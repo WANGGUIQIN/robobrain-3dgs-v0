@@ -1,0 +1,227 @@
+{
+  "task": "pick orange toy from vessel and keep it on the left side of the table",
+  "scene_objects": [
+    "orange_toy",
+    "vessel",
+    "table",
+    "spatula"
+  ],
+  "steps": [
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "orange_toy",
+              "<",
+              "0.03"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "approach_axis",
+            "args": [
+              "0",
+              "0",
+              "-1"
+            ],
+            "role": "progress"
+          }
+        ]
+      },
+      "step": 1,
+      "action": "reach",
+      "target": "orange_toy",
+      "affordance_region": "the orange toy in the vessel",
+      "done_when": "distance(gripper, orange_toy) < 0.03",
+      "affordance_hint": "the orange toy in the vessel",
+      "refine_prompt": "the orange toy in the vessel",
+      "refine_cache_hit": false,
+      "affordance_refined": [
+        0.3672,
+        0.4766
+      ],
+      "affordance_3d_refined": [
+        -0.375,
+        -0.0662,
+        2.4561
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.5905
+    },
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "orange_toy"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              "0",
+              "0",
+              "-1"
+            ],
+            "role": "progress"
+          }
+        ]
+      },
+      "step": 2,
+      "action": "grasp",
+      "target": "orange_toy",
+      "affordance_region": "the orange toy in the vessel",
+      "done_when": "holding(orange_toy)",
+      "affordance_hint": "the orange toy in the vessel",
+      "refine_prompt": "the orange toy in the vessel",
+      "refine_cache_hit": true,
+      "affordance_refined": [
+        0.3672,
+        0.4766
+      ],
+      "affordance_3d_refined": [
+        -0.375,
+        -0.0662,
+        2.4561
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.5905
+    },
+    {
+      "constraints": {
+        "spatial": [
+          {
+            "pred": "above",
+            "args": [
+              "orange_toy",
+              "table",
+              "0.05"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_drop",
+            "args": [
+              "orange_toy"
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "step": 3,
+      "action": "transport",
+      "target": "orange_toy",
+      "destination": "left_side_of_table",
+      "affordance_region": "the left side of the wooden table",
+      "done_when": "above(orange_toy, table, 0.05)",
+      "affordance_hint": "the left side of the wooden table",
+      "refine_prompt": "the left side of the wooden table",
+      "refine_cache_hit": false,
+      "affordance_refined": [
+        0.5977,
+        0.9023
+      ],
+      "affordance_3d_refined": [
+        0.245,
+        1.0092,
+        2.1821
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.3072
+    },
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "surface_contact",
+            "args": [
+              "orange_toy",
+              "table"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "released",
+            "args": [
+              "orange_toy"
+            ],
+            "role": "completion"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "stable",
+            "args": [
+              "orange_toy"
+            ],
+            "role": "completion"
+          }
+        ]
+      },
+      "step": 4,
+      "action": "place",
+      "target": "orange_toy",
+      "destination": "left_side_of_table",
+      "affordance_region": "the left side of the wooden table",
+      "done_when": "surface_contact(orange_toy, table) AND released(orange_toy) AND stable(orange_toy)",
+      "affordance_hint": "the left side of the wooden table",
+      "refine_prompt": "the left side of the wooden table",
+      "refine_cache_hit": true,
+      "affordance_refined": [
+        0.5977,
+        0.9023
+      ],
+      "affordance_3d_refined": [
+        0.245,
+        1.0092,
+        2.1821
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.3072
+    }
+  ]
+}

@@ -1,0 +1,171 @@
+{
+  "task": "move blue plastic bottle near green can",
+  "raw": "Scene: green_can, apple, bottle, table\nStep 1: reach(green_can)\n  affordance: [u=0.500, v=0.500], approach: [x=0.000, y=0.000, z=-1.000]\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, green_can, <, 0.03) [completion]\n  done_when: distance(gripper, green_can) < 0.03\nStep 2: grasp(green_can)\n  affordance: [u=0.500, v=0.500], approach: [x=0.000, y=0.000, z=-1.000]\n  contact: holding(green_can) [completion]\n  direction: grasp_axis(0, 0, -1) [safety]\n  done_when: holding(green_can)\nStep 3: transport(green_can -> near_apple)\n  affordance: [u=0.500, v=0.500], approach: [x=0.000, y=0.000, z=-1.000]\n  spatial: above(green_can, near_apple, 0.05) [completion]\n  safety: no_drop(green_can)\n  done_when: above(green_can, near_apple, 0.05)\nStep 4: place(green_can -> near_apple)\n  affordance: [u=0.500, v=0.500], approach: [x=0.000, y=0.000, z=-1.000]\n  contact: surface_contact(green_can, near_apple) [completion]; released(green_can) [completion]\n  pose: stable(green_can) [completion]\n  done_when: surface_contact(green_can, near_apple) AND released(green_can)\n<END_OF_PLAN>",
+  "parsed": {
+    "scene_objects": [
+      "green_can",
+      "apple",
+      "bottle",
+      "table"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "green_can",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "green_can",
+        "affordance": [
+          0.5,
+          0.5
+        ],
+        "approach": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "done_when": "distance(gripper, green_can) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "green_can"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "green_can",
+        "affordance": [
+          0.5,
+          0.5
+        ],
+        "approach": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "done_when": "holding(green_can)"
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "green_can",
+                "near_apple",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "green_can"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "green_can",
+        "destination": "near_apple",
+        "affordance": [
+          0.5,
+          0.5
+        ],
+        "approach": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "done_when": "above(green_can, near_apple, 0.05)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "surface_contact",
+              "args": [
+                "green_can",
+                "near_apple"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "green_can"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "green_can"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "place",
+        "target": "green_can",
+        "destination": "near_apple",
+        "affordance": [
+          0.5,
+          0.5
+        ],
+        "approach": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "done_when": "surface_contact(green_can, near_apple) AND released(green_can)"
+      }
+    ]
+  }
+}

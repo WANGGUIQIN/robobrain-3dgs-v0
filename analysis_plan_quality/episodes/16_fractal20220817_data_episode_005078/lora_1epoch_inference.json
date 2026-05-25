@@ -1,0 +1,174 @@
+{
+  "task": "place blue plastic bottle into top drawer",
+  "raw": "Scene: bottle, bowl, drawer\nStep 1: reach(bottle)\n  affordance_hint: the body of the white bottle\n  affordance: [u=0.575, v=0.500], approach: [x=0.500, y=0.500, z=0.600]\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, bottle, <, 0.03) [completion]\n  done_when: distance(gripper, bottle) < 0.03\nStep 2: grasp(bottle)\n  affordance_hint: the body of the white bottle\n  affordance: [u=0.575, v=0.500], approach: [x=0.500, y=0.500, z=0.600]\n  contact: holding(bottle) [completion]\n  direction: grasp_axis(0, 0, -1) [safety]\n  done_when: holding(bottle)\nStep 3: transport(bottle -> drawer)\n  affordance_hint: an empty area inside the open drawer\n  affordance: [u=0.500, v=0.650], approach: [x=0.500, y=0.500, z=0.500]\n  spatial: above(bottle, drawer, 0.05) [completion]\n  safety: no_drop(bottle)\n  done_when: above(bottle, drawer, 0.05)\nStep 4: place(bottle -> drawer)\n  affordance_hint: an empty area inside the open drawer\n  affordance: [u=0.500, v=0.650], approach: [x=0.500, y=0.500, z=0.500]\n  contact: surface_contact(bottle, drawer) [completion]; released(bottle) [completion]\n  pose: stable(bottle) [completion]\n  done_when: surface_contact(bottle, drawer) AND released(bottle)\n<END_OF_PLAN>",
+  "parsed": {
+    "scene_objects": [
+      "bottle",
+      "bowl",
+      "drawer"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "bottle",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "bottle",
+        "affordance_hint": "the body of the white bottle",
+        "affordance": [
+          0.575,
+          0.5
+        ],
+        "approach": [
+          0.5,
+          0.5,
+          0.6
+        ],
+        "done_when": "distance(gripper, bottle) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "bottle"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "bottle",
+        "affordance_hint": "the body of the white bottle",
+        "affordance": [
+          0.575,
+          0.5
+        ],
+        "approach": [
+          0.5,
+          0.5,
+          0.6
+        ],
+        "done_when": "holding(bottle)"
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "bottle",
+                "drawer",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "bottle"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "bottle",
+        "destination": "drawer",
+        "affordance_hint": "an empty area inside the open drawer",
+        "affordance": [
+          0.5,
+          0.65
+        ],
+        "approach": [
+          0.5,
+          0.5,
+          0.5
+        ],
+        "done_when": "above(bottle, drawer, 0.05)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "surface_contact",
+              "args": [
+                "bottle",
+                "drawer"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "bottle"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "bottle"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "place",
+        "target": "bottle",
+        "destination": "drawer",
+        "affordance_hint": "an empty area inside the open drawer",
+        "affordance": [
+          0.5,
+          0.65
+        ],
+        "approach": [
+          0.5,
+          0.5,
+          0.5
+        ],
+        "done_when": "surface_contact(bottle, drawer) AND released(bottle)"
+      }
+    ]
+  }
+}

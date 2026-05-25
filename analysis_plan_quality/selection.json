@@ -1,0 +1,122 @@
+[
+  {
+    "idx": 1,
+    "dataset": "rlbench",
+    "episode": "episode_001722",
+    "path": "/home/edge/RoboBrain/w50037733/data/processed/rlbench/episode_001722"
+  },
+  {
+    "idx": 2,
+    "dataset": "rlbench",
+    "episode": "episode_000236",
+    "path": "/home/edge/RoboBrain/w50037733/data/processed/rlbench/episode_000236"
+  },
+  {
+    "idx": 3,
+    "dataset": "rlbench",
+    "episode": "episode_000052",
+    "path": "/home/edge/RoboBrain/w50037733/data/processed/rlbench/episode_000052"
+  },
+  {
+    "idx": 4,
+    "dataset": "droid",
+    "episode": "episode_030298",
+    "path": "/home/edge/RoboBrain/w50037733/data/processed/droid/episode_030298"
+  },
+  {
+    "idx": 5,
+    "dataset": "droid",
+    "episode": "episode_027110",
+    "path": "/home/edge/RoboBrain/w50037733/data/processed/droid/episode_027110"
+  },
+  {
+    "idx": 6,
+    "dataset": "droid",
+    "episode": "episode_024947",
+    "path": "/home/edge/RoboBrain/w50037733/data/processed/droid/episode_024947"
+  },
+  {
+    "idx": 7,
+    "dataset": "bridge",
+    "episode": "episode_004508",
+    "path": "/home/edge/RoboBrain/w50037733/data/processed/bridge/episode_004508"
+  },
+  {
+    "idx": 8,
+    "dataset": "bridge",
+    "episode": "episode_024406",
+    "path": "/home/edge/RoboBrain/w50037733/data/processed/bridge/episode_024406"
+  },
+  {
+    "idx": 9,
+    "dataset": "bridge",
+    "episode": "episode_003286",
+    "path": "/home/edge/RoboBrain/w50037733/data/processed/bridge/episode_003286"
+  },
+  {
+    "idx": 10,
+    "dataset": "rh20t",
+    "episode": "episode_003074",
+    "path": "/home/edge/RoboBrain/w50037733/data/processed/rh20t/episode_003074"
+  },
+  {
+    "idx": 11,
+    "dataset": "rh20t",
+    "episode": "episode_003364",
+    "path": "/home/edge/RoboBrain/w50037733/data/processed/rh20t/episode_003364"
+  },
+  {
+    "idx": 12,
+    "dataset": "rh20t",
+    "episode": "episode_002481",
+    "path": "/home/edge/RoboBrain/w50037733/data/processed/rh20t/episode_002481"
+  },
+  {
+    "idx": 13,
+    "dataset": "taco_play",
+    "episode": "episode_000398",
+    "path": "/home/edge/RoboBrain/w50037733/data/processed/taco_play/episode_000398"
+  },
+  {
+    "idx": 14,
+    "dataset": "taco_play",
+    "episode": "episode_002670",
+    "path": "/home/edge/RoboBrain/w50037733/data/processed/taco_play/episode_002670"
+  },
+  {
+    "idx": 15,
+    "dataset": "taco_play",
+    "episode": "episode_001915",
+    "path": "/home/edge/RoboBrain/w50037733/data/processed/taco_play/episode_001915"
+  },
+  {
+    "idx": 16,
+    "dataset": "fractal20220817_data",
+    "episode": "episode_005078",
+    "path": "/home/edge/RoboBrain/w50037733/data/processed/fractal20220817_data/episode_005078"
+  },
+  {
+    "idx": 17,
+    "dataset": "fractal20220817_data",
+    "episode": "episode_004656",
+    "path": "/home/edge/RoboBrain/w50037733/data/processed/fractal20220817_data/episode_004656"
+  },
+  {
+    "idx": 18,
+    "dataset": "jaco_play",
+    "episode": "episode_000103",
+    "path": "/home/edge/RoboBrain/w50037733/data/processed/jaco_play/episode_000103"
+  },
+  {
+    "idx": 19,
+    "dataset": "jaco_play",
+    "episode": "episode_000242",
+    "path": "/home/edge/RoboBrain/w50037733/data/processed/jaco_play/episode_000242"
+  },
+  {
+    "idx": 20,
+    "dataset": "jaco_play",
+    "episode": "episode_000260",
+    "path": "/home/edge/RoboBrain/w50037733/data/processed/jaco_play/episode_000260"
+  }
+]

@@ -1,0 +1,152 @@
+{
+  "task": "Put the paper bag on the counter",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_planning_3epoch/checkpoint-13319",
+  "raw": "Scene: paper_bag, counter, cabinet\nStep 1: reach(paper_bag)\n  affordance_region: the body of the paper bag\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, paper_bag, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, paper_bag) < 0.03\nStep 2: grasp(paper_bag)\n  affordance_region: the handle of the paper bag\n  contact: holding(paper_bag) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(paper_bag)\nStep 3: transport(paper_bag -> counter)\n  affordance_region: an empty area on the counter\n  spatial: above(paper_bag, counter, 0.05) [completion]\n  safety: no_drop(paper_bag)\n  done_when: above(paper_bag, counter, 0.05)\nStep 4: place(paper_bag -> counter)\n  affordance_region: an empty area on the counter\n  contact: surface_contact(paper_bag, counter) [completion]; released(paper_bag) [completion]\n  pose: stable(paper_bag) [completion]\n  done_when: surface_contact(paper_bag, counter) AND released(paper_bag)\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [],
+    "scene_objects": [
+      "paper_bag",
+      "counter",
+      "cabinet"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "paper_bag",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "paper_bag",
+        "affordance_region": "the body of the paper bag",
+        "done_when": "distance(gripper, paper_bag) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "paper_bag"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "paper_bag",
+        "affordance_region": "the handle of the paper bag",
+        "done_when": "holding(paper_bag)"
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "paper_bag",
+                "counter",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "paper_bag"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "paper_bag",
+        "destination": "counter",
+        "affordance_region": "an empty area on the counter",
+        "done_when": "above(paper_bag, counter, 0.05)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "surface_contact",
+              "args": [
+                "paper_bag",
+                "counter"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "paper_bag"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "paper_bag"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "place",
+        "target": "paper_bag",
+        "destination": "counter",
+        "affordance_region": "an empty area on the counter",
+        "done_when": "surface_contact(paper_bag, counter) AND released(paper_bag)"
+      }
+    ]
+  }
+}

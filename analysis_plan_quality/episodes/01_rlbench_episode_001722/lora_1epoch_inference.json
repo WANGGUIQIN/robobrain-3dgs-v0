@@ -1,0 +1,128 @@
+{
+  "task": "turn right tap",
+  "raw": "Scene: faucet, sink\nStep 1: reach(faucet)\n  affordance_hint: the faucet\n  affordance: [u=0.500, v=0.500], approach: [x=0.000, y=0.000, z=-1.000]\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, faucet, <, 0.03) [completion]\n  done_when: distance(gripper, faucet) < 0.03\nStep 2: grasp(faucet)\n  affordance_hint: the body of the faucet\n  affordance: [u=0.500, v=0.500], approach: [x=0.000, y=0.000, z=-1.000]\n  contact: holding(faucet) [completion]\n  direction: grasp_axis(0, 0, -1) [safety]\n  done_when: holding(faucet)\nStep 3: rotate(faucet -> right)\n  affordance_hint: the body of the faucet\n  affordance: [u=0.500, v=0.500], approach: [x=0.000, y=0.000, z=-1.000]\n  contact: holding(faucet) [progress]\n  direction: rotate_axis(0, 1, 0) [safety]\n  done_when: angle(faucet, initial_angle) > 0.0\n<END_OF_PLAN>",
+  "parsed": {
+    "scene_objects": [
+      "faucet",
+      "sink"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "faucet",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "faucet",
+        "affordance_hint": "the faucet",
+        "affordance": [
+          0.5,
+          0.5
+        ],
+        "approach": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "done_when": "distance(gripper, faucet) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "faucet"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "faucet",
+        "affordance_hint": "the body of the faucet",
+        "affordance": [
+          0.5,
+          0.5
+        ],
+        "approach": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "done_when": "holding(faucet)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "faucet"
+              ],
+              "role": "progress"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "rotate_axis",
+              "args": [
+                "0",
+                "1",
+                "0"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "rotate",
+        "target": "faucet",
+        "destination": "right",
+        "affordance_hint": "the body of the faucet",
+        "affordance": [
+          0.5,
+          0.5
+        ],
+        "approach": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "done_when": "angle(faucet, initial_angle) > 0.0"
+      }
+    ]
+  }
+}

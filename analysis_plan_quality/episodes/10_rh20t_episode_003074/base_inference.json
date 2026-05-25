@@ -1,0 +1,212 @@
+{
+  "task": "Assemble: Attach the bubble ring to the ball",
+  "raw": "Scene: bubble_ring, ball, table\nStep 1: reach(bubble_ring)\n  affordance_hint: the bubble ring\n  affordance: [u=0.575, v=0.700], approach: [x=0.000, y=0.000, z=-1.000]\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, bubble_ring, <, 0.03) [completion]\n  done_when: distance(gripper, bubble_ring) < 0.03\nStep 2: grasp(bubble_ring)\n  affordance_hint: the bubble ring\n  affordance: [u=0.575, v=0.700], approach: [x=0.000, y=0.000, z=-1.000]\n  contact: holding(bubble_ring) [completion]\n  direction: grasp_axis(0, 0, -1) [safety]\n  done_when: holding(bubble_ring)\nStep 3: reach(ball)\n  affordance_hint: the ball\n  affordance: [u=0.575, v=0.600], approach: [x=0.000, y=0.000, z=-1.000]\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, ball, <, 0.03) [completion]\n  done_when: distance(gripper, ball) < 0.03\nStep 4: grasp(ball)\n  affordance_hint: the ball\n  affordance: [u=0.575, v=0.600], approach: [x=0.000, y=0.000, z=-1.000]\n  contact: holding(ball) [completion]\n  direction: grasp_axis(0, 0, -1) [safety]\n  done_when: holding(ball)\nStep 5: insert(bubble_ring -> ball)\n  affordance_hint: the top opening of the ball\n  affordance: [u=0.575, v=0.600], approach: [x=0.000, y=0.000, z=-1.000]\n  contact: inside(bubble_ring, ball) [completion]; released(bubble_ring) [completion]\n  pose: stable(ball) [completion]\n  done_when: inside(bubble_ring, ball) AND released(bubble_ring)\n<END_OF_PLAN>",
+  "parsed": {
+    "scene_objects": [
+      "bubble_ring",
+      "ball",
+      "table"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "bubble_ring",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "bubble_ring",
+        "affordance_hint": "the bubble ring",
+        "affordance": [
+          0.575,
+          0.7
+        ],
+        "approach": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "done_when": "distance(gripper, bubble_ring) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "bubble_ring"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "bubble_ring",
+        "affordance_hint": "the bubble ring",
+        "affordance": [
+          0.575,
+          0.7
+        ],
+        "approach": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "done_when": "holding(bubble_ring)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "ball",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "reach",
+        "target": "ball",
+        "affordance_hint": "the ball",
+        "affordance": [
+          0.575,
+          0.6
+        ],
+        "approach": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "done_when": "distance(gripper, ball) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "ball"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "grasp",
+        "target": "ball",
+        "affordance_hint": "the ball",
+        "affordance": [
+          0.575,
+          0.6
+        ],
+        "approach": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "done_when": "holding(ball)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "inside",
+              "args": [
+                "bubble_ring",
+                "ball"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "bubble_ring"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "ball"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 5,
+        "action": "insert",
+        "target": "bubble_ring",
+        "destination": "ball",
+        "affordance_hint": "the top opening of the ball",
+        "affordance": [
+          0.575,
+          0.6
+        ],
+        "approach": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "done_when": "inside(bubble_ring, ball) AND released(bubble_ring)"
+      }
+    ]
+  }
+}

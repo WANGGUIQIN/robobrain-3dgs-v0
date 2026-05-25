@@ -1,0 +1,97 @@
+{
+  "task": "push the pink block inside the drawer",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_planning_3epoch/checkpoint-13319",
+  "raw": "Scene: pink_block, drawer, table\nStep 1: reach(pink_block)\n  affordance_region: the pink block\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, pink_block, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, pink_block) < 0.03\nStep 2: push(pink_block -> drawer)\n  affordance_region: the pink block\n  contact: gripper_contact(pink_block) [progress]\n  spatial: inside(pink_block, drawer) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: inside(pink_block, drawer)\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [],
+    "scene_objects": [
+      "pink_block",
+      "drawer",
+      "table"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "pink_block",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "pink_block",
+        "affordance_region": "the pink block",
+        "done_when": "distance(gripper, pink_block) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_contact",
+              "args": [
+                "pink_block"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "inside",
+              "args": [
+                "pink_block",
+                "drawer"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "push",
+        "target": "pink_block",
+        "destination": "drawer",
+        "affordance_region": "the pink block",
+        "done_when": "inside(pink_block, drawer)"
+      }
+    ]
+  }
+}

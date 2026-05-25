@@ -1,0 +1,167 @@
+{
+  "task": "push the pink block inside the drawer",
+  "scene_objects": [
+    "pink_block",
+    "drawer",
+    "table"
+  ],
+  "num_steps": 3,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "pink_block",
+      "affordance": [
+        0.1,
+        0.276
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "pink_block",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "drawer"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, pink_block) < 0.03 AND gripper_state(open)",
+      "affordance_hint": "the pink block"
+    },
+    {
+      "step": 2,
+      "action": "push",
+      "target": "pink_block",
+      "affordance": [
+        0.352,
+        0.425
+      ],
+      "approach": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "pink_block"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "aligned_xy",
+            "args": [
+              "pink_block",
+              "drawer",
+              0.05
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "motion_dir",
+            "args": [
+              0,
+              1,
+              0
+            ],
+            "role": "progress"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "pink_block",
+              "drawer"
+            ]
+          }
+        ]
+      },
+      "done_when": "aligned_xy(pink_block, drawer, 0.05)",
+      "affordance_hint": "the center of the pink block",
+      "affordance_3d": [
+        -0.3068,
+        -0.1534,
+        1.798
+      ]
+    },
+    {
+      "step": 3,
+      "action": "release",
+      "target": "pink_block",
+      "affordance": [
+        0.1,
+        0.276
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "released",
+            "args": [
+              "pink_block"
+            ],
+            "role": "completion"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "inside",
+            "args": [
+              "pink_block",
+              "drawer"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "support_stable",
+            "args": [
+              "pink_block"
+            ]
+          }
+        ]
+      },
+      "done_when": "released(pink_block) AND inside(pink_block, drawer)",
+      "affordance_hint": "the pink block"
+    }
+  ]
+}

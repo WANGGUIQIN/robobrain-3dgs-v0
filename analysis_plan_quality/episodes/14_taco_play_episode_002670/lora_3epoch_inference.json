@@ -1,0 +1,169 @@
+{
+  "task": "push the pink block inside the drawer",
+  "raw": "Scene: pink_block, drawer, cabinet\nStep 1: reach(pink_block)\n  affordance: [u=0.500, v=0.500], approach: [x=0.000, y=0.000, z=-1.000]\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, pink_block, <, 0.03) [completion]\n  done_when: distance(gripper, pink_block) < 0.03\nStep 2: grasp(pink_block)\n  affordance: [u=0.500, v=0.500], approach: [x=0.000, y=0.000, z=-1.000]\n  contact: holding(pink_block) [completion]\n  direction: grasp_axis(0, 0, -1) [safety]\n  done_when: holding(pink_block)\nStep 3: pull(drawer)\n  affordance: [u=0.500, v=0.500], approach: [x=0.000, y=0.000, z=-1.000]\n  contact: holding(drawer) [completion]\n  direction: pull_axis(0, 0, -1) [safety]\n  done_when: holding(drawer)\nStep 4: place(pink_block -> drawer)\n  affordance: [u=0.500, v=0.500], approach: [x=0.000, y=0.000, z=-1.000]\n  contact: surface_contact(pink_block, drawer) [completion]; released(pink_block) [completion]\n  pose: stable(pink_block) [completion]\n  done_when: surface_contact(pink_block, drawer) AND released(pink_block)\n<END_OF_PLAN>",
+  "parsed": {
+    "scene_objects": [
+      "pink_block",
+      "drawer",
+      "cabinet"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "pink_block",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "pink_block",
+        "affordance": [
+          0.5,
+          0.5
+        ],
+        "approach": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "done_when": "distance(gripper, pink_block) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "pink_block"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "pink_block",
+        "affordance": [
+          0.5,
+          0.5
+        ],
+        "approach": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "done_when": "holding(pink_block)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "drawer"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "pull_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "pull",
+        "target": "drawer",
+        "affordance": [
+          0.5,
+          0.5
+        ],
+        "approach": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "done_when": "holding(drawer)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "surface_contact",
+              "args": [
+                "pink_block",
+                "drawer"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "pink_block"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "pink_block"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "place",
+        "target": "pink_block",
+        "destination": "drawer",
+        "affordance": [
+          0.5,
+          0.5
+        ],
+        "approach": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "done_when": "surface_contact(pink_block, drawer) AND released(pink_block)"
+      }
+    ]
+  }
+}

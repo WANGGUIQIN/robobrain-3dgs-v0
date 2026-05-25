@@ -1,0 +1,85 @@
+{
+  "task": "pick up the apple fruit",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_planning_3epoch/checkpoint-13319",
+  "raw": "Scene: apple, table\nStep 1: reach(apple)\n  affordance_region: the body of the red apple\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, apple, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, apple) < 0.03\nStep 2: grasp(apple)\n  affordance_region: the body of the red apple\n  contact: holding(apple) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(apple)\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [],
+    "scene_objects": [
+      "apple",
+      "table"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "apple",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "apple",
+        "affordance_region": "the body of the red apple",
+        "done_when": "distance(gripper, apple) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "apple"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "apple",
+        "affordance_region": "the body of the red apple",
+        "done_when": "holding(apple)"
+      }
+    ]
+  }
+}

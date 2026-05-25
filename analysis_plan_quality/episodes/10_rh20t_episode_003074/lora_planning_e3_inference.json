@@ -1,0 +1,127 @@
+{
+  "task": "Assemble: Attach the bubble ring to the ball",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_planning_3epoch/checkpoint-39957",
+  "raw": "Scene: bubble_ring, ball, table\nStep 1: reach(bubble_ring)\n  affordance_region: the small transparent bubble ring\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, bubble_ring, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, bubble_ring) < 0.03\nStep 2: grasp(bubble_ring)\n  affordance_region: the small transparent bubble ring\n  contact: holding(bubble_ring) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(bubble_ring)\nStep 3: insert(bubble_ring -> ball)\n  affordance_region: the top opening of the ball\n  contact: inserted(bubble_ring, ball) [completion]\n  spatial: aligned_xy(bubble_ring, ball, 0.03) [completion]\n  safety: no_collision(bubble_ring, ball)\n  done_when: inserted(bubble_ring, ball)\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [],
+    "scene_objects": [
+      "bubble_ring",
+      "ball",
+      "table"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "bubble_ring",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "bubble_ring",
+        "affordance_region": "the small transparent bubble ring",
+        "done_when": "distance(gripper, bubble_ring) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "bubble_ring"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "bubble_ring",
+        "affordance_region": "the small transparent bubble ring",
+        "done_when": "holding(bubble_ring)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "inserted",
+              "args": [
+                "bubble_ring",
+                "ball"
+              ],
+              "role": "completion"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "aligned_xy",
+              "args": [
+                "bubble_ring",
+                "ball",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_collision",
+              "args": [
+                "bubble_ring",
+                "ball"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "insert",
+        "target": "bubble_ring",
+        "destination": "ball",
+        "affordance_region": "the top opening of the ball",
+        "done_when": "inserted(bubble_ring, ball)"
+      }
+    ]
+  }
+}

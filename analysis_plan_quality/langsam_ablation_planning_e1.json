@@ -1,0 +1,231 @@
+{
+  "per_episode": [
+    {
+      "idx": 1,
+      "dataset": "rlbench",
+      "episode": "episode_001722",
+      "n_steps": 3,
+      "n_grounded_ok": 3,
+      "grounding_success_rate": 1.0,
+      "uv_mae_raw_vs_label": null,
+      "uv_mae_langsam_vs_label": 0.3102833333333333,
+      "improvement": null
+    },
+    {
+      "idx": 2,
+      "dataset": "rlbench",
+      "episode": "episode_000236",
+      "n_steps": 5,
+      "n_grounded_ok": 5,
+      "grounding_success_rate": 1.0,
+      "uv_mae_raw_vs_label": null,
+      "uv_mae_langsam_vs_label": 0.14697499999999997,
+      "improvement": null
+    },
+    {
+      "idx": 3,
+      "dataset": "rlbench",
+      "episode": "episode_000052",
+      "n_steps": 4,
+      "n_grounded_ok": 4,
+      "grounding_success_rate": 1.0,
+      "uv_mae_raw_vs_label": null,
+      "uv_mae_langsam_vs_label": 0.11973749999999998,
+      "improvement": null
+    },
+    {
+      "idx": 4,
+      "dataset": "droid",
+      "episode": "episode_030298",
+      "n_steps": 4,
+      "n_grounded_ok": 2,
+      "grounding_success_rate": 0.5,
+      "uv_mae_raw_vs_label": null,
+      "uv_mae_langsam_vs_label": 0.28005,
+      "improvement": null
+    },
+    {
+      "idx": 5,
+      "dataset": "droid",
+      "episode": "episode_027110",
+      "n_steps": 4,
+      "n_grounded_ok": 4,
+      "grounding_success_rate": 1.0,
+      "uv_mae_raw_vs_label": null,
+      "uv_mae_langsam_vs_label": 0.10753750000000001,
+      "improvement": null
+    },
+    {
+      "idx": 6,
+      "dataset": "droid",
+      "episode": "episode_024947",
+      "n_steps": 4,
+      "n_grounded_ok": 4,
+      "grounding_success_rate": 1.0,
+      "uv_mae_raw_vs_label": null,
+      "uv_mae_langsam_vs_label": 0.11854999999999999,
+      "improvement": null
+    },
+    {
+      "idx": 7,
+      "dataset": "bridge",
+      "episode": "episode_004508",
+      "n_steps": 4,
+      "n_grounded_ok": 4,
+      "grounding_success_rate": 1.0,
+      "uv_mae_raw_vs_label": null,
+      "uv_mae_langsam_vs_label": 0.07279999999999999,
+      "improvement": null
+    },
+    {
+      "idx": 8,
+      "dataset": "bridge",
+      "episode": "episode_024406",
+      "n_steps": 4,
+      "n_grounded_ok": 4,
+      "grounding_success_rate": 1.0,
+      "uv_mae_raw_vs_label": null,
+      "uv_mae_langsam_vs_label": 0.09614999999999999,
+      "improvement": null
+    },
+    {
+      "idx": 9,
+      "dataset": "bridge",
+      "episode": "episode_003286",
+      "n_steps": 4,
+      "n_grounded_ok": 4,
+      "grounding_success_rate": 1.0,
+      "uv_mae_raw_vs_label": null,
+      "uv_mae_langsam_vs_label": 0.17935,
+      "improvement": null
+    },
+    {
+      "idx": 10,
+      "dataset": "rh20t",
+      "episode": "episode_003074",
+      "n_steps": 4,
+      "n_grounded_ok": 4,
+      "grounding_success_rate": 1.0,
+      "uv_mae_raw_vs_label": null,
+      "uv_mae_langsam_vs_label": 0.122275,
+      "improvement": null
+    },
+    {
+      "idx": 11,
+      "dataset": "rh20t",
+      "episode": "episode_003364",
+      "n_steps": 4,
+      "n_grounded_ok": 4,
+      "grounding_success_rate": 1.0,
+      "uv_mae_raw_vs_label": null,
+      "uv_mae_langsam_vs_label": 0.06066250000000003,
+      "improvement": null
+    },
+    {
+      "idx": 12,
+      "dataset": "rh20t",
+      "episode": "episode_002481",
+      "n_steps": 4,
+      "n_grounded_ok": 4,
+      "grounding_success_rate": 1.0,
+      "uv_mae_raw_vs_label": null,
+      "uv_mae_langsam_vs_label": 0.204625,
+      "improvement": null
+    },
+    {
+      "idx": 13,
+      "dataset": "taco_play",
+      "episode": "episode_000398",
+      "n_steps": 2,
+      "n_grounded_ok": 2,
+      "grounding_success_rate": 1.0,
+      "uv_mae_raw_vs_label": null,
+      "uv_mae_langsam_vs_label": 0.23945000000000002,
+      "improvement": null
+    },
+    {
+      "idx": 14,
+      "dataset": "taco_play",
+      "episode": "episode_002670",
+      "n_steps": 2,
+      "n_grounded_ok": 2,
+      "grounding_success_rate": 1.0,
+      "uv_mae_raw_vs_label": null,
+      "uv_mae_langsam_vs_label": 0.10024999999999998,
+      "improvement": null
+    },
+    {
+      "idx": 15,
+      "dataset": "taco_play",
+      "episode": "episode_001915",
+      "n_steps": 2,
+      "n_grounded_ok": 2,
+      "grounding_success_rate": 1.0,
+      "uv_mae_raw_vs_label": null,
+      "uv_mae_langsam_vs_label": 0.20040000000000002,
+      "improvement": null
+    },
+    {
+      "idx": 16,
+      "dataset": "fractal20220817_data",
+      "episode": "episode_005078",
+      "n_steps": 4,
+      "n_grounded_ok": 4,
+      "grounding_success_rate": 1.0,
+      "uv_mae_raw_vs_label": null,
+      "uv_mae_langsam_vs_label": 0.04062500000000002,
+      "improvement": null
+    },
+    {
+      "idx": 17,
+      "dataset": "fractal20220817_data",
+      "episode": "episode_004656",
+      "n_steps": 4,
+      "n_grounded_ok": 4,
+      "grounding_success_rate": 1.0,
+      "uv_mae_raw_vs_label": null,
+      "uv_mae_langsam_vs_label": 0.1799,
+      "improvement": null
+    },
+    {
+      "idx": 18,
+      "dataset": "jaco_play",
+      "episode": "episode_000103",
+      "n_steps": 4,
+      "n_grounded_ok": 4,
+      "grounding_success_rate": 1.0,
+      "uv_mae_raw_vs_label": null,
+      "uv_mae_langsam_vs_label": 0.1382,
+      "improvement": null
+    },
+    {
+      "idx": 19,
+      "dataset": "jaco_play",
+      "episode": "episode_000242",
+      "n_steps": 4,
+      "n_grounded_ok": 4,
+      "grounding_success_rate": 1.0,
+      "uv_mae_raw_vs_label": null,
+      "uv_mae_langsam_vs_label": 0.09115,
+      "improvement": null
+    },
+    {
+      "idx": 20,
+      "dataset": "jaco_play",
+      "episode": "episode_000260",
+      "n_steps": 2,
+      "n_grounded_ok": 2,
+      "grounding_success_rate": 1.0,
+      "uv_mae_raw_vs_label": null,
+      "uv_mae_langsam_vs_label": 0.020399999999999974,
+      "improvement": null
+    }
+  ],
+  "aggregate": {
+    "n_episodes": 20,
+    "uv_mae_raw_vs_label": null,
+    "uv_mae_langsam_vs_label": 0.14146854166666664,
+    "mean_improvement": null,
+    "grounding_success_rate": 0.975
+  }
+}

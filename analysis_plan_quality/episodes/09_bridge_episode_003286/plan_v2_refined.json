@@ -1,0 +1,240 @@
+{
+  "task": "pick orange toy from vessel and keep it on the left side of the table",
+  "scene_objects": [
+    "orange_toy",
+    "vessel",
+    "table",
+    "green_spatula"
+  ],
+  "num_steps": 4,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "orange_toy",
+      "affordance": [
+        0.441,
+        0.425
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "orange_toy",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "vessel"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, orange_toy) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        -0.2274,
+        -0.288,
+        3.3758
+      ],
+      "affordance_hint": "the orange toy in the metal vessel",
+      "affordance_hint_original": "the orange toy",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 2,
+      "action": "grasp",
+      "target": "orange_toy",
+      "affordance": [
+        0.441,
+        0.425
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "orange_toy"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "holding",
+            "args": [
+              "orange_toy"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              0,
+              0,
+              -1
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "holding(orange_toy)",
+      "affordance_3d": [
+        -0.2274,
+        -0.288,
+        3.3758
+      ],
+      "affordance_hint": "the orange toy inside the metal vessel",
+      "affordance_hint_original": "orange toy",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 3,
+      "action": "transport",
+      "target": "orange_toy",
+      "destination": "left_side_of_table",
+      "affordance": [
+        0.218,
+        0.401
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "orange_toy"
+            ],
+            "role": "safety"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "above",
+            "args": [
+              "orange_toy",
+              "left_side_of_table",
+              0.05
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "orange_toy",
+              "table"
+            ]
+          },
+          {
+            "pred": "no_drop",
+            "args": [
+              "orange_toy"
+            ]
+          }
+        ]
+      },
+      "done_when": "above(orange_toy, left_side_of_table, 0.05) AND aligned_xy(orange_toy, left_side_of_table, 0.03)",
+      "affordance_3d": [
+        -0.7371,
+        -0.2559,
+        2.28
+      ],
+      "affordance_hint": "the empty area on the left side of the wooden table",
+      "affordance_hint_original": "an empty area on the left side of table",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 4,
+      "action": "place",
+      "target": "orange_toy",
+      "destination": "left_side_of_table",
+      "affordance": [
+        0.218,
+        0.401
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "surface_contact",
+            "args": [
+              "orange_toy",
+              "table"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "released",
+            "args": [
+              "orange_toy"
+            ],
+            "role": "completion"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "stable",
+            "args": [
+              "orange_toy"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "support_stable",
+            "args": [
+              "orange_toy"
+            ]
+          }
+        ]
+      },
+      "done_when": "surface_contact(orange_toy, table) AND released(orange_toy) AND stable(orange_toy)",
+      "affordance_3d": [
+        -0.7371,
+        -0.2559,
+        2.28
+      ],
+      "affordance_hint": "the empty area on the left side of the wooden table",
+      "affordance_hint_original": "an empty area on the left side of table",
+      "affordance_hint_confidence": "ok"
+    }
+  ]
+}

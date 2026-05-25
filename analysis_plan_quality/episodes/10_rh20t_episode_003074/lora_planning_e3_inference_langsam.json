@@ -1,0 +1,181 @@
+{
+  "task": "Assemble: Attach the bubble ring to the ball",
+  "scene_objects": [
+    "bubble_ring",
+    "ball",
+    "table"
+  ],
+  "steps": [
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "bubble_ring",
+              "<",
+              "0.03"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "approach_axis",
+            "args": [
+              "0",
+              "0",
+              "-1"
+            ],
+            "role": "progress"
+          }
+        ]
+      },
+      "step": 1,
+      "action": "reach",
+      "target": "bubble_ring",
+      "affordance_region": "the small transparent bubble ring",
+      "done_when": "distance(gripper, bubble_ring) < 0.03",
+      "affordance_hint": "the small transparent bubble ring",
+      "refine_prompt": "the small transparent bubble ring",
+      "refine_cache_hit": false,
+      "affordance_refined": [
+        0.4766,
+        0.6797
+      ],
+      "affordance_3d_refined": [
+        -1.2049,
+        -0.0365,
+        1.9473
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.5006
+    },
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "bubble_ring"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              "0",
+              "0",
+              "-1"
+            ],
+            "role": "progress"
+          }
+        ]
+      },
+      "step": 2,
+      "action": "grasp",
+      "target": "bubble_ring",
+      "affordance_region": "the small transparent bubble ring",
+      "done_when": "holding(bubble_ring)",
+      "affordance_hint": "the small transparent bubble ring",
+      "refine_prompt": "the small transparent bubble ring",
+      "refine_cache_hit": true,
+      "affordance_refined": [
+        0.4766,
+        0.6797
+      ],
+      "affordance_3d_refined": [
+        -1.2049,
+        -0.0365,
+        1.9473
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.5006
+    },
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "inserted",
+            "args": [
+              "bubble_ring",
+              "ball"
+            ],
+            "role": "completion"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "aligned_xy",
+            "args": [
+              "bubble_ring",
+              "ball",
+              "0.03"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "bubble_ring",
+              "ball"
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "step": 3,
+      "action": "insert",
+      "target": "bubble_ring",
+      "destination": "ball",
+      "affordance_region": "the top opening of the ball",
+      "done_when": "inserted(bubble_ring, ball)",
+      "affordance_hint": "the top opening of the ball",
+      "refine_prompt": "the top opening of the ball",
+      "refine_cache_hit": false,
+      "affordance_refined": [
+        0.4766,
+        0.6523
+      ],
+      "affordance_3d_refined": [
+        -1.1807,
+        -0.0775,
+        1.9082
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.331
+    }
+  ]
+}

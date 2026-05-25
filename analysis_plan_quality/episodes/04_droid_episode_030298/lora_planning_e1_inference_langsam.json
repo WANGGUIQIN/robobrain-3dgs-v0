@@ -1,0 +1,210 @@
+{
+  "task": "Put the paper bag on the counter",
+  "scene_objects": [
+    "paper_bag",
+    "counter",
+    "cabinet"
+  ],
+  "steps": [
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "paper_bag",
+              "<",
+              "0.03"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "approach_axis",
+            "args": [
+              "0",
+              "0",
+              "-1"
+            ],
+            "role": "progress"
+          }
+        ]
+      },
+      "step": 1,
+      "action": "reach",
+      "target": "paper_bag",
+      "affordance_region": "the body of the paper bag",
+      "done_when": "distance(gripper, paper_bag) < 0.03",
+      "affordance_hint": "the body of the paper bag",
+      "refine_prompt": "the body of the paper bag",
+      "refine_cache_hit": false,
+      "affordance_refined": [
+        0.8906,
+        0.5938
+      ],
+      "affordance_3d_refined": [
+        0.8816,
+        0.4149,
+        2.5931
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.3067
+    },
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "paper_bag"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              "0",
+              "0",
+              "-1"
+            ],
+            "role": "progress"
+          }
+        ]
+      },
+      "step": 2,
+      "action": "grasp",
+      "target": "paper_bag",
+      "affordance_region": "the handle of the paper bag",
+      "done_when": "holding(paper_bag)",
+      "affordance_hint": "the handle of the paper bag",
+      "refine_prompt": "the handle of the paper bag",
+      "refine_cache_hit": false,
+      "affordance_refined": [
+        0.8164,
+        0.625
+      ],
+      "affordance_3d_refined": [
+        0.6257,
+        0.5108,
+        2.5539
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.4474
+    },
+    {
+      "constraints": {
+        "spatial": [
+          {
+            "pred": "above",
+            "args": [
+              "paper_bag",
+              "counter",
+              "0.05"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_drop",
+            "args": [
+              "paper_bag"
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "step": 3,
+      "action": "transport",
+      "target": "paper_bag",
+      "destination": "counter",
+      "affordance_region": "an empty area on the counter",
+      "done_when": "above(paper_bag, counter, 0.05)",
+      "affordance_hint": "an empty area on the counter",
+      "refine_prompt": "an empty area on the counter",
+      "refine_cache_hit": false,
+      "affordance_refined": null,
+      "affordance_3d_refined": null,
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "no_mask",
+      "refine_confidence": 0.0
+    },
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "surface_contact",
+            "args": [
+              "paper_bag",
+              "counter"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "released",
+            "args": [
+              "paper_bag"
+            ],
+            "role": "completion"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "stable",
+            "args": [
+              "paper_bag"
+            ],
+            "role": "completion"
+          }
+        ]
+      },
+      "step": 4,
+      "action": "place",
+      "target": "paper_bag",
+      "destination": "counter",
+      "affordance_region": "an empty area on the counter",
+      "done_when": "surface_contact(paper_bag, counter) AND released(paper_bag)",
+      "affordance_hint": "an empty area on the counter",
+      "refine_prompt": "an empty area on the counter",
+      "refine_cache_hit": false,
+      "affordance_refined": null,
+      "affordance_3d_refined": null,
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "no_mask",
+      "refine_confidence": 0.0
+    }
+  ]
+}

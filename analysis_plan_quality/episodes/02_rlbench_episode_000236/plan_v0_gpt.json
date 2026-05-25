@@ -1,0 +1,231 @@
+{
+  "task": "screw in the gray light bulb",
+  "scene_objects": [
+    "gray_light_bulb",
+    "light_socket",
+    "robot_arm",
+    "table"
+  ],
+  "num_steps": 4,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "gray_light_bulb",
+      "affordance": [
+        0.375,
+        0.75
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "gray_light_bulb",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "light_socket"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, gray_light_bulb) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        -0.2516,
+        0.5033,
+        1.0066
+      ],
+      "affordance_hint": "the gray light bulb"
+    },
+    {
+      "step": 2,
+      "action": "grasp",
+      "target": "gray_light_bulb",
+      "affordance": [
+        0.382,
+        0.75
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "gray_light_bulb"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "holding",
+            "args": [
+              "gray_light_bulb"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              0,
+              0,
+              -1
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "holding(gray_light_bulb)",
+      "affordance_3d": [
+        -1.1631,
+        2.4813,
+        4.9626
+      ],
+      "affordance_hint": "the handle of the gray light bulb"
+    },
+    {
+      "step": 3,
+      "action": "insert",
+      "target": "gray_light_bulb",
+      "destination": "light_socket",
+      "affordance": [
+        0.585,
+        0.5
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "gray_light_bulb"
+            ],
+            "role": "safety"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "above",
+            "args": [
+              "gray_light_bulb",
+              "light_socket",
+              0.05
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gray_light_bulb",
+              "light_socket"
+            ]
+          },
+          {
+            "pred": "no_drop",
+            "args": [
+              "gray_light_bulb"
+            ]
+          }
+        ]
+      },
+      "done_when": "above(gray_light_bulb, light_socket, 0.05) AND aligned_xy(gray_light_bulb, light_socket, 0.03)",
+      "affordance_3d": [
+        0.4164,
+        0.0,
+        2.4226
+      ],
+      "affordance_hint": "the top opening of the light socket"
+    },
+    {
+      "step": 4,
+      "action": "rotate",
+      "target": "gray_light_bulb",
+      "affordance": [
+        0.375,
+        0.75
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "surface_contact",
+            "args": [
+              "gray_light_bulb",
+              "light_socket"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "released",
+            "args": [
+              "gray_light_bulb"
+            ],
+            "role": "completion"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "stable",
+            "args": [
+              "gray_light_bulb"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "support_stable",
+            "args": [
+              "gray_light_bulb"
+            ]
+          }
+        ]
+      },
+      "done_when": "surface_contact(gray_light_bulb, light_socket) AND released(gray_light_bulb) AND stable(gray_light_bulb)",
+      "affordance_3d": [
+        -0.2516,
+        0.5033,
+        1.0066
+      ],
+      "affordance_hint": "the body of the gray light bulb"
+    }
+  ]
+}

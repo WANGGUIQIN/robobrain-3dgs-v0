@@ -1,0 +1,236 @@
+{
+  "task": "place the yellow cup in the dish rack",
+  "scene_objects": [
+    "yellow_cup",
+    "dish_rack",
+    "orange",
+    "blue_bin",
+    "plate",
+    "brown_disc",
+    "toaster",
+    "table"
+  ],
+  "num_steps": 4,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "yellow_cup",
+      "affordance": [
+        0.2,
+        0.243
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "yellow_cup",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "table"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, yellow_cup) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        -1.1401,
+        -0.9773,
+        3.2975
+      ],
+      "affordance_hint": "the yellow cup"
+    },
+    {
+      "step": 2,
+      "action": "grasp",
+      "target": "yellow_cup",
+      "affordance": [
+        0.191,
+        0.227
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "yellow_cup"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "holding",
+            "args": [
+              "yellow_cup"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              0,
+              0,
+              -1
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "holding(yellow_cup)",
+      "affordance_3d": [
+        -1.1906,
+        -1.0549,
+        3.3562
+      ],
+      "affordance_hint": "the handle of the yellow cup"
+    },
+    {
+      "step": 3,
+      "action": "transport",
+      "target": "yellow_cup",
+      "destination": "dish_rack",
+      "affordance": [
+        0.5,
+        0.468
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "yellow_cup"
+            ],
+            "role": "safety"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "above",
+            "args": [
+              "yellow_cup",
+              "dish_rack",
+              0.05
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "yellow_cup",
+              "dish_rack"
+            ]
+          },
+          {
+            "pred": "no_drop",
+            "args": [
+              "yellow_cup"
+            ]
+          }
+        ]
+      },
+      "done_when": "above(yellow_cup, dish_rack, 0.05) AND aligned_xy(yellow_cup, dish_rack, 0.03)",
+      "affordance_3d": [
+        0.0,
+        -0.0924,
+        2.5735
+      ],
+      "affordance_hint": "an empty area on the dish rack"
+    },
+    {
+      "step": 4,
+      "action": "place",
+      "target": "yellow_cup",
+      "destination": "dish_rack",
+      "affordance": [
+        0.5,
+        0.468
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "surface_contact",
+            "args": [
+              "yellow_cup",
+              "dish_rack"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "released",
+            "args": [
+              "yellow_cup"
+            ],
+            "role": "completion"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "stable",
+            "args": [
+              "yellow_cup"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "support_stable",
+            "args": [
+              "yellow_cup"
+            ]
+          }
+        ]
+      },
+      "done_when": "surface_contact(yellow_cup, dish_rack) AND released(yellow_cup) AND stable(yellow_cup)",
+      "affordance_3d": [
+        0.0,
+        -0.0924,
+        2.5735
+      ],
+      "affordance_hint": "an empty area on the dish rack"
+    }
+  ]
+}

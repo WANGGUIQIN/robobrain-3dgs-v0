@@ -1,0 +1,227 @@
+{
+  "task": "move blue plastic bottle near green can",
+  "scene_objects": [
+    "blue_plastic_bottle",
+    "green_can",
+    "apple",
+    "table"
+  ],
+  "steps": [
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "blue_plastic_bottle",
+              "<",
+              "0.03"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "approach_axis",
+            "args": [
+              "0",
+              "0",
+              "-1"
+            ],
+            "role": "progress"
+          }
+        ]
+      },
+      "step": 1,
+      "action": "reach",
+      "target": "blue_plastic_bottle",
+      "affordance_region": "the body of the blue plastic bottle",
+      "done_when": "distance(gripper, blue_plastic_bottle) < 0.03",
+      "affordance_hint": "the body of the blue plastic bottle",
+      "refine_prompt": "the body of the blue plastic bottle",
+      "refine_cache_hit": false,
+      "affordance_refined": [
+        0.3047,
+        0.0977
+      ],
+      "affordance_3d_refined": [
+        -0.5163,
+        -1.0635,
+        2.2995
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.4711
+    },
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "blue_plastic_bottle"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              "0",
+              "0",
+              "-1"
+            ],
+            "role": "progress"
+          }
+        ]
+      },
+      "step": 2,
+      "action": "grasp",
+      "target": "blue_plastic_bottle",
+      "affordance_region": "the body of the blue plastic bottle",
+      "done_when": "holding(blue_plastic_bottle)",
+      "affordance_hint": "the body of the blue plastic bottle",
+      "refine_prompt": "the body of the blue plastic bottle",
+      "refine_cache_hit": true,
+      "affordance_refined": [
+        0.3047,
+        0.0977
+      ],
+      "affordance_3d_refined": [
+        -0.5163,
+        -1.0635,
+        2.2995
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.4711
+    },
+    {
+      "constraints": {
+        "spatial": [
+          {
+            "pred": "above",
+            "args": [
+              "blue_plastic_bottle",
+              "near_green_can",
+              "0.05"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_drop",
+            "args": [
+              "blue_plastic_bottle"
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "step": 3,
+      "action": "transport",
+      "target": "blue_plastic_bottle",
+      "destination": "near_green_can",
+      "affordance_region": "an empty area near the green can",
+      "done_when": "above(blue_plastic_bottle, near_green_can, 0.05)",
+      "affordance_hint": "an empty area near the green can",
+      "refine_prompt": "an empty area near the green can",
+      "refine_cache_hit": false,
+      "affordance_refined": [
+        0.1836,
+        0.2344
+      ],
+      "affordance_3d_refined": [
+        -0.4164,
+        -0.3496,
+        1.145
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.3069
+    },
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "surface_contact",
+            "args": [
+              "blue_plastic_bottle",
+              "table"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "released",
+            "args": [
+              "blue_plastic_bottle"
+            ],
+            "role": "completion"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "stable",
+            "args": [
+              "blue_plastic_bottle"
+            ],
+            "role": "completion"
+          }
+        ]
+      },
+      "step": 4,
+      "action": "place",
+      "target": "blue_plastic_bottle",
+      "destination": "near_green_can",
+      "affordance_region": "an empty area near the green can",
+      "done_when": "surface_contact(blue_plastic_bottle, table) AND released(blue_plastic_bottle)",
+      "affordance_hint": "an empty area near the green can",
+      "refine_prompt": "an empty area near the green can",
+      "refine_cache_hit": true,
+      "affordance_refined": [
+        0.1836,
+        0.2344
+      ],
+      "affordance_3d_refined": [
+        -0.4164,
+        -0.3496,
+        1.145
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.3069
+    }
+  ]
+}

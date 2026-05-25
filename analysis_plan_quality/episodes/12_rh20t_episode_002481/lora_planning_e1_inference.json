@@ -1,0 +1,152 @@
+{
+  "task": "Assemble one piece of a puzzle",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_planning_3epoch/checkpoint-13319",
+  "raw": "Scene: puzzle_piece, puzzle_board, table\nStep 1: reach(puzzle_piece)\n  affordance_region: the body of the puzzle piece\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, puzzle_piece, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, puzzle_piece) < 0.03\nStep 2: grasp(puzzle_piece)\n  affordance_region: the edge of the puzzle piece\n  contact: holding(puzzle_piece) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(puzzle_piece)\nStep 3: transport(puzzle_piece -> puzzle_board)\n  affordance_region: an empty area on the puzzle board\n  spatial: above(puzzle_piece, puzzle_board, 0.05) [completion]\n  safety: no_drop(puzzle_piece)\n  done_when: above(puzzle_piece, puzzle_board, 0.05)\nStep 4: place(puzzle_piece -> puzzle_board)\n  affordance_region: an empty area on the puzzle board\n  contact: surface_contact(puzzle_piece, puzzle_board) [completion]; released(puzzle_piece) [completion]\n  pose: stable(puzzle_piece) [completion]\n  done_when: surface_contact(puzzle_piece, puzzle_board) AND released(puzzle_piece)\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [],
+    "scene_objects": [
+      "puzzle_piece",
+      "puzzle_board",
+      "table"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "puzzle_piece",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "puzzle_piece",
+        "affordance_region": "the body of the puzzle piece",
+        "done_when": "distance(gripper, puzzle_piece) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "puzzle_piece"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "puzzle_piece",
+        "affordance_region": "the edge of the puzzle piece",
+        "done_when": "holding(puzzle_piece)"
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "puzzle_piece",
+                "puzzle_board",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "puzzle_piece"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "puzzle_piece",
+        "destination": "puzzle_board",
+        "affordance_region": "an empty area on the puzzle board",
+        "done_when": "above(puzzle_piece, puzzle_board, 0.05)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "surface_contact",
+              "args": [
+                "puzzle_piece",
+                "puzzle_board"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "puzzle_piece"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "puzzle_piece"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "place",
+        "target": "puzzle_piece",
+        "destination": "puzzle_board",
+        "affordance_region": "an empty area on the puzzle board",
+        "done_when": "surface_contact(puzzle_piece, puzzle_board) AND released(puzzle_piece)"
+      }
+    ]
+  }
+}

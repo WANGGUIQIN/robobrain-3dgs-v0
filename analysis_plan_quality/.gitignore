@@ -1,0 +1,8 @@
+# RGB frames are symlinks into the local dataset (absolute paths) — broken off-machine
+*.png
+# run logs
+logs/
+# python caches
+__pycache__/
+*.pyc
+.DS_Store

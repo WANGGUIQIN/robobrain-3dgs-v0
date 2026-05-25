@@ -1,0 +1,186 @@
+{
+  "task": "screw in the gray light bulb",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_planning_3epoch/checkpoint-13319",
+  "raw": "Scene: gray_light_bulb, brown_light_bulb, table\nStep 1: reach(gray_light_bulb)\n  affordance_region: the base of the gray light bulb\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, gray_light_bulb, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, gray_light_bulb) < 0.03\nStep 2: grasp(gray_light_bulb)\n  affordance_region: the base of the gray light bulb\n  contact: holding(gray_light_bulb) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(gray_light_bulb)\nStep 3: transport(gray_light_bulb -> brown_light_bulb)\n  affordance_region: an empty area on the brown light bulb\n  spatial: above(gray_light_bulb, brown_light_bulb, 0.05) [completion]\n  safety: no_drop(gray_light_bulb)\n  done_when: above(gray_light_bulb, brown_light_bulb, 0.05)\nStep 4: insert(gray_light_bulb -> brown_light_bulb)\n  affordance_region: the top opening of the brown light bulb\n  contact: inserted(gray_light_bulb, brown_light_bulb) [completion]\n  spatial: aligned_xy(gray_light_bulb, brown_light_bulb, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: inserted(gray_light_bulb, brown_light_bulb)\nStep 5: rotate(gray_light_bulb)\n  affordance_region: the body of the gray light bulb\n  contact: inserted(gray_light_bulb, brown_light_bulb) [safety]\n  pose: stable(gray_light_bulb) [completion]\n  done_when: stable(gray_light_bulb)\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [],
+    "scene_objects": [
+      "gray_light_bulb",
+      "brown_light_bulb",
+      "table"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "gray_light_bulb",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "gray_light_bulb",
+        "affordance_region": "the base of the gray light bulb",
+        "done_when": "distance(gripper, gray_light_bulb) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "gray_light_bulb"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "gray_light_bulb",
+        "affordance_region": "the base of the gray light bulb",
+        "done_when": "holding(gray_light_bulb)"
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "gray_light_bulb",
+                "brown_light_bulb",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "gray_light_bulb"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "gray_light_bulb",
+        "destination": "brown_light_bulb",
+        "affordance_region": "an empty area on the brown light bulb",
+        "done_when": "above(gray_light_bulb, brown_light_bulb, 0.05)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "inserted",
+              "args": [
+                "gray_light_bulb",
+                "brown_light_bulb"
+              ],
+              "role": "completion"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "aligned_xy",
+              "args": [
+                "gray_light_bulb",
+                "brown_light_bulb",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "insert",
+        "target": "gray_light_bulb",
+        "destination": "brown_light_bulb",
+        "affordance_region": "the top opening of the brown light bulb",
+        "done_when": "inserted(gray_light_bulb, brown_light_bulb)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "inserted",
+              "args": [
+                "gray_light_bulb",
+                "brown_light_bulb"
+              ],
+              "role": "safety"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "gray_light_bulb"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 5,
+        "action": "rotate",
+        "target": "gray_light_bulb",
+        "affordance_region": "the body of the gray light bulb",
+        "done_when": "stable(gray_light_bulb)"
+      }
+    ]
+  }
+}

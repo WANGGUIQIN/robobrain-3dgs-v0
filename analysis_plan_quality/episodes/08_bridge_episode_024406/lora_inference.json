@@ -1,0 +1,247 @@
+{
+  "task": "Place the drumstick on top of the green cloth.",
+  "parsed": {
+    "scene_objects": [
+      "drumstick",
+      "green_cloth",
+      "pot",
+      "spoon",
+      "stove",
+      "sink"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "drumstick",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "drumstick",
+        "affordance_region": "the drumstick",
+        "done_when": "distance(gripper, drumstick) < 0.03",
+        "affordance_hint": "the drumstick",
+        "refine_prompt": "the drumstick",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.6172,
+          0.5547
+        ],
+        "affordance_3d_refined": [
+          0.4073,
+          0.1901,
+          3.0236
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.3993,
+        "affordance": [
+          0.6172,
+          0.5547
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "drumstick"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "drumstick",
+        "affordance_region": "the blue plastic handle of the drumstick",
+        "done_when": "holding(drumstick)",
+        "affordance_hint": "the blue plastic handle of the drumstick",
+        "refine_prompt": "the blue plastic handle of the drumstick",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.6172,
+          0.5547
+        ],
+        "affordance_3d_refined": [
+          0.4073,
+          0.1901,
+          3.0236
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.3735,
+        "affordance": [
+          0.6172,
+          0.5547
+        ]
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "drumstick",
+                "green_cloth",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "drumstick"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "drumstick",
+        "destination": "green_cloth",
+        "affordance_region": "the empty area on the green cloth",
+        "done_when": "above(drumstick, green_cloth, 0.05)",
+        "affordance_hint": "the empty area on the green cloth",
+        "refine_prompt": "the empty area on the green cloth",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.7266,
+          0.4258
+        ],
+        "affordance_3d_refined": [
+          0.5377,
+          -0.1762,
+          2.0647
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.4078,
+        "affordance": [
+          0.7266,
+          0.4258
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "surface_contact",
+              "args": [
+                "drumstick",
+                "green_cloth"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "drumstick"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "drumstick"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "place",
+        "target": "drumstick",
+        "destination": "green_cloth",
+        "affordance_region": "the empty area on the green cloth",
+        "done_when": "surface_contact(drumstick, green_cloth) AND released(drumstick) AND stable(drumstick)",
+        "affordance_hint": "the empty area on the green cloth",
+        "refine_prompt": "the empty area on the green cloth",
+        "refine_cache_hit": true,
+        "affordance_refined": [
+          0.7266,
+          0.4258
+        ],
+        "affordance_3d_refined": [
+          0.5377,
+          -0.1762,
+          2.0647
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.4078,
+        "affordance": [
+          0.7266,
+          0.4258
+        ]
+      }
+    ]
+  }
+}

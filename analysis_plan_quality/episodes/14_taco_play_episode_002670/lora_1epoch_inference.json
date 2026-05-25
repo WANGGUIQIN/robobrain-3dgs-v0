@@ -1,0 +1,215 @@
+{
+  "task": "push the pink block inside the drawer",
+  "raw": "Scene: pink_block, drawer, cabinet\nStep 1: reach(pink_block)\n  affordance_hint: the pink block\n  affordance: [u=0.650, v=0.600], approach: [x=0.000, y=0.000, z=-1.000]\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, pink_block, <, 0.03) [completion]\n  done_when: distance(gripper, pink_block) < 0.03\nStep 2: grasp(pink_block)\n  affordance_hint: the top face of the pink block\n  affordance: [u=0.650, v=0.600], approach: [x=0.000, y=0.000, z=-1.000]\n  contact: holding(pink_block) [completion]\n  direction: grasp_axis(0, 0, -1) [safety]\n  done_when: holding(pink_block)\nStep 3: pull(drawer)\n  affordance_hint: the handle of the drawer\n  affordance: [u=0.800, v=0.400], approach: [x=0.000, y=0.000, z=-1.000]\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, drawer_handle, <, 0.03) [completion]\n  done_when: distance(gripper, drawer_handle) < 0.03\nStep 4: transport(pink_block -> drawer)\n  affordance_hint: the empty space inside the drawer\n  affordance: [u=0.650, v=0.650], approach: [x=0.000, y=0.000, z=-1.000]\n  contact: holding(pink_block) [progress]\n  spatial: inside(pink_block, drawer) [completion]\n  safety: no_drop(pink_block)\n  done_when: inside(pink_block, drawer)\nStep 5: push(pink_block)\n  affordance_hint: the pink block\n  affordance: [u=0.650, v=0.600], approach: [x=0.000, y=0.000, z=-1.000]\n  contact: gripper_state(closed) [progress]\n  spatial: distance(pink_block, drawer_front, <, 0.05) [completion]\n  done_when: distance(pink_block, drawer_front) < 0.05\n<END_OF_PLAN>",
+  "parsed": {
+    "scene_objects": [
+      "pink_block",
+      "drawer",
+      "cabinet"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "pink_block",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "pink_block",
+        "affordance_hint": "the pink block",
+        "affordance": [
+          0.65,
+          0.6
+        ],
+        "approach": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "done_when": "distance(gripper, pink_block) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "pink_block"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "pink_block",
+        "affordance_hint": "the top face of the pink block",
+        "affordance": [
+          0.65,
+          0.6
+        ],
+        "approach": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "done_when": "holding(pink_block)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "drawer_handle",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "pull",
+        "target": "drawer",
+        "affordance_hint": "the handle of the drawer",
+        "affordance": [
+          0.8,
+          0.4
+        ],
+        "approach": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "done_when": "distance(gripper, drawer_handle) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "pink_block"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "inside",
+              "args": [
+                "pink_block",
+                "drawer"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "pink_block"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "transport",
+        "target": "pink_block",
+        "destination": "drawer",
+        "affordance_hint": "the empty space inside the drawer",
+        "affordance": [
+          0.65,
+          0.65
+        ],
+        "approach": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "done_when": "inside(pink_block, drawer)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "closed"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "pink_block",
+                "drawer_front",
+                "<",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 5,
+        "action": "push",
+        "target": "pink_block",
+        "affordance_hint": "the pink block",
+        "affordance": [
+          0.65,
+          0.6
+        ],
+        "approach": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "done_when": "distance(pink_block, drawer_front) < 0.05"
+      }
+    ]
+  }
+}

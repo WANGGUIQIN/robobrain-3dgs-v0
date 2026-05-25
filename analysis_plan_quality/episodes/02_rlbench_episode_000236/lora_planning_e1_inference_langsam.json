@@ -1,0 +1,280 @@
+{
+  "task": "screw in the gray light bulb",
+  "scene_objects": [
+    "gray_light_bulb",
+    "brown_light_bulb",
+    "table"
+  ],
+  "steps": [
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "gray_light_bulb",
+              "<",
+              "0.03"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "approach_axis",
+            "args": [
+              "0",
+              "0",
+              "-1"
+            ],
+            "role": "progress"
+          }
+        ]
+      },
+      "step": 1,
+      "action": "reach",
+      "target": "gray_light_bulb",
+      "affordance_region": "the base of the gray light bulb",
+      "done_when": "distance(gripper, gray_light_bulb) < 0.03",
+      "affordance_hint": "the base of the gray light bulb",
+      "refine_prompt": "the base of the gray light bulb",
+      "refine_cache_hit": false,
+      "affordance_refined": [
+        0.3516,
+        0.8281
+      ],
+      "affordance_3d_refined": [
+        -0.8253,
+        1.8244,
+        2.78
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.4142
+    },
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "gray_light_bulb"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              "0",
+              "0",
+              "-1"
+            ],
+            "role": "progress"
+          }
+        ]
+      },
+      "step": 2,
+      "action": "grasp",
+      "target": "gray_light_bulb",
+      "affordance_region": "the base of the gray light bulb",
+      "done_when": "holding(gray_light_bulb)",
+      "affordance_hint": "the base of the gray light bulb",
+      "refine_prompt": "the base of the gray light bulb",
+      "refine_cache_hit": true,
+      "affordance_refined": [
+        0.3516,
+        0.8281
+      ],
+      "affordance_3d_refined": [
+        -0.8253,
+        1.8244,
+        2.78
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.4142
+    },
+    {
+      "constraints": {
+        "spatial": [
+          {
+            "pred": "above",
+            "args": [
+              "gray_light_bulb",
+              "brown_light_bulb",
+              "0.05"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_drop",
+            "args": [
+              "gray_light_bulb"
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "step": 3,
+      "action": "transport",
+      "target": "gray_light_bulb",
+      "destination": "brown_light_bulb",
+      "affordance_region": "an empty area on the brown light bulb",
+      "done_when": "above(gray_light_bulb, brown_light_bulb, 0.05)",
+      "affordance_hint": "an empty area on the brown light bulb",
+      "refine_prompt": "an empty area on the brown light bulb",
+      "refine_cache_hit": false,
+      "affordance_refined": [
+        0.5898,
+        0.6719
+      ],
+      "affordance_3d_refined": [
+        0.436,
+        0.8342,
+        2.4266
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.3083
+    },
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "inserted",
+            "args": [
+              "gray_light_bulb",
+              "brown_light_bulb"
+            ],
+            "role": "completion"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "aligned_xy",
+            "args": [
+              "gray_light_bulb",
+              "brown_light_bulb",
+              "0.03"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "approach_axis",
+            "args": [
+              "0",
+              "0",
+              "-1"
+            ],
+            "role": "progress"
+          }
+        ]
+      },
+      "step": 4,
+      "action": "insert",
+      "target": "gray_light_bulb",
+      "destination": "brown_light_bulb",
+      "affordance_region": "the top opening of the brown light bulb",
+      "done_when": "inserted(gray_light_bulb, brown_light_bulb)",
+      "affordance_hint": "the top opening of the brown light bulb",
+      "refine_prompt": "the top opening of the brown light bulb",
+      "refine_cache_hit": false,
+      "affordance_refined": [
+        0.4883,
+        0.0742
+      ],
+      "affordance_3d_refined": [
+        -0.0576,
+        -2.0916,
+        2.4561
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.3105
+    },
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "inserted",
+            "args": [
+              "gray_light_bulb",
+              "brown_light_bulb"
+            ],
+            "role": "safety"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "stable",
+            "args": [
+              "gray_light_bulb"
+            ],
+            "role": "completion"
+          }
+        ]
+      },
+      "step": 5,
+      "action": "rotate",
+      "target": "gray_light_bulb",
+      "affordance_region": "the body of the gray light bulb",
+      "done_when": "stable(gray_light_bulb)",
+      "affordance_hint": "the body of the gray light bulb",
+      "refine_prompt": "the body of the gray light bulb",
+      "refine_cache_hit": false,
+      "affordance_refined": [
+        0.4883,
+        0.0742
+      ],
+      "affordance_3d_refined": [
+        -0.0576,
+        -2.0916,
+        2.4561
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.621
+    }
+  ]
+}

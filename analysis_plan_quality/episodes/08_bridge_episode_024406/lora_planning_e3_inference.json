@@ -1,0 +1,155 @@
+{
+  "task": "Place the drumstick on top of the green cloth.",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_planning_3epoch/checkpoint-39957",
+  "raw": "Scene: drumstick, green_cloth, pot, spoon, stove, sink\nStep 1: reach(drumstick)\n  affordance_region: the drumstick\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, drumstick, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, drumstick) < 0.03\nStep 2: grasp(drumstick)\n  affordance_region: the blue plastic handle of the drumstick\n  contact: holding(drumstick) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(drumstick)\nStep 3: transport(drumstick -> green_cloth)\n  affordance_region: the empty area on the green cloth\n  spatial: above(drumstick, green_cloth, 0.05) [completion]\n  safety: no_drop(drumstick)\n  done_when: above(drumstick, green_cloth, 0.05)\nStep 4: place(drumstick -> green_cloth)\n  affordance_region: the empty area on the green cloth\n  contact: surface_contact(drumstick, green_cloth) [completion]; released(drumstick) [completion]\n  pose: stable(drumstick) [completion]\n  done_when: surface_contact(drumstick, green_cloth) AND released(drumstick) AND stable(drumstick)\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [],
+    "scene_objects": [
+      "drumstick",
+      "green_cloth",
+      "pot",
+      "spoon",
+      "stove",
+      "sink"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "drumstick",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "drumstick",
+        "affordance_region": "the drumstick",
+        "done_when": "distance(gripper, drumstick) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "drumstick"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "drumstick",
+        "affordance_region": "the blue plastic handle of the drumstick",
+        "done_when": "holding(drumstick)"
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "drumstick",
+                "green_cloth",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "drumstick"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "drumstick",
+        "destination": "green_cloth",
+        "affordance_region": "the empty area on the green cloth",
+        "done_when": "above(drumstick, green_cloth, 0.05)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "surface_contact",
+              "args": [
+                "drumstick",
+                "green_cloth"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "drumstick"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "drumstick"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "place",
+        "target": "drumstick",
+        "destination": "green_cloth",
+        "affordance_region": "the empty area on the green cloth",
+        "done_when": "surface_contact(drumstick, green_cloth) AND released(drumstick) AND stable(drumstick)"
+      }
+    ]
+  }
+}

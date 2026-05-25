@@ -1,0 +1,175 @@
+{
+  "task": "Place the drumstick on top of the green cloth.",
+  "raw": "Scene: pot, green_cloth, sink, spoon\nStep 1: reach(pot)\n  affordance_hint: the pot\n  affordance: [u=0.450, v=0.450], approach: [x=0.000, y=0.000, z=-1.000]\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, pot, <, 0.03) [completion]\n  done_when: distance(gripper, pot) < 0.03\nStep 2: grasp(pot)\n  affordance_hint: the handle of the pot\n  affordance: [u=0.450, v=0.450], approach: [x=0.000, y=0.000, z=-1.000]\n  contact: holding(pot) [completion]\n  direction: grasp_axis(0, 0, -1) [safety]\n  done_when: holding(pot)\nStep 3: transport(pot -> green_cloth)\n  affordance_hint: an empty area on the green cloth\n  affordance: [u=0.650, v=0.550], approach: [x=0.000, y=0.000, z=-1.000]\n  spatial: above(pot, green_cloth, 0.05) [completion]\n  safety: no_drop(pot)\n  done_when: above(pot, green_cloth, 0.05)\nStep 4: place(pot -> green_cloth)\n  affordance_hint: an empty area on the green cloth\n  affordance: [u=0.650, v=0.550], approach: [x=0.000, y=0.000, z=-1.000]\n  contact: surface_contact(pot, green_cloth) [completion]; released(pot) [completion]\n  pose: stable(pot) [completion]\n  done_when: surface_contact(pot, green_cloth) AND released(pot)\n<END_OF_PLAN>",
+  "parsed": {
+    "scene_objects": [
+      "pot",
+      "green_cloth",
+      "sink",
+      "spoon"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "pot",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "pot",
+        "affordance_hint": "the pot",
+        "affordance": [
+          0.45,
+          0.45
+        ],
+        "approach": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "done_when": "distance(gripper, pot) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "pot"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "pot",
+        "affordance_hint": "the handle of the pot",
+        "affordance": [
+          0.45,
+          0.45
+        ],
+        "approach": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "done_when": "holding(pot)"
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "pot",
+                "green_cloth",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "pot"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "pot",
+        "destination": "green_cloth",
+        "affordance_hint": "an empty area on the green cloth",
+        "affordance": [
+          0.65,
+          0.55
+        ],
+        "approach": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "done_when": "above(pot, green_cloth, 0.05)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "surface_contact",
+              "args": [
+                "pot",
+                "green_cloth"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "pot"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "pot"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "place",
+        "target": "pot",
+        "destination": "green_cloth",
+        "affordance_hint": "an empty area on the green cloth",
+        "affordance": [
+          0.65,
+          0.55
+        ],
+        "approach": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "done_when": "surface_contact(pot, green_cloth) AND released(pot)"
+      }
+    ]
+  }
+}

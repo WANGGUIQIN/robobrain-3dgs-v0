@@ -1,0 +1,246 @@
+{
+  "task": "Take the white wedge out of the bowl and put it on the nearest front corner of the counter.",
+  "parsed": {
+    "scene_objects": [
+      "white_wedge",
+      "bowl",
+      "orange_cloth",
+      "green_spatula",
+      "table"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "white_wedge",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "white_wedge",
+        "affordance_region": "the white wedge in the bowl",
+        "done_when": "distance(gripper, white_wedge) < 0.03",
+        "affordance_hint": "the white wedge in the bowl",
+        "refine_prompt": "the white wedge in the bowl",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.3008,
+          0.3711
+        ],
+        "affordance_3d_refined": [
+          -0.3249,
+          -0.2103,
+          1.4189
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.5481,
+        "affordance": [
+          0.3008,
+          0.3711
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "white_wedge"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "white_wedge",
+        "affordance_region": "the handle of the white wedge",
+        "done_when": "holding(white_wedge)",
+        "affordance_hint": "the handle of the white wedge",
+        "refine_prompt": "the handle of the white wedge",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.2617,
+          0.625
+        ],
+        "affordance_3d_refined": [
+          -0.6781,
+          0.3557,
+          2.4756
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.4691,
+        "affordance": [
+          0.2617,
+          0.625
+        ]
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "white_wedge",
+                "front_corner",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "white_wedge"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "white_wedge",
+        "destination": "front_corner",
+        "affordance_region": "the front corner of the wooden table",
+        "done_when": "above(white_wedge, front_corner, 0.05)",
+        "affordance_hint": "the front corner of the wooden table",
+        "refine_prompt": "the front corner of the wooden table",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.6328,
+          0.7109
+        ],
+        "affordance_3d_refined": [
+          0.3331,
+          0.5291,
+          2.1821
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.5137,
+        "affordance": [
+          0.6328,
+          0.7109
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "surface_contact",
+              "args": [
+                "white_wedge",
+                "front_corner"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "white_wedge"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "white_wedge"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "place",
+        "target": "white_wedge",
+        "destination": "front_corner",
+        "affordance_region": "the front corner of the wooden table",
+        "done_when": "surface_contact(white_wedge, front_corner) AND released(white_wedge) AND stable(white_wedge)",
+        "affordance_hint": "the front corner of the wooden table",
+        "refine_prompt": "the front corner of the wooden table",
+        "refine_cache_hit": true,
+        "affordance_refined": [
+          0.6328,
+          0.7109
+        ],
+        "affordance_3d_refined": [
+          0.3331,
+          0.5291,
+          2.1821
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.5137,
+        "affordance": [
+          0.6328,
+          0.7109
+        ]
+      }
+    ]
+  }
+}

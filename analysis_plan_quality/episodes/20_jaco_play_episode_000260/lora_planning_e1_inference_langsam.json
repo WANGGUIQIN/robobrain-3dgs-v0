@@ -1,0 +1,119 @@
+{
+  "task": "pick up the apple fruit",
+  "scene_objects": [
+    "apple",
+    "table"
+  ],
+  "steps": [
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "apple",
+              "<",
+              "0.03"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "approach_axis",
+            "args": [
+              "0",
+              "0",
+              "-1"
+            ],
+            "role": "progress"
+          }
+        ]
+      },
+      "step": 1,
+      "action": "reach",
+      "target": "apple",
+      "affordance_region": "the body of the red apple",
+      "done_when": "distance(gripper, apple) < 0.03",
+      "affordance_hint": "the body of the red apple",
+      "refine_prompt": "the body of the red apple",
+      "refine_cache_hit": false,
+      "affordance_refined": [
+        0.4102,
+        0.5195
+      ],
+      "affordance_3d_refined": [
+        -0.2496,
+        0.0543,
+        2.4169
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.4242
+    },
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "apple"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              "0",
+              "0",
+              "-1"
+            ],
+            "role": "progress"
+          }
+        ]
+      },
+      "step": 2,
+      "action": "grasp",
+      "target": "apple",
+      "affordance_region": "the body of the red apple",
+      "done_when": "holding(apple)",
+      "affordance_hint": "the body of the red apple",
+      "refine_prompt": "the body of the red apple",
+      "refine_cache_hit": true,
+      "affordance_refined": [
+        0.4102,
+        0.5195
+      ],
+      "affordance_3d_refined": [
+        -0.2496,
+        0.0543,
+        2.4169
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.4242
+    }
+  ]
+}

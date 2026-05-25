@@ -1,0 +1,240 @@
+{
+  "task": "Assemble: Attach the bubble ring to the ball",
+  "scene_objects": [
+    "bubble_ring",
+    "ball",
+    "table"
+  ],
+  "num_steps": 4,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "bubble_ring",
+      "affordance": [
+        0.575,
+        0.641
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "bubble_ring",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "ball"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, bubble_ring) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        -1.2961,
+        -0.1199,
+        2.3974
+      ],
+      "affordance_hint": "the small transparent bubble ring",
+      "affordance_hint_original": "the bubble ring",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 2,
+      "action": "grasp",
+      "target": "bubble_ring",
+      "affordance": [
+        0.584,
+        0.58
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "bubble_ring"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "holding",
+            "args": [
+              "bubble_ring"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              0,
+              0,
+              -1
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "holding(bubble_ring)",
+      "affordance_3d": [
+        -1.3464,
+        -0.2534,
+        2.5344
+      ],
+      "affordance_hint": "the small transparent bubble ring",
+      "affordance_hint_original": "the handle of the bubble ring",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 3,
+      "action": "transport",
+      "target": "bubble_ring",
+      "destination": "ball",
+      "affordance": [
+        0.462,
+        0.7
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "bubble_ring"
+            ],
+            "role": "safety"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "above",
+            "args": [
+              "bubble_ring",
+              "ball",
+              0.05
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "bubble_ring",
+              "ball"
+            ]
+          },
+          {
+            "pred": "no_drop",
+            "args": [
+              "bubble_ring"
+            ]
+          }
+        ]
+      },
+      "done_when": "above(bubble_ring, ball, 0.05) AND aligned_xy(bubble_ring, ball, 0.03)",
+      "affordance_3d": [
+        -1.2539,
+        -0.0062,
+        1.9864
+      ],
+      "affordance_hint": "the empty area on the ball",
+      "affordance_hint_original": "an empty area on the ball",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 4,
+      "action": "insert",
+      "target": "bubble_ring",
+      "destination": "ball",
+      "affordance": [
+        0.5,
+        0.65
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "inserted",
+            "args": [
+              "bubble_ring",
+              "ball"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "released",
+            "args": [
+              "bubble_ring"
+            ],
+            "role": "completion"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "orientation_match",
+            "args": [
+              "bubble_ring",
+              "ball"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "support_stable",
+            "args": [
+              "bubble_ring"
+            ]
+          }
+        ]
+      },
+      "done_when": "inserted(bubble_ring, ball) AND released(bubble_ring) AND orientation_match(bubble_ring, ball)",
+      "affordance_3d": [
+        -1.1214,
+        -0.0818,
+        1.869
+      ],
+      "affordance_hint": "the top opening of the ball",
+      "affordance_hint_original": "the top opening of the ball",
+      "affordance_hint_confidence": "ok"
+    }
+  ]
+}

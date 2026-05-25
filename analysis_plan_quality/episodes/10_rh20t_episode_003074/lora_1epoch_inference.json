@@ -1,0 +1,174 @@
+{
+  "task": "Assemble: Attach the bubble ring to the ball",
+  "raw": "Scene: ball, bubble_ring, table\nStep 1: reach(ball)\n  affordance_hint: the ball\n  affordance: [u=0.650, v=0.650], approach: [x=0.000, y=0.000, z=-1.000]\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, ball, <, 0.03) [completion]\n  done_when: distance(gripper, ball) < 0.03\nStep 2: grasp(ball)\n  affordance_hint: the ball\n  affordance: [u=0.650, v=0.650], approach: [x=0.000, y=0.000, z=-1.000]\n  contact: holding(ball) [completion]\n  direction: grasp_axis(0, 0, -1) [safety]\n  done_when: holding(ball)\nStep 3: transport(ball -> bubble_ring)\n  affordance_hint: the bubble ring\n  affordance: [u=0.600, v=0.600], approach: [x=0.000, y=0.000, z=-1.000]\n  spatial: above(ball, bubble_ring, 0.05) [completion]\n  safety: no_drop(ball)\n  done_when: above(ball, bubble_ring, 0.05)\nStep 4: place(ball -> bubble_ring)\n  affordance_hint: the bubble ring\n  affordance: [u=0.600, v=0.600], approach: [x=0.000, y=0.000, z=-1.000]\n  contact: surface_contact(ball, bubble_ring) [completion]; released(ball) [completion]\n  pose: stable(ball) [completion]\n  done_when: surface_contact(ball, bubble_ring) AND released(ball)\n<END_OF_PLAN>",
+  "parsed": {
+    "scene_objects": [
+      "ball",
+      "bubble_ring",
+      "table"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "ball",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "ball",
+        "affordance_hint": "the ball",
+        "affordance": [
+          0.65,
+          0.65
+        ],
+        "approach": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "done_when": "distance(gripper, ball) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "ball"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "ball",
+        "affordance_hint": "the ball",
+        "affordance": [
+          0.65,
+          0.65
+        ],
+        "approach": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "done_when": "holding(ball)"
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "ball",
+                "bubble_ring",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "ball"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "ball",
+        "destination": "bubble_ring",
+        "affordance_hint": "the bubble ring",
+        "affordance": [
+          0.6,
+          0.6
+        ],
+        "approach": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "done_when": "above(ball, bubble_ring, 0.05)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "surface_contact",
+              "args": [
+                "ball",
+                "bubble_ring"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "ball"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "ball"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "place",
+        "target": "ball",
+        "destination": "bubble_ring",
+        "affordance_hint": "the bubble ring",
+        "affordance": [
+          0.6,
+          0.6
+        ],
+        "approach": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "done_when": "surface_contact(ball, bubble_ring) AND released(ball)"
+      }
+    ]
+  }
+}

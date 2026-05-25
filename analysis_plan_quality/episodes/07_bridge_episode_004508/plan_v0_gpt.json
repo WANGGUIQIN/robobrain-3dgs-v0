@@ -1,0 +1,233 @@
+{
+  "task": "Take the white wedge out of the bowl and put it on the nearest front corner of the counter.",
+  "scene_objects": [
+    "white_wedge",
+    "bowl",
+    "orange_cloth",
+    "green_spatula",
+    "counter"
+  ],
+  "num_steps": 4,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "white_wedge",
+      "affordance": [
+        0.325,
+        0.325
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "white_wedge",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "bowl"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, white_wedge) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        -0.2749,
+        -0.2749,
+        1.3602
+      ],
+      "affordance_hint": "the white wedge"
+    },
+    {
+      "step": 2,
+      "action": "grasp",
+      "target": "white_wedge",
+      "affordance": [
+        0.25,
+        0.383
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "white_wedge"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "holding",
+            "args": [
+              "white_wedge"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              0,
+              0,
+              -1
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "holding(white_wedge)",
+      "affordance_3d": [
+        -0.4246,
+        -0.1991,
+        1.4776
+      ],
+      "affordance_hint": "the handle of the white wedge"
+    },
+    {
+      "step": 3,
+      "action": "transport",
+      "target": "white_wedge",
+      "destination": "front_corner",
+      "affordance": [
+        0.468,
+        0.651
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "white_wedge"
+            ],
+            "role": "safety"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "above",
+            "args": [
+              "white_wedge",
+              "counter",
+              0.05
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "white_wedge",
+              "counter"
+            ]
+          },
+          {
+            "pred": "no_drop",
+            "args": [
+              "white_wedge"
+            ]
+          }
+        ]
+      },
+      "done_when": "above(white_wedge, counter, 0.05) AND aligned_xy(white_wedge, front_corner, 0.03)",
+      "affordance_3d": [
+        -0.0847,
+        0.413,
+        2.3582
+      ],
+      "affordance_hint": "an empty area on the front corner"
+    },
+    {
+      "step": 4,
+      "action": "place",
+      "target": "white_wedge",
+      "destination": "front_corner",
+      "affordance": [
+        0.468,
+        0.651
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "surface_contact",
+            "args": [
+              "white_wedge",
+              "counter"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "released",
+            "args": [
+              "white_wedge"
+            ],
+            "role": "completion"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "stable",
+            "args": [
+              "white_wedge"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "support_stable",
+            "args": [
+              "white_wedge"
+            ]
+          }
+        ]
+      },
+      "done_when": "surface_contact(white_wedge, counter) AND released(white_wedge) AND stable(white_wedge)",
+      "affordance_3d": [
+        -0.0847,
+        0.413,
+        2.3582
+      ],
+      "affordance_hint": "an empty area on the front corner"
+    }
+  ]
+}

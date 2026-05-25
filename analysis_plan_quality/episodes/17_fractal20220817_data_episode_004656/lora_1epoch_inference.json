@@ -1,0 +1,130 @@
+{
+  "task": "move blue plastic bottle near green can",
+  "raw": "Scene: green_can, apple, bottle, table\nStep 1: reach(bottle)\n  affordance_hint: the body of the green bottle\n  affordance: [u=0.445, v=0.445], approach: [x=0.000, y=0.000, z=-1.000]\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, bottle, <, 0.03) [completion]\n  done_when: distance(gripper, bottle) < 0.03\nStep 2: grasp(bottle)\n  affordance_hint: the body of the green bottle\n  affordance: [u=0.445, v=0.445], approach: [x=0.000, y=0.000, z=-1.000]\n  contact: holding(bottle) [completion]\n  direction: grasp_axis(0, 0, -1) [safety]\n  done_when: holding(bottle)\nStep 3: transport(bottle -> near_green_can)\n  affordance_hint: an empty area on the table near the green can\n  affordance: [u=0.550, v=0.550], approach: [x=0.000, y=0.000, z=-1.000]\n  spatial: above(bottle, near_green_can, 0.05) [completion]\n  safety: no_drop(bottle)\n  done_when: above(bottle, near_green_can, 0.05)\n<END_OF_PLAN>",
+  "parsed": {
+    "scene_objects": [
+      "green_can",
+      "apple",
+      "bottle",
+      "table"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "bottle",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "bottle",
+        "affordance_hint": "the body of the green bottle",
+        "affordance": [
+          0.445,
+          0.445
+        ],
+        "approach": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "done_when": "distance(gripper, bottle) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "bottle"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "bottle",
+        "affordance_hint": "the body of the green bottle",
+        "affordance": [
+          0.445,
+          0.445
+        ],
+        "approach": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "done_when": "holding(bottle)"
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "bottle",
+                "near_green_can",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "bottle"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "bottle",
+        "destination": "near_green_can",
+        "affordance_hint": "an empty area on the table near the green can",
+        "affordance": [
+          0.55,
+          0.55
+        ],
+        "approach": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "done_when": "above(bottle, near_green_can, 0.05)"
+      }
+    ]
+  }
+}

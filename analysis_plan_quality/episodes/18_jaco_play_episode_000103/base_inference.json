@@ -1,0 +1,174 @@
+{
+  "task": "place the yellow cup in the dish rack",
+  "raw": "Scene: yellow_cup, dish_rack, table\nStep 1: reach(yellow_cup)\n  affordance_hint: the yellow cup\n  affordance: [u=0.200, v=0.350], approach: [x=0.000, y=0.000, z=-1.000]\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, yellow_cup, <, 0.03) [completion]\n  done_when: distance(gripper, yellow_cup) < 0.03\nStep 2: grasp(yellow_cup)\n  affordance_hint: the body of the yellow cup\n  affordance: [u=0.200, v=0.350], approach: [x=0.000, y=0.000, z=-1.000]\n  contact: holding(yellow_cup) [completion]\n  direction: grasp_axis(0, 0, -1) [safety]\n  done_when: holding(yellow_cup)\nStep 3: transport(yellow_cup -> dish_rack)\n  affordance_hint: an empty area in the dish rack\n  affordance: [u=0.750, v=0.400], approach: [x=0.000, y=0.000, z=-1.000]\n  spatial: above(yellow_cup, dish_rack, 0.05) [completion]\n  safety: no_drop(yellow_cup)\n  done_when: above(yellow_cup, dish_rack, 0.05)\nStep 4: place(yellow_cup -> dish_rack)\n  affordance_hint: an empty area in the dish rack\n  affordance: [u=0.750, v=0.400], approach: [x=0.000, y=0.000, z=-1.000]\n  contact: surface_contact(yellow_cup, dish_rack) [completion]; released(yellow_cup) [completion]\n  pose: stable(yellow_cup) [completion]\n  done_when: surface_contact(yellow_cup, dish_rack) AND released(yellow_cup)\n<END_OF_PLAN>",
+  "parsed": {
+    "scene_objects": [
+      "yellow_cup",
+      "dish_rack",
+      "table"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "yellow_cup",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "yellow_cup",
+        "affordance_hint": "the yellow cup",
+        "affordance": [
+          0.2,
+          0.35
+        ],
+        "approach": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "done_when": "distance(gripper, yellow_cup) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "yellow_cup"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "yellow_cup",
+        "affordance_hint": "the body of the yellow cup",
+        "affordance": [
+          0.2,
+          0.35
+        ],
+        "approach": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "done_when": "holding(yellow_cup)"
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "yellow_cup",
+                "dish_rack",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "yellow_cup"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "yellow_cup",
+        "destination": "dish_rack",
+        "affordance_hint": "an empty area in the dish rack",
+        "affordance": [
+          0.75,
+          0.4
+        ],
+        "approach": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "done_when": "above(yellow_cup, dish_rack, 0.05)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "surface_contact",
+              "args": [
+                "yellow_cup",
+                "dish_rack"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "yellow_cup"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "yellow_cup"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "place",
+        "target": "yellow_cup",
+        "destination": "dish_rack",
+        "affordance_hint": "an empty area in the dish rack",
+        "affordance": [
+          0.75,
+          0.4
+        ],
+        "approach": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "done_when": "surface_contact(yellow_cup, dish_rack) AND released(yellow_cup)"
+      }
+    ]
+  }
+}

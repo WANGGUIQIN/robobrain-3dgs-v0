@@ -1,0 +1,327 @@
+{
+  "task": "pick orange toy from vessel and keep it on the left side of the table",
+  "raw": "Scene: vessel, orange_toy, table\nStep 1: reach(vessel)\n  affordance: [u=0.500, v=0.500], approach: [x=0.000, y=0.000, z=-1.000]\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, vessel, <, 0.03) [completion]\n  done_when: distance(gripper, vessel) < 0.03\nStep 2: grasp(vessel)\n  affordance: [u=0.500, v=0.500], approach: [x=0.000, y=0.000, z=-1.000]\n  contact: holding(vessel) [completion]\n  direction: grasp_axis(0, 0, -1) [safety]\n  done_when: holding(vessel)\nStep 3: transport(vessel -> table)\n  affordance: [u=0.500, v=0.500], approach: [x=0.000, y=0.000, z=-1.000]\n  spatial: above(vessel, table, 0.05) [completion]\n  safety: no_drop(vessel)\n  done_when: above(vessel, table, 0.05)\nStep 4: place(vessel -> table)\n  affordance: [u=0.500, v=0.500], approach: [x=0.000, y=0.000, z=-1.000]\n  contact: surface_contact(vessel, table) [completion]; released(vessel) [completion]\n  pose: stable(vessel) [completion]\n  done_when: surface_contact(vessel, table) AND released(vessel)\nStep 5: reach(orange_toy)\n  affordance: [u=0.500, v=0.500], approach: [x=0.000, y=0.000, z=-1.000]\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, orange_toy, <, 0.03) [completion]\n  done_when: distance(gripper, orange_toy) < 0.03\nStep 6: grasp(orange_toy)\n  affordance: [u=0.500, v=0.500], approach: [x=0.000, y=0.000, z=-1.000]\n  contact: holding(orange_toy) [completion]\n  direction: grasp_axis(0, 0, -1) [safety]\n  done_when: holding(orange_toy)\nStep 7: transport(orange_toy -> table)\n  affordance: [u=0.500, v=0.500], approach: [x=0.000, y=0.000, z=-1.000]\n  spatial: above(orange_toy, table, 0.05) [completion]\n  safety: no_drop(orange_toy)\n  done_when: above(orange_toy, table, 0.05)\nStep 8: place(orange_toy -> table)\n  affordance: [u=0.500, v=0.500], approach: [x=0.000, y=0.000, z=-1.000]\n  contact: surface_contact(orange_toy, table) [completion]; released(orange_toy) [completion]\n  pose: stable(orange_toy) [completion]\n  done_when: surface_contact(orange_toy, table) AND released(orange_toy)\n<END_OF_PLAN>",
+  "parsed": {
+    "scene_objects": [
+      "vessel",
+      "orange_toy",
+      "table"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "vessel",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "vessel",
+        "affordance": [
+          0.5,
+          0.5
+        ],
+        "approach": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "done_when": "distance(gripper, vessel) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "vessel"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "vessel",
+        "affordance": [
+          0.5,
+          0.5
+        ],
+        "approach": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "done_when": "holding(vessel)"
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "vessel",
+                "table",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "vessel"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "vessel",
+        "destination": "table",
+        "affordance": [
+          0.5,
+          0.5
+        ],
+        "approach": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "done_when": "above(vessel, table, 0.05)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "surface_contact",
+              "args": [
+                "vessel",
+                "table"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "vessel"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "vessel"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "place",
+        "target": "vessel",
+        "destination": "table",
+        "affordance": [
+          0.5,
+          0.5
+        ],
+        "approach": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "done_when": "surface_contact(vessel, table) AND released(vessel)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "orange_toy",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 5,
+        "action": "reach",
+        "target": "orange_toy",
+        "affordance": [
+          0.5,
+          0.5
+        ],
+        "approach": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "done_when": "distance(gripper, orange_toy) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "orange_toy"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 6,
+        "action": "grasp",
+        "target": "orange_toy",
+        "affordance": [
+          0.5,
+          0.5
+        ],
+        "approach": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "done_when": "holding(orange_toy)"
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "orange_toy",
+                "table",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "orange_toy"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 7,
+        "action": "transport",
+        "target": "orange_toy",
+        "destination": "table",
+        "affordance": [
+          0.5,
+          0.5
+        ],
+        "approach": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "done_when": "above(orange_toy, table, 0.05)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "surface_contact",
+              "args": [
+                "orange_toy",
+                "table"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "orange_toy"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "orange_toy"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 8,
+        "action": "place",
+        "target": "orange_toy",
+        "destination": "table",
+        "affordance": [
+          0.5,
+          0.5
+        ],
+        "approach": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "done_when": "surface_contact(orange_toy, table) AND released(orange_toy)"
+      }
+    ]
+  }
+}

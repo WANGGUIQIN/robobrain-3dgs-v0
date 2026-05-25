@@ -1,0 +1,250 @@
+{
+  "task": "close the olive jar",
+  "raw": "Scene: olive_jar, olive_jar_lid, table\nStep 1: reach(olive_jar)\n  affordance_hint: the body of the olive jar\n  affordance: [u=0.575, v=0.500], approach: [x=0.000, y=0.000, z=-1.000]\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, olive_jar, <, 0.03) [completion]\n  done_when: distance(gripper, olive_jar) < 0.03\nStep 2: grasp(olive_jar)\n  affordance_hint: the body of the olive jar\n  affordance: [u=0.575, v=0.500], approach: [x=0.000, y=0.000, z=-1.000]\n  contact: holding(olive_jar) [completion]\n  direction: grasp_axis(0, 0, -1) [safety]\n  done_when: holding(olive_jar)\nStep 3: rotate(olive_jar)\n  affordance_hint: the body of the olive jar\n  affordance: [u=0.575, v=0.500], approach: [x=0.000, y=0.000, z=-1.000]\n  contact: holding(olive_jar) [progress]\n  direction: rotate_axis(0, 1, 0) [progress]\n  done_when: angle(olive_jar, initial_angle) > 0.5\nStep 4: reach(olive_jar_lid)\n  affordance_hint: the top opening of the olive jar\n  affordance: [u=0.575, v=0.400], approach: [x=0.000, y=0.000, z=-1.000]\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, olive_jar_lid, <, 0.03) [completion]\n  done_when: distance(gripper, olive_jar_lid) < 0.03\nStep 5: grasp(olive_jar_lid)\n  affordance_hint: the top opening of the olive jar\n  affordance: [u=0.575, v=0.400], approach: [x=0.000, y=0.000, z=-1.000]\n  contact: holding(olive_jar_lid) [completion]\n  direction: grasp_axis(0, 0, -1) [safety]\n  done_when: holding(olive_jar_lid)\nStep 6: insert(olive_jar_lid -> olive_jar)\n  affordance_hint: the top opening of the olive jar\n  affordance: [u=0.575, v=0.400], approach: [x=0.000, y=0.000, z=-1.000]\n  contact: surface_contact(olive_jar_lid, olive_jar) [completion]; released(olive_jar_lid) [completion]\n  pose: stable(olive_jar_lid) [completion]\n  done_when: surface_contact(olive_jar_lid, olive_jar) AND released(olive_jar_lid)\n<END_OF_PLAN>",
+  "parsed": {
+    "scene_objects": [
+      "olive_jar",
+      "olive_jar_lid",
+      "table"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "olive_jar",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "olive_jar",
+        "affordance_hint": "the body of the olive jar",
+        "affordance": [
+          0.575,
+          0.5
+        ],
+        "approach": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "done_when": "distance(gripper, olive_jar) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "olive_jar"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "olive_jar",
+        "affordance_hint": "the body of the olive jar",
+        "affordance": [
+          0.575,
+          0.5
+        ],
+        "approach": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "done_when": "holding(olive_jar)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "olive_jar"
+              ],
+              "role": "progress"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "rotate_axis",
+              "args": [
+                "0",
+                "1",
+                "0"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "rotate",
+        "target": "olive_jar",
+        "affordance_hint": "the body of the olive jar",
+        "affordance": [
+          0.575,
+          0.5
+        ],
+        "approach": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "done_when": "angle(olive_jar, initial_angle) > 0.5"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "olive_jar_lid",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "reach",
+        "target": "olive_jar_lid",
+        "affordance_hint": "the top opening of the olive jar",
+        "affordance": [
+          0.575,
+          0.4
+        ],
+        "approach": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "done_when": "distance(gripper, olive_jar_lid) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "olive_jar_lid"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 5,
+        "action": "grasp",
+        "target": "olive_jar_lid",
+        "affordance_hint": "the top opening of the olive jar",
+        "affordance": [
+          0.575,
+          0.4
+        ],
+        "approach": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "done_when": "holding(olive_jar_lid)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "surface_contact",
+              "args": [
+                "olive_jar_lid",
+                "olive_jar"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "olive_jar_lid"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "olive_jar_lid"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 6,
+        "action": "insert",
+        "target": "olive_jar_lid",
+        "destination": "olive_jar",
+        "affordance_hint": "the top opening of the olive jar",
+        "affordance": [
+          0.575,
+          0.4
+        ],
+        "approach": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "done_when": "surface_contact(olive_jar_lid, olive_jar) AND released(olive_jar_lid)"
+      }
+    ]
+  }
+}

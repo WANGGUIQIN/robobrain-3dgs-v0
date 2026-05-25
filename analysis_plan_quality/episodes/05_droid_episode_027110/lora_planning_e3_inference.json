@@ -1,0 +1,152 @@
+{
+  "task": "Pick up the black cup from the stove and put it in the pot",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_planning_3epoch/checkpoint-39957",
+  "raw": "Scene: black_cup, pot, stove\nStep 1: reach(black_cup)\n  affordance_region: the black cup on the stove\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, black_cup, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, black_cup) < 0.03\nStep 2: grasp(black_cup)\n  affordance_region: the handle of the black cup\n  contact: holding(black_cup) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(black_cup)\nStep 3: transport(black_cup -> pot)\n  affordance_region: an empty area on the pot\n  spatial: above(black_cup, pot, 0.05) [completion]\n  safety: no_drop(black_cup)\n  done_when: above(black_cup, pot, 0.05)\nStep 4: place(black_cup -> pot)\n  affordance_region: an empty area on the pot\n  contact: surface_contact(black_cup, pot) [completion]; released(black_cup) [completion]\n  pose: stable(black_cup) [completion]\n  done_when: surface_contact(black_cup, pot) AND released(black_cup)\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [],
+    "scene_objects": [
+      "black_cup",
+      "pot",
+      "stove"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "black_cup",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "black_cup",
+        "affordance_region": "the black cup on the stove",
+        "done_when": "distance(gripper, black_cup) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "black_cup"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "black_cup",
+        "affordance_region": "the handle of the black cup",
+        "done_when": "holding(black_cup)"
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "black_cup",
+                "pot",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "black_cup"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "black_cup",
+        "destination": "pot",
+        "affordance_region": "an empty area on the pot",
+        "done_when": "above(black_cup, pot, 0.05)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "surface_contact",
+              "args": [
+                "black_cup",
+                "pot"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "black_cup"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "black_cup"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "place",
+        "target": "black_cup",
+        "destination": "pot",
+        "affordance_region": "an empty area on the pot",
+        "done_when": "surface_contact(black_cup, pot) AND released(black_cup)"
+      }
+    ]
+  }
+}

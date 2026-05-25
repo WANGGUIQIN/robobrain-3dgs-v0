@@ -1,0 +1,280 @@
+{
+  "task": "screw in the gray light bulb",
+  "raw": "Scene: gray_light_bulb, brown_bottle, table\nStep 1: reach(brown_bottle)\n  affordance_hint: the body of the brown bottle\n  affordance: [u=0.640, v=0.500], approach: [x=0.000, y=0.000, z=-1.000]\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, brown_bottle, <, 0.03) [completion]\n  done_when: distance(gripper, brown_bottle) < 0.03\nStep 2: grasp(brown_bottle)\n  affordance_hint: the body of the brown bottle\n  affordance: [u=0.640, v=0.500], approach: [x=0.000, y=0.000, z=-1.000]\n  contact: holding(brown_bottle) [completion]\n  direction: grasp_axis(0, 0, -1) [safety]\n  done_when: holding(brown_bottle)\nStep 3: transport(brown_bottle -> gray_light_bulb)\n  affordance_hint: the gray light bulb\n  affordance: [u=0.400, v=0.500], approach: [x=0.000, y=0.000, z=-1.000]\n  spatial: above(brown_bottle, gray_light_bulb, 0.05) [completion]\n  safety: no_drop(brown_bottle)\n  done_when: above(brown_bottle, gray_light_bulb, 0.05)\nStep 4: release(brown_bottle)\n  affordance_hint: the body of the brown bottle\n  affordance: [u=0.640, v=0.500], approach: [x=0.000, y=0.000, z=-1.000]\n  contact: released(brown_bottle) [completion]\n  pose: stable(brown_bottle) [completion]\n  done_when: released(brown_bottle) AND stable(brown_bottle)\nStep 5: reach(gray_light_bulb)\n  affordance_hint: the gray light bulb\n  affordance: [u=0.400, v=0.500], approach: [x=0.000, y=0.000, z=-1.000]\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, gray_light_bulb, <, 0.03) [completion]\n  done_when: distance(gripper, gray_light_bulb) < 0.03\nStep 6: grasp(gray_light_bulb)\n  affordance_hint: the base of the gray light bulb\n  affordance: [u=0.400, v=0.500], approach: [x=0.000, y=0.000, z=-1.000]\n  contact: holding(gray_light_bulb) [completion]\n  direction: grasp_axis(0, 0, -1) [safety]\n  done_when: holding(gray_light_bulb)\nStep 7: insert(gray_light_bulb -> brown_bottle)\n  affordance_hint: the top opening of the brown bottle\n  affordance: [u=0.640, v=0.300], approach: [x=0.000, y=0.000, z=-1.000]\n  contact: inserted(gray_light_bulb, brown_bottle) [completion]\n  pose: stable(gray_light_bulb) [completion]\n  done_when: inserted(gray_light_bulb, brown_bottle) AND stable(gray_light_bulb)\n<END_OF_PLAN>",
+  "parsed": {
+    "scene_objects": [
+      "gray_light_bulb",
+      "brown_bottle",
+      "table"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "brown_bottle",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "brown_bottle",
+        "affordance_hint": "the body of the brown bottle",
+        "affordance": [
+          0.64,
+          0.5
+        ],
+        "approach": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "done_when": "distance(gripper, brown_bottle) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "brown_bottle"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "brown_bottle",
+        "affordance_hint": "the body of the brown bottle",
+        "affordance": [
+          0.64,
+          0.5
+        ],
+        "approach": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "done_when": "holding(brown_bottle)"
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "brown_bottle",
+                "gray_light_bulb",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "brown_bottle"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "brown_bottle",
+        "destination": "gray_light_bulb",
+        "affordance_hint": "the gray light bulb",
+        "affordance": [
+          0.4,
+          0.5
+        ],
+        "approach": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "done_when": "above(brown_bottle, gray_light_bulb, 0.05)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "released",
+              "args": [
+                "brown_bottle"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "brown_bottle"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "release",
+        "target": "brown_bottle",
+        "affordance_hint": "the body of the brown bottle",
+        "affordance": [
+          0.64,
+          0.5
+        ],
+        "approach": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "done_when": "released(brown_bottle) AND stable(brown_bottle)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "gray_light_bulb",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 5,
+        "action": "reach",
+        "target": "gray_light_bulb",
+        "affordance_hint": "the gray light bulb",
+        "affordance": [
+          0.4,
+          0.5
+        ],
+        "approach": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "done_when": "distance(gripper, gray_light_bulb) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "gray_light_bulb"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 6,
+        "action": "grasp",
+        "target": "gray_light_bulb",
+        "affordance_hint": "the base of the gray light bulb",
+        "affordance": [
+          0.4,
+          0.5
+        ],
+        "approach": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "done_when": "holding(gray_light_bulb)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "inserted",
+              "args": [
+                "gray_light_bulb",
+                "brown_bottle"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "gray_light_bulb"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 7,
+        "action": "insert",
+        "target": "gray_light_bulb",
+        "destination": "brown_bottle",
+        "affordance_hint": "the top opening of the brown bottle",
+        "affordance": [
+          0.64,
+          0.3
+        ],
+        "approach": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "done_when": "inserted(gray_light_bulb, brown_bottle) AND stable(gray_light_bulb)"
+      }
+    ]
+  }
+}

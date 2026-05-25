@@ -1,0 +1,174 @@
+{
+  "task": "Take the white wedge out of the bowl and put it on the nearest front corner of the counter.",
+  "raw": "Scene: bowl, white_wedge, counter\nStep 1: reach(bowl)\n  affordance_hint: the bowl\n  affordance: [u=0.480, v=0.450], approach: [x=0.000, y=0.000, z=-1.000]\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, bowl, <, 0.03) [completion]\n  done_when: distance(gripper, bowl) < 0.03\nStep 2: grasp(white_wedge)\n  affordance_hint: the white wedge in the bowl\n  affordance: [u=0.480, v=0.450], approach: [x=0.000, y=0.000, z=-1.000]\n  contact: holding(white_wedge) [completion]\n  direction: grasp_axis(0, 0, -1) [safety]\n  done_when: holding(white_wedge)\nStep 3: transport(white_wedge -> counter)\n  affordance_hint: the nearest front corner of the counter\n  affordance: [u=0.500, v=0.600], approach: [x=0.000, y=0.000, z=-1.000]\n  spatial: above(white_wedge, counter, 0.05) [completion]\n  safety: no_drop(white_wedge)\n  done_when: above(white_wedge, counter, 0.05)\nStep 4: place(white_wedge -> counter)\n  affordance_hint: the nearest front corner of the counter\n  affordance: [u=0.500, v=0.600], approach: [x=0.000, y=0.000, z=-1.000]\n  contact: surface_contact(white_wedge, counter) [completion]; released(white_wedge) [completion]\n  pose: stable(white_wedge) [completion]\n  done_when: surface_contact(white_wedge, counter) AND released(white_wedge)\n<END_OF_PLAN>",
+  "parsed": {
+    "scene_objects": [
+      "bowl",
+      "white_wedge",
+      "counter"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "bowl",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "bowl",
+        "affordance_hint": "the bowl",
+        "affordance": [
+          0.48,
+          0.45
+        ],
+        "approach": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "done_when": "distance(gripper, bowl) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "white_wedge"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "white_wedge",
+        "affordance_hint": "the white wedge in the bowl",
+        "affordance": [
+          0.48,
+          0.45
+        ],
+        "approach": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "done_when": "holding(white_wedge)"
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "white_wedge",
+                "counter",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "white_wedge"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "white_wedge",
+        "destination": "counter",
+        "affordance_hint": "the nearest front corner of the counter",
+        "affordance": [
+          0.5,
+          0.6
+        ],
+        "approach": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "done_when": "above(white_wedge, counter, 0.05)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "surface_contact",
+              "args": [
+                "white_wedge",
+                "counter"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "white_wedge"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "white_wedge"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "place",
+        "target": "white_wedge",
+        "destination": "counter",
+        "affordance_hint": "the nearest front corner of the counter",
+        "affordance": [
+          0.5,
+          0.6
+        ],
+        "approach": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "done_when": "surface_contact(white_wedge, counter) AND released(white_wedge)"
+      }
+    ]
+  }
+}

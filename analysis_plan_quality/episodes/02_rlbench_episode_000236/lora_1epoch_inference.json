@@ -1,0 +1,265 @@
+{
+  "task": "screw in the gray light bulb",
+  "raw": "Scene: socket, light_bulb, screwdriver, table\nStep 1: grasp(screwdriver)\n  affordance_hint: the handle of the screwdriver\n  affordance: [u=0.650, v=0.600], approach: [x=0.000, y=0.000, z=-1.000]\n  contact: holding(screwdriver) [completion]\n  direction: grasp_axis(0, 0, -1) [safety]\n  done_when: holding(screwdriver)\nStep 2: transport(screwdriver -> socket)\n  affordance_hint: the socket\n  affordance: [u=0.600, v=0.550], approach: [x=0.000, y=0.000, z=-1.000]\n  spatial: above(screwdriver, socket, 0.05) [completion]\n  safety: no_drop(screwdriver)\n  done_when: above(screwdriver, socket, 0.05)\nStep 3: insert(screwdriver -> socket)\n  affordance_hint: the socket\n  affordance: [u=0.600, v=0.550], approach: [x=0.000, y=0.000, z=-1.000]\n  contact: inserted(screwdriver, socket) [completion]\n  pose: stable(screwdriver) [completion]\n  done_when: inserted(screwdriver, socket)\nStep 4: grasp(light_bulb)\n  affordance_hint: the base of the light_bulb\n  affordance: [u=0.450, v=0.650], approach: [x=0.000, y=0.000, z=-1.000]\n  contact: holding(light_bulb) [completion]\n  direction: grasp_axis(0, 0, -1) [safety]\n  done_when: holding(light_bulb)\nStep 5: transport(light_bulb -> socket)\n  affordance_hint: the socket\n  affordance: [u=0.600, v=0.550], approach: [x=0.000, y=0.000, z=-1.000]\n  spatial: above(light_bulb, socket, 0.05) [completion]\n  safety: no_drop(light_bulb)\n  done_when: above(light_bulb, socket, 0.05)\nStep 6: insert(light_bulb -> socket)\n  affordance_hint: the socket\n  affordance: [u=0.600, v=0.550], approach: [x=0.000, y=0.000, z=-1.000]\n  contact: inserted(light_bulb, socket) [completion]\n  pose: stable(light_bulb) [completion]\n  done_when: inserted(light_bulb, socket)\nStep 7: release(screwdriver)\n  affordance: [u=0.650, v=0.600]\n  contact: released(screwdriver) [completion]\n  done_when: released(screwdriver)\n<END_OF_PLAN>",
+  "parsed": {
+    "scene_objects": [
+      "socket",
+      "light_bulb",
+      "screwdriver",
+      "table"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "screwdriver"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "grasp",
+        "target": "screwdriver",
+        "affordance_hint": "the handle of the screwdriver",
+        "affordance": [
+          0.65,
+          0.6
+        ],
+        "approach": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "done_when": "holding(screwdriver)"
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "screwdriver",
+                "socket",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "screwdriver"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "transport",
+        "target": "screwdriver",
+        "destination": "socket",
+        "affordance_hint": "the socket",
+        "affordance": [
+          0.6,
+          0.55
+        ],
+        "approach": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "done_when": "above(screwdriver, socket, 0.05)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "inserted",
+              "args": [
+                "screwdriver",
+                "socket"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "screwdriver"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "insert",
+        "target": "screwdriver",
+        "destination": "socket",
+        "affordance_hint": "the socket",
+        "affordance": [
+          0.6,
+          0.55
+        ],
+        "approach": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "done_when": "inserted(screwdriver, socket)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "light_bulb"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "grasp",
+        "target": "light_bulb",
+        "affordance_hint": "the base of the light_bulb",
+        "affordance": [
+          0.45,
+          0.65
+        ],
+        "approach": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "done_when": "holding(light_bulb)"
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "light_bulb",
+                "socket",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "light_bulb"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 5,
+        "action": "transport",
+        "target": "light_bulb",
+        "destination": "socket",
+        "affordance_hint": "the socket",
+        "affordance": [
+          0.6,
+          0.55
+        ],
+        "approach": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "done_when": "above(light_bulb, socket, 0.05)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "inserted",
+              "args": [
+                "light_bulb",
+                "socket"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "light_bulb"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 6,
+        "action": "insert",
+        "target": "light_bulb",
+        "destination": "socket",
+        "affordance_hint": "the socket",
+        "affordance": [
+          0.6,
+          0.55
+        ],
+        "approach": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "done_when": "inserted(light_bulb, socket)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "released",
+              "args": [
+                "screwdriver"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 7,
+        "action": "release",
+        "target": "screwdriver",
+        "affordance": [
+          0.65,
+          0.6
+        ],
+        "done_when": "released(screwdriver)"
+      }
+    ]
+  }
+}

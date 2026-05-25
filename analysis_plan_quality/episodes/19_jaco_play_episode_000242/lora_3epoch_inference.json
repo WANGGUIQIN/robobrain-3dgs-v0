@@ -1,0 +1,172 @@
+{
+  "task": "pick up the milk dairy",
+  "raw": "Scene: blue_bowl, red_ball, yellow_block, blue_container, table\nStep 1: reach(blue_bowl)\n  affordance: [u=0.500, v=0.500], approach: [x=0.000, y=0.000, z=-1.000]\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, blue_bowl, <, 0.03) [completion]\n  done_when: distance(gripper, blue_bowl) < 0.03\nStep 2: grasp(blue_bowl)\n  affordance: [u=0.500, v=0.500], approach: [x=0.000, y=0.000, z=-1.000]\n  contact: holding(blue_bowl) [completion]\n  direction: grasp_axis(0, 0, -1) [safety]\n  done_when: holding(blue_bowl)\nStep 3: transport(blue_bowl -> blue_container)\n  affordance: [u=0.500, v=0.500], approach: [x=0.000, y=0.000, z=-1.000]\n  spatial: above(blue_bowl, blue_container, 0.05) [completion]\n  safety: no_drop(blue_bowl)\n  done_when: above(blue_bowl, blue_container, 0.05)\nStep 4: place(blue_bowl -> blue_container)\n  affordance: [u=0.500, v=0.500], approach: [x=0.000, y=0.000, z=-1.000]\n  contact: surface_contact(blue_bowl, blue_container) [completion]; released(blue_bowl) [completion]\n  pose: stable(blue_bowl) [completion]\n  done_when: surface_contact(blue_bowl, blue_container) AND released(blue_bowl)\n<END_OF_PLAN>",
+  "parsed": {
+    "scene_objects": [
+      "blue_bowl",
+      "red_ball",
+      "yellow_block",
+      "blue_container",
+      "table"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "blue_bowl",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "blue_bowl",
+        "affordance": [
+          0.5,
+          0.5
+        ],
+        "approach": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "done_when": "distance(gripper, blue_bowl) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "blue_bowl"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "blue_bowl",
+        "affordance": [
+          0.5,
+          0.5
+        ],
+        "approach": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "done_when": "holding(blue_bowl)"
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "blue_bowl",
+                "blue_container",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "blue_bowl"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "blue_bowl",
+        "destination": "blue_container",
+        "affordance": [
+          0.5,
+          0.5
+        ],
+        "approach": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "done_when": "above(blue_bowl, blue_container, 0.05)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "surface_contact",
+              "args": [
+                "blue_bowl",
+                "blue_container"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "blue_bowl"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "blue_bowl"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "place",
+        "target": "blue_bowl",
+        "destination": "blue_container",
+        "affordance": [
+          0.5,
+          0.5
+        ],
+        "approach": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "done_when": "surface_contact(blue_bowl, blue_container) AND released(blue_bowl)"
+      }
+    ]
+  }
+}

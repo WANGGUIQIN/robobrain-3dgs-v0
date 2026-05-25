@@ -1,0 +1,244 @@
+{
+  "task": "close the olive jar",
+  "parsed": {
+    "scene_objects": [
+      "olive_jar",
+      "lid",
+      "table"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "lid",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "lid",
+        "affordance_region": "the metallic lid",
+        "done_when": "distance(gripper, lid) < 0.03",
+        "affordance_hint": "the metallic lid",
+        "refine_prompt": "the metallic lid",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.6328,
+          0.9219
+        ],
+        "affordance_3d_refined": [
+          0.615,
+          1.9534,
+          2.3152
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.3778,
+        "affordance": [
+          0.6328,
+          0.9219
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "lid"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "lid",
+        "affordance_region": "the metallic lid",
+        "done_when": "holding(lid)",
+        "affordance_hint": "the metallic lid",
+        "refine_prompt": "the metallic lid",
+        "refine_cache_hit": true,
+        "affordance_refined": [
+          0.6328,
+          0.9219
+        ],
+        "affordance_3d_refined": [
+          0.615,
+          1.9534,
+          2.3152
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.3778,
+        "affordance": [
+          0.6328,
+          0.9219
+        ]
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "lid",
+                "olive_jar",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "lid"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "lid",
+        "destination": "olive_jar",
+        "affordance_region": "an empty area on the olive jar",
+        "done_when": "above(lid, olive_jar, 0.05)",
+        "affordance_hint": "an empty area on the olive jar",
+        "refine_prompt": "an empty area on the olive jar",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.418,
+          0.707
+        ],
+        "affordance_3d_refined": [
+          -0.4221,
+          1.0652,
+          2.5726
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.3747,
+        "affordance": [
+          0.418,
+          0.707
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "surface_contact",
+              "args": [
+                "lid",
+                "olive_jar"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "lid"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "lid"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "place",
+        "target": "lid",
+        "destination": "olive_jar",
+        "affordance_region": "the top opening of the olive jar",
+        "done_when": "surface_contact(lid, olive_jar) AND released(lid) AND stable(lid)",
+        "affordance_hint": "the top opening of the olive jar",
+        "refine_prompt": "the top opening of the olive jar",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.418,
+          0.707
+        ],
+        "affordance_3d_refined": [
+          -0.4221,
+          1.0652,
+          2.5726
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.4186,
+        "affordance": [
+          0.418,
+          0.707
+        ]
+      }
+    ]
+  }
+}

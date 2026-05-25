@@ -1,0 +1,176 @@
+{
+  "task": "pick up the milk dairy",
+  "raw": "Scene: blue_bowl, red_ball, yellow_brick, blue_container, table\nStep 1: reach(yellow_brick)\n  affordance_hint: the yellow brick\n  affordance: [u=0.425, v=0.750], approach: [x=0.000, y=0.000, z=-1.000]\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, yellow_brick, <, 0.03) [completion]\n  done_when: distance(gripper, yellow_brick) < 0.03\nStep 2: grasp(yellow_brick)\n  affordance_hint: the body of the yellow brick\n  affordance: [u=0.425, v=0.750], approach: [x=0.000, y=0.000, z=-1.000]\n  contact: holding(yellow_brick) [completion]\n  direction: grasp_axis(0, 0, -1) [safety]\n  done_when: holding(yellow_brick)\nStep 3: transport(yellow_brick -> blue_container)\n  affordance_hint: an empty area inside the blue container\n  affordance: [u=0.750, v=0.600], approach: [x=0.000, y=0.000, z=-1.000]\n  spatial: above(yellow_brick, blue_container, 0.05) [completion]\n  safety: no_drop(yellow_brick)\n  done_when: above(yellow_brick, blue_container, 0.05)\nStep 4: place(yellow_brick -> blue_container)\n  affordance_hint: an empty area inside the blue container\n  affordance: [u=0.750, v=0.600], approach: [x=0.000, y=0.000, z=-1.000]\n  contact: surface_contact(yellow_brick, blue_container) [completion]; released(yellow_brick) [completion]\n  pose: stable(yellow_brick) [completion]\n  done_when: surface_contact(yellow_brick, blue_container) AND released(yellow_brick)\n<END_OF_PLAN>",
+  "parsed": {
+    "scene_objects": [
+      "blue_bowl",
+      "red_ball",
+      "yellow_brick",
+      "blue_container",
+      "table"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "yellow_brick",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "yellow_brick",
+        "affordance_hint": "the yellow brick",
+        "affordance": [
+          0.425,
+          0.75
+        ],
+        "approach": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "done_when": "distance(gripper, yellow_brick) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "yellow_brick"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "yellow_brick",
+        "affordance_hint": "the body of the yellow brick",
+        "affordance": [
+          0.425,
+          0.75
+        ],
+        "approach": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "done_when": "holding(yellow_brick)"
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "yellow_brick",
+                "blue_container",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "yellow_brick"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "yellow_brick",
+        "destination": "blue_container",
+        "affordance_hint": "an empty area inside the blue container",
+        "affordance": [
+          0.75,
+          0.6
+        ],
+        "approach": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "done_when": "above(yellow_brick, blue_container, 0.05)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "surface_contact",
+              "args": [
+                "yellow_brick",
+                "blue_container"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "yellow_brick"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "yellow_brick"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "place",
+        "target": "yellow_brick",
+        "destination": "blue_container",
+        "affordance_hint": "an empty area inside the blue container",
+        "affordance": [
+          0.75,
+          0.6
+        ],
+        "approach": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "done_when": "surface_contact(yellow_brick, blue_container) AND released(yellow_brick)"
+      }
+    ]
+  }
+}

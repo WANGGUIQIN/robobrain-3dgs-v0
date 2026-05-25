@@ -1,0 +1,202 @@
+{
+  "task": "close the olive jar",
+  "scene_objects": [
+    "olive_jar",
+    "table"
+  ],
+  "num_steps": 4,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "olive_jar",
+      "affordance": [
+        0.41,
+        0.687
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "olive_jar",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "table"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, olive_jar) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        -0.6069,
+        1.2665,
+        3.3773
+      ],
+      "affordance_hint": "the olive jar",
+      "affordance_hint_original": "the olive jar",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 2,
+      "action": "grasp",
+      "target": "olive_jar",
+      "affordance": [
+        0.41,
+        0.64
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "olive_jar"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "holding",
+            "args": [
+              "olive_jar"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              0,
+              0,
+              -1
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "holding(olive_jar)",
+      "affordance_3d": [
+        -0.1848,
+        0.2893,
+        1.0285
+      ],
+      "affordance_hint": "the lid of the green olive jar",
+      "affordance_hint_original": "the handle of the olive jar",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 3,
+      "action": "rotate",
+      "target": "olive_jar",
+      "affordance": [
+        0.41,
+        0.66
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "olive_jar"
+            ],
+            "role": "safety"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "upright",
+            "args": [
+              "olive_jar"
+            ],
+            "role": "completion"
+          }
+        ]
+      },
+      "done_when": "upright(olive_jar)",
+      "affordance_3d": [
+        -0.1371,
+        0.2443,
+        0.7628
+      ],
+      "affordance_hint": "the body of the olive jar",
+      "affordance_hint_original": "the body of the olive jar",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 4,
+      "action": "release",
+      "target": "olive_jar",
+      "affordance": [
+        0.41,
+        0.687
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "released",
+            "args": [
+              "olive_jar"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "support_stable",
+            "args": [
+              "olive_jar"
+            ]
+          }
+        ]
+      },
+      "done_when": "released(olive_jar)",
+      "affordance_3d": [
+        -0.6069,
+        1.2665,
+        3.3773
+      ],
+      "affordance_hint": "the olive jar",
+      "affordance_hint_original": "the olive jar",
+      "affordance_hint_confidence": "ok"
+    }
+  ]
+}
