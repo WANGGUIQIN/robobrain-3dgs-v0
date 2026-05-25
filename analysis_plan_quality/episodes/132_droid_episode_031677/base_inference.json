@@ -1,0 +1,171 @@
+{
+  "task": "Move the empty plastic pack of snack forward",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_3epoch/best",
+  "raw": "SCENE ANALYSIS - A white table holds a blue snack pack, a white cup, a blue bowl, a white plate with food, a white plate with a brown item, and a white plate with a patterned item. The snack pack is a blue rectangular object with a white label, positioned on the table. STRATEGY - The task is to move the snack pack forward. First, reach for the snack pack to grasp it. Then, transport it to a new position on the table that is forward of its original location. Failure modes include dropping the snack pack during transport or misplacing it. AFFORDANCE REASONING - Step 1 requires reaching the snack pack's body for a stable grasp. Step 2 involves grasping the snack pack's body to lift it. Step 3 is transporting the snack pack to the forward destination. Step 4 is placing the snack pack at the new forward position.\nGoal: on(snack_pack, table); forward(snack_pack, original_pos)\nScene: snack_pack, table, cup, bowl, plate_food, plate_brown, plate_patterned\nStep 1: reach(snack_pack)\n  affordance_region: the body of the blue snack pack\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, snack_pack, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, snack_pack) < 0.03\nStep 2: grasp(snack_pack)\n  affordance_region: the body of the blue snack pack\n  contact: holding(snack_pack) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(snack_pack)\nStep 3: transport(snack_pack -> forward_pos)\n  affordance_region: an empty area on the table forward of the snack_pack's original position\n  spatial: above(snack_pack, forward_pos, 0.05) [completion]\n  safety: no_drop(snack_pack)\n  done_when: above(snack_pack, forward_pos, 0.05)\nStep 4: place(snack_pack -> forward_pos)\n  affordance_region: an empty area on the table forward of the snack_pack's original position\n  contact: surface_contact(snack_pack, forward_pos) [completion]; released(snack_pack) [completion]\n  pose: stable(snack_pack) [completion]\n  done_when: surface_contact(snack_pack, forward_pos) AND released(snack_pack)\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [
+      {
+        "pred": "on",
+        "args": [
+          "snack_pack",
+          "table"
+        ]
+      },
+      {
+        "pred": "forward",
+        "args": [
+          "snack_pack",
+          "original_pos"
+        ]
+      }
+    ],
+    "scene_objects": [
+      "snack_pack",
+      "table",
+      "cup",
+      "bowl",
+      "plate_food",
+      "plate_brown",
+      "plate_patterned"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "snack_pack",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "snack_pack",
+        "affordance_region": "the body of the blue snack pack",
+        "done_when": "distance(gripper, snack_pack) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "snack_pack"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "snack_pack",
+        "affordance_region": "the body of the blue snack pack",
+        "done_when": "holding(snack_pack)"
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "snack_pack",
+                "forward_pos",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "snack_pack"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "snack_pack",
+        "destination": "forward_pos",
+        "affordance_region": "an empty area on the table forward of the snack_pack's original position",
+        "done_when": "above(snack_pack, forward_pos, 0.05)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "surface_contact",
+              "args": [
+                "snack_pack",
+                "forward_pos"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "snack_pack"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "snack_pack"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "place",
+        "target": "snack_pack",
+        "destination": "forward_pos",
+        "affordance_region": "an empty area on the table forward of the snack_pack's original position",
+        "done_when": "surface_contact(snack_pack, forward_pos) AND released(snack_pack)"
+      }
+    ]
+  }
+}

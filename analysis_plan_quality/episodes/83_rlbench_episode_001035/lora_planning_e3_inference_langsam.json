@@ -1,0 +1,226 @@
+{
+  "task": "put the item in the middle drawer",
+  "scene_objects": [
+    "item",
+    "middle_drawer",
+    "table"
+  ],
+  "steps": [
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "item",
+              "<",
+              "0.03"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "approach_axis",
+            "args": [
+              "0",
+              "0",
+              "-1"
+            ],
+            "role": "progress"
+          }
+        ]
+      },
+      "step": 1,
+      "action": "reach",
+      "target": "item",
+      "affordance_region": "the small purple item on the table",
+      "done_when": "distance(gripper, item) < 0.03",
+      "affordance_hint": "the small purple item on the table",
+      "refine_prompt": "the small purple item on the table",
+      "refine_cache_hit": false,
+      "affordance_refined": [
+        0.2188,
+        0.3047
+      ],
+      "affordance_3d_refined": [
+        -1.2934,
+        -0.8982,
+        2.2994
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.5736
+    },
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "item"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              "0",
+              "0",
+              "-1"
+            ],
+            "role": "progress"
+          }
+        ]
+      },
+      "step": 2,
+      "action": "grasp",
+      "target": "item",
+      "affordance_region": "the small purple item",
+      "done_when": "holding(item)",
+      "affordance_hint": "the small purple item",
+      "refine_prompt": "the small purple item",
+      "refine_cache_hit": false,
+      "affordance_refined": [
+        0.2188,
+        0.3047
+      ],
+      "affordance_3d_refined": [
+        -1.2934,
+        -0.8982,
+        2.2994
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.5058
+    },
+    {
+      "constraints": {
+        "spatial": [
+          {
+            "pred": "above",
+            "args": [
+              "item",
+              "middle_drawer",
+              "0.05"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_drop",
+            "args": [
+              "item"
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "step": 3,
+      "action": "transport",
+      "target": "item",
+      "destination": "middle_drawer",
+      "affordance_region": "the empty area on the middle drawer",
+      "done_when": "above(item, middle_drawer, 0.05)",
+      "affordance_hint": "the empty area on the middle drawer",
+      "refine_prompt": "the empty area on the middle drawer",
+      "refine_cache_hit": false,
+      "affordance_refined": [
+        0.0,
+        0.6992
+      ],
+      "affordance_3d_refined": [
+        -2.5494,
+        1.0158,
+        2.5494
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.3643
+    },
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "surface_contact",
+            "args": [
+              "item",
+              "middle_drawer"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "released",
+            "args": [
+              "item"
+            ],
+            "role": "completion"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "stable",
+            "args": [
+              "item"
+            ],
+            "role": "completion"
+          }
+        ]
+      },
+      "step": 4,
+      "action": "place",
+      "target": "item",
+      "destination": "middle_drawer",
+      "affordance_region": "the empty area on the middle drawer",
+      "done_when": "surface_contact(item, middle_drawer) AND released(item)",
+      "affordance_hint": "the empty area on the middle drawer",
+      "refine_prompt": "the empty area on the middle drawer",
+      "refine_cache_hit": true,
+      "affordance_refined": [
+        0.0,
+        0.6992
+      ],
+      "affordance_3d_refined": [
+        -2.5494,
+        1.0158,
+        2.5494
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.3643
+    }
+  ]
+}

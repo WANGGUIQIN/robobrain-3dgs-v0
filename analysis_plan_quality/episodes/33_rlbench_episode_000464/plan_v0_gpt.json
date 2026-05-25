@@ -1,0 +1,230 @@
+{
+  "task": "open the top drawer",
+  "scene_objects": [
+    "drawer",
+    "robot"
+  ],
+  "num_steps": 4,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "drawer",
+      "affordance": [
+        0.3,
+        0.406
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "drawer",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "drawer"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, drawer) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        -0.7006,
+        -0.3297,
+        1.7583
+      ],
+      "affordance_hint": "the drawer"
+    },
+    {
+      "step": 2,
+      "action": "grasp",
+      "target": "drawer",
+      "affordance": [
+        0.546,
+        0.48
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "drawer"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "holding",
+            "args": [
+              "drawer"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              0,
+              0,
+              -1
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "holding(drawer)",
+      "affordance_3d": [
+        0.4399,
+        -0.1833,
+        4.692
+      ],
+      "affordance_hint": "the handle of the drawer"
+    },
+    {
+      "step": 3,
+      "action": "transport",
+      "target": "drawer",
+      "destination": "open_position",
+      "affordance": [
+        0.601,
+        0.601
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "drawer"
+            ],
+            "role": "safety"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "above",
+            "args": [
+              "drawer",
+              "open_position",
+              0.05
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "drawer",
+              "robot"
+            ]
+          },
+          {
+            "pred": "no_drop",
+            "args": [
+              "drawer"
+            ]
+          }
+        ]
+      },
+      "done_when": "above(drawer, open_position, 0.05)",
+      "affordance_3d": [
+        0.0103,
+        0.0103,
+        0.0506
+      ],
+      "affordance_hint": "an empty area on the open position"
+    },
+    {
+      "step": 4,
+      "action": "place",
+      "target": "drawer",
+      "destination": "open_position",
+      "affordance": [
+        0.601,
+        0.601
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "surface_contact",
+            "args": [
+              "drawer",
+              "open_position"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "released",
+            "args": [
+              "drawer"
+            ],
+            "role": "completion"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "stable",
+            "args": [
+              "drawer"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "support_stable",
+            "args": [
+              "drawer"
+            ]
+          }
+        ]
+      },
+      "done_when": "surface_contact(drawer, open_position) AND released(drawer) AND stable(drawer)",
+      "affordance_3d": [
+        0.0103,
+        0.0103,
+        0.0506
+      ],
+      "affordance_hint": "an empty area on the open position"
+    }
+  ]
+}

@@ -1,0 +1,239 @@
+{
+  "task": "Pick up the spoon and drop it at the bottom right corner",
+  "parsed": {
+    "scene_objects": [
+      "spoon",
+      "table",
+      "red_can",
+      "yellow_can",
+      "blue_cloth",
+      "mushroom"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "spoon",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "spoon",
+        "affordance_region": "the body of the spoon",
+        "done_when": "distance(gripper, spoon) < 0.03",
+        "affordance_hint": "the body of the spoon",
+        "refine_prompt": "the body of the spoon",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.4609,
+          0.3047
+        ],
+        "affordance_3d_refined": [
+          -0.0892,
+          -0.446,
+          1.9864
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.3395,
+        "affordance": [
+          0.4609,
+          0.3047
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "spoon"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "spoon",
+        "affordance_region": "the handle of the spoon",
+        "done_when": "holding(spoon)",
+        "affordance_hint": "the handle of the spoon",
+        "refine_prompt": "the handle of the spoon",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.3555,
+          0.2305
+        ],
+        "affordance_3d_refined": [
+          -0.3008,
+          -0.5609,
+          1.8103
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.3734,
+        "affordance": [
+          0.3555,
+          0.2305
+        ]
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "spoon",
+                "bottom_right_corner",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "spoon"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "spoon",
+        "destination": "bottom_right_corner",
+        "affordance_region": "the bottom right corner of the table",
+        "done_when": "above(spoon, bottom_right_corner, 0.05)",
+        "affordance_hint": "the bottom right corner of the table",
+        "refine_prompt": "the bottom right corner of the table",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.6016,
+          0.5312
+        ],
+        "affordance_3d_refined": [
+          0.2708,
+          0.0833,
+          2.3191
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.4158,
+        "affordance": [
+          0.6016,
+          0.5312
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "released",
+              "args": [
+                "spoon"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "spoon"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "release",
+        "target": "spoon",
+        "destination": "bottom_right_corner",
+        "affordance_region": "the bottom right corner of the table",
+        "done_when": "released(spoon) AND stable(spoon)",
+        "affordance_hint": "the bottom right corner of the table",
+        "refine_prompt": "the bottom right corner of the table",
+        "refine_cache_hit": true,
+        "affordance_refined": [
+          0.6016,
+          0.5312
+        ],
+        "affordance_3d_refined": [
+          0.2708,
+          0.0833,
+          2.3191
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.4158,
+        "affordance": [
+          0.6016,
+          0.5312
+        ]
+      }
+    ]
+  }
+}

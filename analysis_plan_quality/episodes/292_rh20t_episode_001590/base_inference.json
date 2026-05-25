@@ -1,0 +1,235 @@
+{
+  "task": "Unscrew the lid from the jar",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_3epoch/best",
+  "raw": "**SCENE ANALYSIS - A glass jar with a metal lid sits on a patterned cloth. The jar is transparent with a cylindrical body and a flat lid; the lid is metallic and circular. The jar is rigid, and the lid is a separate component. STRATEGY - First, grasp the jar to stabilize it. Then, grasp the lid to unscrew it. The task requires separating the lid from the jar, so the sequence is to grasp the jar, then the lid, and finally place the lid on a surface. Failure modes include dropping the jar or lid, or not grasping the lid properly. AFFORDANCE REASONING - Step 1: Reach the jar to grasp it. Step 2: Grasp the jar's body for stability. Step 3: Reach the lid and grasp it. Step 4: Unscrew the lid by rotating it. Step 5: Place the lid on a surface.**\nGoal: unscrewed(jar_lid); placed(jar_lid)\nScene: glass_jar, jar_lid, cloth\nStep 1: reach(glass_jar)\n  affordance_region: the body of the glass jar\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, glass_jar, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, glass_jar) < 0.03\nStep 2: grasp(glass_jar)\n  affordance_region: the body of the glass jar\n  contact: holding(glass_jar) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(glass_jar)\nStep 3: reach(jar_lid)\n  affordance_region: the top surface of the jar_lid\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, jar_lid, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, jar_lid) < 0.03\nStep 4: grasp(jar_lid)\n  affordance_region: the top surface of the jar_lid\n  contact: holding(jar_lid) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(jar_lid)\nStep 5: rotate(jar_lid)\n  affordance_region: the top surface of the jar_lid\n  contact: holding(jar_lid) [progress]\n  direction: rotate_axis(0, 0, 1, 0.5) [progress]\n  done_when: rotated(jar_lid, 0.5)\nStep 6: place(jar_lid -> cloth)\n  affordance_region: an empty area on the cloth\n  contact: surface_contact(jar_lid, cloth) [completion]; released(jar_lid) [completion]\n  pose: stable(jar_lid) [completion]\n  done_when: surface_contact(jar_lid, cloth) AND released(jar_lid)\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [
+      {
+        "pred": "unscrewed",
+        "args": [
+          "jar_lid"
+        ]
+      },
+      {
+        "pred": "placed",
+        "args": [
+          "jar_lid"
+        ]
+      }
+    ],
+    "scene_objects": [
+      "glass_jar",
+      "jar_lid",
+      "cloth"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "glass_jar",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "glass_jar",
+        "affordance_region": "the body of the glass jar",
+        "done_when": "distance(gripper, glass_jar) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "glass_jar"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "glass_jar",
+        "affordance_region": "the body of the glass jar",
+        "done_when": "holding(glass_jar)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "jar_lid",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "reach",
+        "target": "jar_lid",
+        "affordance_region": "the top surface of the jar_lid",
+        "done_when": "distance(gripper, jar_lid) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "jar_lid"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "grasp",
+        "target": "jar_lid",
+        "affordance_region": "the top surface of the jar_lid",
+        "done_when": "holding(jar_lid)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "jar_lid"
+              ],
+              "role": "progress"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "rotate_axis",
+              "args": [
+                "0",
+                "0",
+                "1",
+                "0.5"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 5,
+        "action": "rotate",
+        "target": "jar_lid",
+        "affordance_region": "the top surface of the jar_lid",
+        "done_when": "rotated(jar_lid, 0.5)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "surface_contact",
+              "args": [
+                "jar_lid",
+                "cloth"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "jar_lid"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "jar_lid"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 6,
+        "action": "place",
+        "target": "jar_lid",
+        "destination": "cloth",
+        "affordance_region": "an empty area on the cloth",
+        "done_when": "surface_contact(jar_lid, cloth) AND released(jar_lid)"
+      }
+    ]
+  }
+}

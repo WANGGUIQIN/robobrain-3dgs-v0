@@ -1,0 +1,240 @@
+{
+  "task": "move to the box, then place the pink object",
+  "scene_objects": [
+    "robot_arm",
+    "pink_object",
+    "box",
+    "tray"
+  ],
+  "num_steps": 4,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "pink_object",
+      "affordance": [
+        0.38,
+        0.295
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "pink_object",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "box"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, pink_object) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        -0.2103,
+        -0.3528,
+        1.511
+      ],
+      "affordance_hint": "the pink object",
+      "affordance_hint_original": "the pink object",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 2,
+      "action": "grasp",
+      "target": "pink_object",
+      "affordance": [
+        0.352,
+        0.436
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "pink_object"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "holding",
+            "args": [
+              "pink_object"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              0,
+              0,
+              -1
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "holding(pink_object)",
+      "affordance_3d": [
+        -0.3133,
+        -0.1319,
+        1.836
+      ],
+      "affordance_hint": "the pink object",
+      "affordance_hint_original": "the handle of the pink object",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 3,
+      "action": "transport",
+      "target": "pink_object",
+      "destination": "tray",
+      "affordance": [
+        0.65,
+        0.75
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "pink_object"
+            ],
+            "role": "safety"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "above",
+            "args": [
+              "pink_object",
+              "tray",
+              0.05
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "pink_object",
+              "tray"
+            ]
+          },
+          {
+            "pred": "no_drop",
+            "args": [
+              "pink_object"
+            ]
+          }
+        ]
+      },
+      "done_when": "above(pink_object, tray, 0.05) AND aligned_xy(pink_object, tray, 0.03)",
+      "affordance_3d": [
+        0.294,
+        0.4952,
+        1.723
+      ],
+      "affordance_hint": "the empty area on the white plastic tray",
+      "affordance_hint_original": "an empty area on the tray",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 4,
+      "action": "place",
+      "target": "pink_object",
+      "destination": "tray",
+      "affordance": [
+        0.65,
+        0.75
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "surface_contact",
+            "args": [
+              "pink_object",
+              "tray"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "released",
+            "args": [
+              "pink_object"
+            ],
+            "role": "completion"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "stable",
+            "args": [
+              "pink_object"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "support_stable",
+            "args": [
+              "pink_object"
+            ]
+          }
+        ]
+      },
+      "done_when": "surface_contact(pink_object, tray) AND released(pink_object) AND stable(pink_object)",
+      "affordance_3d": [
+        0.294,
+        0.4952,
+        1.723
+      ],
+      "affordance_hint": "the empty area on the white plastic tray",
+      "affordance_hint_original": "an empty area on the tray",
+      "affordance_hint_confidence": "ok"
+    }
+  ]
+}

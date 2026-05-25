@@ -1,0 +1,176 @@
+{
+  "task": "knock coke can over",
+  "scene_objects": [
+    "coke_can",
+    "silver_can",
+    "plastic_bottle",
+    "table"
+  ],
+  "num_steps": 3,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "coke_can",
+      "affordance": [
+        0.475,
+        0.242
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "coke_can",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "silver_can"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, coke_can) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        -0.0799,
+        -0.8787,
+        2.9649
+      ],
+      "affordance_hint": "the red body of the coke can",
+      "affordance_hint_original": "the coke can",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 2,
+      "action": "push",
+      "target": "coke_can",
+      "affordance": [
+        0.475,
+        0.242
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "coke_can"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "motion_dir",
+            "args": [
+              1.0,
+              0.0,
+              0.0
+            ],
+            "role": "progress"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "silver_can"
+            ]
+          }
+        ]
+      },
+      "done_when": "coke_can is tilted or lying on its side",
+      "affordance_3d": [
+        -0.0799,
+        -0.8787,
+        2.9649
+      ],
+      "affordance_hint": "the center of the red coke can",
+      "affordance_hint_original": "the center of the coke can",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 3,
+      "action": "retreat",
+      "target": "gripper",
+      "affordance": [
+        0.925,
+        0.367
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "table",
+              ">",
+              0.1
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "coke_can"
+            ]
+          }
+        ]
+      },
+      "done_when": "gripper is safely above the table",
+      "affordance_3d": [
+        0.4838,
+        -0.1509,
+        0.9884
+      ],
+      "affordance_hint": "the gripper",
+      "affordance_hint_original": "gripper",
+      "affordance_hint_confidence": "ok"
+    }
+  ]
+}

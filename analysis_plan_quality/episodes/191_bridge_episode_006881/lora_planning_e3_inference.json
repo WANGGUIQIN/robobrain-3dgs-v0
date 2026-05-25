@@ -1,0 +1,145 @@
+{
+  "task": "Take the carrot from the silver vessel and place it above the vessel.",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_planning_3epoch/checkpoint-39957",
+  "raw": "Scene: carrot, silver_vessel, table, brush, cloth\nStep 1: reach(carrot)\n  affordance_region: the carrot in the silver vessel\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, carrot, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, carrot) < 0.03\nStep 2: grasp(carrot)\n  affordance_region: the orange carrot in the silver vessel\n  contact: holding(carrot) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(carrot)\nStep 3: transport(carrot -> above_silver_vessel)\n  affordance_region: an empty area above the silver vessel\n  spatial: above(carrot, silver_vessel, 0.05) [completion]\n  safety: no_drop(carrot)\n  done_when: above(carrot, silver_vessel, 0.05)\nStep 4: release(carrot)\n  affordance_region: the carrot in the silver vessel\n  contact: released(carrot) [completion]\n  pose: stable(carrot) [completion]\n  done_when: released(carrot) AND stable(carrot)\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [],
+    "scene_objects": [
+      "carrot",
+      "silver_vessel",
+      "table",
+      "brush",
+      "cloth"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "carrot",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "carrot",
+        "affordance_region": "the carrot in the silver vessel",
+        "done_when": "distance(gripper, carrot) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "carrot"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "carrot",
+        "affordance_region": "the orange carrot in the silver vessel",
+        "done_when": "holding(carrot)"
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "carrot",
+                "silver_vessel",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "carrot"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "carrot",
+        "destination": "above_silver_vessel",
+        "affordance_region": "an empty area above the silver vessel",
+        "done_when": "above(carrot, silver_vessel, 0.05)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "released",
+              "args": [
+                "carrot"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "carrot"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "release",
+        "target": "carrot",
+        "affordance_region": "the carrot in the silver vessel",
+        "done_when": "released(carrot) AND stable(carrot)"
+      }
+    ]
+  }
+}

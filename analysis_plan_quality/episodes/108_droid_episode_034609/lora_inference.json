@@ -1,0 +1,244 @@
+{
+  "task": "Put one of the left towels on the counter",
+  "parsed": {
+    "scene_objects": [
+      "left_towel",
+      "counter",
+      "robot_arm"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "left_towel",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "left_towel",
+        "affordance_region": "the left towel on the counter",
+        "done_when": "distance(gripper, left_towel) < 0.03",
+        "affordance_hint": "the left towel on the counter",
+        "refine_prompt": "the left towel on the counter",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.4844,
+          0.6953
+        ],
+        "affordance_3d_refined": [
+          -0.1427,
+          0.2299,
+          0.7927
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.3193,
+        "affordance": [
+          0.4844,
+          0.6953
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "left_towel"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "left_towel",
+        "affordance_region": "the handle of the left towel",
+        "done_when": "holding(left_towel)",
+        "affordance_hint": "the handle of the left towel",
+        "refine_prompt": "the handle of the left towel",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.4844,
+          0.5977
+        ],
+        "affordance_3d_refined": [
+          -0.1462,
+          0.134,
+          0.8123
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.4508,
+        "affordance": [
+          0.4844,
+          0.5977
+        ]
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "left_towel",
+                "counter",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "left_towel"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "left_towel",
+        "destination": "counter",
+        "affordance_region": "an empty area on the counter",
+        "done_when": "above(left_towel, counter, 0.05)",
+        "affordance_hint": "an empty area on the counter",
+        "refine_prompt": "an empty area on the counter",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.293,
+          0.4531
+        ],
+        "affordance_3d_refined": [
+          -0.1373,
+          -0.0065,
+          0.3231
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.3012,
+        "affordance": [
+          0.293,
+          0.4531
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "surface_contact",
+              "args": [
+                "left_towel",
+                "counter"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "left_towel"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "left_towel"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "place",
+        "target": "left_towel",
+        "destination": "counter",
+        "affordance_region": "an empty area on the counter",
+        "done_when": "surface_contact(left_towel, counter) AND released(left_towel) AND stable(left_towel)",
+        "affordance_hint": "an empty area on the counter",
+        "refine_prompt": "an empty area on the counter",
+        "refine_cache_hit": true,
+        "affordance_refined": [
+          0.293,
+          0.4531
+        ],
+        "affordance_3d_refined": [
+          -0.1373,
+          -0.0065,
+          0.3231
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.3012,
+        "affordance": [
+          0.293,
+          0.4531
+        ]
+      }
+    ]
+  }
+}

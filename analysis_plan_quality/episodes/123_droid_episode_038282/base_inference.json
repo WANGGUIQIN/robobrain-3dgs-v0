@@ -1,0 +1,159 @@
+{
+  "task": "Use the object to mix the contents in the bowl",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_3epoch/best",
+  "raw": "**SCENE ANALYSIS - A green bowl with a yellow object inside sits on a white countertop. The bowl is rigid with a rim; the yellow object is small and round. STRATEGY - grasp the bowl at its rim for stable hold, rotate it to mix contents, release. Failure modes: slipping during rotation, incomplete mixing. AFFORDANCE REASONING - Step 1 reach bowl rim; Step 2 grasp rim for secure hold; Step 3 rotate bowl; Step 4 release.**\nGoal: mixed_contents(green_bowl)\nScene: green_bowl, yellow_object, countertop\nStep 1: reach(green_bowl)\n  affordance_region: the rim of the green bowl\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, green_bowl, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, green_bowl) < 0.03\nStep 2: grasp(green_bowl)\n  affordance_region: the rim of the green bowl\n  contact: holding(green_bowl) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(green_bowl)\nStep 3: rotate(green_bowl)\n  affordance_region: the body of the green bowl\n  contact: holding(green_bowl) [progress]\n  spatial: rotated(green_bowl, 180) [completion]\n  direction: rotate_axis(0, 0, 180) [progress]\n  done_when: rotated(green_bowl, 180)\nStep 4: release(green_bowl)\n  affordance_region: the countertop\n  contact: released(green_bowl) [completion]\n  pose: stable(green_bowl) [completion]\n  done_when: released(green_bowl) AND stable(green_bowl)\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [
+      {
+        "pred": "mixed_contents",
+        "args": [
+          "green_bowl"
+        ]
+      }
+    ],
+    "scene_objects": [
+      "green_bowl",
+      "yellow_object",
+      "countertop"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "green_bowl",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "green_bowl",
+        "affordance_region": "the rim of the green bowl",
+        "done_when": "distance(gripper, green_bowl) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "green_bowl"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "green_bowl",
+        "affordance_region": "the rim of the green bowl",
+        "done_when": "holding(green_bowl)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "green_bowl"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "rotated",
+              "args": [
+                "green_bowl",
+                "180"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "rotate_axis",
+              "args": [
+                "0",
+                "0",
+                "180"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "rotate",
+        "target": "green_bowl",
+        "affordance_region": "the body of the green bowl",
+        "done_when": "rotated(green_bowl, 180)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "released",
+              "args": [
+                "green_bowl"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "green_bowl"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "release",
+        "target": "green_bowl",
+        "affordance_region": "the countertop",
+        "done_when": "released(green_bowl) AND stable(green_bowl)"
+      }
+    ]
+  }
+}

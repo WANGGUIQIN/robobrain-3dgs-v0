@@ -1,0 +1,367 @@
+{
+  "task": "push the maroon button, then push the green button, then push the teal button",
+  "parsed": {
+    "scene_objects": [
+      "maroon_button",
+      "green_button",
+      "teal_button",
+      "table"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "maroon_button",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "maroon_button",
+        "affordance_region": "the maroon button",
+        "done_when": "distance(gripper, maroon_button) < 0.03",
+        "affordance_hint": "the maroon button",
+        "refine_prompt": "the maroon button",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.1445,
+          0.8867
+        ],
+        "affordance_3d_refined": [
+          -1.6119,
+          1.7536,
+          2.2672
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.5078,
+        "affordance": [
+          0.1445,
+          0.8867
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_contact",
+              "args": [
+                "maroon_button"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "push",
+        "target": "maroon_button",
+        "affordance_region": "the center of the maroon button",
+        "done_when": "gripper_contact(maroon_button)",
+        "affordance_hint": "the center of the maroon button",
+        "refine_prompt": "the center of the maroon button",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.1211,
+          0.8711
+        ],
+        "affordance_3d_refined": [
+          -1.1656,
+          1.1416,
+          1.5382
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.3424,
+        "affordance": [
+          0.1211,
+          0.8711
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "green_button",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "reach",
+        "target": "green_button",
+        "affordance_region": "the green button",
+        "done_when": "distance(gripper, green_button) < 0.03",
+        "affordance_hint": "the green button",
+        "refine_prompt": "the green button",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.4336,
+          0.8242
+        ],
+        "affordance_3d_refined": [
+          -0.2913,
+          1.422,
+          2.193
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.313,
+        "affordance": [
+          0.4336,
+          0.8242
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_contact",
+              "args": [
+                "green_button"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "push",
+        "target": "green_button",
+        "affordance_region": "the center of the green button",
+        "done_when": "gripper_contact(green_button)",
+        "affordance_hint": "the center of the green button",
+        "refine_prompt": "the center of the green button",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.4219,
+          0.8281
+        ],
+        "affordance_3d_refined": [
+          -0.3586,
+          1.5062,
+          2.2952
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.4173,
+        "affordance": [
+          0.4219,
+          0.8281
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "teal_button",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 5,
+        "action": "reach",
+        "target": "teal_button",
+        "affordance_region": "the teal button",
+        "done_when": "distance(gripper, teal_button) < 0.03",
+        "affordance_hint": "the teal button",
+        "refine_prompt": "the teal button",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.4023,
+          0.832
+        ],
+        "affordance_3d_refined": [
+          -0.2567,
+          0.8726,
+          1.3141
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.399,
+        "affordance": [
+          0.4023,
+          0.832
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_contact",
+              "args": [
+                "teal_button"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 6,
+        "action": "push",
+        "target": "teal_button",
+        "affordance_region": "the center of the teal button",
+        "done_when": "gripper_contact(teal_button)",
+        "affordance_hint": "the center of the teal button",
+        "refine_prompt": "the center of the teal button",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.4219,
+          0.8281
+        ],
+        "affordance_3d_refined": [
+          -0.3586,
+          1.5062,
+          2.2952
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.3302,
+        "affordance": [
+          0.4219,
+          0.8281
+        ]
+      }
+    ]
+  }
+}

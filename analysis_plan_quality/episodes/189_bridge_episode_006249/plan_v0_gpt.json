@@ -1,0 +1,234 @@
+{
+  "task": "Place the red spoon inside the orange pot",
+  "scene_objects": [
+    "red_spoon",
+    "orange_pot",
+    "yellow_banana",
+    "purple_cloth",
+    "table"
+  ],
+  "num_steps": 4,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "red_spoon",
+      "affordance": [
+        0.276,
+        0.544
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "red_spoon",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "orange_pot"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, red_spoon) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        -0.6186,
+        0.1194,
+        2.4169
+      ],
+      "affordance_hint": "the red spoon"
+    },
+    {
+      "step": 2,
+      "action": "grasp",
+      "target": "red_spoon",
+      "affordance": [
+        0.276,
+        0.544
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "red_spoon"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "holding",
+            "args": [
+              "red_spoon"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              0,
+              0,
+              -1
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "holding(red_spoon)",
+      "affordance_3d": [
+        -0.6186,
+        0.1194,
+        2.4169
+      ],
+      "affordance_hint": "the handle of the red spoon"
+    },
+    {
+      "step": 3,
+      "action": "transport",
+      "target": "red_spoon",
+      "destination": "orange_pot",
+      "affordance": [
+        0.7,
+        0.651
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "red_spoon"
+            ],
+            "role": "safety"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "above",
+            "args": [
+              "red_spoon",
+              "orange_pot",
+              0.05
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "red_spoon",
+              "orange_pot"
+            ]
+          },
+          {
+            "pred": "no_drop",
+            "args": [
+              "red_spoon"
+            ]
+          }
+        ]
+      },
+      "done_when": "above(red_spoon, orange_pot, 0.05) AND aligned_xy(red_spoon, orange_pot, 0.03)",
+      "affordance_3d": [
+        0.5938,
+        0.4541,
+        2.5931
+      ],
+      "affordance_hint": "an empty area on the orange pot"
+    },
+    {
+      "step": 4,
+      "action": "place",
+      "target": "red_spoon",
+      "destination": "orange_pot",
+      "affordance": [
+        0.7,
+        0.651
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "surface_contact",
+            "args": [
+              "red_spoon",
+              "orange_pot"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "released",
+            "args": [
+              "red_spoon"
+            ],
+            "role": "completion"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "inside",
+            "args": [
+              "red_spoon",
+              "orange_pot"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "support_stable",
+            "args": [
+              "red_spoon"
+            ]
+          }
+        ]
+      },
+      "done_when": "surface_contact(red_spoon, orange_pot) AND released(red_spoon) AND inside(red_spoon, orange_pot)",
+      "affordance_3d": [
+        0.5938,
+        0.4541,
+        2.5931
+      ],
+      "affordance_hint": "an empty area on the orange pot"
+    }
+  ]
+}

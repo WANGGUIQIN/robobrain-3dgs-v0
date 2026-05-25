@@ -1,0 +1,121 @@
+{
+  "task": "knock blue plastic bottle over",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_3epoch/best",
+  "raw": "**SCENE ANALYSIS - A clear plastic bottle with a white cap stands on a dark table. The bottle is rigid with a cylindrical body and a cap. STRATEGY - reach the bottle body, grasp it, and apply a force to tip it over. Failure mode: if the bottle is not grasped properly, it may not tip. AFFORDANCE REASONING - Step 1 reach bottle body; Step 2 grasp body for secure hold; Step 3 apply force to tip.**\nGoal: tipped(blue_plastic_bottle)\nScene: blue_plastic_bottle, table\nStep 1: reach(blue_plastic_bottle)\n  affordance_region: the body of the blue plastic bottle\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, blue_plastic_bottle, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, blue_plastic_bottle) < 0.03\nStep 2: grasp(blue_plastic_bottle)\n  affordance_region: the body of the blue plastic bottle\n  contact: holding(blue_plastic_bottle) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(blue_plastic_bottle)\nStep 3: push(blue_plastic_bottle)\n  affordance_region: the body of the blue plastic bottle\n  contact: pushing(blue_plastic_bottle) [completion]\n  direction: push_axis(0, 0, -1) [progress]\n  done_when: tipped(blue_plastic_bottle)\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [
+      {
+        "pred": "tipped",
+        "args": [
+          "blue_plastic_bottle"
+        ]
+      }
+    ],
+    "scene_objects": [
+      "blue_plastic_bottle",
+      "table"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "blue_plastic_bottle",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "blue_plastic_bottle",
+        "affordance_region": "the body of the blue plastic bottle",
+        "done_when": "distance(gripper, blue_plastic_bottle) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "blue_plastic_bottle"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "blue_plastic_bottle",
+        "affordance_region": "the body of the blue plastic bottle",
+        "done_when": "holding(blue_plastic_bottle)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "pushing",
+              "args": [
+                "blue_plastic_bottle"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "push_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "push",
+        "target": "blue_plastic_bottle",
+        "affordance_region": "the body of the blue plastic bottle",
+        "done_when": "tipped(blue_plastic_bottle)"
+      }
+    ]
+  }
+}

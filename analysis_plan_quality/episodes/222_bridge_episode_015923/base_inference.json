@@ -1,0 +1,162 @@
+{
+  "task": "put spatula in pan",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_3epoch/best",
+  "raw": "**SCENE ANALYSIS -** A kitchen scene with a wooden countertop, a white cabinet drawer open to the right, and a stainless steel pan on the counter. A blue spatula with a black handle lies on the counter near the drawer. The pan is empty and has a handle on its left side. STRATEGY - First, reach for the spatula, grasp it by its handle, then transport it to the pan, and finally place it inside the pan. Failure modes include dropping the spatula during transport or misplacing it in the pan. AFFORDANCE REASONING - Step 1 reach the spatula at its handle; Step 2 grasp the handle for secure hold; Step 3 transport above the pan; Step 4 lower and place inside the pan.\n\nGoal: inside(spatula, pan)\nScene: spatula, pan, countertop, drawer\nStep 1: reach(spatula)\n  affordance_region: the black handle of the blue spatula\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, spatula, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, spatula) < 0.03\nStep 2: grasp(spatula)\n  affordance_region: the black handle of the blue spatula\n  contact: holding(spatula) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(spatula)\nStep 3: transport(spatula -> pan)\n  affordance_region: an empty area inside the pan\n  spatial: above(spatula, pan, 0.05) [completion]\n  safety: no_drop(spatula)\n  done_when: above(spatula, pan, 0.05)\nStep 4: place(spatula -> pan)\n  affordance_region: an empty area inside the pan\n  contact: surface_contact(spatula, pan) [completion]; released(spatula) [completion]\n  pose: inside(spatula, pan) [completion]\n  done_when: surface_contact(spatula, pan) AND released(spatula)\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [
+      {
+        "pred": "inside",
+        "args": [
+          "spatula",
+          "pan"
+        ]
+      }
+    ],
+    "scene_objects": [
+      "spatula",
+      "pan",
+      "countertop",
+      "drawer"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "spatula",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "spatula",
+        "affordance_region": "the black handle of the blue spatula",
+        "done_when": "distance(gripper, spatula) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "spatula"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "spatula",
+        "affordance_region": "the black handle of the blue spatula",
+        "done_when": "holding(spatula)"
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "spatula",
+                "pan",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "spatula"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "spatula",
+        "destination": "pan",
+        "affordance_region": "an empty area inside the pan",
+        "done_when": "above(spatula, pan, 0.05)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "surface_contact",
+              "args": [
+                "spatula",
+                "pan"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "spatula"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "inside",
+              "args": [
+                "spatula",
+                "pan"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "place",
+        "target": "spatula",
+        "destination": "pan",
+        "affordance_region": "an empty area inside the pan",
+        "done_when": "surface_contact(spatula, pan) AND released(spatula)"
+      }
+    ]
+  }
+}

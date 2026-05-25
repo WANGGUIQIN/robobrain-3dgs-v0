@@ -1,0 +1,148 @@
+{
+  "task": "Put the cheese into the pot.",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_3epoch/best",
+  "raw": "**SCENE ANALYSIS -** A stainless steel pot sits on a wooden countertop. An orange cloth with a blue-handled tool (likely a cheese grater) rests on the cloth. The pot is metallic and cylindrical; the cloth is fabric. STRATEGY - First, grasp the blue-handled tool from the cloth. Then, transport it to the pot. Finally, place the tool inside the pot. Failure modes include dropping the tool during transport or misplacing it. AFFORDANCE REASONING - Step 1: Reach for the tool’s handle (the blue part) on the cloth. Step 2: Grasp the tool’s handle for secure hold. Step 3: Transport the tool to the pot’s opening. Step 4: Place the tool inside the pot.\n\n**Goal:** inside(blue_tool, pot); stable(blue_tool)\n**Scene:** pot, blue_tool, cloth, countertop\n**Step 1:** reach(blue_tool)\n  affordance_region: the blue handle of the tool\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, blue_tool, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, blue_tool) < 0.03\n**Step 2:** grasp(blue_tool)\n  affordance_region: the blue handle of the tool\n  contact: holding(blue_tool) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(blue_tool)\n**Step 3:** transport(blue_tool -> pot)\n  affordance_region: the opening of the pot\n  spatial: above(blue_tool, pot, 0.05) [completion]\n  safety: no_drop(blue_tool)\n  done_when: above(blue_tool, pot, 0.05)\n**Step 4:** place(blue_tool -> pot)\n  affordance_region: the interior of the pot\n  contact: inside(blue_tool, pot) [completion]; released(blue_tool) [completion]\n  pose: stable(blue_tool) [completion]\n  done_when: inside(blue_tool, pot) AND released(blue_tool)\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [],
+    "scene_objects": [],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "blue_tool",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "blue_tool",
+        "affordance_region": "the blue handle of the tool",
+        "done_when": "distance(gripper, blue_tool) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "blue_tool"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "blue_tool",
+        "affordance_region": "the blue handle of the tool",
+        "done_when": "holding(blue_tool)"
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "blue_tool",
+                "pot",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "blue_tool"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "blue_tool",
+        "destination": "pot",
+        "affordance_region": "the opening of the pot",
+        "done_when": "above(blue_tool, pot, 0.05)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "inside",
+              "args": [
+                "blue_tool",
+                "pot"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "blue_tool"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "blue_tool"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "place",
+        "target": "blue_tool",
+        "destination": "pot",
+        "affordance_region": "the interior of the pot",
+        "done_when": "inside(blue_tool, pot) AND released(blue_tool)"
+      }
+    ]
+  }
+}

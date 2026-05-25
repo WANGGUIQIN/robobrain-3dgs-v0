@@ -1,0 +1,239 @@
+{
+  "task": "Move the pan to the top right corner of the stove",
+  "scene_objects": [
+    "pan",
+    "stove",
+    "top_right_corner"
+  ],
+  "num_steps": 4,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "pan",
+      "affordance": [
+        0.525,
+        0.925
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "pan",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "stove"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, pan) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        -0.2888,
+        1.2994,
+        2.2213
+      ],
+      "affordance_hint": "the metal pan on the stove",
+      "affordance_hint_original": "the pan",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 2,
+      "action": "grasp",
+      "target": "pan",
+      "affordance": [
+        0.6,
+        0.8
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "pan"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "holding",
+            "args": [
+              "pan"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              0,
+              0,
+              -1
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "holding(pan)",
+      "affordance_3d": [
+        -0.0473,
+        0.6696,
+        1.5755
+      ],
+      "affordance_hint": "the handle of the silver pan",
+      "affordance_hint_original": "the handle of the pan",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 3,
+      "action": "transport",
+      "target": "pan",
+      "destination": "top_right_corner",
+      "affordance": [
+        0.6,
+        0.833
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "pan"
+            ],
+            "role": "safety"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "above",
+            "args": [
+              "pan",
+              "top_right_corner",
+              0.05
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "pan",
+              "stove"
+            ]
+          },
+          {
+            "pred": "no_drop",
+            "args": [
+              "pan"
+            ]
+          }
+        ]
+      },
+      "done_when": "above(pan, top_right_corner, 0.05) AND aligned_xy(pan, top_right_corner, 0.03)",
+      "affordance_3d": [
+        -0.052,
+        0.8054,
+        1.732
+      ],
+      "affordance_hint": "the top right corner of the stove",
+      "affordance_hint_original": "an empty area on the top right corner",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 4,
+      "action": "place",
+      "target": "pan",
+      "destination": "top_right_corner",
+      "affordance": [
+        0.6,
+        0.833
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "surface_contact",
+            "args": [
+              "pan",
+              "top_right_corner"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "released",
+            "args": [
+              "pan"
+            ],
+            "role": "completion"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "stable",
+            "args": [
+              "pan"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "support_stable",
+            "args": [
+              "pan"
+            ]
+          }
+        ]
+      },
+      "done_when": "surface_contact(pan, top_right_corner) AND released(pan) AND stable(pan)",
+      "affordance_3d": [
+        -0.052,
+        0.8054,
+        1.732
+      ],
+      "affordance_hint": "the top right corner of the stove",
+      "affordance_hint_original": "an empty area on the top right corner",
+      "affordance_hint_confidence": "ok"
+    }
+  ]
+}

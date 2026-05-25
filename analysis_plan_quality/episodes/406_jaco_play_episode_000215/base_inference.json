@@ -1,0 +1,161 @@
+{
+  "task": "place the milk dairy in the sink",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_3epoch/best",
+  "raw": "SCENE ANALYSIS - A blue plastic container (sink) is on the right. A small brown object (milk dairy) is on the wooden table near the sink. The table is a flat surface. STRATEGY - Reach the milk dairy, grasp it, transport it to the sink, and place it inside. Failure modes include dropping the dairy during transport or misplacing it outside the sink. AFFORDANCE REASONING - Step 1 reach the dairy body; Step 2 grasp the dairy body for secure hold; Step 3 transport above the sink; Step 4 lower into the sink interior.\nGoal: inside(milk_dairy, sink)\nScene: milk_dairy, sink, table\nStep 1: reach(milk_dairy)\n  affordance_region: the body of the milk dairy\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, milk_dairy, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, milk_dairy) < 0.03\nStep 2: grasp(milk_dairy)\n  affordance_region: the body of the milk dairy\n  contact: holding(milk_dairy) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(milk_dairy)\nStep 3: transport(milk_dairy -> sink)\n  affordance_region: an empty area inside the sink\n  spatial: above(milk_dairy, sink, 0.05) [completion]\n  safety: no_drop(milk_dairy)\n  done_when: above(milk_dairy, sink, 0.05)\nStep 4: place(milk_dairy -> sink)\n  affordance_region: an empty area inside the sink\n  contact: surface_contact(milk_dairy, sink) [completion]; released(milk_dairy) [completion]\n  pose: inside(milk_dairy, sink) [completion]\n  done_when: surface_contact(milk_dairy, sink) AND released(milk_dairy)\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [
+      {
+        "pred": "inside",
+        "args": [
+          "milk_dairy",
+          "sink"
+        ]
+      }
+    ],
+    "scene_objects": [
+      "milk_dairy",
+      "sink",
+      "table"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "milk_dairy",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "milk_dairy",
+        "affordance_region": "the body of the milk dairy",
+        "done_when": "distance(gripper, milk_dairy) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "milk_dairy"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "milk_dairy",
+        "affordance_region": "the body of the milk dairy",
+        "done_when": "holding(milk_dairy)"
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "milk_dairy",
+                "sink",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "milk_dairy"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "milk_dairy",
+        "destination": "sink",
+        "affordance_region": "an empty area inside the sink",
+        "done_when": "above(milk_dairy, sink, 0.05)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "surface_contact",
+              "args": [
+                "milk_dairy",
+                "sink"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "milk_dairy"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "inside",
+              "args": [
+                "milk_dairy",
+                "sink"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "place",
+        "target": "milk_dairy",
+        "destination": "sink",
+        "affordance_region": "an empty area inside the sink",
+        "done_when": "surface_contact(milk_dairy, sink) AND released(milk_dairy)"
+      }
+    ]
+  }
+}

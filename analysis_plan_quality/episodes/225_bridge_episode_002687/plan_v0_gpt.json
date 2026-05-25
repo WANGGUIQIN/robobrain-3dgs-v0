@@ -1,0 +1,232 @@
+{
+  "task": "Move the fish to the left of the green towel",
+  "scene_objects": [
+    "fish",
+    "green_towel",
+    "pot",
+    "table"
+  ],
+  "num_steps": 4,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "fish",
+      "affordance": [
+        0.41,
+        0.587
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "fish",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "pot"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, fish) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        -0.2072,
+        0.1982,
+        2.006
+      ],
+      "affordance_hint": "the fish"
+    },
+    {
+      "step": 2,
+      "action": "grasp",
+      "target": "fish",
+      "affordance": [
+        0.5,
+        0.625
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "fish"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "holding",
+            "args": [
+              "fish"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              0,
+              0,
+              -1
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "holding(fish)",
+      "affordance_3d": [
+        0.0,
+        0.3332,
+        2.3191
+      ],
+      "affordance_hint": "the handle of the fish"
+    },
+    {
+      "step": 3,
+      "action": "transport",
+      "target": "fish",
+      "destination": "left_of_green_towel",
+      "affordance": [
+        0.401,
+        0.5
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "fish"
+            ],
+            "role": "safety"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "above",
+            "args": [
+              "fish",
+              "table",
+              0.05
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "fish",
+              "green_towel"
+            ]
+          },
+          {
+            "pred": "no_drop",
+            "args": [
+              "fish"
+            ]
+          }
+        ]
+      },
+      "done_when": "above(fish, left_of_green_towel, 0.05) AND aligned_xy(fish, left_of_green_towel, 0.03)",
+      "affordance_3d": [
+        -0.201,
+        0.0,
+        1.7907
+      ],
+      "affordance_hint": "an empty area on the left of green towel"
+    },
+    {
+      "step": 4,
+      "action": "place",
+      "target": "fish",
+      "destination": "left_of_green_towel",
+      "affordance": [
+        0.401,
+        0.5
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "surface_contact",
+            "args": [
+              "fish",
+              "table"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "released",
+            "args": [
+              "fish"
+            ],
+            "role": "completion"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "stable",
+            "args": [
+              "fish"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "support_stable",
+            "args": [
+              "fish"
+            ]
+          }
+        ]
+      },
+      "done_when": "surface_contact(fish, table) AND released(fish) AND stable(fish)",
+      "affordance_3d": [
+        -0.201,
+        0.0,
+        1.7907
+      ],
+      "affordance_hint": "an empty area on the left of green towel"
+    }
+  ]
+}

@@ -1,0 +1,121 @@
+{
+  "task": "pick up the orange fruit",
+  "scene_objects": [
+    "red_mug",
+    "blue_bin",
+    "orange_fruit",
+    "table"
+  ],
+  "steps": [
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "orange_fruit",
+              "<",
+              "0.03"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "approach_axis",
+            "args": [
+              "0",
+              "0",
+              "-1"
+            ],
+            "role": "progress"
+          }
+        ]
+      },
+      "step": 1,
+      "action": "reach",
+      "target": "orange_fruit",
+      "affordance_region": "the orange fruit",
+      "done_when": "distance(gripper, orange_fruit) < 0.03",
+      "affordance_hint": "the orange fruit",
+      "refine_prompt": "the orange fruit",
+      "refine_cache_hit": false,
+      "affordance_refined": [
+        0.6211,
+        0.543
+      ],
+      "affordance_3d_refined": [
+        0.5053,
+        0.1793,
+        3.6302
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.5644
+    },
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "orange_fruit"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              "0",
+              "0",
+              "-1"
+            ],
+            "role": "progress"
+          }
+        ]
+      },
+      "step": 2,
+      "action": "grasp",
+      "target": "orange_fruit",
+      "affordance_region": "the body of the orange fruit",
+      "done_when": "holding(orange_fruit)",
+      "affordance_hint": "the body of the orange fruit",
+      "refine_prompt": "the body of the orange fruit",
+      "refine_cache_hit": false,
+      "affordance_refined": [
+        0.6211,
+        0.543
+      ],
+      "affordance_3d_refined": [
+        0.5053,
+        0.1793,
+        3.6302
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.5697
+    }
+  ]
+}

@@ -1,0 +1,178 @@
+{
+  "task": "pick up the apple fruit",
+  "scene_objects": [
+    "apple_fruit",
+    "gripper",
+    "table"
+  ],
+  "num_steps": 3,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "apple_fruit",
+      "affordance": [
+        0.468,
+        0.625
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "apple_fruit",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "apple_fruit"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, apple_fruit) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        -0.1452,
+        0.5807,
+        4.0411
+      ],
+      "affordance_hint": "the red matte body of the apple fruit",
+      "affordance_hint_original": "the apple fruit",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 2,
+      "action": "grasp",
+      "target": "apple_fruit",
+      "affordance": [
+        0.468,
+        0.625
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "apple_fruit"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "holding",
+            "args": [
+              "apple_fruit"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              0,
+              0,
+              -1
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "holding(apple_fruit)",
+      "affordance_3d": [
+        -0.1452,
+        0.5807,
+        4.0411
+      ],
+      "affordance_hint": "the body of the red apple fruit",
+      "affordance_hint_original": "apple fruit",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 3,
+      "action": "transport",
+      "target": "apple_fruit",
+      "affordance": [
+        0.468,
+        0.7
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "apple_fruit"
+            ],
+            "role": "safety"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "above",
+            "args": [
+              "apple_fruit",
+              "table",
+              0.05
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "apple_fruit",
+              "table"
+            ]
+          },
+          {
+            "pred": "no_drop",
+            "args": [
+              "apple_fruit"
+            ]
+          }
+        ]
+      },
+      "done_when": "above(apple_fruit, table, 0.05)",
+      "affordance_3d": [
+        -0.129,
+        0.8224,
+        3.5911
+      ],
+      "affordance_hint": "an empty area on the apple fruit",
+      "affordance_hint_original": "an empty area on the apple fruit",
+      "affordance_hint_confidence": "rejected:missing_token:apple fruit"
+    }
+  ]
+}

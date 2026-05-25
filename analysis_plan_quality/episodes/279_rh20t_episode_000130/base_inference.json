@@ -1,0 +1,180 @@
+{
+  "task": "Pull out a napkin",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_3epoch/best",
+  "raw": "**SCENE ANALYSIS - A white napkin is folded on a blue tablecloth. The napkin is a flat, flexible object. STRATEGY - reach the napkin at its edge for a stable grip, pull it out from the tablecloth, and transport it to a destination. Failure modes include slipping during pull or dropping during transport. AFFORDANCE REASONING - Step 1 reach napkin edge; Step 2 grasp edge for pull; Step 3 pull out; Step 4 transport to destination.**\nGoal: any_in(napkin, hand); stable(napkin)\nScene: napkin, tablecloth\nStep 1: reach(napkin)\n  affordance_region: the edge of the white napkin\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, napkin, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, napkin) < 0.03\nStep 2: grasp(napkin)\n  affordance_region: the edge of the white napkin\n  contact: holding(napkin) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(napkin)\nStep 3: pull(napkin -> hand)\n  affordance_region: the edge of the white napkin\n  contact: holding(napkin) [progress]\n  spatial: distance(napkin, tablecloth, >, 0.05) [completion]\n  direction: pull_axis(0, 0, -1) [progress]\n  done_when: distance(napkin, tablecloth) > 0.05\nStep 4: transport(napkin -> hand)\n  affordance_region: an empty area in the hand\n  contact: holding(napkin) [completion]\n  spatial: above(napkin, hand, 0.05) [completion]\n  safety: no_drop(napkin)\n  done_when: above(napkin, hand, 0.05)\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [
+      {
+        "pred": "any_in",
+        "args": [
+          "napkin",
+          "hand"
+        ]
+      },
+      {
+        "pred": "stable",
+        "args": [
+          "napkin"
+        ]
+      }
+    ],
+    "scene_objects": [
+      "napkin",
+      "tablecloth"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "napkin",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "napkin",
+        "affordance_region": "the edge of the white napkin",
+        "done_when": "distance(gripper, napkin) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "napkin"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "napkin",
+        "affordance_region": "the edge of the white napkin",
+        "done_when": "holding(napkin)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "napkin"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "napkin",
+                "tablecloth",
+                ">",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "pull_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "pull",
+        "target": "napkin",
+        "destination": "hand",
+        "affordance_region": "the edge of the white napkin",
+        "done_when": "distance(napkin, tablecloth) > 0.05"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "napkin"
+              ],
+              "role": "completion"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "napkin",
+                "hand",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "napkin"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "transport",
+        "target": "napkin",
+        "destination": "hand",
+        "affordance_region": "an empty area in the hand",
+        "done_when": "above(napkin, hand, 0.05)"
+      }
+    ]
+  }
+}

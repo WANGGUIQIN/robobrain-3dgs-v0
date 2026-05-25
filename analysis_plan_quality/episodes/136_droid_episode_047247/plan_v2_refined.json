@@ -1,0 +1,240 @@
+{
+  "task": "Move the green block to the right side of the desk",
+  "scene_objects": [
+    "green_block",
+    "yellow_block",
+    "blue_structure",
+    "desk"
+  ],
+  "num_steps": 4,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "green_block",
+      "affordance": [
+        0.391,
+        0.408
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "green_block",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "desk"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, green_block) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        -0.8777,
+        -0.2341,
+        2.9257
+      ],
+      "affordance_hint": "the small green block",
+      "affordance_hint_original": "the green block",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 2,
+      "action": "grasp",
+      "target": "green_block",
+      "affordance": [
+        0.391,
+        0.408
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "green_block"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "holding",
+            "args": [
+              "green_block"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              0,
+              0,
+              -1
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "holding(green_block)",
+      "affordance_3d": [
+        -0.8777,
+        -0.2341,
+        2.9257
+      ],
+      "affordance_hint": "the small green block",
+      "affordance_hint_original": "green block",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 3,
+      "action": "transport",
+      "target": "green_block",
+      "destination": "right_side_of_desk",
+      "affordance": [
+        0.6,
+        0.516
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "green_block"
+            ],
+            "role": "safety"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "above",
+            "args": [
+              "green_block",
+              "desk",
+              0.05
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "green_block",
+              "desk"
+            ]
+          },
+          {
+            "pred": "no_drop",
+            "args": [
+              "green_block"
+            ]
+          }
+        ]
+      },
+      "done_when": "above(green_block, right_side_of_desk, 0.05) AND aligned_xy(green_block, right_side_of_desk, 0.03)",
+      "affordance_3d": [
+        -0.0743,
+        0.1485,
+        2.4756
+      ],
+      "affordance_hint": "the right side of the wooden desk",
+      "affordance_hint_original": "an empty area on the right side of desk",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 4,
+      "action": "place",
+      "target": "green_block",
+      "destination": "right_side_of_desk",
+      "affordance": [
+        0.6,
+        0.516
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "surface_contact",
+            "args": [
+              "green_block",
+              "desk"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "released",
+            "args": [
+              "green_block"
+            ],
+            "role": "completion"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "stable",
+            "args": [
+              "green_block"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "support_stable",
+            "args": [
+              "green_block"
+            ]
+          }
+        ]
+      },
+      "done_when": "surface_contact(green_block, desk) AND released(green_block) AND stable(green_block)",
+      "affordance_3d": [
+        -0.0743,
+        0.1485,
+        2.4756
+      ],
+      "affordance_hint": "the empty area on the right side of the desk",
+      "affordance_hint_original": "an empty area on the right side of desk",
+      "affordance_hint_confidence": "ok"
+    }
+  ]
+}

@@ -1,0 +1,161 @@
+{
+  "task": "screw in the blue light bulb",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_3epoch/best",
+  "raw": "SCENE ANALYSIS - A robotic arm is positioned over a table with a blue base. On the table, there is a blue base with a pink and white object on top, a brown bottle, and a white object with a black top. The task is to screw in a blue light bulb, which likely involves picking up the bulb and inserting it into a socket (not visible in the scene, but assumed to be part of the task). STRATEGY - First, reach for the blue light bulb, grasp it, then transport it to the socket, and finally insert it. Failure modes include dropping the bulb or misaligning it during insertion. AFFORDANCE REASONING - Step 1: Reach for the blue light bulb (assumed to be on the table). Step 2: Grasp the bulb for secure hold. Step 3: Transport the bulb to the socket (assumed to be a fixed position). Step 4: Insert the bulb into the socket.\n\nGoal: inserted(blue_light_bulb, socket); stable(blue_light_bulb)\nScene: blue_light_bulb, socket, table, brown_bottle, white_object\nStep 1: reach(blue_light_bulb)\n  affordance_region: the body of the blue light bulb\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, blue_light_bulb, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, blue_light_bulb) < 0.03\nStep 2: grasp(blue_light_bulb)\n  affordance_region: the body of the blue light bulb\n  contact: holding(blue_light_bulb) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(blue_light_bulb)\nStep 3: transport(blue_light_bulb -> socket)\n  affordance_region: the socket (assumed to be a fixed position)\n  spatial: above(blue_light_bulb, socket, 0.05) [completion]\n  safety: no_drop(blue_light_bulb)\n  done_when: above(blue_light_bulb, socket, 0.05)\nStep 4: insert(blue_light_bulb -> socket)\n  affordance_region: the top opening of the socket\n  contact: inserted(blue_light_bulb, socket) [completion]\n  pose: stable(blue_light_bulb) [completion]\n  done_when: inserted(blue_light_bulb, socket) AND stable(blue_light_bulb)\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [
+      {
+        "pred": "inserted",
+        "args": [
+          "blue_light_bulb",
+          "socket"
+        ]
+      },
+      {
+        "pred": "stable",
+        "args": [
+          "blue_light_bulb"
+        ]
+      }
+    ],
+    "scene_objects": [
+      "blue_light_bulb",
+      "socket",
+      "table",
+      "brown_bottle",
+      "white_object"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "blue_light_bulb",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "blue_light_bulb",
+        "affordance_region": "the body of the blue light bulb",
+        "done_when": "distance(gripper, blue_light_bulb) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "blue_light_bulb"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "blue_light_bulb",
+        "affordance_region": "the body of the blue light bulb",
+        "done_when": "holding(blue_light_bulb)"
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "blue_light_bulb",
+                "socket",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "blue_light_bulb"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "blue_light_bulb",
+        "destination": "socket",
+        "affordance_region": "the socket (assumed to be a fixed position)",
+        "done_when": "above(blue_light_bulb, socket, 0.05)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "inserted",
+              "args": [
+                "blue_light_bulb",
+                "socket"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "blue_light_bulb"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "insert",
+        "target": "blue_light_bulb",
+        "destination": "socket",
+        "affordance_region": "the top opening of the socket",
+        "done_when": "inserted(blue_light_bulb, socket) AND stable(blue_light_bulb)"
+      }
+    ]
+  }
+}

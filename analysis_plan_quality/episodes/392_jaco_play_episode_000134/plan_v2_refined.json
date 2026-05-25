@@ -1,0 +1,239 @@
+{
+  "task": "place the steak meat in the oven",
+  "scene_objects": [
+    "steak_meat",
+    "oven",
+    "table"
+  ],
+  "num_steps": 4,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "steak_meat",
+      "affordance": [
+        0.95,
+        0.437
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "steak_meat",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "oven"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, steak_meat) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        1.531,
+        -0.213,
+        2.9649
+      ],
+      "affordance_hint": "the steak meat on the blue tray",
+      "affordance_hint_original": "the steak meat",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 2,
+      "action": "grasp",
+      "target": "steak_meat",
+      "affordance": [
+        0.937,
+        0.401
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "steak_meat"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "holding",
+            "args": [
+              "steak_meat"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              0,
+              0,
+              -1
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "holding(steak_meat)",
+      "affordance_3d": [
+        1.3828,
+        -0.3087,
+        2.7496
+      ],
+      "affordance_hint": "the steak meat on the blue tray",
+      "affordance_hint_original": "the handle of the steak meat",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 3,
+      "action": "transport",
+      "target": "steak_meat",
+      "destination": "oven",
+      "affordance": [
+        0.352,
+        0.5
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "steak_meat"
+            ],
+            "role": "safety"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "above",
+            "args": [
+              "steak_meat",
+              "oven",
+              0.05
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "steak_meat",
+              "oven"
+            ]
+          },
+          {
+            "pred": "no_drop",
+            "args": [
+              "steak_meat"
+            ]
+          }
+        ]
+      },
+      "done_when": "above(steak_meat, oven, 0.05) AND aligned_xy(steak_meat, oven, 0.03)",
+      "affordance_3d": [
+        -0.4458,
+        0.0,
+        2.6126
+      ],
+      "affordance_hint": "the empty area on the oven",
+      "affordance_hint_original": "an empty area on the oven",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 4,
+      "action": "place",
+      "target": "steak_meat",
+      "destination": "oven",
+      "affordance": [
+        0.352,
+        0.5
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "surface_contact",
+            "args": [
+              "steak_meat",
+              "oven"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "released",
+            "args": [
+              "steak_meat"
+            ],
+            "role": "completion"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "stable",
+            "args": [
+              "steak_meat"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "support_stable",
+            "args": [
+              "steak_meat"
+            ]
+          }
+        ]
+      },
+      "done_when": "surface_contact(steak_meat, oven) AND released(steak_meat) AND stable(steak_meat)",
+      "affordance_3d": [
+        -0.4458,
+        0.0,
+        2.6126
+      ],
+      "affordance_hint": "the empty area on the oven",
+      "affordance_hint_original": "an empty area on the oven",
+      "affordance_hint_confidence": "ok"
+    }
+  ]
+}

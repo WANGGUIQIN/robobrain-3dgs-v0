@@ -1,0 +1,476 @@
+{
+  "task": "Move the green pot to the right, open the microwave door, place the green pot in the microwave then close the microwave door",
+  "parsed": {
+    "scene_objects": [
+      "green_pot",
+      "microwave",
+      "microwave_door",
+      "table"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "green_pot",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "green_pot",
+        "affordance_region": "the green pot",
+        "done_when": "distance(gripper, green_pot) < 0.03",
+        "affordance_hint": "the green pot",
+        "refine_prompt": "the green pot",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.4258,
+          0.7578
+        ],
+        "affordance_3d_refined": [
+          -0.8109,
+          1.1766,
+          3.1801
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.4635,
+        "affordance": [
+          0.4258,
+          0.7578
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "green_pot"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "green_pot",
+        "affordance_region": "the handle of the green pot",
+        "done_when": "holding(green_pot)",
+        "affordance_hint": "the handle of the green pot",
+        "refine_prompt": "the handle of the green pot",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.4258,
+          0.7578
+        ],
+        "affordance_3d_refined": [
+          -0.8109,
+          1.1766,
+          3.1801
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.4265,
+        "affordance": [
+          0.4258,
+          0.7578
+        ]
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "green_pot",
+                "table_right",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "green_pot"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "green_pot",
+        "destination": "table_right",
+        "affordance_region": "an empty area on the table right",
+        "done_when": "above(green_pot, table_right, 0.05)",
+        "affordance_hint": "an empty area on the table right",
+        "refine_prompt": "an empty area on the table right",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.3477,
+          0.9961
+        ],
+        "affordance_3d_refined": [
+          -1.0525,
+          2.0013,
+          2.9649
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.3478,
+        "affordance": [
+          0.3477,
+          0.9961
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "surface_contact",
+              "args": [
+                "green_pot",
+                "table_right"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "green_pot"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "green_pot"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "place",
+        "target": "green_pot",
+        "destination": "table_right",
+        "affordance_region": "an empty area on the table right",
+        "done_when": "surface_contact(green_pot, table_right) AND released(green_pot)",
+        "affordance_hint": "an empty area on the table right",
+        "refine_prompt": "an empty area on the table right",
+        "refine_cache_hit": true,
+        "affordance_refined": [
+          0.3477,
+          0.9961
+        ],
+        "affordance_3d_refined": [
+          -1.0525,
+          2.0013,
+          2.9649
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.3478,
+        "affordance": [
+          0.3477,
+          0.9961
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "microwave_door",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 5,
+        "action": "reach",
+        "target": "microwave_door",
+        "affordance_region": "the handle of the microwave door",
+        "done_when": "distance(gripper, microwave_door) < 0.03",
+        "affordance_hint": "the handle of the microwave door",
+        "refine_prompt": "the handle of the microwave door",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.4766,
+          0.3711
+        ],
+        "affordance_3d_refined": [
+          -0.5336,
+          -0.351,
+          2.8083
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.3879,
+        "affordance": [
+          0.4766,
+          0.3711
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_contact",
+              "args": [
+                "microwave_door"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "motion_dir",
+              "args": [
+                "0",
+                "1",
+                "0"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 6,
+        "action": "pull",
+        "target": "microwave_door",
+        "affordance_region": "the handle of the microwave door",
+        "done_when": "microwave_door(open)",
+        "affordance_hint": "the handle of the microwave door",
+        "refine_prompt": "the handle of the microwave door",
+        "refine_cache_hit": true,
+        "affordance_refined": [
+          0.4766,
+          0.3711
+        ],
+        "affordance_3d_refined": [
+          -0.5336,
+          -0.351,
+          2.8083
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.3879,
+        "affordance": [
+          0.4766,
+          0.3711
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "surface_contact",
+              "args": [
+                "green_pot",
+                "microwave"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "green_pot"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "green_pot"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 7,
+        "action": "place",
+        "target": "green_pot",
+        "destination": "microwave",
+        "affordance_region": "an empty area inside the microwave",
+        "done_when": "surface_contact(green_pot, microwave) AND released(green_pot)",
+        "affordance_hint": "an empty area inside the microwave",
+        "refine_prompt": "an empty area inside the microwave",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.3398,
+          0.5547
+        ],
+        "affordance_3d_refined": [
+          -1.2965,
+          0.3907,
+          3.5519
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.4057,
+        "affordance": [
+          0.3398,
+          0.5547
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_contact",
+              "args": [
+                "microwave_door"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "motion_dir",
+              "args": [
+                "0",
+                "-1",
+                "0"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 8,
+        "action": "push",
+        "target": "microwave_door",
+        "affordance_region": "the handle of the microwave door",
+        "done_when": "microwave_door(closed)",
+        "affordance_hint": "the handle of the microwave door",
+        "refine_prompt": "the handle of the microwave door",
+        "refine_cache_hit": true,
+        "affordance_refined": [
+          0.4766,
+          0.3711
+        ],
+        "affordance_3d_refined": [
+          -0.5336,
+          -0.351,
+          2.8083
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.3879,
+        "affordance": [
+          0.4766,
+          0.3711
+        ]
+      }
+    ]
+  }
+}

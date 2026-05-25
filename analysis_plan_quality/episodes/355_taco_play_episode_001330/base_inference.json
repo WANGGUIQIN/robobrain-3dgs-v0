@@ -1,0 +1,131 @@
+{
+  "task": "go slide the purple block to the left",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_3epoch/best",
+  "raw": "**SCENE ANALYSIS -** A white tray with a purple block and a red block is on a brown surface. A red ball is on the floor. The purple block is on the tray, the red block is on the floor. The tray is a flat surface. **STRATEGY -** The task is to slide the purple block left on the tray. First, reach for the purple block on the tray. Then, grasp it. Then, transport it left on the tray. **AFFORDANCE REASONING -** Step 1 reach the purple block on the tray. Step 2 grasp the purple block. Step 3 transport the purple block left on the tray.\n\nGoal: on(purple_block, tray); left_of(purple_block, red_block)\nScene: purple_block, red_block, tray, ball\nStep 1: reach(purple_block)\n  affordance_region: the purple block on the tray\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, purple_block, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, purple_block) < 0.03\nStep 2: grasp(purple_block)\n  affordance_region: the purple block on the tray\n  contact: holding(purple_block) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(purple_block)\nStep 3: transport(purple_block -> tray)\n  affordance_region: an empty area on the tray to the left of the red block\n  spatial: left_of(purple_block, red_block) [completion]\n  safety: no_drop(purple_block)\n  done_when: left_of(purple_block, red_block)\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [
+      {
+        "pred": "on",
+        "args": [
+          "purple_block",
+          "tray"
+        ]
+      },
+      {
+        "pred": "left_of",
+        "args": [
+          "purple_block",
+          "red_block"
+        ]
+      }
+    ],
+    "scene_objects": [
+      "purple_block",
+      "red_block",
+      "tray",
+      "ball"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "purple_block",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "purple_block",
+        "affordance_region": "the purple block on the tray",
+        "done_when": "distance(gripper, purple_block) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "purple_block"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "purple_block",
+        "affordance_region": "the purple block on the tray",
+        "done_when": "holding(purple_block)"
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "left_of",
+              "args": [
+                "purple_block",
+                "red_block"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "purple_block"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "purple_block",
+        "destination": "tray",
+        "affordance_region": "an empty area on the tray to the left of the red block",
+        "done_when": "left_of(purple_block, red_block)"
+      }
+    ]
+  }
+}

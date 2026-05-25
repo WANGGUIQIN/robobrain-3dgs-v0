@@ -1,0 +1,240 @@
+{
+  "task": "put the ring on the azure spoke",
+  "scene_objects": [
+    "ring",
+    "azure_spoke",
+    "wooden_base"
+  ],
+  "num_steps": 4,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "ring",
+      "affordance": [
+        0.187,
+        0.703
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "ring",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "wooden_base"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, ring) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        -2.9842,
+        1.9398,
+        4.7748
+      ],
+      "affordance_hint": "the ring"
+    },
+    {
+      "step": 2,
+      "action": "grasp",
+      "target": "ring",
+      "affordance": [
+        0.48,
+        0.1
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "ring"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "holding",
+            "args": [
+              "ring"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              0,
+              0,
+              -1
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "holding(ring)",
+      "affordance_3d": [
+        -0.0782,
+        -1.595,
+        2.0016
+      ],
+      "affordance_hint": "the handle of the ring"
+    },
+    {
+      "step": 3,
+      "action": "transport",
+      "target": "ring",
+      "destination": "azure_spoke",
+      "affordance": [
+        0.5,
+        0.601
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "ring"
+            ],
+            "role": "safety"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "above",
+            "args": [
+              "ring",
+              "azure_spoke",
+              0.05
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "aligned_xy",
+            "args": [
+              "ring",
+              "azure_spoke",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "ring",
+              "wooden_base"
+            ]
+          },
+          {
+            "pred": "no_drop",
+            "args": [
+              "ring"
+            ]
+          }
+        ]
+      },
+      "done_when": "above(ring, azure_spoke, 0.05) AND aligned_xy(ring, azure_spoke, 0.03)",
+      "affordance_3d": [
+        0.0,
+        0.2637,
+        1.2981
+      ],
+      "affordance_hint": "an empty area on the azure spoke"
+    },
+    {
+      "step": 4,
+      "action": "place",
+      "target": "ring",
+      "destination": "azure_spoke",
+      "affordance": [
+        0.5,
+        0.601
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "surface_contact",
+            "args": [
+              "ring",
+              "azure_spoke"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "released",
+            "args": [
+              "ring"
+            ],
+            "role": "completion"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "stable",
+            "args": [
+              "ring"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "support_stable",
+            "args": [
+              "ring"
+            ]
+          }
+        ]
+      },
+      "done_when": "surface_contact(ring, azure_spoke) AND released(ring) AND stable(ring)",
+      "affordance_3d": [
+        0.0,
+        0.2637,
+        1.2981
+      ],
+      "affordance_hint": "an empty area on the azure spoke"
+    }
+  ]
+}

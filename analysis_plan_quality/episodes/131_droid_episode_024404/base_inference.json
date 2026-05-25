@@ -1,0 +1,168 @@
+{
+  "task": "Pick up the bottle from the base top and put it on the stove",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_3epoch/best",
+  "raw": "**SCENE ANALYSIS -** A kitchen scene with a black stovetop, a black pot on the back burner, a silver pan on the front left burner, and a countertop with various items including a bottle with an orange cap. The bottle is the target object. The stovetop has four burners, and the task involves moving the bottle from the countertop to one of the burners. **STRATEGY -** First, reach for the bottle on the countertop, grasp it, then transport it to the stovetop, and finally place it on one of the burners. The order is determined by the need to first acquire the bottle before moving it. **AFFORDANCE REASONING -** Step 1 requires reaching the bottle on the countertop, which is on the surface, so the body of the bottle is the affordance region. Step 2 involves grasping the bottle, which has a grip-able feature (the body or cap, but since it's a bottle, the body is the main grasp point). Step 3 is transporting the bottle to the stovetop, which requires an empty area on the stovetop as the destination. Step 4 is placing the bottle on the stovetop, which requires a stable surface on the burner.\n\nGoal: on(bottle, stovetop); stable(bottle)\nScene: bottle, stovetop, countertop, pot, pan\nStep 1: reach(bottle)\n  affordance_region: the body of the bottle\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, bottle, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, bottle) < 0.03\nStep 2: grasp(bottle)\n  affordance_region: the body of the bottle\n  contact: holding(bottle) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(bottle)\nStep 3: transport(bottle -> stovetop)\n  affordance_region: an empty area on the stovetop\n  spatial: above(bottle, stovetop, 0.05) [completion]\n  safety: no_drop(bottle)\n  done_when: above(bottle, stovetop, 0.05)\nStep 4: place(bottle -> stovetop)\n  affordance_region: an empty area on the stovetop\n  contact: surface_contact(bottle, stovetop) [completion]; released(bottle) [completion]\n  pose: stable(bottle) [completion]\n  done_when: surface_contact(bottle, stovetop) AND released(bottle)\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [
+      {
+        "pred": "on",
+        "args": [
+          "bottle",
+          "stovetop"
+        ]
+      },
+      {
+        "pred": "stable",
+        "args": [
+          "bottle"
+        ]
+      }
+    ],
+    "scene_objects": [
+      "bottle",
+      "stovetop",
+      "countertop",
+      "pot",
+      "pan"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "bottle",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "bottle",
+        "affordance_region": "the body of the bottle",
+        "done_when": "distance(gripper, bottle) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "bottle"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "bottle",
+        "affordance_region": "the body of the bottle",
+        "done_when": "holding(bottle)"
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "bottle",
+                "stovetop",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "bottle"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "bottle",
+        "destination": "stovetop",
+        "affordance_region": "an empty area on the stovetop",
+        "done_when": "above(bottle, stovetop, 0.05)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "surface_contact",
+              "args": [
+                "bottle",
+                "stovetop"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "bottle"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "bottle"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "place",
+        "target": "bottle",
+        "destination": "stovetop",
+        "affordance_region": "an empty area on the stovetop",
+        "done_when": "surface_contact(bottle, stovetop) AND released(bottle)"
+      }
+    ]
+  }
+}

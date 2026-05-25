@@ -1,0 +1,157 @@
+{
+  "task": "Move cloth to left edge of table in front of microwave.",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_planning_3epoch/checkpoint-39957",
+  "raw": "Scene: cloth, table, microwave, pot, spoon, corn, mushroom, cans\nStep 1: reach(cloth)\n  affordance_region: the light blue cloth\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, cloth, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, cloth) < 0.03\nStep 2: grasp(cloth)\n  affordance_region: the light blue cloth\n  contact: holding(cloth) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(cloth)\nStep 3: transport(cloth -> left_edge_of_table)\n  affordance_region: the left edge of the table\n  spatial: above(cloth, table, 0.05) [completion]\n  safety: no_drop(cloth)\n  done_when: above(cloth, table, 0.05)\nStep 4: place(cloth -> left_edge_of_table)\n  affordance_region: the left edge of the table\n  contact: surface_contact(cloth, table) [completion]; released(cloth) [completion]\n  pose: stable(cloth) [completion]\n  done_when: surface_contact(cloth, table) AND released(cloth) AND stable(cloth)\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [],
+    "scene_objects": [
+      "cloth",
+      "table",
+      "microwave",
+      "pot",
+      "spoon",
+      "corn",
+      "mushroom",
+      "cans"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "cloth",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "cloth",
+        "affordance_region": "the light blue cloth",
+        "done_when": "distance(gripper, cloth) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "cloth"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "cloth",
+        "affordance_region": "the light blue cloth",
+        "done_when": "holding(cloth)"
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "cloth",
+                "table",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "cloth"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "cloth",
+        "destination": "left_edge_of_table",
+        "affordance_region": "the left edge of the table",
+        "done_when": "above(cloth, table, 0.05)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "surface_contact",
+              "args": [
+                "cloth",
+                "table"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "cloth"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "cloth"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "place",
+        "target": "cloth",
+        "destination": "left_edge_of_table",
+        "affordance_region": "the left edge of the table",
+        "done_when": "surface_contact(cloth, table) AND released(cloth) AND stable(cloth)"
+      }
+    ]
+  }
+}

@@ -1,0 +1,241 @@
+{
+  "task": "Place eggplant to the right of the chicken wing",
+  "scene_objects": [
+    "eggplant",
+    "chicken_wing",
+    "can",
+    "blue_cloth",
+    "table"
+  ],
+  "num_steps": 4,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "eggplant",
+      "affordance": [
+        0.352,
+        0.3
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "eggplant",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "chicken_wing"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, eggplant) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        -0.1887,
+        -0.2532,
+        1.1058
+      ],
+      "affordance_hint": "the purple eggplant",
+      "affordance_hint_original": "the eggplant",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 2,
+      "action": "grasp",
+      "target": "eggplant",
+      "affordance": [
+        0.352,
+        0.3
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "eggplant"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "holding",
+            "args": [
+              "eggplant"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              0,
+              0,
+              -1
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "holding(eggplant)",
+      "affordance_3d": [
+        -0.1887,
+        -0.2532,
+        1.1058
+      ],
+      "affordance_hint": "the purple eggplant",
+      "affordance_hint_original": "eggplant",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 3,
+      "action": "transport",
+      "target": "eggplant",
+      "destination": "right_of_chicken_wing",
+      "affordance": [
+        0.727,
+        0.651
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "eggplant"
+            ],
+            "role": "safety"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "above",
+            "args": [
+              "eggplant",
+              "table",
+              0.05
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "eggplant",
+              "chicken_wing"
+            ]
+          },
+          {
+            "pred": "no_drop",
+            "args": [
+              "eggplant"
+            ]
+          }
+        ]
+      },
+      "done_when": "above(eggplant, table, 0.05) AND aligned_xy(eggplant, right_of_chicken_wing, 0.03)",
+      "affordance_3d": [
+        0.4358,
+        0.293,
+        1.6733
+      ],
+      "affordance_hint": "the empty area on the right of the chicken wing",
+      "affordance_hint_original": "an empty area on the right of chicken wing",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 4,
+      "action": "place",
+      "target": "eggplant",
+      "destination": "right_of_chicken_wing",
+      "affordance": [
+        0.727,
+        0.651
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "surface_contact",
+            "args": [
+              "eggplant",
+              "table"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "released",
+            "args": [
+              "eggplant"
+            ],
+            "role": "completion"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "stable",
+            "args": [
+              "eggplant"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "support_stable",
+            "args": [
+              "eggplant"
+            ]
+          }
+        ]
+      },
+      "done_when": "surface_contact(eggplant, table) AND released(eggplant) AND stable(eggplant)",
+      "affordance_3d": [
+        0.4358,
+        0.293,
+        1.6733
+      ],
+      "affordance_hint": "the empty area on the table to the right of the chicken wing",
+      "affordance_hint_original": "an empty area on the right of chicken wing",
+      "affordance_hint_confidence": "ok"
+    }
+  ]
+}

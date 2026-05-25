@@ -1,0 +1,167 @@
+{
+  "task": "open the top drawer",
+  "scene_objects": [
+    "top_drawer",
+    "robot_arm",
+    "table"
+  ],
+  "num_steps": 3,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "top_drawer",
+      "affordance": [
+        0.25,
+        0.406
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "top_drawer",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "table"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, top_drawer) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        -2.0138,
+        -0.7552,
+        4.0276
+      ],
+      "affordance_hint": "the top drawer"
+    },
+    {
+      "step": 2,
+      "action": "grasp",
+      "target": "top_drawer",
+      "affordance": [
+        0.468,
+        0.554
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "top_drawer"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "holding",
+            "args": [
+              "top_drawer"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              0,
+              0,
+              -1
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "holding(top_drawer)",
+      "affordance_3d": [
+        -0.1281,
+        0.2241,
+        2.0491
+      ],
+      "affordance_hint": "the handle of the top drawer"
+    },
+    {
+      "step": 3,
+      "action": "pull",
+      "target": "top_drawer",
+      "affordance": [
+        0.468,
+        0.554
+      ],
+      "approach": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "top_drawer"
+            ],
+            "role": "safety"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "top_drawer",
+              "table",
+              ">",
+              0.05
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "top_drawer",
+              "table"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(top_drawer, table) > 0.05",
+      "affordance_3d": [
+        -0.1281,
+        0.2241,
+        2.0491
+      ],
+      "affordance_hint": "the handle of the top drawer"
+    }
+  ]
+}

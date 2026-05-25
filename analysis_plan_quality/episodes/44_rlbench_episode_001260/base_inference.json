@@ -1,0 +1,166 @@
+{
+  "task": "use the stick to drag the cube onto the olive target",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_3epoch/best",
+  "raw": "SCENE ANALYSIS - A robotic arm is positioned over a table with a green cube, a gray cube, a pink cube, a black cube, a white cube, and a stick. The task is to use the stick to drag the green cube onto the olive target (the gray cube). The cubes are rigid and the stick is a thin, elongated object. STRATEGY - First, grasp the stick, then use it to push the green cube towards the gray cube. Ensure the stick is used as a tool to move the green cube without direct contact. Failure modes include dropping the stick or misaligning the push. AFFORDANCE REASONING - Step 1: Reach for the stick. Step 2: Grasp the stick. Step 3: Use the stick to push the green cube towards the gray cube. Step 4: Release the stick.\nGoal: on(green_cube, gray_cube)\nScene: green_cube, gray_cube, pink_cube, black_cube, white_cube, stick\nStep 1: reach(stick)\n  affordance_region: the body of the stick\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, stick, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, stick) < 0.03\nStep 2: grasp(stick)\n  affordance_region: the body of the stick\n  contact: holding(stick) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(stick)\nStep 3: push(green_cube -> gray_cube)\n  affordance_region: the body of the green cube\n  contact: stick_contact(green_cube) [progress]\n  spatial: distance(green_cube, gray_cube, <, 0.1) [completion]\n  direction: push_axis(0, 0, -1) [progress]\n  safety: no_drop(green_cube)\n  done_when: distance(green_cube, gray_cube) < 0.1\nStep 4: release(stick)\n  affordance_region: the body of the stick\n  contact: released(stick) [completion]\n  done_when: released(stick)\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [
+      {
+        "pred": "on",
+        "args": [
+          "green_cube",
+          "gray_cube"
+        ]
+      }
+    ],
+    "scene_objects": [
+      "green_cube",
+      "gray_cube",
+      "pink_cube",
+      "black_cube",
+      "white_cube",
+      "stick"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "stick",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "stick",
+        "affordance_region": "the body of the stick",
+        "done_when": "distance(gripper, stick) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "stick"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "stick",
+        "affordance_region": "the body of the stick",
+        "done_when": "holding(stick)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "stick_contact",
+              "args": [
+                "green_cube"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "green_cube",
+                "gray_cube",
+                "<",
+                "0.1"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "push_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "green_cube"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "push",
+        "target": "green_cube",
+        "destination": "gray_cube",
+        "affordance_region": "the body of the green cube",
+        "done_when": "distance(green_cube, gray_cube) < 0.1"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "released",
+              "args": [
+                "stick"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "release",
+        "target": "stick",
+        "affordance_region": "the body of the stick",
+        "done_when": "released(stick)"
+      }
+    ]
+  }
+}

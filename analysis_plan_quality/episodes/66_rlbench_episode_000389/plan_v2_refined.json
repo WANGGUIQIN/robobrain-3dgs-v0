@@ -1,0 +1,220 @@
+{
+  "task": "take the chicken off the grill",
+  "scene_objects": [
+    "grill",
+    "chicken"
+  ],
+  "num_steps": 4,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "chicken",
+      "affordance": [
+        0.535,
+        0.48
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "chicken",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "grill"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, chicken) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        0.1493,
+        -0.083,
+        2.1239
+      ],
+      "affordance_hint": "the black grill with the chicken on it",
+      "affordance_hint_original": "the chicken",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 2,
+      "action": "grasp",
+      "target": "chicken",
+      "affordance": [
+        0.428,
+        0.102
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "chicken"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "holding",
+            "args": [
+              "chicken"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              0,
+              0,
+              -1
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "holding(chicken)",
+      "affordance_3d": [
+        -0.5374,
+        -3.0453,
+        3.8216
+      ],
+      "affordance_hint": "the body of the chicken on the grill",
+      "affordance_hint_original": "the handle of the chicken",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 3,
+      "action": "transport",
+      "target": "chicken",
+      "destination": "grill",
+      "affordance": [
+        0.5,
+        0.5
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "chicken"
+            ],
+            "role": "safety"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "above",
+            "args": [
+              "chicken",
+              "grill",
+              0.05
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "chicken",
+              "grill"
+            ]
+          },
+          {
+            "pred": "no_drop",
+            "args": [
+              "chicken"
+            ]
+          }
+        ]
+      },
+      "done_when": "above(chicken, grill, 0.05)",
+      "affordance_3d": [
+        0.0,
+        0.0,
+        2.9496
+      ],
+      "affordance_hint": "the empty area on the grill",
+      "affordance_hint_original": "an empty area on the grill",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 4,
+      "action": "release",
+      "target": "chicken",
+      "affordance": [
+        0.535,
+        0.48
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "released",
+            "args": [
+              "chicken"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "support_stable",
+            "args": [
+              "chicken"
+            ]
+          }
+        ]
+      },
+      "done_when": "released(chicken)",
+      "affordance_3d": [
+        0.1493,
+        -0.083,
+        2.1239
+      ],
+      "affordance_hint": "the grilled chicken on the grill",
+      "affordance_hint_original": "the chicken",
+      "affordance_hint_confidence": "ok"
+    }
+  ]
+}

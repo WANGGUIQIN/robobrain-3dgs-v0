@@ -1,0 +1,152 @@
+{
+  "task": "Put one marble on the window seal",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_planning_3epoch/checkpoint-39957",
+  "raw": "Scene: red_marble, window_seal, table\nStep 1: reach(red_marble)\n  affordance_region: the red marble\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, red_marble, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, red_marble) < 0.03\nStep 2: grasp(red_marble)\n  affordance_region: the red marble\n  contact: holding(red_marble) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(red_marble)\nStep 3: transport(red_marble -> window_seal)\n  affordance_region: an empty area on the window seal\n  spatial: above(red_marble, window_seal, 0.05) [completion]\n  safety: no_drop(red_marble)\n  done_when: above(red_marble, window_seal, 0.05)\nStep 4: place(red_marble -> window_seal)\n  affordance_region: an empty area on the window seal\n  contact: surface_contact(red_marble, window_seal) [completion]; released(red_marble) [completion]\n  pose: stable(red_marble) [completion]\n  done_when: surface_contact(red_marble, window_seal) AND released(red_marble)\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [],
+    "scene_objects": [
+      "red_marble",
+      "window_seal",
+      "table"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "red_marble",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "red_marble",
+        "affordance_region": "the red marble",
+        "done_when": "distance(gripper, red_marble) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "red_marble"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "red_marble",
+        "affordance_region": "the red marble",
+        "done_when": "holding(red_marble)"
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "red_marble",
+                "window_seal",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "red_marble"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "red_marble",
+        "destination": "window_seal",
+        "affordance_region": "an empty area on the window seal",
+        "done_when": "above(red_marble, window_seal, 0.05)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "surface_contact",
+              "args": [
+                "red_marble",
+                "window_seal"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "red_marble"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "red_marble"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "place",
+        "target": "red_marble",
+        "destination": "window_seal",
+        "affordance_region": "an empty area on the window seal",
+        "done_when": "surface_contact(red_marble, window_seal) AND released(red_marble)"
+      }
+    ]
+  }
+}

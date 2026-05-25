@@ -1,0 +1,211 @@
+{
+  "task": "push the maroon button, then push the green button",
+  "scene_objects": [
+    "maroon_button",
+    "green_button",
+    "table"
+  ],
+  "num_steps": 4,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "maroon_button",
+      "affordance": [
+        0.382,
+        0.804
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "maroon_button",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "green_button"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, maroon_button) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        -0.24,
+        0.624,
+        1.0239
+      ],
+      "affordance_hint": "the maroon button",
+      "affordance_hint_original": "the maroon button",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 2,
+      "action": "push",
+      "target": "maroon_button",
+      "affordance": [
+        0.382,
+        0.804
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "maroon_button"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "motion_dir",
+            "args": [
+              0,
+              0,
+              -1
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "gripper_contact(maroon_button)",
+      "affordance_3d": [
+        -0.24,
+        0.624,
+        1.0239
+      ],
+      "affordance_hint": "the center of the maroon button",
+      "affordance_hint_original": "the center of the maroon button",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 3,
+      "action": "reach",
+      "target": "green_button",
+      "affordance": [
+        0.402,
+        0.687
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "green_button",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "maroon_button"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, green_button) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        -0.767,
+        1.4727,
+        3.9272
+      ],
+      "affordance_hint": "the green button on the table",
+      "affordance_hint_original": "the green button",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 4,
+      "action": "push",
+      "target": "green_button",
+      "affordance": [
+        0.402,
+        0.687
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "green_button"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "motion_dir",
+            "args": [
+              0,
+              0,
+              -1
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "gripper_contact(green_button)",
+      "affordance_3d": [
+        -0.767,
+        1.4727,
+        3.9272
+      ],
+      "affordance_hint": "the center of the green button",
+      "affordance_hint_original": "the center of the green button",
+      "affordance_hint_confidence": "ok"
+    }
+  ]
+}

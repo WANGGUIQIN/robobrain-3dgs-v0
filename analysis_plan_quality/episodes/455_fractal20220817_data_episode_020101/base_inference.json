@@ -1,0 +1,121 @@
+{
+  "task": "knock pepsi can over",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_3epoch/best",
+  "raw": "**SCENE ANALYSIS -** A blue Pepsi can stands on a gray desk. The can is rigid with a cylindrical body. STRATEGY - reach the can at its body for a stable grasp, then push it to the side to knock it over. Failure mode: if the push is too weak, the can won't tip; if too strong, it might roll off the desk. AFFORDANCE REASONING - Step 1 reach can body; Step 2 grasp can body for secure hold; Step 3 push can body to the side.\n\nGoal: knocked_over(pepsi_can)\nScene: pepsi_can, desk\nStep 1: reach(pepsi_can)\n  affordance_region: the body of the pepsi can\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, pepsi_can, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, pepsi_can) < 0.03\nStep 2: grasp(pepsi_can)\n  affordance_region: the body of the pepsi can\n  contact: holding(pepsi_can) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(pepsi_can)\nStep 3: push(pepsi_can)\n  affordance_region: the body of the pepsi can\n  contact: pushing(pepsi_can) [completion]\n  direction: push_axis(0, 0, -1) [progress]\n  done_when: knocked_over(pepsi_can)\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [
+      {
+        "pred": "knocked_over",
+        "args": [
+          "pepsi_can"
+        ]
+      }
+    ],
+    "scene_objects": [
+      "pepsi_can",
+      "desk"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "pepsi_can",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "pepsi_can",
+        "affordance_region": "the body of the pepsi can",
+        "done_when": "distance(gripper, pepsi_can) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "pepsi_can"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "pepsi_can",
+        "affordance_region": "the body of the pepsi can",
+        "done_when": "holding(pepsi_can)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "pushing",
+              "args": [
+                "pepsi_can"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "push_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "push",
+        "target": "pepsi_can",
+        "affordance_region": "the body of the pepsi can",
+        "done_when": "knocked_over(pepsi_can)"
+      }
+    ]
+  }
+}

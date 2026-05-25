@@ -1,0 +1,246 @@
+{
+  "task": "Move the banana to the top right of the table",
+  "parsed": {
+    "scene_objects": [
+      "banana",
+      "knife",
+      "cloth",
+      "pot",
+      "table"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "banana",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "banana",
+        "affordance_region": "the yellow banana on the left side of the table",
+        "done_when": "distance(gripper, banana) < 0.03",
+        "affordance_hint": "the yellow banana on the left side of the table",
+        "refine_prompt": "the yellow banana on the left side of the table",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.2461,
+          0.3906
+        ],
+        "affordance_3d_refined": [
+          -0.5569,
+          -0.2399,
+          1.9082
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.8424,
+        "affordance": [
+          0.2461,
+          0.3906
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "banana"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "banana",
+        "affordance_region": "the yellow banana on the left side of the table",
+        "done_when": "holding(banana)",
+        "affordance_hint": "the yellow banana on the left side of the table",
+        "refine_prompt": "the yellow banana on the left side of the table",
+        "refine_cache_hit": true,
+        "affordance_refined": [
+          0.2461,
+          0.3906
+        ],
+        "affordance_3d_refined": [
+          -0.5569,
+          -0.2399,
+          1.9082
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.8424,
+        "affordance": [
+          0.2461,
+          0.3906
+        ]
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "banana",
+                "top_right_table",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "banana"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "banana",
+        "destination": "top_right_table",
+        "affordance_region": "the top right area of the wooden table",
+        "done_when": "above(banana, top_right_table, 0.05)",
+        "affordance_hint": "the top right area of the wooden table",
+        "refine_prompt": "the top right area of the wooden table",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.7461,
+          0.4336
+        ],
+        "affordance_3d_refined": [
+          0.5011,
+          -0.1352,
+          1.7712
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.3047,
+        "affordance": [
+          0.7461,
+          0.4336
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "surface_contact",
+              "args": [
+                "banana",
+                "top_right_table"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "banana"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "banana"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "place",
+        "target": "banana",
+        "destination": "top_right_table",
+        "affordance_region": "the top right area of the wooden table",
+        "done_when": "surface_contact(banana, top_right_table) AND released(banana) AND stable(banana)",
+        "affordance_hint": "the top right area of the wooden table",
+        "refine_prompt": "the top right area of the wooden table",
+        "refine_cache_hit": true,
+        "affordance_refined": [
+          0.7461,
+          0.4336
+        ],
+        "affordance_3d_refined": [
+          0.5011,
+          -0.1352,
+          1.7712
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.3047,
+        "affordance": [
+          0.7461,
+          0.4336
+        ]
+      }
+    ]
+  }
+}

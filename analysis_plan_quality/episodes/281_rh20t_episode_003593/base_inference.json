@@ -1,0 +1,265 @@
+{
+  "task": "Chop the green garlic",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_3epoch/best",
+  "raw": "**SCENE ANALYSIS - A wooden cutting board with green garlic stalks is on a wooden table. A chef's knife is on a wooden stand to the right. The garlic stalks are rigid and need to be cut. STRATEGY - First, grasp the garlic stalks to move them to the cutting board. Then, grasp the knife to chop the garlic. Failure modes include dropping the garlic or knife, or misaligning the knife for chopping. AFFORDANCE REASONING - Step 1 reach the garlic stalks on the cutting board; Step 2 grasp the garlic stalks for transport; Step 3 transport to the cutting board (if needed); Step 4 grasp the knife; Step 5 chop the garlic stalks.**\nGoal: chopped(green_garlic)\nScene: green_garlic, chef_knife, cutting_board, table\nStep 1: reach(green_garlic)\n  affordance_region: the green garlic stalks on the cutting board\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, green_garlic, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, green_garlic) < 0.03\nStep 2: grasp(green_garlic)\n  affordance_region: the green garlic stalks on the cutting board\n  contact: holding(green_garlic) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(green_garlic)\nStep 3: transport(green_garlic -> cutting_board)\n  affordance_region: an empty area on the cutting board\n  spatial: above(green_garlic, cutting_board, 0.05) [completion]\n  safety: no_drop(green_garlic)\n  done_when: above(green_garlic, cutting_board, 0.05)\nStep 4: place(green_garlic -> cutting_board)\n  affordance_region: an empty area on the cutting board\n  contact: surface_contact(green_garlic, cutting_board) [completion]; released(green_garlic) [completion]\n  pose: stable(green_garlic) [completion]\n  done_when: surface_contact(green_garlic, cutting_board) AND released(green_garlic)\nStep 5: reach(chef_knife)\n  affordance_region: the chef's knife on the wooden stand\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, chef_knife, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, chef_knife) < 0.03\nStep 6: grasp(chef_knife)\n  affordance_region: the handle of the chef's knife\n  contact: holding(chef_knife) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(chef_knife)\nStep 7: chop(green_garlic)\n  affordance_region: the green garlic stalks on the cutting board\n  contact: knife_contact(chef_knife, green_garlic) [completion]; released(chef_knife) [completion]\n  pose: stable(green_garlic) [completion]\n  done_when: knife_contact(chef_knife, green_garlic) AND released(chef_knife)\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [
+      {
+        "pred": "chopped",
+        "args": [
+          "green_garlic"
+        ]
+      }
+    ],
+    "scene_objects": [
+      "green_garlic",
+      "chef_knife",
+      "cutting_board",
+      "table"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "green_garlic",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "green_garlic",
+        "affordance_region": "the green garlic stalks on the cutting board",
+        "done_when": "distance(gripper, green_garlic) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "green_garlic"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "green_garlic",
+        "affordance_region": "the green garlic stalks on the cutting board",
+        "done_when": "holding(green_garlic)"
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "green_garlic",
+                "cutting_board",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "green_garlic"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "green_garlic",
+        "destination": "cutting_board",
+        "affordance_region": "an empty area on the cutting board",
+        "done_when": "above(green_garlic, cutting_board, 0.05)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "surface_contact",
+              "args": [
+                "green_garlic",
+                "cutting_board"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "green_garlic"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "green_garlic"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "place",
+        "target": "green_garlic",
+        "destination": "cutting_board",
+        "affordance_region": "an empty area on the cutting board",
+        "done_when": "surface_contact(green_garlic, cutting_board) AND released(green_garlic)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "chef_knife",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 5,
+        "action": "reach",
+        "target": "chef_knife",
+        "affordance_region": "the chef's knife on the wooden stand",
+        "done_when": "distance(gripper, chef_knife) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "chef_knife"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 6,
+        "action": "grasp",
+        "target": "chef_knife",
+        "affordance_region": "the handle of the chef's knife",
+        "done_when": "holding(chef_knife)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "knife_contact",
+              "args": [
+                "chef_knife",
+                "green_garlic"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "chef_knife"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "green_garlic"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 7,
+        "action": "chop",
+        "target": "green_garlic",
+        "affordance_region": "the green garlic stalks on the cutting board",
+        "done_when": "knife_contact(chef_knife, green_garlic) AND released(chef_knife)"
+      }
+    ]
+  }
+}

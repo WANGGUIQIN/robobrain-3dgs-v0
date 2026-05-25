@@ -1,0 +1,240 @@
+{
+  "task": "place redbull can upright",
+  "scene_objects": [
+    "redbull_can",
+    "apple",
+    "snack_bag",
+    "table"
+  ],
+  "num_steps": 4,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "redbull_can",
+      "affordance": [
+        0.334,
+        0.258
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "redbull_can",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "table"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, redbull_can) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        -0.489,
+        -0.7219,
+        2.5931
+      ],
+      "affordance_hint": "the redbull can",
+      "affordance_hint_original": "the redbull can",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 2,
+      "action": "grasp",
+      "target": "redbull_can",
+      "affordance": [
+        0.334,
+        0.258
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "redbull_can"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "holding",
+            "args": [
+              "redbull_can"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              0,
+              0,
+              -1
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "holding(redbull_can)",
+      "affordance_3d": [
+        -0.489,
+        -0.7219,
+        2.5931
+      ],
+      "affordance_hint": "the top edge of the redbull can",
+      "affordance_hint_original": "the handle of the redbull can",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 3,
+      "action": "transport",
+      "target": "redbull_can",
+      "destination": "upright_position",
+      "affordance": [
+        0.575,
+        0.402
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "redbull_can"
+            ],
+            "role": "safety"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "above",
+            "args": [
+              "redbull_can",
+              "table",
+              0.05
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "redbull_can",
+              "table"
+            ]
+          },
+          {
+            "pred": "no_drop",
+            "args": [
+              "redbull_can"
+            ]
+          }
+        ]
+      },
+      "done_when": "above(redbull_can, table, 0.05) AND aligned_xy(redbull_can, upright_position, 0.03)",
+      "affordance_3d": [
+        0.253,
+        -0.3328,
+        2.9649
+      ],
+      "affordance_hint": "the empty area on the upright position",
+      "affordance_hint_original": "an empty area on the upright position",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 4,
+      "action": "place",
+      "target": "redbull_can",
+      "destination": "upright_position",
+      "affordance": [
+        0.575,
+        0.402
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "surface_contact",
+            "args": [
+              "redbull_can",
+              "table"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "released",
+            "args": [
+              "redbull_can"
+            ],
+            "role": "completion"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "upright",
+            "args": [
+              "redbull_can"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "support_stable",
+            "args": [
+              "redbull_can"
+            ]
+          }
+        ]
+      },
+      "done_when": "surface_contact(redbull_can, table) AND released(redbull_can) AND upright(redbull_can)",
+      "affordance_3d": [
+        0.253,
+        -0.3328,
+        2.9649
+      ],
+      "affordance_hint": "an empty area on the upright position",
+      "affordance_hint_original": "an empty area on the upright position",
+      "affordance_hint_confidence": "rejected:missing_token:upright position"
+    }
+  ]
+}

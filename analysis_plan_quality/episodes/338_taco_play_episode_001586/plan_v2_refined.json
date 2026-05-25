@@ -1,0 +1,230 @@
+{
+  "task": "put the pink object inside the left cabinet",
+  "scene_objects": [
+    "pink_object",
+    "left_cabinet",
+    "table"
+  ],
+  "num_steps": 4,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "pink_object",
+      "affordance": [
+        0.341,
+        0.47
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "pink_object",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "left_cabinet"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, pink_object) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        -0.3041,
+        -0.0593,
+        1.652
+      ],
+      "affordance_hint": "the pink object",
+      "affordance_hint_original": "the pink object",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 2,
+      "action": "grasp",
+      "target": "pink_object",
+      "affordance": [
+        0.347,
+        0.47
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "pink_object"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "holding",
+            "args": [
+              "pink_object"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              0,
+              0,
+              -1
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "holding(pink_object)",
+      "affordance_3d": [
+        -0.2893,
+        -0.0593,
+        1.652
+      ],
+      "affordance_hint": "the pink object",
+      "affordance_hint_original": "the handle of the pink object",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 3,
+      "action": "transport",
+      "target": "pink_object",
+      "destination": "left_cabinet",
+      "affordance": [
+        0.191,
+        0.25
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "pink_object"
+            ],
+            "role": "safety"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "inside",
+            "args": [
+              "pink_object",
+              "left_cabinet"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "pink_object",
+              "left_cabinet"
+            ]
+          },
+          {
+            "pred": "no_drop",
+            "args": [
+              "pink_object"
+            ]
+          }
+        ]
+      },
+      "done_when": "inside(pink_object, left_cabinet)",
+      "affordance_3d": [
+        -0.668,
+        -0.5411,
+        1.883
+      ],
+      "affordance_hint": "the empty area inside the left cabinet",
+      "affordance_hint_original": "an empty area on the left cabinet",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 4,
+      "action": "release",
+      "target": "pink_object",
+      "destination": "left_cabinet",
+      "affordance": [
+        0.341,
+        0.47
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "released",
+            "args": [
+              "pink_object"
+            ],
+            "role": "completion"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "stable",
+            "args": [
+              "pink_object"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "support_stable",
+            "args": [
+              "pink_object"
+            ]
+          }
+        ]
+      },
+      "done_when": "released(pink_object) AND stable(pink_object)",
+      "affordance_3d": [
+        -0.3041,
+        -0.0593,
+        1.652
+      ],
+      "affordance_hint": "the pink object",
+      "affordance_hint_original": "the pink object",
+      "affordance_hint_confidence": "ok"
+    }
+  ]
+}

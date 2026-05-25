@@ -1,0 +1,429 @@
+{
+  "task": "Press the buttons on a row of four power strips to turn them on",
+  "scene_objects": [
+    "power_strip_1",
+    "power_strip_2",
+    "power_strip_3",
+    "power_strip_4",
+    "table"
+  ],
+  "num_steps": 8,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "power_strip_1",
+      "affordance": [
+        0.468,
+        0.475
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "power_strip_1_button",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "table"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, power_strip_1_button) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        -1.0825,
+        -0.3139,
+        1.732
+      ],
+      "affordance_hint": "the power strip 1"
+    },
+    {
+      "step": 2,
+      "action": "push",
+      "target": "power_strip_1_button",
+      "affordance": [
+        0.462,
+        0.462
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "power_strip_1_button"
+            ],
+            "role": "completion"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "aligned_z",
+            "args": [
+              "gripper",
+              "power_strip_1_button"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "force_limit",
+            "args": [
+              "gripper",
+              "power_strip_1_button"
+            ]
+          }
+        ]
+      },
+      "done_when": "gripper_contact(power_strip_1_button) AND button_pressed(power_strip_1)",
+      "affordance_3d": [
+        -1.081,
+        -0.3318,
+        1.7125
+      ],
+      "affordance_hint": "the center of the power strip 1 button"
+    },
+    {
+      "step": 3,
+      "action": "reach",
+      "target": "power_strip_2",
+      "affordance": [
+        0.468,
+        0.475
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "power_strip_2_button",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "table"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, power_strip_2_button) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        -1.0825,
+        -0.3139,
+        1.732
+      ],
+      "affordance_hint": "the power strip 2"
+    },
+    {
+      "step": 4,
+      "action": "push",
+      "target": "power_strip_2_button",
+      "affordance": [
+        0.462,
+        0.462
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "power_strip_2_button"
+            ],
+            "role": "completion"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "aligned_z",
+            "args": [
+              "gripper",
+              "power_strip_2_button"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "force_limit",
+            "args": [
+              "gripper",
+              "power_strip_2_button"
+            ]
+          }
+        ]
+      },
+      "done_when": "gripper_contact(power_strip_2_button) AND button_pressed(power_strip_2)",
+      "affordance_3d": [
+        -1.081,
+        -0.3318,
+        1.7125
+      ],
+      "affordance_hint": "the center of the power strip 2 button"
+    },
+    {
+      "step": 5,
+      "action": "reach",
+      "target": "power_strip_3",
+      "affordance": [
+        0.462,
+        0.475
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "power_strip_3_button",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "table"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, power_strip_3_button) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        -1.1057,
+        -0.3175,
+        1.7516
+      ],
+      "affordance_hint": "the power strip 3"
+    },
+    {
+      "step": 6,
+      "action": "push",
+      "target": "power_strip_3_button",
+      "affordance": [
+        0.462,
+        0.462
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "power_strip_3_button"
+            ],
+            "role": "completion"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "aligned_z",
+            "args": [
+              "gripper",
+              "power_strip_3_button"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "force_limit",
+            "args": [
+              "gripper",
+              "power_strip_3_button"
+            ]
+          }
+        ]
+      },
+      "done_when": "gripper_contact(power_strip_3_button) AND button_pressed(power_strip_3)",
+      "affordance_3d": [
+        -1.081,
+        -0.3318,
+        1.7125
+      ],
+      "affordance_hint": "the center of the power strip 3 button"
+    },
+    {
+      "step": 7,
+      "action": "reach",
+      "target": "power_strip_4",
+      "affordance": [
+        0.468,
+        0.475
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "power_strip_4_button",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "table"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, power_strip_4_button) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        -1.0825,
+        -0.3139,
+        1.732
+      ],
+      "affordance_hint": "the power strip 4"
+    },
+    {
+      "step": 8,
+      "action": "push",
+      "target": "power_strip_4_button",
+      "affordance": [
+        0.462,
+        0.462
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "power_strip_4_button"
+            ],
+            "role": "completion"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "aligned_z",
+            "args": [
+              "gripper",
+              "power_strip_4_button"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "force_limit",
+            "args": [
+              "gripper",
+              "power_strip_4_button"
+            ]
+          }
+        ]
+      },
+      "done_when": "gripper_contact(power_strip_4_button) AND button_pressed(power_strip_4)",
+      "affordance_3d": [
+        -1.081,
+        -0.3318,
+        1.7125
+      ],
+      "affordance_hint": "the center of the power strip 4 button"
+    }
+  ]
+}

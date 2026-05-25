@@ -1,0 +1,245 @@
+{
+  "task": "Move the fish to the left of the green towel",
+  "parsed": {
+    "scene_objects": [
+      "fish",
+      "green_towel",
+      "pot",
+      "table"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "fish",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "fish",
+        "affordance_region": "the orange fish in the metal pot",
+        "done_when": "distance(gripper, fish) < 0.03",
+        "affordance_hint": "the orange fish in the metal pot",
+        "refine_prompt": "the orange fish in the metal pot",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.3828,
+          0.4844
+        ],
+        "affordance_3d_refined": [
+          -0.2491,
+          -0.0332,
+          1.8495
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.7286,
+        "affordance": [
+          0.3828,
+          0.4844
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "fish"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "fish",
+        "affordance_region": "the body of the fish",
+        "done_when": "holding(fish)",
+        "affordance_hint": "the body of the fish",
+        "refine_prompt": "the body of the fish",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.4023,
+          0.5664
+        ],
+        "affordance_3d_refined": [
+          -0.2186,
+          0.1486,
+          1.9473
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.3699,
+        "affordance": [
+          0.4023,
+          0.5664
+        ]
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "fish",
+                "table",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "fish"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "fish",
+        "destination": "left_of_green_towel",
+        "affordance_region": "the empty area on the left of the green towel",
+        "done_when": "above(fish, table, 0.05)",
+        "affordance_hint": "the empty area on the left of the green towel",
+        "refine_prompt": "the empty area on the left of the green towel",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.0,
+          0.0977
+        ],
+        "affordance_3d_refined": [
+          -0.8718,
+          -0.7015,
+          1.5168
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.335,
+        "affordance": [
+          0.0,
+          0.0977
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "surface_contact",
+              "args": [
+                "fish",
+                "table"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "fish"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "fish"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "place",
+        "target": "fish",
+        "destination": "left_of_green_towel",
+        "affordance_region": "the empty area on the left of the green towel",
+        "done_when": "surface_contact(fish, table) AND released(fish) AND stable(fish)",
+        "affordance_hint": "the empty area on the left of the green towel",
+        "refine_prompt": "the empty area on the left of the green towel",
+        "refine_cache_hit": true,
+        "affordance_refined": [
+          0.0,
+          0.0977
+        ],
+        "affordance_3d_refined": [
+          -0.8718,
+          -0.7015,
+          1.5168
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.335,
+        "affordance": [
+          0.0,
+          0.0977
+        ]
+      }
+    ]
+  }
+}

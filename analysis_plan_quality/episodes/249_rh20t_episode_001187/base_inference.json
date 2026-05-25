@@ -1,0 +1,120 @@
+{
+  "task": "Turn off the desk lamp by pressing the button",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_3epoch/best",
+  "raw": "**SCENE ANALYSIS - A desk lamp with a blue shade and a white base is on a green patterned surface. The lamp has a switch/button on its white base. STRATEGY - Reach the lamp base, press the switch/button to turn it off. Failure mode: misidentifying the switch/button. AFFORDANCE REASONING - Step 1 reach the lamp base; Step 2 grasp the base for stability; Step 3 press the switch/button.**\nGoal: off(desk_lamp)\nScene: desk_lamp\nStep 1: reach(desk_lamp)\n  affordance_region: the white base of the desk lamp\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, desk_lamp, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, desk_lamp) < 0.03\nStep 2: grasp(desk_lamp)\n  affordance_region: the white base of the desk lamp\n  contact: holding(desk_lamp) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(desk_lamp)\nStep 3: push(desk_lamp)\n  affordance_region: the switch/button on the white base of the desk lamp\n  contact: pressed(desk_lamp_switch) [completion]\n  direction: press_axis(0, 0, -1) [progress]\n  done_when: pressed(desk_lamp_switch)\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [
+      {
+        "pred": "off",
+        "args": [
+          "desk_lamp"
+        ]
+      }
+    ],
+    "scene_objects": [
+      "desk_lamp"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "desk_lamp",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "desk_lamp",
+        "affordance_region": "the white base of the desk lamp",
+        "done_when": "distance(gripper, desk_lamp) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "desk_lamp"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "desk_lamp",
+        "affordance_region": "the white base of the desk lamp",
+        "done_when": "holding(desk_lamp)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "pressed",
+              "args": [
+                "desk_lamp_switch"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "press_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "push",
+        "target": "desk_lamp",
+        "affordance_region": "the switch/button on the white base of the desk lamp",
+        "done_when": "pressed(desk_lamp_switch)"
+      }
+    ]
+  }
+}

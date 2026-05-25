@@ -1,0 +1,226 @@
+{
+  "task": "place the green cup in the oven",
+  "scene_objects": [
+    "green_cup",
+    "oven",
+    "table"
+  ],
+  "steps": [
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "green_cup",
+              "<",
+              "0.03"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "approach_axis",
+            "args": [
+              "0",
+              "0",
+              "-1"
+            ],
+            "role": "progress"
+          }
+        ]
+      },
+      "step": 1,
+      "action": "reach",
+      "target": "green_cup",
+      "affordance_region": "the green cup",
+      "done_when": "distance(gripper, green_cup) < 0.03",
+      "affordance_hint": "the green cup",
+      "refine_prompt": "the green cup",
+      "refine_cache_hit": false,
+      "affordance_refined": [
+        0.8359,
+        0.2422
+      ],
+      "affordance_3d_refined": [
+        1.1449,
+        -0.8787,
+        2.9649
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.6644
+    },
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "green_cup"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              "0",
+              "0",
+              "-1"
+            ],
+            "role": "progress"
+          }
+        ]
+      },
+      "step": 2,
+      "action": "grasp",
+      "target": "green_cup",
+      "affordance_region": "the handle of the green cup",
+      "done_when": "holding(green_cup)",
+      "affordance_hint": "the handle of the green cup",
+      "refine_prompt": "the handle of the green cup",
+      "refine_cache_hit": false,
+      "affordance_refined": [
+        0.793,
+        0.168
+      ],
+      "affordance_3d_refined": [
+        0.7942,
+        -0.9001,
+        2.3582
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.3213
+    },
+    {
+      "constraints": {
+        "spatial": [
+          {
+            "pred": "above",
+            "args": [
+              "green_cup",
+              "oven",
+              "0.05"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_drop",
+            "args": [
+              "green_cup"
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "step": 3,
+      "action": "transport",
+      "target": "green_cup",
+      "destination": "oven",
+      "affordance_region": "an empty area on the oven",
+      "done_when": "above(green_cup, oven, 0.05)",
+      "affordance_hint": "an empty area on the oven",
+      "refine_prompt": "an empty area on the oven",
+      "refine_cache_hit": false,
+      "affordance_refined": [
+        0.0977,
+        0.2305
+      ],
+      "affordance_3d_refined": [
+        -1.0002,
+        -0.67,
+        2.1625
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.3406
+    },
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "surface_contact",
+            "args": [
+              "green_cup",
+              "oven"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "released",
+            "args": [
+              "green_cup"
+            ],
+            "role": "completion"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "stable",
+            "args": [
+              "green_cup"
+            ],
+            "role": "completion"
+          }
+        ]
+      },
+      "step": 4,
+      "action": "place",
+      "target": "green_cup",
+      "destination": "oven",
+      "affordance_region": "an empty area on the oven",
+      "done_when": "surface_contact(green_cup, oven) AND released(green_cup)",
+      "affordance_hint": "an empty area on the oven",
+      "refine_prompt": "an empty area on the oven",
+      "refine_cache_hit": true,
+      "affordance_refined": [
+        0.0977,
+        0.2305
+      ],
+      "affordance_3d_refined": [
+        -1.0002,
+        -0.67,
+        2.1625
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.3406
+    }
+  ]
+}

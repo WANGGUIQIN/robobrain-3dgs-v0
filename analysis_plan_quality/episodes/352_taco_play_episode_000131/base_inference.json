@@ -1,0 +1,159 @@
+{
+  "task": "grasp the pink block",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_3epoch/best",
+  "raw": "SCENE ANALYSIS - A white sink with a faucet is on a countertop. A pink block is on the countertop to the left of the sink. The block is a solid cube. STRATEGY - Reach the block, grasp it, and transport it to the sink. Failure modes include missing the block or dropping it during transport. AFFORDANCE REASONING - Step 1 reach the block at its body; Step 2 grasp the block at its body for a secure hold; Step 3 transport the block to the sink basin; Step 4 place the block in the sink.\nGoal: inside(pink_block, sink)\nScene: pink_block, sink, countertop\nStep 1: reach(pink_block)\n  affordance_region: the body of the pink block\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, pink_block, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, pink_block) < 0.03\nStep 2: grasp(pink_block)\n  affordance_region: the body of the pink block\n  contact: holding(pink_block) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(pink_block)\nStep 3: transport(pink_block -> sink)\n  affordance_region: an empty area inside the sink basin\n  spatial: inside(pink_block, sink) [completion]\n  safety: no_drop(pink_block)\n  done_when: inside(pink_block, sink)\nStep 4: place(pink_block -> sink)\n  affordance_region: an empty area inside the sink basin\n  contact: surface_contact(pink_block, sink) [completion]; released(pink_block) [completion]\n  pose: stable(pink_block) [completion]\n  done_when: surface_contact(pink_block, sink) AND released(pink_block)\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [
+      {
+        "pred": "inside",
+        "args": [
+          "pink_block",
+          "sink"
+        ]
+      }
+    ],
+    "scene_objects": [
+      "pink_block",
+      "sink",
+      "countertop"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "pink_block",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "pink_block",
+        "affordance_region": "the body of the pink block",
+        "done_when": "distance(gripper, pink_block) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "pink_block"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "pink_block",
+        "affordance_region": "the body of the pink block",
+        "done_when": "holding(pink_block)"
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "inside",
+              "args": [
+                "pink_block",
+                "sink"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "pink_block"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "pink_block",
+        "destination": "sink",
+        "affordance_region": "an empty area inside the sink basin",
+        "done_when": "inside(pink_block, sink)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "surface_contact",
+              "args": [
+                "pink_block",
+                "sink"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "pink_block"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "pink_block"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "place",
+        "target": "pink_block",
+        "destination": "sink",
+        "affordance_region": "an empty area inside the sink basin",
+        "done_when": "surface_contact(pink_block, sink) AND released(pink_block)"
+      }
+    ]
+  }
+}

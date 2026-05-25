@@ -1,0 +1,248 @@
+{
+  "task": "put the ring on the rose spoke",
+  "scene_objects": [
+    "ring",
+    "rose_spoke",
+    "table"
+  ],
+  "num_steps": 4,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "ring",
+      "affordance": [
+        0.861,
+        0.804
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "ring",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "rose_spoke"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, ring) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        0.53,
+        0.4493,
+        0.7373
+      ],
+      "affordance_hint": "the small blue ring on the table",
+      "affordance_hint_original": "the ring",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 2,
+      "action": "grasp",
+      "target": "ring",
+      "affordance": [
+        0.85,
+        0.796
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "ring"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "holding",
+            "args": [
+              "ring"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              0,
+              0,
+              -1
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "holding(ring)",
+      "affordance_3d": [
+        1.1014,
+        0.9301,
+        1.5665
+      ],
+      "affordance_hint": "the small blue ring on the table",
+      "affordance_hint_original": "the handle of the ring",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 3,
+      "action": "transport",
+      "target": "ring",
+      "destination": "rose_spoke",
+      "affordance": [
+        0.468,
+        0.601
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "ring"
+            ],
+            "role": "safety"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "above",
+            "args": [
+              "ring",
+              "rose_spoke",
+              0.05
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "aligned_xy",
+            "args": [
+              "ring",
+              "rose_spoke",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "ring",
+              "rose_spoke"
+            ]
+          },
+          {
+            "pred": "no_drop",
+            "args": [
+              "ring"
+            ]
+          }
+        ]
+      },
+      "done_when": "above(ring, rose_spoke, 0.05) AND aligned_xy(ring, rose_spoke, 0.03)",
+      "affordance_3d": [
+        -0.0811,
+        0.2637,
+        1.2981
+      ],
+      "affordance_hint": "the empty area on the rose spoke",
+      "affordance_hint_original": "an empty area on the rose spoke",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 4,
+      "action": "place",
+      "target": "ring",
+      "destination": "rose_spoke",
+      "affordance": [
+        0.468,
+        0.601
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "surface_contact",
+            "args": [
+              "ring",
+              "rose_spoke"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "released",
+            "args": [
+              "ring"
+            ],
+            "role": "completion"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "stable",
+            "args": [
+              "ring"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "support_stable",
+            "args": [
+              "ring"
+            ]
+          }
+        ]
+      },
+      "done_when": "surface_contact(ring, rose_spoke) AND released(ring) AND stable(ring)",
+      "affordance_3d": [
+        -0.0811,
+        0.2637,
+        1.2981
+      ],
+      "affordance_hint": "the empty area on the rose spoke",
+      "affordance_hint_original": "an empty area on the rose spoke",
+      "affordance_hint_confidence": "ok"
+    }
+  ]
+}

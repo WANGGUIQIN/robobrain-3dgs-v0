@@ -1,0 +1,226 @@
+{
+  "task": "Remove the bubble ring from the assembled bubble ring and ball",
+  "scene_objects": [
+    "bubble_ring",
+    "ball",
+    "table"
+  ],
+  "steps": [
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "bubble_ring",
+              "<",
+              "0.03"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "approach_axis",
+            "args": [
+              "0",
+              "0",
+              "-1"
+            ],
+            "role": "progress"
+          }
+        ]
+      },
+      "step": 1,
+      "action": "reach",
+      "target": "bubble_ring",
+      "affordance_region": "the body of the bubble ring",
+      "done_when": "distance(gripper, bubble_ring) < 0.03",
+      "affordance_hint": "the body of the bubble ring",
+      "refine_prompt": "the body of the bubble ring",
+      "refine_cache_hit": false,
+      "affordance_refined": [
+        0.5859,
+        0.8164
+      ],
+      "affordance_3d_refined": [
+        -0.9513,
+        0.1623,
+        1.7907
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.3113
+    },
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "bubble_ring"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              "0",
+              "0",
+              "-1"
+            ],
+            "role": "progress"
+          }
+        ]
+      },
+      "step": 2,
+      "action": "grasp",
+      "target": "bubble_ring",
+      "affordance_region": "the small yellow grip of the bubble ring",
+      "done_when": "holding(bubble_ring)",
+      "affordance_hint": "the small yellow grip of the bubble ring",
+      "refine_prompt": "the small yellow grip of the bubble ring",
+      "refine_cache_hit": false,
+      "affordance_refined": [
+        0.3516,
+        0.5508
+      ],
+      "affordance_3d_refined": [
+        -1.2308,
+        -0.2087,
+        1.7125
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.4625
+    },
+    {
+      "constraints": {
+        "spatial": [
+          {
+            "pred": "above",
+            "args": [
+              "bubble_ring",
+              "table",
+              "0.05"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_drop",
+            "args": [
+              "bubble_ring"
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "step": 3,
+      "action": "transport",
+      "target": "bubble_ring",
+      "destination": "table",
+      "affordance_region": "an empty area on the table",
+      "done_when": "above(bubble_ring, table, 0.05)",
+      "affordance_hint": "an empty area on the table",
+      "refine_prompt": "an empty area on the table",
+      "refine_cache_hit": false,
+      "affordance_refined": [
+        0.5859,
+        0.8164
+      ],
+      "affordance_3d_refined": [
+        -0.9513,
+        0.1623,
+        1.7907
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.51
+    },
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "surface_contact",
+            "args": [
+              "bubble_ring",
+              "table"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "released",
+            "args": [
+              "bubble_ring"
+            ],
+            "role": "completion"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "stable",
+            "args": [
+              "bubble_ring"
+            ],
+            "role": "completion"
+          }
+        ]
+      },
+      "step": 4,
+      "action": "place",
+      "target": "bubble_ring",
+      "destination": "table",
+      "affordance_region": "an empty area on the table",
+      "done_when": "surface_contact(bubble_ring, table) AND released(bubble_ring)",
+      "affordance_hint": "an empty area on the table",
+      "refine_prompt": "an empty area on the table",
+      "refine_cache_hit": true,
+      "affordance_refined": [
+        0.5859,
+        0.8164
+      ],
+      "affordance_3d_refined": [
+        -0.9513,
+        0.1623,
+        1.7907
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.51
+    }
+  ]
+}

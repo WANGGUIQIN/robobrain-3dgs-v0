@@ -1,0 +1,161 @@
+{
+  "task": "Chop the green garlic",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_3epoch/best",
+  "raw": "SCENE ANALYSIS - A green garlic bunch is on a wooden cutting board. A knife is on the board. The garlic is a flexible plant with stalks and leaves; the knife has a blade and a handle. STRATEGY - Grasp the garlic stalks, transport to the knife blade, and perform a chopping motion. Failure modes include slipping garlic, misaligning with the blade, or incomplete cut. AFFORDANCE REASONING - Step 1 grasp garlic stalks (flexible, so grasp the main stalks); Step 2 transport to blade (approach blade); Step 3 chop (press and slide garlic against blade).\nGoal: chopped(green_garlic)\nScene: green_garlic, knife, cutting_board\nStep 1: grasp(green_garlic)\n  affordance_region: the main stalks of the green garlic\n  contact: holding(green_garlic) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: holding(green_garlic)\nStep 2: transport(green_garlic -> knife)\n  affordance_region: the blade of the knife\n  spatial: above(green_garlic, knife, 0.05) [completion]\n  safety: no_drop(green_garlic)\n  done_when: above(green_garlic, knife, 0.05)\nStep 3: insert(green_garlic -> knife)\n  affordance_region: the blade of the knife\n  contact: blade_contact(green_garlic, knife) [completion]\n  direction: insert_axis(0, 0, -1) [progress]\n  done_when: blade_contact(green_garlic, knife)\nStep 4: push(green_garlic)\n  affordance_region: the blade of the knife\n  contact: blade_contact(green_garlic, knife) [progress]\n  direction: push_axis(0, 0, -1) [progress]\n  done_when: blade_contact(green_garlic, knife)\nStep 5: release(green_garlic)\n  affordance_region: the main stalks of the green garlic\n  contact: released(green_garlic) [completion]\n  done_when: released(green_garlic)\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [
+      {
+        "pred": "chopped",
+        "args": [
+          "green_garlic"
+        ]
+      }
+    ],
+    "scene_objects": [
+      "green_garlic",
+      "knife",
+      "cutting_board"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "green_garlic"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "grasp",
+        "target": "green_garlic",
+        "affordance_region": "the main stalks of the green garlic",
+        "done_when": "holding(green_garlic)"
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "green_garlic",
+                "knife",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "green_garlic"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "transport",
+        "target": "green_garlic",
+        "destination": "knife",
+        "affordance_region": "the blade of the knife",
+        "done_when": "above(green_garlic, knife, 0.05)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "blade_contact",
+              "args": [
+                "green_garlic",
+                "knife"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "insert_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "insert",
+        "target": "green_garlic",
+        "destination": "knife",
+        "affordance_region": "the blade of the knife",
+        "done_when": "blade_contact(green_garlic, knife)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "blade_contact",
+              "args": [
+                "green_garlic",
+                "knife"
+              ],
+              "role": "progress"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "push_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "push",
+        "target": "green_garlic",
+        "affordance_region": "the blade of the knife",
+        "done_when": "blade_contact(green_garlic, knife)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "released",
+              "args": [
+                "green_garlic"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 5,
+        "action": "release",
+        "target": "green_garlic",
+        "affordance_region": "the main stalks of the green garlic",
+        "done_when": "released(green_garlic)"
+      }
+    ]
+  }
+}

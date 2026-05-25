@@ -1,0 +1,239 @@
+{
+  "task": "Use the wooden spoon to mix inside the pot",
+  "scene_objects": [
+    "wooden_spoon",
+    "pot",
+    "stove",
+    "counter"
+  ],
+  "steps": [
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "wooden_spoon",
+              "<",
+              "0.03"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "approach_axis",
+            "args": [
+              "0",
+              "0",
+              "-1"
+            ],
+            "role": "progress"
+          }
+        ]
+      },
+      "step": 1,
+      "action": "reach",
+      "target": "wooden_spoon",
+      "affordance_region": "the wooden spoon",
+      "done_when": "distance(gripper, wooden_spoon) < 0.03",
+      "affordance_hint": "the wooden spoon",
+      "refine_prompt": "the wooden spoon",
+      "refine_cache_hit": false,
+      "affordance_refined": [
+        0.7383,
+        0.8672
+      ],
+      "affordance_3d_refined": [
+        0.4228,
+        1.4871,
+        2.9159
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.3166
+    },
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "wooden_spoon"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              "0",
+              "0",
+              "-1"
+            ],
+            "role": "progress"
+          }
+        ]
+      },
+      "step": 2,
+      "action": "grasp",
+      "target": "wooden_spoon",
+      "affordance_region": "the handle of the wooden spoon",
+      "done_when": "holding(wooden_spoon)",
+      "affordance_hint": "the handle of the wooden spoon",
+      "refine_prompt": "the handle of the wooden spoon",
+      "refine_cache_hit": false,
+      "refine_prompt_fallback": "wooden spoon",
+      "affordance_refined": [
+        0.7383,
+        0.8672
+      ],
+      "affordance_3d_refined": [
+        0.4228,
+        1.4871,
+        2.9159
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.2648
+    },
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "wooden_spoon"
+            ],
+            "role": "safety"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "inside",
+            "args": [
+              "wooden_spoon",
+              "pot"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "insert_dir",
+            "args": [
+              "0",
+              "0",
+              "-1"
+            ],
+            "role": "progress"
+          }
+        ]
+      },
+      "step": 3,
+      "action": "insert",
+      "target": "wooden_spoon",
+      "destination": "pot",
+      "affordance_region": "the top opening of the pot",
+      "done_when": "inside(wooden_spoon, pot)",
+      "affordance_hint": "the top opening of the pot",
+      "refine_prompt": "the top opening of the pot",
+      "refine_cache_hit": false,
+      "affordance_refined": [
+        0.5703,
+        0.707
+      ],
+      "affordance_3d_refined": [
+        -0.15,
+        0.6536,
+        2.143
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.7015
+    },
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "wooden_spoon"
+            ],
+            "role": "safety"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "inside",
+            "args": [
+              "wooden_spoon",
+              "pot"
+            ],
+            "role": "safety"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "motion_dir",
+            "args": [
+              "circular"
+            ],
+            "role": "completion"
+          }
+        ]
+      },
+      "step": 4,
+      "action": "rotate",
+      "target": "wooden_spoon",
+      "affordance_region": "the body of the wooden spoon",
+      "done_when": "mixing_complete",
+      "affordance_hint": "the body of the wooden spoon",
+      "refine_prompt": "the body of the wooden spoon",
+      "refine_cache_hit": false,
+      "affordance_refined": [
+        0.7539,
+        0.9258
+      ],
+      "affordance_3d_refined": [
+        0.5505,
+        1.9519,
+        3.3367
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.3052
+    }
+  ]
+}

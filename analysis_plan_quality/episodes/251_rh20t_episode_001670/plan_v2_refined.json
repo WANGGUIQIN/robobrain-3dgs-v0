@@ -1,0 +1,240 @@
+{
+  "task": "Put the cup on the cup rack",
+  "scene_objects": [
+    "cup",
+    "cup_rack",
+    "table",
+    "blocks"
+  ],
+  "num_steps": 4,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "cup",
+      "affordance": [
+        0.303,
+        0.558
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "cup",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "blocks"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, cup) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        -1.6058,
+        -0.2455,
+        2.1234
+      ],
+      "affordance_hint": "the transparent glass cup",
+      "affordance_hint_original": "the cup",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 2,
+      "action": "grasp",
+      "target": "cup",
+      "affordance": [
+        0.3,
+        0.6
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "cup"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "holding",
+            "args": [
+              "cup"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              0,
+              0,
+              -1
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "holding(cup)",
+      "affordance_3d": [
+        -1.5827,
+        -0.1693,
+        2.0843
+      ],
+      "affordance_hint": "the handle of the transparent glass cup",
+      "affordance_hint_original": "the handle of the cup",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 3,
+      "action": "transport",
+      "target": "cup",
+      "destination": "cup_rack",
+      "affordance": [
+        0.553,
+        0.5
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "cup"
+            ],
+            "role": "safety"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "above",
+            "args": [
+              "cup",
+              "cup_rack",
+              0.05
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "cup",
+              "cup_rack"
+            ]
+          },
+          {
+            "pred": "no_drop",
+            "args": [
+              "cup"
+            ]
+          }
+        ]
+      },
+      "done_when": "above(cup, cup_rack, 0.05) AND aligned_xy(cup, cup_rack, 0.03)",
+      "affordance_3d": [
+        -0.8873,
+        -0.2592,
+        1.5951
+      ],
+      "affordance_hint": "the empty area on the cup rack",
+      "affordance_hint_original": "an empty area on the cup rack",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 4,
+      "action": "place",
+      "target": "cup",
+      "destination": "cup_rack",
+      "affordance": [
+        0.553,
+        0.5
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "surface_contact",
+            "args": [
+              "cup",
+              "cup_rack"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "released",
+            "args": [
+              "cup"
+            ],
+            "role": "completion"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "stable",
+            "args": [
+              "cup"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "support_stable",
+            "args": [
+              "cup"
+            ]
+          }
+        ]
+      },
+      "done_when": "surface_contact(cup, cup_rack) AND released(cup) AND stable(cup)",
+      "affordance_3d": [
+        -0.8873,
+        -0.2592,
+        1.5951
+      ],
+      "affordance_hint": "the empty area on the cup rack",
+      "affordance_hint_original": "an empty area on the cup rack",
+      "affordance_hint_confidence": "ok"
+    }
+  ]
+}

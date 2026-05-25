@@ -1,0 +1,182 @@
+{
+  "task": "Turn the knob to decrease the volume of the speaker",
+  "parsed": {
+    "scene_objects": [
+      "knob",
+      "speaker",
+      "table"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "knob",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "knob",
+        "affordance_region": "the knob on the speaker",
+        "done_when": "distance(gripper, knob) < 0.03",
+        "affordance_hint": "the knob on the speaker",
+        "refine_prompt": "the knob on the speaker",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.5273,
+          0.3906
+        ],
+        "affordance_3d_refined": [
+          -0.9448,
+          -0.4085,
+          1.6342
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.5565,
+        "affordance": [
+          0.5273,
+          0.3906
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "knob"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "knob",
+        "affordance_region": "the knob on the speaker",
+        "done_when": "holding(knob)",
+        "affordance_hint": "the knob on the speaker",
+        "refine_prompt": "the knob on the speaker",
+        "refine_cache_hit": true,
+        "affordance_refined": [
+          0.5273,
+          0.3906
+        ],
+        "affordance_3d_refined": [
+          -0.9448,
+          -0.4085,
+          1.6342
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.5565,
+        "affordance": [
+          0.5273,
+          0.3906
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "knob"
+              ],
+              "role": "safety"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "orientation_match",
+              "args": [
+                "knob",
+                "decrease_volume"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "rotate",
+        "target": "knob",
+        "affordance_region": "the knob on the speaker",
+        "done_when": "orientation_match(knob, decrease_volume)",
+        "affordance_hint": "the knob on the speaker",
+        "refine_prompt": "the knob on the speaker",
+        "refine_cache_hit": true,
+        "affordance_refined": [
+          0.5273,
+          0.3906
+        ],
+        "affordance_3d_refined": [
+          -0.9448,
+          -0.4085,
+          1.6342
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.5565,
+        "affordance": [
+          0.5273,
+          0.3906
+        ]
+      }
+    ]
+  }
+}

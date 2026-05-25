@@ -1,0 +1,152 @@
+{
+  "task": "Pick up the toy egg and put it in the orange bowl on the table",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_planning_3epoch/checkpoint-39957",
+  "raw": "Scene: toy_egg, orange_bowl, table\nStep 1: reach(toy_egg)\n  affordance_region: the body of the toy egg\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, toy_egg, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, toy_egg) < 0.03\nStep 2: grasp(toy_egg)\n  affordance_region: the body of the toy egg\n  contact: holding(toy_egg) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(toy_egg)\nStep 3: transport(toy_egg -> orange_bowl)\n  affordance_region: an empty area on the orange bowl\n  spatial: above(toy_egg, orange_bowl, 0.05) [completion]\n  safety: no_drop(toy_egg)\n  done_when: above(toy_egg, orange_bowl, 0.05)\nStep 4: place(toy_egg -> orange_bowl)\n  affordance_region: an empty area on the orange bowl\n  contact: surface_contact(toy_egg, orange_bowl) [completion]; released(toy_egg) [completion]\n  pose: stable(toy_egg) [completion]\n  done_when: surface_contact(toy_egg, orange_bowl) AND released(toy_egg)\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [],
+    "scene_objects": [
+      "toy_egg",
+      "orange_bowl",
+      "table"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "toy_egg",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "toy_egg",
+        "affordance_region": "the body of the toy egg",
+        "done_when": "distance(gripper, toy_egg) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "toy_egg"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "toy_egg",
+        "affordance_region": "the body of the toy egg",
+        "done_when": "holding(toy_egg)"
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "toy_egg",
+                "orange_bowl",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "toy_egg"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "toy_egg",
+        "destination": "orange_bowl",
+        "affordance_region": "an empty area on the orange bowl",
+        "done_when": "above(toy_egg, orange_bowl, 0.05)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "surface_contact",
+              "args": [
+                "toy_egg",
+                "orange_bowl"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "toy_egg"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "toy_egg"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "place",
+        "target": "toy_egg",
+        "destination": "orange_bowl",
+        "affordance_region": "an empty area on the orange bowl",
+        "done_when": "surface_contact(toy_egg, orange_bowl) AND released(toy_egg)"
+      }
+    ]
+  }
+}

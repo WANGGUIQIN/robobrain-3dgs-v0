@@ -1,0 +1,171 @@
+{
+  "task": "open bottom drawer",
+  "scene_objects": [
+    "bottom_drawer",
+    "cabinet",
+    "tabletop_items"
+  ],
+  "num_steps": 3,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "bottom_drawer",
+      "affordance": [
+        0.5,
+        0.666
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "bottom_drawer",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "cabinet"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, bottom_drawer) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        0.0,
+        0.5518,
+        2.9257
+      ],
+      "affordance_hint": "the bottom drawer of the wooden cabinet",
+      "affordance_hint_original": "the bottom drawer",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 2,
+      "action": "pull",
+      "target": "bottom_drawer",
+      "affordance": [
+        0.5,
+        0.45
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "bottom_drawer"
+            ],
+            "role": "completion"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "motion_dir",
+            "args": [
+              "gripper",
+              "outward"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "bottom_drawer",
+              "cabinet"
+            ]
+          }
+        ]
+      },
+      "done_when": "bottom_drawer is partially open",
+      "affordance_3d": [
+        0.0,
+        -0.2542,
+        4.3542
+      ],
+      "affordance_hint": "the handle of the bottom drawer",
+      "affordance_hint_original": "the handle of the bottom drawer",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 3,
+      "action": "release",
+      "target": "bottom_drawer",
+      "affordance": [
+        0.5,
+        0.666
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "released",
+            "args": [
+              "bottom_drawer"
+            ],
+            "role": "completion"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "stable",
+            "args": [
+              "bottom_drawer"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "cabinet"
+            ]
+          }
+        ]
+      },
+      "done_when": "bottom_drawer is fully open AND gripper_state(open)",
+      "affordance_3d": [
+        0.0,
+        0.5518,
+        2.9257
+      ],
+      "affordance_hint": "the bottom drawer",
+      "affordance_hint_original": "the bottom drawer",
+      "affordance_hint_confidence": "ok"
+    }
+  ]
+}

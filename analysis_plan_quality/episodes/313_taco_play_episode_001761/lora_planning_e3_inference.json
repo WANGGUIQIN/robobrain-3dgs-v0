@@ -1,0 +1,123 @@
+{
+  "task": "go towards the yellow block and lift it",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_planning_3epoch/checkpoint-39957",
+  "raw": "Scene: yellow_block, table\nStep 1: reach(yellow_block)\n  affordance_region: the yellow block\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, yellow_block, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, yellow_block) < 0.03\nStep 2: grasp(yellow_block)\n  affordance_region: the yellow block\n  contact: holding(yellow_block) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(yellow_block)\nStep 3: lift(yellow_block)\n  affordance_region: the yellow block\n  contact: holding(yellow_block) [safety]\n  spatial: above(yellow_block, table, 0.1) [completion]\n  safety: no_drop(yellow_block)\n  done_when: above(yellow_block, table, 0.1)\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [],
+    "scene_objects": [
+      "yellow_block",
+      "table"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "yellow_block",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "yellow_block",
+        "affordance_region": "the yellow block",
+        "done_when": "distance(gripper, yellow_block) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "yellow_block"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "yellow_block",
+        "affordance_region": "the yellow block",
+        "done_when": "holding(yellow_block)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "yellow_block"
+              ],
+              "role": "safety"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "yellow_block",
+                "table",
+                "0.1"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "yellow_block"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "lift",
+        "target": "yellow_block",
+        "affordance_region": "the yellow block",
+        "done_when": "above(yellow_block, table, 0.1)"
+      }
+    ]
+  }
+}

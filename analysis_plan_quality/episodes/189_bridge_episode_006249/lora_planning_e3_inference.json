@@ -1,0 +1,155 @@
+{
+  "task": "Place the red spoon inside the orange pot",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_planning_3epoch/checkpoint-39957",
+  "raw": "Scene: red_spoon, orange_pot, purple_cloth, yellow_banana, table\nStep 1: reach(red_spoon)\n  affordance_region: the red spoon\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, red_spoon, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, red_spoon) < 0.03\nStep 2: grasp(red_spoon)\n  affordance_region: the handle of the red spoon\n  contact: holding(red_spoon) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(red_spoon)\nStep 3: transport(red_spoon -> orange_pot)\n  affordance_region: the inside of the orange pot\n  spatial: above(red_spoon, orange_pot, 0.05) [completion]\n  safety: no_drop(red_spoon)\n  done_when: above(red_spoon, orange_pot, 0.05)\nStep 4: place(red_spoon -> orange_pot)\n  affordance_region: the inside of the orange pot\n  contact: surface_contact(red_spoon, orange_pot) [completion]; released(red_spoon) [completion]\n  pose: inside(red_spoon, orange_pot) [completion]\n  done_when: surface_contact(red_spoon, orange_pot) AND released(red_spoon) AND inside(red_spoon, orange_pot)\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [],
+    "scene_objects": [
+      "red_spoon",
+      "orange_pot",
+      "purple_cloth",
+      "yellow_banana",
+      "table"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "red_spoon",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "red_spoon",
+        "affordance_region": "the red spoon",
+        "done_when": "distance(gripper, red_spoon) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "red_spoon"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "red_spoon",
+        "affordance_region": "the handle of the red spoon",
+        "done_when": "holding(red_spoon)"
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "red_spoon",
+                "orange_pot",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "red_spoon"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "red_spoon",
+        "destination": "orange_pot",
+        "affordance_region": "the inside of the orange pot",
+        "done_when": "above(red_spoon, orange_pot, 0.05)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "surface_contact",
+              "args": [
+                "red_spoon",
+                "orange_pot"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "red_spoon"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "inside",
+              "args": [
+                "red_spoon",
+                "orange_pot"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "place",
+        "target": "red_spoon",
+        "destination": "orange_pot",
+        "affordance_region": "the inside of the orange pot",
+        "done_when": "surface_contact(red_spoon, orange_pot) AND released(red_spoon) AND inside(red_spoon, orange_pot)"
+      }
+    ]
+  }
+}

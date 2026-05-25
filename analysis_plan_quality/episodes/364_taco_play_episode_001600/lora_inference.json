@@ -1,0 +1,196 @@
+{
+  "task": "open the cabinet drawer",
+  "parsed": {
+    "scene_objects": [
+      "cabinet_drawer",
+      "robot_arm",
+      "workspace"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "cabinet_drawer",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "cabinet_drawer",
+        "affordance_region": "the front edge of the cabinet drawer",
+        "done_when": "distance(gripper, cabinet_drawer) < 0.03",
+        "affordance_hint": "the front edge of the cabinet drawer",
+        "refine_prompt": "the front edge of the cabinet drawer",
+        "refine_cache_hit": false,
+        "refine_prompt_fallback": "cabinet drawer",
+        "affordance_refined": [
+          0.668,
+          0.0938
+        ],
+        "affordance_3d_refined": [
+          0.2914,
+          -0.7047,
+          1.509
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.479,
+        "affordance": [
+          0.668,
+          0.0938
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "cabinet_drawer"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "cabinet_drawer",
+        "affordance_region": "the black handle of the cabinet drawer",
+        "done_when": "holding(cabinet_drawer)",
+        "affordance_hint": "the black handle of the cabinet drawer",
+        "refine_prompt": "the black handle of the cabinet drawer",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.7539,
+          0.2773
+        ],
+        "affordance_3d_refined": [
+          0.0029,
+          -0.0026,
+          0.01
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.6481,
+        "affordance": [
+          0.7539,
+          0.2773
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "cabinet_drawer"
+              ],
+              "role": "safety"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "cabinet_drawer",
+                "workspace",
+                ">",
+                "0.1"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "motion_dir",
+              "args": [
+                "0",
+                "1",
+                "0"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "pull",
+        "target": "cabinet_drawer",
+        "affordance_region": "the black handle of the cabinet drawer",
+        "done_when": "distance(cabinet_drawer, workspace) > 0.1",
+        "affordance_hint": "the black handle of the cabinet drawer",
+        "refine_prompt": "the black handle of the cabinet drawer",
+        "refine_cache_hit": true,
+        "affordance_refined": [
+          0.7539,
+          0.2773
+        ],
+        "affordance_3d_refined": [
+          0.0029,
+          -0.0026,
+          0.01
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.6481,
+        "affordance": [
+          0.7539,
+          0.2773
+        ]
+      }
+    ]
+  }
+}

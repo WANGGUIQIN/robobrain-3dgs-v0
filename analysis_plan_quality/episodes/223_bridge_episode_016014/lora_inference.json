@@ -1,0 +1,246 @@
+{
+  "task": "Lift the toy potato sitting in the silver pot on the upper left side of the stove. Pick it up and move the right side and down. Place it on the orange square at the lower right side of the stove.",
+  "parsed": {
+    "scene_objects": [
+      "toy_potato",
+      "silver_pot",
+      "stove",
+      "orange_cloth",
+      "blue_bottle"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "toy_potato",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "toy_potato",
+        "affordance_region": "the toy potato in the silver pot",
+        "done_when": "distance(gripper, toy_potato) < 0.03",
+        "affordance_hint": "the toy potato in the silver pot",
+        "refine_prompt": "the toy potato in the silver pot",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.4219,
+          0.2109
+        ],
+        "affordance_3d_refined": [
+          -0.1239,
+          -0.4585,
+          1.3798
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.3959,
+        "affordance": [
+          0.4219,
+          0.2109
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "toy_potato"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "toy_potato",
+        "affordance_region": "the body of the toy potato",
+        "done_when": "holding(toy_potato)",
+        "affordance_hint": "the body of the toy potato",
+        "refine_prompt": "the body of the toy potato",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.668,
+          0.6016
+        ],
+        "affordance_3d_refined": [
+          0.4856,
+          0.2936,
+          2.5148
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.5044,
+        "affordance": [
+          0.668,
+          0.6016
+        ]
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "toy_potato",
+                "orange_cloth",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "toy_potato"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "toy_potato",
+        "destination": "orange_cloth",
+        "affordance_region": "an empty area on the orange cloth",
+        "done_when": "above(toy_potato, orange_cloth, 0.05)",
+        "affordance_hint": "an empty area on the orange cloth",
+        "refine_prompt": "an empty area on the orange cloth",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.668,
+          0.6016
+        ],
+        "affordance_3d_refined": [
+          0.4856,
+          0.2936,
+          2.5148
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.3748,
+        "affordance": [
+          0.668,
+          0.6016
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "surface_contact",
+              "args": [
+                "toy_potato",
+                "orange_cloth"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "toy_potato"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "toy_potato"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "place",
+        "target": "toy_potato",
+        "destination": "orange_cloth",
+        "affordance_region": "an empty area on the orange cloth",
+        "done_when": "surface_contact(toy_potato, orange_cloth) AND released(toy_potato) AND stable(toy_potato)",
+        "affordance_hint": "an empty area on the orange cloth",
+        "refine_prompt": "an empty area on the orange cloth",
+        "refine_cache_hit": true,
+        "affordance_refined": [
+          0.668,
+          0.6016
+        ],
+        "affordance_3d_refined": [
+          0.4856,
+          0.2936,
+          2.5148
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.3748,
+        "affordance": [
+          0.668,
+          0.6016
+        ]
+      }
+    ]
+  }
+}

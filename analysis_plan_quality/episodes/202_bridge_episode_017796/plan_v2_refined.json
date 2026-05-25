@@ -1,0 +1,241 @@
+{
+  "task": "Put the cheese into the pot.",
+  "scene_objects": [
+    "cheese",
+    "pot",
+    "orange_cloth",
+    "blue_scoop",
+    "table"
+  ],
+  "num_steps": 4,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "cheese",
+      "affordance": [
+        0.611,
+        0.593
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "cheese",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "pot"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, cheese) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        0.2793,
+        0.2394,
+        2.2213
+      ],
+      "affordance_hint": "the cheese",
+      "affordance_hint_original": "the cheese",
+      "affordance_hint_confidence": "rejected:missing_token:cheese"
+    },
+    {
+      "step": 2,
+      "action": "grasp",
+      "target": "cheese",
+      "affordance": [
+        0.602,
+        0.593
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "cheese"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "holding",
+            "args": [
+              "cheese"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              0,
+              0,
+              -1
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "holding(cheese)",
+      "affordance_3d": [
+        0.2593,
+        0.2394,
+        2.2213
+      ],
+      "affordance_hint": "cheese",
+      "affordance_hint_original": "cheese",
+      "affordance_hint_confidence": "rejected:missing_token:cheese"
+    },
+    {
+      "step": 3,
+      "action": "transport",
+      "target": "cheese",
+      "destination": "pot",
+      "affordance": [
+        0.553,
+        0.425
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "cheese"
+            ],
+            "role": "safety"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "above",
+            "args": [
+              "cheese",
+              "pot",
+              0.05
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "cheese",
+              "pot"
+            ]
+          },
+          {
+            "pred": "no_drop",
+            "args": [
+              "cheese"
+            ]
+          }
+        ]
+      },
+      "done_when": "above(cheese, pot, 0.05) AND aligned_xy(cheese, pot, 0.03)",
+      "affordance_3d": [
+        0.0941,
+        -0.1277,
+        1.4972
+      ],
+      "affordance_hint": "the empty area inside the metal pot",
+      "affordance_hint_original": "an empty area on the pot",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 4,
+      "action": "place",
+      "target": "cheese",
+      "destination": "pot",
+      "affordance": [
+        0.553,
+        0.425
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "surface_contact",
+            "args": [
+              "cheese",
+              "pot"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "released",
+            "args": [
+              "cheese"
+            ],
+            "role": "completion"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "stable",
+            "args": [
+              "cheese"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "support_stable",
+            "args": [
+              "cheese"
+            ]
+          }
+        ]
+      },
+      "done_when": "surface_contact(cheese, pot) AND released(cheese) AND stable(cheese)",
+      "affordance_3d": [
+        0.0941,
+        -0.1277,
+        1.4972
+      ],
+      "affordance_hint": "the empty area inside the metal pot",
+      "affordance_hint_original": "an empty area on the pot",
+      "affordance_hint_confidence": "ok"
+    }
+  ]
+}

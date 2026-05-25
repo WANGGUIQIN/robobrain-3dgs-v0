@@ -1,0 +1,65 @@
+{
+  "task": "move green rice chip bag near water bottle",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_3epoch/best",
+  "raw": "**SCENE ANALYSIS - A green rice chip bag lies on a gray countertop. The bag is flexible and has a printed design. STRATEGY - The task is to move the bag, likely to a different location. Since the bag is on the countertop, a push action is suitable to slide it without grasping. Failure modes include the bag being too slippery or the push not being strong enough. AFFORDANCE REASONING - Step 1 push the bag's body to move it.**\nGoal: any_in(green_rice_chip_bag, new_location)\nScene: green_rice_chip_bag, countertop\nStep 1: push(green_rice_chip_bag)\n  affordance_region: the body of the green rice chip bag\n  contact: surface_contact(gripper, green_rice_chip_bag) [progress]\n  spatial: distance(gripper, green_rice_chip_bag, <, 0.05) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, green_rice_chip_bag) < 0.05\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [
+      {
+        "pred": "any_in",
+        "args": [
+          "green_rice_chip_bag",
+          "new_location"
+        ]
+      }
+    ],
+    "scene_objects": [
+      "green_rice_chip_bag",
+      "countertop"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "surface_contact",
+              "args": [
+                "gripper",
+                "green_rice_chip_bag"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "green_rice_chip_bag",
+                "<",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "push",
+        "target": "green_rice_chip_bag",
+        "affordance_region": "the body of the green rice chip bag",
+        "done_when": "distance(gripper, green_rice_chip_bag) < 0.05"
+      }
+    ]
+  }
+}

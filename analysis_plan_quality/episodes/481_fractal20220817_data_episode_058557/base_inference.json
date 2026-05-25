@@ -1,0 +1,159 @@
+{
+  "task": "place redbull can upright",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_3epoch/best",
+  "raw": "**SCENE ANALYSIS -** A red can and a silver can are on a gray table. The red can is lying on its side. The silver can is upright. The table is flat and rigid. **STRATEGY -** First, reach for the red can. Grasp it by its body to lift it. Transport it to a position where it can be placed upright. Place it on the table so it stands vertically. **AFFORDANCE REASONING -** Step 1: Reach for the red can's body. Step 2: Grasp the red can's body to lift it. Step 3: Transport the red can to a position above the table. Step 4: Place the red can on the table to make it upright.\n\nGoal: upright(red_can)\nScene: red_can, silver_can, table\nStep 1: reach(red_can)\n  affordance_region: the body of the red can\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, red_can, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, red_can) < 0.03\nStep 2: grasp(red_can)\n  affordance_region: the body of the red can\n  contact: holding(red_can) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(red_can)\nStep 3: transport(red_can -> table)\n  affordance_region: an empty area on the table\n  spatial: above(red_can, table, 0.05) [completion]\n  safety: no_drop(red_can)\n  done_when: above(red_can, table, 0.05)\nStep 4: place(red_can -> table)\n  affordance_region: an empty area on the table\n  contact: surface_contact(red_can, table) [completion]; released(red_can) [completion]\n  pose: upright(red_can) [completion]\n  done_when: surface_contact(red_can, table) AND released(red_can)\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [
+      {
+        "pred": "upright",
+        "args": [
+          "red_can"
+        ]
+      }
+    ],
+    "scene_objects": [
+      "red_can",
+      "silver_can",
+      "table"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "red_can",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "red_can",
+        "affordance_region": "the body of the red can",
+        "done_when": "distance(gripper, red_can) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "red_can"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "red_can",
+        "affordance_region": "the body of the red can",
+        "done_when": "holding(red_can)"
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "red_can",
+                "table",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "red_can"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "red_can",
+        "destination": "table",
+        "affordance_region": "an empty area on the table",
+        "done_when": "above(red_can, table, 0.05)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "surface_contact",
+              "args": [
+                "red_can",
+                "table"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "red_can"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "upright",
+              "args": [
+                "red_can"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "place",
+        "target": "red_can",
+        "destination": "table",
+        "affordance_region": "an empty area on the table",
+        "done_when": "surface_contact(red_can, table) AND released(red_can)"
+      }
+    ]
+  }
+}

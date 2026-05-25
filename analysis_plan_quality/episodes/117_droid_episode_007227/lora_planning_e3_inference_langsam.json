@@ -1,0 +1,217 @@
+{
+  "task": "Turn the object on the arm of the sofa towards the left",
+  "scene_objects": [
+    "red_mug",
+    "blue_plate",
+    "table"
+  ],
+  "steps": [
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "red_mug",
+              "<",
+              "0.03"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "approach_axis",
+            "args": [
+              "0",
+              "0",
+              "-1"
+            ],
+            "role": "progress"
+          }
+        ]
+      },
+      "step": 1,
+      "action": "reach",
+      "target": "red_mug",
+      "affordance_region": "the body of the red mug",
+      "done_when": "distance(gripper, red_mug) < 0.03",
+      "affordance_hint": "the body of the red mug",
+      "refine_prompt": "the body of the red mug",
+      "refine_cache_hit": false,
+      "refine_prompt_fallback": "red mug",
+      "affordance_refined": [
+        0.8906,
+        0.7773
+      ],
+      "affordance_3d_refined": [
+        0.9681,
+        1.1247,
+        2.8475
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.2853
+    },
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "red_mug"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              "0",
+              "0",
+              "-1"
+            ],
+            "role": "progress"
+          }
+        ]
+      },
+      "step": 2,
+      "action": "grasp",
+      "target": "red_mug",
+      "affordance_region": "the handle of the red mug",
+      "done_when": "holding(red_mug)",
+      "affordance_hint": "the handle of the red mug",
+      "refine_prompt": "the handle of the red mug",
+      "refine_cache_hit": false,
+      "refine_prompt_fallback": "red mug",
+      "affordance_refined": [
+        0.8906,
+        0.7773
+      ],
+      "affordance_3d_refined": [
+        0.9681,
+        1.1247,
+        2.8475
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.2853
+    },
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "red_mug"
+            ],
+            "role": "safety"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "orientation_match",
+            "args": [
+              "red_mug",
+              "left"
+            ],
+            "role": "completion"
+          }
+        ]
+      },
+      "step": 3,
+      "action": "rotate",
+      "target": "red_mug",
+      "affordance_region": "the body of the red mug",
+      "done_when": "orientation_match(red_mug, left)",
+      "affordance_hint": "the body of the red mug",
+      "refine_prompt": "the body of the red mug",
+      "refine_cache_hit": true,
+      "affordance_refined": [
+        0.8906,
+        0.7773
+      ],
+      "affordance_3d_refined": [
+        0.9681,
+        1.1247,
+        2.8475
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.2853
+    },
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "released",
+            "args": [
+              "red_mug"
+            ],
+            "role": "completion"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "stable",
+            "args": [
+              "red_mug"
+            ],
+            "role": "completion"
+          }
+        ]
+      },
+      "step": 4,
+      "action": "release",
+      "target": "red_mug",
+      "affordance_region": "the body of the red mug",
+      "done_when": "released(red_mug) AND stable(red_mug)",
+      "affordance_hint": "the body of the red mug",
+      "refine_prompt": "the body of the red mug",
+      "refine_cache_hit": true,
+      "affordance_refined": [
+        0.8906,
+        0.7773
+      ],
+      "affordance_3d_refined": [
+        0.9681,
+        1.1247,
+        2.8475
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.2853
+    }
+  ]
+}

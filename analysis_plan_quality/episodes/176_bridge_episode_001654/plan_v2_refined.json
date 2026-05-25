@@ -1,0 +1,242 @@
+{
+  "task": "pick upthe yellow towel put on the another side of the table",
+  "scene_objects": [
+    "yellow_towel",
+    "metal_pot",
+    "can",
+    "blue_handle_tool",
+    "red_handle_tool",
+    "table"
+  ],
+  "num_steps": 4,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "yellow_towel",
+      "affordance": [
+        0.225,
+        0.491
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "yellow_towel",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "metal_pot"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, yellow_towel) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        -0.4337,
+        -0.0124,
+        1.3798
+      ],
+      "affordance_hint": "the yellow towel on the right side of the table",
+      "affordance_hint_original": "the yellow towel",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 2,
+      "action": "grasp",
+      "target": "yellow_towel",
+      "affordance": [
+        0.225,
+        0.495
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "yellow_towel"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "holding",
+            "args": [
+              "yellow_towel"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              0,
+              0,
+              -1
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "holding(yellow_towel)",
+      "affordance_3d": [
+        -0.4337,
+        -0.0062,
+        1.3798
+      ],
+      "affordance_hint": "the yellow towel on the right side of the table",
+      "affordance_hint_original": "yellow towel",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 3,
+      "action": "transport",
+      "target": "yellow_towel",
+      "destination": "other_side_of_table",
+      "affordance": [
+        0.428,
+        0.401
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "yellow_towel"
+            ],
+            "role": "safety"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "above",
+            "args": [
+              "yellow_towel",
+              "table",
+              0.05
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "yellow_towel",
+              "can"
+            ]
+          },
+          {
+            "pred": "no_drop",
+            "args": [
+              "yellow_towel"
+            ]
+          }
+        ]
+      },
+      "done_when": "above(yellow_towel, table, 0.05) AND aligned_xy(yellow_towel, other_side_of_table, 0.03)",
+      "affordance_3d": [
+        -0.0894,
+        -0.1241,
+        1.1058
+      ],
+      "affordance_hint": "the empty area on the other side of the table",
+      "affordance_hint_original": "an empty area on the other side of table",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 4,
+      "action": "place",
+      "target": "yellow_towel",
+      "destination": "other_side_of_table",
+      "affordance": [
+        0.428,
+        0.401
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "surface_contact",
+            "args": [
+              "yellow_towel",
+              "table"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "released",
+            "args": [
+              "yellow_towel"
+            ],
+            "role": "completion"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "stable",
+            "args": [
+              "yellow_towel"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "support_stable",
+            "args": [
+              "yellow_towel"
+            ]
+          }
+        ]
+      },
+      "done_when": "surface_contact(yellow_towel, table) AND released(yellow_towel) AND stable(yellow_towel)",
+      "affordance_3d": [
+        -0.0894,
+        -0.1241,
+        1.1058
+      ],
+      "affordance_hint": "the empty area on the other side of the table",
+      "affordance_hint_original": "an empty area on the other side of table",
+      "affordance_hint_confidence": "ok"
+    }
+  ]
+}

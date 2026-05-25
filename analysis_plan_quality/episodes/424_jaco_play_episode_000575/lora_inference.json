@@ -1,0 +1,248 @@
+{
+  "task": "pick up the gray bowl",
+  "parsed": {
+    "scene_objects": [
+      "gray_bowl",
+      "blue_bin",
+      "table",
+      "orange",
+      "bread_slice",
+      "red_meat_slice",
+      "oven"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "gray_bowl",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "gray_bowl",
+        "affordance_region": "the body of the gray bowl",
+        "done_when": "distance(gripper, gray_bowl) < 0.03",
+        "affordance_hint": "the body of the gray bowl",
+        "refine_prompt": "the body of the gray bowl",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.543,
+          0.3008
+        ],
+        "affordance_3d_refined": [
+          0.1068,
+          -0.4952,
+          2.1625
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.5129,
+        "affordance": [
+          0.543,
+          0.3008
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "gray_bowl"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "gray_bowl",
+        "affordance_region": "the rim of the gray bowl",
+        "done_when": "holding(gray_bowl)",
+        "affordance_hint": "the rim of the gray bowl",
+        "refine_prompt": "the rim of the gray bowl",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.543,
+          0.3008
+        ],
+        "affordance_3d_refined": [
+          0.1068,
+          -0.4952,
+          2.1625
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.4998,
+        "affordance": [
+          0.543,
+          0.3008
+        ]
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "gray_bowl",
+                "blue_bin",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "gray_bowl"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "gray_bowl",
+        "destination": "blue_bin",
+        "affordance_region": "an empty area on the blue bin",
+        "done_when": "above(gray_bowl, blue_bin, 0.05)",
+        "affordance_hint": "an empty area on the blue bin",
+        "refine_prompt": "an empty area on the blue bin",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.8828,
+          0.457
+        ],
+        "affordance_3d_refined": [
+          1.2014,
+          -0.1348,
+          2.73
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.4915,
+        "affordance": [
+          0.8828,
+          0.457
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "surface_contact",
+              "args": [
+                "gray_bowl",
+                "blue_bin"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "gray_bowl"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "gray_bowl"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "place",
+        "target": "gray_bowl",
+        "destination": "blue_bin",
+        "affordance_region": "an empty area on the blue bin",
+        "done_when": "surface_contact(gray_bowl, blue_bin) AND released(gray_bowl)",
+        "affordance_hint": "an empty area on the blue bin",
+        "refine_prompt": "an empty area on the blue bin",
+        "refine_cache_hit": true,
+        "affordance_refined": [
+          0.8828,
+          0.457
+        ],
+        "affordance_3d_refined": [
+          1.2014,
+          -0.1348,
+          2.73
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.4915,
+        "affordance": [
+          0.8828,
+          0.457
+        ]
+      }
+    ]
+  }
+}

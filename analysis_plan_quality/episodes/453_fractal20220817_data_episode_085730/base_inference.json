@@ -1,0 +1,164 @@
+{
+  "task": "pick coke can from bottom drawer and place on counter",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_3epoch/best",
+  "raw": "**SCENE ANALYSIS -** A gray nightstand has a bowl on its top surface and a crumpled aluminum can to the right of the bowl. Below, a drawer is open, revealing a red can inside. The drawer is a recessed compartment with a visible front edge. The can is cylindrical and metallic, typical of a beverage can. **STRATEGY -** First, reach into the drawer to grasp the can. The can is inside the drawer, so the gripper must enter the drawer's opening. Then, grasp the can's body for a secure hold. Transport the can from the drawer to the nightstand's top surface. Finally, place the can on the surface, ensuring it is stable. Failure modes include not grasping the can properly (leading to dropping) or misplacing it on the surface. **AFFORDANCE REASONING -** Step 1: Reach into the drawer to access the can. The affordance is the drawer's opening. Step 2: Grasp the can's body, as it is the main part to hold. Step 3: Transport the can from the drawer to the nightstand's surface. The destination is the top surface of the nightstand. Step 4: Place the can on the surface, ensuring it is stable.\n\nGoal: on(coke_can, nightstand); stable(coke_can)\nScene: coke_can, nightstand, drawer\nStep 1: reach(drawer)\n  affordance_region: the front edge of the open drawer\n  contact: gripper_state(open) [progress]\n  spatial: inside(gripper, drawer) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: inside(gripper, drawer)\nStep 2: grasp(coke_can)\n  affordance_region: the body of the red coke can\n  contact: holding(coke_can) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(coke_can)\nStep 3: transport(coke_can -> nightstand)\n  affordance_region: an empty area on the nightstand's top surface\n  spatial: above(coke_can, nightstand, 0.05) [completion]\n  safety: no_drop(coke_can)\n  done_when: above(coke_can, nightstand, 0.05)\nStep 4: place(coke_can -> nightstand)\n  affordance_region: an empty area on the nightstand's top surface\n  contact: surface_contact(coke_can, nightstand) [completion]; released(coke_can) [completion]\n  pose: stable(coke_can) [completion]\n  done_when: surface_contact(coke_can, nightstand) AND released(coke_can)\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [
+      {
+        "pred": "on",
+        "args": [
+          "coke_can",
+          "nightstand"
+        ]
+      },
+      {
+        "pred": "stable",
+        "args": [
+          "coke_can"
+        ]
+      }
+    ],
+    "scene_objects": [
+      "coke_can",
+      "nightstand",
+      "drawer"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "inside",
+              "args": [
+                "gripper",
+                "drawer"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "drawer",
+        "affordance_region": "the front edge of the open drawer",
+        "done_when": "inside(gripper, drawer)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "coke_can"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "coke_can",
+        "affordance_region": "the body of the red coke can",
+        "done_when": "holding(coke_can)"
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "coke_can",
+                "nightstand",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "coke_can"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "coke_can",
+        "destination": "nightstand",
+        "affordance_region": "an empty area on the nightstand's top surface",
+        "done_when": "above(coke_can, nightstand, 0.05)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "surface_contact",
+              "args": [
+                "coke_can",
+                "nightstand"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "coke_can"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "coke_can"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "place",
+        "target": "coke_can",
+        "destination": "nightstand",
+        "affordance_region": "an empty area on the nightstand's top surface",
+        "done_when": "surface_contact(coke_can, nightstand) AND released(coke_can)"
+      }
+    ]
+  }
+}

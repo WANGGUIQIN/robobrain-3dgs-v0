@@ -1,0 +1,130 @@
+{
+  "task": "pick up the milk dairy",
+  "parsed": {
+    "scene_objects": [
+      "red_milk_bottle",
+      "blue_container",
+      "table"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "red_milk_bottle",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "red_milk_bottle",
+        "affordance_region": "the body of the red milk bottle",
+        "done_when": "distance(gripper, red_milk_bottle) < 0.03",
+        "affordance_hint": "the body of the red milk bottle",
+        "refine_prompt": "the body of the red milk bottle",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.3906,
+          0.5898
+        ],
+        "affordance_3d_refined": [
+          -0.3789,
+          0.3113,
+          3.0138
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.5001,
+        "affordance": [
+          0.3906,
+          0.5898
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "red_milk_bottle"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "red_milk_bottle",
+        "affordance_region": "the body of the red milk bottle",
+        "done_when": "holding(red_milk_bottle)",
+        "affordance_hint": "the body of the red milk bottle",
+        "refine_prompt": "the body of the red milk bottle",
+        "refine_cache_hit": true,
+        "affordance_refined": [
+          0.3906,
+          0.5898
+        ],
+        "affordance_3d_refined": [
+          -0.3789,
+          0.3113,
+          3.0138
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.5001,
+        "affordance": [
+          0.3906,
+          0.5898
+        ]
+      }
+    ]
+  }
+}

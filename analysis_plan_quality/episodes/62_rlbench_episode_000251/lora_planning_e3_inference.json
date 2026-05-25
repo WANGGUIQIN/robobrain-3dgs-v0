@@ -1,0 +1,154 @@
+{
+  "task": "screw in the white light bulb",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_planning_3epoch/checkpoint-39957",
+  "raw": "Scene: white_light_bulb, screwdriver, table\nStep 1: reach(white_light_bulb)\n  affordance_region: the white light bulb\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, white_light_bulb, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, white_light_bulb) < 0.03\nStep 2: grasp(white_light_bulb)\n  affordance_region: the base of the white light bulb\n  contact: holding(white_light_bulb) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(white_light_bulb)\nStep 3: insert(white_light_bulb -> screwdriver)\n  affordance_region: the top opening of the screwdriver\n  contact: holding(white_light_bulb) [safety]\n  spatial: aligned_xy(white_light_bulb, screwdriver, 0.03) [completion]\n  direction: insert_dir(0, 0, -1) [progress]\n  done_when: aligned_xy(white_light_bulb, screwdriver, 0.03)\nStep 4: rotate(white_light_bulb)\n  affordance_region: the white light bulb\n  contact: holding(white_light_bulb) [safety]\n  pose: stable(white_light_bulb) [completion]\n  done_when: stable(white_light_bulb)\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [],
+    "scene_objects": [
+      "white_light_bulb",
+      "screwdriver",
+      "table"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "white_light_bulb",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "white_light_bulb",
+        "affordance_region": "the white light bulb",
+        "done_when": "distance(gripper, white_light_bulb) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "white_light_bulb"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "white_light_bulb",
+        "affordance_region": "the base of the white light bulb",
+        "done_when": "holding(white_light_bulb)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "white_light_bulb"
+              ],
+              "role": "safety"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "aligned_xy",
+              "args": [
+                "white_light_bulb",
+                "screwdriver",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "insert_dir",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "insert",
+        "target": "white_light_bulb",
+        "destination": "screwdriver",
+        "affordance_region": "the top opening of the screwdriver",
+        "done_when": "aligned_xy(white_light_bulb, screwdriver, 0.03)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "white_light_bulb"
+              ],
+              "role": "safety"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "white_light_bulb"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "rotate",
+        "target": "white_light_bulb",
+        "affordance_region": "the white light bulb",
+        "done_when": "stable(white_light_bulb)"
+      }
+    ]
+  }
+}

@@ -1,0 +1,228 @@
+{
+  "task": "Place red ring on the left edge",
+  "scene_objects": [
+    "red_ring",
+    "metal_bowl",
+    "yellow_cloth",
+    "red_fork",
+    "table"
+  ],
+  "steps": [
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "red_ring",
+              "<",
+              "0.03"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "approach_axis",
+            "args": [
+              "0",
+              "0",
+              "-1"
+            ],
+            "role": "progress"
+          }
+        ]
+      },
+      "step": 1,
+      "action": "reach",
+      "target": "red_ring",
+      "affordance_region": "the red ring in the metal bowl",
+      "done_when": "distance(gripper, red_ring) < 0.03",
+      "affordance_hint": "the red ring in the metal bowl",
+      "refine_prompt": "the red ring in the metal bowl",
+      "refine_cache_hit": false,
+      "affordance_refined": [
+        0.5703,
+        0.6289
+      ],
+      "affordance_3d_refined": [
+        0.1732,
+        0.3175,
+        2.143
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.3143
+    },
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "red_ring"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              "0",
+              "0",
+              "-1"
+            ],
+            "role": "progress"
+          }
+        ]
+      },
+      "step": 2,
+      "action": "grasp",
+      "target": "red_ring",
+      "affordance_region": "the red ring in the metal bowl",
+      "done_when": "holding(red_ring)",
+      "affordance_hint": "the red ring in the metal bowl",
+      "refine_prompt": "the red ring in the metal bowl",
+      "refine_cache_hit": true,
+      "affordance_refined": [
+        0.5703,
+        0.6289
+      ],
+      "affordance_3d_refined": [
+        0.1732,
+        0.3175,
+        2.143
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.3143
+    },
+    {
+      "constraints": {
+        "spatial": [
+          {
+            "pred": "above",
+            "args": [
+              "red_ring",
+              "left_edge",
+              "0.05"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_drop",
+            "args": [
+              "red_ring"
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "step": 3,
+      "action": "transport",
+      "target": "red_ring",
+      "destination": "left_edge",
+      "affordance_region": "the left edge of the wooden table",
+      "done_when": "above(red_ring, left_edge, 0.05)",
+      "affordance_hint": "the left edge of the wooden table",
+      "refine_prompt": "the left edge of the wooden table",
+      "refine_cache_hit": false,
+      "affordance_refined": [
+        0.2734,
+        0.6914
+      ],
+      "affordance_3d_refined": [
+        -0.4817,
+        0.4069,
+        1.8495
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.4638
+    },
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "surface_contact",
+            "args": [
+              "red_ring",
+              "left_edge"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "released",
+            "args": [
+              "red_ring"
+            ],
+            "role": "completion"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "stable",
+            "args": [
+              "red_ring"
+            ],
+            "role": "completion"
+          }
+        ]
+      },
+      "step": 4,
+      "action": "place",
+      "target": "red_ring",
+      "destination": "left_edge",
+      "affordance_region": "the left edge of the wooden table",
+      "done_when": "surface_contact(red_ring, left_edge) AND released(red_ring) AND stable(red_ring)",
+      "affordance_hint": "the left edge of the wooden table",
+      "refine_prompt": "the left edge of the wooden table",
+      "refine_cache_hit": true,
+      "affordance_refined": [
+        0.2734,
+        0.6914
+      ],
+      "affordance_3d_refined": [
+        -0.4817,
+        0.4069,
+        1.8495
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.4638
+    }
+  ]
+}

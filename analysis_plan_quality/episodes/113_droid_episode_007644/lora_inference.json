@@ -1,0 +1,138 @@
+{
+  "task": "Press the button on the top right side of the breakfast marker to open the chamber on the right",
+  "parsed": {
+    "scene_objects": [
+      "breakfast_maker",
+      "button",
+      "chamber"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "button",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "button",
+        "affordance_region": "the top right button of the breakfast maker",
+        "done_when": "distance(gripper, button) < 0.03",
+        "affordance_hint": "the top right button of the breakfast maker",
+        "refine_prompt": "the top right button of the breakfast maker",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.5312,
+          0.6875
+        ],
+        "affordance_3d_refined": [
+          -0.4755,
+          1.1096,
+          3.9629
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.5761,
+        "affordance": [
+          0.5312,
+          0.6875
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_contact",
+              "args": [
+                "button"
+              ],
+              "role": "completion"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "aligned_z",
+              "args": [
+                "gripper",
+                "button"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "force_limit",
+              "args": [
+                "button"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "push",
+        "target": "button",
+        "affordance_region": "the top right button of the breakfast maker",
+        "done_when": "gripper_contact(button) AND button_state(open)",
+        "affordance_hint": "the top right button of the breakfast maker",
+        "refine_prompt": "the top right button of the breakfast maker",
+        "refine_cache_hit": true,
+        "affordance_refined": [
+          0.5312,
+          0.6875
+        ],
+        "affordance_3d_refined": [
+          -0.4755,
+          1.1096,
+          3.9629
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.5761,
+        "affordance": [
+          0.5312,
+          0.6875
+        ]
+      }
+    ]
+  }
+}

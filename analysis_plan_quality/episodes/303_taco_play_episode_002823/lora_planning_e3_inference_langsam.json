@@ -1,0 +1,181 @@
+{
+  "task": "grasp the handle of the drawer, then open it",
+  "scene_objects": [
+    "drawer_handle",
+    "drawer",
+    "table"
+  ],
+  "steps": [
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "drawer_handle",
+              "<",
+              "0.03"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "approach_axis",
+            "args": [
+              "0",
+              "0",
+              "-1"
+            ],
+            "role": "progress"
+          }
+        ]
+      },
+      "step": 1,
+      "action": "reach",
+      "target": "drawer_handle",
+      "affordance_region": "the black plastic handle of the drawer",
+      "done_when": "distance(gripper, drawer_handle) < 0.03",
+      "affordance_hint": "the black plastic handle of the drawer",
+      "refine_prompt": "the black plastic handle of the drawer",
+      "refine_cache_hit": false,
+      "affordance_refined": [
+        0.4727,
+        0.2148
+      ],
+      "affordance_3d_refined": [
+        -0.0003,
+        -0.0033,
+        0.01
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.4645
+    },
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "drawer_handle"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              "0",
+              "0",
+              "-1"
+            ],
+            "role": "progress"
+          }
+        ]
+      },
+      "step": 2,
+      "action": "grasp",
+      "target": "drawer_handle",
+      "affordance_region": "the black plastic handle of the drawer",
+      "done_when": "holding(drawer_handle)",
+      "affordance_hint": "the black plastic handle of the drawer",
+      "refine_prompt": "the black plastic handle of the drawer",
+      "refine_cache_hit": true,
+      "affordance_refined": [
+        0.4727,
+        0.2148
+      ],
+      "affordance_3d_refined": [
+        -0.0003,
+        -0.0033,
+        0.01
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.4645
+    },
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "drawer_handle"
+            ],
+            "role": "safety"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "drawer",
+              "open",
+              ">",
+              "0.1"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "motion_dir",
+            "args": [
+              "0",
+              "-1",
+              "0"
+            ],
+            "role": "completion"
+          }
+        ]
+      },
+      "step": 3,
+      "action": "pull",
+      "target": "drawer_handle",
+      "affordance_region": "the black plastic handle of the drawer",
+      "done_when": "distance(drawer, open) > 0.1",
+      "affordance_hint": "the black plastic handle of the drawer",
+      "refine_prompt": "the black plastic handle of the drawer",
+      "refine_cache_hit": true,
+      "affordance_refined": [
+        0.4727,
+        0.2148
+      ],
+      "affordance_3d_refined": [
+        -0.0003,
+        -0.0033,
+        0.01
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.4645
+    }
+  ]
+}

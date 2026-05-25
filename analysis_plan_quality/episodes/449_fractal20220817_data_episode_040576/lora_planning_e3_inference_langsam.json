@@ -1,0 +1,130 @@
+{
+  "task": "knock blue plastic bottle over",
+  "scene_objects": [
+    "blue_bottle",
+    "red_can",
+    "silver_can",
+    "table"
+  ],
+  "steps": [
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "blue_bottle",
+              "<",
+              "0.03"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "approach_axis",
+            "args": [
+              "0",
+              "0",
+              "-1"
+            ],
+            "role": "progress"
+          }
+        ]
+      },
+      "step": 1,
+      "action": "reach",
+      "target": "blue_bottle",
+      "affordance_region": "the body of the blue bottle",
+      "done_when": "distance(gripper, blue_bottle) < 0.03",
+      "affordance_hint": "the body of the blue bottle",
+      "refine_prompt": "the body of the blue bottle",
+      "refine_cache_hit": false,
+      "affordance_refined": [
+        0.4609,
+        0.5469
+      ],
+      "affordance_3d_refined": [
+        -0.1823,
+        0.2188,
+        4.0607
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.3038
+    },
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "blue_bottle"
+            ],
+            "role": "completion"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "motion_dir",
+            "args": [
+              "blue_bottle",
+              "away_from_gripper"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "blue_bottle",
+              "table"
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "step": 2,
+      "action": "push",
+      "target": "blue_bottle",
+      "affordance_region": "the body of the blue bottle",
+      "done_when": "blue_bottle is tilted or knocked over",
+      "affordance_hint": "the body of the blue bottle",
+      "refine_prompt": "the body of the blue bottle",
+      "refine_cache_hit": true,
+      "affordance_refined": [
+        0.4609,
+        0.5469
+      ],
+      "affordance_3d_refined": [
+        -0.1823,
+        0.2188,
+        4.0607
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.3038
+    }
+  ]
+}

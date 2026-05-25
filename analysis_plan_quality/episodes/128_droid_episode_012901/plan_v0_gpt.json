@@ -1,0 +1,231 @@
+{
+  "task": "Pick up the toy egg and put it in the orange bowl on the table",
+  "scene_objects": [
+    "toy_egg",
+    "orange_bowl",
+    "table"
+  ],
+  "num_steps": 4,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "toy_egg",
+      "affordance": [
+        0.48,
+        0.612
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "toy_egg",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "orange_bowl"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, toy_egg) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        -0.2299,
+        0.2299,
+        1.2428
+      ],
+      "affordance_hint": "the toy egg"
+    },
+    {
+      "step": 2,
+      "action": "grasp",
+      "target": "toy_egg",
+      "affordance": [
+        0.5,
+        0.612
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "toy_egg"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "holding",
+            "args": [
+              "toy_egg"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              0,
+              0,
+              -1
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "holding(toy_egg)",
+      "affordance_3d": [
+        -0.2176,
+        0.2516,
+        1.3602
+      ],
+      "affordance_hint": "toy egg"
+    },
+    {
+      "step": 3,
+      "action": "transport",
+      "target": "toy_egg",
+      "destination": "orange_bowl",
+      "affordance": [
+        0.584,
+        0.75
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "toy_egg"
+            ],
+            "role": "safety"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "above",
+            "args": [
+              "toy_egg",
+              "orange_bowl",
+              0.05
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "toy_egg",
+              "orange_bowl"
+            ]
+          },
+          {
+            "pred": "no_drop",
+            "args": [
+              "toy_egg"
+            ]
+          }
+        ]
+      },
+      "done_when": "above(toy_egg, orange_bowl, 0.05) AND aligned_xy(toy_egg, orange_bowl, 0.03)",
+      "affordance_3d": [
+        -0.0944,
+        0.6799,
+        1.8886
+      ],
+      "affordance_hint": "an empty area on the orange bowl"
+    },
+    {
+      "step": 4,
+      "action": "place",
+      "target": "toy_egg",
+      "destination": "orange_bowl",
+      "affordance": [
+        0.584,
+        0.75
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "surface_contact",
+            "args": [
+              "toy_egg",
+              "orange_bowl"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "released",
+            "args": [
+              "toy_egg"
+            ],
+            "role": "completion"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "stable",
+            "args": [
+              "toy_egg"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "support_stable",
+            "args": [
+              "toy_egg"
+            ]
+          }
+        ]
+      },
+      "done_when": "surface_contact(toy_egg, orange_bowl) AND released(toy_egg) AND stable(toy_egg)",
+      "affordance_3d": [
+        -0.0944,
+        0.6799,
+        1.8886
+      ],
+      "affordance_hint": "an empty area on the orange bowl"
+    }
+  ]
+}

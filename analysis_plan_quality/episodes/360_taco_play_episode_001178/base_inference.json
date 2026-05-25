@@ -1,0 +1,81 @@
+{
+  "task": "store the grasped yellow object in the drawer",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_3epoch/best",
+  "raw": "**SCENE ANALYSIS -** A white drawer is open, revealing a red object inside. A white tray is on the countertop. The robot arm is positioned near the drawer. The task is to store a grasped yellow object in the drawer. The drawer is empty, so the yellow object can be placed directly inside. The drawer's interior is accessible, and the robot can reach it to perform the placement. **STRATEGY -** First, the robot must grasp the yellow object (though not visible in the scene, it is assumed to be held). Then, it needs to transport the object to the drawer and place it inside. The drawer is already open, so no additional action is needed to open it. **AFFORDANCE REASONING -** Step 1: Grasp the yellow object (affordance: the object's surface). Step 2: Transport the object to the drawer (affordance: the drawer's open interior). Step 3: Place the object inside the drawer (affordance: the drawer's interior space).\n\nGoal: inside(yellow_object, drawer)\nScene: drawer, tray, robot_arm\nStep 1: grasp(yellow_object)\n  affordance_region: the surface of the yellow object\n  contact: holding(yellow_object) [completion]\n  done_when: holding(yellow_object)\nStep 2: transport(yellow_object -> drawer)\n  affordance_region: the open interior of the drawer\n  spatial: inside(yellow_object, drawer) [completion]\n  done_when: inside(yellow_object, drawer)\nStep 3: place(yellow_object -> drawer)\n  affordance_region: the open interior of the drawer\n  contact: released(yellow_object) [completion]\n  done_when: released(yellow_object)\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [
+      {
+        "pred": "inside",
+        "args": [
+          "yellow_object",
+          "drawer"
+        ]
+      }
+    ],
+    "scene_objects": [
+      "drawer",
+      "tray",
+      "robot_arm"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "yellow_object"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "grasp",
+        "target": "yellow_object",
+        "affordance_region": "the surface of the yellow object",
+        "done_when": "holding(yellow_object)"
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "inside",
+              "args": [
+                "yellow_object",
+                "drawer"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "transport",
+        "target": "yellow_object",
+        "destination": "drawer",
+        "affordance_region": "the open interior of the drawer",
+        "done_when": "inside(yellow_object, drawer)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "released",
+              "args": [
+                "yellow_object"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "place",
+        "target": "yellow_object",
+        "destination": "drawer",
+        "affordance_region": "the open interior of the drawer",
+        "done_when": "released(yellow_object)"
+      }
+    ]
+  }
+}

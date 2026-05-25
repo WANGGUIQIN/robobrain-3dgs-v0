@@ -1,0 +1,121 @@
+{
+  "task": "pick up the long bread",
+  "scene_objects": [
+    "long_bread",
+    "table",
+    "blue_bin",
+    "red_object",
+    "yellow_object",
+    "toaster"
+  ],
+  "num_steps": 2,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "long_bread",
+      "affordance": [
+        0.517,
+        0.611
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "long_bread",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "table"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, long_bread) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        0.0508,
+        0.3555,
+        2.8279
+      ],
+      "affordance_hint": "the long brown bread on the table",
+      "affordance_hint_original": "the long bread",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 2,
+      "action": "grasp",
+      "target": "long_bread",
+      "affordance": [
+        0.511,
+        0.619
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "long_bread"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "holding",
+            "args": [
+              "long_bread"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              0,
+              0,
+              -1
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "holding(long_bread)",
+      "affordance_3d": [
+        0.0384,
+        0.3836,
+        2.8475
+      ],
+      "affordance_hint": "the top surface of the long brown bread",
+      "affordance_hint_original": "long bread",
+      "affordance_hint_confidence": "ok"
+    }
+  ]
+}

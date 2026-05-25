@@ -1,0 +1,118 @@
+{
+  "task": "grasp the pink block",
+  "scene_objects": [
+    "pink_block",
+    "tray",
+    "table"
+  ],
+  "num_steps": 2,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "pink_block",
+      "affordance": [
+        0.441,
+        0.5
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "pink_block",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "tray"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, pink_block) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        -0.1333,
+        0.0,
+        1.979
+      ],
+      "affordance_hint": "the pink block on the wooden tray",
+      "affordance_hint_original": "the pink block",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 2,
+      "action": "grasp",
+      "target": "pink_block",
+      "affordance": [
+        0.441,
+        0.517
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "pink_block"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "holding",
+            "args": [
+              "pink_block"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              0,
+              0,
+              -1
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "holding(pink_block)",
+      "affordance_3d": [
+        -0.1316,
+        0.0351,
+        1.954
+      ],
+      "affordance_hint": "the pink block on the wooden tray",
+      "affordance_hint_original": "pink block",
+      "affordance_hint_confidence": "ok"
+    }
+  ]
+}

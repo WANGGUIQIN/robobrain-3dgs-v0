@@ -1,0 +1,167 @@
+{
+  "task": "knock pepsi can over",
+  "scene_objects": [
+    "pepsi_can",
+    "sponge",
+    "lettuce",
+    "table"
+  ],
+  "num_steps": 3,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "pepsi_can",
+      "affordance": [
+        0.8,
+        0.093
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "pepsi_can",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "table"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, pepsi_can) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        1.2484,
+        -1.6861,
+        3.6106
+      ],
+      "affordance_hint": "the pepsi can"
+    },
+    {
+      "step": 2,
+      "action": "push",
+      "target": "pepsi_can",
+      "affordance": [
+        0.8,
+        0.093
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "pepsi_can"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "motion_dir",
+            "args": [
+              0,
+              1,
+              0
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "pepsi_can",
+              "lettuce"
+            ]
+          }
+        ]
+      },
+      "done_when": "pepsi_can is tilted or knocked over",
+      "affordance_3d": [
+        1.2484,
+        -1.6861,
+        3.6106
+      ],
+      "affordance_hint": "the center of the pepsi can"
+    },
+    {
+      "step": 3,
+      "action": "release",
+      "target": "pepsi_can",
+      "affordance": [
+        0.8,
+        0.093
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "released",
+            "args": [
+              "pepsi_can"
+            ],
+            "role": "completion"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "stable",
+            "args": [
+              "pepsi_can"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "pepsi_can"
+            ]
+          }
+        ]
+      },
+      "done_when": "gripper_state(open) AND pepsi_can is knocked over",
+      "affordance_3d": [
+        1.2484,
+        -1.6861,
+        3.6106
+      ],
+      "affordance_hint": "the pepsi can"
+    }
+  ]
+}

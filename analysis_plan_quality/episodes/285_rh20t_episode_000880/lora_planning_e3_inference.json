@@ -1,0 +1,97 @@
+{
+  "task": "Push the soccer ball into the goal",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_planning_3epoch/checkpoint-39957",
+  "raw": "Scene: soccer_ball, goal, table\nStep 1: reach(soccer_ball)\n  affordance_region: the small black soccer ball\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, soccer_ball, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, soccer_ball) < 0.03\nStep 2: push(soccer_ball -> goal)\n  affordance_region: the center of the soccer ball\n  contact: gripper_contact(soccer_ball) [progress]\n  spatial: aligned_xy(soccer_ball, goal, 0.05) [completion]\n  safety: no_collision(soccer_ball, goal)\n  done_when: aligned_xy(soccer_ball, goal, 0.05)\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [],
+    "scene_objects": [
+      "soccer_ball",
+      "goal",
+      "table"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "soccer_ball",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "soccer_ball",
+        "affordance_region": "the small black soccer ball",
+        "done_when": "distance(gripper, soccer_ball) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_contact",
+              "args": [
+                "soccer_ball"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "aligned_xy",
+              "args": [
+                "soccer_ball",
+                "goal",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_collision",
+              "args": [
+                "soccer_ball",
+                "goal"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "push",
+        "target": "soccer_ball",
+        "destination": "goal",
+        "affordance_region": "the center of the soccer ball",
+        "done_when": "aligned_xy(soccer_ball, goal, 0.05)"
+      }
+    ]
+  }
+}

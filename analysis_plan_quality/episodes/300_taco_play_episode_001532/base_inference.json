@@ -1,0 +1,113 @@
+{
+  "task": "turn off the green led light",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_3epoch/best",
+  "raw": "**SCENE ANALYSIS -** A white robotic arm is positioned on a light-colored surface. The scene contains a white plastic container with a lid, a small yellow object, and a green LED light on a control panel in the background. The green LED is a small, illuminated component on a flat surface. **STRATEGY -** The task requires interacting with the green LED. The arm must reach the LED, then perform a push action to turn it off. The LED is a small, fixed component, so the push action must be precise. **AFFORDANCE REASONING -** Step 1: Reach the LED's surface for contact. Step 2: Push the LED to turn it off.\n\nGoal: off(green_led)\nScene: green_led, robotic_arm, white_container, yellow_object\nStep 1: reach(green_led)\n  affordance_region: the surface of the green_led\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, green_led, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, green_led) < 0.03\nStep 2: push(green_led)\n  affordance_region: the surface of the green_led\n  contact: gripper_state(closed) [progress]\n  spatial: contact(gripper, green_led) [completion]\n  direction: push_axis(0, 0, -1) [progress]\n  safety: no_slip(green_led)\n  done_when: contact(gripper, green_led)\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [
+      {
+        "pred": "off",
+        "args": [
+          "green_led"
+        ]
+      }
+    ],
+    "scene_objects": [
+      "green_led",
+      "robotic_arm",
+      "white_container",
+      "yellow_object"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "green_led",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "green_led",
+        "affordance_region": "the surface of the green_led",
+        "done_when": "distance(gripper, green_led) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "closed"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "contact",
+              "args": [
+                "gripper",
+                "green_led"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "push_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_slip",
+              "args": [
+                "green_led"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "push",
+        "target": "green_led",
+        "affordance_region": "the surface of the green_led",
+        "done_when": "contact(gripper, green_led)"
+      }
+    ]
+  }
+}

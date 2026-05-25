@@ -1,0 +1,234 @@
+{
+  "task": "place the butter dairy in the black bowl",
+  "scene_objects": [
+    "butter_dairy",
+    "black_bowl",
+    "blue_container",
+    "white_plate",
+    "orange_object",
+    "table"
+  ],
+  "num_steps": 4,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "butter_dairy",
+      "affordance": [
+        0.633,
+        0.45
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "butter_dairy",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "black_bowl"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, butter_dairy) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        0.4407,
+        -0.1685,
+        2.8866
+      ],
+      "affordance_hint": "the butter dairy"
+    },
+    {
+      "step": 2,
+      "action": "grasp",
+      "target": "butter_dairy",
+      "affordance": [
+        0.45,
+        0.285
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "butter_dairy"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "holding",
+            "args": [
+              "butter_dairy"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              0,
+              0,
+              -1
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "holding(butter_dairy)",
+      "affordance_3d": [
+        -0.1479,
+        -0.6259,
+        2.5344
+      ],
+      "affordance_hint": "butter dairy"
+    },
+    {
+      "step": 3,
+      "action": "transport",
+      "target": "butter_dairy",
+      "destination": "black_bowl",
+      "affordance": [
+        0.5,
+        0.468
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "butter_dairy"
+            ],
+            "role": "safety"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "above",
+            "args": [
+              "butter_dairy",
+              "black_bowl",
+              0.05
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "butter_dairy",
+              "black_bowl"
+            ]
+          },
+          {
+            "pred": "no_drop",
+            "args": [
+              "butter_dairy"
+            ]
+          }
+        ]
+      },
+      "done_when": "above(butter_dairy, black_bowl, 0.05) AND aligned_xy(butter_dairy, black_bowl, 0.03)",
+      "affordance_3d": [
+        0.0,
+        -0.077,
+        2.143
+      ],
+      "affordance_hint": "an empty area on the black bowl"
+    },
+    {
+      "step": 4,
+      "action": "place",
+      "target": "butter_dairy",
+      "destination": "black_bowl",
+      "affordance": [
+        0.5,
+        0.468
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "surface_contact",
+            "args": [
+              "butter_dairy",
+              "black_bowl"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "released",
+            "args": [
+              "butter_dairy"
+            ],
+            "role": "completion"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "stable",
+            "args": [
+              "butter_dairy"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "support_stable",
+            "args": [
+              "butter_dairy"
+            ]
+          }
+        ]
+      },
+      "done_when": "surface_contact(butter_dairy, black_bowl) AND released(butter_dairy) AND stable(butter_dairy)",
+      "affordance_3d": [
+        0.0,
+        -0.077,
+        2.143
+      ],
+      "affordance_hint": "an empty area on the black bowl"
+    }
+  ]
+}

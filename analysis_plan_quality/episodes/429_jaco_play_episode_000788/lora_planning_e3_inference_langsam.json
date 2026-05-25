@@ -1,0 +1,228 @@
+{
+  "task": "place the butter dairy in the black bowl",
+  "scene_objects": [
+    "butter_dairy",
+    "black_bowl",
+    "blue_container",
+    "orange",
+    "table"
+  ],
+  "steps": [
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "butter_dairy",
+              "<",
+              "0.03"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "approach_axis",
+            "args": [
+              "0",
+              "0",
+              "-1"
+            ],
+            "role": "progress"
+          }
+        ]
+      },
+      "step": 1,
+      "action": "reach",
+      "target": "butter_dairy",
+      "affordance_region": "the yellow butter dairy",
+      "done_when": "distance(gripper, butter_dairy) < 0.03",
+      "affordance_hint": "the yellow butter dairy",
+      "refine_prompt": "the yellow butter dairy",
+      "refine_cache_hit": false,
+      "affordance_refined": [
+        0.4453,
+        0.6016
+      ],
+      "affordance_3d_refined": [
+        -0.1999,
+        0.3713,
+        3.1801
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.6315
+    },
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "butter_dairy"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              "0",
+              "0",
+              "-1"
+            ],
+            "role": "progress"
+          }
+        ]
+      },
+      "step": 2,
+      "action": "grasp",
+      "target": "butter_dairy",
+      "affordance_region": "the yellow butter dairy",
+      "done_when": "holding(butter_dairy)",
+      "affordance_hint": "the yellow butter dairy",
+      "refine_prompt": "the yellow butter dairy",
+      "refine_cache_hit": true,
+      "affordance_refined": [
+        0.4453,
+        0.6016
+      ],
+      "affordance_3d_refined": [
+        -0.1999,
+        0.3713,
+        3.1801
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.6315
+    },
+    {
+      "constraints": {
+        "spatial": [
+          {
+            "pred": "above",
+            "args": [
+              "butter_dairy",
+              "black_bowl",
+              "0.05"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_drop",
+            "args": [
+              "butter_dairy"
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "step": 3,
+      "action": "transport",
+      "target": "butter_dairy",
+      "destination": "black_bowl",
+      "affordance_region": "an empty area on the black bowl",
+      "done_when": "above(butter_dairy, black_bowl, 0.05)",
+      "affordance_hint": "an empty area on the black bowl",
+      "refine_prompt": "an empty area on the black bowl",
+      "refine_cache_hit": false,
+      "affordance_refined": [
+        0.957,
+        0.4297
+      ],
+      "affordance_3d_refined": [
+        1.4754,
+        -0.227,
+        2.8083
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.4699
+    },
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "surface_contact",
+            "args": [
+              "butter_dairy",
+              "black_bowl"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "released",
+            "args": [
+              "butter_dairy"
+            ],
+            "role": "completion"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "stable",
+            "args": [
+              "butter_dairy"
+            ],
+            "role": "completion"
+          }
+        ]
+      },
+      "step": 4,
+      "action": "place",
+      "target": "butter_dairy",
+      "destination": "black_bowl",
+      "affordance_region": "an empty area on the black bowl",
+      "done_when": "surface_contact(butter_dairy, black_bowl) AND released(butter_dairy)",
+      "affordance_hint": "an empty area on the black bowl",
+      "refine_prompt": "an empty area on the black bowl",
+      "refine_cache_hit": true,
+      "affordance_refined": [
+        0.957,
+        0.4297
+      ],
+      "affordance_3d_refined": [
+        1.4754,
+        -0.227,
+        2.8083
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.4699
+    }
+  ]
+}

@@ -1,0 +1,161 @@
+{
+  "task": "toggle the green light switch to turn on the green light",
+  "scene_objects": [
+    "green_light_switch",
+    "robot_arm",
+    "cabinet",
+    "tray"
+  ],
+  "num_steps": 3,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "green_light_switch",
+      "affordance": [
+        0.47,
+        0.1
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "green_light_switch",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "cabinet"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, green_light_switch) < 0.03 AND gripper_state(open)",
+      "affordance_hint": "the green light switch on the cabinet",
+      "affordance_hint_original": "the green light switch",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 2,
+      "action": "push",
+      "target": "green_light_switch",
+      "affordance": [
+        0.47,
+        0.1
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "green_light_switch"
+            ],
+            "role": "completion"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "aligned_xy",
+            "args": [
+              "gripper",
+              "green_light_switch",
+              0.02
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "cabinet"
+            ]
+          }
+        ]
+      },
+      "done_when": "gripper_contact(green_light_switch) AND toggled(green_light_switch, on)",
+      "affordance_hint": "the center of the green light switch",
+      "affordance_hint_original": "the center of the green light switch",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 3,
+      "action": "retreat",
+      "target": "green_light_switch",
+      "affordance": [
+        0.475,
+        0.1
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "green_light_switch",
+              ">",
+              0.05
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "cabinet"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, green_light_switch) > 0.05",
+      "affordance_hint": "the green light switch on the cabinet",
+      "affordance_hint_original": "green light switch",
+      "affordance_hint_confidence": "ok"
+    }
+  ]
+}

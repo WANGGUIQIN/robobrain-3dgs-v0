@@ -1,0 +1,172 @@
+{
+  "task": "knock water bottle over",
+  "scene_objects": [
+    "water_bottle",
+    "orange",
+    "soda_can",
+    "table"
+  ],
+  "num_steps": 3,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "water_bottle",
+      "affordance": [
+        0.45,
+        0.445
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "water_bottle",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "orange"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, water_bottle) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        -0.2279,
+        -0.2454,
+        3.9042
+      ],
+      "affordance_hint": "the body of the clear plastic water bottle",
+      "affordance_hint_original": "the water bottle",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 2,
+      "action": "push",
+      "target": "water_bottle",
+      "affordance": [
+        0.45,
+        0.45
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "water_bottle"
+            ],
+            "role": "completion"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "motion_dir",
+            "args": [
+              "water_bottle",
+              "away_from_gripper"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "water_bottle",
+              "orange"
+            ]
+          }
+        ]
+      },
+      "done_when": "water_bottle is tilted or knocked over",
+      "affordance_3d": [
+        -0.2325,
+        -0.2325,
+        3.9824
+      ],
+      "affordance_hint": "the body of the water bottle",
+      "affordance_hint_original": "the center of the water bottle",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 3,
+      "action": "release",
+      "target": "water_bottle",
+      "affordance": [
+        0.45,
+        0.445
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "released",
+            "args": [
+              "water_bottle"
+            ],
+            "role": "completion"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "tilted",
+            "args": [
+              "water_bottle"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "table"
+            ]
+          }
+        ]
+      },
+      "done_when": "gripper_state(open) AND water_bottle is tilted",
+      "affordance_3d": [
+        -0.2279,
+        -0.2454,
+        3.9042
+      ],
+      "affordance_hint": "the body of the clear plastic water bottle",
+      "affordance_hint_original": "the water bottle",
+      "affordance_hint_confidence": "ok"
+    }
+  ]
+}

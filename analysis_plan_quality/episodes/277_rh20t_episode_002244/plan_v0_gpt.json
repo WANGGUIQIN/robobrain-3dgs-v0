@@ -1,0 +1,121 @@
+{
+  "task": "Turn the knob to decrease the volume of the speaker",
+  "scene_objects": [
+    "knob",
+    "speaker",
+    "table"
+  ],
+  "num_steps": 2,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "knob",
+      "affordance": [
+        0.343,
+        0.25
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "knob",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "speaker"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, knob) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        -1.0287,
+        -0.5144,
+        1.4189
+      ],
+      "affordance_hint": "the knob"
+    },
+    {
+      "step": 2,
+      "action": "rotate",
+      "target": "knob",
+      "affordance": [
+        0.343,
+        0.25
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "knob"
+            ],
+            "role": "completion"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "orientation_match",
+            "args": [
+              "knob",
+              "decrease_volume_position"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "speaker"
+            ]
+          },
+          {
+            "pred": "force_limit",
+            "args": [
+              "knob"
+            ]
+          }
+        ]
+      },
+      "done_when": "orientation_match(knob, decrease_volume_position)",
+      "affordance_3d": [
+        -1.0287,
+        -0.5144,
+        1.4189
+      ],
+      "affordance_hint": "the body of the knob"
+    }
+  ]
+}

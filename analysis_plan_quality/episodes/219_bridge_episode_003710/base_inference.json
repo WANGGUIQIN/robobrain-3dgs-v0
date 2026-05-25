@@ -1,0 +1,11 @@
+{
+  "task": "(These pictures aren't working)",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_3epoch/best",
+  "raw": "The user's request is to plan manipulation steps for a task, but the provided image is corrupted with a repeating pattern of \"These pictures aren't working\". This means the visual scene data required to analyze objects, their spatial relations, and material properties is unavailable. Without a clear image, it is impossible to identify scene-relevant objects, determine their affordances, or reason about the spatial constraints and failure modes necessary to decompose the task into executable steps. The plan cannot be generated due to the lack of visual information.\n\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [],
+    "scene_objects": [],
+    "steps": []
+  }
+}

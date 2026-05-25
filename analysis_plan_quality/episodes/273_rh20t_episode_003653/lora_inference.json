@@ -1,0 +1,205 @@
+{
+  "task": "Slice the carrots",
+  "parsed": {
+    "scene_objects": [
+      "carrot",
+      "knife",
+      "cutting_board",
+      "table"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "knife",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "knife",
+        "affordance_region": "the blade of the knife",
+        "done_when": "distance(gripper, knife) < 0.03",
+        "affordance_hint": "the blade of the knife",
+        "refine_prompt": "the blade of the knife",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.5586,
+          0.375
+        ],
+        "affordance_3d_refined": [
+          -0.7957,
+          -0.3776,
+          1.4385
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.4464,
+        "affordance": [
+          0.5586,
+          0.375
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "knife"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "knife",
+        "affordance_region": "the handle of the knife",
+        "done_when": "holding(knife)",
+        "affordance_hint": "the handle of the knife",
+        "refine_prompt": "the handle of the knife",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.5586,
+          0.375
+        ],
+        "affordance_3d_refined": [
+          -0.7957,
+          -0.3776,
+          1.4385
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.4752,
+        "affordance": [
+          0.5586,
+          0.375
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_contact",
+              "args": [
+                "knife",
+                "carrot"
+              ],
+              "role": "completion"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "aligned_xy",
+              "args": [
+                "knife",
+                "carrot",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "motion_dir",
+              "args": [
+                "knife",
+                "downward"
+              ],
+              "role": "progress"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_collision",
+              "args": [
+                "knife",
+                "cutting_board"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "slice",
+        "target": "carrot",
+        "affordance_region": "the body of the carrot",
+        "done_when": "carrot_sliced",
+        "affordance_hint": "the body of the carrot",
+        "refine_prompt": "the body of the carrot",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.4219,
+          0.4648
+        ],
+        "affordance_3d_refined": [
+          -1.2901,
+          -0.3712,
+          1.9473
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.3467,
+        "affordance": [
+          0.4219,
+          0.4648
+        ]
+      }
+    ]
+  }
+}

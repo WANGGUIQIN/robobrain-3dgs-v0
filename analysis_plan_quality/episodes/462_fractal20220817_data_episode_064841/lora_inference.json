@@ -1,0 +1,244 @@
+{
+  "task": "pick sponge from white bowl and place on counter",
+  "parsed": {
+    "scene_objects": [
+      "orange",
+      "white_bowl",
+      "table"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "white_bowl",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "white_bowl",
+        "affordance_region": "the white bowl",
+        "done_when": "distance(gripper, white_bowl) < 0.03",
+        "affordance_hint": "the white bowl",
+        "refine_prompt": "the white bowl",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.6289,
+          0.2188
+        ],
+        "affordance_3d_refined": [
+          0.4799,
+          -1.0471,
+          3.2388
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.6738,
+        "affordance": [
+          0.6289,
+          0.2188
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "white_bowl"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "white_bowl",
+        "affordance_region": "the rim of the white bowl",
+        "done_when": "holding(white_bowl)",
+        "affordance_hint": "the rim of the white bowl",
+        "refine_prompt": "the rim of the white bowl",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.5625,
+          0.2266
+        ],
+        "affordance_3d_refined": [
+          0.2116,
+          -0.9258,
+          2.9453
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.434,
+        "affordance": [
+          0.5625,
+          0.2266
+        ]
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "white_bowl",
+                "table",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "white_bowl"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "white_bowl",
+        "destination": "table",
+        "affordance_region": "an empty area on the table",
+        "done_when": "above(white_bowl, table, 0.05)",
+        "affordance_hint": "an empty area on the table",
+        "refine_prompt": "an empty area on the table",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.5977,
+          0.543
+        ],
+        "affordance_3d_refined": [
+          0.3943,
+          0.1735,
+          3.5128
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.3827,
+        "affordance": [
+          0.5977,
+          0.543
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "surface_contact",
+              "args": [
+                "white_bowl",
+                "table"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "white_bowl"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "white_bowl"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "place",
+        "target": "white_bowl",
+        "destination": "table",
+        "affordance_region": "an empty area on the table",
+        "done_when": "surface_contact(white_bowl, table) AND released(white_bowl)",
+        "affordance_hint": "an empty area on the table",
+        "refine_prompt": "an empty area on the table",
+        "refine_cache_hit": true,
+        "affordance_refined": [
+          0.5977,
+          0.543
+        ],
+        "affordance_3d_refined": [
+          0.3943,
+          0.1735,
+          3.5128
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.3827,
+        "affordance": [
+          0.5977,
+          0.543
+        ]
+      }
+    ]
+  }
+}

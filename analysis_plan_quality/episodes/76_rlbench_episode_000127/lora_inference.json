@@ -1,0 +1,246 @@
+{
+  "task": "put the ring on the rose spoke",
+  "parsed": {
+    "scene_objects": [
+      "green_cylinder",
+      "blue_cylinder",
+      "pink_cylinder",
+      "wooden_base",
+      "table"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "green_cylinder",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "green_cylinder",
+        "affordance_region": "the green cylinder on the wooden base",
+        "done_when": "distance(gripper, green_cylinder) < 0.03",
+        "affordance_hint": "the green cylinder on the wooden base",
+        "refine_prompt": "the green cylinder on the wooden base",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.3359,
+          0.6328
+        ],
+        "affordance_3d_refined": [
+          -0.7735,
+          0.6261,
+          2.3572
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.5452,
+        "affordance": [
+          0.3359,
+          0.6328
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "green_cylinder"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "green_cylinder",
+        "affordance_region": "the top of the green cylinder",
+        "done_when": "holding(green_cylinder)",
+        "affordance_hint": "the top of the green cylinder",
+        "refine_prompt": "the top of the green cylinder",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.3359,
+          0.6328
+        ],
+        "affordance_3d_refined": [
+          -0.7198,
+          0.5827,
+          2.1938
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.3195,
+        "affordance": [
+          0.3359,
+          0.6328
+        ]
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "green_cylinder",
+                "wooden_base",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "green_cylinder"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "green_cylinder",
+        "destination": "wooden_base",
+        "affordance_region": "an empty area on the wooden base",
+        "done_when": "above(green_cylinder, wooden_base, 0.05)",
+        "affordance_hint": "an empty area on the wooden base",
+        "refine_prompt": "an empty area on the wooden base",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.2812,
+          0.7344
+        ],
+        "affordance_3d_refined": [
+          -1.9337,
+          2.0718,
+          4.4198
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.3747,
+        "affordance": [
+          0.2812,
+          0.7344
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "surface_contact",
+              "args": [
+                "green_cylinder",
+                "wooden_base"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "green_cylinder"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "green_cylinder"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "place",
+        "target": "green_cylinder",
+        "destination": "wooden_base",
+        "affordance_region": "an empty area on the wooden base",
+        "done_when": "surface_contact(green_cylinder, wooden_base) AND released(green_cylinder)",
+        "affordance_hint": "an empty area on the wooden base",
+        "refine_prompt": "an empty area on the wooden base",
+        "refine_cache_hit": true,
+        "affordance_refined": [
+          0.2812,
+          0.7344
+        ],
+        "affordance_3d_refined": [
+          -1.9337,
+          2.0718,
+          4.4198
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.3747,
+        "affordance": [
+          0.2812,
+          0.7344
+        ]
+      }
+    ]
+  }
+}

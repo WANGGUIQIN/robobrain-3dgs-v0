@@ -1,0 +1,154 @@
+{
+  "task": "bring the orange to the front edge from back",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_planning_3epoch/checkpoint-39957",
+  "raw": "Scene: orange, spoon, bowl, cloth, table\nStep 1: reach(orange)\n  affordance_region: the orange\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, orange, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, orange) < 0.03\nStep 2: grasp(orange)\n  affordance_region: the orange\n  contact: holding(orange) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(orange)\nStep 3: transport(orange -> front_edge)\n  affordance_region: the front edge of the table\n  spatial: above(orange, table, 0.05) [completion]\n  safety: no_drop(orange)\n  done_when: above(orange, table, 0.05) AND aligned_xy(orange, front_edge, 0.03)\nStep 4: place(orange -> front_edge)\n  affordance_region: the front edge of the table\n  contact: surface_contact(orange, table) [completion]; released(orange) [completion]\n  pose: stable(orange) [completion]\n  done_when: surface_contact(orange, table) AND released(orange) AND stable(orange)\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [],
+    "scene_objects": [
+      "orange",
+      "spoon",
+      "bowl",
+      "cloth",
+      "table"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "orange",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "orange",
+        "affordance_region": "the orange",
+        "done_when": "distance(gripper, orange) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "orange"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "orange",
+        "affordance_region": "the orange",
+        "done_when": "holding(orange)"
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "orange",
+                "table",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "orange"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "orange",
+        "destination": "front_edge",
+        "affordance_region": "the front edge of the table",
+        "done_when": "above(orange, table, 0.05) AND aligned_xy(orange, front_edge, 0.03)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "surface_contact",
+              "args": [
+                "orange",
+                "table"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "orange"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "orange"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "place",
+        "target": "orange",
+        "destination": "front_edge",
+        "affordance_region": "the front edge of the table",
+        "done_when": "surface_contact(orange, table) AND released(orange) AND stable(orange)"
+      }
+    ]
+  }
+}

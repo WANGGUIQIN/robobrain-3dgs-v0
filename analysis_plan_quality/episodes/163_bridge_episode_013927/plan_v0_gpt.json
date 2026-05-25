@@ -1,0 +1,233 @@
+{
+  "task": "Move potato to middle front of stove top",
+  "scene_objects": [
+    "potato",
+    "stove_top",
+    "metal_bowl",
+    "blue_cloth",
+    "blue_handle_spoon"
+  ],
+  "num_steps": 4,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "potato",
+      "affordance": [
+        0.669,
+        0.387
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "potato",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "metal_bowl"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, potato) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        0.5347,
+        -0.3606,
+        2.7692
+      ],
+      "affordance_hint": "the potato"
+    },
+    {
+      "step": 2,
+      "action": "grasp",
+      "target": "potato",
+      "affordance": [
+        0.66,
+        0.387
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "potato"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "holding",
+            "args": [
+              "potato"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              0,
+              0,
+              -1
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "holding(potato)",
+      "affordance_3d": [
+        0.5134,
+        -0.3632,
+        2.7887
+      ],
+      "affordance_hint": "potato"
+    },
+    {
+      "step": 3,
+      "action": "transport",
+      "target": "potato",
+      "destination": "middle_front_stove_top",
+      "affordance": [
+        0.477,
+        0.526
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "potato"
+            ],
+            "role": "safety"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "above",
+            "args": [
+              "potato",
+              "stove_top",
+              0.05
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "potato",
+              "stove_top"
+            ]
+          },
+          {
+            "pred": "no_drop",
+            "args": [
+              "potato"
+            ]
+          }
+        ]
+      },
+      "done_when": "above(potato, stove_top, 0.05) AND aligned_xy(potato, middle_front_stove_top, 0.03)",
+      "affordance_3d": [
+        -0.0662,
+        0.0772,
+        2.4561
+      ],
+      "affordance_hint": "an empty area on the middle front stove top"
+    },
+    {
+      "step": 4,
+      "action": "place",
+      "target": "potato",
+      "destination": "middle_front_stove_top",
+      "affordance": [
+        0.477,
+        0.526
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "surface_contact",
+            "args": [
+              "potato",
+              "stove_top"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "released",
+            "args": [
+              "potato"
+            ],
+            "role": "completion"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "stable",
+            "args": [
+              "potato"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "support_stable",
+            "args": [
+              "potato"
+            ]
+          }
+        ]
+      },
+      "done_when": "surface_contact(potato, stove_top) AND released(potato) AND stable(potato)",
+      "affordance_3d": [
+        -0.0662,
+        0.0772,
+        2.4561
+      ],
+      "affordance_hint": "an empty area on the middle front stove top"
+    }
+  ]
+}

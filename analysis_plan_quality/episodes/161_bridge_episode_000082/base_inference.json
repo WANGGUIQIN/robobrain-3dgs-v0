@@ -1,0 +1,169 @@
+{
+  "task": "Move the chocolate from the pan to the left of the cloth.",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_3epoch/best",
+  "raw": "**SCENE ANALYSIS** - A small metal pan with chocolate inside sits on a wooden countertop. To the left of the pan is a blue plastic spoon. To the right, there is a silver metal bowl. The task is to move the chocolate from the pan to the left of the cloth (the orange cloth is on the far right). The pan is the source, and the target area is the countertop to the left of the cloth. The chocolate is inside the pan, so the first step is to grasp the pan, then transport it to the target area, and finally place the pan down so the chocolate is on the countertop. The pan has a rim and a body; the rim is the most stable part to grasp. The target area is the countertop surface to the left of the cloth, which is a flat, empty space. **STRATEGY** - First, reach and grasp the pan by its rim for stability. Then, transport the pan to the left of the cloth, ensuring the chocolate remains inside. Finally, place the pan on the countertop in the target area. Failure modes include dropping the pan during transport or placing it incorrectly. **AFFORDANCE REASONING** - Step 1: Reach the pan by its rim for a stable grasp. Step 2: Grasp the rim to lift the pan. Step 3: Transport the pan to the left of the cloth, maintaining a safe distance from other objects. Step 4: Place the pan on the countertop in the target area, ensuring the chocolate is on the surface.\n\nGoal: on(chocolate, countertop); stable(chocolate)\nScene: pan, chocolate, countertop, cloth, spoon, bowl\nStep 1: reach(pan)\n  affordance_region: the rim of the metal pan\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, pan, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, pan) < 0.03\nStep 2: grasp(pan)\n  affordance_region: the rim of the metal pan\n  contact: holding(pan) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(pan)\nStep 3: transport(pan -> left_of_cloth)\n  affordance_region: an empty area on the countertop to the left of the cloth\n  spatial: above(pan, left_of_cloth, 0.05) [completion]\n  safety: no_drop(pan)\n  done_when: above(pan, left_of_cloth, 0.05)\nStep 4: place(pan -> left_of_cloth)\n  affordance_region: an empty area on the countertop to the left of the cloth\n  contact: surface_contact(pan, countertop) [completion]; released(pan) [completion]\n  pose: stable(pan) [completion]\n  done_when: surface_contact(pan, countertop) AND released(pan)\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [
+      {
+        "pred": "on",
+        "args": [
+          "chocolate",
+          "countertop"
+        ]
+      },
+      {
+        "pred": "stable",
+        "args": [
+          "chocolate"
+        ]
+      }
+    ],
+    "scene_objects": [
+      "pan",
+      "chocolate",
+      "countertop",
+      "cloth",
+      "spoon",
+      "bowl"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "pan",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "pan",
+        "affordance_region": "the rim of the metal pan",
+        "done_when": "distance(gripper, pan) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "pan"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "pan",
+        "affordance_region": "the rim of the metal pan",
+        "done_when": "holding(pan)"
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "pan",
+                "left_of_cloth",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "pan"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "pan",
+        "destination": "left_of_cloth",
+        "affordance_region": "an empty area on the countertop to the left of the cloth",
+        "done_when": "above(pan, left_of_cloth, 0.05)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "surface_contact",
+              "args": [
+                "pan",
+                "countertop"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "pan"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "pan"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "place",
+        "target": "pan",
+        "destination": "left_of_cloth",
+        "affordance_region": "an empty area on the countertop to the left of the cloth",
+        "done_when": "surface_contact(pan, countertop) AND released(pan)"
+      }
+    ]
+  }
+}

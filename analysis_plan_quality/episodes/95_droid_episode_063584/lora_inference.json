@@ -1,0 +1,369 @@
+{
+  "task": "Pick the orange and yellow blocks and put them in the bowl",
+  "parsed": {
+    "scene_objects": [
+      "orange_block",
+      "yellow_block",
+      "bowl",
+      "table"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "orange_block",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "orange_block",
+        "affordance_region": "the small orange block on the table",
+        "done_when": "distance(gripper, orange_block) < 0.03",
+        "affordance_hint": "the small orange block on the table",
+        "refine_prompt": "the small orange block on the table",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.3477,
+          0.9961
+        ],
+        "affordance_3d_refined": [
+          -0.9622,
+          1.8296,
+          2.7105
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.6898,
+        "affordance": [
+          0.3477,
+          0.9961
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "orange_block"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "orange_block",
+        "affordance_region": "the small orange block on the table",
+        "done_when": "holding(orange_block)",
+        "affordance_hint": "the small orange block on the table",
+        "refine_prompt": "the small orange block on the table",
+        "refine_cache_hit": true,
+        "affordance_refined": [
+          0.3477,
+          0.9961
+        ],
+        "affordance_3d_refined": [
+          -0.9622,
+          1.8296,
+          2.7105
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.6898,
+        "affordance": [
+          0.3477,
+          0.9961
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "surface_contact",
+              "args": [
+                "orange_block",
+                "bowl"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "orange_block"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "orange_block"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "place",
+        "target": "orange_block",
+        "destination": "bowl",
+        "affordance_region": "the empty area inside the black bowl",
+        "done_when": "surface_contact(orange_block, bowl) AND released(orange_block)",
+        "affordance_hint": "the empty area inside the black bowl",
+        "refine_prompt": "the empty area inside the black bowl",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.4961,
+          0.668
+        ],
+        "affordance_3d_refined": [
+          -0.3827,
+          0.5914,
+          2.3191
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.3376,
+        "affordance": [
+          0.4961,
+          0.668
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "yellow_block",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "reach",
+        "target": "yellow_block",
+        "affordance_region": "the yellow block on the table",
+        "done_when": "distance(gripper, yellow_block) < 0.03",
+        "affordance_hint": "the yellow block on the table",
+        "refine_prompt": "the yellow block on the table",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.3477,
+          0.9961
+        ],
+        "affordance_3d_refined": [
+          -0.9622,
+          1.8296,
+          2.7105
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.6976,
+        "affordance": [
+          0.3477,
+          0.9961
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "yellow_block"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 5,
+        "action": "grasp",
+        "target": "yellow_block",
+        "affordance_region": "the yellow block on the table",
+        "done_when": "holding(yellow_block)",
+        "affordance_hint": "the yellow block on the table",
+        "refine_prompt": "the yellow block on the table",
+        "refine_cache_hit": true,
+        "affordance_refined": [
+          0.3477,
+          0.9961
+        ],
+        "affordance_3d_refined": [
+          -0.9622,
+          1.8296,
+          2.7105
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.6976,
+        "affordance": [
+          0.3477,
+          0.9961
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "surface_contact",
+              "args": [
+                "yellow_block",
+                "bowl"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "yellow_block"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "yellow_block"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 6,
+        "action": "place",
+        "target": "yellow_block",
+        "destination": "bowl",
+        "affordance_region": "the empty area inside the black bowl",
+        "done_when": "surface_contact(yellow_block, bowl) AND released(yellow_block)",
+        "affordance_hint": "the empty area inside the black bowl",
+        "refine_prompt": "the empty area inside the black bowl",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.4961,
+          0.668
+        ],
+        "affordance_3d_refined": [
+          -0.3827,
+          0.5914,
+          2.3191
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.3376,
+        "affordance": [
+          0.4961,
+          0.668
+        ]
+      }
+    ]
+  }
+}

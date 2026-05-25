@@ -1,0 +1,247 @@
+{
+  "task": "Build with small Lego blocks for the nth time with n blocks",
+  "parsed": {
+    "scene_objects": [
+      "red_block",
+      "blue_block",
+      "green_block",
+      "yellow_block",
+      "gray_plate",
+      "table"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "red_block",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "red_block",
+        "affordance_region": "the red block",
+        "done_when": "distance(gripper, red_block) < 0.03",
+        "affordance_hint": "the red block",
+        "refine_prompt": "the red block",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.043,
+          0.6953
+        ],
+        "affordance_3d_refined": [
+          -1.8048,
+          -0.0117,
+          1.869
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.4505,
+        "affordance": [
+          0.043,
+          0.6953
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "red_block"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "red_block",
+        "affordance_region": "the red block",
+        "done_when": "holding(red_block)",
+        "affordance_hint": "the red block",
+        "refine_prompt": "the red block",
+        "refine_cache_hit": true,
+        "affordance_refined": [
+          0.043,
+          0.6953
+        ],
+        "affordance_3d_refined": [
+          -1.8048,
+          -0.0117,
+          1.869
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.4505,
+        "affordance": [
+          0.043,
+          0.6953
+        ]
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "red_block",
+                "gray_plate",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "red_block"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "red_block",
+        "destination": "gray_plate",
+        "affordance_region": "the empty area on the gray plate",
+        "done_when": "above(red_block, gray_plate, 0.05)",
+        "affordance_hint": "the empty area on the gray plate",
+        "refine_prompt": "the empty area on the gray plate",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.3047,
+          0.5078
+        ],
+        "affordance_3d_refined": [
+          -1.2803,
+          -0.2645,
+          1.6929
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.3426,
+        "affordance": [
+          0.3047,
+          0.5078
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "surface_contact",
+              "args": [
+                "red_block",
+                "gray_plate"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "red_block"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "red_block"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "place",
+        "target": "red_block",
+        "destination": "gray_plate",
+        "affordance_region": "the empty area on the gray plate",
+        "done_when": "surface_contact(red_block, gray_plate) AND released(red_block)",
+        "affordance_hint": "the empty area on the gray plate",
+        "refine_prompt": "the empty area on the gray plate",
+        "refine_cache_hit": true,
+        "affordance_refined": [
+          0.3047,
+          0.5078
+        ],
+        "affordance_3d_refined": [
+          -1.2803,
+          -0.2645,
+          1.6929
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.3426,
+        "affordance": [
+          0.3047,
+          0.5078
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,196 @@
+{
+  "task": "Chop the pakchoi",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_3epoch/best",
+  "raw": "**SCENE ANALYSIS - A wooden cutting board with a green vegetable (pakchoi) is on a table. A knife is on the table to the right of the cutting board. The robot arm is positioned over the table. STRATEGY - First, grasp the knife to pick it up. Then, transport the knife to the cutting board. Next, grasp the pakchoi on the cutting board. Use the knife to chop the pakchoi into smaller pieces. Finally, place the chopped pieces back onto the cutting board. Failure modes include dropping the knife or pakchoi, or not properly positioning the knife for chopping. AFFORDANCE REASONING - Step 1: Reach for the knife handle to grasp it. Step 2: Transport the knife to the cutting board. Step 3: Grasp the pakchoi on the cutting board. Step 4: Use the knife to chop the pakchoi. Step 5: Place the chopped pieces back on the cutting board.**\nGoal: chopped(pakchoi); on(pakchoi, cutting_board)\nScene: cutting_board, pakchoi, knife, table\nStep 1: grasp(knife)\n  affordance_region: the handle of the knife\n  contact: holding(knife) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(knife)\nStep 2: transport(knife -> cutting_board)\n  affordance_region: an empty area on the cutting board\n  spatial: above(knife, cutting_board, 0.05) [completion]\n  safety: no_drop(knife)\n  done_when: above(knife, cutting_board, 0.05)\nStep 3: grasp(pakchoi)\n  affordance_region: the body of the green pakchoi\n  contact: holding(pakchoi) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(pakchoi)\nStep 4: chop(pakchoi)\n  affordance_region: the blade of the knife\n  contact: contact(knife, pakchoi) [completion]\n  spatial: above(pakchoi, cutting_board, 0.05) [completion]\n  direction: chop_axis(0, 0, -1) [progress]\n  done_when: chopped(pakchoi)\nStep 5: place(pakchoi -> cutting_board)\n  affordance_region: an empty area on the cutting board\n  contact: surface_contact(pakchoi, cutting_board) [completion]; released(pakchoi) [completion]\n  pose: stable(pakchoi) [completion]\n  done_when: surface_contact(pakchoi, cutting_board) AND released(pakchoi)\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [
+      {
+        "pred": "chopped",
+        "args": [
+          "pakchoi"
+        ]
+      },
+      {
+        "pred": "on",
+        "args": [
+          "pakchoi",
+          "cutting_board"
+        ]
+      }
+    ],
+    "scene_objects": [
+      "cutting_board",
+      "pakchoi",
+      "knife",
+      "table"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "knife"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "grasp",
+        "target": "knife",
+        "affordance_region": "the handle of the knife",
+        "done_when": "holding(knife)"
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "knife",
+                "cutting_board",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "knife"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "transport",
+        "target": "knife",
+        "destination": "cutting_board",
+        "affordance_region": "an empty area on the cutting board",
+        "done_when": "above(knife, cutting_board, 0.05)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "pakchoi"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "grasp",
+        "target": "pakchoi",
+        "affordance_region": "the body of the green pakchoi",
+        "done_when": "holding(pakchoi)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "contact",
+              "args": [
+                "knife",
+                "pakchoi"
+              ],
+              "role": "completion"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "pakchoi",
+                "cutting_board",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "chop_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "chop",
+        "target": "pakchoi",
+        "affordance_region": "the blade of the knife",
+        "done_when": "chopped(pakchoi)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "surface_contact",
+              "args": [
+                "pakchoi",
+                "cutting_board"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "pakchoi"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "pakchoi"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 5,
+        "action": "place",
+        "target": "pakchoi",
+        "destination": "cutting_board",
+        "affordance_region": "an empty area on the cutting board",
+        "done_when": "surface_contact(pakchoi, cutting_board) AND released(pakchoi)"
+      }
+    ]
+  }
+}

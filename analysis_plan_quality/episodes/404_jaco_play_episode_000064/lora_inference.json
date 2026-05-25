@@ -1,0 +1,129 @@
+{
+  "task": "pick up the black bowl",
+  "parsed": {
+    "scene_objects": [
+      "black_bowl",
+      "table"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "black_bowl",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "black_bowl",
+        "affordance_region": "the body of the black bowl",
+        "done_when": "distance(gripper, black_bowl) < 0.03",
+        "affordance_hint": "the body of the black bowl",
+        "refine_prompt": "the body of the black bowl",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.4531,
+          0.3555
+        ],
+        "affordance_3d_refined": [
+          -0.1239,
+          -0.3821,
+          2.2995
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.4934,
+        "affordance": [
+          0.4531,
+          0.3555
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "black_bowl"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "black_bowl",
+        "affordance_region": "the rim of the black bowl",
+        "done_when": "holding(black_bowl)",
+        "affordance_hint": "the rim of the black bowl",
+        "refine_prompt": "the rim of the black bowl",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.4531,
+          0.3555
+        ],
+        "affordance_3d_refined": [
+          -0.1239,
+          -0.3821,
+          2.2995
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.5657,
+        "affordance": [
+          0.4531,
+          0.3555
+        ]
+      }
+    ]
+  }
+}

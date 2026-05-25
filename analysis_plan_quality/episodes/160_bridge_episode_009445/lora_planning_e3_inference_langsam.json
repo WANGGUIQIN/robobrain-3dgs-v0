@@ -1,0 +1,229 @@
+{
+  "task": "Move the pot to the bottom middle of stove",
+  "scene_objects": [
+    "pot",
+    "stove",
+    "yellow_sponge",
+    "blue_brush",
+    "purple_cloth",
+    "sink"
+  ],
+  "steps": [
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "pot",
+              "<",
+              "0.03"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "approach_axis",
+            "args": [
+              "0",
+              "0",
+              "-1"
+            ],
+            "role": "progress"
+          }
+        ]
+      },
+      "step": 1,
+      "action": "reach",
+      "target": "pot",
+      "affordance_region": "the body of the silver pot",
+      "done_when": "distance(gripper, pot) < 0.03",
+      "affordance_hint": "the body of the silver pot",
+      "refine_prompt": "the body of the silver pot",
+      "refine_cache_hit": false,
+      "affordance_refined": [
+        0.4453,
+        0.4727
+      ],
+      "affordance_3d_refined": [
+        -0.1544,
+        -0.0772,
+        2.4561
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.6152
+    },
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "pot"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              "0",
+              "0",
+              "-1"
+            ],
+            "role": "progress"
+          }
+        ]
+      },
+      "step": 2,
+      "action": "grasp",
+      "target": "pot",
+      "affordance_region": "the handle of the silver pot",
+      "done_when": "holding(pot)",
+      "affordance_hint": "the handle of the silver pot",
+      "refine_prompt": "the handle of the silver pot",
+      "refine_cache_hit": false,
+      "affordance_refined": [
+        0.543,
+        0.4414
+      ],
+      "affordance_3d_refined": [
+        0.1068,
+        -0.1457,
+        2.1625
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.4727
+    },
+    {
+      "constraints": {
+        "spatial": [
+          {
+            "pred": "above",
+            "args": [
+              "pot",
+              "bottom_middle_stove",
+              "0.05"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_drop",
+            "args": [
+              "pot"
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "step": 3,
+      "action": "transport",
+      "target": "pot",
+      "destination": "bottom_middle_stove",
+      "affordance_region": "the bottom middle of the stove",
+      "done_when": "above(pot, bottom_middle_stove, 0.05)",
+      "affordance_hint": "the bottom middle of the stove",
+      "refine_prompt": "the bottom middle of the stove",
+      "refine_cache_hit": false,
+      "affordance_refined": [
+        0.5898,
+        0.6211
+      ],
+      "affordance_3d_refined": [
+        0.2537,
+        0.3419,
+        2.4561
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.3915
+    },
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "surface_contact",
+            "args": [
+              "pot",
+              "bottom_middle_stove"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "released",
+            "args": [
+              "pot"
+            ],
+            "role": "completion"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "stable",
+            "args": [
+              "pot"
+            ],
+            "role": "completion"
+          }
+        ]
+      },
+      "step": 4,
+      "action": "place",
+      "target": "pot",
+      "destination": "bottom_middle_stove",
+      "affordance_region": "the bottom middle of the stove",
+      "done_when": "surface_contact(pot, bottom_middle_stove) AND released(pot) AND stable(pot)",
+      "affordance_hint": "the bottom middle of the stove",
+      "refine_prompt": "the bottom middle of the stove",
+      "refine_cache_hit": true,
+      "affordance_refined": [
+        0.5898,
+        0.6211
+      ],
+      "affordance_3d_refined": [
+        0.2537,
+        0.3419,
+        2.4561
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.3915
+    }
+  ]
+}

@@ -1,0 +1,240 @@
+{
+  "task": "pick sponge from white bowl and place on counter",
+  "scene_objects": [
+    "sponge",
+    "white_bowl",
+    "counter",
+    "orange"
+  ],
+  "num_steps": 4,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "sponge",
+      "affordance": [
+        0.6,
+        0.23
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "sponge",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "white_bowl"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, sponge) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        0.3736,
+        -0.9914,
+        3.1997
+      ],
+      "affordance_hint": "the sponge",
+      "affordance_hint_original": "the sponge",
+      "affordance_hint_confidence": "rejected:missing_token:sponge"
+    },
+    {
+      "step": 2,
+      "action": "grasp",
+      "target": "sponge",
+      "affordance": [
+        0.587,
+        0.23
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "sponge"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "holding",
+            "args": [
+              "sponge"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              0,
+              0,
+              -1
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "holding(sponge)",
+      "affordance_3d": [
+        0.3122,
+        -0.9792,
+        3.1605
+      ],
+      "affordance_hint": "the yellow sponge in the white bowl",
+      "affordance_hint_original": "sponge",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 3,
+      "action": "transport",
+      "target": "sponge",
+      "destination": "counter",
+      "affordance": [
+        0.558,
+        0.402
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "sponge"
+            ],
+            "role": "safety"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "above",
+            "args": [
+              "sponge",
+              "counter",
+              0.05
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "sponge",
+              "counter"
+            ]
+          },
+          {
+            "pred": "no_drop",
+            "args": [
+              "sponge"
+            ]
+          }
+        ]
+      },
+      "done_when": "above(sponge, counter, 0.05) AND aligned_xy(sponge, counter, 0.03)",
+      "affordance_3d": [
+        0.2445,
+        -0.4075,
+        3.6302
+      ],
+      "affordance_hint": "the empty area on the counter near the orange",
+      "affordance_hint_original": "an empty area on the counter",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 4,
+      "action": "place",
+      "target": "sponge",
+      "destination": "counter",
+      "affordance": [
+        0.558,
+        0.402
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "surface_contact",
+            "args": [
+              "sponge",
+              "counter"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "released",
+            "args": [
+              "sponge"
+            ],
+            "role": "completion"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "stable",
+            "args": [
+              "sponge"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "support_stable",
+            "args": [
+              "sponge"
+            ]
+          }
+        ]
+      },
+      "done_when": "surface_contact(sponge, counter) AND released(sponge) AND stable(sponge)",
+      "affordance_3d": [
+        0.2445,
+        -0.4075,
+        3.6302
+      ],
+      "affordance_hint": "the empty area on the counter near the orange",
+      "affordance_hint_original": "an empty area on the counter",
+      "affordance_hint_confidence": "ok"
+    }
+  ]
+}

@@ -1,0 +1,121 @@
+{
+  "task": "Pick up a bag of things",
+  "scene_objects": [
+    "bag_of_things",
+    "table"
+  ],
+  "num_steps": 2,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "bag_of_things",
+      "affordance": [
+        0.416,
+        0.575
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "bag_of_things",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "table"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, bag_of_things) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        -1.4724,
+        -0.227,
+        2.2017
+      ],
+      "affordance_hint": "the bag of things"
+    },
+    {
+      "step": 2,
+      "action": "grasp",
+      "target": "bag_of_things",
+      "affordance": [
+        0.375,
+        0.45
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "bag_of_things"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "holding",
+            "args": [
+              "bag_of_things"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              0,
+              0,
+              -1
+            ],
+            "role": "safety"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_drop",
+            "args": [
+              "bag_of_things"
+            ]
+          }
+        ]
+      },
+      "done_when": "holding(bag_of_things)",
+      "affordance_3d": [
+        -1.4864,
+        -0.4313,
+        2.1234
+      ],
+      "affordance_hint": "the handle of the bag of things"
+    }
+  ]
+}

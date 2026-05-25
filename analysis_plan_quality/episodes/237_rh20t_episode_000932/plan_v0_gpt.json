@@ -1,0 +1,231 @@
+{
+  "task": "Place the block on the scale",
+  "scene_objects": [
+    "block",
+    "scale",
+    "table"
+  ],
+  "num_steps": 4,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "block",
+      "affordance": [
+        0.361,
+        0.375
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "block",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "scale"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, block) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        -0.9552,
+        -0.3519,
+        1.3407
+      ],
+      "affordance_hint": "the block"
+    },
+    {
+      "step": 2,
+      "action": "grasp",
+      "target": "block",
+      "affordance": [
+        0.361,
+        0.375
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "block"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "holding",
+            "args": [
+              "block"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              0,
+              0,
+              -1
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "holding(block)",
+      "affordance_3d": [
+        -0.9552,
+        -0.3519,
+        1.3407
+      ],
+      "affordance_hint": "block"
+    },
+    {
+      "step": 3,
+      "action": "transport",
+      "target": "block",
+      "destination": "scale",
+      "affordance": [
+        0.406,
+        0.45
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "block"
+            ],
+            "role": "safety"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "above",
+            "args": [
+              "block",
+              "scale",
+              0.05
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "block",
+              "scale"
+            ]
+          },
+          {
+            "pred": "no_drop",
+            "args": [
+              "block"
+            ]
+          }
+        ]
+      },
+      "done_when": "above(block, scale, 0.05) AND aligned_xy(block, scale, 0.03)",
+      "affordance_3d": [
+        -0.8917,
+        -0.2683,
+        1.3211
+      ],
+      "affordance_hint": "an empty area on the scale"
+    },
+    {
+      "step": 4,
+      "action": "place",
+      "target": "block",
+      "destination": "scale",
+      "affordance": [
+        0.406,
+        0.45
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "surface_contact",
+            "args": [
+              "block",
+              "scale"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "released",
+            "args": [
+              "block"
+            ],
+            "role": "completion"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "stable",
+            "args": [
+              "block"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "support_stable",
+            "args": [
+              "block"
+            ]
+          }
+        ]
+      },
+      "done_when": "surface_contact(block, scale) AND released(block) AND stable(block)",
+      "affordance_3d": [
+        -0.8917,
+        -0.2683,
+        1.3211
+      ],
+      "affordance_hint": "an empty area on the scale"
+    }
+  ]
+}

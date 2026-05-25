@@ -1,0 +1,231 @@
+{
+  "task": "move green can near blue chip bag",
+  "scene_objects": [
+    "green_can",
+    "blue_chip_bag",
+    "table"
+  ],
+  "num_steps": 4,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "green_can",
+      "affordance": [
+        0.41,
+        0.515
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "green_can",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "blue_chip_bag"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, green_can) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        -0.4962,
+        0.0863,
+        4.8043
+      ],
+      "affordance_hint": "the green can"
+    },
+    {
+      "step": 2,
+      "action": "grasp",
+      "target": "green_can",
+      "affordance": [
+        0.406,
+        0.484
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "green_can"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "holding",
+            "args": [
+              "green_can"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              0,
+              0,
+              -1
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "holding(green_can)",
+      "affordance_3d": [
+        -0.5283,
+        -0.088,
+        4.9022
+      ],
+      "affordance_hint": "the handle of the green can"
+    },
+    {
+      "step": 3,
+      "action": "transport",
+      "target": "green_can",
+      "destination": "blue_chip_bag",
+      "affordance": [
+        0.425,
+        0.32
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "green_can"
+            ],
+            "role": "safety"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "near",
+            "args": [
+              "green_can",
+              "blue_chip_bag",
+              0.05
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "green_can",
+              "blue_chip_bag"
+            ]
+          },
+          {
+            "pred": "no_drop",
+            "args": [
+              "green_can"
+            ]
+          }
+        ]
+      },
+      "done_when": "near(green_can, blue_chip_bag, 0.05)",
+      "affordance_3d": [
+        -0.2246,
+        -0.5437,
+        2.6322
+      ],
+      "affordance_hint": "an empty area on the blue chip bag"
+    },
+    {
+      "step": 4,
+      "action": "place",
+      "target": "green_can",
+      "destination": "blue_chip_bag",
+      "affordance": [
+        0.425,
+        0.32
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "surface_contact",
+            "args": [
+              "green_can",
+              "table"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "released",
+            "args": [
+              "green_can"
+            ],
+            "role": "completion"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "stable",
+            "args": [
+              "green_can"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "support_stable",
+            "args": [
+              "green_can"
+            ]
+          }
+        ]
+      },
+      "done_when": "surface_contact(green_can, table) AND released(green_can) AND stable(green_can)",
+      "affordance_3d": [
+        -0.2246,
+        -0.5437,
+        2.6322
+      ],
+      "affordance_hint": "an empty area on the blue chip bag"
+    }
+  ]
+}

@@ -1,0 +1,171 @@
+{
+  "task": "Pull out a napkin",
+  "scene_objects": [
+    "napkin",
+    "napkin_holder",
+    "table"
+  ],
+  "num_steps": 3,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "napkin",
+      "affordance": [
+        0.495,
+        0.736
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "napkin",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "napkin_holder"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, napkin) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        -1.1863,
+        0.0492,
+        1.9669
+      ],
+      "affordance_hint": "the napkin"
+    },
+    {
+      "step": 2,
+      "action": "grasp",
+      "target": "napkin",
+      "affordance": [
+        0.5,
+        0.7
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "napkin"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "holding",
+            "args": [
+              "napkin"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              0,
+              0,
+              -1
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "holding(napkin)",
+      "affordance_3d": [
+        -1.1332,
+        -0.0059,
+        1.8886
+      ],
+      "affordance_hint": "the handle of the napkin"
+    },
+    {
+      "step": 3,
+      "action": "pull",
+      "target": "napkin",
+      "affordance": [
+        0.5,
+        0.7
+      ],
+      "approach": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "napkin"
+            ],
+            "role": "safety"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "clear_path",
+            "args": [
+              "napkin",
+              "napkin_holder"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "napkin",
+              "napkin_holder"
+            ]
+          },
+          {
+            "pred": "no_drop",
+            "args": [
+              "napkin"
+            ]
+          }
+        ]
+      },
+      "done_when": "clear_path(napkin, napkin_holder) AND holding(napkin)",
+      "affordance_3d": [
+        -1.1332,
+        -0.0059,
+        1.8886
+      ],
+      "affordance_hint": "the handle of the napkin"
+    }
+  ]
+}

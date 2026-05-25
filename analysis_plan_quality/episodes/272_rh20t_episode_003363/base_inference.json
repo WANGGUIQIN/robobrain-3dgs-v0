@@ -1,0 +1,113 @@
+{
+  "task": "Insert the pencil into the pencil sharpener",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_3epoch/best",
+  "raw": "**SCENE ANALYSIS - A red pencil lies on a white cloth surface. A black pencil sharpener is positioned on the cloth, with a visible slot for inserting the pencil. The pencil is rigid and slender, the sharpener has a distinct slot for insertion. STRATEGY - First, grasp the pencil to pick it up. Then, transport it to the sharpener. Finally, insert the pencil into the sharpener's slot. Failure modes include dropping the pencil during transport or misaligning it with the sharpener's slot. AFFORDANCE REASONING - Step 1: Grasp the pencil at its body for a secure hold. Step 2: Transport the pencil to the sharpener's slot. Step 3: Insert the pencil into the sharpener's slot.**\nGoal: inserted(pencil, sharpener)\nScene: pencil, sharpener, cloth\nStep 1: grasp(pencil)\n  affordance_region: the body of the red pencil\n  contact: holding(pencil) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(pencil)\nStep 2: transport(pencil -> sharpener)\n  affordance_region: the slot of the black pencil sharpener\n  spatial: above(pencil, sharpener_slot, 0.05) [completion]\n  safety: no_drop(pencil)\n  done_when: above(pencil, sharpener_slot, 0.05)\nStep 3: insert(pencil -> sharpener)\n  affordance_region: the slot of the black pencil sharpener\n  contact: inserted(pencil, sharpener) [completion]\n  pose: aligned(pencil, sharpener_slot) [completion]\n  done_when: inserted(pencil, sharpener)\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [
+      {
+        "pred": "inserted",
+        "args": [
+          "pencil",
+          "sharpener"
+        ]
+      }
+    ],
+    "scene_objects": [
+      "pencil",
+      "sharpener",
+      "cloth"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "pencil"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "grasp",
+        "target": "pencil",
+        "affordance_region": "the body of the red pencil",
+        "done_when": "holding(pencil)"
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "pencil",
+                "sharpener_slot",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "pencil"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "transport",
+        "target": "pencil",
+        "destination": "sharpener",
+        "affordance_region": "the slot of the black pencil sharpener",
+        "done_when": "above(pencil, sharpener_slot, 0.05)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "inserted",
+              "args": [
+                "pencil",
+                "sharpener"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "aligned",
+              "args": [
+                "pencil",
+                "sharpener_slot"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "insert",
+        "target": "pencil",
+        "destination": "sharpener",
+        "affordance_region": "the slot of the black pencil sharpener",
+        "done_when": "inserted(pencil, sharpener)"
+      }
+    ]
+  }
+}

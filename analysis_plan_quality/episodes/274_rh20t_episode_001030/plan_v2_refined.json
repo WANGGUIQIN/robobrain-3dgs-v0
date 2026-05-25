@@ -1,0 +1,179 @@
+{
+  "task": "Hit the pool ball",
+  "scene_objects": [
+    "pool_ball",
+    "pool_table",
+    "cue_stick"
+  ],
+  "num_steps": 3,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "cue_stick",
+      "affordance": [
+        0.531,
+        0.416
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "cue_stick",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "pool_table"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, cue_stick) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        -0.9734,
+        -0.3915,
+        1.6929
+      ],
+      "affordance_hint": "the wooden body of the cue stick",
+      "affordance_hint_original": "the cue stick",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 2,
+      "action": "grasp",
+      "target": "cue_stick",
+      "affordance": [
+        0.531,
+        0.401
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "cue_stick"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "holding",
+            "args": [
+              "cue_stick"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              0,
+              0,
+              -1
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "holding(cue_stick)",
+      "affordance_3d": [
+        -0.9622,
+        -0.4026,
+        1.6733
+      ],
+      "affordance_hint": "the wooden handle of the cue stick",
+      "affordance_hint_original": "the handle of the cue stick",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 3,
+      "action": "push",
+      "target": "pool_ball",
+      "affordance": [
+        0.462,
+        0.334
+      ],
+      "approach": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "cue_stick"
+            ],
+            "role": "safety"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "aligned_xy",
+            "args": [
+              "cue_stick",
+              "pool_ball",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "cue_stick",
+              "pool_table"
+            ]
+          },
+          {
+            "pred": "force_limit",
+            "args": [
+              "cue_stick",
+              "pool_ball"
+            ]
+          }
+        ]
+      },
+      "done_when": "aligned_xy(cue_stick, pool_ball, 0.03) AND pool_ball_motion_detected",
+      "affordance_3d": [
+        -0.9945,
+        -0.4628,
+        1.5755
+      ],
+      "affordance_hint": "the center of the white pool ball",
+      "affordance_hint_original": "the center of the pool ball",
+      "affordance_hint_confidence": "ok"
+    }
+  ]
+}

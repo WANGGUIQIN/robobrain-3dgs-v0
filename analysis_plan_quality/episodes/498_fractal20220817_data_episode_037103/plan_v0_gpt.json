@@ -1,0 +1,232 @@
+{
+  "task": "move sponge near rxbar blueberry",
+  "scene_objects": [
+    "sponge",
+    "rxbar_blueberry",
+    "can",
+    "table"
+  ],
+  "num_steps": 4,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "sponge",
+      "affordance": [
+        0.306,
+        0.281
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "sponge",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "can"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, sponge) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        -0.5734,
+        -0.6422,
+        2.5539
+      ],
+      "affordance_hint": "the sponge"
+    },
+    {
+      "step": 2,
+      "action": "grasp",
+      "target": "sponge",
+      "affordance": [
+        0.306,
+        0.281
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "sponge"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "holding",
+            "args": [
+              "sponge"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              0,
+              0,
+              -1
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "holding(sponge)",
+      "affordance_3d": [
+        -0.5734,
+        -0.6422,
+        2.5539
+      ],
+      "affordance_hint": "sponge"
+    },
+    {
+      "step": 3,
+      "action": "transport",
+      "target": "sponge",
+      "destination": "rxbar_blueberry",
+      "affordance": [
+        0.526,
+        0.351
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "sponge"
+            ],
+            "role": "safety"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "near",
+            "args": [
+              "sponge",
+              "rxbar_blueberry",
+              0.05
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "sponge",
+              "rxbar_blueberry"
+            ]
+          },
+          {
+            "pred": "no_drop",
+            "args": [
+              "sponge"
+            ]
+          }
+        ]
+      },
+      "done_when": "near(sponge, rxbar_blueberry, 0.05)",
+      "affordance_3d": [
+        0.0852,
+        -0.4625,
+        2.7105
+      ],
+      "affordance_hint": "an empty area on the rxbar blueberry"
+    },
+    {
+      "step": 4,
+      "action": "place",
+      "target": "sponge",
+      "destination": "rxbar_blueberry",
+      "affordance": [
+        0.526,
+        0.351
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "surface_contact",
+            "args": [
+              "sponge",
+              "rxbar_blueberry"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "released",
+            "args": [
+              "sponge"
+            ],
+            "role": "completion"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "stable",
+            "args": [
+              "sponge"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "support_stable",
+            "args": [
+              "sponge"
+            ]
+          }
+        ]
+      },
+      "done_when": "surface_contact(sponge, rxbar_blueberry) AND released(sponge) AND stable(sponge)",
+      "affordance_3d": [
+        0.0852,
+        -0.4625,
+        2.7105
+      ],
+      "affordance_hint": "an empty area on the rxbar blueberry"
+    }
+  ]
+}

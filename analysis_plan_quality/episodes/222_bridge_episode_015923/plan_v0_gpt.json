@@ -1,0 +1,231 @@
+{
+  "task": "put spatula in pan",
+  "scene_objects": [
+    "spatula",
+    "pan",
+    "table"
+  ],
+  "num_steps": 4,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "spatula",
+      "affordance": [
+        0.642,
+        0.416
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "spatula",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "pan"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, spatula) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        0.4413,
+        -0.2697,
+        2.73
+      ],
+      "affordance_hint": "the spatula"
+    },
+    {
+      "step": 2,
+      "action": "grasp",
+      "target": "spatula",
+      "affordance": [
+        0.64,
+        0.416
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "spatula"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "holding",
+            "args": [
+              "spatula"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              0,
+              0,
+              -1
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "holding(spatula)",
+      "affordance_3d": [
+        0.4413,
+        -0.2697,
+        2.73
+      ],
+      "affordance_hint": "the handle of the spatula"
+    },
+    {
+      "step": 3,
+      "action": "transport",
+      "target": "spatula",
+      "destination": "pan",
+      "affordance": [
+        0.468,
+        0.6
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "spatula"
+            ],
+            "role": "safety"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "above",
+            "args": [
+              "spatula",
+              "pan",
+              0.05
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "spatula",
+              "pan"
+            ]
+          },
+          {
+            "pred": "no_drop",
+            "args": [
+              "spatula"
+            ]
+          }
+        ]
+      },
+      "done_when": "above(spatula, pan, 0.05) AND aligned_xy(spatula, pan, 0.03)",
+      "affordance_3d": [
+        -0.1114,
+        0.3621,
+        3.1018
+      ],
+      "affordance_hint": "an empty area on the pan"
+    },
+    {
+      "step": 4,
+      "action": "place",
+      "target": "spatula",
+      "destination": "pan",
+      "affordance": [
+        0.468,
+        0.6
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "surface_contact",
+            "args": [
+              "spatula",
+              "pan"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "released",
+            "args": [
+              "spatula"
+            ],
+            "role": "completion"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "stable",
+            "args": [
+              "spatula"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "support_stable",
+            "args": [
+              "spatula"
+            ]
+          }
+        ]
+      },
+      "done_when": "surface_contact(spatula, pan) AND released(spatula) AND stable(spatula)",
+      "affordance_3d": [
+        -0.1114,
+        0.3621,
+        3.1018
+      ],
+      "affordance_hint": "an empty area on the pan"
+    }
+  ]
+}

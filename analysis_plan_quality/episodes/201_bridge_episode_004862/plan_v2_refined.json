@@ -1,0 +1,241 @@
+{
+  "task": "Place croissant inside of silver pot.",
+  "scene_objects": [
+    "croissant",
+    "silver_pot",
+    "yellow_cloth",
+    "brush",
+    "table"
+  ],
+  "num_steps": 4,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "croissant",
+      "affordance": [
+        0.218,
+        0.352
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "croissant",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "silver_pot"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, croissant) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        -0.56,
+        -0.2955,
+        1.732
+      ],
+      "affordance_hint": "the golden brown croissant on the wooden table",
+      "affordance_hint_original": "the croissant",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 2,
+      "action": "grasp",
+      "target": "croissant",
+      "affordance": [
+        0.218,
+        0.352
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "croissant"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "holding",
+            "args": [
+              "croissant"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              0,
+              0,
+              -1
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "holding(croissant)",
+      "affordance_3d": [
+        -0.56,
+        -0.2955,
+        1.732
+      ],
+      "affordance_hint": "the body of the croissant",
+      "affordance_hint_original": "the handle of the croissant",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 3,
+      "action": "transport",
+      "target": "croissant",
+      "destination": "silver_pot",
+      "affordance": [
+        0.352,
+        0.526
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "croissant"
+            ],
+            "role": "safety"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "above",
+            "args": [
+              "croissant",
+              "silver_pot",
+              0.05
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "croissant",
+              "silver_pot"
+            ]
+          },
+          {
+            "pred": "no_drop",
+            "args": [
+              "croissant"
+            ]
+          }
+        ]
+      },
+      "done_when": "above(croissant, silver_pot, 0.05) AND aligned_xy(croissant, silver_pot, 0.03)",
+      "affordance_3d": [
+        -0.3556,
+        0.0655,
+        2.0843
+      ],
+      "affordance_hint": "the inside of the silver pot",
+      "affordance_hint_original": "an empty area on the silver pot",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 4,
+      "action": "place",
+      "target": "croissant",
+      "destination": "silver_pot",
+      "affordance": [
+        0.352,
+        0.526
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "surface_contact",
+            "args": [
+              "croissant",
+              "silver_pot"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "released",
+            "args": [
+              "croissant"
+            ],
+            "role": "completion"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "stable",
+            "args": [
+              "croissant"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "support_stable",
+            "args": [
+              "croissant"
+            ]
+          }
+        ]
+      },
+      "done_when": "surface_contact(croissant, silver_pot) AND released(croissant) AND stable(croissant)",
+      "affordance_3d": [
+        -0.3556,
+        0.0655,
+        2.0843
+      ],
+      "affordance_hint": "the inside of the silver pot",
+      "affordance_hint_original": "an empty area on the silver pot",
+      "affordance_hint_confidence": "ok"
+    }
+  ]
+}

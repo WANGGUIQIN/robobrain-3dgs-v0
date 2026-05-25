@@ -1,0 +1,165 @@
+{
+  "task": "pick pepsi can from bottom shelf of fridge",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_3epoch/best",
+  "raw": "**SCENE ANALYSIS -** A refrigerator with multiple shelves is open, revealing various beverages. The bottom shelf contains several cans, including a Pepsi can. The fridge door is ajar, and the interior is well-lit. The Pepsi can is among other canned drinks, identifiable by its distinct red and silver color scheme. **STRATEGY -** To pick the Pepsi can, first reach into the fridge, grasp the can by its body (since it's a can, the body is the primary graspable part), lift it out, and then transport it to a destination outside the fridge. Failure modes include not grasping the can properly, dropping it during transport, or misidentifying the can. **AFFORDANCE REASONING -** Step 1: Reach into the fridge to locate the Pepsi can. Step 2: Grasp the can by its body for a secure hold. Step 3: Lift the can out of the fridge. Step 4: Transport the can to the desired location.\n\nGoal: held(pepsi_can); outside(fridge, pepsi_can)\nScene: fridge, pepsi_can, other_cans, fridge_door\nStep 1: reach(fridge)\n  affordance_region: the open door of the fridge\n  contact: gripper_state(open) [progress]\n  spatial: inside(gripper, fridge) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: inside(gripper, fridge)\nStep 2: grasp(pepsi_can)\n  affordance_region: the body of the pepsi_can\n  contact: holding(pepsi_can) [completion]\n  spatial: inside(gripper, pepsi_can) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(pepsi_can)\nStep 3: transport(pepsi_can -> outside(fridge))\n  affordance_region: an empty area outside the fridge\n  spatial: outside(gripper, fridge) [completion]\n  safety: no_drop(pepsi_can)\n  done_when: outside(gripper, fridge)\nStep 4: release(pepsi_can)\n  affordance_region: an empty area outside the fridge\n  contact: released(pepsi_can) [completion]\n  pose: stable(pepsi_can) [completion]\n  done_when: released(pepsi_can) AND stable(pepsi_can)\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [
+      {
+        "pred": "held",
+        "args": [
+          "pepsi_can"
+        ]
+      },
+      {
+        "pred": "outside",
+        "args": [
+          "fridge",
+          "pepsi_can"
+        ]
+      }
+    ],
+    "scene_objects": [
+      "fridge",
+      "pepsi_can",
+      "other_cans",
+      "fridge_door"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "inside",
+              "args": [
+                "gripper",
+                "fridge"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "fridge",
+        "affordance_region": "the open door of the fridge",
+        "done_when": "inside(gripper, fridge)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "pepsi_can"
+              ],
+              "role": "completion"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "inside",
+              "args": [
+                "gripper",
+                "pepsi_can"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "pepsi_can",
+        "affordance_region": "the body of the pepsi_can",
+        "done_when": "holding(pepsi_can)"
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "outside",
+              "args": [
+                "gripper",
+                "fridge"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "pepsi_can"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "pepsi_can",
+        "destination": "outside(fridge",
+        "affordance_region": "an empty area outside the fridge",
+        "done_when": "outside(gripper, fridge)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "released",
+              "args": [
+                "pepsi_can"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "pepsi_can"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "release",
+        "target": "pepsi_can",
+        "affordance_region": "an empty area outside the fridge",
+        "done_when": "released(pepsi_can) AND stable(pepsi_can)"
+      }
+    ]
+  }
+}

@@ -1,0 +1,234 @@
+{
+  "task": "Screw the lid onto the jar",
+  "scene_objects": [
+    "lid",
+    "jar",
+    "table"
+  ],
+  "num_steps": 4,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "lid",
+      "affordance": [
+        0.575,
+        0.625
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "lid",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "jar"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, lid) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        -1.021,
+        -0.118,
+        1.8886
+      ],
+      "affordance_hint": "the transparent plastic lid on the table",
+      "affordance_hint_original": "the lid",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 2,
+      "action": "grasp",
+      "target": "lid",
+      "affordance": [
+        0.45,
+        0.687
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "lid"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "holding",
+            "args": [
+              "lid"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              0,
+              0,
+              -1
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "holding(lid)",
+      "affordance_3d": [
+        -1.0971,
+        -0.0214,
+        1.7125
+      ],
+      "affordance_hint": "the clear plastic lid",
+      "affordance_hint_original": "the handle of the lid",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 3,
+      "action": "transport",
+      "target": "lid",
+      "destination": "jar",
+      "affordance": [
+        0.419,
+        0.75
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "lid"
+            ],
+            "role": "safety"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "above",
+            "args": [
+              "lid",
+              "jar",
+              0.05
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "lid",
+              "jar"
+            ]
+          },
+          {
+            "pred": "no_drop",
+            "args": [
+              "lid"
+            ]
+          }
+        ]
+      },
+      "done_when": "above(lid, jar, 0.05) AND aligned_xy(lid, jar, 0.03)",
+      "affordance_3d": [
+        -1.1268,
+        0.0635,
+        1.6929
+      ],
+      "affordance_hint": "the top opening of the glass jar",
+      "affordance_hint_original": "an empty area on the jar",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 4,
+      "action": "rotate",
+      "target": "lid",
+      "destination": "jar",
+      "affordance": [
+        0.575,
+        0.612
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "inserted",
+            "args": [
+              "lid",
+              "jar"
+            ],
+            "role": "completion"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "orientation_match",
+            "args": [
+              "lid",
+              "jar"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "force_limit",
+            "args": [
+              "lid",
+              "jar"
+            ]
+          }
+        ]
+      },
+      "done_when": "inserted(lid, jar) AND orientation_match(lid, jar)",
+      "affordance_3d": [
+        -1.0316,
+        -0.1371,
+        1.9082
+      ],
+      "affordance_hint": "the body of the lid",
+      "affordance_hint_original": "the body of the lid",
+      "affordance_hint_confidence": "ok"
+    }
+  ]
+}

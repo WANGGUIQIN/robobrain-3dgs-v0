@@ -1,0 +1,166 @@
+{
+  "task": "stack the wine bottle to the left of the rack",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_3epoch/best",
+  "raw": "**SCENE ANALYSIS -** A wine bottle stands on a wooden table to the left of a metal rack. The bottle has a cylindrical body and a neck; the rack has horizontal bars. The table is a flat surface. **STRATEGY -** First, grasp the wine bottle by its body to ensure a stable hold. Then, transport it over the rack. Finally, place it on the rack's bars. Failure modes include dropping the bottle during transport or misaligning it with the rack. **AFFORDANCE REASONING -** Step 1: Reach the bottle body for initial contact. Step 2: Grasp the bottle body for a secure grip. Step 3: Transport the bottle over the rack. Step 4: Place the bottle on the rack's bars.\n\nGoal: on(wine_bottle, rack); stable(wine_bottle)\nScene: wine_bottle, rack, table\nStep 1: reach(wine_bottle)\n  affordance_region: the body of the wine bottle\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, wine_bottle, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, wine_bottle) < 0.03\nStep 2: grasp(wine_bottle)\n  affordance_region: the body of the wine bottle\n  contact: holding(wine_bottle) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(wine_bottle)\nStep 3: transport(wine_bottle -> rack)\n  affordance_region: an empty area on the rack\n  spatial: above(wine_bottle, rack, 0.05) [completion]\n  safety: no_drop(wine_bottle)\n  done_when: above(wine_bottle, rack, 0.05)\nStep 4: place(wine_bottle -> rack)\n  affordance_region: an empty area on the rack\n  contact: surface_contact(wine_bottle, rack) [completion]; released(wine_bottle) [completion]\n  pose: stable(wine_bottle) [completion]\n  done_when: surface_contact(wine_bottle, rack) AND released(wine_bottle)\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [
+      {
+        "pred": "on",
+        "args": [
+          "wine_bottle",
+          "rack"
+        ]
+      },
+      {
+        "pred": "stable",
+        "args": [
+          "wine_bottle"
+        ]
+      }
+    ],
+    "scene_objects": [
+      "wine_bottle",
+      "rack",
+      "table"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "wine_bottle",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "wine_bottle",
+        "affordance_region": "the body of the wine bottle",
+        "done_when": "distance(gripper, wine_bottle) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "wine_bottle"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "wine_bottle",
+        "affordance_region": "the body of the wine bottle",
+        "done_when": "holding(wine_bottle)"
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "wine_bottle",
+                "rack",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "wine_bottle"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "wine_bottle",
+        "destination": "rack",
+        "affordance_region": "an empty area on the rack",
+        "done_when": "above(wine_bottle, rack, 0.05)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "surface_contact",
+              "args": [
+                "wine_bottle",
+                "rack"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "wine_bottle"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "wine_bottle"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "place",
+        "target": "wine_bottle",
+        "destination": "rack",
+        "affordance_region": "an empty area on the rack",
+        "done_when": "surface_contact(wine_bottle, rack) AND released(wine_bottle)"
+      }
+    ]
+  }
+}

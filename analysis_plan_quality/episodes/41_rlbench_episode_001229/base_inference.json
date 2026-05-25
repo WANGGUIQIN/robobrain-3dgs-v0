@@ -1,0 +1,193 @@
+{
+  "task": "use the stick to drag the cube onto the white target",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_3epoch/best",
+  "raw": "SCENE ANALYSIS - A robotic arm is positioned over a table with a yellow cube, a blue cube, a white target, and a stick. The stick is a long, thin object with a yellow handle and a metallic tip. The task requires using the stick to drag the cube onto the white target. STRATEGY - First, grasp the stick at its handle for control. Then, use the stick to push the cube towards the target. Ensure the stick makes contact with the cube and applies force in the correct direction. Failure modes include not grasping the stick properly, misaligning the stick with the cube, or pushing in the wrong direction. AFFORDANCE REASONING - Step 1: Reach for the stick handle to grasp it. Step 2: Grasp the stick handle for a secure hold. Step 3: Transport the stick to the cube. Step 4: Use the stick to push the cube towards the target. Step 5: Release the stick after the cube is on the target.\nGoal: on(cube, white_target); stable(cube)\nScene: yellow_cube, blue_cube, white_target, stick, table\nStep 1: reach(stick)\n  affordance_region: the yellow handle of the stick\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, stick, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, stick) < 0.03\nStep 2: grasp(stick)\n  affordance_region: the yellow handle of the stick\n  contact: holding(stick) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(stick)\nStep 3: transport(stick -> cube)\n  affordance_region: an empty area near the cube\n  spatial: above(stick, cube, 0.05) [completion]\n  safety: no_drop(stick)\n  done_when: above(stick, cube, 0.05)\nStep 4: push(stick -> cube)\n  affordance_region: the metallic tip of the stick\n  contact: contact(stick_tip, cube) [completion]\n  direction: push_axis(0, 0, -1) [progress]\n  spatial: distance(stick_tip, cube, <, 0.05) [completion]\n  done_when: contact(stick_tip, cube)\nStep 5: release(stick)\n  affordance_region: the yellow handle of the stick\n  contact: released(stick) [completion]\n  done_when: released(stick)\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [
+      {
+        "pred": "on",
+        "args": [
+          "cube",
+          "white_target"
+        ]
+      },
+      {
+        "pred": "stable",
+        "args": [
+          "cube"
+        ]
+      }
+    ],
+    "scene_objects": [
+      "yellow_cube",
+      "blue_cube",
+      "white_target",
+      "stick",
+      "table"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "stick",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "stick",
+        "affordance_region": "the yellow handle of the stick",
+        "done_when": "distance(gripper, stick) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "stick"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "stick",
+        "affordance_region": "the yellow handle of the stick",
+        "done_when": "holding(stick)"
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "stick",
+                "cube",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "stick"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "stick",
+        "destination": "cube",
+        "affordance_region": "an empty area near the cube",
+        "done_when": "above(stick, cube, 0.05)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "contact",
+              "args": [
+                "stick_tip",
+                "cube"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "push_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "stick_tip",
+                "cube",
+                "<",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "push",
+        "target": "stick",
+        "destination": "cube",
+        "affordance_region": "the metallic tip of the stick",
+        "done_when": "contact(stick_tip, cube)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "released",
+              "args": [
+                "stick"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 5,
+        "action": "release",
+        "target": "stick",
+        "affordance_region": "the yellow handle of the stick",
+        "done_when": "released(stick)"
+      }
+    ]
+  }
+}

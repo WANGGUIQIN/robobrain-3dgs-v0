@@ -1,0 +1,230 @@
+{
+  "task": "place the milk dairy in the sink",
+  "scene_objects": [
+    "milk_dairy",
+    "sink",
+    "table",
+    "orange",
+    "blue_bin",
+    "plate",
+    "oven"
+  ],
+  "steps": [
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "milk_dairy",
+              "<",
+              "0.03"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "approach_axis",
+            "args": [
+              "0",
+              "0",
+              "-1"
+            ],
+            "role": "progress"
+          }
+        ]
+      },
+      "step": 1,
+      "action": "reach",
+      "target": "milk_dairy",
+      "affordance_region": "the body of the milk dairy",
+      "done_when": "distance(gripper, milk_dairy) < 0.03",
+      "affordance_hint": "the body of the milk dairy",
+      "refine_prompt": "the body of the milk dairy",
+      "refine_cache_hit": false,
+      "affordance_refined": [
+        0.5938,
+        0.2852
+      ],
+      "affordance_3d_refined": [
+        0.2288,
+        -0.5244,
+        2.1234
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.3362
+    },
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "milk_dairy"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              "0",
+              "0",
+              "-1"
+            ],
+            "role": "progress"
+          }
+        ]
+      },
+      "step": 2,
+      "action": "grasp",
+      "target": "milk_dairy",
+      "affordance_region": "the handle of the milk dairy",
+      "done_when": "holding(milk_dairy)",
+      "affordance_hint": "the handle of the milk dairy",
+      "refine_prompt": "the handle of the milk dairy",
+      "refine_cache_hit": false,
+      "affordance_refined": [
+        0.3477,
+        0.2109
+      ],
+      "affordance_3d_refined": [
+        -0.7797,
+        -1.4794,
+        4.4521
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.3595
+    },
+    {
+      "constraints": {
+        "spatial": [
+          {
+            "pred": "above",
+            "args": [
+              "milk_dairy",
+              "sink",
+              "0.05"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_drop",
+            "args": [
+              "milk_dairy"
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "step": 3,
+      "action": "transport",
+      "target": "milk_dairy",
+      "destination": "sink",
+      "affordance_region": "an empty area on the sink",
+      "done_when": "above(milk_dairy, sink, 0.05)",
+      "affordance_hint": "an empty area on the sink",
+      "refine_prompt": "an empty area on the sink",
+      "refine_cache_hit": false,
+      "affordance_refined": [
+        0.5938,
+        0.2852
+      ],
+      "affordance_3d_refined": [
+        0.2288,
+        -0.5244,
+        2.1234
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.5038
+    },
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "surface_contact",
+            "args": [
+              "milk_dairy",
+              "sink"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "released",
+            "args": [
+              "milk_dairy"
+            ],
+            "role": "completion"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "stable",
+            "args": [
+              "milk_dairy"
+            ],
+            "role": "completion"
+          }
+        ]
+      },
+      "step": 4,
+      "action": "place",
+      "target": "milk_dairy",
+      "destination": "sink",
+      "affordance_region": "an empty area on the sink",
+      "done_when": "surface_contact(milk_dairy, sink) AND released(milk_dairy) AND stable(milk_dairy)",
+      "affordance_hint": "an empty area on the sink",
+      "refine_prompt": "an empty area on the sink",
+      "refine_cache_hit": true,
+      "affordance_refined": [
+        0.5938,
+        0.2852
+      ],
+      "affordance_3d_refined": [
+        0.2288,
+        -0.5244,
+        2.1234
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.5038
+    }
+  ]
+}

@@ -1,0 +1,244 @@
+{
+  "task": "Put the white piece of clothing on the seat.",
+  "parsed": {
+    "scene_objects": [
+      "white_clothing",
+      "blue_clothing",
+      "chair"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "white_clothing",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "white_clothing",
+        "affordance_region": "the white clothing on the chair",
+        "done_when": "distance(gripper, white_clothing) < 0.03",
+        "affordance_hint": "the white clothing on the chair",
+        "refine_prompt": "the white clothing on the chair",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.5352,
+          0.5039
+        ],
+        "affordance_3d_refined": [
+          -0.1542,
+          0.0603,
+          1.3407
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.3529,
+        "affordance": [
+          0.5352,
+          0.5039
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "white_clothing"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "white_clothing",
+        "affordance_region": "the white clothing on the chair",
+        "done_when": "holding(white_clothing)",
+        "affordance_hint": "the white clothing on the chair",
+        "refine_prompt": "the white clothing on the chair",
+        "refine_cache_hit": true,
+        "affordance_refined": [
+          0.5352,
+          0.5039
+        ],
+        "affordance_3d_refined": [
+          -0.1542,
+          0.0603,
+          1.3407
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.3529,
+        "affordance": [
+          0.5352,
+          0.5039
+        ]
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "white_clothing",
+                "chair",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "white_clothing"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "white_clothing",
+        "destination": "chair",
+        "affordance_region": "an empty area on the chair",
+        "done_when": "above(white_clothing, chair, 0.05)",
+        "affordance_hint": "an empty area on the chair",
+        "refine_prompt": "an empty area on the chair",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.5352,
+          0.5078
+        ],
+        "affordance_3d_refined": [
+          -0.1542,
+          0.067,
+          1.3407
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.5464,
+        "affordance": [
+          0.5352,
+          0.5078
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "surface_contact",
+              "args": [
+                "white_clothing",
+                "chair"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "white_clothing"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "white_clothing"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "place",
+        "target": "white_clothing",
+        "destination": "chair",
+        "affordance_region": "an empty area on the chair",
+        "done_when": "surface_contact(white_clothing, chair) AND released(white_clothing)",
+        "affordance_hint": "an empty area on the chair",
+        "refine_prompt": "an empty area on the chair",
+        "refine_cache_hit": true,
+        "affordance_refined": [
+          0.5352,
+          0.5078
+        ],
+        "affordance_3d_refined": [
+          -0.1542,
+          0.067,
+          1.3407
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.5464,
+        "affordance": [
+          0.5352,
+          0.5078
+        ]
+      }
+    ]
+  }
+}

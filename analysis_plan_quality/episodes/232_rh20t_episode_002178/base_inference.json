@@ -1,0 +1,226 @@
+{
+  "task": "Press the buttons on a row of four power strips to turn them off",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_3epoch/best",
+  "raw": "**SCENE ANALYSIS - A white power strip with four buttons is on a green table. The buttons are small and rectangular, arranged in a row. The power strip is rigid and has a flat surface. STRATEGY - Reach the power strip, press each button sequentially to turn them off. Failure modes include missing a button or pressing too hard. AFFORDANCE REASONING - Step 1 reach the power strip body; Step 2 press each button with a finger-like contact; Step 3 release after each press.**\nGoal: all_buttons_pressed(power_strip)\nScene: power_strip\nStep 1: reach(power_strip)\n  affordance_region: the body of the power strip\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, power_strip, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, power_strip) < 0.03\nStep 2: press(button1 -> button1)\n  affordance_region: the first button on the power strip\n  contact: finger_contact(button1) [completion]\n  spatial: above(button1, power_strip, 0.02) [completion]\n  direction: press_axis(0, 0, -1) [progress]\n  done_when: finger_contact(button1)\nStep 3: press(button2 -> button2)\n  affordance_region: the second button on the power strip\n  contact: finger_contact(button2) [completion]\n  spatial: above(button2, power_strip, 0.02) [completion]\n  direction: press_axis(0, 0, -1) [progress]\n  done_when: finger_contact(button2)\nStep 4: press(button3 -> button3)\n  affordance_region: the third button on the power strip\n  contact: finger_contact(button3) [completion]\n  spatial: above(button3, power_strip, 0.02) [completion]\n  direction: press_axis(0, 0, -1) [progress]\n  done_when: finger_contact(button3)\nStep 5: press(button4 -> button4)\n  affordance_region: the fourth button on the power_strip\n  contact: finger_contact(button4) [completion]\n  spatial: above(button4, power_strip, 0.02) [completion]\n  direction: press_axis(0, 0, -1) [progress]\n  done_when: finger_contact(button4)\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [
+      {
+        "pred": "all_buttons_pressed",
+        "args": [
+          "power_strip"
+        ]
+      }
+    ],
+    "scene_objects": [
+      "power_strip"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "power_strip",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "power_strip",
+        "affordance_region": "the body of the power strip",
+        "done_when": "distance(gripper, power_strip) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "finger_contact",
+              "args": [
+                "button1"
+              ],
+              "role": "completion"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "button1",
+                "power_strip",
+                "0.02"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "press_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "press",
+        "target": "button1",
+        "destination": "button1",
+        "affordance_region": "the first button on the power strip",
+        "done_when": "finger_contact(button1)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "finger_contact",
+              "args": [
+                "button2"
+              ],
+              "role": "completion"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "button2",
+                "power_strip",
+                "0.02"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "press_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "press",
+        "target": "button2",
+        "destination": "button2",
+        "affordance_region": "the second button on the power strip",
+        "done_when": "finger_contact(button2)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "finger_contact",
+              "args": [
+                "button3"
+              ],
+              "role": "completion"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "button3",
+                "power_strip",
+                "0.02"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "press_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "press",
+        "target": "button3",
+        "destination": "button3",
+        "affordance_region": "the third button on the power strip",
+        "done_when": "finger_contact(button3)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "finger_contact",
+              "args": [
+                "button4"
+              ],
+              "role": "completion"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "button4",
+                "power_strip",
+                "0.02"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "press_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 5,
+        "action": "press",
+        "target": "button4",
+        "destination": "button4",
+        "affordance_region": "the fourth button on the power_strip",
+        "done_when": "finger_contact(button4)"
+      }
+    ]
+  }
+}

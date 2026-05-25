@@ -1,0 +1,120 @@
+{
+  "task": "move green can near blue chip bag",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_3epoch/best",
+  "raw": "**SCENE ANALYSIS - A green can is on a brown table. A blue chip bag is on the table to the left of the can. The can is cylindrical with a top opening; the chip bag is a flexible package. STRATEGY - The task is to move the green can. To avoid disturbing the chip bag, push the can horizontally. This is a direct manipulation with no need for grasping. Failure mode: pushing too hard could cause the can to roll off the table. AFFORDANCE REASONING - Step 1: reach the can body to apply force. Step 2: push the can horizontally to move it. Step 3: release to complete the action.**\nGoal: moved(green_can)\nScene: green_can, blue_chip_bag, table\nStep 1: reach(green_can)\n  affordance_region: the body of the green can\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, green_can, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, green_can) < 0.03\nStep 2: push(green_can)\n  affordance_region: the body of the green can\n  contact: pushing(green_can) [completion]\n  direction: push_axis(1, 0, 0) [progress]\n  safety: no_roll(green_can)\n  done_when: distance(green_can, original_position) > 0.1\nStep 3: release(green_can)\n  affordance_region: the body of the green can\n  contact: released(green_can) [completion]\n  done_when: released(green_can)\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [
+      {
+        "pred": "moved",
+        "args": [
+          "green_can"
+        ]
+      }
+    ],
+    "scene_objects": [
+      "green_can",
+      "blue_chip_bag",
+      "table"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "green_can",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "green_can",
+        "affordance_region": "the body of the green can",
+        "done_when": "distance(gripper, green_can) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "pushing",
+              "args": [
+                "green_can"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "push_axis",
+              "args": [
+                "1",
+                "0",
+                "0"
+              ],
+              "role": "progress"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_roll",
+              "args": [
+                "green_can"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "push",
+        "target": "green_can",
+        "affordance_region": "the body of the green can",
+        "done_when": "distance(green_can, original_position) > 0.1"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "released",
+              "args": [
+                "green_can"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "release",
+        "target": "green_can",
+        "affordance_region": "the body of the green can",
+        "done_when": "released(green_can)"
+      }
+    ]
+  }
+}

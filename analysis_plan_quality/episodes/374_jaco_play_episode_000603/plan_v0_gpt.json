@@ -1,0 +1,118 @@
+{
+  "task": "pick up the burger meat",
+  "scene_objects": [
+    "burger_meat",
+    "orange",
+    "red_object",
+    "plate",
+    "toaster",
+    "blue_container",
+    "table"
+  ],
+  "num_steps": 2,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "burger_meat",
+      "affordance": [
+        0.633,
+        0.59
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "burger_meat",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "table"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, burger_meat) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        0.4975,
+        0.3365,
+        3.2584
+      ],
+      "affordance_hint": "the burger meat"
+    },
+    {
+      "step": 2,
+      "action": "grasp",
+      "target": "burger_meat",
+      "affordance": [
+        0.633,
+        0.59
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "burger_meat"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "holding",
+            "args": [
+              "burger_meat"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              0,
+              0,
+              -1
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "holding(burger_meat)",
+      "affordance_3d": [
+        0.4975,
+        0.3365,
+        3.2584
+      ],
+      "affordance_hint": "the handle of the burger meat"
+    }
+  ]
+}

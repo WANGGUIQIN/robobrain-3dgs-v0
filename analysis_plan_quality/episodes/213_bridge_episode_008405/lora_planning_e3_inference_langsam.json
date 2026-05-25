@@ -1,0 +1,227 @@
+{
+  "task": "Move the spatula from the back to the side of the vessel",
+  "scene_objects": [
+    "spatula",
+    "vessel",
+    "table",
+    "purple_cloth"
+  ],
+  "steps": [
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "spatula",
+              "<",
+              "0.03"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "approach_axis",
+            "args": [
+              "0",
+              "0",
+              "-1"
+            ],
+            "role": "progress"
+          }
+        ]
+      },
+      "step": 1,
+      "action": "reach",
+      "target": "spatula",
+      "affordance_region": "the red plastic handle of the spatula",
+      "done_when": "distance(gripper, spatula) < 0.03",
+      "affordance_hint": "the red plastic handle of the spatula",
+      "refine_prompt": "the red plastic handle of the spatula",
+      "refine_cache_hit": false,
+      "affordance_refined": [
+        0.7109,
+        0.4219
+      ],
+      "affordance_3d_refined": [
+        0.4295,
+        -0.1591,
+        1.7712
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.8168
+    },
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "spatula"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              "0",
+              "0",
+              "-1"
+            ],
+            "role": "progress"
+          }
+        ]
+      },
+      "step": 2,
+      "action": "grasp",
+      "target": "spatula",
+      "affordance_region": "the red handle of the spatula",
+      "done_when": "holding(spatula)",
+      "affordance_hint": "the red handle of the spatula",
+      "refine_prompt": "the red handle of the spatula",
+      "refine_cache_hit": false,
+      "affordance_refined": [
+        0.7109,
+        0.4219
+      ],
+      "affordance_3d_refined": [
+        0.4295,
+        -0.1591,
+        1.7712
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.794
+    },
+    {
+      "constraints": {
+        "spatial": [
+          {
+            "pred": "above",
+            "args": [
+              "spatula",
+              "vessel",
+              "0.05"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_drop",
+            "args": [
+              "spatula"
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "step": 3,
+      "action": "transport",
+      "target": "spatula",
+      "destination": "vessel",
+      "affordance_region": "an empty area on the vessel",
+      "done_when": "above(spatula, vessel, 0.05)",
+      "affordance_hint": "an empty area on the vessel",
+      "refine_prompt": "an empty area on the vessel",
+      "refine_cache_hit": false,
+      "affordance_refined": [
+        0.5469,
+        0.5352
+      ],
+      "affordance_3d_refined": [
+        0.1018,
+        0.0763,
+        1.8886
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.3405
+    },
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "surface_contact",
+            "args": [
+              "spatula",
+              "vessel"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "released",
+            "args": [
+              "spatula"
+            ],
+            "role": "completion"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "stable",
+            "args": [
+              "spatula"
+            ],
+            "role": "completion"
+          }
+        ]
+      },
+      "step": 4,
+      "action": "place",
+      "target": "spatula",
+      "destination": "vessel",
+      "affordance_region": "an empty area on the vessel",
+      "done_when": "surface_contact(spatula, vessel) AND released(spatula)",
+      "affordance_hint": "an empty area on the vessel",
+      "refine_prompt": "an empty area on the vessel",
+      "refine_cache_hit": true,
+      "affordance_refined": [
+        0.5469,
+        0.5352
+      ],
+      "affordance_3d_refined": [
+        0.1018,
+        0.0763,
+        1.8886
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.3405
+    }
+  ]
+}

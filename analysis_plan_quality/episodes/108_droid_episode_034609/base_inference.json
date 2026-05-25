@@ -1,0 +1,169 @@
+{
+  "task": "Put one of the left towels on the counter",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_3epoch/best",
+  "raw": "SCENE ANALYSIS - A kitchen scene with a white robotic arm. On the counter, there is a white container with a lid, a yellow lemon, and a bunch of yellow lemons. A blue towel hangs on a cabinet handle. The task is to place one of the left towels on the counter. The blue towel is the only towel visible. STRATEGY - First, reach for the blue towel hanging on the cabinet handle. Grasp it by its body for a secure hold. Then, transport it to the counter. Finally, place it on the counter. Failure modes include not grasping the towel properly, dropping it during transport, or placing it in an unstable position. AFFORDANCE REASONING - Step 1: Reach for the blue towel on the cabinet handle. Step 2: Grasp the body of the blue towel. Step 3: Transport the towel to the counter. Step 4: Place the towel on the counter.\nGoal: on(blue_towel, counter); stable(blue_towel)\nScene: blue_towel, counter, cabinet_handle, white_container, yellow_lemons, lemon\nStep 1: reach(blue_towel)\n  affordance_region: the body of the blue towel\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, blue_towel, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, blue_towel) < 0.03\nStep 2: grasp(blue_towel)\n  affordance_region: the body of the blue towel\n  contact: holding(blue_towel) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(blue_towel)\nStep 3: transport(blue_towel -> counter)\n  affordance_region: an empty area on the counter\n  spatial: above(blue_towel, counter, 0.05) [completion]\n  safety: no_drop(blue_towel)\n  done_when: above(blue_towel, counter, 0.05)\nStep 4: place(blue_towel -> counter)\n  affordance_region: an empty area on the counter\n  contact: surface_contact(blue_towel, counter) [completion]; released(blue_towel) [completion]\n  pose: stable(blue_towel) [completion]\n  done_when: surface_contact(blue_towel, counter) AND released(blue_towel)\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [
+      {
+        "pred": "on",
+        "args": [
+          "blue_towel",
+          "counter"
+        ]
+      },
+      {
+        "pred": "stable",
+        "args": [
+          "blue_towel"
+        ]
+      }
+    ],
+    "scene_objects": [
+      "blue_towel",
+      "counter",
+      "cabinet_handle",
+      "white_container",
+      "yellow_lemons",
+      "lemon"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "blue_towel",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "blue_towel",
+        "affordance_region": "the body of the blue towel",
+        "done_when": "distance(gripper, blue_towel) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "blue_towel"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "blue_towel",
+        "affordance_region": "the body of the blue towel",
+        "done_when": "holding(blue_towel)"
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "blue_towel",
+                "counter",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "blue_towel"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "blue_towel",
+        "destination": "counter",
+        "affordance_region": "an empty area on the counter",
+        "done_when": "above(blue_towel, counter, 0.05)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "surface_contact",
+              "args": [
+                "blue_towel",
+                "counter"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "blue_towel"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "blue_towel"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "place",
+        "target": "blue_towel",
+        "destination": "counter",
+        "affordance_region": "an empty area on the counter",
+        "done_when": "surface_contact(blue_towel, counter) AND released(blue_towel)"
+      }
+    ]
+  }
+}

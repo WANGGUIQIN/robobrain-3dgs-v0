@@ -1,0 +1,183 @@
+{
+  "task": "Chop the orange",
+  "scene_objects": [
+    "orange",
+    "knife",
+    "cutting_board",
+    "table"
+  ],
+  "num_steps": 3,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "knife",
+      "affordance": [
+        0.687,
+        0.437
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "knife",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "orange"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, knife) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        -0.5681,
+        -0.2683,
+        1.2624
+      ],
+      "affordance_hint": "the black plastic handle of the knife",
+      "affordance_hint_original": "the knife",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 2,
+      "action": "grasp",
+      "target": "knife",
+      "affordance": [
+        0.675,
+        0.406
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "knife"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "holding",
+            "args": [
+              "knife"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              0,
+              0,
+              -1
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "holding(knife)",
+      "affordance_3d": [
+        -0.5619,
+        -0.2905,
+        1.2233
+      ],
+      "affordance_hint": "the black handle of the knife",
+      "affordance_hint_original": "the handle of the knife",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 3,
+      "action": "cut",
+      "target": "orange",
+      "affordance": [
+        0.566,
+        0.45
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "knife",
+              "orange"
+            ],
+            "role": "completion"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "aligned_xy",
+            "args": [
+              "knife",
+              "orange"
+            ],
+            "role": "completion"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "tilt",
+            "args": [
+              "knife",
+              "downward"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "knife",
+              "cutting_board"
+            ]
+          }
+        ]
+      },
+      "done_when": "orange is cut into pieces",
+      "affordance_3d": [
+        -0.8616,
+        -0.32,
+        1.5755
+      ],
+      "affordance_hint": "the orange on the wooden cutting board",
+      "affordance_hint_original": "orange",
+      "affordance_hint_confidence": "ok"
+    }
+  ]
+}

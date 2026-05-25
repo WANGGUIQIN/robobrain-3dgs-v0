@@ -1,0 +1,127 @@
+{
+  "task": "push the drawer",
+  "scene_objects": [
+    "drawer",
+    "robot_arm",
+    "table"
+  ],
+  "num_steps": 2,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "drawer_handle",
+      "affordance": [
+        0.75,
+        0.295
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "drawer_handle",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "table"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, drawer_handle) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        0.4429,
+        -0.3598,
+        1.541
+      ],
+      "affordance_hint": "the drawer handle"
+    },
+    {
+      "step": 2,
+      "action": "push",
+      "target": "drawer",
+      "affordance": [
+        0.65,
+        0.78
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "drawer_handle"
+            ],
+            "role": "completion"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "aligned_xy",
+            "args": [
+              "gripper",
+              "drawer_handle",
+              0.03
+            ],
+            "role": "progress"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "motion_dir",
+            "args": [
+              0,
+              1,
+              0
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "drawer",
+              "table"
+            ]
+          }
+        ]
+      },
+      "done_when": "drawer_fully_open",
+      "affordance_3d": [
+        0.2901,
+        0.5496,
+        1.7
+      ],
+      "affordance_hint": "the center of the drawer"
+    }
+  ]
+}

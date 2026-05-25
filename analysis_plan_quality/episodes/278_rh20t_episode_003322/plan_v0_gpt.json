@@ -1,0 +1,166 @@
+{
+  "task": "Drag the plate back after holding it down",
+  "scene_objects": [
+    "plate",
+    "cardboard",
+    "table"
+  ],
+  "num_steps": 3,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "plate",
+      "affordance": [
+        0.352,
+        0.294
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "plate",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "plate"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, plate) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        -0.9355,
+        -0.4271,
+        1.3015
+      ],
+      "affordance_hint": "the plate"
+    },
+    {
+      "step": 2,
+      "action": "grasp",
+      "target": "plate",
+      "affordance": [
+        0.352,
+        0.294
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "plate"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "holding",
+            "args": [
+              "plate"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              0,
+              0,
+              -1
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "holding(plate)",
+      "affordance_3d": [
+        -0.9355,
+        -0.4271,
+        1.3015
+      ],
+      "affordance_hint": "the handle of the plate"
+    },
+    {
+      "step": 3,
+      "action": "push",
+      "target": "plate",
+      "affordance": [
+        0.352,
+        0.294
+      ],
+      "approach": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "plate"
+            ],
+            "role": "safety"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "aligned_xy",
+            "args": [
+              "plate",
+              "cardboard",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "plate",
+              "table"
+            ]
+          }
+        ]
+      },
+      "done_when": "aligned_xy(plate, cardboard, 0.03)",
+      "affordance_3d": [
+        -0.9355,
+        -0.4271,
+        1.3015
+      ],
+      "affordance_hint": "the center of the plate"
+    }
+  ]
+}

@@ -1,0 +1,513 @@
+{
+  "task": "place 3 cups on the cup holder",
+  "scene_objects": [
+    "cup_holder",
+    "cup_1",
+    "cup_2",
+    "cup_3",
+    "table"
+  ],
+  "steps": [
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "cup_1",
+              "<",
+              "0.03"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "approach_axis",
+            "args": [
+              "0",
+              "0",
+              "-1"
+            ],
+            "role": "progress"
+          }
+        ]
+      },
+      "step": 1,
+      "action": "reach",
+      "target": "cup_1",
+      "affordance_region": "the body of the gray cup on the right",
+      "done_when": "distance(gripper, cup_1) < 0.03",
+      "affordance_hint": "the body of the gray cup on the right",
+      "refine_prompt": "the body of the gray cup on the right",
+      "refine_cache_hit": false,
+      "affordance_refined": [
+        0.4883,
+        0.0742
+      ],
+      "affordance_3d_refined": [
+        -0.0575,
+        -2.0876,
+        2.4515
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.4631
+    },
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "cup_1"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              "0",
+              "0",
+              "-1"
+            ],
+            "role": "progress"
+          }
+        ]
+      },
+      "step": 2,
+      "action": "grasp",
+      "target": "cup_1",
+      "affordance_region": "the handle of the leftmost cup",
+      "done_when": "holding(cup_1)",
+      "affordance_hint": "the handle of the leftmost cup",
+      "refine_prompt": "the handle of the leftmost cup",
+      "refine_cache_hit": false,
+      "affordance_refined": [
+        0.5312,
+        0.6562
+      ],
+      "affordance_3d_refined": [
+        0.0389,
+        0.1947,
+        0.623
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.4951
+    },
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "surface_contact",
+            "args": [
+              "cup_1",
+              "cup_holder"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "released",
+            "args": [
+              "cup_1"
+            ],
+            "role": "completion"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "stable",
+            "args": [
+              "cup_1"
+            ],
+            "role": "completion"
+          }
+        ]
+      },
+      "step": 3,
+      "action": "place",
+      "target": "cup_1",
+      "destination": "cup_holder",
+      "affordance_region": "an empty area on the cup holder",
+      "done_when": "surface_contact(cup_1, cup_holder) AND released(cup_1)",
+      "affordance_hint": "an empty area on the cup holder",
+      "refine_prompt": "an empty area on the cup holder",
+      "refine_cache_hit": false,
+      "refine_prompt_fallback": "cup 1",
+      "affordance_refined": [
+        0.4883,
+        0.0742
+      ],
+      "affordance_3d_refined": [
+        -0.0575,
+        -2.0876,
+        2.4515
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.5132
+    },
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "cup_2",
+              "<",
+              "0.03"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "approach_axis",
+            "args": [
+              "0",
+              "0",
+              "-1"
+            ],
+            "role": "progress"
+          }
+        ]
+      },
+      "step": 4,
+      "action": "reach",
+      "target": "cup_2",
+      "affordance_region": "the body of the gray cup near the table edge",
+      "done_when": "distance(gripper, cup_2) < 0.03",
+      "affordance_hint": "the body of the gray cup near the table edge",
+      "refine_prompt": "the body of the gray cup near the table edge",
+      "refine_cache_hit": false,
+      "affordance_refined": [
+        0.4883,
+        0.0742
+      ],
+      "affordance_3d_refined": [
+        -0.0575,
+        -2.0876,
+        2.4515
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.6342
+    },
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "cup_2"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              "0",
+              "0",
+              "-1"
+            ],
+            "role": "progress"
+          }
+        ]
+      },
+      "step": 5,
+      "action": "grasp",
+      "target": "cup_2",
+      "affordance_region": "the handle of the middle gray cup",
+      "done_when": "holding(cup_2)",
+      "affordance_hint": "the handle of the middle gray cup",
+      "refine_prompt": "the handle of the middle gray cup",
+      "refine_cache_hit": false,
+      "affordance_refined": [
+        0.5312,
+        0.6406
+      ],
+      "affordance_3d_refined": [
+        0.0643,
+        0.2893,
+        1.0285
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.4955
+    },
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "surface_contact",
+            "args": [
+              "cup_2",
+              "cup_holder"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "released",
+            "args": [
+              "cup_2"
+            ],
+            "role": "completion"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "stable",
+            "args": [
+              "cup_2"
+            ],
+            "role": "completion"
+          }
+        ]
+      },
+      "step": 6,
+      "action": "place",
+      "target": "cup_2",
+      "destination": "cup_holder",
+      "affordance_region": "an empty area on the cup holder",
+      "done_when": "surface_contact(cup_2, cup_holder) AND released(cup_2)",
+      "affordance_hint": "an empty area on the cup holder",
+      "refine_prompt": "an empty area on the cup holder",
+      "refine_cache_hit": false,
+      "refine_prompt_fallback": "cup 2",
+      "affordance_refined": [
+        0.5898,
+        0.7266
+      ],
+      "affordance_3d_refined": [
+        0.4153,
+        1.0474,
+        2.3114
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.328
+    },
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "cup_3",
+              "<",
+              "0.03"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "approach_axis",
+            "args": [
+              "0",
+              "0",
+              "-1"
+            ],
+            "role": "progress"
+          }
+        ]
+      },
+      "step": 7,
+      "action": "reach",
+      "target": "cup_3",
+      "affordance_region": "the body of the rightmost cup",
+      "done_when": "distance(gripper, cup_3) < 0.03",
+      "affordance_hint": "the body of the rightmost cup",
+      "refine_prompt": "the body of the rightmost cup",
+      "refine_cache_hit": false,
+      "affordance_refined": [
+        0.4883,
+        0.0742
+      ],
+      "affordance_3d_refined": [
+        -0.0575,
+        -2.0876,
+        2.4515
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.6514
+    },
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "cup_3"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              "0",
+              "0",
+              "-1"
+            ],
+            "role": "progress"
+          }
+        ]
+      },
+      "step": 8,
+      "action": "grasp",
+      "target": "cup_3",
+      "affordance_region": "the handle of the rightmost cup",
+      "done_when": "holding(cup_3)",
+      "affordance_hint": "the handle of the rightmost cup",
+      "refine_prompt": "the handle of the rightmost cup",
+      "refine_cache_hit": false,
+      "affordance_refined": [
+        0.5312,
+        0.6562
+      ],
+      "affordance_3d_refined": [
+        0.0389,
+        0.1947,
+        0.623
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.4374
+    },
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "surface_contact",
+            "args": [
+              "cup_3",
+              "cup_holder"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "released",
+            "args": [
+              "cup_3"
+            ],
+            "role": "completion"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "stable",
+            "args": [
+              "cup_3"
+            ],
+            "role": "completion"
+          }
+        ]
+      },
+      "step": 9,
+      "action": "place",
+      "target": "cup_3",
+      "destination": "cup_holder",
+      "affordance_region": "an empty area on the cup holder",
+      "done_when": "surface_contact(cup_3, cup_holder) AND released(cup_3)",
+      "affordance_hint": "an empty area on the cup holder",
+      "refine_prompt": "an empty area on the cup holder",
+      "refine_cache_hit": false,
+      "refine_prompt_fallback": "cup 3",
+      "affordance_refined": [
+        0.5898,
+        0.7266
+      ],
+      "affordance_3d_refined": [
+        0.4153,
+        1.0474,
+        2.3114
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.3634
+    }
+  ]
+}

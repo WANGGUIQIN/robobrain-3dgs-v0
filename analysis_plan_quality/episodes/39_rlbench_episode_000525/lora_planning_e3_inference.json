@@ -1,0 +1,426 @@
+{
+  "task": "place 3 cups on the cup holder",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_planning_3epoch/checkpoint-39957",
+  "raw": "Scene: cup_holder, cup_1, cup_2, cup_3, table\nStep 1: reach(cup_1)\n  affordance_region: the body of the metallic cup on the right side of the table\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, cup_1, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, cup_1) < 0.03\nStep 2: grasp(cup_1)\n  affordance_region: the handle of the leftmost cup\n  contact: holding(cup_1) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(cup_1)\nStep 3: transport(cup_1 -> cup_holder)\n  affordance_region: an empty area on the cup holder\n  spatial: above(cup_1, cup_holder, 0.05) [completion]\n  safety: no_drop(cup_1)\n  done_when: above(cup_1, cup_holder, 0.05)\nStep 4: place(cup_1 -> cup_holder)\n  affordance_region: an empty area on the cup holder\n  contact: surface_contact(cup_1, cup_holder) [completion]; released(cup_1) [completion]\n  pose: stable(cup_1) [completion]\n  done_when: surface_contact(cup_1, cup_holder) AND released(cup_1)\nStep 5: reach(cup_2)\n  affordance_region: the body of the metallic cup on the right side of the table\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, cup_2, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, cup_2) < 0.03\nStep 6: grasp(cup_2)\n  affordance_region: the handle of the metallic cup on the right side of the table\n  contact: holding(cup_2) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(cup_2)\nStep 7: transport(cup_2 -> cup_holder)\n  affordance_region: an empty area on the cup holder\n  spatial: above(cup_2, cup_holder, 0.05) [completion]\n  safety: no_drop(cup_2)\n  done_when: above(cup_2, cup_holder, 0.05)\nStep 8: place(cup_2 -> cup_holder)\n  affordance_region: an empty area on the cup holder\n  contact: surface_contact(cup_2, cup_holder) [completion]; released(cup_2) [completion]\n  pose: stable(cup_2) [completion]\n  done_when: surface_contact(cup_2, cup_holder) AND released(cup_2)\nStep 9: reach(cup_3)\n  affordance_region: the body of the rightmost cup\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, cup_3, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, cup_3) < 0.03\nStep 10: grasp(cup_3)\n  affordance_region: the handle of the rightmost cup\n  contact: holding(cup_3) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(cup_3)\nStep 11: transport(cup_3 -> cup_holder)\n  affordance_region: an empty area on the cup holder\n  spatial: above(cup_3, cup_holder, 0.05) [completion]\n  safety: no_drop(cup_3)\n  done_when: above(cup_3, cup_holder, 0.05)\nStep 12: place(cup_3 -> cup_holder)\n  affordance_region: an empty area on the cup holder\n  contact: surface_contact(cup_3, cup_holder) [completion]; released(cup_3) [completion]\n  pose: stable(cup_3) [completion]\n  done_when: surface_contact(cup_3, cup_holder) AND released(cup_3)\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [],
+    "scene_objects": [
+      "cup_holder",
+      "cup_1",
+      "cup_2",
+      "cup_3",
+      "table"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "cup_1",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "cup_1",
+        "affordance_region": "the body of the metallic cup on the right side of the table",
+        "done_when": "distance(gripper, cup_1) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "cup_1"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "cup_1",
+        "affordance_region": "the handle of the leftmost cup",
+        "done_when": "holding(cup_1)"
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "cup_1",
+                "cup_holder",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "cup_1"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "cup_1",
+        "destination": "cup_holder",
+        "affordance_region": "an empty area on the cup holder",
+        "done_when": "above(cup_1, cup_holder, 0.05)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "surface_contact",
+              "args": [
+                "cup_1",
+                "cup_holder"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "cup_1"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "cup_1"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "place",
+        "target": "cup_1",
+        "destination": "cup_holder",
+        "affordance_region": "an empty area on the cup holder",
+        "done_when": "surface_contact(cup_1, cup_holder) AND released(cup_1)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "cup_2",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 5,
+        "action": "reach",
+        "target": "cup_2",
+        "affordance_region": "the body of the metallic cup on the right side of the table",
+        "done_when": "distance(gripper, cup_2) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "cup_2"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 6,
+        "action": "grasp",
+        "target": "cup_2",
+        "affordance_region": "the handle of the metallic cup on the right side of the table",
+        "done_when": "holding(cup_2)"
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "cup_2",
+                "cup_holder",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "cup_2"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 7,
+        "action": "transport",
+        "target": "cup_2",
+        "destination": "cup_holder",
+        "affordance_region": "an empty area on the cup holder",
+        "done_when": "above(cup_2, cup_holder, 0.05)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "surface_contact",
+              "args": [
+                "cup_2",
+                "cup_holder"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "cup_2"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "cup_2"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 8,
+        "action": "place",
+        "target": "cup_2",
+        "destination": "cup_holder",
+        "affordance_region": "an empty area on the cup holder",
+        "done_when": "surface_contact(cup_2, cup_holder) AND released(cup_2)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "cup_3",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 9,
+        "action": "reach",
+        "target": "cup_3",
+        "affordance_region": "the body of the rightmost cup",
+        "done_when": "distance(gripper, cup_3) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "cup_3"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 10,
+        "action": "grasp",
+        "target": "cup_3",
+        "affordance_region": "the handle of the rightmost cup",
+        "done_when": "holding(cup_3)"
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "cup_3",
+                "cup_holder",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "cup_3"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 11,
+        "action": "transport",
+        "target": "cup_3",
+        "destination": "cup_holder",
+        "affordance_region": "an empty area on the cup holder",
+        "done_when": "above(cup_3, cup_holder, 0.05)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "surface_contact",
+              "args": [
+                "cup_3",
+                "cup_holder"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "cup_3"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "cup_3"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 12,
+        "action": "place",
+        "target": "cup_3",
+        "destination": "cup_holder",
+        "affordance_region": "an empty area on the cup holder",
+        "done_when": "surface_contact(cup_3, cup_holder) AND released(cup_3)"
+      }
+    ]
+  }
+}

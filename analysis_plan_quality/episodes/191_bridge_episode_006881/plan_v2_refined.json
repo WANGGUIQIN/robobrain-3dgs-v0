@@ -1,0 +1,241 @@
+{
+  "task": "Take the carrot from the silver vessel and place it above the vessel.",
+  "scene_objects": [
+    "carrot",
+    "silver_vessel",
+    "table",
+    "purple_cloth",
+    "brush"
+  ],
+  "num_steps": 4,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "carrot",
+      "affordance": [
+        0.642,
+        0.7
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "carrot",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "silver_vessel"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, carrot) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        0.571,
+        0.8089,
+        3.5324
+      ],
+      "affordance_hint": "the orange carrot in the silver vessel",
+      "affordance_hint_original": "the carrot",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 2,
+      "action": "grasp",
+      "target": "carrot",
+      "affordance": [
+        0.642,
+        0.7
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "carrot"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "holding",
+            "args": [
+              "carrot"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              0,
+              0,
+              -1
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "holding(carrot)",
+      "affordance_3d": [
+        0.571,
+        0.8089,
+        3.5324
+      ],
+      "affordance_hint": "the orange carrot in the silver vessel",
+      "affordance_hint_original": "carrot",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 3,
+      "action": "transport",
+      "target": "carrot",
+      "destination": "above_vessel",
+      "affordance": [
+        0.45,
+        0.401
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "carrot"
+            ],
+            "role": "safety"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "above",
+            "args": [
+              "carrot",
+              "silver_vessel",
+              0.05
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "carrot",
+              "silver_vessel"
+            ]
+          },
+          {
+            "pred": "no_drop",
+            "args": [
+              "carrot"
+            ]
+          }
+        ]
+      },
+      "done_when": "above(carrot, silver_vessel, 0.05) AND aligned_xy(carrot, silver_vessel, 0.03)",
+      "affordance_3d": [
+        -0.1137,
+        -0.2186,
+        1.9473
+      ],
+      "affordance_hint": "the empty area above the silver vessel",
+      "affordance_hint_original": "an empty area on the above vessel",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 4,
+      "action": "place",
+      "target": "carrot",
+      "destination": "above_vessel",
+      "affordance": [
+        0.45,
+        0.401
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "surface_contact",
+            "args": [
+              "carrot",
+              "table"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "released",
+            "args": [
+              "carrot"
+            ],
+            "role": "completion"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "stable",
+            "args": [
+              "carrot"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "support_stable",
+            "args": [
+              "carrot"
+            ]
+          }
+        ]
+      },
+      "done_when": "surface_contact(carrot, table) AND released(carrot) AND stable(carrot)",
+      "affordance_3d": [
+        -0.1137,
+        -0.2186,
+        1.9473
+      ],
+      "affordance_hint": "the empty area above the silver vessel",
+      "affordance_hint_original": "an empty area on the above vessel",
+      "affordance_hint_confidence": "ok"
+    }
+  ]
+}

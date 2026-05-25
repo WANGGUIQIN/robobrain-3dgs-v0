@@ -1,0 +1,239 @@
+{
+  "task": "place the black bowl in the oven",
+  "scene_objects": [
+    "black_bowl",
+    "oven",
+    "table"
+  ],
+  "num_steps": 4,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "black_bowl",
+      "affordance": [
+        0.62,
+        0.383
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "black_bowl",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "table"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, black_bowl) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        0.4182,
+        -0.4047,
+        3.004
+      ],
+      "affordance_hint": "the black bowl",
+      "affordance_hint_original": "the black bowl",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 2,
+      "action": "grasp",
+      "target": "black_bowl",
+      "affordance": [
+        0.62,
+        0.352
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "black_bowl"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "holding",
+            "args": [
+              "black_bowl"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              0,
+              0,
+              -1
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "holding(black_bowl)",
+      "affordance_3d": [
+        0.4073,
+        -0.4992,
+        2.9257
+      ],
+      "affordance_hint": "the body of the black bowl",
+      "affordance_hint_original": "the handle of the black bowl",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 3,
+      "action": "transport",
+      "target": "black_bowl",
+      "destination": "oven",
+      "affordance": [
+        0.16,
+        0.5
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "black_bowl"
+            ],
+            "role": "safety"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "above",
+            "args": [
+              "black_bowl",
+              "oven",
+              0.05
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "black_bowl",
+              "oven"
+            ]
+          },
+          {
+            "pred": "no_drop",
+            "args": [
+              "black_bowl"
+            ]
+          }
+        ]
+      },
+      "done_when": "above(black_bowl, oven, 0.05) AND aligned_xy(black_bowl, oven, 0.03)",
+      "affordance_3d": [
+        -1.0283,
+        0.0,
+        2.6322
+      ],
+      "affordance_hint": "the empty area on the oven",
+      "affordance_hint_original": "an empty area on the oven",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 4,
+      "action": "place",
+      "target": "black_bowl",
+      "destination": "oven",
+      "affordance": [
+        0.16,
+        0.5
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "surface_contact",
+            "args": [
+              "black_bowl",
+              "oven"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "released",
+            "args": [
+              "black_bowl"
+            ],
+            "role": "completion"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "stable",
+            "args": [
+              "black_bowl"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "support_stable",
+            "args": [
+              "black_bowl"
+            ]
+          }
+        ]
+      },
+      "done_when": "surface_contact(black_bowl, oven) AND released(black_bowl) AND stable(black_bowl)",
+      "affordance_3d": [
+        -1.0283,
+        0.0,
+        2.6322
+      ],
+      "affordance_hint": "the empty area inside the oven",
+      "affordance_hint_original": "an empty area on the oven",
+      "affordance_hint_confidence": "ok"
+    }
+  ]
+}

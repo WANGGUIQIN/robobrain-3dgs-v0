@@ -1,0 +1,231 @@
+{
+  "task": "Pick up the wipe and clean the top of the book",
+  "scene_objects": [
+    "wipe",
+    "book",
+    "table"
+  ],
+  "steps": [
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "wipe",
+              "<",
+              "0.03"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "approach_axis",
+            "args": [
+              "0",
+              "0",
+              "-1"
+            ],
+            "role": "progress"
+          }
+        ]
+      },
+      "step": 1,
+      "action": "reach",
+      "target": "wipe",
+      "affordance_region": "the corner of the white wipe",
+      "done_when": "distance(gripper, wipe) < 0.03",
+      "affordance_hint": "the corner of the white wipe",
+      "refine_prompt": "the corner of the white wipe",
+      "refine_cache_hit": false,
+      "refine_prompt_fallback": "wipe",
+      "affordance_refined": [
+        0.5469,
+        0.6328
+      ],
+      "affordance_3d_refined": [
+        -0.2554,
+        0.5363,
+        2.5539
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.271
+    },
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "wipe"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              "0",
+              "0",
+              "-1"
+            ],
+            "role": "progress"
+          }
+        ]
+      },
+      "step": 2,
+      "action": "grasp",
+      "target": "wipe",
+      "affordance_region": "the corner of the white wipe",
+      "done_when": "holding(wipe)",
+      "affordance_hint": "the corner of the white wipe",
+      "refine_prompt": "the corner of the white wipe",
+      "refine_cache_hit": true,
+      "affordance_refined": [
+        0.5469,
+        0.6328
+      ],
+      "affordance_3d_refined": [
+        -0.2554,
+        0.5363,
+        2.5539
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.271
+    },
+    {
+      "constraints": {
+        "spatial": [
+          {
+            "pred": "above",
+            "args": [
+              "wipe",
+              "book",
+              "0.05"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_drop",
+            "args": [
+              "wipe"
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "step": 3,
+      "action": "transport",
+      "target": "wipe",
+      "destination": "book",
+      "affordance_region": "an empty area on the book",
+      "done_when": "above(wipe, book, 0.05)",
+      "affordance_hint": "an empty area on the book",
+      "refine_prompt": "an empty area on the book",
+      "refine_cache_hit": false,
+      "affordance_refined": [
+        0.5625,
+        0.5938
+      ],
+      "affordance_3d_refined": [
+        -0.1934,
+        0.3867,
+        2.4169
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.3345
+    },
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "surface_contact",
+            "args": [
+              "wipe",
+              "book"
+            ],
+            "role": "completion"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "aligned_xy",
+            "args": [
+              "wipe",
+              "book",
+              "0.03"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "wipe",
+              "book"
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "step": 4,
+      "action": "wipe",
+      "target": "book",
+      "affordance_region": "the top surface of the blue book",
+      "done_when": "surface_contact(wipe, book) AND aligned_xy(wipe, book, 0.03)",
+      "affordance_hint": "the top surface of the blue book",
+      "refine_prompt": "the top surface of the blue book",
+      "refine_cache_hit": false,
+      "affordance_refined": [
+        0.582,
+        0.6172
+      ],
+      "affordance_3d_refined": [
+        -0.1372,
+        0.4741,
+        2.4952
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.3831
+    }
+  ]
+}

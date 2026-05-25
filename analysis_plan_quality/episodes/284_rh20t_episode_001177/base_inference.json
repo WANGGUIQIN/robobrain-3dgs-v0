@@ -1,0 +1,18 @@
+{
+  "task": "Turn off the desk lamp by pressing the button",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_3epoch/best",
+  "raw": "The scene shows a robotic arm positioned over a desk with a green patterned surface. On the desk, there are several objects: a red toy car, a blue toy car, a yellow toy car, a green bottle, and a blue circular object. The robotic arm is currently holding the green bottle, indicating it has been grasped. The task is to turn off the desk lamp by pressing a button. However, the desk lamp is not visible in the image, suggesting it may be out of frame or the task involves a different object or action not directly observable. \n\nStrategy: Since the desk lamp is not visible, the task likely involves interacting with a button on a device or surface not shown. The robotic arm is already holding the green bottle, which may be a distractor or part of a misaligned task. The goal is to press a button, which typically requires a flat surface or a specific button region. The arm must first release the bottle, approach the button, and press it. Failure modes include the arm not releasing the bottle, misaligning with the button, or pressing the wrong object. \n\nAffordance reasoning: The arm must first release the bottle (affordance_region: the body of the green bottle) to free its gripper. Then, it must approach the button (affordance_region: a flat surface or button on a device) and press it (affordance_region: the button surface). The button press requires contact and a downward force, with the arm's gripper or a tool (if available) to apply pressure. \n\nGoal: The task is to turn off the lamp, which is achieved by pressing a button. The goal predicate is a single action: pressing the button. \n\nScene: green_bottle, red_car, blue_car, yellow_car, blue_circular_object, desk_surface (implied for button press). \n\nStep 1: Release the green bottle. \n  - Affordance_region: the body of the green bottle. \n  - Contact: released(green_bottle) [completion]. \n  - Direction: approach_axis(0, 0, -1) [progress]. \n  - Done_when: released(green_bottle). \n\nStep 2: Approach the button. \n  - Affordance_region: a flat surface or button on a device (not visible, but assumed to exist). \n  - Contact: gripper_state(open) [progress]. \n  - Spatial: distance(gripper, button, <, 0.03) [completion]. \n  - Direction: approach_axis(0, 0, -1) [progress]. \n  - Done_when: distance(gripper, button) < 0.03. \n\nStep 3: Press the button. \n  - Affordance_region: the button surface. \n  - Contact: pressed(button) [completion]. \n  - Pose: downward_force(gripper, button) [completion]. \n  - Done_when: pressed(button). \n\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [],
+    "scene_objects": [
+      "green_bottle",
+      "red_car",
+      "blue_car",
+      "yellow_car",
+      "blue_circular_object",
+      "desk_surface (implied for button press)."
+    ],
+    "steps": []
+  }
+}

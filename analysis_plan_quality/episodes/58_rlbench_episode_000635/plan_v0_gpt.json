@@ -1,0 +1,240 @@
+{
+  "task": "put the triangular prism in the shape sorter",
+  "scene_objects": [
+    "triangular_prism",
+    "shape_sorter",
+    "table"
+  ],
+  "num_steps": 4,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "triangular_prism",
+      "affordance": [
+        0.476,
+        0.601
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "triangular_prism",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "shape_sorter"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, triangular_prism) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        -0.072,
+        0.3119,
+        1.5354
+      ],
+      "affordance_hint": "the triangular prism"
+    },
+    {
+      "step": 2,
+      "action": "grasp",
+      "target": "triangular_prism",
+      "affordance": [
+        0.476,
+        0.585
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "triangular_prism"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "holding",
+            "args": [
+              "triangular_prism"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              0,
+              0,
+              -1
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "holding(triangular_prism)",
+      "affordance_3d": [
+        -0.041,
+        0.1505,
+        0.8754
+      ],
+      "affordance_hint": "the handle of the triangular prism"
+    },
+    {
+      "step": 3,
+      "action": "transport",
+      "target": "triangular_prism",
+      "destination": "shape_sorter",
+      "affordance": [
+        0.476,
+        0.66
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "triangular_prism"
+            ],
+            "role": "safety"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "above",
+            "args": [
+              "triangular_prism",
+              "shape_sorter",
+              0.05
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "aligned_xy",
+            "args": [
+              "triangular_prism",
+              "shape_sorter",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "triangular_prism",
+              "shape_sorter"
+            ]
+          },
+          {
+            "pred": "no_drop",
+            "args": [
+              "triangular_prism"
+            ]
+          }
+        ]
+      },
+      "done_when": "above(triangular_prism, shape_sorter, 0.05) AND aligned_xy(triangular_prism, shape_sorter, 0.03)",
+      "affordance_3d": [
+        -0.0126,
+        0.0864,
+        0.2698
+      ],
+      "affordance_hint": "an empty area on the shape sorter"
+    },
+    {
+      "step": 4,
+      "action": "insert",
+      "target": "triangular_prism",
+      "destination": "shape_sorter",
+      "affordance": [
+        0.476,
+        0.57
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "inserted",
+            "args": [
+              "triangular_prism",
+              "shape_sorter"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "released",
+            "args": [
+              "triangular_prism"
+            ],
+            "role": "completion"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "stable",
+            "args": [
+              "triangular_prism"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "support_stable",
+            "args": [
+              "triangular_prism"
+            ]
+          }
+        ]
+      },
+      "done_when": "inserted(triangular_prism, shape_sorter) AND released(triangular_prism) AND stable(triangular_prism)",
+      "affordance_3d": [
+        -0.0971,
+        0.2913,
+        2.0716
+      ],
+      "affordance_hint": "the top opening of the shape sorter"
+    }
+  ]
+}

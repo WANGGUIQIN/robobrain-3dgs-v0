@@ -1,0 +1,162 @@
+{
+  "task": "pick up the green cup",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_3epoch/best",
+  "raw": "**SCENE ANALYSIS -** A green cup is on a wooden table. A blue basket is to the right of the cup. A yellow cup is in front of the green cup. A blue bowl is behind the yellow cup. The green cup is a rigid container with a rim. STRATEGY - Reach the green cup at its rim for a stable grasp, lift it, and transport it to the blue basket. Failure modes include dropping the cup during transport or misaligning it with the basket. AFFORDANCE REASONING - Step 1 reach the green cup rim; Step 2 grasp the rim for secure hold; Step 3 transport above the basket; Step 4 place into the basket.\n\nGoal: inside(green_cup, blue_basket)\nScene: green_cup, blue_basket, table, yellow_cup, blue_bowl\nStep 1: reach(green_cup)\n  affordance_region: the rim of the green cup\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, green_cup, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, green_cup) < 0.03\nStep 2: grasp(green_cup)\n  affordance_region: the rim of the green cup\n  contact: holding(green_cup) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(green_cup)\nStep 3: transport(green_cup -> blue_basket)\n  affordance_region: an empty area inside the blue basket\n  spatial: above(green_cup, blue_basket, 0.05) [completion]\n  safety: no_drop(green_cup)\n  done_when: above(green_cup, blue_basket, 0.05)\nStep 4: place(green_cup -> blue_basket)\n  affordance_region: an empty area inside the blue basket\n  contact: surface_contact(green_cup, blue_basket) [completion]; released(green_cup) [completion]\n  pose: stable(green_cup) [completion]\n  done_when: surface_contact(green_cup, blue_basket) AND released(green_cup)\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [
+      {
+        "pred": "inside",
+        "args": [
+          "green_cup",
+          "blue_basket"
+        ]
+      }
+    ],
+    "scene_objects": [
+      "green_cup",
+      "blue_basket",
+      "table",
+      "yellow_cup",
+      "blue_bowl"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "green_cup",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "green_cup",
+        "affordance_region": "the rim of the green cup",
+        "done_when": "distance(gripper, green_cup) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "green_cup"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "green_cup",
+        "affordance_region": "the rim of the green cup",
+        "done_when": "holding(green_cup)"
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "green_cup",
+                "blue_basket",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "green_cup"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "green_cup",
+        "destination": "blue_basket",
+        "affordance_region": "an empty area inside the blue basket",
+        "done_when": "above(green_cup, blue_basket, 0.05)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "surface_contact",
+              "args": [
+                "green_cup",
+                "blue_basket"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "green_cup"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "green_cup"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "place",
+        "target": "green_cup",
+        "destination": "blue_basket",
+        "affordance_region": "an empty area inside the blue basket",
+        "done_when": "surface_contact(green_cup, blue_basket) AND released(green_cup)"
+      }
+    ]
+  }
+}

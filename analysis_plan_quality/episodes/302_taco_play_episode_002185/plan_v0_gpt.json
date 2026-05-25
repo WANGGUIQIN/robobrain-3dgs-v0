@@ -1,0 +1,168 @@
+{
+  "task": "turn off the green light",
+  "scene_objects": [
+    "green_light",
+    "robot_arm",
+    "table"
+  ],
+  "num_steps": 3,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "green_light",
+      "affordance": [
+        0.45,
+        0.1
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "green_light",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "table"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, green_light) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        -0.0939,
+        -0.7365,
+        1.608
+      ],
+      "affordance_hint": "the green light"
+    },
+    {
+      "step": 2,
+      "action": "press",
+      "target": "green_light",
+      "affordance": [
+        0.45,
+        0.15
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "green_light"
+            ],
+            "role": "completion"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "stable",
+            "args": [
+              "green_light"
+            ],
+            "role": "safety"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "force_limit",
+            "args": [
+              "gripper",
+              "green_light"
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "gripper_contact(green_light) AND green_light(off)",
+      "affordance_3d": [
+        -0.0939,
+        -0.6498,
+        1.608
+      ],
+      "affordance_hint": "the center of the green light"
+    },
+    {
+      "step": 3,
+      "action": "retreat",
+      "target": "green_light",
+      "affordance": [
+        0.455,
+        0.15
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "completion"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "green_light",
+              ">",
+              0.05
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "table"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, green_light) > 0.05 AND gripper_state(open)",
+      "affordance_3d": [
+        -0.0871,
+        -0.6531,
+        1.616
+      ],
+      "affordance_hint": "green light"
+    }
+  ]
+}

@@ -1,0 +1,182 @@
+{
+  "task": "use the stick to drag the cube onto the gray target",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_3epoch/best",
+  "raw": "SCENE ANALYSIS - A robotic arm is positioned over a table with a gray square target, a blue square, a purple square, a pink rectangular object, and a long stick. The stick is a rigid, elongated object suitable for dragging. STRATEGY - First, grasp the stick to enable manipulation. Then, use the stick to push the blue cube towards the gray target. Ensure the stick is held securely and the push is directed accurately to move the cube onto the target. Failure modes include dropping the stick or misaligning the push. AFFORDANCE REASONING - Step 1: Reach for the stick to grasp it. Step 2: Grasp the stick for control. Step 3: Transport the stick to the blue cube. Step 4: Use the stick to push the blue cube onto the gray target.\nGoal: on(blue_cube, gray_target)\nScene: gray_target, blue_cube, purple_cube, pink_object, stick, table\nStep 1: reach(stick)\n  affordance_region: the body of the stick\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, stick, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, stick) < 0.03\nStep 2: grasp(stick)\n  affordance_region: the body of the stick\n  contact: holding(stick) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(stick)\nStep 3: transport(stick -> blue_cube)\n  affordance_region: the body of the blue cube\n  contact: near(stick, blue_cube) [progress]\n  spatial: distance(stick, blue_cube, <, 0.1) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: near(stick, blue_cube)\nStep 4: push(stick -> blue_cube)\n  affordance_region: the body of the blue cube\n  contact: pushing(blue_cube) [completion]\n  spatial: distance(blue_cube, gray_target, <, 0.05) [completion]\n  direction: push_axis(0, 0, -1) [progress]\n  done_when: distance(blue_cube, gray_target) < 0.05\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [
+      {
+        "pred": "on",
+        "args": [
+          "blue_cube",
+          "gray_target"
+        ]
+      }
+    ],
+    "scene_objects": [
+      "gray_target",
+      "blue_cube",
+      "purple_cube",
+      "pink_object",
+      "stick",
+      "table"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "stick",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "stick",
+        "affordance_region": "the body of the stick",
+        "done_when": "distance(gripper, stick) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "stick"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "stick",
+        "affordance_region": "the body of the stick",
+        "done_when": "holding(stick)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "near",
+              "args": [
+                "stick",
+                "blue_cube"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "stick",
+                "blue_cube",
+                "<",
+                "0.1"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "stick",
+        "destination": "blue_cube",
+        "affordance_region": "the body of the blue cube",
+        "done_when": "near(stick, blue_cube)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "pushing",
+              "args": [
+                "blue_cube"
+              ],
+              "role": "completion"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "blue_cube",
+                "gray_target",
+                "<",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "push_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "push",
+        "target": "stick",
+        "destination": "blue_cube",
+        "affordance_region": "the body of the blue cube",
+        "done_when": "distance(blue_cube, gray_target) < 0.05"
+      }
+    ]
+  }
+}

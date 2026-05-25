@@ -1,0 +1,241 @@
+{
+  "task": "Move the red pepper to the right of the blue spoon",
+  "scene_objects": [
+    "red_pepper",
+    "blue_spoon",
+    "metal_bowl",
+    "stove",
+    "green_cloth"
+  ],
+  "num_steps": 4,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "red_pepper",
+      "affordance": [
+        0.535,
+        0.285
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "red_pepper",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "metal_bowl"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, red_pepper) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        0.1008,
+        -0.6162,
+        2.4952
+      ],
+      "affordance_hint": "the red pepper in the metal bowl",
+      "affordance_hint_original": "the red pepper",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 2,
+      "action": "grasp",
+      "target": "red_pepper",
+      "affordance": [
+        0.5,
+        0.275
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "red_pepper"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "holding",
+            "args": [
+              "red_pepper"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              0,
+              0,
+              -1
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "holding(red_pepper)",
+      "affordance_3d": [
+        0.0,
+        -0.6295,
+        2.4169
+      ],
+      "affordance_hint": "the red body of the red pepper",
+      "affordance_hint_original": "the handle of the red pepper",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 3,
+      "action": "transport",
+      "target": "red_pepper",
+      "destination": "right_of_blue_spoon",
+      "affordance": [
+        0.441,
+        0.45
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "red_pepper"
+            ],
+            "role": "safety"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "above",
+            "args": [
+              "red_pepper",
+              "blue_spoon",
+              0.05
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "red_pepper",
+              "blue_spoon"
+            ]
+          },
+          {
+            "pred": "no_drop",
+            "args": [
+              "red_pepper"
+            ]
+          }
+        ]
+      },
+      "done_when": "above(red_pepper, blue_spoon, 0.05) AND aligned_xy(red_pepper, right_of_blue_spoon, 0.03)",
+      "affordance_3d": [
+        -0.1496,
+        -0.1297,
+        2.2213
+      ],
+      "affordance_hint": "the empty area on the right of the blue spoon",
+      "affordance_hint_original": "an empty area on the right of blue spoon",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 4,
+      "action": "place",
+      "target": "red_pepper",
+      "destination": "right_of_blue_spoon",
+      "affordance": [
+        0.441,
+        0.45
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "surface_contact",
+            "args": [
+              "red_pepper",
+              "stove"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "released",
+            "args": [
+              "red_pepper"
+            ],
+            "role": "completion"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "stable",
+            "args": [
+              "red_pepper"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "support_stable",
+            "args": [
+              "red_pepper"
+            ]
+          }
+        ]
+      },
+      "done_when": "surface_contact(red_pepper, stove) AND released(red_pepper) AND stable(red_pepper)",
+      "affordance_3d": [
+        -0.1496,
+        -0.1297,
+        2.2213
+      ],
+      "affordance_hint": "the empty area on the right of the blue spoon",
+      "affordance_hint_original": "an empty area on the right of blue spoon",
+      "affordance_hint_confidence": "ok"
+    }
+  ]
+}

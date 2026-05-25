@@ -1,0 +1,132 @@
+{
+  "task": "push the red button to turn off the red light",
+  "scene_objects": [
+    "red_button",
+    "red_light",
+    "robot_arm",
+    "table"
+  ],
+  "num_steps": 2,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "red_button",
+      "affordance": [
+        0.1,
+        0.3
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "red_button",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "red_button"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, red_button) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        -0.0756,
+        -0.0474,
+        0.165
+      ],
+      "affordance_hint": "the red button on the front panel of the control unit",
+      "affordance_hint_original": "the red button",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 2,
+      "action": "push",
+      "target": "red_button",
+      "affordance": [
+        0.1,
+        0.3
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "red_button"
+            ],
+            "role": "completion"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "aligned_xy",
+            "args": [
+              "gripper",
+              "red_button",
+              0.02
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "motion_dir",
+            "args": [
+              0,
+              0,
+              -1
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "red_button"
+            ]
+          }
+        ]
+      },
+      "done_when": "red_light(off)",
+      "affordance_3d": [
+        -0.0756,
+        -0.0474,
+        0.165
+      ],
+      "affordance_hint": "the center of the red button",
+      "affordance_hint_original": "the center of the red button",
+      "affordance_hint_confidence": "ok"
+    }
+  ]
+}

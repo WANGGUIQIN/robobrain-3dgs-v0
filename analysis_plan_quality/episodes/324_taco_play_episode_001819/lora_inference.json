@@ -1,0 +1,201 @@
+{
+  "task": "turn off the red led light",
+  "parsed": {
+    "scene_objects": [
+      "red_led",
+      "cabinet",
+      "table"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "red_led",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "red_led",
+        "affordance_region": "the red led",
+        "done_when": "distance(gripper, red_led) < 0.03",
+        "affordance_hint": "the red led",
+        "refine_prompt": "the red led",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.7422,
+          0.3867
+        ],
+        "affordance_3d_refined": [
+          0.493,
+          -0.2306,
+          1.771
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.3245,
+        "affordance": [
+          0.7422,
+          0.3867
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_contact",
+              "args": [
+                "red_led"
+              ],
+              "role": "completion"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "aligned_xy",
+              "args": [
+                "gripper",
+                "red_led",
+                "0.02"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_collision",
+              "args": [
+                "gripper",
+                "cabinet"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "push",
+        "target": "red_led",
+        "affordance_region": "the center of the red led",
+        "done_when": "gripper_contact(red_led)",
+        "affordance_hint": "the center of the red led",
+        "refine_prompt": "the center of the red led",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.7422,
+          0.3867
+        ],
+        "affordance_3d_refined": [
+          0.493,
+          -0.2306,
+          1.771
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.3379,
+        "affordance": [
+          0.7422,
+          0.3867
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "released",
+              "args": [
+                "red_led"
+              ],
+              "role": "completion"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "clear_path",
+              "args": [
+                "gripper"
+              ],
+              "role": "progress"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_collision",
+              "args": [
+                "gripper",
+                "cabinet"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "release",
+        "target": "red_led",
+        "affordance_region": "the red led",
+        "done_when": "released(red_led)",
+        "affordance_hint": "the red led",
+        "refine_prompt": "the red led",
+        "refine_cache_hit": true,
+        "affordance_refined": [
+          0.7422,
+          0.3867
+        ],
+        "affordance_3d_refined": [
+          0.493,
+          -0.2306,
+          1.771
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.3245,
+        "affordance": [
+          0.7422,
+          0.3867
+        ]
+      }
+    ]
+  }
+}

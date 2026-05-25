@@ -1,0 +1,172 @@
+{
+  "task": "go push the yellow block to the right",
+  "scene_objects": [
+    "yellow_block",
+    "table",
+    "tray",
+    "cabinet"
+  ],
+  "num_steps": 3,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "yellow_block",
+      "affordance": [
+        0.419,
+        0.53
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "yellow_block",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "tray"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, yellow_block) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        -0.1577,
+        0.0601,
+        1.672
+      ],
+      "affordance_hint": "the yellow block",
+      "affordance_hint_original": "the yellow block",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 2,
+      "action": "push",
+      "target": "yellow_block",
+      "affordance": [
+        0.419,
+        0.535
+      ],
+      "approach": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "yellow_block"
+            ],
+            "role": "completion"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "motion_dir",
+            "args": [
+              "yellow_block",
+              "right"
+            ],
+            "role": "progress"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "yellow_block",
+              "tray"
+            ]
+          }
+        ]
+      },
+      "done_when": "yellow_block moved right AND gripper_contact(yellow_block)",
+      "affordance_3d": [
+        -0.1579,
+        0.0677,
+        1.674
+      ],
+      "affordance_hint": "the center of the yellow block",
+      "affordance_hint_original": "the center of the yellow block",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 3,
+      "action": "release",
+      "target": "yellow_block",
+      "affordance": [
+        0.419,
+        0.53
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "released",
+            "args": [
+              "yellow_block"
+            ],
+            "role": "completion"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "on_surface",
+            "args": [
+              "yellow_block",
+              "table"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "support_stable",
+            "args": [
+              "yellow_block"
+            ]
+          }
+        ]
+      },
+      "done_when": "released(yellow_block) AND on_surface(yellow_block, table)",
+      "affordance_3d": [
+        -0.1577,
+        0.0601,
+        1.672
+      ],
+      "affordance_hint": "the yellow block",
+      "affordance_hint_original": "the yellow block",
+      "affordance_hint_confidence": "ok"
+    }
+  ]
+}

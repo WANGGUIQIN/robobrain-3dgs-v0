@@ -1,0 +1,148 @@
+{
+  "task": "Move the blue fork and place it on the yellow napkin",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_3epoch/best",
+  "raw": "**SCENE ANALYSIS -** A wooden table holds a blue fork, a red brush, a red spoon, and a yellow napkin. The blue fork is a rigid object with tines; the yellow napkin is a flat, absorbent cloth. The task requires moving the blue fork to the yellow napkin. STRATEGY - First, reach for the blue fork to grasp it. Then, transport it to the yellow napkin and place it there. Failure modes include dropping the fork during transport or misplacing it on the napkin. AFFORDANCE REASONING - Step 1: Reach for the blue fork at its tines for a stable grasp. Step 2: Grasp the tines to lift the fork. Step 3: Transport the fork to the yellow napkin. Step 4: Place the fork on the yellow napkin.\n\n**Goal:** on(blue_fork, yellow_napkin)\n**Scene:** blue_fork, yellow_napkin, table\n**Step 1:** reach(blue_fork)\n  affordance_region: the tines of the blue fork\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, blue_fork, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, blue_fork) < 0.03\n**Step 2:** grasp(blue_fork)\n  affordance_region: the tines of the blue fork\n  contact: holding(blue_fork) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(blue_fork)\n**Step 3:** transport(blue_fork -> yellow_napkin)\n  affordance_region: an empty area on the yellow napkin\n  spatial: above(blue_fork, yellow_napkin, 0.05) [completion]\n  safety: no_drop(blue_fork)\n  done_when: above(blue_fork, yellow_napkin, 0.05)\n**Step 4:** place(blue_fork -> yellow_napkin)\n  affordance_region: an empty area on the yellow napkin\n  contact: surface_contact(blue_fork, yellow_napkin) [completion]; released(blue_fork) [completion]\n  pose: stable(blue_fork) [completion]\n  done_when: surface_contact(blue_fork, yellow_napkin) AND released(blue_fork)\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [],
+    "scene_objects": [],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "blue_fork",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "blue_fork",
+        "affordance_region": "the tines of the blue fork",
+        "done_when": "distance(gripper, blue_fork) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "blue_fork"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "blue_fork",
+        "affordance_region": "the tines of the blue fork",
+        "done_when": "holding(blue_fork)"
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "blue_fork",
+                "yellow_napkin",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "blue_fork"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "blue_fork",
+        "destination": "yellow_napkin",
+        "affordance_region": "an empty area on the yellow napkin",
+        "done_when": "above(blue_fork, yellow_napkin, 0.05)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "surface_contact",
+              "args": [
+                "blue_fork",
+                "yellow_napkin"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "blue_fork"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "blue_fork"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "place",
+        "target": "blue_fork",
+        "destination": "yellow_napkin",
+        "affordance_region": "an empty area on the yellow napkin",
+        "done_when": "surface_contact(blue_fork, yellow_napkin) AND released(blue_fork)"
+      }
+    ]
+  }
+}

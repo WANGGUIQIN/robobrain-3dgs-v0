@@ -1,0 +1,233 @@
+{
+  "task": "place the gray bowl in the dish rack",
+  "scene_objects": [
+    "gray_bowl",
+    "dish_rack",
+    "orange_object",
+    "yellow_cup",
+    "table"
+  ],
+  "num_steps": 4,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "gray_bowl",
+      "affordance": [
+        0.892,
+        0.468
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "gray_bowl",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "orange_object"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, gray_bowl) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        1.4016,
+        -0.1121,
+        3.1214
+      ],
+      "affordance_hint": "the gray bowl"
+    },
+    {
+      "step": 2,
+      "action": "grasp",
+      "target": "gray_bowl",
+      "affordance": [
+        0.875,
+        0.45
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "gray_bowl"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "holding",
+            "args": [
+              "gray_bowl"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              0,
+              0,
+              -1
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "holding(gray_bowl)",
+      "affordance_3d": [
+        1.2781,
+        -0.1731,
+        2.9649
+      ],
+      "affordance_hint": "the handle of the gray bowl"
+    },
+    {
+      "step": 3,
+      "action": "transport",
+      "target": "gray_bowl",
+      "destination": "dish_rack",
+      "affordance": [
+        0.883,
+        0.5
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "gray_bowl"
+            ],
+            "role": "safety"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "above",
+            "args": [
+              "gray_bowl",
+              "dish_rack",
+              0.05
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gray_bowl",
+              "dish_rack"
+            ]
+          },
+          {
+            "pred": "no_drop",
+            "args": [
+              "gray_bowl"
+            ]
+          }
+        ]
+      },
+      "done_when": "above(gray_bowl, dish_rack, 0.05) AND aligned_xy(gray_bowl, dish_rack, 0.03)",
+      "affordance_3d": [
+        1.7353,
+        0.0,
+        3.9433
+      ],
+      "affordance_hint": "an empty area on the dish rack"
+    },
+    {
+      "step": 4,
+      "action": "place",
+      "target": "gray_bowl",
+      "destination": "dish_rack",
+      "affordance": [
+        0.883,
+        0.5
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "surface_contact",
+            "args": [
+              "gray_bowl",
+              "dish_rack"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "released",
+            "args": [
+              "gray_bowl"
+            ],
+            "role": "completion"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "stable",
+            "args": [
+              "gray_bowl"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "support_stable",
+            "args": [
+              "gray_bowl"
+            ]
+          }
+        ]
+      },
+      "done_when": "surface_contact(gray_bowl, dish_rack) AND released(gray_bowl) AND stable(gray_bowl)",
+      "affordance_3d": [
+        1.7353,
+        0.0,
+        3.9433
+      ],
+      "affordance_hint": "an empty area on the dish rack"
+    }
+  ]
+}

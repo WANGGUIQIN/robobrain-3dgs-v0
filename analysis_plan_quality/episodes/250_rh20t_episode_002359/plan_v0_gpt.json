@@ -1,0 +1,231 @@
+{
+  "task": "Build with small Lego blocks for the nth time with n blocks",
+  "scene_objects": [
+    "Lego_blocks",
+    "table",
+    "assembly_area"
+  ],
+  "num_steps": 4,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "first_Lego_block",
+      "affordance": [
+        0.3,
+        0.401
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "first_Lego_block",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "table"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, first_Lego_block) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        -1.1964,
+        -0.3791,
+        1.5755
+      ],
+      "affordance_hint": "the first Lego block"
+    },
+    {
+      "step": 2,
+      "action": "grasp",
+      "target": "first_Lego_block",
+      "affordance": [
+        0.3,
+        0.401
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "first_Lego_block"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "holding",
+            "args": [
+              "first_Lego_block"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              0,
+              0,
+              -1
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "holding(first_Lego_block)",
+      "affordance_3d": [
+        -1.1964,
+        -0.3791,
+        1.5755
+      ],
+      "affordance_hint": "first Lego block"
+    },
+    {
+      "step": 3,
+      "action": "transport",
+      "target": "first_Lego_block",
+      "destination": "assembly_area",
+      "affordance": [
+        0.406,
+        0.45
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "first_Lego_block"
+            ],
+            "role": "safety"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "above",
+            "args": [
+              "first_Lego_block",
+              "assembly_area",
+              0.05
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "first_Lego_block",
+              "assembly_area"
+            ]
+          },
+          {
+            "pred": "no_drop",
+            "args": [
+              "first_Lego_block"
+            ]
+          }
+        ]
+      },
+      "done_when": "above(first_Lego_block, assembly_area, 0.05) AND aligned_xy(first_Lego_block, assembly_area, 0.03)",
+      "affordance_3d": [
+        -1.037,
+        -0.3121,
+        1.5364
+      ],
+      "affordance_hint": "an empty area on the assembly area"
+    },
+    {
+      "step": 4,
+      "action": "place",
+      "target": "first_Lego_block",
+      "destination": "assembly_area",
+      "affordance": [
+        0.406,
+        0.45
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "surface_contact",
+            "args": [
+              "first_Lego_block",
+              "assembly_area"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "released",
+            "args": [
+              "first_Lego_block"
+            ],
+            "role": "completion"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "stable",
+            "args": [
+              "first_Lego_block"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "support_stable",
+            "args": [
+              "first_Lego_block"
+            ]
+          }
+        ]
+      },
+      "done_when": "surface_contact(first_Lego_block, assembly_area) AND released(first_Lego_block) AND stable(first_Lego_block)",
+      "affordance_3d": [
+        -1.037,
+        -0.3121,
+        1.5364
+      ],
+      "affordance_hint": "an empty area on the assembly area"
+    }
+  ]
+}

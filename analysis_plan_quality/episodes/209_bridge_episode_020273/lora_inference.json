@@ -1,0 +1,246 @@
+{
+  "task": "Place eggplant to the right of the chicken wing",
+  "parsed": {
+    "scene_objects": [
+      "eggplant",
+      "chicken_wing",
+      "can",
+      "blue_cloth",
+      "table"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "eggplant",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "eggplant",
+        "affordance_region": "the purple eggplant",
+        "done_when": "distance(gripper, eggplant) < 0.03",
+        "affordance_hint": "the purple eggplant",
+        "refine_prompt": "the purple eggplant",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.3438,
+          0.3438
+        ],
+        "affordance_3d_refined": [
+          -0.2021,
+          -0.2021,
+          1.1254
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.6164,
+        "affordance": [
+          0.3438,
+          0.3438
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "eggplant"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "eggplant",
+        "affordance_region": "the purple eggplant",
+        "done_when": "holding(eggplant)",
+        "affordance_hint": "the purple eggplant",
+        "refine_prompt": "the purple eggplant",
+        "refine_cache_hit": true,
+        "affordance_refined": [
+          0.3438,
+          0.3438
+        ],
+        "affordance_3d_refined": [
+          -0.2021,
+          -0.2021,
+          1.1254
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.6164,
+        "affordance": [
+          0.3438,
+          0.3438
+        ]
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "eggplant",
+                "table",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "eggplant"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "eggplant",
+        "destination": "right_of_chicken_wing",
+        "affordance_region": "an empty area on the right of the chicken wing",
+        "done_when": "above(eggplant, table, 0.05)",
+        "affordance_hint": "an empty area on the right of the chicken wing",
+        "refine_prompt": "an empty area on the right of the chicken wing",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.8594,
+          0.9375
+        ],
+        "affordance_3d_refined": [
+          0.2143,
+          0.2609,
+          0.5188
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.3603,
+        "affordance": [
+          0.8594,
+          0.9375
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "surface_contact",
+              "args": [
+                "eggplant",
+                "table"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "eggplant"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "eggplant"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "place",
+        "target": "eggplant",
+        "destination": "right_of_chicken_wing",
+        "affordance_region": "an empty area on the right of the chicken wing",
+        "done_when": "surface_contact(eggplant, table) AND released(eggplant) AND stable(eggplant)",
+        "affordance_hint": "an empty area on the right of the chicken wing",
+        "refine_prompt": "an empty area on the right of the chicken wing",
+        "refine_cache_hit": true,
+        "affordance_refined": [
+          0.8594,
+          0.9375
+        ],
+        "affordance_3d_refined": [
+          0.2143,
+          0.2609,
+          0.5188
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.3603,
+        "affordance": [
+          0.8594,
+          0.9375
+        ]
+      }
+    ]
+  }
+}

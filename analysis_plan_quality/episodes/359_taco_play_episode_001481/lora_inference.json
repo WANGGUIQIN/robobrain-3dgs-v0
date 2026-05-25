@@ -1,0 +1,245 @@
+{
+  "task": "place the purple object on top of the drawer",
+  "parsed": {
+    "scene_objects": [
+      "purple_object",
+      "drawer",
+      "table"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "purple_object",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "purple_object",
+        "affordance_region": "the purple object",
+        "done_when": "distance(gripper, purple_object) < 0.03",
+        "affordance_hint": "the purple object",
+        "refine_prompt": "the purple object",
+        "refine_cache_hit": false,
+        "refine_prompt_fallback": "purple object",
+        "affordance_refined": [
+          0.1719,
+          0.4297
+        ],
+        "affordance_3d_refined": [
+          -0.4579,
+          -0.0981,
+          1.214
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.2787,
+        "affordance": [
+          0.1719,
+          0.4297
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "purple_object"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "purple_object",
+        "affordance_region": "the purple object",
+        "done_when": "holding(purple_object)",
+        "affordance_hint": "the purple object",
+        "refine_prompt": "the purple object",
+        "refine_cache_hit": true,
+        "affordance_refined": [
+          0.1719,
+          0.4297
+        ],
+        "affordance_3d_refined": [
+          -0.4579,
+          -0.0981,
+          1.214
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.2787,
+        "affordance": [
+          0.1719,
+          0.4297
+        ]
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "purple_object",
+                "drawer",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "purple_object"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "purple_object",
+        "destination": "drawer",
+        "affordance_region": "the top surface of the white drawer",
+        "done_when": "above(purple_object, drawer, 0.05)",
+        "affordance_hint": "the top surface of the white drawer",
+        "refine_prompt": "the top surface of the white drawer",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.668,
+          0.1094
+        ],
+        "affordance_3d_refined": [
+          0.2927,
+          -0.6807,
+          1.516
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.3136,
+        "affordance": [
+          0.668,
+          0.1094
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "surface_contact",
+              "args": [
+                "purple_object",
+                "drawer"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "purple_object"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "purple_object"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "place",
+        "target": "purple_object",
+        "destination": "drawer",
+        "affordance_region": "the top surface of the white drawer",
+        "done_when": "surface_contact(purple_object, drawer) AND released(purple_object) AND stable(purple_object)",
+        "affordance_hint": "the top surface of the white drawer",
+        "refine_prompt": "the top surface of the white drawer",
+        "refine_cache_hit": true,
+        "affordance_refined": [
+          0.668,
+          0.1094
+        ],
+        "affordance_3d_refined": [
+          0.2927,
+          -0.6807,
+          1.516
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.3136,
+        "affordance": [
+          0.668,
+          0.1094
+        ]
+      }
+    ]
+  }
+}

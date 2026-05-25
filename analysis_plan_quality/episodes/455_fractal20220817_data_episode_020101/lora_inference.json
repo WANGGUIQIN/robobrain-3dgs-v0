@@ -1,0 +1,150 @@
+{
+  "task": "knock pepsi can over",
+  "parsed": {
+    "scene_objects": [
+      "pepsi_can",
+      "table"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "pepsi_can",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "pepsi_can",
+        "affordance_region": "the body of the pepsi can",
+        "done_when": "distance(gripper, pepsi_can) < 0.03",
+        "affordance_hint": "the body of the pepsi can",
+        "refine_prompt": "the body of the pepsi can",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.9961,
+          0.2422
+        ],
+        "affordance_3d_refined": [
+          2.6059,
+          -1.3542,
+          4.5695
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.3607,
+        "affordance": [
+          0.9961,
+          0.2422
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_contact",
+              "args": [
+                "pepsi_can"
+              ],
+              "role": "completion"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "aligned_xy",
+              "args": [
+                "pepsi_can",
+                "table",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "motion_dir",
+              "args": [
+                "1",
+                "0",
+                "0"
+              ],
+              "role": "progress"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_collision",
+              "args": [
+                "pepsi_can",
+                "table"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "push",
+        "target": "pepsi_can",
+        "affordance_region": "the body of the pepsi can",
+        "done_when": "pepsi_can is tilted or knocked over",
+        "affordance_hint": "the body of the pepsi can",
+        "refine_prompt": "the body of the pepsi can",
+        "refine_cache_hit": true,
+        "affordance_refined": [
+          0.9961,
+          0.2422
+        ],
+        "affordance_3d_refined": [
+          2.6059,
+          -1.3542,
+          4.5695
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.3607,
+        "affordance": [
+          0.9961,
+          0.2422
+        ]
+      }
+    ]
+  }
+}

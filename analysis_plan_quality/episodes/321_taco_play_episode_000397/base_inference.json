@@ -1,0 +1,127 @@
+{
+  "task": "move the red light switch to turn on the red light",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_3epoch/best",
+  "raw": "The scene shows a robotic arm in a room with a white cabinet, a cardboard box, and a white plastic container on the floor. The task is to move a red light switch to turn on the red light. The red light switch is likely on the wall, but it's not visible in the image. The robotic arm needs to reach the switch, grasp it, and then flip it to turn on the light.\n\nGoal: turn_on(red_light); stable(red_light)\nScene: robotic_arm, red_light_switch, wall, red_light\nStep 1: reach(red_light_switch)\n  affordance_region: the wall near the red_light_switch\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, red_light_switch, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, red_light_switch) < 0.03\nStep 2: grasp(red_light_switch)\n  affordance_region: the red_light_switch on the wall\n  contact: holding(red_light_switch) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(red_light_switch)\nStep 3: flip(red_light_switch)\n  affordance_region: the red_light_switch on the wall\n  contact: flipped(red_light_switch) [completion]\n  pose: stable(red_light_switch) [completion]\n  done_when: flipped(red_light_switch)\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [
+      {
+        "pred": "turn_on",
+        "args": [
+          "red_light"
+        ]
+      },
+      {
+        "pred": "stable",
+        "args": [
+          "red_light"
+        ]
+      }
+    ],
+    "scene_objects": [
+      "robotic_arm",
+      "red_light_switch",
+      "wall",
+      "red_light"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "red_light_switch",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "red_light_switch",
+        "affordance_region": "the wall near the red_light_switch",
+        "done_when": "distance(gripper, red_light_switch) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "red_light_switch"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "red_light_switch",
+        "affordance_region": "the red_light_switch on the wall",
+        "done_when": "holding(red_light_switch)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "flipped",
+              "args": [
+                "red_light_switch"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "red_light_switch"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "flip",
+        "target": "red_light_switch",
+        "affordance_region": "the red_light_switch on the wall",
+        "done_when": "flipped(red_light_switch)"
+      }
+    ]
+  }
+}

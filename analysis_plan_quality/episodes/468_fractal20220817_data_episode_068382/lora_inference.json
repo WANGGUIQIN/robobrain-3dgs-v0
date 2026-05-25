@@ -1,0 +1,244 @@
+{
+  "task": "pick green rice chip bag from top drawer and place on counter",
+  "parsed": {
+    "scene_objects": [
+      "green_rice_chip_bag",
+      "counter",
+      "drawer"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "green_rice_chip_bag",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "green_rice_chip_bag",
+        "affordance_region": "the green rice chip bag",
+        "done_when": "distance(gripper, green_rice_chip_bag) < 0.03",
+        "affordance_hint": "the green rice chip bag",
+        "refine_prompt": "the green rice chip bag",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.1992,
+          0.6211
+        ],
+        "affordance_3d_refined": [
+          -0.9169,
+          0.3691,
+          2.6518
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.4622,
+        "affordance": [
+          0.1992,
+          0.6211
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "green_rice_chip_bag"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "green_rice_chip_bag",
+        "affordance_region": "the body of the green rice chip bag",
+        "done_when": "holding(green_rice_chip_bag)",
+        "affordance_hint": "the body of the green rice chip bag",
+        "refine_prompt": "the body of the green rice chip bag",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.9961,
+          0.2305
+        ],
+        "affordance_3d_refined": [
+          2.3269,
+          -1.2642,
+          4.0803
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.3239,
+        "affordance": [
+          0.9961,
+          0.2305
+        ]
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "green_rice_chip_bag",
+                "counter",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "green_rice_chip_bag"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "green_rice_chip_bag",
+        "destination": "counter",
+        "affordance_region": "an empty area on the counter",
+        "done_when": "above(green_rice_chip_bag, counter, 0.05)",
+        "affordance_hint": "an empty area on the counter",
+        "refine_prompt": "an empty area on the counter",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.582,
+          0.5703
+        ],
+        "affordance_3d_refined": [
+          0.1836,
+          0.1574,
+          1.9473
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.5017,
+        "affordance": [
+          0.582,
+          0.5703
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "surface_contact",
+              "args": [
+                "green_rice_chip_bag",
+                "counter"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "green_rice_chip_bag"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "green_rice_chip_bag"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "place",
+        "target": "green_rice_chip_bag",
+        "destination": "counter",
+        "affordance_region": "an empty area on the counter",
+        "done_when": "surface_contact(green_rice_chip_bag, counter) AND released(green_rice_chip_bag) AND stable(green_rice_chip_bag)",
+        "affordance_hint": "an empty area on the counter",
+        "refine_prompt": "an empty area on the counter",
+        "refine_cache_hit": true,
+        "affordance_refined": [
+          0.582,
+          0.5703
+        ],
+        "affordance_3d_refined": [
+          0.1836,
+          0.1574,
+          1.9473
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.5017,
+        "affordance": [
+          0.582,
+          0.5703
+        ]
+      }
+    ]
+  }
+}

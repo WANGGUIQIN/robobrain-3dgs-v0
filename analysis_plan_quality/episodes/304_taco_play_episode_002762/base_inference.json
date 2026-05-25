@@ -1,0 +1,142 @@
+{
+  "task": "take the purple block and rotate it right",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_3epoch/best",
+  "raw": "SCENE ANALYSIS - A white cabinet with open shelves is visible. On the top shelf, there is a purple block. The cabinet has a light brown interior. The purple block is a cube with a matte finish. STRATEGY - First, reach and grasp the purple block. Then, rotate the gripper to turn the block 90 degrees to the right. Finally, release the block in its new orientation. Failure modes include dropping the block during rotation or not rotating it enough. AFFORDANCE REASONING - Step 1 reach the block at its body for stable contact. Step 2 grasp the block at its body for secure hold. Step 3 rotate the gripper around the block's vertical axis. Step 4 release the block in its rotated position.\nGoal: rotated(purple_block, 90, right)\nScene: purple_block, cabinet\nStep 1: reach(purple_block)\n  affordance_region: the body of the purple block\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, purple_block, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, purple_block) < 0.03\nStep 2: grasp(purple_block)\n  affordance_region: the body of the purple block\n  contact: holding(purple_block) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(purple_block)\nStep 3: rotate(purple_block, 90, right)\n  affordance_region: the body of the purple block\n  contact: holding(purple_block) [progress]\n  direction: rotate_axis(0, 1, 0, 90) [progress]\n  done_when: rotated(purple_block, 90, right)\nStep 4: release(purple_block)\n  affordance_region: the body of the purple block\n  contact: released(purple_block) [completion]\n  done_when: released(purple_block)\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [
+      {
+        "pred": "rotated",
+        "args": [
+          "purple_block",
+          "90",
+          "right"
+        ]
+      }
+    ],
+    "scene_objects": [
+      "purple_block",
+      "cabinet"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "purple_block",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "purple_block",
+        "affordance_region": "the body of the purple block",
+        "done_when": "distance(gripper, purple_block) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "purple_block"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "purple_block",
+        "affordance_region": "the body of the purple block",
+        "done_when": "holding(purple_block)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "purple_block"
+              ],
+              "role": "progress"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "rotate_axis",
+              "args": [
+                "0",
+                "1",
+                "0",
+                "90"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "rotate",
+        "target": "purple_block, 90, right",
+        "affordance_region": "the body of the purple block",
+        "done_when": "rotated(purple_block, 90, right)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "released",
+              "args": [
+                "purple_block"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "release",
+        "target": "purple_block",
+        "affordance_region": "the body of the purple block",
+        "done_when": "released(purple_block)"
+      }
+    ]
+  }
+}

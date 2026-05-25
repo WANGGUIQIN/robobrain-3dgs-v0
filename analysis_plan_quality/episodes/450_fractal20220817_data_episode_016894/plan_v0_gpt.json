@@ -1,0 +1,232 @@
+{
+  "task": "move green can near blue plastic bottle",
+  "scene_objects": [
+    "green_can",
+    "blue_plastic_bottle",
+    "green_packet",
+    "table"
+  ],
+  "num_steps": 4,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "green_can",
+      "affordance": [
+        0.361,
+        0.483
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "green_can",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "green_packet"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, green_can) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        -0.7513,
+        -0.0835,
+        4.6478
+      ],
+      "affordance_hint": "the green can"
+    },
+    {
+      "step": 2,
+      "action": "grasp",
+      "target": "green_can",
+      "affordance": [
+        0.356,
+        0.459
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "green_can"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "holding",
+            "args": [
+              "green_can"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              0,
+              0,
+              -1
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "holding(green_can)",
+      "affordance_3d": [
+        -0.7884,
+        -0.2131,
+        4.7456
+      ],
+      "affordance_hint": "the handle of the green can"
+    },
+    {
+      "step": 3,
+      "action": "transport",
+      "target": "green_can",
+      "destination": "near_blue_plastic_bottle",
+      "affordance": [
+        0.558,
+        0.45
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "green_can"
+            ],
+            "role": "safety"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "near",
+            "args": [
+              "green_can",
+              "blue_plastic_bottle",
+              0.05
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "green_can",
+              "blue_plastic_bottle"
+            ]
+          },
+          {
+            "pred": "no_drop",
+            "args": [
+              "green_can"
+            ]
+          }
+        ]
+      },
+      "done_when": "near(green_can, blue_plastic_bottle, 0.05)",
+      "affordance_3d": [
+        0.2274,
+        -0.1971,
+        3.3758
+      ],
+      "affordance_hint": "an empty area on the near blue plastic bottle"
+    },
+    {
+      "step": 4,
+      "action": "place",
+      "target": "green_can",
+      "destination": "near_blue_plastic_bottle",
+      "affordance": [
+        0.558,
+        0.45
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "surface_contact",
+            "args": [
+              "green_can",
+              "table"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "released",
+            "args": [
+              "green_can"
+            ],
+            "role": "completion"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "stable",
+            "args": [
+              "green_can"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "support_stable",
+            "args": [
+              "green_can"
+            ]
+          }
+        ]
+      },
+      "done_when": "surface_contact(green_can, table) AND released(green_can) AND stable(green_can)",
+      "affordance_3d": [
+        0.2274,
+        -0.1971,
+        3.3758
+      ],
+      "affordance_hint": "an empty area on the near blue plastic bottle"
+    }
+  ]
+}

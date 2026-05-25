@@ -1,0 +1,234 @@
+{
+  "task": "Chop the green garlic",
+  "scene_objects": [
+    "green_garlic",
+    "knife",
+    "cutting_board",
+    "table"
+  ],
+  "num_steps": 4,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "knife",
+      "affordance": [
+        0.575,
+        0.375
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "knife",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "table"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, knife) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        -0.6402,
+        -0.3108,
+        1.1841
+      ],
+      "affordance_hint": "the black handle of the chef knife",
+      "affordance_hint_original": "the knife",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 2,
+      "action": "grasp",
+      "target": "knife",
+      "affordance": [
+        0.575,
+        0.1
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "knife"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "holding",
+            "args": [
+              "knife"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              0,
+              0,
+              -1
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "holding(knife)",
+      "affordance_3d": [
+        -0.1958,
+        -0.1743,
+        0.3622
+      ],
+      "affordance_hint": "the handle of the knife",
+      "affordance_hint_original": "the handle of the knife",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 3,
+      "action": "transport",
+      "target": "knife",
+      "destination": "green_garlic",
+      "affordance": [
+        0.406,
+        0.406
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "knife"
+            ],
+            "role": "safety"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "above",
+            "args": [
+              "knife",
+              "green_garlic",
+              0.05
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "knife",
+              "cutting_board"
+            ]
+          },
+          {
+            "pred": "no_drop",
+            "args": [
+              "knife"
+            ]
+          }
+        ]
+      },
+      "done_when": "above(knife, green_garlic, 0.05) AND aligned_xy(knife, green_garlic, 0.03)",
+      "affordance_3d": [
+        -1.1559,
+        -0.4067,
+        1.7125
+      ],
+      "affordance_hint": "the empty area on the green garlic",
+      "affordance_hint_original": "an empty area on the green garlic",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 4,
+      "action": "chop",
+      "target": "green_garlic",
+      "affordance": [
+        0.45,
+        0.398
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "surface_contact",
+            "args": [
+              "knife",
+              "green_garlic"
+            ],
+            "role": "completion"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "stable",
+            "args": [
+              "green_garlic"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "force_limit",
+            "args": [
+              "knife",
+              "green_garlic"
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "surface_contact(knife, green_garlic) AND green_garlic(chopped)",
+      "affordance_3d": [
+        -1.072,
+        -0.4079,
+        1.6733
+      ],
+      "affordance_hint": "the green garlic on the wooden cutting board",
+      "affordance_hint_original": "green garlic",
+      "affordance_hint_confidence": "ok"
+    }
+  ]
+}

@@ -1,0 +1,168 @@
+{
+  "task": "pick rxbar chocolate from middle drawer and place on counter",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_3epoch/best",
+  "raw": "**SCENE ANALYSIS -** A kitchen scene with a countertop holding a red apple and a green can. A drawer is open, revealing a small black object (RXBAR chocolate) inside. The drawer has a handle. The task is to pick the RXBAR from the drawer and place it on the counter. The drawer is open, so the first step is to reach into the drawer to grasp the chocolate. The chocolate is small and likely located near the front of the drawer for easy access. The goal is to transport the chocolate from the drawer to the counter, requiring a grasp, transport, and place action. **STRATEGY -** First, reach into the drawer to grasp the chocolate. Then, transport it to the counter and place it there. Failure modes include not grasping the chocolate properly or dropping it during transport. **AFFORDANCE REASONING -** Step 1: Reach into the drawer to grasp the chocolate. The affordance region is the front part of the drawer where the chocolate is likely located. Step 2: Grasp the chocolate. The affordance region is the body of the chocolate. Step 3: Transport the chocolate to the counter. The affordance region is an empty area on the counter. Step 4: Place the chocolate on the counter. The affordance region is an empty area on the counter.\n\nGoal: on(rxbar_chocolate, counter); stable(rxbar_chocolate)\nScene: rxbar_chocolate, counter, drawer, apple, can\nStep 1: reach(drawer)\n  affordance_region: the front part of the open drawer\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, drawer, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, drawer) < 0.03\nStep 2: grasp(rxbar_chocolate)\n  affordance_region: the body of the rxbar_chocolate\n  contact: holding(rxbar_chocolate) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(rxbar_chocolate)\nStep 3: transport(rxbar_chocolate -> counter)\n  affordance_region: an empty area on the counter\n  spatial: above(rxbar_chocolate, counter, 0.05) [completion]\n  safety: no_drop(rxbar_chocolate)\n  done_when: above(rxbar_chocolate, counter, 0.05)\nStep 4: place(rxbar_chocolate -> counter)\n  affordance_region: an empty area on the counter\n  contact: surface_contact(rxbar_chocolate, counter) [completion]; released(rxbar_chocolate) [completion]\n  pose: stable(rxbar_chocolate) [completion]\n  done_when: surface_contact(rxbar_chocolate, counter) AND released(rxbar_chocolate)\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [
+      {
+        "pred": "on",
+        "args": [
+          "rxbar_chocolate",
+          "counter"
+        ]
+      },
+      {
+        "pred": "stable",
+        "args": [
+          "rxbar_chocolate"
+        ]
+      }
+    ],
+    "scene_objects": [
+      "rxbar_chocolate",
+      "counter",
+      "drawer",
+      "apple",
+      "can"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "drawer",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "drawer",
+        "affordance_region": "the front part of the open drawer",
+        "done_when": "distance(gripper, drawer) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "rxbar_chocolate"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "rxbar_chocolate",
+        "affordance_region": "the body of the rxbar_chocolate",
+        "done_when": "holding(rxbar_chocolate)"
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "rxbar_chocolate",
+                "counter",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "rxbar_chocolate"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "rxbar_chocolate",
+        "destination": "counter",
+        "affordance_region": "an empty area on the counter",
+        "done_when": "above(rxbar_chocolate, counter, 0.05)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "surface_contact",
+              "args": [
+                "rxbar_chocolate",
+                "counter"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "rxbar_chocolate"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "rxbar_chocolate"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "place",
+        "target": "rxbar_chocolate",
+        "destination": "counter",
+        "affordance_region": "an empty area on the counter",
+        "done_when": "surface_contact(rxbar_chocolate, counter) AND released(rxbar_chocolate)"
+      }
+    ]
+  }
+}

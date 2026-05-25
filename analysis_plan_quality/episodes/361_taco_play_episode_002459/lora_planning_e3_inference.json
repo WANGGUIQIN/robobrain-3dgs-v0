@@ -1,0 +1,136 @@
+{
+  "task": "grasp the drawer handle and close it",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_planning_3epoch/checkpoint-39957",
+  "raw": "Scene: drawer_handle, drawer, table\nStep 1: reach(drawer_handle)\n  affordance_region: the black plastic drawer handle\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, drawer_handle, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, drawer_handle) < 0.03\nStep 2: grasp(drawer_handle)\n  affordance_region: the black plastic handle of the drawer\n  contact: holding(drawer_handle) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(drawer_handle)\nStep 3: push(drawer_handle)\n  affordance_region: the black plastic drawer handle\n  contact: holding(drawer_handle) [safety]\n  spatial: aligned_xy(drawer, closed_position, 0.03) [completion]\n  direction: motion_dir(0, -1, 0) [completion]\n  safety: no_collision(drawer, table)\n  done_when: aligned_xy(drawer, closed_position, 0.03)\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [],
+    "scene_objects": [
+      "drawer_handle",
+      "drawer",
+      "table"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "drawer_handle",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "drawer_handle",
+        "affordance_region": "the black plastic drawer handle",
+        "done_when": "distance(gripper, drawer_handle) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "drawer_handle"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "drawer_handle",
+        "affordance_region": "the black plastic handle of the drawer",
+        "done_when": "holding(drawer_handle)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "drawer_handle"
+              ],
+              "role": "safety"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "aligned_xy",
+              "args": [
+                "drawer",
+                "closed_position",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "motion_dir",
+              "args": [
+                "0",
+                "-1",
+                "0"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_collision",
+              "args": [
+                "drawer",
+                "table"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "push",
+        "target": "drawer_handle",
+        "affordance_region": "the black plastic drawer handle",
+        "done_when": "aligned_xy(drawer, closed_position, 0.03)"
+      }
+    ]
+  }
+}

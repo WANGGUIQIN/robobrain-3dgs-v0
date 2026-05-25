@@ -1,0 +1,226 @@
+{
+  "task": "put the moon in the shape sorter",
+  "scene_objects": [
+    "moon",
+    "shape_sorter",
+    "table"
+  ],
+  "steps": [
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "moon",
+              "<",
+              "0.03"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "approach_axis",
+            "args": [
+              "0",
+              "0",
+              "-1"
+            ],
+            "role": "progress"
+          }
+        ]
+      },
+      "step": 1,
+      "action": "reach",
+      "target": "moon",
+      "affordance_region": "the body of the moon",
+      "done_when": "distance(gripper, moon) < 0.03",
+      "affordance_hint": "the body of the moon",
+      "refine_prompt": "the body of the moon",
+      "refine_cache_hit": false,
+      "affordance_refined": [
+        0.4883,
+        0.0742
+      ],
+      "affordance_3d_refined": [
+        -0.0585,
+        -2.1264,
+        2.4971
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.3095
+    },
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "moon"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              "0",
+              "0",
+              "-1"
+            ],
+            "role": "progress"
+          }
+        ]
+      },
+      "step": 2,
+      "action": "grasp",
+      "target": "moon",
+      "affordance_region": "the body of the moon",
+      "done_when": "holding(moon)",
+      "affordance_hint": "the body of the moon",
+      "refine_prompt": "the body of the moon",
+      "refine_cache_hit": true,
+      "affordance_refined": [
+        0.4883,
+        0.0742
+      ],
+      "affordance_3d_refined": [
+        -0.0585,
+        -2.1264,
+        2.4971
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.3095
+    },
+    {
+      "constraints": {
+        "spatial": [
+          {
+            "pred": "above",
+            "args": [
+              "moon",
+              "shape_sorter",
+              "0.05"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_drop",
+            "args": [
+              "moon"
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "step": 3,
+      "action": "transport",
+      "target": "moon",
+      "destination": "shape_sorter",
+      "affordance_region": "an empty area on the shape sorter",
+      "done_when": "above(moon, shape_sorter, 0.05)",
+      "affordance_hint": "an empty area on the shape sorter",
+      "refine_prompt": "an empty area on the shape sorter",
+      "refine_cache_hit": false,
+      "affordance_refined": [
+        0.1836,
+        0.9961
+      ],
+      "affordance_3d_refined": [
+        -1.3213,
+        2.0717,
+        2.088
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.5091
+    },
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "inserted",
+            "args": [
+              "moon",
+              "shape_sorter"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "released",
+            "args": [
+              "moon"
+            ],
+            "role": "completion"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "stable",
+            "args": [
+              "moon"
+            ],
+            "role": "completion"
+          }
+        ]
+      },
+      "step": 4,
+      "action": "insert",
+      "target": "moon",
+      "destination": "shape_sorter",
+      "affordance_region": "the top opening of the shape sorter",
+      "done_when": "inserted(moon, shape_sorter) AND released(moon) AND stable(moon)",
+      "affordance_hint": "the top opening of the shape sorter",
+      "refine_prompt": "the top opening of the shape sorter",
+      "refine_cache_hit": false,
+      "affordance_refined": [
+        0.4883,
+        0.0742
+      ],
+      "affordance_3d_refined": [
+        -0.0586,
+        -2.1286,
+        2.4996
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.3355
+    }
+  ]
+}

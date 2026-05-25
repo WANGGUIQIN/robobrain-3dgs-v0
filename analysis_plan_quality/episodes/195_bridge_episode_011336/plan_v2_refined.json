@@ -1,0 +1,120 @@
+{
+  "task": "close cabinet",
+  "scene_objects": [
+    "cabinet_door",
+    "corn",
+    "countertop"
+  ],
+  "num_steps": 2,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "cabinet_door",
+      "affordance": [
+        0.5,
+        0.712
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "cabinet_door",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "countertop"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, cabinet_door) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        0.0,
+        0.5718,
+        2.3582
+      ],
+      "affordance_hint": "the right side of the cabinet door",
+      "affordance_hint_original": "the cabinet door",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 2,
+      "action": "push",
+      "target": "cabinet_door",
+      "affordance": [
+        0.5,
+        0.7
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "cabinet_door"
+            ],
+            "role": "completion"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "aligned_xy",
+            "args": [
+              "cabinet_door",
+              "closed_position",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "countertop"
+            ]
+          }
+        ]
+      },
+      "done_when": "aligned_xy(cabinet_door, closed_position, 0.03)",
+      "affordance_3d": [
+        0.0,
+        0.5311,
+        2.3191
+      ],
+      "affordance_hint": "the center of the cabinet door",
+      "affordance_hint_original": "the center of the cabinet door",
+      "affordance_hint_confidence": "ok"
+    }
+  ]
+}

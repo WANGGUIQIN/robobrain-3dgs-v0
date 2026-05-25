@@ -1,0 +1,226 @@
+{
+  "task": "put spatula in pan",
+  "scene_objects": [
+    "spatula",
+    "pan",
+    "table"
+  ],
+  "steps": [
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "spatula",
+              "<",
+              "0.03"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "approach_axis",
+            "args": [
+              "0",
+              "0",
+              "-1"
+            ],
+            "role": "progress"
+          }
+        ]
+      },
+      "step": 1,
+      "action": "reach",
+      "target": "spatula",
+      "affordance_region": "the blue plastic spatula",
+      "done_when": "distance(gripper, spatula) < 0.03",
+      "affordance_hint": "the blue plastic spatula",
+      "refine_prompt": "the blue plastic spatula",
+      "refine_cache_hit": false,
+      "affordance_refined": [
+        0.6406,
+        0.4375
+      ],
+      "affordance_3d_refined": [
+        0.4508,
+        -0.2004,
+        2.7887
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.6142
+    },
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "spatula"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              "0",
+              "0",
+              "-1"
+            ],
+            "role": "progress"
+          }
+        ]
+      },
+      "step": 2,
+      "action": "grasp",
+      "target": "spatula",
+      "affordance_region": "the blue plastic handle of the spatula",
+      "done_when": "holding(spatula)",
+      "affordance_hint": "the blue plastic handle of the spatula",
+      "refine_prompt": "the blue plastic handle of the spatula",
+      "refine_cache_hit": false,
+      "affordance_refined": [
+        0.6406,
+        0.4375
+      ],
+      "affordance_3d_refined": [
+        0.4508,
+        -0.2004,
+        2.7887
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.4526
+    },
+    {
+      "constraints": {
+        "spatial": [
+          {
+            "pred": "above",
+            "args": [
+              "spatula",
+              "pan",
+              "0.05"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_drop",
+            "args": [
+              "spatula"
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "step": 3,
+      "action": "transport",
+      "target": "spatula",
+      "destination": "pan",
+      "affordance_region": "the empty area inside the metal pan",
+      "done_when": "above(spatula, pan, 0.05)",
+      "affordance_hint": "the empty area inside the metal pan",
+      "refine_prompt": "the empty area inside the metal pan",
+      "refine_cache_hit": false,
+      "affordance_refined": [
+        0.4375,
+        0.5664
+      ],
+      "affordance_3d_refined": [
+        -0.2172,
+        0.2308,
+        3.0236
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.3911
+    },
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "surface_contact",
+            "args": [
+              "spatula",
+              "pan"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "released",
+            "args": [
+              "spatula"
+            ],
+            "role": "completion"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "stable",
+            "args": [
+              "spatula"
+            ],
+            "role": "completion"
+          }
+        ]
+      },
+      "step": 4,
+      "action": "place",
+      "target": "spatula",
+      "destination": "pan",
+      "affordance_region": "the empty area inside the metal pan",
+      "done_when": "surface_contact(spatula, pan) AND released(spatula)",
+      "affordance_hint": "the empty area inside the metal pan",
+      "refine_prompt": "the empty area inside the metal pan",
+      "refine_cache_hit": true,
+      "affordance_refined": [
+        0.4375,
+        0.5664
+      ],
+      "affordance_3d_refined": [
+        -0.2172,
+        0.2308,
+        3.0236
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.3911
+    }
+  ]
+}

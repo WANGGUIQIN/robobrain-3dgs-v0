@@ -1,0 +1,240 @@
+{
+  "task": "Take the blue cup out of the orange cup and put it in the sink",
+  "scene_objects": [
+    "blue_cup",
+    "orange_cup",
+    "sink",
+    "table"
+  ],
+  "num_steps": 4,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "blue_cup",
+      "affordance": [
+        0.64,
+        0.695
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "blue_cup",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "orange_cup"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, blue_cup) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        0.0577,
+        0.8371,
+        2.8866
+      ],
+      "affordance_hint": "the blue cup on the table",
+      "affordance_hint_original": "the blue cup",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 2,
+      "action": "grasp",
+      "target": "blue_cup",
+      "affordance": [
+        0.64,
+        0.695
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "blue_cup"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "holding",
+            "args": [
+              "blue_cup"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              0,
+              0,
+              -1
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "holding(blue_cup)",
+      "affordance_3d": [
+        0.0577,
+        0.8371,
+        2.8866
+      ],
+      "affordance_hint": "the body of the blue cup",
+      "affordance_hint_original": "the handle of the blue cup",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 3,
+      "action": "transport",
+      "target": "blue_cup",
+      "destination": "sink",
+      "affordance": [
+        0.526,
+        0.63
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "blue_cup"
+            ],
+            "role": "safety"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "above",
+            "args": [
+              "blue_cup",
+              "sink",
+              0.05
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "blue_cup",
+              "sink"
+            ]
+          },
+          {
+            "pred": "no_drop",
+            "args": [
+              "blue_cup"
+            ]
+          }
+        ]
+      },
+      "done_when": "above(blue_cup, sink, 0.05) AND aligned_xy(blue_cup, sink, 0.03)",
+      "affordance_3d": [
+        -0.2434,
+        0.3992,
+        1.9473
+      ],
+      "affordance_hint": "the empty area in the sink",
+      "affordance_hint_original": "an empty area on the sink",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 4,
+      "action": "place",
+      "target": "blue_cup",
+      "destination": "sink",
+      "affordance": [
+        0.526,
+        0.63
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "surface_contact",
+            "args": [
+              "blue_cup",
+              "sink"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "released",
+            "args": [
+              "blue_cup"
+            ],
+            "role": "completion"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "stable",
+            "args": [
+              "blue_cup"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "support_stable",
+            "args": [
+              "blue_cup"
+            ]
+          }
+        ]
+      },
+      "done_when": "surface_contact(blue_cup, sink) AND released(blue_cup) AND stable(blue_cup)",
+      "affordance_3d": [
+        -0.2434,
+        0.3992,
+        1.9473
+      ],
+      "affordance_hint": "the empty area in the sink",
+      "affordance_hint_original": "an empty area on the sink",
+      "affordance_hint_confidence": "ok"
+    }
+  ]
+}

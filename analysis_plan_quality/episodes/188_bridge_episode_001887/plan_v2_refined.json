@@ -1,0 +1,241 @@
+{
+  "task": "Pick up the potato and place it on the yellow cloth",
+  "scene_objects": [
+    "potato",
+    "yellow_cloth",
+    "brush",
+    "metal_bowl",
+    "table"
+  ],
+  "num_steps": 4,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "potato",
+      "affordance": [
+        0.535,
+        0.687
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "potato",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "table"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, potato) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        0.0993,
+        0.5294,
+        2.4561
+      ],
+      "affordance_hint": "the round yellow potato on the wooden table",
+      "affordance_hint_original": "the potato",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 2,
+      "action": "grasp",
+      "target": "potato",
+      "affordance": [
+        0.535,
+        0.687
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "potato"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "holding",
+            "args": [
+              "potato"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              0,
+              0,
+              -1
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "holding(potato)",
+      "affordance_3d": [
+        0.0993,
+        0.5294,
+        2.4561
+      ],
+      "affordance_hint": "the round yellow potato on the table",
+      "affordance_hint_original": "potato",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 3,
+      "action": "transport",
+      "target": "potato",
+      "destination": "yellow_cloth",
+      "affordance": [
+        0.303,
+        0.475
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "potato"
+            ],
+            "role": "safety"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "above",
+            "args": [
+              "potato",
+              "yellow_cloth",
+              0.05
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "potato",
+              "yellow_cloth"
+            ]
+          },
+          {
+            "pred": "no_drop",
+            "args": [
+              "potato"
+            ]
+          }
+        ]
+      },
+      "done_when": "above(potato, yellow_cloth, 0.05) AND aligned_xy(potato, yellow_cloth, 0.03)",
+      "affordance_3d": [
+        -0.3845,
+        -0.0461,
+        1.7125
+      ],
+      "affordance_hint": "the empty area on the yellow cloth",
+      "affordance_hint_original": "an empty area on the yellow cloth",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 4,
+      "action": "place",
+      "target": "potato",
+      "destination": "yellow_cloth",
+      "affordance": [
+        0.303,
+        0.475
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "surface_contact",
+            "args": [
+              "potato",
+              "yellow_cloth"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "released",
+            "args": [
+              "potato"
+            ],
+            "role": "completion"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "stable",
+            "args": [
+              "potato"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "support_stable",
+            "args": [
+              "potato"
+            ]
+          }
+        ]
+      },
+      "done_when": "surface_contact(potato, yellow_cloth) AND released(potato) AND stable(potato)",
+      "affordance_3d": [
+        -0.3845,
+        -0.0461,
+        1.7125
+      ],
+      "affordance_hint": "the empty area on the yellow cloth",
+      "affordance_hint_original": "an empty area on the yellow cloth",
+      "affordance_hint_confidence": "ok"
+    }
+  ]
+}

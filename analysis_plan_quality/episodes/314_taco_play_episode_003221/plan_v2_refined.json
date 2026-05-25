@@ -1,0 +1,127 @@
+{
+  "task": "push the door to the left",
+  "scene_objects": [
+    "door",
+    "robot_arm",
+    "table"
+  ],
+  "num_steps": 2,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "door",
+      "affordance": [
+        0.352,
+        0.4
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "door",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "door"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, door) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        -0.3095,
+        -0.2118,
+        1.814
+      ],
+      "affordance_hint": "the wooden door",
+      "affordance_hint_original": "the door",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 2,
+      "action": "push",
+      "target": "door",
+      "affordance": [
+        0.75,
+        0.125
+      ],
+      "approach": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "door"
+            ],
+            "role": "completion"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "motion_dir",
+            "args": [
+              "door",
+              "left"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "door",
+              "table"
+            ]
+          },
+          {
+            "pred": "force_limit",
+            "args": [
+              "door",
+              "<",
+              5.0
+            ]
+          }
+        ]
+      },
+      "done_when": "door_position(leftmost) AND gripper_contact(door)",
+      "affordance_3d": [
+        0.491,
+        -0.6121,
+        1.42
+      ],
+      "affordance_hint": "the center of the white door",
+      "affordance_hint_original": "the center of the door",
+      "affordance_hint_confidence": "ok"
+    }
+  ]
+}

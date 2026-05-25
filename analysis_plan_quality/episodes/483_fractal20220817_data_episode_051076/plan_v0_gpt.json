@@ -1,0 +1,223 @@
+{
+  "task": "move redbull can near blue chip bag",
+  "scene_objects": [
+    "redbull_can",
+    "blue_chip_bag",
+    "green_chip_bag",
+    "table"
+  ],
+  "num_steps": 4,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "redbull_can",
+      "affordance": [
+        0.725,
+        0.351
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "redbull_can",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "blue_chip_bag"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, redbull_can) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        0.9302,
+        -0.6094,
+        3.5715
+      ],
+      "affordance_hint": "the redbull can"
+    },
+    {
+      "step": 2,
+      "action": "grasp",
+      "target": "redbull_can",
+      "affordance": [
+        0.725,
+        0.335
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "redbull_can"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "holding",
+            "args": [
+              "redbull_can"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              0,
+              0,
+              -1
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "holding(redbull_can)",
+      "affordance_3d": [
+        0.9454,
+        -0.6846,
+        3.6302
+      ],
+      "affordance_hint": "the handle of the redbull can"
+    },
+    {
+      "step": 3,
+      "action": "transport",
+      "target": "redbull_can",
+      "destination": "blue_chip_bag",
+      "affordance": [
+        0.601,
+        0.601
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "redbull_can"
+            ],
+            "role": "safety"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "near",
+            "args": [
+              "redbull_can",
+              "blue_chip_bag",
+              0.05
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "redbull_can",
+              "blue_chip_bag"
+            ]
+          },
+          {
+            "pred": "no_drop",
+            "args": [
+              "redbull_can"
+            ]
+          }
+        ]
+      },
+      "done_when": "near(redbull_can, blue_chip_bag, 0.05)",
+      "affordance_3d": [
+        0.3804,
+        0.3804,
+        3.2584
+      ],
+      "affordance_hint": "an empty area on the blue chip bag"
+    },
+    {
+      "step": 4,
+      "action": "release",
+      "target": "redbull_can",
+      "affordance": [
+        0.725,
+        0.351
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "released",
+            "args": [
+              "redbull_can"
+            ],
+            "role": "completion"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "upright",
+            "args": [
+              "redbull_can"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "support_stable",
+            "args": [
+              "redbull_can"
+            ]
+          }
+        ]
+      },
+      "done_when": "released(redbull_can) AND upright(redbull_can)",
+      "affordance_3d": [
+        0.9302,
+        -0.6094,
+        3.5715
+      ],
+      "affordance_hint": "the redbull can"
+    }
+  ]
+}

@@ -1,0 +1,242 @@
+{
+  "task": "Place cucumber at diagonal angle at bottom right of table.",
+  "scene_objects": [
+    "cucumber",
+    "fork",
+    "red_handle",
+    "metal_pot",
+    "purple_cloth",
+    "table"
+  ],
+  "num_steps": 4,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "cucumber",
+      "affordance": [
+        0.178,
+        0.486
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "cucumber",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "table"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, cucumber) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        -0.7963,
+        -0.0388,
+        2.1625
+      ],
+      "affordance_hint": "the green cucumber",
+      "affordance_hint_original": "the cucumber",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 2,
+      "action": "grasp",
+      "target": "cucumber",
+      "affordance": [
+        0.178,
+        0.486
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "cucumber"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "holding",
+            "args": [
+              "cucumber"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              0,
+              0,
+              -1
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "holding(cucumber)",
+      "affordance_3d": [
+        -0.7963,
+        -0.0388,
+        2.1625
+      ],
+      "affordance_hint": "the green cucumber",
+      "affordance_hint_original": "the handle of the cucumber",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 3,
+      "action": "transport",
+      "target": "cucumber",
+      "destination": "bottom_right_table",
+      "affordance": [
+        0.75,
+        0.651
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "cucumber"
+            ],
+            "role": "safety"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "above",
+            "args": [
+              "cucumber",
+              "table",
+              0.05
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "cucumber",
+              "table"
+            ]
+          },
+          {
+            "pred": "no_drop",
+            "args": [
+              "cucumber"
+            ]
+          }
+        ]
+      },
+      "done_when": "above(cucumber, table, 0.05) AND aligned_xy(cucumber, bottom_right_table, 0.03)",
+      "affordance_3d": [
+        0.7508,
+        0.4575,
+        2.6126
+      ],
+      "affordance_hint": "the bottom right area of the wooden table",
+      "affordance_hint_original": "an empty area on the bottom right table",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 4,
+      "action": "place",
+      "target": "cucumber",
+      "destination": "bottom_right_table",
+      "affordance": [
+        0.75,
+        0.651
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "surface_contact",
+            "args": [
+              "cucumber",
+              "table"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "released",
+            "args": [
+              "cucumber"
+            ],
+            "role": "completion"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "tilted",
+            "args": [
+              "cucumber"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "support_stable",
+            "args": [
+              "cucumber"
+            ]
+          }
+        ]
+      },
+      "done_when": "surface_contact(cucumber, table) AND released(cucumber) AND tilted(cucumber)",
+      "affordance_3d": [
+        0.7508,
+        0.4575,
+        2.6126
+      ],
+      "affordance_hint": "the bottom right corner of the wooden table",
+      "affordance_hint_original": "an empty area on the bottom right table",
+      "affordance_hint_confidence": "ok"
+    }
+  ]
+}

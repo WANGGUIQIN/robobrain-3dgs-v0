@@ -1,0 +1,158 @@
+{
+  "task": "Insert the tip of a small pipette into the holder for small pipette tips",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_3epoch/best",
+  "raw": "The scene shows a robotic arm with a gripper positioned over a blue pipette tip on a textured surface. The goal is to insert the tip of a small pipette into a holder. However, the image does not show a pipette holder, only a single blue pipette tip. Assuming the task involves picking up the tip and inserting it into a holder that is either present but not visible or will be introduced, the plan must account for the missing holder. The strategy involves picking up the tip, moving to the holder's location, and inserting the tip. Failure modes include misalignment during insertion or dropping the tip. The affordance for grasping is the tip's body, and the insertion requires precise spatial alignment with the holder's opening.\n\nGoal: inserted(pipette_tip, holder); stable(pipette_tip)\nScene: pipette_tip, holder\nStep 1: reach(pipette_tip)\n  affordance_region: the body of the blue pipette tip\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, pipette_tip, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, pipette_tip) < 0.03\nStep 2: grasp(pipette_tip)\n  affordance_region: the body of the blue pipette tip\n  contact: holding(pipette_tip) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(pipette_tip)\nStep 3: transport(pipette_tip -> holder)\n  affordance_region: the opening of the holder\n  spatial: above(pipette_tip, holder, 0.05) [completion]\n  safety: no_drop(pipette_tip)\n  done_when: above(pipette_tip, holder, 0.05)\nStep 4: insert(pipette_tip -> holder)\n  affordance_region: the opening of the holder\n  contact: inside(pipette_tip, holder) [completion]\n  pose: stable(pipette_tip) [completion]\n  done_when: inside(pipette_tip, holder) AND stable(pipette_tip)\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [
+      {
+        "pred": "inserted",
+        "args": [
+          "pipette_tip",
+          "holder"
+        ]
+      },
+      {
+        "pred": "stable",
+        "args": [
+          "pipette_tip"
+        ]
+      }
+    ],
+    "scene_objects": [
+      "pipette_tip",
+      "holder"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "pipette_tip",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "pipette_tip",
+        "affordance_region": "the body of the blue pipette tip",
+        "done_when": "distance(gripper, pipette_tip) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "pipette_tip"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "pipette_tip",
+        "affordance_region": "the body of the blue pipette tip",
+        "done_when": "holding(pipette_tip)"
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "pipette_tip",
+                "holder",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "pipette_tip"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "pipette_tip",
+        "destination": "holder",
+        "affordance_region": "the opening of the holder",
+        "done_when": "above(pipette_tip, holder, 0.05)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "inside",
+              "args": [
+                "pipette_tip",
+                "holder"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "pipette_tip"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "insert",
+        "target": "pipette_tip",
+        "destination": "holder",
+        "affordance_region": "the opening of the holder",
+        "done_when": "inside(pipette_tip, holder) AND stable(pipette_tip)"
+      }
+    ]
+  }
+}

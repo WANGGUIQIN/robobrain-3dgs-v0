@@ -1,0 +1,195 @@
+{
+  "task": "Scoot the pot to the counter's far left centre.",
+  "parsed": {
+    "scene_objects": [
+      "pot",
+      "purple_scoop",
+      "blue_object",
+      "table"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "pot",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "pot",
+        "affordance_region": "the rim of the steel pot",
+        "done_when": "distance(gripper, pot) < 0.03",
+        "affordance_hint": "the rim of the steel pot",
+        "refine_prompt": "the rim of the steel pot",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.6562,
+          0.6562
+        ],
+        "affordance_3d_refined": [
+          0.5396,
+          0.5396,
+          3.004
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.5932,
+        "affordance": [
+          0.6562,
+          0.6562
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "pot"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "pot",
+        "affordance_region": "the rim of the steel pot",
+        "done_when": "holding(pot)",
+        "affordance_hint": "the rim of the steel pot",
+        "refine_prompt": "the rim of the steel pot",
+        "refine_cache_hit": true,
+        "affordance_refined": [
+          0.6562,
+          0.6562
+        ],
+        "affordance_3d_refined": [
+          0.5396,
+          0.5396,
+          3.004
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.5932,
+        "affordance": [
+          0.6562,
+          0.6562
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "pot"
+              ],
+              "role": "safety"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "aligned_xy",
+              "args": [
+                "pot",
+                "counter_far_left_centre",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_collision",
+              "args": [
+                "pot",
+                "table"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "push",
+        "target": "pot",
+        "destination": "counter_far_left_centre",
+        "affordance_region": "the body of the steel pot",
+        "done_when": "aligned_xy(pot, counter_far_left_centre, 0.03)",
+        "affordance_hint": "the body of the steel pot",
+        "refine_prompt": "the body of the steel pot",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.6562,
+          0.6562
+        ],
+        "affordance_3d_refined": [
+          0.5396,
+          0.5396,
+          3.004
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.8692,
+        "affordance": [
+          0.6562,
+          0.6562
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,244 @@
+{
+  "task": "put the item in the bottom drawer",
+  "parsed": {
+    "scene_objects": [
+      "drawer",
+      "item",
+      "table"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "item",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "item",
+        "affordance_region": "the small blue item on the top of the drawer",
+        "done_when": "distance(gripper, item) < 0.03",
+        "affordance_hint": "the small blue item on the top of the drawer",
+        "refine_prompt": "the small blue item on the top of the drawer",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.1836,
+          0.3828
+        ],
+        "affordance_3d_refined": [
+          -1.5841,
+          -0.5867,
+          2.5032
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.4135,
+        "affordance": [
+          0.1836,
+          0.3828
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "item"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "item",
+        "affordance_region": "the small blue item on the top of the drawer",
+        "done_when": "holding(item)",
+        "affordance_hint": "the small blue item on the top of the drawer",
+        "refine_prompt": "the small blue item on the top of the drawer",
+        "refine_cache_hit": true,
+        "affordance_refined": [
+          0.1836,
+          0.3828
+        ],
+        "affordance_3d_refined": [
+          -1.5841,
+          -0.5867,
+          2.5032
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.4135,
+        "affordance": [
+          0.1836,
+          0.3828
+        ]
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "item",
+                "drawer",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "item"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "item",
+        "destination": "drawer",
+        "affordance_region": "an empty area on the drawer",
+        "done_when": "above(item, drawer, 0.05)",
+        "affordance_hint": "an empty area on the drawer",
+        "refine_prompt": "an empty area on the drawer",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.1836,
+          0.3828
+        ],
+        "affordance_3d_refined": [
+          -1.5841,
+          -0.5867,
+          2.5032
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.403,
+        "affordance": [
+          0.1836,
+          0.3828
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "surface_contact",
+              "args": [
+                "item",
+                "drawer"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "item"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "item"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "place",
+        "target": "item",
+        "destination": "drawer",
+        "affordance_region": "an empty area on the drawer",
+        "done_when": "surface_contact(item, drawer) AND released(item) AND stable(item)",
+        "affordance_hint": "an empty area on the drawer",
+        "refine_prompt": "an empty area on the drawer",
+        "refine_cache_hit": true,
+        "affordance_refined": [
+          0.1836,
+          0.3828
+        ],
+        "affordance_3d_refined": [
+          -1.5841,
+          -0.5867,
+          2.5032
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.403,
+        "affordance": [
+          0.1836,
+          0.3828
+        ]
+      }
+    ]
+  }
+}

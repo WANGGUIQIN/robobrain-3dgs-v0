@@ -1,0 +1,226 @@
+{
+  "task": "Move the green block on top of the cabinet to the left",
+  "scene_objects": [
+    "green_block",
+    "cabinet",
+    "table"
+  ],
+  "steps": [
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "green_block",
+              "<",
+              "0.03"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "approach_axis",
+            "args": [
+              "0",
+              "0",
+              "-1"
+            ],
+            "role": "progress"
+          }
+        ]
+      },
+      "step": 1,
+      "action": "reach",
+      "target": "green_block",
+      "affordance_region": "the green block on top of the cabinet",
+      "done_when": "distance(gripper, green_block) < 0.03",
+      "affordance_hint": "the green block on top of the cabinet",
+      "refine_prompt": "the green block on top of the cabinet",
+      "refine_cache_hit": false,
+      "affordance_refined": [
+        0.4766,
+        0.3516
+      ],
+      "affordance_3d_refined": [
+        -0.6191,
+        -0.4888,
+        3.2584
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.4806
+    },
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "green_block"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              "0",
+              "0",
+              "-1"
+            ],
+            "role": "progress"
+          }
+        ]
+      },
+      "step": 2,
+      "action": "grasp",
+      "target": "green_block",
+      "affordance_region": "the green block on top of the cabinet",
+      "done_when": "holding(green_block)",
+      "affordance_hint": "the green block on top of the cabinet",
+      "refine_prompt": "the green block on top of the cabinet",
+      "refine_cache_hit": true,
+      "affordance_refined": [
+        0.4766,
+        0.3516
+      ],
+      "affordance_3d_refined": [
+        -0.6191,
+        -0.4888,
+        3.2584
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.4806
+    },
+    {
+      "constraints": {
+        "spatial": [
+          {
+            "pred": "above",
+            "args": [
+              "green_block",
+              "cabinet_left",
+              "0.05"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_drop",
+            "args": [
+              "green_block"
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "step": 3,
+      "action": "transport",
+      "target": "green_block",
+      "destination": "cabinet_left",
+      "affordance_region": "an empty area on the cabinet left",
+      "done_when": "above(green_block, cabinet_left, 0.05)",
+      "affordance_hint": "an empty area on the cabinet left",
+      "refine_prompt": "an empty area on the cabinet left",
+      "refine_cache_hit": false,
+      "affordance_refined": [
+        0.4531,
+        0.5703
+      ],
+      "affordance_3d_refined": [
+        -0.747,
+        0.4414,
+        3.3954
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.3217
+    },
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "surface_contact",
+            "args": [
+              "green_block",
+              "cabinet_left"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "released",
+            "args": [
+              "green_block"
+            ],
+            "role": "completion"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "stable",
+            "args": [
+              "green_block"
+            ],
+            "role": "completion"
+          }
+        ]
+      },
+      "step": 4,
+      "action": "place",
+      "target": "green_block",
+      "destination": "cabinet_left",
+      "affordance_region": "an empty area on the cabinet left",
+      "done_when": "surface_contact(green_block, cabinet_left) AND released(green_block) AND stable(green_block)",
+      "affordance_hint": "an empty area on the cabinet left",
+      "refine_prompt": "an empty area on the cabinet left",
+      "refine_cache_hit": true,
+      "affordance_refined": [
+        0.4531,
+        0.5703
+      ],
+      "affordance_3d_refined": [
+        -0.747,
+        0.4414,
+        3.3954
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.3217
+    }
+  ]
+}

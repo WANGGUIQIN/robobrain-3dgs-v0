@@ -1,0 +1,251 @@
+{
+  "task": "put the ring on the violet spoke",
+  "scene_objects": [
+    "ring",
+    "violet_spoke",
+    "red_spoke",
+    "green_spoke",
+    "purple_spoke",
+    "table"
+  ],
+  "num_steps": 4,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "ring",
+      "affordance": [
+        0.678,
+        0.678
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "ring",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "violet_spoke"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, ring) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        0.0444,
+        0.0444,
+        0.1236
+      ],
+      "affordance_hint": "the small blue ring on the table",
+      "affordance_hint_original": "the ring",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 2,
+      "action": "grasp",
+      "target": "ring",
+      "affordance": [
+        0.678,
+        0.678
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "ring"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "holding",
+            "args": [
+              "ring"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              0,
+              0,
+              -1
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "holding(ring)",
+      "affordance_3d": [
+        0.0444,
+        0.0444,
+        0.1236
+      ],
+      "affordance_hint": "the small blue ring on the table",
+      "affordance_hint_original": "the handle of the ring",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 3,
+      "action": "transport",
+      "target": "ring",
+      "destination": "violet_spoke",
+      "affordance": [
+        0.5,
+        0.5
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "ring"
+            ],
+            "role": "safety"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "above",
+            "args": [
+              "ring",
+              "violet_spoke",
+              0.05
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "aligned_xy",
+            "args": [
+              "ring",
+              "violet_spoke",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "ring",
+              "violet_spoke"
+            ]
+          },
+          {
+            "pred": "no_drop",
+            "args": [
+              "ring"
+            ]
+          }
+        ]
+      },
+      "done_when": "above(ring, violet_spoke, 0.05) AND aligned_xy(ring, violet_spoke, 0.03)",
+      "affordance_3d": [
+        0.0,
+        0.0,
+        3.9285
+      ],
+      "affordance_hint": "the empty area on the violet spoke",
+      "affordance_hint_original": "an empty area on the violet spoke",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 4,
+      "action": "place",
+      "target": "ring",
+      "destination": "violet_spoke",
+      "affordance": [
+        0.5,
+        0.5
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "surface_contact",
+            "args": [
+              "ring",
+              "violet_spoke"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "released",
+            "args": [
+              "ring"
+            ],
+            "role": "completion"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "stable",
+            "args": [
+              "ring"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "support_stable",
+            "args": [
+              "ring"
+            ]
+          }
+        ]
+      },
+      "done_when": "surface_contact(ring, violet_spoke) AND released(ring) AND stable(ring)",
+      "affordance_3d": [
+        0.0,
+        0.0,
+        3.9285
+      ],
+      "affordance_hint": "the empty area on the violet spoke",
+      "affordance_hint_original": "an empty area on the violet spoke",
+      "affordance_hint_confidence": "ok"
+    }
+  ]
+}

@@ -1,0 +1,166 @@
+{
+  "task": "Move the empty plastic pack of snack forward",
+  "scene_objects": [
+    "plastic_pack",
+    "table",
+    "other_items"
+  ],
+  "num_steps": 3,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "plastic_pack",
+      "affordance": [
+        0.612,
+        0.475
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "plastic_pack",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "other_items"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, plastic_pack) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        -0.0442,
+        0.0295,
+        2.9453
+      ],
+      "affordance_hint": "the plastic pack"
+    },
+    {
+      "step": 2,
+      "action": "grasp",
+      "target": "plastic_pack",
+      "affordance": [
+        0.625,
+        0.45
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "plastic_pack"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "holding",
+            "args": [
+              "plastic_pack"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              0,
+              0,
+              -1
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "holding(plastic_pack)",
+      "affordance_3d": [
+        0.0,
+        -0.0712,
+        2.8475
+      ],
+      "affordance_hint": "the handle of the plastic pack"
+    },
+    {
+      "step": 3,
+      "action": "push",
+      "target": "plastic_pack",
+      "affordance": [
+        0.619,
+        0.475
+      ],
+      "approach": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "plastic_pack"
+            ],
+            "role": "safety"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "aligned_xy",
+            "args": [
+              "plastic_pack",
+              "destination",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "plastic_pack",
+              "other_items"
+            ]
+          }
+        ]
+      },
+      "done_when": "aligned_xy(plastic_pack, destination, 0.03)",
+      "affordance_3d": [
+        -0.0293,
+        0.0293,
+        2.9257
+      ],
+      "affordance_hint": "the center of the plastic pack"
+    }
+  ]
+}

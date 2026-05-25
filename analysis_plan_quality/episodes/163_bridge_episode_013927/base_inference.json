@@ -1,0 +1,167 @@
+{
+  "task": "Move potato to middle front of stove top",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_3epoch/best",
+  "raw": "**SCENE ANALYSIS** - A silver pot with a black handle sits on a black stovetop. A white potato is inside the pot. A blue cloth is on the stovetop to the right of the pot. The stovetop has a red burner. The goal is to move the potato to the middle front of the stovetop. The potato is inside the pot, so it must be removed first. The pot's handle is the most accessible part for grasping. The stovetop surface is the destination. **STRATEGY** - First, grasp the pot's handle to lift the pot. Then, transport the pot to the middle front of the stovetop. Finally, place the pot on the stovetop to expose the potato. Failure modes include dropping the pot or misplacing it. **AFFORDANCE REASONING** - Step 1: Reach for the pot's handle to grasp it. Step 2: Grasp the handle to lift the pot. Step 3: Transport the pot to the middle front of the stovetop. Step 4: Place the pot on the stovetop to expose the potato.\n\nGoal: on(pot, stovetop); stable(pot)\nScene: pot, potato, stovetop, blue_cloth\nStep 1: reach(pot)\n  affordance_region: the black handle of the pot\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, pot, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, pot) < 0.03\nStep 2: grasp(pot)\n  affordance_region: the black handle of the pot\n  contact: holding(pot) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(pot)\nStep 3: transport(pot -> stovetop)\n  affordance_region: the middle front area of the stovetop\n  spatial: above(pot, stovetop, 0.05) [completion]\n  safety: no_drop(pot)\n  done_when: above(pot, stovetop, 0.05)\nStep 4: place(pot -> stovetop)\n  affordance_region: the middle front area of the stovetop\n  contact: surface_contact(pot, stovetop) [completion]; released(pot) [completion]\n  pose: stable(pot) [completion]\n  done_when: surface_contact(pot, stovetop) AND released(pot)\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [
+      {
+        "pred": "on",
+        "args": [
+          "pot",
+          "stovetop"
+        ]
+      },
+      {
+        "pred": "stable",
+        "args": [
+          "pot"
+        ]
+      }
+    ],
+    "scene_objects": [
+      "pot",
+      "potato",
+      "stovetop",
+      "blue_cloth"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "pot",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "pot",
+        "affordance_region": "the black handle of the pot",
+        "done_when": "distance(gripper, pot) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "pot"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "pot",
+        "affordance_region": "the black handle of the pot",
+        "done_when": "holding(pot)"
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "pot",
+                "stovetop",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "pot"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "pot",
+        "destination": "stovetop",
+        "affordance_region": "the middle front area of the stovetop",
+        "done_when": "above(pot, stovetop, 0.05)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "surface_contact",
+              "args": [
+                "pot",
+                "stovetop"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "pot"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "pot"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "place",
+        "target": "pot",
+        "destination": "stovetop",
+        "affordance_region": "the middle front area of the stovetop",
+        "done_when": "surface_contact(pot, stovetop) AND released(pot)"
+      }
+    ]
+  }
+}

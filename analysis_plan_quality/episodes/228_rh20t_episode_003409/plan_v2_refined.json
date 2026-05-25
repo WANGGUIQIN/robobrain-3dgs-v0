@@ -1,0 +1,234 @@
+{
+  "task": "Plug in the power cord to the socket",
+  "scene_objects": [
+    "power_cord",
+    "socket",
+    "table"
+  ],
+  "num_steps": 4,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "power_cord",
+      "affordance": [
+        0.308,
+        0.38
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "power_cord",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "socket"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, power_cord) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        -0.995,
+        -0.3427,
+        1.3211
+      ],
+      "affordance_hint": "the white power cord on the table",
+      "affordance_hint_original": "the power cord",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 2,
+      "action": "grasp",
+      "target": "power_cord",
+      "affordance": [
+        0.486,
+        0.44
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "power_cord"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "holding",
+            "args": [
+              "power_cord"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              0,
+              0,
+              -1
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "holding(power_cord)",
+      "affordance_3d": [
+        -0.8931,
+        -0.3053,
+        1.4581
+      ],
+      "affordance_hint": "the white plastic plug of the power cord",
+      "affordance_hint_original": "the handle of the power cord",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 3,
+      "action": "transport",
+      "target": "power_cord",
+      "destination": "socket",
+      "affordance": [
+        0.406,
+        0.479
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "power_cord"
+            ],
+            "role": "safety"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "aligned_xy",
+            "args": [
+              "power_cord",
+              "socket",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "power_cord",
+              "socket"
+            ]
+          },
+          {
+            "pred": "no_drop",
+            "args": [
+              "power_cord"
+            ]
+          }
+        ]
+      },
+      "done_when": "aligned_xy(power_cord, socket, 0.03)",
+      "affordance_3d": [
+        -0.9974,
+        -0.2632,
+        1.4776
+      ],
+      "affordance_hint": "the empty area on the white socket",
+      "affordance_hint_original": "an empty area on the socket",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 4,
+      "action": "insert",
+      "target": "power_cord",
+      "destination": "socket",
+      "affordance": [
+        0.475,
+        0.45
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "inserted",
+            "args": [
+              "power_cord",
+              "socket"
+            ],
+            "role": "completion"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "aligned_z",
+            "args": [
+              "power_cord",
+              "socket"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "power_cord",
+              "socket"
+            ]
+          }
+        ]
+      },
+      "done_when": "inserted(power_cord, socket) AND aligned_z(power_cord, socket)",
+      "affordance_3d": [
+        -0.9022,
+        -0.2962,
+        1.4581
+      ],
+      "affordance_hint": "the top opening of the white socket",
+      "affordance_hint_original": "the top opening of the socket",
+      "affordance_hint_confidence": "ok"
+    }
+  ]
+}

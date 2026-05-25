@@ -1,0 +1,152 @@
+{
+  "task": "Pick up the scoop and put it in the object",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_planning_3epoch/checkpoint-39957",
+  "raw": "Scene: scoop, object, table\nStep 1: reach(scoop)\n  affordance_region: the body of the scoop\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, scoop, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, scoop) < 0.03\nStep 2: grasp(scoop)\n  affordance_region: the handle of the scoop\n  contact: holding(scoop) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(scoop)\nStep 3: transport(scoop -> object)\n  affordance_region: an empty area on the object\n  spatial: above(scoop, object, 0.05) [completion]\n  safety: no_drop(scoop)\n  done_when: above(scoop, object, 0.05)\nStep 4: place(scoop -> object)\n  affordance_region: an empty area on the object\n  contact: surface_contact(scoop, object) [completion]; released(scoop) [completion]\n  pose: stable(scoop) [completion]\n  done_when: surface_contact(scoop, object) AND released(scoop)\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [],
+    "scene_objects": [
+      "scoop",
+      "object",
+      "table"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "scoop",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "scoop",
+        "affordance_region": "the body of the scoop",
+        "done_when": "distance(gripper, scoop) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "scoop"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "scoop",
+        "affordance_region": "the handle of the scoop",
+        "done_when": "holding(scoop)"
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "scoop",
+                "object",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "scoop"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "scoop",
+        "destination": "object",
+        "affordance_region": "an empty area on the object",
+        "done_when": "above(scoop, object, 0.05)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "surface_contact",
+              "args": [
+                "scoop",
+                "object"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "scoop"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "scoop"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "place",
+        "target": "scoop",
+        "destination": "object",
+        "affordance_region": "an empty area on the object",
+        "done_when": "surface_contact(scoop, object) AND released(scoop)"
+      }
+    ]
+  }
+}

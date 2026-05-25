@@ -1,0 +1,241 @@
+{
+  "task": "Use the object to mix the contents in the bowl",
+  "scene_objects": [
+    "bowl",
+    "mixing_object",
+    "table"
+  ],
+  "num_steps": 4,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "mixing_object",
+      "affordance": [
+        0.625,
+        0.425
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "mixing_object",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "bowl"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, mixing_object) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        0.0,
+        -0.0296,
+        0.5384
+      ],
+      "affordance_hint": "the green plastic mixing object",
+      "affordance_hint_original": "the mixing object",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 2,
+      "action": "grasp",
+      "target": "mixing_object",
+      "affordance": [
+        0.625,
+        0.401
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "mixing_object"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "holding",
+            "args": [
+              "mixing_object"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              0,
+              0,
+              -1
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "holding(mixing_object)",
+      "affordance_3d": [
+        0.0,
+        -0.0424,
+        0.4992
+      ],
+      "affordance_hint": "the handle of the black mixing object",
+      "affordance_hint_original": "the handle of the mixing object",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 3,
+      "action": "transport",
+      "target": "mixing_object",
+      "destination": "bowl",
+      "affordance": [
+        0.553,
+        0.678
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "mixing_object"
+            ],
+            "role": "safety"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "above",
+            "args": [
+              "mixing_object",
+              "bowl",
+              0.05
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "mixing_object",
+              "bowl"
+            ]
+          },
+          {
+            "pred": "no_drop",
+            "args": [
+              "mixing_object"
+            ]
+          }
+        ]
+      },
+      "done_when": "above(mixing_object, bowl, 0.05) AND aligned_xy(mixing_object, bowl, 0.03)",
+      "affordance_3d": [
+        -0.0907,
+        0.2722,
+        1.008
+      ],
+      "affordance_hint": "the empty area on the green bowl",
+      "affordance_hint_original": "an empty area on the bowl",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 4,
+      "action": "mix",
+      "target": "bowl",
+      "tool": "mixing_object",
+      "affordance": [
+        0.611,
+        0.593
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "mixing_object"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "inside",
+            "args": [
+              "mixing_object",
+              "bowl"
+            ],
+            "role": "completion"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "tilted",
+            "args": [
+              "mixing_object"
+            ],
+            "role": "progress"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_spill",
+            "args": [
+              "bowl"
+            ]
+          }
+        ]
+      },
+      "done_when": "inside(mixing_object, bowl) AND mixing_action_complete",
+      "affordance_3d": [
+        -0.0182,
+        0.1456,
+        0.9102
+      ],
+      "affordance_hint": "the contents inside the green bowl",
+      "affordance_hint_original": "bowl",
+      "affordance_hint_confidence": "ok"
+    }
+  ]
+}

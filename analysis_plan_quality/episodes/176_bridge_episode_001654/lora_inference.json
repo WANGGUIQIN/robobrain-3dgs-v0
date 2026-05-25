@@ -1,0 +1,246 @@
+{
+  "task": "pick upthe yellow towel put on the another side of the table",
+  "parsed": {
+    "scene_objects": [
+      "yellow_towel",
+      "metal_bowl",
+      "blue_spoon",
+      "red_spoon",
+      "table"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "yellow_towel",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "yellow_towel",
+        "affordance_region": "the yellow towel",
+        "done_when": "distance(gripper, yellow_towel) < 0.03",
+        "affordance_hint": "the yellow towel",
+        "refine_prompt": "the yellow towel",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.2695,
+          0.457
+        ],
+        "affordance_3d_refined": [
+          -0.3448,
+          -0.0643,
+          1.3015
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.853,
+        "affordance": [
+          0.2695,
+          0.457
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "yellow_towel"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "yellow_towel",
+        "affordance_region": "the corner of the yellow towel",
+        "done_when": "holding(yellow_towel)",
+        "affordance_hint": "the corner of the yellow towel",
+        "refine_prompt": "the corner of the yellow towel",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.2695,
+          0.457
+        ],
+        "affordance_3d_refined": [
+          -0.3448,
+          -0.0643,
+          1.3015
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.5663,
+        "affordance": [
+          0.2695,
+          0.457
+        ]
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "yellow_towel",
+                "table",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "yellow_towel"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "yellow_towel",
+        "destination": "other_side_of_table",
+        "affordance_region": "an empty area on the other side of the table",
+        "done_when": "above(yellow_towel, table, 0.05)",
+        "affordance_hint": "an empty area on the other side of the table",
+        "refine_prompt": "an empty area on the other side of the table",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.0,
+          0.3945
+        ],
+        "affordance_3d_refined": [
+          -0.6468,
+          -0.1364,
+          1.1254
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.309,
+        "affordance": [
+          0.0,
+          0.3945
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "surface_contact",
+              "args": [
+                "yellow_towel",
+                "table"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "yellow_towel"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "yellow_towel"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "place",
+        "target": "yellow_towel",
+        "destination": "other_side_of_table",
+        "affordance_region": "an empty area on the other side of the table",
+        "done_when": "surface_contact(yellow_towel, table) AND released(yellow_towel) AND stable(yellow_towel)",
+        "affordance_hint": "an empty area on the other side of the table",
+        "refine_prompt": "an empty area on the other side of the table",
+        "refine_cache_hit": true,
+        "affordance_refined": [
+          0.0,
+          0.3945
+        ],
+        "affordance_3d_refined": [
+          -0.6468,
+          -0.1364,
+          1.1254
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.309,
+        "affordance": [
+          0.0,
+          0.3945
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,192 @@
+{
+  "task": "Chop the onions",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_3epoch/best",
+  "raw": "SCENE ANALYSIS - A white onion is on a wooden cutting board. A chef's knife is on the same board. The onion is a solid, irregular object; the knife has a sharp blade and a handle. STRATEGY - First, grasp the onion to pick it up. Then, place it on the cutting board. Next, grasp the knife to pick it up. Finally, perform a chopping motion on the onion. Failure modes include dropping the onion or knife, or misaligning the knife during chopping. AFFORDANCE REASONING - Step 1 reach the onion body; Step 2 grasp the onion body; Step 3 place the onion on the board; Step 4 grasp the knife handle; Step 5 perform a chopping motion on the onion.\nGoal: chopped(onion)\nScene: onion, knife, cutting_board\nStep 1: reach(onion)\n  affordance_region: the body of the white onion\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, onion, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, onion) < 0.03\nStep 2: grasp(onion)\n  affordance_region: the body of the white onion\n  contact: holding(onion) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(onion)\nStep 3: place(onion -> cutting_board)\n  affordance_region: an empty area on the cutting board\n  contact: surface_contact(onion, cutting_board) [completion]; released(onion) [completion]\n  pose: stable(onion) [completion]\n  done_when: surface_contact(onion, cutting_board) AND released(onion)\nStep 4: grasp(knife)\n  affordance_region: the handle of the chef's knife\n  contact: holding(knife) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(knife)\nStep 5: chop(knife, onion)\n  affordance_region: the blade of the chef's knife\n  contact: knife_contact(onion) [completion]; released(knife) [completion]\n  pose: stable(knife) [completion]\n  done_when: knife_contact(onion) AND released(knife)\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [
+      {
+        "pred": "chopped",
+        "args": [
+          "onion"
+        ]
+      }
+    ],
+    "scene_objects": [
+      "onion",
+      "knife",
+      "cutting_board"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "onion",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "onion",
+        "affordance_region": "the body of the white onion",
+        "done_when": "distance(gripper, onion) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "onion"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "onion",
+        "affordance_region": "the body of the white onion",
+        "done_when": "holding(onion)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "surface_contact",
+              "args": [
+                "onion",
+                "cutting_board"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "onion"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "onion"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "place",
+        "target": "onion",
+        "destination": "cutting_board",
+        "affordance_region": "an empty area on the cutting board",
+        "done_when": "surface_contact(onion, cutting_board) AND released(onion)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "knife"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "grasp",
+        "target": "knife",
+        "affordance_region": "the handle of the chef's knife",
+        "done_when": "holding(knife)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "knife_contact",
+              "args": [
+                "onion"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "knife"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "knife"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 5,
+        "action": "chop",
+        "target": "knife, onion",
+        "affordance_region": "the blade of the chef's knife",
+        "done_when": "knife_contact(onion) AND released(knife)"
+      }
+    ]
+  }
+}

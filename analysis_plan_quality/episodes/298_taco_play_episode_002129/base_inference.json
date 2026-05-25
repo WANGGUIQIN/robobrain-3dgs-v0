@@ -1,0 +1,94 @@
+{
+  "task": "go towards the yellow block and pick it up",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_3epoch/best",
+  "raw": "SCENE ANALYSIS - A white cabinet with a black handle is on a wooden surface. A white tray is on the floor. A yellow block is on the wooden surface, near the cabinet. The yellow block is a cube with a matte finish. STRATEGY - First, reach towards the yellow block to grasp it. Since the block is on the surface, a direct grasp on its body is possible. The task is a single pick-up, so no transport or placement is needed. Failure modes include misgrasping (e.g., grabbing the cabinet handle instead) or not reaching the block. AFFORDANCE REASONING - Step 1: reach the yellow block at its body for a stable grasp. Step 2: grasp the yellow block to lift it.\nGoal: holding(yellow_block)\nScene: yellow_block, cabinet, tray, wooden_surface\nStep 1: reach(yellow_block)\n  affordance_region: the body of the yellow block\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, yellow_block, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, yellow_block) < 0.03\nStep 2: grasp(yellow_block)\n  affordance_region: the body of the yellow block\n  contact: holding(yellow_block) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(yellow_block)\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [
+      {
+        "pred": "holding",
+        "args": [
+          "yellow_block"
+        ]
+      }
+    ],
+    "scene_objects": [
+      "yellow_block",
+      "cabinet",
+      "tray",
+      "wooden_surface"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "yellow_block",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "yellow_block",
+        "affordance_region": "the body of the yellow block",
+        "done_when": "distance(gripper, yellow_block) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "yellow_block"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "yellow_block",
+        "affordance_region": "the body of the yellow block",
+        "done_when": "holding(yellow_block)"
+      }
+    ]
+  }
+}

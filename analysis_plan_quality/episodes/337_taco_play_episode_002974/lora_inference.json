@@ -1,0 +1,150 @@
+{
+  "task": "push the yellow block to the left",
+  "parsed": {
+    "scene_objects": [
+      "yellow_block",
+      "tray",
+      "table"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "yellow_block",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "yellow_block",
+        "affordance_region": "the yellow block on the tray",
+        "done_when": "distance(gripper, yellow_block) < 0.03",
+        "affordance_hint": "the yellow block on the tray",
+        "refine_prompt": "the yellow block on the tray",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.8438,
+          0.4336
+        ],
+        "affordance_3d_refined": [
+          0.004,
+          -0.0008,
+          0.01
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.3428,
+        "affordance": [
+          0.8438,
+          0.4336
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_contact",
+              "args": [
+                "yellow_block"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "aligned_xy",
+              "args": [
+                "yellow_block",
+                "left",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "motion_dir",
+              "args": [
+                "left"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_collision",
+              "args": [
+                "yellow_block",
+                "tray"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "push",
+        "target": "yellow_block",
+        "destination": "left",
+        "affordance_region": "the center of the yellow block",
+        "done_when": "aligned_xy(yellow_block, left, 0.03)",
+        "affordance_hint": "the center of the yellow block",
+        "refine_prompt": "the center of the yellow block",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.0,
+          0.6914
+        ],
+        "affordance_3d_refined": [
+          -0.0057,
+          0.0022,
+          0.01
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.3209,
+        "affordance": [
+          0.0,
+          0.6914
+        ]
+      }
+    ]
+  }
+}

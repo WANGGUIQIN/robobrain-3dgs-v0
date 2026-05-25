@@ -1,0 +1,131 @@
+{
+  "task": "move the blue light switch to turn on the blue light",
+  "scene_objects": [
+    "blue_light_switch",
+    "blue_light",
+    "table"
+  ],
+  "steps": [
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "blue_light_switch",
+              "<",
+              "0.03"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "approach_axis",
+            "args": [
+              "0",
+              "0",
+              "-1"
+            ],
+            "role": "progress"
+          }
+        ]
+      },
+      "step": 1,
+      "action": "reach",
+      "target": "blue_light_switch",
+      "affordance_region": "the blue light switch on the wall",
+      "done_when": "distance(gripper, blue_light_switch) < 0.03",
+      "affordance_hint": "the blue light switch on the wall",
+      "refine_prompt": "the blue light switch on the wall",
+      "refine_cache_hit": false,
+      "refine_prompt_fallback": "blue light switch",
+      "affordance_refined": [
+        0.0938,
+        0.8867
+      ],
+      "affordance_3d_refined": [
+        -0.0047,
+        0.0044,
+        0.01
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.2481
+    },
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "blue_light_switch"
+            ],
+            "role": "completion"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "aligned_xy",
+            "args": [
+              "gripper",
+              "blue_light_switch"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "motion_dir",
+            "args": [
+              "0",
+              "0",
+              "-1"
+            ],
+            "role": "completion"
+          }
+        ]
+      },
+      "step": 2,
+      "action": "push",
+      "target": "blue_light_switch",
+      "affordance_region": "the center of the blue light switch",
+      "done_when": "blue_light_switch(state=on)",
+      "affordance_hint": "the center of the blue light switch",
+      "refine_prompt": "the center of the blue light switch",
+      "refine_cache_hit": false,
+      "affordance_refined": [
+        0.332,
+        0.1953
+      ],
+      "affordance_3d_refined": [
+        -0.0019,
+        -0.0035,
+        0.01
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.5
+    }
+  ]
+}

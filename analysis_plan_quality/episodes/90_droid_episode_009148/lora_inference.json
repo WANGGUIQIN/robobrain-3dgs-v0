@@ -1,0 +1,246 @@
+{
+  "task": "Pick up the salt cellar and put it in the bowl",
+  "parsed": {
+    "scene_objects": [
+      "salt_cellar",
+      "bowl",
+      "table"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "salt_cellar",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "salt_cellar",
+        "affordance_region": "the body of the salt cellar",
+        "done_when": "distance(gripper, salt_cellar) < 0.03",
+        "affordance_hint": "the body of the salt cellar",
+        "refine_prompt": "the body of the salt cellar",
+        "refine_cache_hit": false,
+        "refine_prompt_fallback": "salt cellar",
+        "affordance_refined": [
+          0.6367,
+          0.3711
+        ],
+        "affordance_3d_refined": [
+          0.0225,
+          -0.1872,
+          1.4972
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.3129,
+        "affordance": [
+          0.6367,
+          0.3711
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "salt_cellar"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "salt_cellar",
+        "affordance_region": "the top surface of the salt cellar",
+        "done_when": "holding(salt_cellar)",
+        "affordance_hint": "the top surface of the salt cellar",
+        "refine_prompt": "the top surface of the salt cellar",
+        "refine_cache_hit": false,
+        "refine_prompt_fallback": "salt cellar",
+        "affordance_refined": [
+          0.6367,
+          0.3711
+        ],
+        "affordance_3d_refined": [
+          0.0225,
+          -0.1872,
+          1.4972
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.3129,
+        "affordance": [
+          0.6367,
+          0.3711
+        ]
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "salt_cellar",
+                "bowl",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "salt_cellar"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "salt_cellar",
+        "destination": "bowl",
+        "affordance_region": "an empty area on the bowl",
+        "done_when": "above(salt_cellar, bowl, 0.05)",
+        "affordance_hint": "an empty area on the bowl",
+        "refine_prompt": "an empty area on the bowl",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.6367,
+          0.3711
+        ],
+        "affordance_3d_refined": [
+          0.0225,
+          -0.1872,
+          1.4972
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.4768,
+        "affordance": [
+          0.6367,
+          0.3711
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "surface_contact",
+              "args": [
+                "salt_cellar",
+                "bowl"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "salt_cellar"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "salt_cellar"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "place",
+        "target": "salt_cellar",
+        "destination": "bowl",
+        "affordance_region": "an empty area on the bowl",
+        "done_when": "surface_contact(salt_cellar, bowl) AND released(salt_cellar) AND stable(salt_cellar)",
+        "affordance_hint": "an empty area on the bowl",
+        "refine_prompt": "an empty area on the bowl",
+        "refine_cache_hit": true,
+        "affordance_refined": [
+          0.6367,
+          0.3711
+        ],
+        "affordance_3d_refined": [
+          0.0225,
+          -0.1872,
+          1.4972
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.4768,
+        "affordance": [
+          0.6367,
+          0.3711
+        ]
+      }
+    ]
+  }
+}

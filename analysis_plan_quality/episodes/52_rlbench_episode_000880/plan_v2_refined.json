@@ -1,0 +1,154 @@
+{
+  "task": "push the maroon button",
+  "scene_objects": [
+    "maroon_button",
+    "black_button",
+    "blue_button",
+    "table"
+  ],
+  "num_steps": 3,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "maroon_button",
+      "affordance": [
+        0.66,
+        0.703
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "maroon_button",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "black_button"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, maroon_button) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        0.4582,
+        0.5811,
+        1.4305
+      ],
+      "affordance_hint": "the maroon button on the black square",
+      "affordance_hint_original": "the maroon button",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 2,
+      "action": "push",
+      "target": "maroon_button",
+      "affordance": [
+        0.66,
+        0.703
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "maroon_button"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "motion_dir",
+            "args": [
+              0,
+              0,
+              -1
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "gripper_contact(maroon_button)",
+      "affordance_3d": [
+        0.4582,
+        0.5811,
+        1.4305
+      ],
+      "affordance_hint": "the center of the maroon button",
+      "affordance_hint_original": "the center of the maroon button",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 3,
+      "action": "release",
+      "target": "maroon_button",
+      "affordance": [
+        0.66,
+        0.703
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "released",
+            "args": [
+              "maroon_button"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_drop",
+            "args": [
+              "maroon_button"
+            ]
+          }
+        ]
+      },
+      "done_when": "released(maroon_button)",
+      "affordance_3d": [
+        0.4582,
+        0.5811,
+        1.4305
+      ],
+      "affordance_hint": "the maroon button",
+      "affordance_hint_original": "the maroon button",
+      "affordance_hint_confidence": "ok"
+    }
+  ]
+}

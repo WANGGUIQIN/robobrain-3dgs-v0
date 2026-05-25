@@ -1,0 +1,289 @@
+{
+  "task": "grasp the drawer handle and close it",
+  "scene_objects": [
+    "robot_gripper",
+    "drawer",
+    "drawer_handle",
+    "countertop",
+    "white_bin",
+    "control_box"
+  ],
+  "num_steps": 3,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "drawer_handle",
+      "affordance": [
+        0.475,
+        0.125
+      ],
+      "approach": [
+        -1.0,
+        0.0,
+        0.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "drawer_handle",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "clear_path",
+            "args": [
+              "gripper",
+              "drawer_handle"
+            ],
+            "role": "safety"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "approach_dir",
+            "args": [
+              -1.0,
+              0.0,
+              0.0
+            ],
+            "role": "safety"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "drawer_front"
+            ],
+            "role": "safety"
+          },
+          {
+            "pred": "within_workspace",
+            "args": [
+              "gripper"
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "distance(gripper, drawer_handle) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        -0.031,
+        -0.744,
+        1.726
+      ],
+      "affordance_hint": "the black plastic drawer handle",
+      "affordance_hint_original": "the drawer handle",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 2,
+      "action": "grasp",
+      "target": "drawer_handle",
+      "affordance": [
+        0.475,
+        0.125
+      ],
+      "approach": [
+        -1.0,
+        0.0,
+        0.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "drawer_handle"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "gripper_state",
+            "args": [
+              "closed"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              0.0,
+              1.0,
+              0.0
+            ],
+            "role": "safety"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "force_limit",
+            "args": [
+              "drawer_handle"
+            ],
+            "role": "safety"
+          },
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "drawer_front"
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "gripper_contact(drawer_handle) AND gripper_state(closed)",
+      "affordance_3d": [
+        -0.031,
+        -0.744,
+        1.726
+      ],
+      "affordance_hint": "the black plastic handle of the drawer",
+      "affordance_hint_original": "the handle of the drawer handle",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 3,
+      "action": "push",
+      "target": "drawer_handle",
+      "affordance": [
+        0.485,
+        0.137
+      ],
+      "approach": [
+        -1.0,
+        0.0,
+        0.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "drawer_handle"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "aligned_xy",
+            "args": [
+              "drawer",
+              "cabinet",
+              0.02
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "inside",
+            "args": [
+              "drawer",
+              "cabinet"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "clear_path",
+            "args": [
+              "drawer",
+              "cabinet"
+            ],
+            "role": "safety"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "motion_dir",
+            "args": [
+              1.0,
+              0.0,
+              0.0
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "approach_dir",
+            "args": [
+              -1.0,
+              0.0,
+              0.0
+            ],
+            "role": "safety"
+          },
+          {
+            "pred": "retreat_dir",
+            "args": [
+              -1.0,
+              0.0,
+              0.0
+            ],
+            "role": "progress"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "orientation_match",
+            "args": [
+              "drawer",
+              "cabinet"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "drawer",
+              "cabinet_frame"
+            ],
+            "role": "safety"
+          },
+          {
+            "pred": "force_limit",
+            "args": [
+              "drawer"
+            ],
+            "role": "safety"
+          },
+          {
+            "pred": "support_stable",
+            "args": [
+              "drawer"
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "inside(drawer, cabinet) AND aligned_xy(drawer, cabinet, 0.02) AND orientation_match(drawer, cabinet)",
+      "affordance_3d": [
+        -0.0311,
+        -0.7237,
+        1.733
+      ],
+      "affordance_hint": "the center of the black drawer handle",
+      "affordance_hint_original": "the center of the drawer handle",
+      "affordance_hint_confidence": "ok"
+    }
+  ]
+}

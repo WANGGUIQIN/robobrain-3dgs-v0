@@ -1,0 +1,244 @@
+{
+  "task": "place water bottle into bottom drawer",
+  "parsed": {
+    "scene_objects": [
+      "water_bottle",
+      "bottom_drawer",
+      "table"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "water_bottle",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "water_bottle",
+        "affordance_region": "the body of the water bottle",
+        "done_when": "distance(gripper, water_bottle) < 0.03",
+        "affordance_hint": "the body of the water bottle",
+        "refine_prompt": "the body of the water bottle",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.5039,
+          0.2891
+        ],
+        "affordance_3d_refined": [
+          0.0182,
+          -0.9846,
+          4.0607
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.3003,
+        "affordance": [
+          0.5039,
+          0.2891
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "water_bottle"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "water_bottle",
+        "affordance_region": "the body of the water bottle",
+        "done_when": "holding(water_bottle)",
+        "affordance_hint": "the body of the water bottle",
+        "refine_prompt": "the body of the water bottle",
+        "refine_cache_hit": true,
+        "affordance_refined": [
+          0.5039,
+          0.2891
+        ],
+        "affordance_3d_refined": [
+          0.0182,
+          -0.9846,
+          4.0607
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.3003,
+        "affordance": [
+          0.5039,
+          0.2891
+        ]
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "water_bottle",
+                "bottom_drawer",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "water_bottle"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "water_bottle",
+        "destination": "bottom_drawer",
+        "affordance_region": "the empty space in the bottom drawer",
+        "done_when": "above(water_bottle, bottom_drawer, 0.05)",
+        "affordance_hint": "the empty space in the bottom drawer",
+        "refine_prompt": "the empty space in the bottom drawer",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.5508,
+          0.7812
+        ],
+        "affordance_3d_refined": [
+          0.1148,
+          0.6359,
+          1.9669
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.4473,
+        "affordance": [
+          0.5508,
+          0.7812
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "surface_contact",
+              "args": [
+                "water_bottle",
+                "bottom_drawer"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "water_bottle"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "water_bottle"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "place",
+        "target": "water_bottle",
+        "destination": "bottom_drawer",
+        "affordance_region": "the empty space in the bottom drawer",
+        "done_when": "surface_contact(water_bottle, bottom_drawer) AND released(water_bottle) AND stable(water_bottle)",
+        "affordance_hint": "the empty space in the bottom drawer",
+        "refine_prompt": "the empty space in the bottom drawer",
+        "refine_cache_hit": true,
+        "affordance_refined": [
+          0.5508,
+          0.7812
+        ],
+        "affordance_3d_refined": [
+          0.1148,
+          0.6359,
+          1.9669
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.4473,
+        "affordance": [
+          0.5508,
+          0.7812
+        ]
+      }
+    ]
+  }
+}

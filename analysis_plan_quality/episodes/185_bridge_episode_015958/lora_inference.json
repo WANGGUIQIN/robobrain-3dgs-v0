@@ -1,0 +1,245 @@
+{
+  "task": "Take the green object and put it on the lower right part of the table",
+  "parsed": {
+    "scene_objects": [
+      "red_fork",
+      "metal_pot",
+      "blue_cloth",
+      "table"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "red_fork",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "red_fork",
+        "affordance_region": "the red plastic handle of the red fork",
+        "done_when": "distance(gripper, red_fork) < 0.03",
+        "affordance_hint": "the red plastic handle of the red fork",
+        "refine_prompt": "the red plastic handle of the red fork",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.1523,
+          0.5
+        ],
+        "affordance_3d_refined": [
+          -0.5201,
+          0.0,
+          1.3015
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.6308,
+        "affordance": [
+          0.1523,
+          0.5
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "red_fork"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "red_fork",
+        "affordance_region": "the red plastic handle of the red fork",
+        "done_when": "holding(red_fork)",
+        "affordance_hint": "the red plastic handle of the red fork",
+        "refine_prompt": "the red plastic handle of the red fork",
+        "refine_cache_hit": true,
+        "affordance_refined": [
+          0.1523,
+          0.5
+        ],
+        "affordance_3d_refined": [
+          -0.5201,
+          0.0,
+          1.3015
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.6308,
+        "affordance": [
+          0.1523,
+          0.5
+        ]
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "red_fork",
+                "lower_right_table",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "red_fork"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "red_fork",
+        "destination": "lower_right_table",
+        "affordance_region": "the lower right part of the wooden table",
+        "done_when": "above(red_fork, lower_right_table, 0.05)",
+        "affordance_hint": "the lower right part of the wooden table",
+        "refine_prompt": "the lower right part of the wooden table",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.6523,
+          0.7148
+        ],
+        "affordance_3d_refined": [
+          0.2622,
+          0.3698,
+          1.4972
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.3839,
+        "affordance": [
+          0.6523,
+          0.7148
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "surface_contact",
+              "args": [
+                "red_fork",
+                "lower_right_table"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "red_fork"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "red_fork"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "place",
+        "target": "red_fork",
+        "destination": "lower_right_table",
+        "affordance_region": "the lower right part of the wooden table",
+        "done_when": "surface_contact(red_fork, lower_right_table) AND released(red_fork)",
+        "affordance_hint": "the lower right part of the wooden table",
+        "refine_prompt": "the lower right part of the wooden table",
+        "refine_cache_hit": true,
+        "affordance_refined": [
+          0.6523,
+          0.7148
+        ],
+        "affordance_3d_refined": [
+          0.2622,
+          0.3698,
+          1.4972
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.3839,
+        "affordance": [
+          0.6523,
+          0.7148
+        ]
+      }
+    ]
+  }
+}

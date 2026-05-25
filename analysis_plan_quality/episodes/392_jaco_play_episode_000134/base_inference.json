@@ -1,0 +1,162 @@
+{
+  "task": "place the steak meat in the oven",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_3epoch/best",
+  "raw": "SCENE ANALYSIS - A blue plastic tray holds a green object and a brown steak. A yellow rectangular block and a light blue cube are on the wooden table. The tray is a container with a flat surface; the steak is a solid object with a flat top. STRATEGY - First, grasp the steak from the table, then transport it to the tray, and finally place it on the tray. Failure modes include dropping the steak during transport or misplacing it on the table. AFFORDANCE REASONING - Step 1 reach the steak on the table; Step 2 grasp the steak's flat top for secure hold; Step 3 transport the steak to the tray's empty area; Step 4 place the steak on the tray's surface.\nGoal: on(brown_steak, blue_tray)\nScene: brown_steak, blue_tray, yellow_block, light_blue_cube, table\nStep 1: reach(brown_steak)\n  affordance_region: the flat top of the brown steak\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, brown_steak, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, brown_steak) < 0.03\nStep 2: grasp(brown_steak)\n  affordance_region: the flat top of the brown steak\n  contact: holding(brown_steak) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(brown_steak)\nStep 3: transport(brown_steak -> blue_tray)\n  affordance_region: an empty area on the blue tray\n  spatial: above(brown_steak, blue_tray, 0.05) [completion]\n  safety: no_drop(brown_steak)\n  done_when: above(brown_steak, blue_tray, 0.05)\nStep 4: place(brown_steak -> blue_tray)\n  affordance_region: an empty area on the blue tray\n  contact: surface_contact(brown_steak, blue_tray) [completion]; released(brown_steak) [completion]\n  pose: stable(brown_steak) [completion]\n  done_when: surface_contact(brown_steak, blue_tray) AND released(brown_steak)\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [
+      {
+        "pred": "on",
+        "args": [
+          "brown_steak",
+          "blue_tray"
+        ]
+      }
+    ],
+    "scene_objects": [
+      "brown_steak",
+      "blue_tray",
+      "yellow_block",
+      "light_blue_cube",
+      "table"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "brown_steak",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "brown_steak",
+        "affordance_region": "the flat top of the brown steak",
+        "done_when": "distance(gripper, brown_steak) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "brown_steak"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "brown_steak",
+        "affordance_region": "the flat top of the brown steak",
+        "done_when": "holding(brown_steak)"
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "brown_steak",
+                "blue_tray",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "brown_steak"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "brown_steak",
+        "destination": "blue_tray",
+        "affordance_region": "an empty area on the blue tray",
+        "done_when": "above(brown_steak, blue_tray, 0.05)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "surface_contact",
+              "args": [
+                "brown_steak",
+                "blue_tray"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "brown_steak"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "brown_steak"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "place",
+        "target": "brown_steak",
+        "destination": "blue_tray",
+        "affordance_region": "an empty area on the blue tray",
+        "done_when": "surface_contact(brown_steak, blue_tray) AND released(brown_steak)"
+      }
+    ]
+  }
+}

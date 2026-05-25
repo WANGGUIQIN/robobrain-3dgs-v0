@@ -1,0 +1,134 @@
+{
+  "task": "open bottom drawer",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_3epoch/best",
+  "raw": "**SCENE ANALYSIS -** A wooden drawer unit with three drawers is visible. The bottom drawer is closed. The drawer has a flat front surface with a horizontal handle. The drawer is made of wood and is a rigid object. **STRATEGY -** To open the drawer, the handle must be grasped and pulled. The handle is a distinct part of the drawer front. The action requires contact with the handle, pulling motion, and the drawer must move spatially away from the drawer unit. Failure modes include not grasping the handle, pulling in the wrong direction, or insufficient force. **AFFORDANCE REASONING -** Step 1 reach the drawer handle for a stable grip; Step 2 grasp the handle; Step 3 pull the handle to open the drawer.\n\nGoal: open(bottom_drawer)\nScene: drawer_unit, bottom_drawer\nStep 1: reach(bottom_drawer)\n  affordance_region: the front surface of the bottom drawer\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, bottom_drawer, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, bottom_drawer) < 0.03\nStep 2: grasp(bottom_drawer)\n  affordance_region: the horizontal handle on the front of the bottom drawer\n  contact: holding(bottom_drawer) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(bottom_drawer)\nStep 3: pull(bottom_drawer -> away_from_drawer_unit)\n  affordance_region: the horizontal handle on the front of the bottom drawer\n  contact: holding(bottom_drawer) [progress]\n  spatial: distance(bottom_drawer, drawer_unit, >, 0.1) [completion]\n  direction: pull_axis(0, 0, -1) [progress]\n  done_when: distance(bottom_drawer, drawer_unit) > 0.1\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [
+      {
+        "pred": "open",
+        "args": [
+          "bottom_drawer"
+        ]
+      }
+    ],
+    "scene_objects": [
+      "drawer_unit",
+      "bottom_drawer"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "bottom_drawer",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "bottom_drawer",
+        "affordance_region": "the front surface of the bottom drawer",
+        "done_when": "distance(gripper, bottom_drawer) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "bottom_drawer"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "bottom_drawer",
+        "affordance_region": "the horizontal handle on the front of the bottom drawer",
+        "done_when": "holding(bottom_drawer)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "bottom_drawer"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "bottom_drawer",
+                "drawer_unit",
+                ">",
+                "0.1"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "pull_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "pull",
+        "target": "bottom_drawer",
+        "destination": "away_from_drawer_unit",
+        "affordance_region": "the horizontal handle on the front of the bottom drawer",
+        "done_when": "distance(bottom_drawer, drawer_unit) > 0.1"
+      }
+    ]
+  }
+}

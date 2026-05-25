@@ -1,0 +1,118 @@
+{
+  "task": "grasp the drawer handle, then open it",
+  "scene_objects": [
+    "drawer_handle",
+    "drawer",
+    "table"
+  ],
+  "num_steps": 2,
+  "steps": [
+    {
+      "step": 1,
+      "action": "grasp",
+      "target": "drawer_handle",
+      "affordance": [
+        0.73,
+        0.3
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "drawer_handle"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "holding",
+            "args": [
+              "drawer_handle"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              0,
+              0,
+              -1
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "holding(drawer_handle)",
+      "affordance_3d": [
+        0.4133,
+        -0.3573,
+        1.56
+      ],
+      "affordance_hint": "the black plastic handle of the drawer",
+      "affordance_hint_original": "the handle of the drawer handle",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 2,
+      "action": "pull",
+      "target": "drawer_handle",
+      "affordance": [
+        0.73,
+        0.3
+      ],
+      "approach": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "drawer_handle"
+            ],
+            "role": "safety"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "drawer",
+              "initial_position",
+              ">",
+              0.1
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "drawer",
+              "environment"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(drawer, initial_position) > 0.1",
+      "affordance_3d": [
+        0.4133,
+        -0.3573,
+        1.56
+      ],
+      "affordance_hint": "the black plastic handle of the drawer",
+      "affordance_hint_original": "the handle of the drawer handle",
+      "affordance_hint_confidence": "ok"
+    }
+  ]
+}

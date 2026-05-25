@@ -1,0 +1,168 @@
+{
+  "task": "Move the green napkin from left end to right end of the table.",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_3epoch/best",
+  "raw": "**SCENE ANALYSIS -** A green napkin lies on a wooden table, next to a blue brush and a metal bowl. The napkin is a flat, rectangular object. STRATEGY - First, grasp the napkin from its body to ensure a stable hold. Then, transport it across the table to the right end, placing it on the table surface. Failure modes include dropping the napkin during transport or misplacing it. AFFORDANCE REASONING - Step 1 reach the napkin body; Step 2 grasp the napkin body for secure hold; Step 3 transport to the right end; Step 4 place on the table surface.\n\nGoal: on(green_napkin, table); at(green_napkin, right_end)\nScene: green_napkin, table, blue_brush, metal_bowl\nStep 1: reach(green_napkin)\n  affordance_region: the body of the green napkin\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, green_napkin, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, green_napkin) < 0.03\nStep 2: grasp(green_napkin)\n  affordance_region: the body of the green napkin\n  contact: holding(green_napkin) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(green_napkin)\nStep 3: transport(green_napkin -> right_end)\n  affordance_region: an empty area on the table at the right end\n  spatial: above(green_napkin, right_end, 0.05) [completion]\n  safety: no_drop(green_napkin)\n  done_when: above(green_napkin, right_end, 0.05)\nStep 4: place(green_napkin -> right_end)\n  affordance_region: an empty area on the table at the right end\n  contact: surface_contact(green_napkin, table) [completion]; released(green_napkin) [completion]\n  pose: stable(green_napkin) [completion]\n  done_when: surface_contact(green_napkin, table) AND released(green_napkin)\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [
+      {
+        "pred": "on",
+        "args": [
+          "green_napkin",
+          "table"
+        ]
+      },
+      {
+        "pred": "at",
+        "args": [
+          "green_napkin",
+          "right_end"
+        ]
+      }
+    ],
+    "scene_objects": [
+      "green_napkin",
+      "table",
+      "blue_brush",
+      "metal_bowl"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "green_napkin",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "green_napkin",
+        "affordance_region": "the body of the green napkin",
+        "done_when": "distance(gripper, green_napkin) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "green_napkin"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "green_napkin",
+        "affordance_region": "the body of the green napkin",
+        "done_when": "holding(green_napkin)"
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "green_napkin",
+                "right_end",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "green_napkin"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "green_napkin",
+        "destination": "right_end",
+        "affordance_region": "an empty area on the table at the right end",
+        "done_when": "above(green_napkin, right_end, 0.05)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "surface_contact",
+              "args": [
+                "green_napkin",
+                "table"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "green_napkin"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "green_napkin"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "place",
+        "target": "green_napkin",
+        "destination": "right_end",
+        "affordance_region": "an empty area on the table at the right end",
+        "done_when": "surface_contact(green_napkin, table) AND released(green_napkin)"
+      }
+    ]
+  }
+}

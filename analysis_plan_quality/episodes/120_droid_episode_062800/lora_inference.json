@@ -1,0 +1,743 @@
+{
+  "task": "Put the cups into each other in the black bowl and put the fork in them beginning with the dark blue one, then the light blue one, and finally the orange one",
+  "parsed": {
+    "scene_objects": [
+      "dark_blue_cup",
+      "light_blue_cup",
+      "orange_cup",
+      "black_bowl",
+      "fork",
+      "table"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "dark_blue_cup",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "dark_blue_cup",
+        "affordance_region": "the body of the dark blue cup",
+        "done_when": "distance(gripper, dark_blue_cup) < 0.03",
+        "affordance_hint": "the body of the dark blue cup",
+        "refine_prompt": "the body of the dark blue cup",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.5625,
+          0.6211
+        ],
+        "affordance_3d_refined": [
+          -0.2435,
+          0.5934,
+          3.0431
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.425,
+        "affordance": [
+          0.5625,
+          0.6211
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "dark_blue_cup"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "dark_blue_cup",
+        "affordance_region": "the handle of the dark blue cup",
+        "done_when": "holding(dark_blue_cup)",
+        "affordance_hint": "the handle of the dark blue cup",
+        "refine_prompt": "the handle of the dark blue cup",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.5781,
+          0.7383
+        ],
+        "affordance_3d_refined": [
+          -0.2296,
+          1.3199,
+          3.8259
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.3438,
+        "affordance": [
+          0.5781,
+          0.7383
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "dark_blue_cup"
+              ],
+              "role": "safety"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "inside",
+              "args": [
+                "dark_blue_cup",
+                "black_bowl"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "insert_dir",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "insert",
+        "target": "dark_blue_cup",
+        "destination": "black_bowl",
+        "affordance_region": "the top opening of the black bowl",
+        "done_when": "inside(dark_blue_cup, black_bowl)",
+        "affordance_hint": "the top opening of the black bowl",
+        "refine_prompt": "the top opening of the black bowl",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.5664,
+          0.6055
+        ],
+        "affordance_3d_refined": [
+          -0.2297,
+          0.536,
+          3.0627
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.3223,
+        "affordance": [
+          0.5664,
+          0.6055
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "light_blue_cup",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "reach",
+        "target": "light_blue_cup",
+        "affordance_region": "the body of the light blue cup",
+        "done_when": "distance(gripper, light_blue_cup) < 0.03",
+        "affordance_hint": "the body of the light blue cup",
+        "refine_prompt": "the body of the light blue cup",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.5781,
+          0.7383
+        ],
+        "affordance_3d_refined": [
+          -0.2296,
+          1.3199,
+          3.8259
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.4799,
+        "affordance": [
+          0.5781,
+          0.7383
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "light_blue_cup"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 5,
+        "action": "grasp",
+        "target": "light_blue_cup",
+        "affordance_region": "the handle of the light blue cup",
+        "done_when": "holding(light_blue_cup)",
+        "affordance_hint": "the handle of the light blue cup",
+        "refine_prompt": "the handle of the light blue cup",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.5781,
+          0.7383
+        ],
+        "affordance_3d_refined": [
+          -0.2296,
+          1.3199,
+          3.8259
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.5005,
+        "affordance": [
+          0.5781,
+          0.7383
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "light_blue_cup"
+              ],
+              "role": "safety"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "inside",
+              "args": [
+                "light_blue_cup",
+                "dark_blue_cup"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "insert_dir",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 6,
+        "action": "insert",
+        "target": "light_blue_cup",
+        "destination": "dark_blue_cup",
+        "affordance_region": "the top opening of the dark blue cup",
+        "done_when": "inside(light_blue_cup, dark_blue_cup)",
+        "affordance_hint": "the top opening of the dark blue cup",
+        "refine_prompt": "the top opening of the dark blue cup",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.5625,
+          0.6211
+        ],
+        "affordance_3d_refined": [
+          -0.2435,
+          0.5934,
+          3.0431
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.3747,
+        "affordance": [
+          0.5625,
+          0.6211
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "orange_cup",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 7,
+        "action": "reach",
+        "target": "orange_cup",
+        "affordance_region": "the body of the orange cup",
+        "done_when": "distance(gripper, orange_cup) < 0.03",
+        "affordance_hint": "the body of the orange cup",
+        "refine_prompt": "the body of the orange cup",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.5,
+          0.6992
+        ],
+        "affordance_3d_refined": [
+          -0.562,
+          1.0363,
+          3.5128
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.3904,
+        "affordance": [
+          0.5,
+          0.6992
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "orange_cup"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 8,
+        "action": "grasp",
+        "target": "orange_cup",
+        "affordance_region": "the handle of the orange cup",
+        "done_when": "holding(orange_cup)",
+        "affordance_hint": "the handle of the orange cup",
+        "refine_prompt": "the handle of the orange cup",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.4844,
+          0.6602
+        ],
+        "affordance_3d_refined": [
+          -0.5337,
+          0.7264,
+          2.9649
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.3358,
+        "affordance": [
+          0.4844,
+          0.6602
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "orange_cup"
+              ],
+              "role": "safety"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "inside",
+              "args": [
+                "orange_cup",
+                "light_blue_cup"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "insert_dir",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 9,
+        "action": "insert",
+        "target": "orange_cup",
+        "destination": "light_blue_cup",
+        "affordance_region": "the top opening of the light blue cup",
+        "done_when": "inside(orange_cup, light_blue_cup)",
+        "affordance_hint": "the top opening of the light blue cup",
+        "refine_prompt": "the top opening of the light blue cup",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.5781,
+          0.7383
+        ],
+        "affordance_3d_refined": [
+          -0.2296,
+          1.3199,
+          3.8259
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.5952,
+        "affordance": [
+          0.5781,
+          0.7383
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "fork",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 10,
+        "action": "reach",
+        "target": "fork",
+        "affordance_region": "the handle of the fork",
+        "done_when": "distance(gripper, fork) < 0.03",
+        "affordance_hint": "the handle of the fork",
+        "refine_prompt": "the handle of the fork",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.8789,
+          0.793
+        ],
+        "affordance_3d_refined": [
+          1.1925,
+          1.5228,
+          3.6693
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.3238,
+        "affordance": [
+          0.8789,
+          0.793
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "fork"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 11,
+        "action": "grasp",
+        "target": "fork",
+        "affordance_region": "the handle of the fork",
+        "done_when": "holding(fork)",
+        "affordance_hint": "the handle of the fork",
+        "refine_prompt": "the handle of the fork",
+        "refine_cache_hit": true,
+        "affordance_refined": [
+          0.8789,
+          0.793
+        ],
+        "affordance_3d_refined": [
+          1.1925,
+          1.5228,
+          3.6693
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.3238,
+        "affordance": [
+          0.8789,
+          0.793
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "fork"
+              ],
+              "role": "safety"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "inside",
+              "args": [
+                "fork",
+                "orange_cup"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "insert_dir",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 12,
+        "action": "insert",
+        "target": "fork",
+        "destination": "orange_cup",
+        "affordance_region": "the top opening of the orange cup",
+        "done_when": "inside(fork, orange_cup)",
+        "affordance_hint": "the top opening of the orange cup",
+        "refine_prompt": "the top opening of the orange cup",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.5,
+          0.6992
+        ],
+        "affordance_3d_refined": [
+          -0.562,
+          1.0363,
+          3.5128
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.5416,
+        "affordance": [
+          0.5,
+          0.6992
+        ]
+      }
+    ]
+  }
+}

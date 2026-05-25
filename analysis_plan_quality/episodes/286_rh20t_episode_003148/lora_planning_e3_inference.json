@@ -1,0 +1,114 @@
+{
+  "task": "Dial a number on an old rotary phone",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_planning_3epoch/checkpoint-39957",
+  "raw": "Scene: rotary_phone, dial, table\nStep 1: reach(dial)\n  affordance_region: the dial of the rotary phone\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, dial, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, dial) < 0.03\nStep 2: grasp(dial)\n  affordance_region: the dial of the rotary phone\n  contact: holding(dial) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(dial)\nStep 3: rotate(dial)\n  affordance_region: the dial of the rotary phone\n  contact: holding(dial) [safety]\n  pose: orientation_match(dial, desired_number) [completion]\n  done_when: orientation_match(dial, desired_number)\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [],
+    "scene_objects": [
+      "rotary_phone",
+      "dial",
+      "table"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "dial",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "dial",
+        "affordance_region": "the dial of the rotary phone",
+        "done_when": "distance(gripper, dial) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "dial"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "dial",
+        "affordance_region": "the dial of the rotary phone",
+        "done_when": "holding(dial)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "dial"
+              ],
+              "role": "safety"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "orientation_match",
+              "args": [
+                "dial",
+                "desired_number"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "rotate",
+        "target": "dial",
+        "affordance_region": "the dial of the rotary phone",
+        "done_when": "orientation_match(dial, desired_number)"
+      }
+    ]
+  }
+}

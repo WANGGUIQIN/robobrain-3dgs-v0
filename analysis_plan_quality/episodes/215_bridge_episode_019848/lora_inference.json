@@ -1,0 +1,246 @@
+{
+  "task": "Move the green cloth to the right of the can",
+  "parsed": {
+    "scene_objects": [
+      "green_cloth",
+      "can",
+      "orange_bowl",
+      "table"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "green_cloth",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "green_cloth",
+        "affordance_region": "the green cloth",
+        "done_when": "distance(gripper, green_cloth) < 0.03",
+        "affordance_hint": "the green cloth",
+        "refine_prompt": "the green cloth",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.6133,
+          0.7031
+        ],
+        "affordance_3d_refined": [
+          0.3275,
+          0.5872,
+          2.5148
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.886,
+        "affordance": [
+          0.6133,
+          0.7031
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "green_cloth"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "green_cloth",
+        "affordance_region": "the green cloth",
+        "done_when": "holding(green_cloth)",
+        "affordance_hint": "the green cloth",
+        "refine_prompt": "the green cloth",
+        "refine_cache_hit": true,
+        "affordance_refined": [
+          0.6133,
+          0.7031
+        ],
+        "affordance_3d_refined": [
+          0.3275,
+          0.5872,
+          2.5148
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.886,
+        "affordance": [
+          0.6133,
+          0.7031
+        ]
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "green_cloth",
+                "table",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "green_cloth"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "green_cloth",
+        "destination": "right_of_can",
+        "affordance_region": "an empty area on the right of the can",
+        "done_when": "above(green_cloth, table, 0.05) AND aligned_xy(green_cloth, right_of_can, 0.03)",
+        "affordance_hint": "an empty area on the right of the can",
+        "refine_prompt": "an empty area on the right of the can",
+        "refine_cache_hit": false,
+        "refine_prompt_fallback": "green cloth",
+        "affordance_refined": [
+          0.6133,
+          0.7031
+        ],
+        "affordance_3d_refined": [
+          0.3275,
+          0.5872,
+          2.5148
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.862,
+        "affordance": [
+          0.6133,
+          0.7031
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "surface_contact",
+              "args": [
+                "green_cloth",
+                "table"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "green_cloth"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "green_cloth"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "place",
+        "target": "green_cloth",
+        "destination": "right_of_can",
+        "affordance_region": "an empty area on the right of the can",
+        "done_when": "surface_contact(green_cloth, table) AND released(green_cloth) AND stable(green_cloth)",
+        "affordance_hint": "an empty area on the right of the can",
+        "refine_prompt": "an empty area on the right of the can",
+        "refine_cache_hit": true,
+        "affordance_refined": [
+          0.6133,
+          0.7031
+        ],
+        "affordance_3d_refined": [
+          0.3275,
+          0.5872,
+          2.5148
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.862,
+        "affordance": [
+          0.6133,
+          0.7031
+        ]
+      }
+    ]
+  }
+}

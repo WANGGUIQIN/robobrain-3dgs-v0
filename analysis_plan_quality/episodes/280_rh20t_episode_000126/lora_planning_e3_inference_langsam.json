@@ -1,0 +1,177 @@
+{
+  "task": "Pull out a napkin",
+  "scene_objects": [
+    "napkin",
+    "table"
+  ],
+  "steps": [
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "napkin",
+              "<",
+              "0.03"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "approach_axis",
+            "args": [
+              "0",
+              "0",
+              "-1"
+            ],
+            "role": "progress"
+          }
+        ]
+      },
+      "step": 1,
+      "action": "reach",
+      "target": "napkin",
+      "affordance_region": "the corner of the napkin",
+      "done_when": "distance(gripper, napkin) < 0.03",
+      "affordance_hint": "the corner of the napkin",
+      "refine_prompt": "the corner of the napkin",
+      "refine_cache_hit": false,
+      "affordance_refined": [
+        0.6523,
+        0.9961
+      ],
+      "affordance_3d_refined": [
+        -0.9498,
+        0.4656,
+        1.9864
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.4809
+    },
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "napkin"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              "0",
+              "0",
+              "-1"
+            ],
+            "role": "progress"
+          }
+        ]
+      },
+      "step": 2,
+      "action": "grasp",
+      "target": "napkin",
+      "affordance_region": "the corner of the napkin",
+      "done_when": "holding(napkin)",
+      "affordance_hint": "the corner of the napkin",
+      "refine_prompt": "the corner of the napkin",
+      "refine_cache_hit": true,
+      "affordance_refined": [
+        0.6523,
+        0.9961
+      ],
+      "affordance_3d_refined": [
+        -0.9498,
+        0.4656,
+        1.9864
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.4809
+    },
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "napkin"
+            ],
+            "role": "safety"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "clear_path",
+            "args": [
+              "napkin"
+            ],
+            "role": "progress"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "motion_dir",
+            "args": [
+              "0",
+              "1",
+              "0"
+            ],
+            "role": "completion"
+          }
+        ]
+      },
+      "step": 3,
+      "action": "pull",
+      "target": "napkin",
+      "affordance_region": "the corner of the napkin",
+      "done_when": "napkin is fully pulled out",
+      "affordance_hint": "the corner of the napkin",
+      "refine_prompt": "the corner of the napkin",
+      "refine_cache_hit": true,
+      "affordance_refined": [
+        0.6523,
+        0.9961
+      ],
+      "affordance_3d_refined": [
+        -0.9498,
+        0.4656,
+        1.9864
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.4809
+    }
+  ]
+}

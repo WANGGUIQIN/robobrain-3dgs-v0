@@ -1,0 +1,160 @@
+{
+  "task": "put the pink block on top of the drawer",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_3epoch/best",
+  "raw": "SCENE ANALYSIS - A white drawer is open, with a pink block visible inside. A white tray is on the floor. The drawer is a rigid container with a front face; the pink block is a small, solid object. STRATEGY - First, reach into the drawer to grasp the pink block. Then, transport it to the white tray. Finally, place the block on the tray. Failure modes include missing the block in the drawer or dropping it during transport. AFFORDANCE REASONING - Step 1 reach the drawer front to access the block; Step 2 grasp the pink block (as a small solid object); Step 3 transport to the tray; Step 4 place on the tray.\nGoal: on(pink_block, white_tray)\nScene: pink_block, white_drawer, white_tray\nStep 1: reach(white_drawer)\n  affordance_region: the front face of the white drawer\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, white_drawer, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, white_drawer) < 0.03\nStep 2: grasp(pink_block)\n  affordance_region: the pink block inside the white drawer\n  contact: holding(pink_block) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(pink_block)\nStep 3: transport(pink_block -> white_tray)\n  affordance_region: an empty area on the white tray\n  spatial: above(pink_block, white_tray, 0.05) [completion]\n  safety: no_drop(pink_block)\n  done_when: above(pink_block, white_tray, 0.05)\nStep 4: place(pink_block -> white_tray)\n  affordance_region: an empty area on the white tray\n  contact: surface_contact(pink_block, white_tray) [completion]; released(pink_block) [completion]\n  pose: stable(pink_block) [completion]\n  done_when: surface_contact(pink_block, white_tray) AND released(pink_block)\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [
+      {
+        "pred": "on",
+        "args": [
+          "pink_block",
+          "white_tray"
+        ]
+      }
+    ],
+    "scene_objects": [
+      "pink_block",
+      "white_drawer",
+      "white_tray"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "white_drawer",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "white_drawer",
+        "affordance_region": "the front face of the white drawer",
+        "done_when": "distance(gripper, white_drawer) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "pink_block"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "pink_block",
+        "affordance_region": "the pink block inside the white drawer",
+        "done_when": "holding(pink_block)"
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "pink_block",
+                "white_tray",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "pink_block"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "pink_block",
+        "destination": "white_tray",
+        "affordance_region": "an empty area on the white tray",
+        "done_when": "above(pink_block, white_tray, 0.05)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "surface_contact",
+              "args": [
+                "pink_block",
+                "white_tray"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "pink_block"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "pink_block"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "place",
+        "target": "pink_block",
+        "destination": "white_tray",
+        "affordance_region": "an empty area on the white tray",
+        "done_when": "surface_contact(pink_block, white_tray) AND released(pink_block)"
+      }
+    ]
+  }
+}

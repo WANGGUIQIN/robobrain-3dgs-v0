@@ -1,0 +1,231 @@
+{
+  "task": "Pick up one object and put it on the table",
+  "scene_objects": [
+    "cylindrical_object",
+    "tray",
+    "table"
+  ],
+  "num_steps": 4,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "cylindrical_object",
+      "affordance": [
+        0.406,
+        0.666
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "cylindrical_object",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "tray"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, cylindrical_object) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        -0.8466,
+        0.7559,
+        3.0236
+      ],
+      "affordance_hint": "the cylindrical object"
+    },
+    {
+      "step": 2,
+      "action": "grasp",
+      "target": "cylindrical_object",
+      "affordance": [
+        0.41,
+        0.666
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "cylindrical_object"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "holding",
+            "args": [
+              "cylindrical_object"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              0,
+              0,
+              -1
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "holding(cylindrical_object)",
+      "affordance_3d": [
+        -0.8315,
+        0.7559,
+        3.0236
+      ],
+      "affordance_hint": "the handle of the cylindrical object"
+    },
+    {
+      "step": 3,
+      "action": "transport",
+      "target": "cylindrical_object",
+      "destination": "table",
+      "affordance": [
+        0.402,
+        0.7
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "cylindrical_object"
+            ],
+            "role": "safety"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "above",
+            "args": [
+              "cylindrical_object",
+              "table",
+              0.05
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "cylindrical_object",
+              "table"
+            ]
+          },
+          {
+            "pred": "no_drop",
+            "args": [
+              "cylindrical_object"
+            ]
+          }
+        ]
+      },
+      "done_when": "above(cylindrical_object, table, 0.05) AND aligned_xy(cylindrical_object, table, 0.03)",
+      "affordance_3d": [
+        -0.8729,
+        0.9035,
+        3.0627
+      ],
+      "affordance_hint": "an empty area on the table"
+    },
+    {
+      "step": 4,
+      "action": "place",
+      "target": "cylindrical_object",
+      "destination": "table",
+      "affordance": [
+        0.402,
+        0.7
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "surface_contact",
+            "args": [
+              "cylindrical_object",
+              "table"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "released",
+            "args": [
+              "cylindrical_object"
+            ],
+            "role": "completion"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "stable",
+            "args": [
+              "cylindrical_object"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "support_stable",
+            "args": [
+              "cylindrical_object"
+            ]
+          }
+        ]
+      },
+      "done_when": "surface_contact(cylindrical_object, table) AND released(cylindrical_object) AND stable(cylindrical_object)",
+      "affordance_3d": [
+        -0.8729,
+        0.9035,
+        3.0627
+      ],
+      "affordance_hint": "an empty area on the table"
+    }
+  ]
+}

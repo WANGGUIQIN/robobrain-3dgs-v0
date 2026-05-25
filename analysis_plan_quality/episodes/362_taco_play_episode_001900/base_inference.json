@@ -1,0 +1,113 @@
+{
+  "task": "go push the yellow block to the right",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_3epoch/best",
+  "raw": "SCENE ANALYSIS - A yellow block is on a light brown surface. A white robotic arm is positioned to the left of the block. The block is a cube with a flat top and sides. STRATEGY - The task is to move the block to the right. The plan involves reaching the block, pushing it, and ensuring it moves to the right. Failure modes include the gripper not making contact or the block not moving. AFFORDANCE REASONING - Step 1 reach the block at its top for stable contact; Step 2 push the block in the right direction; Step 3 ensure the block is moved to the right.\nGoal: any_in(yellow_block, right_of(yellow_block))\nScene: yellow_block, robotic_arm, surface\nStep 1: reach(yellow_block)\n  affordance_region: the top face of the yellow block\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, yellow_block, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, yellow_block) < 0.03\nStep 2: push(yellow_block)\n  affordance_region: the top face of the yellow block\n  contact: gripper_contact(yellow_block) [completion]\n  direction: push_axis(1, 0, 0) [progress]\n  done_when: gripper_contact(yellow_block)\nStep 3: ensure(yellow_block, right_of(yellow_block))\n  affordance_region: the top face of the yellow block\n  spatial: right_of(yellow_block, original_position) [completion]\n  done_when: right_of(yellow_block, original_position)\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [
+      {
+        "pred": "any_in",
+        "args": [
+          "yellow_block",
+          "right_of(yellow_block"
+        ]
+      }
+    ],
+    "scene_objects": [
+      "yellow_block",
+      "robotic_arm",
+      "surface"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "yellow_block",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "yellow_block",
+        "affordance_region": "the top face of the yellow block",
+        "done_when": "distance(gripper, yellow_block) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_contact",
+              "args": [
+                "yellow_block"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "push_axis",
+              "args": [
+                "1",
+                "0",
+                "0"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "push",
+        "target": "yellow_block",
+        "affordance_region": "the top face of the yellow block",
+        "done_when": "gripper_contact(yellow_block)"
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "right_of",
+              "args": [
+                "yellow_block",
+                "original_position"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "ensure",
+        "target": "yellow_block, right_of(yellow_block",
+        "affordance_region": "the top face of the yellow block",
+        "done_when": "right_of(yellow_block, original_position)"
+      }
+    ]
+  }
+}

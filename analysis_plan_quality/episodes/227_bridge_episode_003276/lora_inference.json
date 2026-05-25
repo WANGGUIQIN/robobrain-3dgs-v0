@@ -1,0 +1,246 @@
+{
+  "task": "Place red utensil above the yellow cloth next to blue utensil.",
+  "parsed": {
+    "scene_objects": [
+      "red_utensil",
+      "yellow_cloth",
+      "blue_utensil",
+      "can",
+      "table"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "red_utensil",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "red_utensil",
+        "affordance_region": "the red utensil",
+        "done_when": "distance(gripper, red_utensil) < 0.03",
+        "affordance_hint": "the red utensil",
+        "refine_prompt": "the red utensil",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.3164,
+          0.4883
+        ],
+        "affordance_3d_refined": [
+          -0.444,
+          -0.0283,
+          2.1038
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.5997,
+        "affordance": [
+          0.3164,
+          0.4883
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "red_utensil"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "red_utensil",
+        "affordance_region": "the red handle of the red utensil",
+        "done_when": "holding(red_utensil)",
+        "affordance_hint": "the red handle of the red utensil",
+        "refine_prompt": "the red handle of the red utensil",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.3164,
+          0.4883
+        ],
+        "affordance_3d_refined": [
+          -0.444,
+          -0.0283,
+          2.1038
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.3497,
+        "affordance": [
+          0.3164,
+          0.4883
+        ]
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "red_utensil",
+                "yellow_cloth",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "red_utensil"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "red_utensil",
+        "destination": "yellow_cloth",
+        "affordance_region": "the empty area on the yellow cloth",
+        "done_when": "above(red_utensil, yellow_cloth, 0.05)",
+        "affordance_hint": "the empty area on the yellow cloth",
+        "refine_prompt": "the empty area on the yellow cloth",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.4375,
+          0.6797
+        ],
+        "affordance_3d_refined": [
+          -0.1554,
+          0.4467,
+          2.1625
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.3386,
+        "affordance": [
+          0.4375,
+          0.6797
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "surface_contact",
+              "args": [
+                "red_utensil",
+                "yellow_cloth"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "red_utensil"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "red_utensil"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "place",
+        "target": "red_utensil",
+        "destination": "yellow_cloth",
+        "affordance_region": "the empty area on the yellow cloth",
+        "done_when": "surface_contact(red_utensil, yellow_cloth) AND released(red_utensil)",
+        "affordance_hint": "the empty area on the yellow cloth",
+        "refine_prompt": "the empty area on the yellow cloth",
+        "refine_cache_hit": true,
+        "affordance_refined": [
+          0.4375,
+          0.6797
+        ],
+        "affordance_3d_refined": [
+          -0.1554,
+          0.4467,
+          2.1625
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.3386,
+        "affordance": [
+          0.4375,
+          0.6797
+        ]
+      }
+    ]
+  }
+}

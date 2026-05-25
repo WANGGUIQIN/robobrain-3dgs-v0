@@ -1,0 +1,244 @@
+{
+  "task": "Chop the onions",
+  "parsed": {
+    "scene_objects": [
+      "onion",
+      "cutting_board",
+      "table"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "onion",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "onion",
+        "affordance_region": "the onion on the cutting board",
+        "done_when": "distance(gripper, onion) < 0.03",
+        "affordance_hint": "the onion on the cutting board",
+        "refine_prompt": "the onion on the cutting board",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.4648,
+          0.4609
+        ],
+        "affordance_3d_refined": [
+          -0.8913,
+          -0.2749,
+          1.4189
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.6152,
+        "affordance": [
+          0.4648,
+          0.4609
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "onion"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "onion",
+        "affordance_region": "the body of the onion",
+        "done_when": "holding(onion)",
+        "affordance_hint": "the body of the onion",
+        "refine_prompt": "the body of the onion",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.7617,
+          0.9023
+        ],
+        "affordance_3d_refined": [
+          -1.5021,
+          0.6129,
+          3.8455
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.304,
+        "affordance": [
+          0.7617,
+          0.9023
+        ]
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "onion",
+                "cutting_board",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "onion"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "onion",
+        "destination": "cutting_board",
+        "affordance_region": "an empty area on the cutting board",
+        "done_when": "above(onion, cutting_board, 0.05)",
+        "affordance_hint": "an empty area on the cutting board",
+        "refine_prompt": "an empty area on the cutting board",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.4648,
+          0.4609
+        ],
+        "affordance_3d_refined": [
+          -0.8913,
+          -0.2749,
+          1.4189
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.5003,
+        "affordance": [
+          0.4648,
+          0.4609
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "surface_contact",
+              "args": [
+                "onion",
+                "cutting_board"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "onion"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "onion"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "place",
+        "target": "onion",
+        "destination": "cutting_board",
+        "affordance_region": "an empty area on the cutting board",
+        "done_when": "surface_contact(onion, cutting_board) AND released(onion)",
+        "affordance_hint": "an empty area on the cutting board",
+        "refine_prompt": "an empty area on the cutting board",
+        "refine_cache_hit": true,
+        "affordance_refined": [
+          0.4648,
+          0.4609
+        ],
+        "affordance_3d_refined": [
+          -0.8913,
+          -0.2749,
+          1.4189
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.5003,
+        "affordance": [
+          0.4648,
+          0.4609
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,248 @@
+{
+  "task": "put the moon in the shape sorter",
+  "scene_objects": [
+    "moon",
+    "shape_sorter",
+    "table"
+  ],
+  "num_steps": 4,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "moon",
+      "affordance": [
+        0.652,
+        0.834
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "moon",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "shape_sorter"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, moon) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        1.138,
+        2.5094,
+        3.7349
+      ],
+      "affordance_hint": "the small purple moon",
+      "affordance_hint_original": "the moon",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 2,
+      "action": "grasp",
+      "target": "moon",
+      "affordance": [
+        0.633,
+        0.808
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "moon"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "holding",
+            "args": [
+              "moon"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              0,
+              0,
+              -1
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "holding(moon)",
+      "affordance_3d": [
+        0.0964,
+        0.224,
+        0.3629
+      ],
+      "affordance_hint": "the pink matte moon",
+      "affordance_hint_original": "the handle of the moon",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 3,
+      "action": "transport",
+      "target": "moon",
+      "destination": "shape_sorter",
+      "affordance": [
+        0.459,
+        0.656
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "moon"
+            ],
+            "role": "safety"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "above",
+            "args": [
+              "moon",
+              "shape_sorter",
+              0.05
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "aligned_xy",
+            "args": [
+              "moon",
+              "shape_sorter",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "moon",
+              "shape_sorter"
+            ]
+          },
+          {
+            "pred": "no_drop",
+            "args": [
+              "moon"
+            ]
+          }
+        ]
+      },
+      "done_when": "above(moon, shape_sorter, 0.05) AND aligned_xy(moon, shape_sorter, 0.03)",
+      "affordance_3d": [
+        -0.0487,
+        0.1947,
+        0.623
+      ],
+      "affordance_hint": "the empty area on the top surface of the brown shape sorter",
+      "affordance_hint_original": "an empty area on the shape sorter",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 4,
+      "action": "insert",
+      "target": "moon",
+      "destination": "shape_sorter",
+      "affordance": [
+        0.633,
+        0.765
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "inserted",
+            "args": [
+              "moon"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "surface_contact",
+            "args": [
+              "moon",
+              "shape_sorter"
+            ],
+            "role": "completion"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "stable",
+            "args": [
+              "moon"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "support_stable",
+            "args": [
+              "moon"
+            ]
+          }
+        ]
+      },
+      "done_when": "inserted(moon) AND surface_contact(moon, shape_sorter) AND stable(moon)",
+      "affordance_3d": [
+        0.8145,
+        1.629,
+        3.0664
+      ],
+      "affordance_hint": "the top opening of the brown shape sorter",
+      "affordance_hint_original": "the top opening of the shape sorter",
+      "affordance_hint_confidence": "ok"
+    }
+  ]
+}

@@ -1,0 +1,166 @@
+{
+  "task": "Pick up the light blue cloth peg and put it on the table.",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_3epoch/best",
+  "raw": "**SCENE ANALYSIS -** A blue cloth with a white design is on a table. A light blue peg is attached to the cloth. The peg is small and cylindrical, likely made of plastic. The cloth is spread out, and the peg is positioned on the left side of the cloth. The task requires picking up the peg and placing it on the table. The peg is not on the table, so it needs to be detached from the cloth. The cloth is a soft surface, so the peg can be placed on it without issue. **STRATEGY -** First, reach for the peg on the cloth. Then, grasp the peg to detach it from the cloth. After that, transport the peg to the table and place it on the table surface. **AFFORDANCE REASONING -** Step 1: Reach for the peg on the cloth. The peg is small and cylindrical, so the body of the peg is the appropriate affordance region. Step 2: Grasp the peg to detach it from the cloth. The peg is cylindrical, so the body is the appropriate affordance region. Step 3: Transport the peg to the table. The peg is small, so it can be transported directly to the table. Step 4: Place the peg on the table. The table is a flat surface, so the peg can be placed on it.\n\nGoal: on(light_blue_peg, table); stable(light_blue_peg)\nScene: light_blue_peg, blue_cloth, table\nStep 1: reach(light_blue_peg)\n  affordance_region: the body of the light blue peg\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, light_blue_peg, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, light_blue_peg) < 0.03\nStep 2: grasp(light_blue_peg)\n  affordance_region: the body of the light blue peg\n  contact: holding(light_blue_peg) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(light_blue_peg)\nStep 3: transport(light_blue_peg -> table)\n  affordance_region: an empty area on the table\n  spatial: above(light_blue_peg, table, 0.05) [completion]\n  safety: no_drop(light_blue_peg)\n  done_when: above(light_blue_peg, table, 0.05)\nStep 4: place(light_blue_peg -> table)\n  affordance_region: an empty area on the table\n  contact: surface_contact(light_blue_peg, table) [completion]; released(light_blue_peg) [completion]\n  pose: stable(light_blue_peg) [completion]\n  done_when: surface_contact(light_blue_peg, table) AND released(light_blue_peg)\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [
+      {
+        "pred": "on",
+        "args": [
+          "light_blue_peg",
+          "table"
+        ]
+      },
+      {
+        "pred": "stable",
+        "args": [
+          "light_blue_peg"
+        ]
+      }
+    ],
+    "scene_objects": [
+      "light_blue_peg",
+      "blue_cloth",
+      "table"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "light_blue_peg",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "light_blue_peg",
+        "affordance_region": "the body of the light blue peg",
+        "done_when": "distance(gripper, light_blue_peg) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "light_blue_peg"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "light_blue_peg",
+        "affordance_region": "the body of the light blue peg",
+        "done_when": "holding(light_blue_peg)"
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "light_blue_peg",
+                "table",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "light_blue_peg"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "light_blue_peg",
+        "destination": "table",
+        "affordance_region": "an empty area on the table",
+        "done_when": "above(light_blue_peg, table, 0.05)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "surface_contact",
+              "args": [
+                "light_blue_peg",
+                "table"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "light_blue_peg"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "light_blue_peg"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "place",
+        "target": "light_blue_peg",
+        "destination": "table",
+        "affordance_region": "an empty area on the table",
+        "done_when": "surface_contact(light_blue_peg, table) AND released(light_blue_peg)"
+      }
+    ]
+  }
+}

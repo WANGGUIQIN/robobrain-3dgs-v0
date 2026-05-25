@@ -1,0 +1,267 @@
+{
+  "task": "Uncover the container",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_3epoch/best",
+  "raw": "**SCENE ANALYSIS -** A white container with a lid sits on a purple mat on a table. A small white object is next to the container. The container is rigid with a flat top and a flat bottom; the lid is flat. STRATEGY - First, reach for the container to grasp it. Then, lift the container to bring the lid into position. Next, reach for the lid and grasp it. Finally, lift the lid and place it on the table. Failure modes include not grasping the container or lid properly, or dropping them. AFFORDANCE REASONING - Step 1 reach container body; Step 2 grasp container handle; Step 3 transport container to lid; Step 4 reach lid; Step 5 grasp lid; Step 6 transport lid to table; Step 7 place lid on table.\n\nGoal: on(lid, table); stable(lid)\nScene: container, lid, table, purple_mat\nStep 1: reach(container)\n  affordance_region: the body of the white container\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, container, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, container) < 0.03\nStep 2: grasp(container)\n  affordance_region: the side handle of the white container\n  contact: holding(container) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(container)\nStep 3: transport(container -> lid)\n  affordance_region: the top surface of the white lid\n  spatial: above(container, lid, 0.05) [completion]\n  safety: no_drop(container)\n  done_when: above(container, lid, 0.05)\nStep 4: reach(lid)\n  affordance_region: the body of the white lid\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, lid, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, lid) < 0.03\nStep 5: grasp(lid)\n  affordance_region: the body of the white lid\n  contact: holding(lid) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(lid)\nStep 6: transport(lid -> table)\n  affordance_region: an empty area on the table\n  spatial: above(lid, table, 0.05) [completion]\n  safety: no_drop(lid)\n  done_when: above(lid, table, 0.05)\nStep 7: place(lid -> table)\n  affordance_region: an empty area on the table\n  contact: surface_contact(lid, table) [completion]; released(lid) [completion]\n  pose: stable(lid) [completion]\n  done_when: surface_contact(lid, table) AND released(lid)\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [
+      {
+        "pred": "on",
+        "args": [
+          "lid",
+          "table"
+        ]
+      },
+      {
+        "pred": "stable",
+        "args": [
+          "lid"
+        ]
+      }
+    ],
+    "scene_objects": [
+      "container",
+      "lid",
+      "table",
+      "purple_mat"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "container",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "container",
+        "affordance_region": "the body of the white container",
+        "done_when": "distance(gripper, container) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "container"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "container",
+        "affordance_region": "the side handle of the white container",
+        "done_when": "holding(container)"
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "container",
+                "lid",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "container"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "container",
+        "destination": "lid",
+        "affordance_region": "the top surface of the white lid",
+        "done_when": "above(container, lid, 0.05)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "lid",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "reach",
+        "target": "lid",
+        "affordance_region": "the body of the white lid",
+        "done_when": "distance(gripper, lid) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "lid"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 5,
+        "action": "grasp",
+        "target": "lid",
+        "affordance_region": "the body of the white lid",
+        "done_when": "holding(lid)"
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "lid",
+                "table",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "lid"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 6,
+        "action": "transport",
+        "target": "lid",
+        "destination": "table",
+        "affordance_region": "an empty area on the table",
+        "done_when": "above(lid, table, 0.05)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "surface_contact",
+              "args": [
+                "lid",
+                "table"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "lid"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "lid"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 7,
+        "action": "place",
+        "target": "lid",
+        "destination": "table",
+        "affordance_region": "an empty area on the table",
+        "done_when": "surface_contact(lid, table) AND released(lid)"
+      }
+    ]
+  }
+}

@@ -1,0 +1,120 @@
+{
+  "task": "push the yellow block to the left",
+  "scene_objects": [
+    "yellow_block",
+    "tray",
+    "table"
+  ],
+  "num_steps": 2,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "yellow_block",
+      "affordance": [
+        0.57,
+        0.485
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "yellow_block",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "tray"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, yellow_block) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        0.1282,
+        -0.0285,
+        1.586
+      ],
+      "affordance_hint": "the yellow block on the wooden tray",
+      "affordance_hint_original": "the yellow block",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 2,
+      "action": "push",
+      "target": "yellow_block",
+      "affordance": [
+        0.57,
+        0.485
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "yellow_block"
+            ],
+            "role": "completion"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "aligned_xy",
+            "args": [
+              "yellow_block",
+              "left_position",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "yellow_block",
+              "tray"
+            ]
+          }
+        ]
+      },
+      "done_when": "aligned_xy(yellow_block, left_position, 0.03)",
+      "affordance_3d": [
+        0.1282,
+        -0.0285,
+        1.586
+      ],
+      "affordance_hint": "the center of the yellow block",
+      "affordance_hint_original": "the center of the yellow block",
+      "affordance_hint_confidence": "ok"
+    }
+  ]
+}

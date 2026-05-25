@@ -1,0 +1,244 @@
+{
+  "task": "office manipulation",
+  "parsed": {
+    "scene_objects": [
+      "drawer",
+      "snack_bags",
+      "robot_gripper"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "drawer",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "drawer",
+        "affordance_region": "the front edge of the open drawer",
+        "done_when": "distance(gripper, drawer) < 0.03",
+        "affordance_hint": "the front edge of the open drawer",
+        "refine_prompt": "the front edge of the open drawer",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.4922,
+          0.7109
+        ],
+        "affordance_3d_refined": [
+          -0.0287,
+          0.7759,
+          3.1997
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.4197,
+        "affordance": [
+          0.4922,
+          0.7109
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "snack_bags"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "snack_bags",
+        "affordance_region": "the green snack bag in the drawer",
+        "done_when": "holding(snack_bags)",
+        "affordance_hint": "the green snack bag in the drawer",
+        "refine_prompt": "the green snack bag in the drawer",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.7188,
+          0.8555
+        ],
+        "affordance_3d_refined": [
+          0.8144,
+          1.3235,
+          3.2388
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.3223,
+        "affordance": [
+          0.7188,
+          0.8555
+        ]
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "snack_bags",
+                "table",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "snack_bags"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "snack_bags",
+        "destination": "table",
+        "affordance_region": "the empty area on the table",
+        "done_when": "above(snack_bags, table, 0.05)",
+        "affordance_hint": "the empty area on the table",
+        "refine_prompt": "the empty area on the table",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.4648,
+          0.2148
+        ],
+        "affordance_3d_refined": [
+          -0.0906,
+          -0.7345,
+          2.2408
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.3148,
+        "affordance": [
+          0.4648,
+          0.2148
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "surface_contact",
+              "args": [
+                "snack_bags",
+                "table"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "snack_bags"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "snack_bags"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "place",
+        "target": "snack_bags",
+        "destination": "table",
+        "affordance_region": "the empty area on the table",
+        "done_when": "surface_contact(snack_bags, table) AND released(snack_bags)",
+        "affordance_hint": "the empty area on the table",
+        "refine_prompt": "the empty area on the table",
+        "refine_cache_hit": true,
+        "affordance_refined": [
+          0.4648,
+          0.2148
+        ],
+        "affordance_3d_refined": [
+          -0.0906,
+          -0.7345,
+          2.2408
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.3148,
+        "affordance": [
+          0.4648,
+          0.2148
+        ]
+      }
+    ]
+  }
+}

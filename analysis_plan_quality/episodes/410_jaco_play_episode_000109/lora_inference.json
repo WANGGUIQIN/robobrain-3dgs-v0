@@ -1,0 +1,250 @@
+{
+  "task": "place the butter dairy in the sink",
+  "parsed": {
+    "scene_objects": [
+      "butter_dairy",
+      "sink",
+      "table",
+      "blue_bowl",
+      "orange",
+      "grill_plate",
+      "yellow_cup",
+      "oven_rack"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "butter_dairy",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "butter_dairy",
+        "affordance_region": "the body of the butter dairy",
+        "done_when": "distance(gripper, butter_dairy) < 0.03",
+        "affordance_hint": "the body of the butter dairy",
+        "refine_prompt": "the body of the butter dairy",
+        "refine_cache_hit": false,
+        "refine_prompt_fallback": "butter dairy",
+        "affordance_refined": [
+          0.6094,
+          0.293
+        ],
+        "affordance_3d_refined": [
+          0.2202,
+          -0.4169,
+          1.7516
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.2994,
+        "affordance": [
+          0.6094,
+          0.293
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "butter_dairy"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "butter_dairy",
+        "affordance_region": "the yellow body of the butter dairy",
+        "done_when": "holding(butter_dairy)",
+        "affordance_hint": "the yellow body of the butter dairy",
+        "refine_prompt": "the yellow body of the butter dairy",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.6523,
+          0.457
+        ],
+        "affordance_3d_refined": [
+          0.5638,
+          -0.159,
+          3.2193
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.48,
+        "affordance": [
+          0.6523,
+          0.457
+        ]
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "butter_dairy",
+                "sink",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "butter_dairy"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "butter_dairy",
+        "destination": "sink",
+        "affordance_region": "an empty area on the sink",
+        "done_when": "above(butter_dairy, sink, 0.05)",
+        "affordance_hint": "an empty area on the sink",
+        "refine_prompt": "an empty area on the sink",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.6094,
+          0.293
+        ],
+        "affordance_3d_refined": [
+          0.2202,
+          -0.4169,
+          1.7516
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.3277,
+        "affordance": [
+          0.6094,
+          0.293
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "surface_contact",
+              "args": [
+                "butter_dairy",
+                "sink"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "butter_dairy"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "butter_dairy"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "place",
+        "target": "butter_dairy",
+        "destination": "sink",
+        "affordance_region": "an empty area on the sink",
+        "done_when": "surface_contact(butter_dairy, sink) AND released(butter_dairy) AND stable(butter_dairy)",
+        "affordance_hint": "an empty area on the sink",
+        "refine_prompt": "an empty area on the sink",
+        "refine_cache_hit": true,
+        "affordance_refined": [
+          0.6094,
+          0.293
+        ],
+        "affordance_3d_refined": [
+          0.2202,
+          -0.4169,
+          1.7516
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.3277,
+        "affordance": [
+          0.6094,
+          0.293
+        ]
+      }
+    ]
+  }
+}

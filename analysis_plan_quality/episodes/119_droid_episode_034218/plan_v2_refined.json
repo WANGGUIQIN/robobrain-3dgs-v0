@@ -1,0 +1,177 @@
+{
+  "task": "Turn the faucet to the right",
+  "scene_objects": [
+    "faucet",
+    "sink",
+    "countertop"
+  ],
+  "num_steps": 3,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "faucet",
+      "affordance": [
+        0.558,
+        0.294
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "faucet",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "sink"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, faucet) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        -0.1256,
+        -0.3325,
+        1.4776
+      ],
+      "affordance_hint": "the metallic faucet on the countertop",
+      "affordance_hint_original": "the faucet",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 2,
+      "action": "grasp",
+      "target": "faucet",
+      "affordance": [
+        0.558,
+        0.236
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "faucet"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "holding",
+            "args": [
+              "faucet"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              0,
+              0,
+              -1
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "holding(faucet)",
+      "affordance_3d": [
+        -0.1339,
+        -0.4726,
+        1.5755
+      ],
+      "affordance_hint": "the handle of the faucet",
+      "affordance_hint_original": "the handle of the faucet",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 3,
+      "action": "rotate",
+      "target": "faucet",
+      "affordance": [
+        0.553,
+        0.303
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "faucet"
+            ],
+            "role": "safety"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "orientation_match",
+            "args": [
+              "faucet",
+              "right"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "faucet",
+              "sink"
+            ]
+          },
+          {
+            "pred": "force_limit",
+            "args": [
+              "faucet"
+            ]
+          }
+        ]
+      },
+      "done_when": "orientation_match(faucet, right)",
+      "affordance_3d": [
+        -0.1295,
+        -0.3021,
+        1.4385
+      ],
+      "affordance_hint": "the body of the silver faucet",
+      "affordance_hint_original": "the body of the faucet",
+      "affordance_hint_confidence": "ok"
+    }
+  ]
+}

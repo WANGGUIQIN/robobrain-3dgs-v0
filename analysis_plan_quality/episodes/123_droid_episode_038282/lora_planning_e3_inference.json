@@ -1,0 +1,123 @@
+{
+  "task": "Use the object to mix the contents in the bowl",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_planning_3epoch/checkpoint-39957",
+  "raw": "Scene: green_bowl, yellow_object, table\nStep 1: reach(green_bowl)\n  affordance_region: the rim of the green bowl\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, green_bowl, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, green_bowl) < 0.03\nStep 2: grasp(yellow_object)\n  affordance_region: the yellow object in the green bowl\n  contact: holding(yellow_object) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(yellow_object)\nStep 3: mix(green_bowl)\n  affordance_region: the contents inside the green bowl\n  contact: holding(yellow_object) [progress]\n  spatial: inside(yellow_object, green_bowl) [completion]\n  safety: no_spill(yellow_object)\n  done_when: contents_mixed(green_bowl)\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [],
+    "scene_objects": [
+      "green_bowl",
+      "yellow_object",
+      "table"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "green_bowl",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "green_bowl",
+        "affordance_region": "the rim of the green bowl",
+        "done_when": "distance(gripper, green_bowl) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "yellow_object"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "yellow_object",
+        "affordance_region": "the yellow object in the green bowl",
+        "done_when": "holding(yellow_object)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "yellow_object"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "inside",
+              "args": [
+                "yellow_object",
+                "green_bowl"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_spill",
+              "args": [
+                "yellow_object"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "mix",
+        "target": "green_bowl",
+        "affordance_region": "the contents inside the green bowl",
+        "done_when": "contents_mixed(green_bowl)"
+      }
+    ]
+  }
+}

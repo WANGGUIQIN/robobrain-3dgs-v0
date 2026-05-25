@@ -1,0 +1,87 @@
+{
+  "task": "turn off the blue light lamp",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_3epoch/best",
+  "raw": "**SCENE ANALYSIS -** A white robotic arm is positioned on a countertop. In the background, there is a white cabinet with a black handle. On the countertop, there is a white tray containing small objects. The task is to turn off a blue light, which is not visible in the image. The scene contains no blue light or any object that could be associated with a light switch. STRATEGY - The task cannot be completed with the given scene as the target object (blue light) is not present. AFFORDANCE REASONING - No affordances related to a blue light or light switch are available in the scene.\n\nGoal: <pred>(<args>); <pred>(<args>); ...\nScene: robotic_arm, white_cabinet, black_handle, white_tray, small_objects\nStep 1: reach(blue_light)\n  affordance_region: the blue light (not visible in the scene)\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, blue_light, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, blue_light) < 0.03\nStep 2: push(blue_light)\n  affordance_region: the switch of the blue light\n  contact: switch_contact(gripper, blue_light) [completion]\n  pose: switch_pressed(blue_light) [completion]\n  done_when: switch_pressed(blue_light)\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [],
+    "scene_objects": [
+      "robotic_arm",
+      "white_cabinet",
+      "black_handle",
+      "white_tray",
+      "small_objects"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "blue_light",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "blue_light",
+        "affordance_region": "the blue light (not visible in the scene)",
+        "done_when": "distance(gripper, blue_light) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "switch_contact",
+              "args": [
+                "gripper",
+                "blue_light"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "switch_pressed",
+              "args": [
+                "blue_light"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "push",
+        "target": "blue_light",
+        "affordance_region": "the switch of the blue light",
+        "done_when": "switch_pressed(blue_light)"
+      }
+    ]
+  }
+}

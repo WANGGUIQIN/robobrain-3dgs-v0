@@ -1,0 +1,246 @@
+{
+  "task": "Put the wooden spoon with holes on the countertop",
+  "parsed": {
+    "scene_objects": [
+      "wooden_spoon",
+      "countertop",
+      "stove",
+      "containers"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "wooden_spoon",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "wooden_spoon",
+        "affordance_region": "the wooden spoon with holes",
+        "done_when": "distance(gripper, wooden_spoon) < 0.03",
+        "affordance_hint": "the wooden spoon with holes",
+        "refine_prompt": "the wooden spoon with holes",
+        "refine_cache_hit": false,
+        "refine_prompt_fallback": "wooden spoon",
+        "affordance_refined": [
+          0.0586,
+          0.582
+        ],
+        "affordance_3d_refined": [
+          -0.4471,
+          0.0894,
+          0.6166
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.2663,
+        "affordance": [
+          0.0586,
+          0.582
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "wooden_spoon"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "wooden_spoon",
+        "affordance_region": "the handle of the wooden spoon",
+        "done_when": "holding(wooden_spoon)",
+        "affordance_hint": "the handle of the wooden spoon",
+        "refine_prompt": "the handle of the wooden spoon",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.0859,
+          0.5781
+        ],
+        "affordance_3d_refined": [
+          -0.412,
+          0.0836,
+          0.5971
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.3114,
+        "affordance": [
+          0.0859,
+          0.5781
+        ]
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "wooden_spoon",
+                "countertop",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "wooden_spoon"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "wooden_spoon",
+        "destination": "countertop",
+        "affordance_region": "an empty area on the countertop",
+        "done_when": "above(wooden_spoon, countertop, 0.05)",
+        "affordance_hint": "an empty area on the countertop",
+        "refine_prompt": "an empty area on the countertop",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.543,
+          0.8594
+        ],
+        "affordance_3d_refined": [
+          -0.1428,
+          0.6801,
+          1.3602
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.4312,
+        "affordance": [
+          0.543,
+          0.8594
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "surface_contact",
+              "args": [
+                "wooden_spoon",
+                "countertop"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "wooden_spoon"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "wooden_spoon"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "place",
+        "target": "wooden_spoon",
+        "destination": "countertop",
+        "affordance_region": "an empty area on the countertop",
+        "done_when": "surface_contact(wooden_spoon, countertop) AND released(wooden_spoon) AND stable(wooden_spoon)",
+        "affordance_hint": "an empty area on the countertop",
+        "refine_prompt": "an empty area on the countertop",
+        "refine_cache_hit": true,
+        "affordance_refined": [
+          0.543,
+          0.8594
+        ],
+        "affordance_3d_refined": [
+          -0.1428,
+          0.6801,
+          1.3602
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.4312,
+        "affordance": [
+          0.543,
+          0.8594
+        ]
+      }
+    ]
+  }
+}

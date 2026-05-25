@@ -1,0 +1,168 @@
+{
+  "task": "place the brush at the left side of the pan",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_3epoch/best",
+  "raw": "**SCENE ANALYSIS** - A kitchen scene with a stovetop, a sink, and a yellow sponge on the counter. A red brush is on the stovetop, a blue sponge is on the counter, and a red container is on the stovetop. The task is to place the brush on the left side of the pan. The brush is a small object with a handle, likely made of plastic or metal, and is positioned on the stovetop. The pan is on the stovetop, and the goal is to move the brush to the left side of the pan. **STRATEGY** - First, reach for the brush, grasp it, then transport it to the left side of the pan, and place it there. The brush must be picked up carefully to avoid dropping it, and the placement must be precise to ensure it is on the left side of the pan. **AFFORDANCE REASONING** - Step 1: Reach for the brush on the stovetop. Step 2: Grasp the brush by its handle. Step 3: Transport the brush to the left side of the pan. Step 4: Place the brush on the left side of the pan.\n\nGoal: on(brush, pan); stable(brush)\nScene: brush, pan, stovetop, sponge, container\nStep 1: reach(brush)\n  affordance_region: the handle of the brush\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, brush, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, brush) < 0.03\nStep 2: grasp(brush)\n  affordance_region: the handle of the brush\n  contact: holding(brush) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(brush)\nStep 3: transport(brush -> pan)\n  affordance_region: the left side of the pan\n  spatial: above(brush, pan, 0.05) [completion]\n  safety: no_drop(brush)\n  done_when: above(brush, pan, 0.05)\nStep 4: place(brush -> pan)\n  affordance_region: the left side of the pan\n  contact: surface_contact(brush, pan) [completion]; released(brush) [completion]\n  pose: stable(brush) [completion]\n  done_when: surface_contact(brush, pan) AND released(brush)\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [
+      {
+        "pred": "on",
+        "args": [
+          "brush",
+          "pan"
+        ]
+      },
+      {
+        "pred": "stable",
+        "args": [
+          "brush"
+        ]
+      }
+    ],
+    "scene_objects": [
+      "brush",
+      "pan",
+      "stovetop",
+      "sponge",
+      "container"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "brush",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "brush",
+        "affordance_region": "the handle of the brush",
+        "done_when": "distance(gripper, brush) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "brush"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "brush",
+        "affordance_region": "the handle of the brush",
+        "done_when": "holding(brush)"
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "brush",
+                "pan",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "brush"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "brush",
+        "destination": "pan",
+        "affordance_region": "the left side of the pan",
+        "done_when": "above(brush, pan, 0.05)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "surface_contact",
+              "args": [
+                "brush",
+                "pan"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "brush"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "brush"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "place",
+        "target": "brush",
+        "destination": "pan",
+        "affordance_region": "the left side of the pan",
+        "done_when": "surface_contact(brush, pan) AND released(brush)"
+      }
+    ]
+  }
+}

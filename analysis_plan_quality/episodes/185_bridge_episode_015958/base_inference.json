@@ -1,0 +1,168 @@
+{
+  "task": "Take the green object and put it on the lower right part of the table",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_3epoch/best",
+  "raw": "**SCENE ANALYSIS -** A stainless steel pot sits on a wooden table. A purple sponge is to the right of the pot, and a red-handled tool is to the left. The pot is metallic and cylindrical with a handle. The task is to move the green object (not visible in the image, but assumed to be in the scene) to the lower right part of the table. STRATEGY - First, locate and grasp the green object, then transport it to the lower right area. Failure modes include mislocating the object or dropping it during transport. AFFORDANCE REASONING - Step 1: Reach for the green object (if visible) or assume its location. Step 2: Grasp the object securely. Step 3: Transport it to the lower right. Step 4: Place it there.\n\nGoal: on(green_object, lower_right_table); stable(green_object)\nScene: green_object, stainless_steel_pot, purple_sponge, red_handled_tool, table\nStep 1: reach(green_object)\n  affordance_region: the body of the green object (assumed to be on the table)\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, green_object, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, green_object) < 0.03\nStep 2: grasp(green_object)\n  affordance_region: the body of the green object\n  contact: holding(green_object) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(green_object)\nStep 3: transport(green_object -> lower_right_table)\n  affordance_region: an empty area in the lower right part of the table\n  spatial: above(green_object, lower_right_table, 0.05) [completion]\n  safety: no_drop(green_object)\n  done_when: above(green_object, lower_right_table, 0.05)\nStep 4: place(green_object -> lower_right_table)\n  affordance_region: an empty area in the lower right part of the table\n  contact: surface_contact(green_object, lower_right_table) [completion]; released(green_object) [completion]\n  pose: stable(green_object) [completion]\n  done_when: surface_contact(green_object, lower_right_table) AND released(green_object)\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [
+      {
+        "pred": "on",
+        "args": [
+          "green_object",
+          "lower_right_table"
+        ]
+      },
+      {
+        "pred": "stable",
+        "args": [
+          "green_object"
+        ]
+      }
+    ],
+    "scene_objects": [
+      "green_object",
+      "stainless_steel_pot",
+      "purple_sponge",
+      "red_handled_tool",
+      "table"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "green_object",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "green_object",
+        "affordance_region": "the body of the green object (assumed to be on the table)",
+        "done_when": "distance(gripper, green_object) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "green_object"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "green_object",
+        "affordance_region": "the body of the green object",
+        "done_when": "holding(green_object)"
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "green_object",
+                "lower_right_table",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "green_object"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "green_object",
+        "destination": "lower_right_table",
+        "affordance_region": "an empty area in the lower right part of the table",
+        "done_when": "above(green_object, lower_right_table, 0.05)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "surface_contact",
+              "args": [
+                "green_object",
+                "lower_right_table"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "green_object"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "green_object"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "place",
+        "target": "green_object",
+        "destination": "lower_right_table",
+        "affordance_region": "an empty area in the lower right part of the table",
+        "done_when": "surface_contact(green_object, lower_right_table) AND released(green_object)"
+      }
+    ]
+  }
+}

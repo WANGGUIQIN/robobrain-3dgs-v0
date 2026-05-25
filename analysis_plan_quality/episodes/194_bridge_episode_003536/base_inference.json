@@ -1,0 +1,82 @@
+{
+  "task": "place blue cloth next to yellow knife",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_3epoch/best",
+  "raw": "**SCENE ANALYSIS -** A blue cloth and a yellow knife are on a wooden surface. The blue cloth is a flat, rectangular textile; the yellow knife has a yellow handle and a metallic blade. The goal is to place the blue cloth next to the yellow knife. The cloth is initially to the left of the knife. STRATEGY - First, grasp the blue cloth. Then, transport it to the right side of the yellow knife. Finally, place the cloth there. Failure modes include dropping the cloth during transport or placing it in an incorrect position. AFFORDANCE REASONING - Step 1: Reach for the blue cloth to grasp it. Step 2: Grasp the cloth by its body for a secure hold. Step 3: Transport the cloth to the right side of the yellow knife. Step 4: Place the cloth on the surface next to the yellow knife.\n\n**Goal:** on(blue_cloth, surface); next_to(blue_cloth, yellow_knife)\n**Scene:** blue_cloth, yellow_knife, surface\n**Step 1:** reach(blue_cloth)\n  affordance_region: the body of the blue cloth\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, blue_cloth, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, blue_cloth) < 0.03\n**Step 2:** grasp(blue_cloth)\n  affordance_region: the body of the blue cloth\n  contact: holding(blue_cloth) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(blue_cloth)\n**Step 3:** transport(blue_cloth -> right_of(yellow_knife))\n  affordance_region: an empty area on the surface to the right of the yellow knife\n  spatial: above(blue_cloth, right_of(yellow_knife), 0.05) [completion]\n  safety: no_drop(blue_cloth)\n  done_when: above(blue_cloth, right_of(yellow_knife), 0.05)\n**Step 4:** place(blue_cloth -> right_of(yellow_knife))\n  affordance_region: an empty area on the surface to the right of the yellow knife\n  contact: surface_contact(blue_cloth, surface) [completion]; released(blue_cloth) [completion]\n  pose: stable(blue_cloth) [completion]\n  done_when: surface_contact(blue_cloth, surface) AND released(blue_cloth)\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [],
+    "scene_objects": [],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "blue_cloth",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "blue_cloth",
+        "affordance_region": "the body of the blue cloth",
+        "done_when": "distance(gripper, blue_cloth) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "blue_cloth"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "blue_cloth",
+        "affordance_region": "the body of the blue cloth",
+        "done_when": "holding(blue_cloth)"
+      }
+    ]
+  }
+}

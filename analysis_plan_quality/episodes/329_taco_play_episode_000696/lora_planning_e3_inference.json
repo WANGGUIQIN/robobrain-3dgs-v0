@@ -1,0 +1,152 @@
+{
+  "task": "place the yellow object on top of the drawer",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_planning_3epoch/checkpoint-39957",
+  "raw": "Scene: yellow_object, drawer, table\nStep 1: reach(yellow_object)\n  affordance_region: the yellow object\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, yellow_object, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, yellow_object) < 0.03\nStep 2: grasp(yellow_object)\n  affordance_region: the yellow object\n  contact: holding(yellow_object) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(yellow_object)\nStep 3: transport(yellow_object -> drawer)\n  affordance_region: the top surface of the drawer\n  spatial: above(yellow_object, drawer, 0.05) [completion]\n  safety: no_drop(yellow_object)\n  done_when: above(yellow_object, drawer, 0.05)\nStep 4: place(yellow_object -> drawer)\n  affordance_region: the top surface of the drawer\n  contact: surface_contact(yellow_object, drawer) [completion]; released(yellow_object) [completion]\n  pose: stable(yellow_object) [completion]\n  done_when: surface_contact(yellow_object, drawer) AND released(yellow_object)\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [],
+    "scene_objects": [
+      "yellow_object",
+      "drawer",
+      "table"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "yellow_object",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "yellow_object",
+        "affordance_region": "the yellow object",
+        "done_when": "distance(gripper, yellow_object) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "yellow_object"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "yellow_object",
+        "affordance_region": "the yellow object",
+        "done_when": "holding(yellow_object)"
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "yellow_object",
+                "drawer",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "yellow_object"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "yellow_object",
+        "destination": "drawer",
+        "affordance_region": "the top surface of the drawer",
+        "done_when": "above(yellow_object, drawer, 0.05)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "surface_contact",
+              "args": [
+                "yellow_object",
+                "drawer"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "yellow_object"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "yellow_object"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "place",
+        "target": "yellow_object",
+        "destination": "drawer",
+        "affordance_region": "the top surface of the drawer",
+        "done_when": "surface_contact(yellow_object, drawer) AND released(yellow_object)"
+      }
+    ]
+  }
+}

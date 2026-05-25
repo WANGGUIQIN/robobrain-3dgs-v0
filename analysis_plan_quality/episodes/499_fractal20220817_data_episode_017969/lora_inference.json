@@ -1,0 +1,247 @@
+{
+  "task": "place sponge into middle drawer",
+  "parsed": {
+    "scene_objects": [
+      "sponge",
+      "middle_drawer",
+      "table",
+      "red_can",
+      "bowl",
+      "blue_object"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "sponge",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "sponge",
+        "affordance_region": "the yellow sponge",
+        "done_when": "distance(gripper, sponge) < 0.03",
+        "affordance_hint": "the yellow sponge",
+        "refine_prompt": "the yellow sponge",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.4766,
+          0.207
+        ],
+        "affordance_3d_refined": [
+          -0.0815,
+          -1.0183,
+          3.0236
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.5573,
+        "affordance": [
+          0.4766,
+          0.207
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "sponge"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "sponge",
+        "affordance_region": "the yellow sponge",
+        "done_when": "holding(sponge)",
+        "affordance_hint": "the yellow sponge",
+        "refine_prompt": "the yellow sponge",
+        "refine_cache_hit": true,
+        "affordance_refined": [
+          0.4766,
+          0.207
+        ],
+        "affordance_3d_refined": [
+          -0.0815,
+          -1.0183,
+          3.0236
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.5573,
+        "affordance": [
+          0.4766,
+          0.207
+        ]
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "sponge",
+                "middle_drawer",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "sponge"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "sponge",
+        "destination": "middle_drawer",
+        "affordance_region": "the empty space in the middle drawer",
+        "done_when": "above(sponge, middle_drawer, 0.05)",
+        "affordance_hint": "the empty space in the middle drawer",
+        "refine_prompt": "the empty space in the middle drawer",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.4414,
+          0.6836
+        ],
+        "affordance_3d_refined": [
+          -0.1272,
+          0.3986,
+          1.8886
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.4384,
+        "affordance": [
+          0.4414,
+          0.6836
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "surface_contact",
+              "args": [
+                "sponge",
+                "middle_drawer"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "sponge"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "sponge"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "place",
+        "target": "sponge",
+        "destination": "middle_drawer",
+        "affordance_region": "the empty space in the middle drawer",
+        "done_when": "surface_contact(sponge, middle_drawer) AND released(sponge) AND stable(sponge)",
+        "affordance_hint": "the empty space in the middle drawer",
+        "refine_prompt": "the empty space in the middle drawer",
+        "refine_cache_hit": true,
+        "affordance_refined": [
+          0.4414,
+          0.6836
+        ],
+        "affordance_3d_refined": [
+          -0.1272,
+          0.3986,
+          1.8886
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.4384,
+        "affordance": [
+          0.4414,
+          0.6836
+        ]
+      }
+    ]
+  }
+}

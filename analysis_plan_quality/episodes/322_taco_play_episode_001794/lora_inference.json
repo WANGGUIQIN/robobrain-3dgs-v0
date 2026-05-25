@@ -1,0 +1,150 @@
+{
+  "task": "push the sliding door to the left",
+  "parsed": {
+    "scene_objects": [
+      "sliding_door",
+      "robot_arm",
+      "workspace"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "sliding_door",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "sliding_door",
+        "affordance_region": "the sliding door",
+        "done_when": "distance(gripper, sliding_door) < 0.03",
+        "affordance_hint": "the sliding door",
+        "refine_prompt": "the sliding door",
+        "refine_cache_hit": false,
+        "refine_prompt_fallback": "sliding door",
+        "affordance_refined": [
+          0.9961,
+          0.2578
+        ],
+        "affordance_3d_refined": [
+          0.9467,
+          -0.4621,
+          1.66
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.2367,
+        "affordance": [
+          0.9961,
+          0.2578
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_contact",
+              "args": [
+                "sliding_door"
+              ],
+              "role": "completion"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "aligned_xy",
+              "args": [
+                "sliding_door",
+                "workspace",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "motion_dir",
+              "args": [
+                "left"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_collision",
+              "args": [
+                "sliding_door"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "push",
+        "target": "sliding_door",
+        "affordance_region": "the center of the sliding door",
+        "done_when": "aligned_xy(sliding_door, workspace, 0.03)",
+        "affordance_hint": "the center of the sliding door",
+        "refine_prompt": "the center of the sliding door",
+        "refine_cache_hit": false,
+        "refine_prompt_fallback": "sliding door",
+        "affordance_refined": [
+          0.9961,
+          0.2578
+        ],
+        "affordance_3d_refined": [
+          0.9467,
+          -0.4621,
+          1.66
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.2367,
+        "affordance": [
+          0.9961,
+          0.2578
+        ]
+      }
+    ]
+  }
+}

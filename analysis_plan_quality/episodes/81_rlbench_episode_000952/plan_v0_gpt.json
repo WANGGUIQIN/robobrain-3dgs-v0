@@ -1,0 +1,231 @@
+{
+  "task": "put the mustard in the cupboard",
+  "scene_objects": [
+    "mustard",
+    "cupboard",
+    "table"
+  ],
+  "num_steps": 4,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "mustard",
+      "affordance": [
+        0.406,
+        0.656
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "mustard",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "table"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, mustard) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        -0.6221,
+        1.0368,
+        3.3179
+      ],
+      "affordance_hint": "the mustard"
+    },
+    {
+      "step": 2,
+      "action": "grasp",
+      "target": "mustard",
+      "affordance": [
+        0.406,
+        0.585
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "mustard"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "holding",
+            "args": [
+              "mustard"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              0,
+              0,
+              -1
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "holding(mustard)",
+      "affordance_3d": [
+        -0.5434,
+        0.4981,
+        2.898
+      ],
+      "affordance_hint": "the handle of the mustard"
+    },
+    {
+      "step": 3,
+      "action": "transport",
+      "target": "mustard",
+      "destination": "cupboard",
+      "affordance": [
+        0.5,
+        0.5
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "mustard"
+            ],
+            "role": "safety"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "above",
+            "args": [
+              "mustard",
+              "cupboard",
+              0.05
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "mustard",
+              "cupboard"
+            ]
+          },
+          {
+            "pred": "no_drop",
+            "args": [
+              "mustard"
+            ]
+          }
+        ]
+      },
+      "done_when": "above(mustard, cupboard, 0.05) AND aligned_xy(mustard, cupboard, 0.03)",
+      "affordance_3d": [
+        0.0,
+        0.0,
+        3.9285
+      ],
+      "affordance_hint": "an empty area on the cupboard"
+    },
+    {
+      "step": 4,
+      "action": "place",
+      "target": "mustard",
+      "destination": "cupboard",
+      "affordance": [
+        0.5,
+        0.5
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "surface_contact",
+            "args": [
+              "mustard",
+              "cupboard"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "released",
+            "args": [
+              "mustard"
+            ],
+            "role": "completion"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "stable",
+            "args": [
+              "mustard"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "support_stable",
+            "args": [
+              "mustard"
+            ]
+          }
+        ]
+      },
+      "done_when": "surface_contact(mustard, cupboard) AND released(mustard) AND stable(mustard)",
+      "affordance_3d": [
+        0.0,
+        0.0,
+        3.9285
+      ],
+      "affordance_hint": "an empty area on the cupboard"
+    }
+  ]
+}

@@ -1,0 +1,194 @@
+{
+  "task": "Pull out a napkin",
+  "parsed": {
+    "scene_objects": [
+      "napkin_box",
+      "napkin",
+      "table"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "napkin_box",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "napkin_box",
+        "affordance_region": "the napkin box on the table",
+        "done_when": "distance(gripper, napkin_box) < 0.03",
+        "affordance_hint": "the napkin box on the table",
+        "refine_prompt": "the napkin box on the table",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.4805,
+          0.6914
+        ],
+        "affordance_3d_refined": [
+          -1.0663,
+          -0.0162,
+          1.732
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.4118,
+        "affordance": [
+          0.4805,
+          0.6914
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "napkin"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "napkin",
+        "affordance_region": "the corner of the napkin",
+        "done_when": "holding(napkin)",
+        "affordance_hint": "the corner of the napkin",
+        "refine_prompt": "the corner of the napkin",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.0938,
+          0.0391
+        ],
+        "affordance_3d_refined": [
+          -2.3624,
+          -1.3568,
+          2.5539
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.3479,
+        "affordance": [
+          0.0938,
+          0.0391
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "napkin"
+              ],
+              "role": "safety"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "clear_path",
+              "args": [
+                "napkin",
+                "table"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "motion_dir",
+              "args": [
+                "0",
+                "1",
+                "0"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "pull",
+        "target": "napkin",
+        "destination": "table",
+        "affordance_region": "the corner of the napkin",
+        "done_when": "napkin is fully pulled out and on the table",
+        "affordance_hint": "the corner of the napkin",
+        "refine_prompt": "the corner of the napkin",
+        "refine_cache_hit": true,
+        "affordance_refined": [
+          0.0938,
+          0.0391
+        ],
+        "affordance_3d_refined": [
+          -2.3624,
+          -1.3568,
+          2.5539
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.3479,
+        "affordance": [
+          0.0938,
+          0.0391
+        ]
+      }
+    ]
+  }
+}

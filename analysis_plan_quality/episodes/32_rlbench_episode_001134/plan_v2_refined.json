@@ -1,0 +1,249 @@
+{
+  "task": "put the money away in the safe on the middle shelf",
+  "scene_objects": [
+    "money",
+    "safe",
+    "middle_shelf",
+    "cabinet"
+  ],
+  "num_steps": 4,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "money",
+      "affordance": [
+        0.25,
+        0.265
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "money",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "cabinet"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, money) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        -1.4936,
+        -1.4003,
+        2.9872
+      ],
+      "affordance_hint": "the stack of green money on the top of the safe",
+      "affordance_hint_original": "the money",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 2,
+      "action": "grasp",
+      "target": "money",
+      "affordance": [
+        0.468,
+        0.102
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "money"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "holding",
+            "args": [
+              "money"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              0,
+              0,
+              -1
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "holding(money)",
+      "affordance_3d": [
+        -0.2433,
+        -3.1018,
+        3.8925
+      ],
+      "affordance_hint": "the stack of green money on the top of the safe",
+      "affordance_hint_original": "the handle of the money",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 3,
+      "action": "transport",
+      "target": "money",
+      "destination": "safe",
+      "affordance": [
+        0.468,
+        0.703
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "money"
+            ],
+            "role": "safety"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "above",
+            "args": [
+              "money",
+              "safe",
+              0.05
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "aligned_xy",
+            "args": [
+              "money",
+              "safe",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "money",
+              "cabinet"
+            ]
+          },
+          {
+            "pred": "no_drop",
+            "args": [
+              "money"
+            ]
+          }
+        ]
+      },
+      "done_when": "above(money, safe, 0.05) AND aligned_xy(money, safe, 0.03)",
+      "affordance_3d": [
+        -0.3111,
+        2.0221,
+        4.9776
+      ],
+      "affordance_hint": "the empty area inside the safe on the middle shelf",
+      "affordance_hint_original": "an empty area on the safe",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 4,
+      "action": "place",
+      "target": "money",
+      "destination": "safe",
+      "affordance": [
+        0.468,
+        0.703
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "surface_contact",
+            "args": [
+              "money",
+              "safe"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "released",
+            "args": [
+              "money"
+            ],
+            "role": "completion"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "stable",
+            "args": [
+              "money"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "support_stable",
+            "args": [
+              "money"
+            ]
+          }
+        ]
+      },
+      "done_when": "surface_contact(money, safe) AND released(money) AND stable(money)",
+      "affordance_3d": [
+        -0.3111,
+        2.0221,
+        4.9776
+      ],
+      "affordance_hint": "the empty area inside the safe on the middle shelf",
+      "affordance_hint_original": "an empty area on the safe",
+      "affordance_hint_confidence": "ok"
+    }
+  ]
+}

@@ -1,0 +1,89 @@
+{
+  "task": "pick up the steak meat",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_planning_3epoch/checkpoint-39957",
+  "raw": "Scene: steak_meat, yellow_cup, blue_bin, orange_bowl, yellow_block, table\nStep 1: reach(steak_meat)\n  affordance_region: the steak meat\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, steak_meat, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, steak_meat) < 0.03\nStep 2: grasp(steak_meat)\n  affordance_region: the body of the steak meat\n  contact: holding(steak_meat) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(steak_meat)\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [],
+    "scene_objects": [
+      "steak_meat",
+      "yellow_cup",
+      "blue_bin",
+      "orange_bowl",
+      "yellow_block",
+      "table"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "steak_meat",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "steak_meat",
+        "affordance_region": "the steak meat",
+        "done_when": "distance(gripper, steak_meat) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "steak_meat"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "steak_meat",
+        "affordance_region": "the body of the steak meat",
+        "done_when": "holding(steak_meat)"
+      }
+    ]
+  }
+}

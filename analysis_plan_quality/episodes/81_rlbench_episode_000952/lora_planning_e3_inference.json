@@ -1,0 +1,152 @@
+{
+  "task": "put the mustard in the cupboard",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_planning_3epoch/checkpoint-39957",
+  "raw": "Scene: mustard, cupboard, table\nStep 1: reach(mustard)\n  affordance_region: the body of the yellow mustard bottle\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, mustard, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, mustard) < 0.03\nStep 2: grasp(mustard)\n  affordance_region: the body of the mustard bottle\n  contact: holding(mustard) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(mustard)\nStep 3: transport(mustard -> cupboard)\n  affordance_region: an empty area on the cupboard\n  spatial: above(mustard, cupboard, 0.05) [completion]\n  safety: no_drop(mustard)\n  done_when: above(mustard, cupboard, 0.05)\nStep 4: place(mustard -> cupboard)\n  affordance_region: an empty area on the cupboard\n  contact: surface_contact(mustard, cupboard) [completion]; released(mustard) [completion]\n  pose: stable(mustard) [completion]\n  done_when: surface_contact(mustard, cupboard) AND released(mustard)\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [],
+    "scene_objects": [
+      "mustard",
+      "cupboard",
+      "table"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "mustard",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "mustard",
+        "affordance_region": "the body of the yellow mustard bottle",
+        "done_when": "distance(gripper, mustard) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "mustard"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "mustard",
+        "affordance_region": "the body of the mustard bottle",
+        "done_when": "holding(mustard)"
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "mustard",
+                "cupboard",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "mustard"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "mustard",
+        "destination": "cupboard",
+        "affordance_region": "an empty area on the cupboard",
+        "done_when": "above(mustard, cupboard, 0.05)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "surface_contact",
+              "args": [
+                "mustard",
+                "cupboard"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "mustard"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "mustard"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "place",
+        "target": "mustard",
+        "destination": "cupboard",
+        "affordance_region": "an empty area on the cupboard",
+        "done_when": "surface_contact(mustard, cupboard) AND released(mustard)"
+      }
+    ]
+  }
+}

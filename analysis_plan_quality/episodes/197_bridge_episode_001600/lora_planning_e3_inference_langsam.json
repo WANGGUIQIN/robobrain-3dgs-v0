@@ -1,0 +1,227 @@
+{
+  "task": "Move bowl from the towel to the left side of the counter.",
+  "scene_objects": [
+    "bowl",
+    "towel",
+    "counter",
+    "robot_gripper"
+  ],
+  "steps": [
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "bowl",
+              "<",
+              "0.03"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "approach_axis",
+            "args": [
+              "0",
+              "0",
+              "-1"
+            ],
+            "role": "progress"
+          }
+        ]
+      },
+      "step": 1,
+      "action": "reach",
+      "target": "bowl",
+      "affordance_region": "the rim of the steel bowl",
+      "done_when": "distance(gripper, bowl) < 0.03",
+      "affordance_hint": "the rim of the steel bowl",
+      "refine_prompt": "the rim of the steel bowl",
+      "refine_cache_hit": false,
+      "affordance_refined": [
+        0.4688,
+        0.582
+      ],
+      "affordance_3d_refined": [
+        -0.1016,
+        0.2667,
+        2.8279
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.6392
+    },
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "bowl"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              "0",
+              "0",
+              "-1"
+            ],
+            "role": "progress"
+          }
+        ]
+      },
+      "step": 2,
+      "action": "grasp",
+      "target": "bowl",
+      "affordance_region": "the rim of the steel bowl",
+      "done_when": "holding(bowl)",
+      "affordance_hint": "the rim of the steel bowl",
+      "refine_prompt": "the rim of the steel bowl",
+      "refine_cache_hit": true,
+      "affordance_refined": [
+        0.4688,
+        0.582
+      ],
+      "affordance_3d_refined": [
+        -0.1016,
+        0.2667,
+        2.8279
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.6392
+    },
+    {
+      "constraints": {
+        "spatial": [
+          {
+            "pred": "above",
+            "args": [
+              "bowl",
+              "left_side_counter",
+              "0.05"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_drop",
+            "args": [
+              "bowl"
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "step": 3,
+      "action": "transport",
+      "target": "bowl",
+      "destination": "left_side_counter",
+      "affordance_region": "the left side of the wooden counter",
+      "done_when": "above(bowl, left_side_counter, 0.05)",
+      "affordance_hint": "the left side of the wooden counter",
+      "refine_prompt": "the left side of the wooden counter",
+      "refine_cache_hit": false,
+      "affordance_refined": [
+        0.1836,
+        0.5156
+      ],
+      "affordance_3d_refined": [
+        -0.8649,
+        0.0427,
+        2.3778
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.553
+    },
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "surface_contact",
+            "args": [
+              "bowl",
+              "left_side_counter"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "released",
+            "args": [
+              "bowl"
+            ],
+            "role": "completion"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "stable",
+            "args": [
+              "bowl"
+            ],
+            "role": "completion"
+          }
+        ]
+      },
+      "step": 4,
+      "action": "place",
+      "target": "bowl",
+      "destination": "left_side_counter",
+      "affordance_region": "the left side of the wooden counter",
+      "done_when": "surface_contact(bowl, left_side_counter) AND released(bowl) AND stable(bowl)",
+      "affordance_hint": "the left side of the wooden counter",
+      "refine_prompt": "the left side of the wooden counter",
+      "refine_cache_hit": true,
+      "affordance_refined": [
+        0.1836,
+        0.5156
+      ],
+      "affordance_3d_refined": [
+        -0.8649,
+        0.0427,
+        2.3778
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.553
+    }
+  ]
+}

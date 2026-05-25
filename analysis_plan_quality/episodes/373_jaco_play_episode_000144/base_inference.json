@@ -1,0 +1,165 @@
+{
+  "task": "place the long bread in the table",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_3epoch/best",
+  "raw": "**SCENE ANALYSIS -** A blue plastic container with a grid pattern sits on a wooden table. Inside it are two light blue rectangular blocks. A small brown rectangular block is on the table to the right of the container. A black bowl with an orange inside is on the left. A white bowl with a brown substance is in the center. A black coffee machine is in the background. The long bread is the brown rectangular block on the table. STRATEGY - First, reach for the long bread on the table. Grasp it to pick it up. Then, transport it to the blue container. Finally, place it inside the container. Failure modes include dropping the bread during transport or placing it outside the container. AFFORDANCE REASONING - Step 1 reach the long bread on the table; Step 2 grasp the long bread for secure hold; Step 3 transport the long bread to the blue container; Step 4 place the long bread inside the blue container.\n\nGoal: inside(long_bread, blue_container)\nScene: blue_container, long_bread, table, black_bowl, orange, white_bowl, brown_substance, coffee_machine\nStep 1: reach(long_bread)\n  affordance_region: the body of the long bread\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, long_bread, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, long_bread) < 0.03\nStep 2: grasp(long_bread)\n  affordance_region: the body of the long bread\n  contact: holding(long_bread) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(long_bread)\nStep 3: transport(long_bread -> blue_container)\n  affordance_region: an empty area inside the blue container\n  spatial: above(long_bread, blue_container, 0.05) [completion]\n  safety: no_drop(long_bread)\n  done_when: above(long_bread, blue_container, 0.05)\nStep 4: place(long_bread -> blue_container)\n  affordance_region: an empty area inside the blue container\n  contact: surface_contact(long_bread, blue_container) [completion]; released(long_bread) [completion]\n  pose: stable(long_bread) [completion]\n  done_when: surface_contact(long_bread, blue_container) AND released(long_bread)\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [
+      {
+        "pred": "inside",
+        "args": [
+          "long_bread",
+          "blue_container"
+        ]
+      }
+    ],
+    "scene_objects": [
+      "blue_container",
+      "long_bread",
+      "table",
+      "black_bowl",
+      "orange",
+      "white_bowl",
+      "brown_substance",
+      "coffee_machine"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "long_bread",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "long_bread",
+        "affordance_region": "the body of the long bread",
+        "done_when": "distance(gripper, long_bread) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "long_bread"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "long_bread",
+        "affordance_region": "the body of the long bread",
+        "done_when": "holding(long_bread)"
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "long_bread",
+                "blue_container",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "long_bread"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "long_bread",
+        "destination": "blue_container",
+        "affordance_region": "an empty area inside the blue container",
+        "done_when": "above(long_bread, blue_container, 0.05)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "surface_contact",
+              "args": [
+                "long_bread",
+                "blue_container"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "long_bread"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "long_bread"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "place",
+        "target": "long_bread",
+        "destination": "blue_container",
+        "affordance_region": "an empty area inside the blue container",
+        "done_when": "surface_contact(long_bread, blue_container) AND released(long_bread)"
+      }
+    ]
+  }
+}

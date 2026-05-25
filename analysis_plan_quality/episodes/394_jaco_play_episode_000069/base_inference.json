@@ -1,0 +1,325 @@
+{
+  "task": "place the black bowl in the oven",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_3epoch/best",
+  "raw": "**SCENE ANALYSIS -** A black bowl is on a wooden table. A blue oven with a door is on the right. The bowl is rigid with a curved rim; the oven door has a handle. STRATEGY - reach the bowl at its rim for stable grasp, lift and transport to the oven, open the oven door, place the bowl inside, then close the door. Failure modes: dropping the bowl, misaligning it with the oven opening, or failing to close the door. AFFORDANCE REASONING - Step 1 reach bowl rim; Step 2 grasp rim for secure hold; Step 3 transport to oven; Step 4 grasp oven door handle; Step 5 open door; Step 6 place bowl inside; Step 7 release bowl; Step 8 close door.\n\nGoal: inside(black_bowl, oven); closed(oven_door)\nScene: black_bowl, oven, table\nStep 1: reach(black_bowl)\n  affordance_region: the rim of the black bowl\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, black_bowl, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, black_bowl) < 0.03\nStep 2: grasp(black_bowl)\n  affordance_region: the rim of the black bowl\n  contact: holding(black_bowl) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(black_bowl)\nStep 3: transport(black_bowl -> oven)\n  affordance_region: an empty area inside the oven\n  spatial: above(black_bowl, oven, 0.05) [completion]\n  safety: no_drop(black_bowl)\n  done_when: above(black_bowl, oven, 0.05)\nStep 4: reach(oven_door)\n  affordance_region: the handle of the oven door\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, oven_door, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, oven_door) < 0.03\nStep 5: grasp(oven_door)\n  affordance_region: the handle of the oven door\n  contact: holding(oven_door) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(oven_door)\nStep 6: pull(oven_door -> open)\n  affordance_region: the handle of the oven door\n  contact: holding(oven_door) [progress]\n  direction: pull_axis(0, 0, -1) [progress]\n  done_when: open(oven_door)\nStep 7: place(black_bowl -> oven)\n  affordance_region: an empty area inside the oven\n  contact: surface_contact(black_bowl, oven) [completion]; released(black_bowl) [completion]\n  pose: stable(black_bowl) [completion]\n  done_when: surface_contact(black_bowl, oven) AND released(black_bowl)\nStep 8: release(oven_door)\n  affordance_region: the handle of the oven door\n  contact: released(oven_door) [completion]\n  direction: release_axis(0, 0, -1) [progress]\n  done_when: released(oven_door)\nStep 9: push(oven_door -> closed)\n  affordance_region: the handle of the oven door\n  contact: holding(oven_door) [progress]\n  direction: push_axis(0, 0, -1) [progress]\n  done_when: closed(oven_door)\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [
+      {
+        "pred": "inside",
+        "args": [
+          "black_bowl",
+          "oven"
+        ]
+      },
+      {
+        "pred": "closed",
+        "args": [
+          "oven_door"
+        ]
+      }
+    ],
+    "scene_objects": [
+      "black_bowl",
+      "oven",
+      "table"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "black_bowl",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "black_bowl",
+        "affordance_region": "the rim of the black bowl",
+        "done_when": "distance(gripper, black_bowl) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "black_bowl"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "black_bowl",
+        "affordance_region": "the rim of the black bowl",
+        "done_when": "holding(black_bowl)"
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "black_bowl",
+                "oven",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "black_bowl"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "black_bowl",
+        "destination": "oven",
+        "affordance_region": "an empty area inside the oven",
+        "done_when": "above(black_bowl, oven, 0.05)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "oven_door",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "reach",
+        "target": "oven_door",
+        "affordance_region": "the handle of the oven door",
+        "done_when": "distance(gripper, oven_door) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "oven_door"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 5,
+        "action": "grasp",
+        "target": "oven_door",
+        "affordance_region": "the handle of the oven door",
+        "done_when": "holding(oven_door)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "oven_door"
+              ],
+              "role": "progress"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "pull_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 6,
+        "action": "pull",
+        "target": "oven_door",
+        "destination": "open",
+        "affordance_region": "the handle of the oven door",
+        "done_when": "open(oven_door)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "surface_contact",
+              "args": [
+                "black_bowl",
+                "oven"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "black_bowl"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "black_bowl"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 7,
+        "action": "place",
+        "target": "black_bowl",
+        "destination": "oven",
+        "affordance_region": "an empty area inside the oven",
+        "done_when": "surface_contact(black_bowl, oven) AND released(black_bowl)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "released",
+              "args": [
+                "oven_door"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "release_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 8,
+        "action": "release",
+        "target": "oven_door",
+        "affordance_region": "the handle of the oven door",
+        "done_when": "released(oven_door)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "oven_door"
+              ],
+              "role": "progress"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "push_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 9,
+        "action": "push",
+        "target": "oven_door",
+        "destination": "closed",
+        "affordance_region": "the handle of the oven door",
+        "done_when": "closed(oven_door)"
+      }
+    ]
+  }
+}

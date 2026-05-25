@@ -1,0 +1,140 @@
+{
+  "task": "turn off the green led light",
+  "scene_objects": [
+    "green_led_light",
+    "robot_arm",
+    "table"
+  ],
+  "steps": [
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "green_led_light",
+              "<",
+              "0.03"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "approach_axis",
+            "args": [
+              "0",
+              "0",
+              "-1"
+            ],
+            "role": "progress"
+          }
+        ]
+      },
+      "step": 1,
+      "action": "reach",
+      "target": "green_led_light",
+      "affordance_region": "the green led light",
+      "done_when": "distance(gripper, green_led_light) < 0.03",
+      "affordance_hint": "the green led light",
+      "refine_prompt": "the green led light",
+      "refine_cache_hit": false,
+      "affordance_refined": [
+        0.5625,
+        0.6211
+      ],
+      "affordance_3d_refined": [
+        0.13,
+        0.252,
+        1.81
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.3806
+    },
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "green_led_light"
+            ],
+            "role": "completion"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "aligned_xy",
+            "args": [
+              "gripper",
+              "green_led_light"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "motion_dir",
+            "args": [
+              "0",
+              "0",
+              "-1"
+            ],
+            "role": "progress"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "table"
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "step": 2,
+      "action": "push",
+      "target": "green_led_light",
+      "affordance_region": "the center of the green led light",
+      "done_when": "green_led_light is off",
+      "affordance_hint": "the center of the green led light",
+      "refine_prompt": "the center of the green led light",
+      "refine_cache_hit": false,
+      "affordance_refined": [
+        0.5625,
+        0.6211
+      ],
+      "affordance_3d_refined": [
+        0.13,
+        0.252,
+        1.81
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.5239
+    }
+  ]
+}

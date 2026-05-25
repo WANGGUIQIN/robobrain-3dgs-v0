@@ -1,0 +1,228 @@
+{
+  "task": "Move the kadai and place it at the right edge of the table.",
+  "scene_objects": [
+    "kadai",
+    "blue_cloth",
+    "fork",
+    "mushroom",
+    "table"
+  ],
+  "steps": [
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "kadai",
+              "<",
+              "0.03"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "approach_axis",
+            "args": [
+              "0",
+              "0",
+              "-1"
+            ],
+            "role": "progress"
+          }
+        ]
+      },
+      "step": 1,
+      "action": "reach",
+      "target": "kadai",
+      "affordance_region": "the body of the metal kadai",
+      "done_when": "distance(gripper, kadai) < 0.03",
+      "affordance_hint": "the body of the metal kadai",
+      "refine_prompt": "the body of the metal kadai",
+      "refine_cache_hit": false,
+      "affordance_refined": [
+        0.5547,
+        0.9961
+      ],
+      "affordance_3d_refined": [
+        0.1003,
+        0.9096,
+        1.5951
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.3125
+    },
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "kadai"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              "0",
+              "0",
+              "-1"
+            ],
+            "role": "progress"
+          }
+        ]
+      },
+      "step": 2,
+      "action": "grasp",
+      "target": "kadai",
+      "affordance_region": "the handle of the metal kadai",
+      "done_when": "holding(kadai)",
+      "affordance_hint": "the handle of the metal kadai",
+      "refine_prompt": "the handle of the metal kadai",
+      "refine_cache_hit": false,
+      "affordance_refined": [
+        0.3125,
+        0.8516
+      ],
+      "affordance_3d_refined": [
+        -0.3227,
+        0.6051,
+        1.4972
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.3051
+    },
+    {
+      "constraints": {
+        "spatial": [
+          {
+            "pred": "above",
+            "args": [
+              "kadai",
+              "table",
+              "0.05"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_drop",
+            "args": [
+              "kadai"
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "step": 3,
+      "action": "transport",
+      "target": "kadai",
+      "destination": "right_edge_of_table",
+      "affordance_region": "the right edge of the wooden table",
+      "done_when": "above(kadai, table, 0.05) AND aligned_xy(kadai, right_edge_of_table, 0.03)",
+      "affordance_hint": "the right edge of the wooden table",
+      "refine_prompt": "the right edge of the wooden table",
+      "refine_cache_hit": false,
+      "affordance_refined": [
+        0.6641,
+        0.6484
+      ],
+      "affordance_3d_refined": [
+        0.3857,
+        0.349,
+        2.0451
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.4552
+    },
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "surface_contact",
+            "args": [
+              "kadai",
+              "table"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "released",
+            "args": [
+              "kadai"
+            ],
+            "role": "completion"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "stable",
+            "args": [
+              "kadai"
+            ],
+            "role": "completion"
+          }
+        ]
+      },
+      "step": 4,
+      "action": "place",
+      "target": "kadai",
+      "destination": "right_edge_of_table",
+      "affordance_region": "the right edge of the wooden table",
+      "done_when": "surface_contact(kadai, table) AND released(kadai) AND stable(kadai)",
+      "affordance_hint": "the right edge of the wooden table",
+      "refine_prompt": "the right edge of the wooden table",
+      "refine_cache_hit": true,
+      "affordance_refined": [
+        0.6641,
+        0.6484
+      ],
+      "affordance_3d_refined": [
+        0.3857,
+        0.349,
+        2.0451
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.4552
+    }
+  ]
+}

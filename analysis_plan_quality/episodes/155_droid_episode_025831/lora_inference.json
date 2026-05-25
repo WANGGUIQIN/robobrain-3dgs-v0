@@ -1,0 +1,245 @@
+{
+  "task": "Remove the bottle from the pot and put it on the counter to the right",
+  "parsed": {
+    "scene_objects": [
+      "bottle",
+      "pot",
+      "counter"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "bottle",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "bottle",
+        "affordance_region": "the body of the bottle",
+        "done_when": "distance(gripper, bottle) < 0.03",
+        "affordance_hint": "the body of the bottle",
+        "refine_prompt": "the body of the bottle",
+        "refine_cache_hit": false,
+        "refine_prompt_fallback": "bottle",
+        "affordance_refined": [
+          0.6602,
+          0.3477
+        ],
+        "affordance_3d_refined": [
+          0.0797,
+          -0.2745,
+          1.7712
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.3468,
+        "affordance": [
+          0.6602,
+          0.3477
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "bottle"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "bottle",
+        "affordance_region": "the body of the bottle",
+        "done_when": "holding(bottle)",
+        "affordance_hint": "the body of the bottle",
+        "refine_prompt": "the body of the bottle",
+        "refine_cache_hit": true,
+        "affordance_refined": [
+          0.6602,
+          0.3477
+        ],
+        "affordance_3d_refined": [
+          0.0797,
+          -0.2745,
+          1.7712
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.3468,
+        "affordance": [
+          0.6602,
+          0.3477
+        ]
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "bottle",
+                "counter",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "bottle"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "bottle",
+        "destination": "counter",
+        "affordance_region": "the empty area on the counter to the right",
+        "done_when": "above(bottle, counter, 0.05)",
+        "affordance_hint": "the empty area on the counter to the right",
+        "refine_prompt": "the empty area on the counter to the right",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.6992,
+          0.8672
+        ],
+        "affordance_3d_refined": [
+          0.3337,
+          1.7915,
+          3.5128
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.4626,
+        "affordance": [
+          0.6992,
+          0.8672
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "surface_contact",
+              "args": [
+                "bottle",
+                "counter"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "bottle"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "bottle"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "place",
+        "target": "bottle",
+        "destination": "counter",
+        "affordance_region": "the empty area on the counter to the right",
+        "done_when": "surface_contact(bottle, counter) AND released(bottle) AND stable(bottle)",
+        "affordance_hint": "the empty area on the counter to the right",
+        "refine_prompt": "the empty area on the counter to the right",
+        "refine_cache_hit": true,
+        "affordance_refined": [
+          0.6992,
+          0.8672
+        ],
+        "affordance_3d_refined": [
+          0.3337,
+          1.7915,
+          3.5128
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.4626,
+        "affordance": [
+          0.6992,
+          0.8672
+        ]
+      }
+    ]
+  }
+}

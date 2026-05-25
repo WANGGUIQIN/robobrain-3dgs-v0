@@ -1,0 +1,121 @@
+{
+  "task": "pick up the gray bowl",
+  "scene_objects": [
+    "gray_bowl",
+    "red_object",
+    "grill_plate",
+    "blue_dish_rack",
+    "oven",
+    "table"
+  ],
+  "num_steps": 2,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "gray_bowl",
+      "affordance": [
+        0.419,
+        0.459
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "gray_bowl",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "gray_bowl"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, gray_bowl) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        -0.2556,
+        -0.1217,
+        2.7105
+      ],
+      "affordance_hint": "the body of the gray bowl",
+      "affordance_hint_original": "the gray bowl",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 2,
+      "action": "grasp",
+      "target": "gray_bowl",
+      "affordance": [
+        0.408,
+        0.441
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "gray_bowl"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "holding",
+            "args": [
+              "gray_bowl"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              0,
+              0,
+              -1
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "holding(gray_bowl)",
+      "affordance_3d": [
+        -0.29,
+        -0.1812,
+        2.6909
+      ],
+      "affordance_hint": "the rim of the gray bowl",
+      "affordance_hint_original": "the handle of the gray bowl",
+      "affordance_hint_confidence": "ok"
+    }
+  ]
+}

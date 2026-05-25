@@ -1,0 +1,114 @@
+{
+  "task": "Turn the faucet to the right",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_planning_3epoch/checkpoint-39957",
+  "raw": "Scene: faucet, sink, countertop\nStep 1: reach(faucet)\n  affordance_region: the body of the faucet\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, faucet, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, faucet) < 0.03\nStep 2: grasp(faucet)\n  affordance_region: the handle of the faucet\n  contact: holding(faucet) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(faucet)\nStep 3: rotate(faucet)\n  affordance_region: the body of the faucet\n  contact: holding(faucet) [safety]\n  pose: orientation_match(faucet, right) [completion]\n  done_when: orientation_match(faucet, right)\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [],
+    "scene_objects": [
+      "faucet",
+      "sink",
+      "countertop"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "faucet",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "faucet",
+        "affordance_region": "the body of the faucet",
+        "done_when": "distance(gripper, faucet) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "faucet"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "faucet",
+        "affordance_region": "the handle of the faucet",
+        "done_when": "holding(faucet)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "faucet"
+              ],
+              "role": "safety"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "orientation_match",
+              "args": [
+                "faucet",
+                "right"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "rotate",
+        "target": "faucet",
+        "affordance_region": "the body of the faucet",
+        "done_when": "orientation_match(faucet, right)"
+      }
+    ]
+  }
+}

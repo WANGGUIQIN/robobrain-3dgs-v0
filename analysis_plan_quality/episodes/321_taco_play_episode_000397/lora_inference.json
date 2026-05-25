@@ -1,0 +1,141 @@
+{
+  "task": "move the red light switch to turn on the red light",
+  "parsed": {
+    "scene_objects": [
+      "red_light_switch",
+      "red_light",
+      "table"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "red_light_switch",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "red_light_switch",
+        "affordance_region": "the red light switch on the wall",
+        "done_when": "distance(gripper, red_light_switch) < 0.03",
+        "affordance_hint": "the red light switch on the wall",
+        "refine_prompt": "the red light switch on the wall",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.9961,
+          0.4375
+        ],
+        "affordance_3d_refined": [
+          0.0057,
+          -0.0007,
+          0.01
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.3007,
+        "affordance": [
+          0.9961,
+          0.4375
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_contact",
+              "args": [
+                "red_light_switch"
+              ],
+              "role": "completion"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "aligned_xy",
+              "args": [
+                "gripper",
+                "red_light_switch"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "motion_dir",
+              "args": [
+                "0",
+                "1",
+                "0"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "push",
+        "target": "red_light_switch",
+        "affordance_region": "the center of the red light switch",
+        "done_when": "red_light_switch(state=on)",
+        "affordance_hint": "the center of the red light switch",
+        "refine_prompt": "the center of the red light switch",
+        "refine_cache_hit": false,
+        "refine_prompt_fallback": "red light switch",
+        "affordance_refined": [
+          0.0,
+          0.7656
+        ],
+        "affordance_3d_refined": [
+          -0.0057,
+          0.0031,
+          0.01
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.2823,
+        "affordance": [
+          0.0,
+          0.7656
+        ]
+      }
+    ]
+  }
+}

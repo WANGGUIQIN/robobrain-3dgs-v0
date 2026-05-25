@@ -1,0 +1,247 @@
+{
+  "task": "pick rxbar chocolate from middle drawer and place on counter",
+  "parsed": {
+    "scene_objects": [
+      "rxbar_chocolate",
+      "middle_drawer",
+      "counter",
+      "apple",
+      "can",
+      "bowl"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "rxbar_chocolate",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "rxbar_chocolate",
+        "affordance_region": "the rxbar chocolate in the middle drawer",
+        "done_when": "distance(gripper, rxbar_chocolate) < 0.03",
+        "affordance_hint": "the rxbar chocolate in the middle drawer",
+        "refine_prompt": "the rxbar chocolate in the middle drawer",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.5508,
+          0.6953
+        ],
+        "affordance_3d_refined": [
+          0.1457,
+          0.5602,
+          2.4952
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.3228,
+        "affordance": [
+          0.5508,
+          0.6953
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "rxbar_chocolate"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "rxbar_chocolate",
+        "affordance_region": "the rxbar chocolate in the middle drawer",
+        "done_when": "holding(rxbar_chocolate)",
+        "affordance_hint": "the rxbar chocolate in the middle drawer",
+        "refine_prompt": "the rxbar chocolate in the middle drawer",
+        "refine_cache_hit": true,
+        "affordance_refined": [
+          0.5508,
+          0.6953
+        ],
+        "affordance_3d_refined": [
+          0.1457,
+          0.5602,
+          2.4952
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.3228,
+        "affordance": [
+          0.5508,
+          0.6953
+        ]
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "rxbar_chocolate",
+                "counter",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "rxbar_chocolate"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "rxbar_chocolate",
+        "destination": "counter",
+        "affordance_region": "an empty area on the counter",
+        "done_when": "above(rxbar_chocolate, counter, 0.05)",
+        "affordance_hint": "an empty area on the counter",
+        "refine_prompt": "an empty area on the counter",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.0312,
+          0.168
+        ],
+        "affordance_3d_refined": [
+          -0.5221,
+          -0.3698,
+          0.9689
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.3118,
+        "affordance": [
+          0.0312,
+          0.168
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "surface_contact",
+              "args": [
+                "rxbar_chocolate",
+                "counter"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "rxbar_chocolate"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "rxbar_chocolate"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "place",
+        "target": "rxbar_chocolate",
+        "destination": "counter",
+        "affordance_region": "an empty area on the counter",
+        "done_when": "surface_contact(rxbar_chocolate, counter) AND released(rxbar_chocolate) AND stable(rxbar_chocolate)",
+        "affordance_hint": "an empty area on the counter",
+        "refine_prompt": "an empty area on the counter",
+        "refine_cache_hit": true,
+        "affordance_refined": [
+          0.0312,
+          0.168
+        ],
+        "affordance_3d_refined": [
+          -0.5221,
+          -0.3698,
+          0.9689
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.3118,
+        "affordance": [
+          0.0312,
+          0.168
+        ]
+      }
+    ]
+  }
+}

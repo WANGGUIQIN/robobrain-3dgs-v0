@@ -1,0 +1,170 @@
+{
+  "task": "close the azure jar",
+  "scene_objects": [
+    "azure_jar",
+    "green_jar",
+    "blue_jar",
+    "table"
+  ],
+  "num_steps": 3,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "azure_jar",
+      "affordance": [
+        0.351,
+        0.695
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "azure_jar",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "green_jar"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, azure_jar) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        -1.3541,
+        1.7817,
+        4.5611
+      ],
+      "affordance_hint": "the body of the azure jar",
+      "affordance_hint_original": "the azure jar",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 2,
+      "action": "grasp",
+      "target": "azure_jar",
+      "affordance": [
+        0.351,
+        0.687
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "azure_jar"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "holding",
+            "args": [
+              "azure_jar"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              0,
+              0,
+              -1
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "holding(azure_jar)",
+      "affordance_3d": [
+        -0.9964,
+        1.2585,
+        3.3561
+      ],
+      "affordance_hint": "the lid of the azure jar",
+      "affordance_hint_original": "the handle of the azure jar",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 3,
+      "action": "rotate",
+      "target": "azure_jar",
+      "affordance": [
+        0.351,
+        0.695
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "azure_jar"
+            ],
+            "role": "safety"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "upright",
+            "args": [
+              "azure_jar"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_drop",
+            "args": [
+              "azure_jar"
+            ]
+          }
+        ]
+      },
+      "done_when": "upright(azure_jar)",
+      "affordance_3d": [
+        -1.3541,
+        1.7817,
+        4.5611
+      ],
+      "affordance_hint": "the body of the azure jar",
+      "affordance_hint_original": "the body of the azure jar",
+      "affordance_hint_confidence": "ok"
+    }
+  ]
+}

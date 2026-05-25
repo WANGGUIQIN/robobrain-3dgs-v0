@@ -1,0 +1,190 @@
+{
+  "task": "turn left tap",
+  "parsed": {
+    "scene_objects": [
+      "tap",
+      "table"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "tap",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "tap",
+        "affordance_region": "the body of the white tap",
+        "done_when": "distance(gripper, tap) < 0.03",
+        "affordance_hint": "the body of the white tap",
+        "refine_prompt": "the body of the white tap",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.4805,
+          0.0664
+        ],
+        "affordance_3d_refined": [
+          -0.0972,
+          -2.1576,
+          2.488
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.4556,
+        "affordance": [
+          0.4805,
+          0.0664
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "tap"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "tap",
+        "affordance_region": "the white plastic handle of the tap",
+        "done_when": "holding(tap)",
+        "affordance_hint": "the white plastic handle of the tap",
+        "refine_prompt": "the white plastic handle of the tap",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.7539,
+          0.4688
+        ],
+        "affordance_3d_refined": [
+          1.2602,
+          -0.1551,
+          2.4817
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.3168,
+        "affordance": [
+          0.7539,
+          0.4688
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "tap"
+              ],
+              "role": "safety"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "orientation_match",
+              "args": [
+                "tap",
+                "left_position"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "tap"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "rotate",
+        "target": "tap",
+        "affordance_region": "the body of the white tap",
+        "done_when": "orientation_match(tap, left_position)",
+        "affordance_hint": "the body of the white tap",
+        "refine_prompt": "the body of the white tap",
+        "refine_cache_hit": true,
+        "affordance_refined": [
+          0.4805,
+          0.0664
+        ],
+        "affordance_3d_refined": [
+          -0.0972,
+          -2.1576,
+          2.488
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.4556,
+        "affordance": [
+          0.4805,
+          0.0664
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,180 @@
+{
+  "task": "Open the first drawer under the fruit plushies",
+  "scene_objects": [
+    "drawer",
+    "fruit_plushies",
+    "table"
+  ],
+  "steps": [
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "drawer",
+              "<",
+              "0.03"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "approach_axis",
+            "args": [
+              "0",
+              "0",
+              "-1"
+            ],
+            "role": "progress"
+          }
+        ]
+      },
+      "step": 1,
+      "action": "reach",
+      "target": "drawer",
+      "affordance_region": "the front edge of the drawer",
+      "done_when": "distance(gripper, drawer) < 0.03",
+      "affordance_hint": "the front edge of the drawer",
+      "refine_prompt": "the front edge of the drawer",
+      "refine_cache_hit": false,
+      "refine_prompt_fallback": "drawer",
+      "affordance_refined": [
+        0.0547,
+        0.3711
+      ],
+      "affordance_3d_refined": [
+        -1.5644,
+        -0.2679,
+        2.143
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.23
+    },
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "drawer"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              "0",
+              "0",
+              "-1"
+            ],
+            "role": "progress"
+          }
+        ]
+      },
+      "step": 2,
+      "action": "grasp",
+      "target": "drawer",
+      "affordance_region": "the handle of the drawer",
+      "done_when": "holding(drawer)",
+      "affordance_hint": "the handle of the drawer",
+      "refine_prompt": "the handle of the drawer",
+      "refine_cache_hit": false,
+      "refine_prompt_fallback": "drawer",
+      "affordance_refined": [
+        0.0547,
+        0.3711
+      ],
+      "affordance_3d_refined": [
+        -1.5644,
+        -0.2679,
+        2.143
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.23
+    },
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "drawer"
+            ],
+            "role": "safety"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "aligned_xy",
+            "args": [
+              "drawer",
+              "open_position",
+              "0.05"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "drawer"
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "step": 3,
+      "action": "pull",
+      "target": "drawer",
+      "affordance_region": "the front edge of the drawer",
+      "done_when": "aligned_xy(drawer, open_position, 0.05)",
+      "affordance_hint": "the front edge of the drawer",
+      "refine_prompt": "the front edge of the drawer",
+      "refine_cache_hit": true,
+      "affordance_refined": [
+        0.0547,
+        0.3711
+      ],
+      "affordance_3d_refined": [
+        -1.5644,
+        -0.2679,
+        2.143
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.23
+    }
+  ]
+}

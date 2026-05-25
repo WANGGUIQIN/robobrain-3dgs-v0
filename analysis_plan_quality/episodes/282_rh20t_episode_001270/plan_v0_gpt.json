@@ -1,0 +1,122 @@
+{
+  "task": "Use the gripper to push and close the drawer",
+  "scene_objects": [
+    "drawer",
+    "table"
+  ],
+  "num_steps": 2,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "drawer",
+      "affordance": [
+        0.531,
+        0.401
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "drawer",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "drawer"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, drawer) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        -1.3785,
+        -0.5769,
+        2.3974
+      ],
+      "affordance_hint": "the drawer"
+    },
+    {
+      "step": 2,
+      "action": "push",
+      "target": "drawer",
+      "affordance": [
+        0.531,
+        0.401
+      ],
+      "approach": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "drawer"
+            ],
+            "role": "completion"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "aligned_xy",
+            "args": [
+              "drawer",
+              "closed_position",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "drawer"
+            ]
+          },
+          {
+            "pred": "force_limit",
+            "args": [
+              "gripper",
+              "drawer"
+            ]
+          }
+        ]
+      },
+      "done_when": "aligned_xy(drawer, closed_position, 0.03)",
+      "affordance_3d": [
+        -1.3785,
+        -0.5769,
+        2.3974
+      ],
+      "affordance_hint": "the center of the drawer"
+    }
+  ]
+}

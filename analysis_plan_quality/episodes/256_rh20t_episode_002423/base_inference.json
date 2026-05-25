@@ -1,0 +1,128 @@
+{
+  "task": "Press a button from top to bottom with obstacles",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_3epoch/best",
+  "raw": "The scene shows a robotic arm with a gripper positioned over a blue surface. The goal is to press a button from top to bottom with obstacles. The button is likely a small, distinct object on the surface, and the obstacles are other objects that may block the path. The plan involves reaching the button, pressing it, and then moving away.\n\nGoal: pressed(button); stable(button)\nScene: robotic_arm, button, obstacles\nStep 1: reach(button)\n  affordance_region: the top surface of the button\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, button, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, button) < 0.03\nStep 2: press(button)\n  affordance_region: the top surface of the button\n  contact: pressed(button) [completion]\n  direction: press_axis(0, 0, -1) [progress]\n  done_when: pressed(button)\nStep 3: release(button)\n  affordance_region: the top surface of the button\n  contact: released(button) [completion]\n  direction: release_axis(0, 0, -1) [progress]\n  done_when: released(button)\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [
+      {
+        "pred": "pressed",
+        "args": [
+          "button"
+        ]
+      },
+      {
+        "pred": "stable",
+        "args": [
+          "button"
+        ]
+      }
+    ],
+    "scene_objects": [
+      "robotic_arm",
+      "button",
+      "obstacles"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "button",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "button",
+        "affordance_region": "the top surface of the button",
+        "done_when": "distance(gripper, button) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "pressed",
+              "args": [
+                "button"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "press_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "press",
+        "target": "button",
+        "affordance_region": "the top surface of the button",
+        "done_when": "pressed(button)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "released",
+              "args": [
+                "button"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "release_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "release",
+        "target": "button",
+        "affordance_region": "the top surface of the button",
+        "done_when": "released(button)"
+      }
+    ]
+  }
+}

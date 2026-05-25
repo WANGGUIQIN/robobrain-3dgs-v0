@@ -1,0 +1,166 @@
+{
+  "task": "Cover the box",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_3epoch/best",
+  "raw": "**SCENE ANALYSIS - A cardboard box is open on a green patterned surface. A blue object (likely a lid) is positioned to the right of the box. The box has a rectangular opening. STRATEGY - First, grasp the blue lid. Then, transport it to the box's opening. Finally, insert the lid into the box to cover it. Failure modes include misaligning the lid with the box or dropping it during transport. AFFORDANCE REASONING - Step 1: Reach for the blue lid at its body. Step 2: Grasp the blue lid at its body for a secure hold. Step 3: Transport the blue lid to the box's opening. Step 4: Insert the blue lid into the box's opening.**\nGoal: inside(blue_lid, box); stable(blue_lid)\nScene: box, blue_lid, green_surface\nStep 1: reach(blue_lid)\n  affordance_region: the body of the blue lid\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, blue_lid, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, blue_lid) < 0.03\nStep 2: grasp(blue_lid)\n  affordance_region: the body of the blue lid\n  contact: holding(blue_lid) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(blue_lid)\nStep 3: transport(blue_lid -> box)\n  affordance_region: the opening of the box\n  spatial: above(blue_lid, box, 0.05) [completion]\n  safety: no_drop(blue_lid)\n  done_when: above(blue_lid, box, 0.05)\nStep 4: insert(blue_lid -> box)\n  affordance_region: the opening of the box\n  contact: inside(blue_lid, box) [completion]; released(blue_lid) [completion]\n  pose: stable(blue_lid) [completion]\n  done_when: inside(blue_lid, box) AND released(blue_lid)\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [
+      {
+        "pred": "inside",
+        "args": [
+          "blue_lid",
+          "box"
+        ]
+      },
+      {
+        "pred": "stable",
+        "args": [
+          "blue_lid"
+        ]
+      }
+    ],
+    "scene_objects": [
+      "box",
+      "blue_lid",
+      "green_surface"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "blue_lid",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "blue_lid",
+        "affordance_region": "the body of the blue lid",
+        "done_when": "distance(gripper, blue_lid) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "blue_lid"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "blue_lid",
+        "affordance_region": "the body of the blue lid",
+        "done_when": "holding(blue_lid)"
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "blue_lid",
+                "box",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "blue_lid"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "blue_lid",
+        "destination": "box",
+        "affordance_region": "the opening of the box",
+        "done_when": "above(blue_lid, box, 0.05)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "inside",
+              "args": [
+                "blue_lid",
+                "box"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "blue_lid"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "blue_lid"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "insert",
+        "target": "blue_lid",
+        "destination": "box",
+        "affordance_region": "the opening of the box",
+        "done_when": "inside(blue_lid, box) AND released(blue_lid)"
+      }
+    ]
+  }
+}

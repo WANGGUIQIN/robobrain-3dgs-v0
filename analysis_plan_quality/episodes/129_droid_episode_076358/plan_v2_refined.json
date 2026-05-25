@@ -1,0 +1,181 @@
+{
+  "task": "Move the brown bowl forward slightly",
+  "scene_objects": [
+    "brown_bowl",
+    "table",
+    "white_plate",
+    "orange object",
+    "tools"
+  ],
+  "num_steps": 3,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "brown_bowl",
+      "affordance": [
+        0.544,
+        0.462
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "brown_bowl",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "table"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, brown_bowl) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        -0.3277,
+        -0.0312,
+        3.1214
+      ],
+      "affordance_hint": "the brown bowl",
+      "affordance_hint_original": "the brown bowl",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 2,
+      "action": "grasp",
+      "target": "brown_bowl",
+      "affordance": [
+        0.544,
+        0.45
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "brown_bowl"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "holding",
+            "args": [
+              "brown_bowl"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              0,
+              0,
+              -1
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "holding(brown_bowl)",
+      "affordance_3d": [
+        -0.3277,
+        -0.078,
+        3.1214
+      ],
+      "affordance_hint": "the rim of the brown bowl",
+      "affordance_hint_original": "the handle of the brown bowl",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 3,
+      "action": "transport",
+      "target": "brown_bowl",
+      "destination": "forward_position",
+      "affordance": [
+        0.425,
+        0.642
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "brown_bowl"
+            ],
+            "role": "safety"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "aligned_xy",
+            "args": [
+              "brown_bowl",
+              "forward_position",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "brown_bowl",
+              "table"
+            ]
+          },
+          {
+            "pred": "no_drop",
+            "args": [
+              "brown_bowl"
+            ]
+          }
+        ]
+      },
+      "done_when": "aligned_xy(brown_bowl, forward_position, 0.03)",
+      "affordance_3d": [
+        -0.786,
+        0.6781,
+        3.0823
+      ],
+      "affordance_hint": "the empty area on the forward position",
+      "affordance_hint_original": "an empty area on the forward position",
+      "affordance_hint_confidence": "ok"
+    }
+  ]
+}

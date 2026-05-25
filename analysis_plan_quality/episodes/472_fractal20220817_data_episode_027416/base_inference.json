@@ -1,0 +1,163 @@
+{
+  "task": "place green can into bottom drawer",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_3epoch/best",
+  "raw": "**SCENE ANALYSIS -** A green can, a white bowl, and an orange are on a gray table. A drawer is open below. The green can is a rigid cylinder with a top opening; the bowl is a rigid container with a rim; the orange is a rigid sphere. The drawer is empty. STRATEGY - First, grasp the green can from its top opening. Then, transport it over the open drawer. Finally, place it inside the drawer. Failure modes include dropping the can during transport or misaligning it with the drawer. AFFORDANCE REASONING - Step 1 reach the can at its top opening for a stable grasp; Step 2 grasp the top opening to lift; Step 3 transport over the drawer; Step 4 place inside the drawer.\n\nGoal: inside(green_can, drawer)\nScene: green_can, bowl, orange, table, drawer\nStep 1: reach(green_can)\n  affordance_region: the top opening of the green can\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, green_can, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, green_can) < 0.03\nStep 2: grasp(green_can)\n  affordance_region: the top opening of the green can\n  contact: holding(green_can) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(green_can)\nStep 3: transport(green_can -> drawer)\n  affordance_region: an empty area inside the open drawer\n  spatial: above(green_can, drawer, 0.05) [completion]\n  safety: no_drop(green_can)\n  done_when: above(green_can, drawer, 0.05)\nStep 4: place(green_can -> drawer)\n  affordance_region: an empty area inside the open drawer\n  contact: surface_contact(green_can, drawer) [completion]; released(green_can) [completion]\n  pose: inside(green_can, drawer) [completion]\n  done_when: surface_contact(green_can, drawer) AND released(green_can)\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [
+      {
+        "pred": "inside",
+        "args": [
+          "green_can",
+          "drawer"
+        ]
+      }
+    ],
+    "scene_objects": [
+      "green_can",
+      "bowl",
+      "orange",
+      "table",
+      "drawer"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "green_can",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "green_can",
+        "affordance_region": "the top opening of the green can",
+        "done_when": "distance(gripper, green_can) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "green_can"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "green_can",
+        "affordance_region": "the top opening of the green can",
+        "done_when": "holding(green_can)"
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "green_can",
+                "drawer",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "green_can"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "green_can",
+        "destination": "drawer",
+        "affordance_region": "an empty area inside the open drawer",
+        "done_when": "above(green_can, drawer, 0.05)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "surface_contact",
+              "args": [
+                "green_can",
+                "drawer"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "green_can"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "inside",
+              "args": [
+                "green_can",
+                "drawer"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "place",
+        "target": "green_can",
+        "destination": "drawer",
+        "affordance_region": "an empty area inside the open drawer",
+        "done_when": "surface_contact(green_can, drawer) AND released(green_can)"
+      }
+    ]
+  }
+}

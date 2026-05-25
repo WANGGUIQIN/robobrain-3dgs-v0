@@ -1,0 +1,113 @@
+{
+  "task": "turn off the blue light lamp",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_planning_3epoch/checkpoint-39957",
+  "raw": "Scene: blue_light_lamp, table\nStep 1: reach(blue_light_lamp)\n  affordance_region: the blue light lamp\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, blue_light_lamp, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, blue_light_lamp) < 0.03\nStep 2: grasp(blue_light_lamp)\n  affordance_region: the base of the blue light lamp\n  contact: holding(blue_light_lamp) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(blue_light_lamp)\nStep 3: rotate(blue_light_lamp)\n  affordance_region: the body of the blue light lamp\n  contact: holding(blue_light_lamp) [safety]\n  pose: orientation_match(blue_light_lamp, off_position) [completion]\n  done_when: orientation_match(blue_light_lamp, off_position)\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [],
+    "scene_objects": [
+      "blue_light_lamp",
+      "table"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "blue_light_lamp",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "blue_light_lamp",
+        "affordance_region": "the blue light lamp",
+        "done_when": "distance(gripper, blue_light_lamp) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "blue_light_lamp"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "blue_light_lamp",
+        "affordance_region": "the base of the blue light lamp",
+        "done_when": "holding(blue_light_lamp)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "blue_light_lamp"
+              ],
+              "role": "safety"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "orientation_match",
+              "args": [
+                "blue_light_lamp",
+                "off_position"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "rotate",
+        "target": "blue_light_lamp",
+        "affordance_region": "the body of the blue light lamp",
+        "done_when": "orientation_match(blue_light_lamp, off_position)"
+      }
+    ]
+  }
+}

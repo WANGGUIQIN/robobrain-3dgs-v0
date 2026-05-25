@@ -1,0 +1,232 @@
+{
+  "task": "pick coke can from bottom drawer and place on counter",
+  "scene_objects": [
+    "coke_can",
+    "counter",
+    "drawer",
+    "robot_gripper"
+  ],
+  "num_steps": 4,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "coke_can",
+      "affordance": [
+        0.5,
+        0.906
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "coke_can",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "drawer"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, coke_can) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        0.0,
+        1.019,
+        2.1821
+      ],
+      "affordance_hint": "the coke can"
+    },
+    {
+      "step": 2,
+      "action": "grasp",
+      "target": "coke_can",
+      "affordance": [
+        0.5,
+        0.908
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "coke_can"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "holding",
+            "args": [
+              "coke_can"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              0,
+              0,
+              -1
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "holding(coke_can)",
+      "affordance_3d": [
+        0.0,
+        1.019,
+        2.1821
+      ],
+      "affordance_hint": "the handle of the coke can"
+    },
+    {
+      "step": 3,
+      "action": "transport",
+      "target": "coke_can",
+      "destination": "counter",
+      "affordance": [
+        0.558,
+        0.339
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "coke_can"
+            ],
+            "role": "safety"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "above",
+            "args": [
+              "coke_can",
+              "counter",
+              0.05
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "coke_can",
+              "counter"
+            ]
+          },
+          {
+            "pred": "no_drop",
+            "args": [
+              "coke_can"
+            ]
+          }
+        ]
+      },
+      "done_when": "above(coke_can, counter, 0.05) AND aligned_xy(coke_can, counter, 0.03)",
+      "affordance_3d": [
+        0.2577,
+        -0.7044,
+        3.8259
+      ],
+      "affordance_hint": "an empty area on the counter"
+    },
+    {
+      "step": 4,
+      "action": "place",
+      "target": "coke_can",
+      "destination": "counter",
+      "affordance": [
+        0.558,
+        0.339
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "surface_contact",
+            "args": [
+              "coke_can",
+              "counter"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "released",
+            "args": [
+              "coke_can"
+            ],
+            "role": "completion"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "stable",
+            "args": [
+              "coke_can"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "support_stable",
+            "args": [
+              "coke_can"
+            ]
+          }
+        ]
+      },
+      "done_when": "surface_contact(coke_can, counter) AND released(coke_can) AND stable(coke_can)",
+      "affordance_3d": [
+        0.2577,
+        -0.7044,
+        3.8259
+      ],
+      "affordance_hint": "an empty area on the counter"
+    }
+  ]
+}

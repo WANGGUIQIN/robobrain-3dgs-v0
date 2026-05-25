@@ -1,0 +1,241 @@
+{
+  "task": "Move the green cloth to the right of the can",
+  "scene_objects": [
+    "green_cloth",
+    "can",
+    "orange_bowl",
+    "yellow_item",
+    "table"
+  ],
+  "num_steps": 4,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "green_cloth",
+      "affordance": [
+        0.611,
+        0.687
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "green_cloth",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "can"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, green_cloth) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        0.3088,
+        0.5294,
+        2.4561
+      ],
+      "affordance_hint": "the green cloth on the right side of the table",
+      "affordance_hint_original": "the green cloth",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 2,
+      "action": "grasp",
+      "target": "green_cloth",
+      "affordance": [
+        0.611,
+        0.687
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "green_cloth"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "holding",
+            "args": [
+              "green_cloth"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              0,
+              0,
+              -1
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "holding(green_cloth)",
+      "affordance_3d": [
+        0.3088,
+        0.5294,
+        2.4561
+      ],
+      "affordance_hint": "the green cloth on the right side of the table",
+      "affordance_hint_original": "green cloth",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 3,
+      "action": "transport",
+      "target": "green_cloth",
+      "destination": "right_of_can",
+      "affordance": [
+        0.553,
+        0.351
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "green_cloth"
+            ],
+            "role": "safety"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "above",
+            "args": [
+              "green_cloth",
+              "table",
+              0.05
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "green_cloth",
+              "can"
+            ]
+          },
+          {
+            "pred": "no_drop",
+            "args": [
+              "green_cloth"
+            ]
+          }
+        ]
+      },
+      "done_when": "above(green_cloth, table, 0.05) AND aligned_xy(green_cloth, right_of_can, 0.03)",
+      "affordance_3d": [
+        0.0818,
+        -0.2221,
+        1.3015
+      ],
+      "affordance_hint": "the empty area on the table to the right of the can",
+      "affordance_hint_original": "an empty area on the right of can",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 4,
+      "action": "place",
+      "target": "green_cloth",
+      "destination": "right_of_can",
+      "affordance": [
+        0.553,
+        0.351
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "surface_contact",
+            "args": [
+              "green_cloth",
+              "table"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "released",
+            "args": [
+              "green_cloth"
+            ],
+            "role": "completion"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "stable",
+            "args": [
+              "green_cloth"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "support_stable",
+            "args": [
+              "green_cloth"
+            ]
+          }
+        ]
+      },
+      "done_when": "surface_contact(green_cloth, table) AND released(green_cloth) AND stable(green_cloth)",
+      "affordance_3d": [
+        0.0818,
+        -0.2221,
+        1.3015
+      ],
+      "affordance_hint": "the empty area on the table to the right of the can",
+      "affordance_hint_original": "an empty area on the right of can",
+      "affordance_hint_confidence": "ok"
+    }
+  ]
+}

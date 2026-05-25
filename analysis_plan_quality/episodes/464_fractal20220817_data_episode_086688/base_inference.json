@@ -1,0 +1,149 @@
+{
+  "task": "place green can upright",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_3epoch/best",
+  "raw": "**SCENE ANALYSIS - A green can lies on a flat surface. It is cylindrical and appears to be lying on its side. STRATEGY - To place it upright, first grasp the can, then rotate it 90 degrees around its vertical axis. Failure modes include dropping the can during rotation or not rotating it enough. AFFORDANCE REASONING - Step 1 reach the can body; Step 2 grasp the can body for stability; Step 3 rotate the can 90 degrees; Step 4 release the can to stand upright.**\nGoal: upright(green_can)\nScene: green_can, surface\nStep 1: reach(green_can)\n  affordance_region: the body of the green can\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, green_can, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, green_can) < 0.03\nStep 2: grasp(green_can)\n  affordance_region: the body of the green can\n  contact: holding(green_can) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(green_can)\nStep 3: rotate(green_can, 90)\n  affordance_region: the body of the green can\n  contact: holding(green_can) [progress]\n  direction: rotate_axis(0, 1, 0, 90) [progress]\n  done_when: angle(green_can, vertical_axis, 90)\nStep 4: release(green_can)\n  affordance_region: the surface\n  contact: released(green_can) [completion]\n  pose: upright(green_can) [completion]\n  done_when: upright(green_can)\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [
+      {
+        "pred": "upright",
+        "args": [
+          "green_can"
+        ]
+      }
+    ],
+    "scene_objects": [
+      "green_can",
+      "surface"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "green_can",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "green_can",
+        "affordance_region": "the body of the green can",
+        "done_when": "distance(gripper, green_can) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "green_can"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "green_can",
+        "affordance_region": "the body of the green can",
+        "done_when": "holding(green_can)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "green_can"
+              ],
+              "role": "progress"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "rotate_axis",
+              "args": [
+                "0",
+                "1",
+                "0",
+                "90"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "rotate",
+        "target": "green_can, 90",
+        "affordance_region": "the body of the green can",
+        "done_when": "angle(green_can, vertical_axis, 90)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "released",
+              "args": [
+                "green_can"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "upright",
+              "args": [
+                "green_can"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "release",
+        "target": "green_can",
+        "affordance_region": "the surface",
+        "done_when": "upright(green_can)"
+      }
+    ]
+  }
+}

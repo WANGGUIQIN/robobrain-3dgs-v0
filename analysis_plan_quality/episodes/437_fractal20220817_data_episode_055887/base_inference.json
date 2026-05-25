@@ -1,0 +1,160 @@
+{
+  "task": "place coke can into white bowl",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_3epoch/best",
+  "raw": "**SCENE ANALYSIS -** A red can (coke can) is on a gray table. A white bowl is on the same table, to the right of the can. The can is cylindrical and rigid; the bowl is a container with a circular opening. **STRATEGY -** First, reach for the can, grasp it, then transport it to the bowl, and finally place it inside. The bowl is the destination, so the action is 'insert' to place the can into the bowl's opening. **AFFORDANCE REASONING -** Step 1: Reach for the can's body to approach it. Step 2: Grasp the can's body for a secure hold. Step 3: Transport the can to the bowl's location. Step 4: Insert the can into the bowl's opening.\n\nGoal: inside(coke_can, white_bowl)\nScene: coke_can, white_bowl, table\nStep 1: reach(coke_can)\n  affordance_region: the body of the coke can\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, coke_can, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, coke_can) < 0.03\nStep 2: grasp(coke_can)\n  affordance_region: the body of the coke can\n  contact: holding(coke_can) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(coke_can)\nStep 3: transport(coke_can -> white_bowl)\n  affordance_region: the opening of the white bowl\n  spatial: above(coke_can, white_bowl, 0.05) [completion]\n  safety: no_drop(coke_can)\n  done_when: above(coke_can, white_bowl, 0.05)\nStep 4: insert(coke_can -> white_bowl)\n  affordance_region: the opening of the white bowl\n  contact: inside(coke_can, white_bowl) [completion]; released(coke_can) [completion]\n  pose: stable(coke_can) [completion]\n  done_when: inside(coke_can, white_bowl)\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [
+      {
+        "pred": "inside",
+        "args": [
+          "coke_can",
+          "white_bowl"
+        ]
+      }
+    ],
+    "scene_objects": [
+      "coke_can",
+      "white_bowl",
+      "table"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "coke_can",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "coke_can",
+        "affordance_region": "the body of the coke can",
+        "done_when": "distance(gripper, coke_can) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "coke_can"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "coke_can",
+        "affordance_region": "the body of the coke can",
+        "done_when": "holding(coke_can)"
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "coke_can",
+                "white_bowl",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "coke_can"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "coke_can",
+        "destination": "white_bowl",
+        "affordance_region": "the opening of the white bowl",
+        "done_when": "above(coke_can, white_bowl, 0.05)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "inside",
+              "args": [
+                "coke_can",
+                "white_bowl"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "coke_can"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "coke_can"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "insert",
+        "target": "coke_can",
+        "destination": "white_bowl",
+        "affordance_region": "the opening of the white bowl",
+        "done_when": "inside(coke_can, white_bowl)"
+      }
+    ]
+  }
+}

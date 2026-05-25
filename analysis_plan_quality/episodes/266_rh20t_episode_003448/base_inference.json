@@ -1,0 +1,124 @@
+{
+  "task": "Insert the tip of a large pipette into the holder for large pipette tips",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_3epoch/best",
+  "raw": "**SCENE ANALYSIS - A pipette tip is in a clear plastic holder on a marble-patterned surface. The holder has a green top and a clear body. The pipette tip is a small, cylindrical object. STRATEGY - First, grasp the pipette tip from the holder. Then, transport it to the pipette tip holder. Finally, insert the tip into the holder. Failure modes include dropping the tip, misaligning the insertion, or the holder being obstructed. AFFORDANCE REASONING - Step 1: Grasp the pipette tip from the holder (affordance: the tip's end). Step 2: Transport the tip to the holder (affordance: empty space near the holder). Step 3: Insert the tip into the holder (affordance: the holder's top opening).**\nGoal: inside(pipette_tip, pipette_tip_holder)\nScene: pipette_tip, pipette_tip_holder, marble_surface\nStep 1: grasp(pipette_tip)\n  affordance_region: the tip of the pipette\n  contact: holding(pipette_tip) [completion]\n  spatial: distance(gripper, pipette_tip, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: holding(pipette_tip)\nStep 2: transport(pipette_tip -> pipette_tip_holder)\n  affordance_region: an empty area near the pipette_tip_holder\n  spatial: above(pipette_tip, pipette_tip_holder, 0.05) [completion]\n  safety: no_drop(pipette_tip)\n  done_when: above(pipette_tip, pipette_tip_holder, 0.05)\nStep 3: insert(pipette_tip -> pipette_tip_holder)\n  affordance_region: the top opening of the pipette_tip_holder\n  contact: inside(pipette_tip, pipette_tip_holder) [completion]\n  pose: stable(pipette_tip_holder) [completion]\n  done_when: inside(pipette_tip, pipette_tip_holder)\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [
+      {
+        "pred": "inside",
+        "args": [
+          "pipette_tip",
+          "pipette_tip_holder"
+        ]
+      }
+    ],
+    "scene_objects": [
+      "pipette_tip",
+      "pipette_tip_holder",
+      "marble_surface"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "pipette_tip"
+              ],
+              "role": "completion"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "pipette_tip",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "grasp",
+        "target": "pipette_tip",
+        "affordance_region": "the tip of the pipette",
+        "done_when": "holding(pipette_tip)"
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "pipette_tip",
+                "pipette_tip_holder",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "pipette_tip"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "transport",
+        "target": "pipette_tip",
+        "destination": "pipette_tip_holder",
+        "affordance_region": "an empty area near the pipette_tip_holder",
+        "done_when": "above(pipette_tip, pipette_tip_holder, 0.05)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "inside",
+              "args": [
+                "pipette_tip",
+                "pipette_tip_holder"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "pipette_tip_holder"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "insert",
+        "target": "pipette_tip",
+        "destination": "pipette_tip_holder",
+        "affordance_region": "the top opening of the pipette_tip_holder",
+        "done_when": "inside(pipette_tip, pipette_tip_holder)"
+      }
+    ]
+  }
+}

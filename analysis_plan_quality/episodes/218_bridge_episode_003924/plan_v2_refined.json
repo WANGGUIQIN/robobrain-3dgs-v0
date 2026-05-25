@@ -1,0 +1,179 @@
+{
+  "task": "Put the napkin more towards the top of the stove.",
+  "scene_objects": [
+    "napkin",
+    "stove",
+    "red_pepper",
+    "pot"
+  ],
+  "num_steps": 3,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "napkin",
+      "affordance": [
+        0.531,
+        0.593
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "napkin",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "stove"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, napkin) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        0.1079,
+        0.3237,
+        3.004
+      ],
+      "affordance_hint": "the blue napkin on the right side of the stove",
+      "affordance_hint_original": "the napkin",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 2,
+      "action": "grasp",
+      "target": "napkin",
+      "affordance": [
+        0.5,
+        0.575
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "napkin"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "holding",
+            "args": [
+              "napkin"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              0,
+              0,
+              -1
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "holding(napkin)",
+      "affordance_3d": [
+        0.0,
+        0.2479,
+        2.9062
+      ],
+      "affordance_hint": "the handle of the napkin",
+      "affordance_hint_original": "the handle of the napkin",
+      "affordance_hint_confidence": "rejected:missing_token:napkin"
+    },
+    {
+      "step": 3,
+      "action": "place",
+      "target": "napkin",
+      "destination": "top_of_stove",
+      "affordance": [
+        0.45,
+        0.408
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "surface_contact",
+            "args": [
+              "napkin",
+              "stove"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "released",
+            "args": [
+              "napkin"
+            ],
+            "role": "completion"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "stable",
+            "args": [
+              "napkin"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "support_stable",
+            "args": [
+              "napkin"
+            ]
+          }
+        ]
+      },
+      "done_when": "surface_contact(napkin, stove) AND released(napkin) AND stable(napkin)",
+      "affordance_3d": [
+        -0.1137,
+        -0.2099,
+        1.9473
+      ],
+      "affordance_hint": "the empty area on the top of the stove",
+      "affordance_hint_original": "an empty area on the top of stove",
+      "affordance_hint_confidence": "ok"
+    }
+  ]
+}

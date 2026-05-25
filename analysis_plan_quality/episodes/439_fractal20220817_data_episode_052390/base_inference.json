@@ -1,0 +1,114 @@
+{
+  "task": "move coke can near green rice chip bag",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_3epoch/best",
+  "raw": "**SCENE ANALYSIS -** A red can (Coke) and a blue can (Coke) are on a glass table. A green bag is on the left, and a white bottle is on the right. The robot arm is on the right side of the table. The red can is in front of the blue can. The table is a flat surface. **STRATEGY -** Push the red can to the left to move it closer to the green bag. This avoids lifting the can, which is simpler and less likely to fail. **AFFORDANCE REASONING -** Step 1: Reach the red can's body to push it. Step 2: Push the red can to the left along the table surface. Step 3: Stop when the red can is near the green bag.\n\nGoal: near(red_can, green_bag)\nScene: red_can, green_bag, blue_can, table\nStep 1: reach(red_can)\n  affordance_region: the body of the red can\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, red_can, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, red_can) < 0.03\nStep 2: push(red_can -> left)\n  affordance_region: the body of the red can\n  contact: pushing(red_can) [progress]\n  spatial: on_table(red_can) [progress]\n  direction: push_axis(-0.5, 0, 0) [progress]\n  safety: no_slip(red_can)\n  done_when: near(red_can, green_bag)\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [
+      {
+        "pred": "near",
+        "args": [
+          "red_can",
+          "green_bag"
+        ]
+      }
+    ],
+    "scene_objects": [
+      "red_can",
+      "green_bag",
+      "blue_can",
+      "table"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "red_can",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "red_can",
+        "affordance_region": "the body of the red can",
+        "done_when": "distance(gripper, red_can) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "pushing",
+              "args": [
+                "red_can"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "on_table",
+              "args": [
+                "red_can"
+              ],
+              "role": "progress"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "push_axis",
+              "args": [
+                "-0.5",
+                "0",
+                "0"
+              ],
+              "role": "progress"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_slip",
+              "args": [
+                "red_can"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "push",
+        "target": "red_can",
+        "destination": "left",
+        "affordance_region": "the body of the red can",
+        "done_when": "near(red_can, green_bag)"
+      }
+    ]
+  }
+}

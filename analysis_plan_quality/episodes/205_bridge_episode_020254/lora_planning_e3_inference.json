@@ -1,0 +1,11 @@
+{
+  "task": "place the brush at the left side of the pan",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_planning_3epoch/checkpoint-39957",
+  "raw": "<SCENE_ANALYSIS - A red mug is on a stovetop, a blue brush is on the left side of the stovetop, and a yellow sponge with blue objects is on the right side of the stovetop. STRATEGY - reach the red mug, grasp it, transport it to the left side of the pan, and place it there. AFFORDANCE REASONING - Step 1: reach the red mug to prepare for grasping. Step 2: grasp the red mug by its handle for a secure hold. Step 3: transport the red mug to the left side of the pan, ensuring it is above the pan. Step 4: place the red mug on the left side of the pan, ensuring it is stable and on the pan.\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [],
+    "scene_objects": [],
+    "steps": []
+  }
+}

@@ -1,0 +1,231 @@
+{
+  "task": "Move the towel to right of spoon but middle of table",
+  "scene_objects": [
+    "towel",
+    "spoon",
+    "table"
+  ],
+  "num_steps": 4,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "towel",
+      "affordance": [
+        0.441,
+        0.387
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "towel",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "spoon"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, towel) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        -0.1298,
+        -0.251,
+        1.9277
+      ],
+      "affordance_hint": "the towel"
+    },
+    {
+      "step": 2,
+      "action": "grasp",
+      "target": "towel",
+      "affordance": [
+        0.441,
+        0.387
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "towel"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "holding",
+            "args": [
+              "towel"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              0,
+              0,
+              -1
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "holding(towel)",
+      "affordance_3d": [
+        -0.1298,
+        -0.251,
+        1.9277
+      ],
+      "affordance_hint": "towel"
+    },
+    {
+      "step": 3,
+      "action": "transport",
+      "target": "towel",
+      "destination": "middle_of_table_right_of_spoon",
+      "affordance": [
+        0.41,
+        0.419
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "towel"
+            ],
+            "role": "safety"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "above",
+            "args": [
+              "towel",
+              "table",
+              0.05
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "towel",
+              "spoon"
+            ]
+          },
+          {
+            "pred": "no_drop",
+            "args": [
+              "towel"
+            ]
+          }
+        ]
+      },
+      "done_when": "above(towel, table, 0.05) AND aligned_xy(towel, middle_of_table_right_of_spoon, 0.03)",
+      "affordance_3d": [
+        -0.2072,
+        -0.1892,
+        2.006
+      ],
+      "affordance_hint": "an empty area on the middle of table right of spoon"
+    },
+    {
+      "step": 4,
+      "action": "place",
+      "target": "towel",
+      "destination": "middle_of_table_right_of_spoon",
+      "affordance": [
+        0.41,
+        0.419
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "surface_contact",
+            "args": [
+              "towel",
+              "table"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "released",
+            "args": [
+              "towel"
+            ],
+            "role": "completion"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "stable",
+            "args": [
+              "towel"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "support_stable",
+            "args": [
+              "towel"
+            ]
+          }
+        ]
+      },
+      "done_when": "surface_contact(towel, table) AND released(towel) AND stable(towel)",
+      "affordance_3d": [
+        -0.2072,
+        -0.1892,
+        2.006
+      ],
+      "affordance_hint": "an empty area on the middle of table right of spoon"
+    }
+  ]
+}

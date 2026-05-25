@@ -1,0 +1,176 @@
+{
+  "task": "Play the drum",
+  "scene_objects": [
+    "drum",
+    "mallet",
+    "table"
+  ],
+  "num_steps": 3,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "mallet",
+      "affordance": [
+        0.4,
+        0.334
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "mallet",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "table"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, mallet) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        -0.9667,
+        -0.4168,
+        1.4189
+      ],
+      "affordance_hint": "the mallet"
+    },
+    {
+      "step": 2,
+      "action": "grasp",
+      "target": "mallet",
+      "affordance": [
+        0.4,
+        0.334
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "mallet"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "holding",
+            "args": [
+              "mallet"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              0,
+              0,
+              -1
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "holding(mallet)",
+      "affordance_3d": [
+        -0.9667,
+        -0.4168,
+        1.4189
+      ],
+      "affordance_hint": "the handle of the mallet"
+    },
+    {
+      "step": 3,
+      "action": "strike",
+      "target": "drum",
+      "affordance": [
+        0.492,
+        0.462
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "mallet"
+            ],
+            "role": "safety"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "mallet",
+              "drum",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "level",
+            "args": [
+              "mallet"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "mallet",
+              "drum"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(mallet, drum) < 0.03 AND gripper_contact(mallet)",
+      "affordance_3d": [
+        -1.311,
+        -0.419,
+        2.1625
+      ],
+      "affordance_hint": "drum"
+    }
+  ]
+}

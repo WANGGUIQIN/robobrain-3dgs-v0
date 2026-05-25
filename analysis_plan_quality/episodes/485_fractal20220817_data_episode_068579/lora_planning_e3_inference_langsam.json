@@ -1,0 +1,228 @@
+{
+  "task": "place apple into middle drawer",
+  "scene_objects": [
+    "apple",
+    "bowl",
+    "green_bag",
+    "table",
+    "middle_drawer"
+  ],
+  "steps": [
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "apple",
+              "<",
+              "0.03"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "approach_axis",
+            "args": [
+              "0",
+              "0",
+              "-1"
+            ],
+            "role": "progress"
+          }
+        ]
+      },
+      "step": 1,
+      "action": "reach",
+      "target": "apple",
+      "affordance_region": "the red apple",
+      "done_when": "distance(gripper, apple) < 0.03",
+      "affordance_hint": "the red apple",
+      "refine_prompt": "the red apple",
+      "refine_cache_hit": false,
+      "affordance_refined": [
+        0.6719,
+        0.3086
+      ],
+      "affordance_3d_refined": [
+        0.868,
+        -0.9667,
+        4.3934
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.6834
+    },
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "apple"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              "0",
+              "0",
+              "-1"
+            ],
+            "role": "progress"
+          }
+        ]
+      },
+      "step": 2,
+      "action": "grasp",
+      "target": "apple",
+      "affordance_region": "the red apple",
+      "done_when": "holding(apple)",
+      "affordance_hint": "the red apple",
+      "refine_prompt": "the red apple",
+      "refine_cache_hit": true,
+      "affordance_refined": [
+        0.6719,
+        0.3086
+      ],
+      "affordance_3d_refined": [
+        0.868,
+        -0.9667,
+        4.3934
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.6834
+    },
+    {
+      "constraints": {
+        "spatial": [
+          {
+            "pred": "above",
+            "args": [
+              "apple",
+              "middle_drawer",
+              "0.05"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_drop",
+            "args": [
+              "apple"
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "step": 3,
+      "action": "transport",
+      "target": "apple",
+      "destination": "middle_drawer",
+      "affordance_region": "the empty space in the middle drawer",
+      "done_when": "above(apple, middle_drawer, 0.05)",
+      "affordance_hint": "the empty space in the middle drawer",
+      "refine_prompt": "the empty space in the middle drawer",
+      "refine_cache_hit": false,
+      "affordance_refined": [
+        0.7461,
+        0.5352
+      ],
+      "affordance_3d_refined": [
+        0.9771,
+        0.1396,
+        3.4541
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.3317
+    },
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "surface_contact",
+            "args": [
+              "apple",
+              "middle_drawer"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "released",
+            "args": [
+              "apple"
+            ],
+            "role": "completion"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "stable",
+            "args": [
+              "apple"
+            ],
+            "role": "completion"
+          }
+        ]
+      },
+      "step": 4,
+      "action": "place",
+      "target": "apple",
+      "destination": "middle_drawer",
+      "affordance_region": "the empty space in the middle drawer",
+      "done_when": "surface_contact(apple, middle_drawer) AND released(apple) AND stable(apple)",
+      "affordance_hint": "the empty space in the middle drawer",
+      "refine_prompt": "the empty space in the middle drawer",
+      "refine_cache_hit": true,
+      "affordance_refined": [
+        0.7461,
+        0.5352
+      ],
+      "affordance_3d_refined": [
+        0.9771,
+        0.1396,
+        3.4541
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.3317
+    }
+  ]
+}

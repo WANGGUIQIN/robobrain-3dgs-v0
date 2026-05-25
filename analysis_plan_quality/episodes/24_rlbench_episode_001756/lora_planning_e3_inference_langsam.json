@@ -1,0 +1,167 @@
+{
+  "task": "turn right tap",
+  "scene_objects": [
+    "tap",
+    "table"
+  ],
+  "steps": [
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "tap",
+              "<",
+              "0.03"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "approach_axis",
+            "args": [
+              "0",
+              "0",
+              "-1"
+            ],
+            "role": "progress"
+          }
+        ]
+      },
+      "step": 1,
+      "action": "reach",
+      "target": "tap",
+      "affordance_region": "the body of the white tap",
+      "done_when": "distance(gripper, tap) < 0.03",
+      "affordance_hint": "the body of the white tap",
+      "refine_prompt": "the body of the white tap",
+      "refine_cache_hit": false,
+      "affordance_refined": [
+        0.4883,
+        0.0742
+      ],
+      "affordance_3d_refined": [
+        -0.0565,
+        -2.0512,
+        2.4087
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.3552
+    },
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "tap"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              "0",
+              "0",
+              "-1"
+            ],
+            "role": "progress"
+          }
+        ]
+      },
+      "step": 2,
+      "action": "grasp",
+      "target": "tap",
+      "affordance_region": "the handle of the white tap",
+      "done_when": "holding(tap)",
+      "affordance_hint": "the handle of the white tap",
+      "refine_prompt": "the handle of the white tap",
+      "refine_cache_hit": false,
+      "affordance_refined": [
+        0.4805,
+        0.0664
+      ],
+      "affordance_3d_refined": [
+        -0.0958,
+        -2.1258,
+        2.4514
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.448
+    },
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "tap"
+            ],
+            "role": "safety"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "motion_dir",
+            "args": [
+              "tap",
+              "right"
+            ],
+            "role": "completion"
+          }
+        ]
+      },
+      "step": 3,
+      "action": "rotate",
+      "target": "tap",
+      "affordance_region": "the body of the white tap",
+      "done_when": "tap_rotated(tap, right)",
+      "affordance_hint": "the body of the white tap",
+      "refine_prompt": "the body of the white tap",
+      "refine_cache_hit": true,
+      "affordance_refined": [
+        0.4883,
+        0.0742
+      ],
+      "affordance_3d_refined": [
+        -0.0565,
+        -2.0512,
+        2.4087
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.3552
+    }
+  ]
+}

@@ -1,0 +1,157 @@
+{
+  "task": "switch off the blue light",
+  "scene_objects": [
+    "blue_light",
+    "robot_arm",
+    "table"
+  ],
+  "num_steps": 3,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "blue_light",
+      "affordance": [
+        0.4,
+        0.925
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "blue_light",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "table"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, blue_light) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        -0.2023,
+        0.8482,
+        1.733
+      ],
+      "affordance_hint": "the blue light"
+    },
+    {
+      "step": 2,
+      "action": "press",
+      "target": "blue_light",
+      "affordance": [
+        0.392,
+        0.919
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "blue_light"
+            ],
+            "role": "completion"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "stable",
+            "args": [
+              "blue_light"
+            ],
+            "role": "safety"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "force_limit",
+            "args": [
+              "gripper",
+              "blue_light"
+            ]
+          }
+        ]
+      },
+      "done_when": "blue_light(off)",
+      "affordance_3d": [
+        -0.219,
+        0.837,
+        1.742
+      ],
+      "affordance_hint": "the center of the blue light"
+    },
+    {
+      "step": 3,
+      "action": "retreat",
+      "target": "blue_light",
+      "affordance": [
+        0.395,
+        0.92
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        1.0
+      ],
+      "constraints": {
+        "direction": [
+          {
+            "pred": "retreat_dir",
+            "args": [
+              0.0,
+              0.0,
+              1.0
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "table"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, blue_light) > 0.05",
+      "affordance_3d": [
+        -0.2111,
+        0.8443,
+        1.741
+      ],
+      "affordance_hint": "blue light"
+    }
+  ]
+}

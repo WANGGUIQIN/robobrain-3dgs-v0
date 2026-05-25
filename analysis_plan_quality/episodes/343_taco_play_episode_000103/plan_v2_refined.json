@@ -1,0 +1,172 @@
+{
+  "task": "turn off the blue light lamp",
+  "scene_objects": [
+    "blue_light_lamp",
+    "robot_arm",
+    "table",
+    "cabinet"
+  ],
+  "num_steps": 3,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "blue_light_lamp",
+      "affordance": [
+        0.392,
+        0.927
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "blue_light_lamp",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "cabinet"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, blue_light_lamp) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        -0.219,
+        0.8526,
+        1.742
+      ],
+      "affordance_hint": "the blue light lamp",
+      "affordance_hint_original": "the blue light lamp",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 2,
+      "action": "grasp",
+      "target": "blue_light_lamp",
+      "affordance": [
+        0.3,
+        0.92
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "blue_light_lamp"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "holding",
+            "args": [
+              "blue_light_lamp"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              0,
+              0,
+              -1
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "holding(blue_light_lamp)",
+      "affordance_3d": [
+        -0.3866,
+        0.8186,
+        1.688
+      ],
+      "affordance_hint": "the blue light lamp",
+      "affordance_hint_original": "the handle of the blue light lamp",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 3,
+      "action": "rotate",
+      "target": "blue_light_lamp",
+      "affordance": [
+        0.35,
+        0.9
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "blue_light_lamp"
+            ],
+            "role": "safety"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "orientation_match",
+            "args": [
+              "blue_light_lamp",
+              "off_position"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "blue_light_lamp",
+              "cabinet"
+            ]
+          }
+        ]
+      },
+      "done_when": "orientation_match(blue_light_lamp, off_position)",
+      "affordance_3d": [
+        -0.3042,
+        0.8166,
+        1.783
+      ],
+      "affordance_hint": "the body of the blue light lamp",
+      "affordance_hint_original": "the body of the blue light lamp",
+      "affordance_hint_confidence": "ok"
+    }
+  ]
+}

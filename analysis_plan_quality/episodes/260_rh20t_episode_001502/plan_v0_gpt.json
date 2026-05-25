@@ -1,0 +1,170 @@
+{
+  "task": "Pick up the cup",
+  "scene_objects": [
+    "cup",
+    "table",
+    "two_boxes"
+  ],
+  "num_steps": 3,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "cup",
+      "affordance": [
+        0.45,
+        0.1
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "cup",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "two_boxes"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, cup) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        -0.6834,
+        -0.5134,
+        1.0667
+      ],
+      "affordance_hint": "the cup"
+    },
+    {
+      "step": 2,
+      "action": "grasp",
+      "target": "cup",
+      "affordance": [
+        0.45,
+        0.1
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "cup"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "holding",
+            "args": [
+              "cup"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              0,
+              0,
+              -1
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "holding(cup)",
+      "affordance_3d": [
+        -0.6834,
+        -0.5134,
+        1.0667
+      ],
+      "affordance_hint": "the handle of the cup"
+    },
+    {
+      "step": 3,
+      "action": "transport",
+      "target": "cup",
+      "affordance": [
+        0.45,
+        0.2
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "cup"
+            ],
+            "role": "safety"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "clear_path",
+            "args": [
+              "cup"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "cup",
+              "two_boxes"
+            ]
+          },
+          {
+            "pred": "no_drop",
+            "args": [
+              "cup"
+            ]
+          }
+        ]
+      },
+      "done_when": "holding(cup) AND clear_path(cup)",
+      "affordance_3d": [
+        -0.746,
+        -0.4695,
+        1.1645
+      ],
+      "affordance_hint": "an empty area on the cup"
+    }
+  ]
+}

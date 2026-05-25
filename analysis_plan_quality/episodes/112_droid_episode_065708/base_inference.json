@@ -1,0 +1,212 @@
+{
+  "task": "Clean the plate with the towel and move it a bit",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_3epoch/best",
+  "raw": "**SCENE ANALYSIS -** A white plate is on a countertop. A white towel is hanging on a hook to the left of the plate. The towel is soft and flexible. STRATEGY - First, reach for and grasp the towel to pick it up. Then, use the towel to wipe the surface of the plate. After cleaning, place the towel back on the hook. Finally, perform a small movement (push) to reposition the plate slightly. AFFORDANCE REASONING - Step 1: Reach for the towel at its hanging point. Step 2: Grasp the towel's body to lift it. Step 3: Wipe the plate's surface with the towel. Step 4: Place the towel back on the hook. Step 5: Push the plate to move it a bit.\n\nGoal: any_in(towel, hook); any_in(plate, countertop); stable(plate)\nScene: plate, towel, hook, countertop\nStep 1: reach(towel)\n  affordance_region: the hanging point of the white towel\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, towel, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, towel) < 0.03\nStep 2: grasp(towel)\n  affordance_region: the body of the white towel\n  contact: holding(towel) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(towel)\nStep 3: wipe(plate)\n  affordance_region: the surface of the white plate\n  contact: towel_contact(plate) [completion]\n  pose: stable(towel) [progress]\n  done_when: towel_contact(plate)\nStep 4: place(towel -> hook)\n  affordance_region: the hook\n  contact: surface_contact(towel, hook) [completion]; released(towel) [completion]\n  pose: stable(towel) [completion]\n  done_when: surface_contact(towel, hook) AND released(towel)\nStep 5: push(plate)\n  affordance_region: the body of the white plate\n  contact: gripper_contact(plate) [progress]\n  spatial: distance(gripper, plate, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, plate) < 0.03\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [
+      {
+        "pred": "any_in",
+        "args": [
+          "towel",
+          "hook"
+        ]
+      },
+      {
+        "pred": "any_in",
+        "args": [
+          "plate",
+          "countertop"
+        ]
+      },
+      {
+        "pred": "stable",
+        "args": [
+          "plate"
+        ]
+      }
+    ],
+    "scene_objects": [
+      "plate",
+      "towel",
+      "hook",
+      "countertop"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "towel",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "towel",
+        "affordance_region": "the hanging point of the white towel",
+        "done_when": "distance(gripper, towel) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "towel"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "towel",
+        "affordance_region": "the body of the white towel",
+        "done_when": "holding(towel)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "towel_contact",
+              "args": [
+                "plate"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "towel"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "wipe",
+        "target": "plate",
+        "affordance_region": "the surface of the white plate",
+        "done_when": "towel_contact(plate)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "surface_contact",
+              "args": [
+                "towel",
+                "hook"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "towel"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "towel"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "place",
+        "target": "towel",
+        "destination": "hook",
+        "affordance_region": "the hook",
+        "done_when": "surface_contact(towel, hook) AND released(towel)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_contact",
+              "args": [
+                "plate"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "plate",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 5,
+        "action": "push",
+        "target": "plate",
+        "affordance_region": "the body of the white plate",
+        "done_when": "distance(gripper, plate) < 0.03"
+      }
+    ]
+  }
+}

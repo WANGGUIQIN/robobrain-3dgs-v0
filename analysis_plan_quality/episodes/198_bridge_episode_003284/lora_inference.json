@@ -1,0 +1,246 @@
+{
+  "task": "Move the blue spoon next to the silver pot.",
+  "parsed": {
+    "scene_objects": [
+      "blue_spoon",
+      "silver_pot",
+      "purple_eggplant",
+      "yellow_cloth",
+      "table"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "blue_spoon",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "blue_spoon",
+        "affordance_region": "the blue plastic spoon",
+        "done_when": "distance(gripper, blue_spoon) < 0.03",
+        "affordance_hint": "the blue plastic spoon",
+        "refine_prompt": "the blue plastic spoon",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.5,
+          0.7344
+        ],
+        "affordance_3d_refined": [
+          0.0,
+          0.7039,
+          2.6126
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.5699,
+        "affordance": [
+          0.5,
+          0.7344
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "blue_spoon"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "blue_spoon",
+        "affordance_region": "the handle of the blue spoon",
+        "done_when": "holding(blue_spoon)",
+        "affordance_hint": "the handle of the blue spoon",
+        "refine_prompt": "the handle of the blue spoon",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.2422,
+          0.3633
+        ],
+        "affordance_3d_refined": [
+          -0.4379,
+          -0.2322,
+          1.4776
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.5275,
+        "affordance": [
+          0.2422,
+          0.3633
+        ]
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "blue_spoon",
+                "silver_pot",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "blue_spoon"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "blue_spoon",
+        "destination": "silver_pot",
+        "affordance_region": "an empty area on the silver pot",
+        "done_when": "above(blue_spoon, silver_pot, 0.05)",
+        "affordance_hint": "an empty area on the silver pot",
+        "refine_prompt": "an empty area on the silver pot",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.707,
+          0.4375
+        ],
+        "affordance_3d_refined": [
+          0.4122,
+          -0.1244,
+          1.732
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.3992,
+        "affordance": [
+          0.707,
+          0.4375
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "surface_contact",
+              "args": [
+                "blue_spoon",
+                "silver_pot"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "blue_spoon"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "blue_spoon"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "place",
+        "target": "blue_spoon",
+        "destination": "silver_pot",
+        "affordance_region": "an empty area on the silver pot",
+        "done_when": "surface_contact(blue_spoon, silver_pot) AND released(blue_spoon)",
+        "affordance_hint": "an empty area on the silver pot",
+        "refine_prompt": "an empty area on the silver pot",
+        "refine_cache_hit": true,
+        "affordance_refined": [
+          0.707,
+          0.4375
+        ],
+        "affordance_3d_refined": [
+          0.4122,
+          -0.1244,
+          1.732
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.3992,
+        "affordance": [
+          0.707,
+          0.4375
+        ]
+      }
+    ]
+  }
+}

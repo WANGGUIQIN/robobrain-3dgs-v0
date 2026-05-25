@@ -1,0 +1,244 @@
+{
+  "task": "take the chicken off the grill",
+  "parsed": {
+    "scene_objects": [
+      "grill",
+      "chicken",
+      "robot_arm"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "chicken",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "chicken",
+        "affordance_region": "the body of the chicken",
+        "done_when": "distance(gripper, chicken) < 0.03",
+        "affordance_hint": "the body of the chicken",
+        "refine_prompt": "the body of the chicken",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.4805,
+          0.0664
+        ],
+        "affordance_3d_refined": [
+          -0.1027,
+          -2.2798,
+          2.629
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.4927,
+        "affordance": [
+          0.4805,
+          0.0664
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "chicken"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "chicken",
+        "affordance_region": "the body of the chicken",
+        "done_when": "holding(chicken)",
+        "affordance_hint": "the body of the chicken",
+        "refine_prompt": "the body of the chicken",
+        "refine_cache_hit": true,
+        "affordance_refined": [
+          0.4805,
+          0.0664
+        ],
+        "affordance_3d_refined": [
+          -0.1027,
+          -2.2798,
+          2.629
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.4927,
+        "affordance": [
+          0.4805,
+          0.0664
+        ]
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "chicken",
+                "grill",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "chicken"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "chicken",
+        "destination": "grill",
+        "affordance_region": "an empty area on the grill",
+        "done_when": "above(chicken, grill, 0.05)",
+        "affordance_hint": "an empty area on the grill",
+        "refine_prompt": "an empty area on the grill",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.4609,
+          0.6328
+        ],
+        "affordance_3d_refined": [
+          -0.2094,
+          0.7121,
+          2.6807
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.3473,
+        "affordance": [
+          0.4609,
+          0.6328
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "surface_contact",
+              "args": [
+                "chicken",
+                "grill"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "chicken"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "chicken"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "place",
+        "target": "chicken",
+        "destination": "grill",
+        "affordance_region": "an empty area on the grill",
+        "done_when": "surface_contact(chicken, grill) AND released(chicken)",
+        "affordance_hint": "an empty area on the grill",
+        "refine_prompt": "an empty area on the grill",
+        "refine_cache_hit": true,
+        "affordance_refined": [
+          0.4609,
+          0.6328
+        ],
+        "affordance_3d_refined": [
+          -0.2094,
+          0.7121,
+          2.6807
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.3473,
+        "affordance": [
+          0.4609,
+          0.6328
+        ]
+      }
+    ]
+  }
+}

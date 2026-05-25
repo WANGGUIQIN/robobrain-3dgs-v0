@@ -1,0 +1,148 @@
+{
+  "task": "place blue chip bag into white bowl",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_3epoch/best",
+  "raw": "**SCENE ANALYSIS -** A white bowl, a blue chip bag, and an apple are on a gray table. The chip bag is a flexible package with a printed design; the bowl is a rigid container with a circular rim. The task requires moving the chip bag into the bowl. STRATEGY - First, reach for the chip bag to grasp it. Then, transport it over the bowl and place it inside. Failure modes include dropping the chip bag during transport or misaligning it with the bowl. AFFORDANCE REASONING - Step 1: Reach for the chip bag body to establish contact. Step 2: Grasp the chip bag's printed surface for a secure hold. Step 3: Transport the chip bag over the bowl. Step 4: Place the chip bag inside the bowl's rim.\n\n**Goal:** inside(blue_chip_bag, white_bowl); stable(blue_chip_bag)\n**Scene:** white_bowl, blue_chip_bag, apple\n**Step 1:** reach(blue_chip_bag)\n  affordance_region: the body of the blue chip bag\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, blue_chip_bag, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, blue_chip_bag) < 0.03\n**Step 2:** grasp(blue_chip_bag)\n  affordance_region: the printed surface of the blue chip bag\n  contact: holding(blue_chip_bag) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(blue_chip_bag)\n**Step 3:** transport(blue_chip_bag -> white_bowl)\n  affordance_region: an empty area inside the white bowl\n  spatial: above(blue_chip_bag, white_bowl, 0.05) [completion]\n  safety: no_drop(blue_chip_bag)\n  done_when: above(blue_chip_bag, white_bowl, 0.05)\n**Step 4:** place(blue_chip_bag -> white_bowl)\n  affordance_region: an empty area inside the white bowl\n  contact: surface_contact(blue_chip_bag, white_bowl) [completion]; released(blue_chip_bag) [completion]\n  pose: stable(blue_chip_bag) [completion]\n  done_when: surface_contact(blue_chip_bag, white_bowl) AND released(blue_chip_bag)\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [],
+    "scene_objects": [],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "blue_chip_bag",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "blue_chip_bag",
+        "affordance_region": "the body of the blue chip bag",
+        "done_when": "distance(gripper, blue_chip_bag) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "blue_chip_bag"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "blue_chip_bag",
+        "affordance_region": "the printed surface of the blue chip bag",
+        "done_when": "holding(blue_chip_bag)"
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "blue_chip_bag",
+                "white_bowl",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "blue_chip_bag"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "blue_chip_bag",
+        "destination": "white_bowl",
+        "affordance_region": "an empty area inside the white bowl",
+        "done_when": "above(blue_chip_bag, white_bowl, 0.05)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "surface_contact",
+              "args": [
+                "blue_chip_bag",
+                "white_bowl"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "blue_chip_bag"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "blue_chip_bag"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "place",
+        "target": "blue_chip_bag",
+        "destination": "white_bowl",
+        "affordance_region": "an empty area inside the white bowl",
+        "done_when": "surface_contact(blue_chip_bag, white_bowl) AND released(blue_chip_bag)"
+      }
+    ]
+  }
+}

@@ -1,0 +1,106 @@
+{
+  "task": "push the yellow block to the left",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_planning_3epoch/checkpoint-39957",
+  "raw": "Scene: yellow_block, tray, table\nStep 1: reach(yellow_block)\n  affordance_region: the yellow block on the tray\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, yellow_block, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, yellow_block) < 0.03\nStep 2: push(yellow_block -> left)\n  affordance_region: the center of the yellow block\n  contact: gripper_contact(yellow_block) [progress]\n  spatial: aligned_xy(yellow_block, left, 0.03) [completion]\n  direction: motion_dir(left) [completion]\n  safety: no_collision(yellow_block, tray)\n  done_when: aligned_xy(yellow_block, left, 0.03)\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [],
+    "scene_objects": [
+      "yellow_block",
+      "tray",
+      "table"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "yellow_block",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "yellow_block",
+        "affordance_region": "the yellow block on the tray",
+        "done_when": "distance(gripper, yellow_block) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_contact",
+              "args": [
+                "yellow_block"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "aligned_xy",
+              "args": [
+                "yellow_block",
+                "left",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "motion_dir",
+              "args": [
+                "left"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_collision",
+              "args": [
+                "yellow_block",
+                "tray"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "push",
+        "target": "yellow_block",
+        "destination": "left",
+        "affordance_region": "the center of the yellow block",
+        "done_when": "aligned_xy(yellow_block, left, 0.03)"
+      }
+    ]
+  }
+}

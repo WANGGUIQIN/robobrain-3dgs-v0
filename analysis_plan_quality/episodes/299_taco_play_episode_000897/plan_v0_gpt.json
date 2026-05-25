@@ -1,0 +1,172 @@
+{
+  "task": "go towards the pink block and lift it",
+  "scene_objects": [
+    "pink_block",
+    "table",
+    "robot_gripper"
+  ],
+  "num_steps": 3,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "pink_block",
+      "affordance": [
+        0.47,
+        0.21
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "pink_block",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "pink_block"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, pink_block) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        -0.0461,
+        -0.426,
+        1.282
+      ],
+      "affordance_hint": "the pink block"
+    },
+    {
+      "step": 2,
+      "action": "grasp",
+      "target": "pink_block",
+      "affordance": [
+        0.47,
+        0.21
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "pink_block"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "holding",
+            "args": [
+              "pink_block"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              0,
+              0,
+              -1
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "holding(pink_block)",
+      "affordance_3d": [
+        -0.0461,
+        -0.426,
+        1.282
+      ],
+      "affordance_hint": "pink block"
+    },
+    {
+      "step": 3,
+      "action": "lift",
+      "target": "pink_block",
+      "affordance": [
+        0.47,
+        0.21
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "pink_block"
+            ],
+            "role": "safety"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "above",
+            "args": [
+              "pink_block",
+              "table",
+              0.05
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "pink_block",
+              "table"
+            ]
+          },
+          {
+            "pred": "no_drop",
+            "args": [
+              "pink_block"
+            ]
+          }
+        ]
+      },
+      "done_when": "above(pink_block, table, 0.05)",
+      "affordance_3d": [
+        -0.0461,
+        -0.426,
+        1.282
+      ],
+      "affordance_hint": "pink block"
+    }
+  ]
+}

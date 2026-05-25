@@ -1,0 +1,179 @@
+{
+  "task": "go slide the purple block to the left",
+  "scene_objects": [
+    "purple_block",
+    "table"
+  ],
+  "steps": [
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "purple_block",
+              "<",
+              "0.03"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "approach_axis",
+            "args": [
+              "0",
+              "0",
+              "-1"
+            ],
+            "role": "progress"
+          }
+        ]
+      },
+      "step": 1,
+      "action": "reach",
+      "target": "purple_block",
+      "affordance_region": "the purple block",
+      "done_when": "distance(gripper, purple_block) < 0.03",
+      "affordance_hint": "the purple block",
+      "refine_prompt": "the purple block",
+      "refine_cache_hit": false,
+      "affordance_refined": [
+        0.0,
+        0.7188
+      ],
+      "affordance_3d_refined": [
+        -0.0057,
+        0.0025,
+        0.01
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.3019
+    },
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "purple_block"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              "0",
+              "0",
+              "-1"
+            ],
+            "role": "progress"
+          }
+        ]
+      },
+      "step": 2,
+      "action": "grasp",
+      "target": "purple_block",
+      "affordance_region": "the purple block",
+      "done_when": "holding(purple_block)",
+      "affordance_hint": "the purple block",
+      "refine_prompt": "the purple block",
+      "refine_cache_hit": true,
+      "affordance_refined": [
+        0.0,
+        0.7188
+      ],
+      "affordance_3d_refined": [
+        -0.0057,
+        0.0025,
+        0.01
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.3019
+    },
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "purple_block"
+            ],
+            "role": "safety"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "aligned_xy",
+            "args": [
+              "purple_block",
+              "left",
+              "0.03"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "motion_dir",
+            "args": [
+              "left"
+            ],
+            "role": "completion"
+          }
+        ]
+      },
+      "step": 3,
+      "action": "push",
+      "target": "purple_block",
+      "destination": "left",
+      "affordance_region": "the center of the purple block",
+      "done_when": "aligned_xy(purple_block, left, 0.03)",
+      "affordance_hint": "the center of the purple block",
+      "refine_prompt": "the center of the purple block",
+      "refine_cache_hit": false,
+      "refine_prompt_fallback": "purple block",
+      "affordance_refined": [
+        0.0,
+        0.7188
+      ],
+      "affordance_3d_refined": [
+        -0.0057,
+        0.0025,
+        0.01
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.2988
+    }
+  ]
+}

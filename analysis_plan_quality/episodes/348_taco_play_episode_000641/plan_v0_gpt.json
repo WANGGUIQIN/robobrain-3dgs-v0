@@ -1,0 +1,233 @@
+{
+  "task": "put the grasped purple object inside the box",
+  "scene_objects": [
+    "purple_object",
+    "box",
+    "tray",
+    "table"
+  ],
+  "num_steps": 4,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "purple_object",
+      "affordance": [
+        0.276,
+        0.92
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "purple_object",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "tray"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, purple_object) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        -0.4223,
+        0.8002,
+        1.65
+      ],
+      "affordance_hint": "the purple object"
+    },
+    {
+      "step": 2,
+      "action": "grasp",
+      "target": "purple_object",
+      "affordance": [
+        0.47,
+        0.06
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "purple_object"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "holding",
+            "args": [
+              "purple_object"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              0,
+              0,
+              -1
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "holding(purple_object)",
+      "affordance_3d": [
+        -0.0611,
+        -0.8636,
+        1.702
+      ],
+      "affordance_hint": "the handle of the purple object"
+    },
+    {
+      "step": 3,
+      "action": "transport",
+      "target": "purple_object",
+      "destination": "box",
+      "affordance": [
+        0.15,
+        0.3
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "purple_object"
+            ],
+            "role": "safety"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "above",
+            "args": [
+              "purple_object",
+              "box",
+              0.05
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "purple_object",
+              "box"
+            ]
+          },
+          {
+            "pred": "no_drop",
+            "args": [
+              "purple_object"
+            ]
+          }
+        ]
+      },
+      "done_when": "above(purple_object, box, 0.05) AND aligned_xy(purple_object, box, 0.03)",
+      "affordance_3d": [
+        -0.7319,
+        -0.4147,
+        1.811
+      ],
+      "affordance_hint": "an empty area on the box"
+    },
+    {
+      "step": 4,
+      "action": "place",
+      "target": "purple_object",
+      "destination": "box",
+      "affordance": [
+        0.15,
+        0.3
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "surface_contact",
+            "args": [
+              "purple_object",
+              "box"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "released",
+            "args": [
+              "purple_object"
+            ],
+            "role": "completion"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "inside",
+            "args": [
+              "purple_object",
+              "box"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "support_stable",
+            "args": [
+              "purple_object"
+            ]
+          }
+        ]
+      },
+      "done_when": "surface_contact(purple_object, box) AND released(purple_object) AND inside(purple_object, box)",
+      "affordance_3d": [
+        -0.7319,
+        -0.4147,
+        1.811
+      ],
+      "affordance_hint": "an empty area on the box"
+    }
+  ]
+}

@@ -1,0 +1,231 @@
+{
+  "task": "Build with large Megabloks for the nth time with n blocks",
+  "scene_objects": [
+    "red_block",
+    "white_blocks",
+    "table"
+  ],
+  "num_steps": 4,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "red_block",
+      "affordance": [
+        0.475,
+        0.35
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "red_block",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "white_blocks"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, red_block) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        -1.1322,
+        -0.5147,
+        1.8299
+      ],
+      "affordance_hint": "the red block"
+    },
+    {
+      "step": 2,
+      "action": "grasp",
+      "target": "red_block",
+      "affordance": [
+        0.475,
+        0.35
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "red_block"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "holding",
+            "args": [
+              "red_block"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              0,
+              0,
+              -1
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "holding(red_block)",
+      "affordance_3d": [
+        -1.1322,
+        -0.5147,
+        1.8299
+      ],
+      "affordance_hint": "red block"
+    },
+    {
+      "step": 3,
+      "action": "transport",
+      "target": "red_block",
+      "destination": "white_blocks",
+      "affordance": [
+        0.401,
+        0.558
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "red_block"
+            ],
+            "role": "safety"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "above",
+            "args": [
+              "red_block",
+              "white_blocks",
+              0.05
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "red_block",
+              "white_blocks"
+            ]
+          },
+          {
+            "pred": "no_drop",
+            "args": [
+              "red_block"
+            ]
+          }
+        ]
+      },
+      "done_when": "above(red_block, white_blocks, 0.05) AND aligned_xy(red_block, white_blocks, 0.03)",
+      "affordance_3d": [
+        -1.1215,
+        -0.1912,
+        1.6538
+      ],
+      "affordance_hint": "an empty area on the white blocks"
+    },
+    {
+      "step": 4,
+      "action": "place",
+      "target": "red_block",
+      "destination": "white_blocks",
+      "affordance": [
+        0.401,
+        0.558
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "surface_contact",
+            "args": [
+              "red_block",
+              "white_blocks"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "released",
+            "args": [
+              "red_block"
+            ],
+            "role": "completion"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "stable",
+            "args": [
+              "red_block"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "support_stable",
+            "args": [
+              "red_block"
+            ]
+          }
+        ]
+      },
+      "done_when": "surface_contact(red_block, white_blocks) AND released(red_block) AND stable(red_block)",
+      "affordance_3d": [
+        -1.1215,
+        -0.1912,
+        1.6538
+      ],
+      "affordance_hint": "an empty area on the white blocks"
+    }
+  ]
+}

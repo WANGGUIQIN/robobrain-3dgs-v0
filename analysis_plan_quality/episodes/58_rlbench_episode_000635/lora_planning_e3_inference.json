@@ -1,0 +1,152 @@
+{
+  "task": "put the triangular prism in the shape sorter",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_planning_3epoch/checkpoint-39957",
+  "raw": "Scene: triangular_prism, shape_sorter, table\nStep 1: reach(triangular_prism)\n  affordance_region: the body of the triangular prism\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, triangular_prism, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, triangular_prism) < 0.03\nStep 2: grasp(triangular_prism)\n  affordance_region: the pink triangular prism\n  contact: holding(triangular_prism) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(triangular_prism)\nStep 3: transport(triangular_prism -> shape_sorter)\n  affordance_region: an empty area on the shape sorter\n  spatial: above(triangular_prism, shape_sorter, 0.05) [completion]\n  safety: no_drop(triangular_prism)\n  done_when: above(triangular_prism, shape_sorter, 0.05)\nStep 4: insert(triangular_prism -> shape_sorter)\n  affordance_region: the top opening of the shape sorter\n  contact: inserted(triangular_prism, shape_sorter) [completion]; released(triangular_prism) [completion]\n  pose: stable(triangular_prism) [completion]\n  done_when: inserted(triangular_prism, shape_sorter) AND released(triangular_prism)\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [],
+    "scene_objects": [
+      "triangular_prism",
+      "shape_sorter",
+      "table"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "triangular_prism",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "triangular_prism",
+        "affordance_region": "the body of the triangular prism",
+        "done_when": "distance(gripper, triangular_prism) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "triangular_prism"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "triangular_prism",
+        "affordance_region": "the pink triangular prism",
+        "done_when": "holding(triangular_prism)"
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "triangular_prism",
+                "shape_sorter",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "triangular_prism"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "triangular_prism",
+        "destination": "shape_sorter",
+        "affordance_region": "an empty area on the shape sorter",
+        "done_when": "above(triangular_prism, shape_sorter, 0.05)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "inserted",
+              "args": [
+                "triangular_prism",
+                "shape_sorter"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "triangular_prism"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "triangular_prism"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "insert",
+        "target": "triangular_prism",
+        "destination": "shape_sorter",
+        "affordance_region": "the top opening of the shape sorter",
+        "done_when": "inserted(triangular_prism, shape_sorter) AND released(triangular_prism)"
+      }
+    ]
+  }
+}

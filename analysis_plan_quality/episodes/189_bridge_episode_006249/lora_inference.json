@@ -1,0 +1,247 @@
+{
+  "task": "Place the red spoon inside the orange pot",
+  "parsed": {
+    "scene_objects": [
+      "red_spoon",
+      "orange_pot",
+      "purple_cloth",
+      "yellow_banana",
+      "table"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "red_spoon",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "red_spoon",
+        "affordance_region": "the red spoon",
+        "done_when": "distance(gripper, red_spoon) < 0.03",
+        "affordance_hint": "the red spoon",
+        "refine_prompt": "the red spoon",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.2539,
+          0.5781
+        ],
+        "affordance_3d_refined": [
+          -0.7169,
+          0.2276,
+          2.5344
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.7291,
+        "affordance": [
+          0.2539,
+          0.5781
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "red_spoon"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "red_spoon",
+        "affordance_region": "the handle of the red spoon",
+        "done_when": "holding(red_spoon)",
+        "affordance_hint": "the handle of the red spoon",
+        "refine_prompt": "the handle of the red spoon",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.2539,
+          0.5781
+        ],
+        "affordance_3d_refined": [
+          -0.7169,
+          0.2276,
+          2.5344
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.6296,
+        "affordance": [
+          0.2539,
+          0.5781
+        ]
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "red_spoon",
+                "orange_pot",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "red_spoon"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "red_spoon",
+        "destination": "orange_pot",
+        "affordance_region": "the inside of the orange pot",
+        "done_when": "above(red_spoon, orange_pot, 0.05)",
+        "affordance_hint": "the inside of the orange pot",
+        "refine_prompt": "the inside of the orange pot",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.5781,
+          0.6562
+        ],
+        "affordance_3d_refined": [
+          0.2346,
+          0.4693,
+          2.6126
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.3387,
+        "affordance": [
+          0.5781,
+          0.6562
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "surface_contact",
+              "args": [
+                "red_spoon",
+                "orange_pot"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "red_spoon"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "inside",
+              "args": [
+                "red_spoon",
+                "orange_pot"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "place",
+        "target": "red_spoon",
+        "destination": "orange_pot",
+        "affordance_region": "the inside of the orange pot",
+        "done_when": "surface_contact(red_spoon, orange_pot) AND released(red_spoon) AND inside(red_spoon, orange_pot)",
+        "affordance_hint": "the inside of the orange pot",
+        "refine_prompt": "the inside of the orange pot",
+        "refine_cache_hit": true,
+        "affordance_refined": [
+          0.5781,
+          0.6562
+        ],
+        "affordance_3d_refined": [
+          0.2346,
+          0.4693,
+          2.6126
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.3387,
+        "affordance": [
+          0.5781,
+          0.6562
+        ]
+      }
+    ]
+  }
+}

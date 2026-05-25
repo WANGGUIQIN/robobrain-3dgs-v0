@@ -1,0 +1,162 @@
+{
+  "task": "Move an object from one box to another",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_3epoch/best",
+  "raw": "SCENE ANALYSIS - A wooden table holds two square boxes and a small rectangular object. The left box is open, the right box is closed. The small object is on the table between the boxes. The boxes are rigid with flat bottoms and open tops. STRATEGY - First, grasp the small object from the table. Then, transport it to the open left box. Finally, place the object inside the left box. Failure modes include dropping the object during transport or misplacing it in the wrong box. AFFORDANCE REASONING - Step 1 reach the small object on the table; Step 2 grasp its body for secure hold; Step 3 transport it to the open left box; Step 4 place it inside the left box.\nGoal: inside(small_object, left_box)\nScene: left_box, right_box, small_object, table\nStep 1: reach(small_object)\n  affordance_region: the body of the small rectangular object\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, small_object, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, small_object) < 0.03\nStep 2: grasp(small_object)\n  affordance_region: the body of the small rectangular object\n  contact: holding(small_object) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(small_object)\nStep 3: transport(small_object -> left_box)\n  affordance_region: an empty area inside the open left box\n  spatial: above(small_object, left_box, 0.05) [completion]\n  safety: no_drop(small_object)\n  done_when: above(small_object, left_box, 0.05)\nStep 4: place(small_object -> left_box)\n  affordance_region: an empty area inside the open left box\n  contact: surface_contact(small_object, left_box) [completion]; released(small_object) [completion]\n  pose: inside(small_object, left_box) [completion]\n  done_when: surface_contact(small_object, left_box) AND released(small_object)\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [
+      {
+        "pred": "inside",
+        "args": [
+          "small_object",
+          "left_box"
+        ]
+      }
+    ],
+    "scene_objects": [
+      "left_box",
+      "right_box",
+      "small_object",
+      "table"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "small_object",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "small_object",
+        "affordance_region": "the body of the small rectangular object",
+        "done_when": "distance(gripper, small_object) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "small_object"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "small_object",
+        "affordance_region": "the body of the small rectangular object",
+        "done_when": "holding(small_object)"
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "small_object",
+                "left_box",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "small_object"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "small_object",
+        "destination": "left_box",
+        "affordance_region": "an empty area inside the open left box",
+        "done_when": "above(small_object, left_box, 0.05)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "surface_contact",
+              "args": [
+                "small_object",
+                "left_box"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "small_object"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "inside",
+              "args": [
+                "small_object",
+                "left_box"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "place",
+        "target": "small_object",
+        "destination": "left_box",
+        "affordance_region": "an empty area inside the open left box",
+        "done_when": "surface_contact(small_object, left_box) AND released(small_object)"
+      }
+    ]
+  }
+}

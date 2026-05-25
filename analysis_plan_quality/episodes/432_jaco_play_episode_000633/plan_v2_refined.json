@@ -1,0 +1,121 @@
+{
+  "task": "pick up the milk dairy",
+  "scene_objects": [
+    "milk_dairy",
+    "red_ball",
+    "yellow_bottle",
+    "blue_bin",
+    "bowl",
+    "table"
+  ],
+  "num_steps": 2,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "milk_dairy",
+      "affordance": [
+        0.625,
+        0.619
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "milk_dairy",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "milk_dairy"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, milk_dairy) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        0.4148,
+        0.3889,
+        2.8866
+      ],
+      "affordance_hint": "the yellow plastic bottle of milk dairy",
+      "affordance_hint_original": "the milk dairy",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 2,
+      "action": "grasp",
+      "target": "milk_dairy",
+      "affordance": [
+        0.625,
+        0.619
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "milk_dairy"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "holding",
+            "args": [
+              "milk_dairy"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              0,
+              0,
+              -1
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "holding(milk_dairy)",
+      "affordance_3d": [
+        0.4148,
+        0.3889,
+        2.8866
+      ],
+      "affordance_hint": "the yellow plastic bottle of milk dairy",
+      "affordance_hint_original": "milk dairy",
+      "affordance_hint_confidence": "ok"
+    }
+  ]
+}

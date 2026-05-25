@@ -1,0 +1,114 @@
+{
+  "task": "grasp the pink block",
+  "scene_objects": [
+    "pink_block",
+    "table",
+    "robot_gripper"
+  ],
+  "num_steps": 2,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "pink_block",
+      "affordance": [
+        0.445,
+        0.544
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "pink_block",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "table"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, pink_block) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        -0.1212,
+        0.0952,
+        1.928
+      ],
+      "affordance_hint": "the pink block"
+    },
+    {
+      "step": 2,
+      "action": "grasp",
+      "target": "pink_block",
+      "affordance": [
+        0.445,
+        0.55
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "pink_block"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "holding",
+            "args": [
+              "pink_block"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              0,
+              0,
+              -1
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "holding(pink_block)",
+      "affordance_3d": [
+        -0.1204,
+        0.1118,
+        1.915
+      ],
+      "affordance_hint": "pink block"
+    }
+  ]
+}

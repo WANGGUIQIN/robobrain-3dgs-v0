@@ -1,0 +1,166 @@
+{
+  "task": "take the chicken off the grill",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_3epoch/best",
+  "raw": "**SCENE ANALYSIS - A robotic arm is positioned over a grill with a black body and a metal grate. A yellow chicken is on the grate. The grill is on a wooden surface. The chicken is a rigid object with a textured surface. STRATEGY - First, reach and grasp the chicken on the grill. Then, transport it to a safe area (the wooden surface below the grill). Finally, place the chicken on the wooden surface. Failure modes include dropping the chicken during transport or misplacing it. AFFORDANCE REASONING - Step 1: Reach the chicken on the grill. Step 2: Grasp the chicken's body for a secure hold. Step 3: Transport the chicken to the wooden surface. Step 4: Place the chicken on the wooden surface.**\nGoal: on(chicken, wooden_surface); stable(chicken)\nScene: chicken, grill, wooden_surface\nStep 1: reach(chicken)\n  affordance_region: the body of the yellow chicken\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, chicken, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, chicken) < 0.03\nStep 2: grasp(chicken)\n  affordance_region: the body of the yellow chicken\n  contact: holding(chicken) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(chicken)\nStep 3: transport(chicken -> wooden_surface)\n  affordance_region: an empty area on the wooden surface\n  spatial: above(chicken, wooden_surface, 0.05) [completion]\n  safety: no_drop(chicken)\n  done_when: above(chicken, wooden_surface, 0.05)\nStep 4: place(chicken -> wooden_surface)\n  affordance_region: an empty area on the wooden surface\n  contact: surface_contact(chicken, wooden_surface) [completion]; released(chicken) [completion]\n  pose: stable(chicken) [completion]\n  done_when: surface_contact(chicken, wooden_surface) AND released(chicken)\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [
+      {
+        "pred": "on",
+        "args": [
+          "chicken",
+          "wooden_surface"
+        ]
+      },
+      {
+        "pred": "stable",
+        "args": [
+          "chicken"
+        ]
+      }
+    ],
+    "scene_objects": [
+      "chicken",
+      "grill",
+      "wooden_surface"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "chicken",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "chicken",
+        "affordance_region": "the body of the yellow chicken",
+        "done_when": "distance(gripper, chicken) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "chicken"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "chicken",
+        "affordance_region": "the body of the yellow chicken",
+        "done_when": "holding(chicken)"
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "chicken",
+                "wooden_surface",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "chicken"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "chicken",
+        "destination": "wooden_surface",
+        "affordance_region": "an empty area on the wooden surface",
+        "done_when": "above(chicken, wooden_surface, 0.05)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "surface_contact",
+              "args": [
+                "chicken",
+                "wooden_surface"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "chicken"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "chicken"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "place",
+        "target": "chicken",
+        "destination": "wooden_surface",
+        "affordance_region": "an empty area on the wooden surface",
+        "done_when": "surface_contact(chicken, wooden_surface) AND released(chicken)"
+      }
+    ]
+  }
+}

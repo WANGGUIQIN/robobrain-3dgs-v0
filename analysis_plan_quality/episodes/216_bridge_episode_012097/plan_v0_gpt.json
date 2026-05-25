@@ -1,0 +1,223 @@
+{
+  "task": "Pick up the spoon and drop it at the bottom right corner",
+  "scene_objects": [
+    "spoon",
+    "table",
+    "bottom_right_corner"
+  ],
+  "num_steps": 4,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "spoon",
+      "affordance": [
+        0.325,
+        0.216
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "spoon",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "table"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, spoon) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        -0.3618,
+        -0.587,
+        1.7907
+      ],
+      "affordance_hint": "the spoon"
+    },
+    {
+      "step": 2,
+      "action": "grasp",
+      "target": "spoon",
+      "affordance": [
+        0.25,
+        0.325
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "spoon"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "holding",
+            "args": [
+              "spoon"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              0,
+              0,
+              -1
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "holding(spoon)",
+      "affordance_3d": [
+        -0.8745,
+        -0.6149,
+        3.0431
+      ],
+      "affordance_hint": "the handle of the spoon"
+    },
+    {
+      "step": 3,
+      "action": "transport",
+      "target": "spoon",
+      "destination": "bottom_right_corner",
+      "affordance": [
+        0.7,
+        0.65
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "spoon"
+            ],
+            "role": "safety"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "above",
+            "args": [
+              "spoon",
+              "bottom_right_corner",
+              0.05
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "spoon",
+              "table"
+            ]
+          },
+          {
+            "pred": "no_drop",
+            "args": [
+              "spoon"
+            ]
+          }
+        ]
+      },
+      "done_when": "above(spoon, bottom_right_corner, 0.05)",
+      "affordance_3d": [
+        0.5804,
+        0.4324,
+        2.5344
+      ],
+      "affordance_hint": "an empty area on the bottom right corner"
+    },
+    {
+      "step": 4,
+      "action": "release",
+      "target": "spoon",
+      "destination": "bottom_right_corner",
+      "affordance": [
+        0.325,
+        0.216
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "released",
+            "args": [
+              "spoon"
+            ],
+            "role": "completion"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "stable",
+            "args": [
+              "spoon"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "support_stable",
+            "args": [
+              "spoon"
+            ]
+          }
+        ]
+      },
+      "done_when": "released(spoon) AND stable(spoon)",
+      "affordance_3d": [
+        -0.3618,
+        -0.587,
+        1.7907
+      ],
+      "affordance_hint": "the spoon"
+    }
+  ]
+}

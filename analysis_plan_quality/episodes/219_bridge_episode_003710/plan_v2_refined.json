@@ -1,0 +1,241 @@
+{
+  "task": "(These pictures aren't working)",
+  "scene_objects": [
+    "yellow_knife",
+    "green_cloth",
+    "metal_pot",
+    "black-and-white ball",
+    "table"
+  ],
+  "num_steps": 4,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "yellow_knife",
+      "affordance": [
+        0.425,
+        0.316
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "yellow_knife",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "metal_pot"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, yellow_knife) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        -0.1578,
+        -0.3903,
+        1.8495
+      ],
+      "affordance_hint": "the yellow plastic handle of the yellow knife",
+      "affordance_hint_original": "the yellow knife",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 2,
+      "action": "grasp",
+      "target": "yellow_knife",
+      "affordance": [
+        0.425,
+        0.3
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "yellow_knife"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "holding",
+            "args": [
+              "yellow_knife"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              0,
+              0,
+              -1
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "holding(yellow_knife)",
+      "affordance_3d": [
+        -0.1494,
+        -0.4011,
+        1.7516
+      ],
+      "affordance_hint": "the yellow plastic handle of the yellow knife",
+      "affordance_hint_original": "the handle of the yellow knife",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 3,
+      "action": "transport",
+      "target": "yellow_knife",
+      "destination": "green_cloth",
+      "affordance": [
+        0.602,
+        0.375
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "yellow_knife"
+            ],
+            "role": "safety"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "above",
+            "args": [
+              "yellow_knife",
+              "green_cloth",
+              0.05
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "yellow_knife",
+              "metal_pot"
+            ]
+          },
+          {
+            "pred": "no_drop",
+            "args": [
+              "yellow_knife"
+            ]
+          }
+        ]
+      },
+      "done_when": "above(yellow_knife, green_cloth, 0.05) AND aligned_xy(yellow_knife, green_cloth, 0.03)",
+      "affordance_3d": [
+        0.2365,
+        -0.2911,
+        2.0256
+      ],
+      "affordance_hint": "the empty area on the green cloth",
+      "affordance_hint_original": "an empty area on the green cloth",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 4,
+      "action": "place",
+      "target": "yellow_knife",
+      "destination": "green_cloth",
+      "affordance": [
+        0.602,
+        0.375
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "surface_contact",
+            "args": [
+              "yellow_knife",
+              "green_cloth"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "released",
+            "args": [
+              "yellow_knife"
+            ],
+            "role": "completion"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "stable",
+            "args": [
+              "yellow_knife"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "support_stable",
+            "args": [
+              "yellow_knife"
+            ]
+          }
+        ]
+      },
+      "done_when": "surface_contact(yellow_knife, green_cloth) AND released(yellow_knife) AND stable(yellow_knife)",
+      "affordance_3d": [
+        0.2365,
+        -0.2911,
+        2.0256
+      ],
+      "affordance_hint": "the empty area on the green cloth",
+      "affordance_hint_original": "an empty area on the green cloth",
+      "affordance_hint_confidence": "ok"
+    }
+  ]
+}

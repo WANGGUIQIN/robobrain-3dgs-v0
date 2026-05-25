@@ -1,0 +1,172 @@
+{
+  "task": "Close the trash can lid.",
+  "scene_objects": [
+    "trash_can",
+    "trash_can_lid",
+    "robot_arm"
+  ],
+  "num_steps": 3,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "trash_can_lid",
+      "affordance": [
+        0.391,
+        0.625
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "trash_can_lid",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "trash_can"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, trash_can_lid) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        -0.4257,
+        0.2838,
+        1.4189
+      ],
+      "affordance_hint": "the trash can lid"
+    },
+    {
+      "step": 2,
+      "action": "grasp",
+      "target": "trash_can_lid",
+      "affordance": [
+        0.4,
+        0.625
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "trash_can_lid"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "holding",
+            "args": [
+              "trash_can_lid"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              0,
+              0,
+              -1
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "holding(trash_can_lid)",
+      "affordance_3d": [
+        -0.4058,
+        0.2799,
+        1.3994
+      ],
+      "affordance_hint": "the handle of the trash can lid"
+    },
+    {
+      "step": 3,
+      "action": "place",
+      "target": "trash_can_lid",
+      "destination": "trash_can",
+      "affordance": [
+        0.41,
+        0.976
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "surface_contact",
+            "args": [
+              "trash_can_lid",
+              "trash_can"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "released",
+            "args": [
+              "trash_can_lid"
+            ],
+            "role": "completion"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "stable",
+            "args": [
+              "trash_can_lid"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "support_stable",
+            "args": [
+              "trash_can_lid"
+            ]
+          }
+        ]
+      },
+      "done_when": "surface_contact(trash_can_lid, trash_can) AND released(trash_can_lid) AND stable(trash_can_lid)",
+      "affordance_3d": [
+        -0.5301,
+        1.253,
+        1.9277
+      ],
+      "affordance_hint": "an empty area on the trash can"
+    }
+  ]
+}

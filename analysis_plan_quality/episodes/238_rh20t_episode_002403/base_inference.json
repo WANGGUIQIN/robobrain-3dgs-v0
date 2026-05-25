@@ -1,0 +1,158 @@
+{
+  "task": "Build with large Megabloks for the nth time with n blocks",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_3epoch/best",
+  "raw": "SCENE ANALYSIS - A white pegboard with a grid of holes is on a green surface. A black peg is inserted into the top-left hole. The peg is small and cylindrical. STRATEGY - To build with the peg, first grasp the peg, then transport it to a new position on the board, and place it. Failure modes include dropping the peg during transport or misaligning it with a hole. AFFORDANCE REASONING - Step 1 reach the peg at its top for a stable grasp; Step 2 grasp the peg's top for secure hold; Step 3 transport the peg to a new hole; Step 4 place the peg into the new hole.\nGoal: stacked({peg})\nScene: peg, pegboard\nStep 1: reach(peg)\n  affordance_region: the top of the black peg\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, peg, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, peg) < 0.03\nStep 2: grasp(peg)\n  affordance_region: the top of the black peg\n  contact: holding(peg) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(peg)\nStep 3: transport(peg -> pegboard)\n  affordance_region: an empty hole on the pegboard\n  spatial: above(peg, pegboard, 0.05) [completion]\n  safety: no_drop(peg)\n  done_when: above(peg, pegboard, 0.05)\nStep 4: place(peg -> pegboard)\n  affordance_region: an empty hole on the pegboard\n  contact: surface_contact(peg, pegboard) [completion]; released(peg) [completion]\n  pose: stable(peg) [completion]\n  done_when: surface_contact(peg, pegboard) AND released(peg)\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [
+      {
+        "pred": "stacked",
+        "args": [
+          "{peg}"
+        ]
+      }
+    ],
+    "scene_objects": [
+      "peg",
+      "pegboard"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "peg",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "peg",
+        "affordance_region": "the top of the black peg",
+        "done_when": "distance(gripper, peg) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "peg"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "peg",
+        "affordance_region": "the top of the black peg",
+        "done_when": "holding(peg)"
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "peg",
+                "pegboard",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "peg"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "peg",
+        "destination": "pegboard",
+        "affordance_region": "an empty hole on the pegboard",
+        "done_when": "above(peg, pegboard, 0.05)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "surface_contact",
+              "args": [
+                "peg",
+                "pegboard"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "peg"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "peg"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "place",
+        "target": "peg",
+        "destination": "pegboard",
+        "affordance_region": "an empty hole on the pegboard",
+        "done_when": "surface_contact(peg, pegboard) AND released(peg)"
+      }
+    ]
+  }
+}

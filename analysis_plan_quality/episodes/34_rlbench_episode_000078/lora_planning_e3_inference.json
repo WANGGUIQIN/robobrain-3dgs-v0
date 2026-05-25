@@ -1,0 +1,153 @@
+{
+  "task": "close the azure jar",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_planning_3epoch/checkpoint-39957",
+  "raw": "Scene: red_mug, blue_jar, green_jar, table\nStep 1: reach(red_mug)\n  affordance_region: the body of the red mug\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, red_mug, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, red_mug) < 0.03\nStep 2: grasp(red_mug)\n  affordance_region: the handle of the red mug\n  contact: holding(red_mug) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(red_mug)\nStep 3: transport(red_mug -> blue_jar)\n  affordance_region: an empty area on the blue jar\n  spatial: above(red_mug, blue_jar, 0.05) [completion]\n  safety: no_drop(red_mug)\n  done_when: above(red_mug, blue_jar, 0.05)\nStep 4: place(red_mug -> blue_jar)\n  affordance_region: an empty area on the blue jar\n  contact: surface_contact(red_mug, blue_jar) [completion]; released(red_mug) [completion]\n  pose: stable(red_mug) [completion]\n  done_when: surface_contact(red_mug, blue_jar) AND released(red_mug)\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [],
+    "scene_objects": [
+      "red_mug",
+      "blue_jar",
+      "green_jar",
+      "table"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "red_mug",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "red_mug",
+        "affordance_region": "the body of the red mug",
+        "done_when": "distance(gripper, red_mug) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "red_mug"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "red_mug",
+        "affordance_region": "the handle of the red mug",
+        "done_when": "holding(red_mug)"
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "red_mug",
+                "blue_jar",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "red_mug"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "red_mug",
+        "destination": "blue_jar",
+        "affordance_region": "an empty area on the blue jar",
+        "done_when": "above(red_mug, blue_jar, 0.05)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "surface_contact",
+              "args": [
+                "red_mug",
+                "blue_jar"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "red_mug"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "red_mug"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "place",
+        "target": "red_mug",
+        "destination": "blue_jar",
+        "affordance_region": "an empty area on the blue jar",
+        "done_when": "surface_contact(red_mug, blue_jar) AND released(red_mug)"
+      }
+    ]
+  }
+}

@@ -1,0 +1,123 @@
+{
+  "task": "Press the button on the top right side of the breakfast marker to open the chamber on the right",
+  "scene_objects": [
+    "breakfast_maker",
+    "button",
+    "chamber"
+  ],
+  "num_steps": 2,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "button",
+      "affordance": [
+        0.45,
+        0.95
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "button",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "breakfast_maker"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, button) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        -0.6979,
+        1.9076,
+        3.1018
+      ],
+      "affordance_hint": "the button"
+    },
+    {
+      "step": 2,
+      "action": "push",
+      "target": "button",
+      "affordance": [
+        0.525,
+        0.48
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "button"
+            ],
+            "role": "completion"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "aligned_z",
+            "args": [
+              "gripper",
+              "button"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "breakfast_maker"
+            ]
+          },
+          {
+            "pred": "force_limit",
+            "args": [
+              "button",
+              "press"
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "gripper_contact(button) AND button_state(open)",
+      "affordance_3d": [
+        -0.4643,
+        0.0536,
+        3.5715
+      ],
+      "affordance_hint": "the center of the button"
+    }
+  ]
+}

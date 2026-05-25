@@ -1,0 +1,268 @@
+{
+  "task": "sweep dirt to the short dustpan",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_3epoch/best",
+  "raw": "SCENE ANALYSIS - A robotic arm is positioned over a scene with a long-handled broom, a short-handled dustpan, and scattered dirt particles on a wooden surface. The broom has a long handle and a wide brush head; the dustpan has a short handle and a shallow pan. The dirt is small, granular, and scattered. STRATEGY - First, grasp the broom to sweep the dirt into a single clump. Then, release the broom and grasp the dustpan to collect the dirt. Failure modes include missing dirt during sweeping or dropping the broom/dustpan. AFFORDANCE REASONING - Step 1: Reach the broom handle for control. Step 2: Grasp the broom handle to lift and sweep. Step 3: Transport the broom to the dirt and sweep. Step 4: Release the broom and grasp the dustpan handle. Step 5: Transport the dustpan to the dirt and place it to collect.\nGoal: all_in(dirt, dustpan)\nScene: broom, dustpan, dirt, table\nStep 1: reach(broom)\n  affordance_region: the long handle of the broom\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, broom, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, broom) < 0.03\nStep 2: grasp(broom)\n  affordance_region: the long handle of the broom\n  contact: holding(broom) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(broom)\nStep 3: transport(broom -> dirt)\n  affordance_region: the area over the dirt particles\n  spatial: above(broom, dirt, 0.05) [completion]\n  safety: no_drop(broom)\n  done_when: above(broom, dirt, 0.05)\nStep 4: sweep(dirt)\n  affordance_region: the brush head of the broom\n  contact: surface_contact(broom, dirt) [progress]\n  direction: sweep_axis(0, 0, -1) [progress]\n  done_when: dirt is clumped\nStep 5: release(broom)\n  affordance_region: the long handle of the broom\n  contact: released(broom) [completion]\n  done_when: released(broom)\nStep 6: grasp(dustpan)\n  affordance_region: the short handle of the dustpan\n  contact: holding(dustpan) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(dustpan)\nStep 7: transport(dustpan -> dirt)\n  affordance_region: the area over the clumped dirt\n  spatial: above(dustpan, dirt, 0.05) [completion]\n  safety: no_drop(dustpan)\n  done_when: above(dustpan, dirt, 0.05)\nStep 8: place(dustpan -> dirt)\n  affordance_region: the shallow pan of the dustpan\n  contact: surface_contact(dustpan, dirt) [completion]; released(dustpan) [completion]\n  pose: stable(dustpan) [completion]\n  done_when: surface_contact(dustpan, dirt) AND released(dustpan)\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [
+      {
+        "pred": "all_in",
+        "args": [
+          "dirt",
+          "dustpan"
+        ]
+      }
+    ],
+    "scene_objects": [
+      "broom",
+      "dustpan",
+      "dirt",
+      "table"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "broom",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "broom",
+        "affordance_region": "the long handle of the broom",
+        "done_when": "distance(gripper, broom) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "broom"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "broom",
+        "affordance_region": "the long handle of the broom",
+        "done_when": "holding(broom)"
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "broom",
+                "dirt",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "broom"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "broom",
+        "destination": "dirt",
+        "affordance_region": "the area over the dirt particles",
+        "done_when": "above(broom, dirt, 0.05)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "surface_contact",
+              "args": [
+                "broom",
+                "dirt"
+              ],
+              "role": "progress"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "sweep_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "sweep",
+        "target": "dirt",
+        "affordance_region": "the brush head of the broom",
+        "done_when": "dirt is clumped"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "released",
+              "args": [
+                "broom"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 5,
+        "action": "release",
+        "target": "broom",
+        "affordance_region": "the long handle of the broom",
+        "done_when": "released(broom)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "dustpan"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 6,
+        "action": "grasp",
+        "target": "dustpan",
+        "affordance_region": "the short handle of the dustpan",
+        "done_when": "holding(dustpan)"
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "dustpan",
+                "dirt",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "dustpan"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 7,
+        "action": "transport",
+        "target": "dustpan",
+        "destination": "dirt",
+        "affordance_region": "the area over the clumped dirt",
+        "done_when": "above(dustpan, dirt, 0.05)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "surface_contact",
+              "args": [
+                "dustpan",
+                "dirt"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "dustpan"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "dustpan"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 8,
+        "action": "place",
+        "target": "dustpan",
+        "destination": "dirt",
+        "affordance_region": "the shallow pan of the dustpan",
+        "done_when": "surface_contact(dustpan, dirt) AND released(dustpan)"
+      }
+    ]
+  }
+}

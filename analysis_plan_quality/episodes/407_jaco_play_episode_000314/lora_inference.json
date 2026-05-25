@@ -1,0 +1,244 @@
+{
+  "task": "place the orange fruit in the gray plate",
+  "parsed": {
+    "scene_objects": [
+      "orange_fruit",
+      "gray_plate",
+      "table"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "orange_fruit",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "orange_fruit",
+        "affordance_region": "the body of the orange fruit",
+        "done_when": "distance(gripper, orange_fruit) < 0.03",
+        "affordance_hint": "the body of the orange fruit",
+        "refine_prompt": "the body of the orange fruit",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.3672,
+          0.6172
+        ],
+        "affordance_3d_refined": [
+          -0.4288,
+          0.3783,
+          2.8083
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.5877,
+        "affordance": [
+          0.3672,
+          0.6172
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "orange_fruit"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "orange_fruit",
+        "affordance_region": "the body of the orange fruit",
+        "done_when": "holding(orange_fruit)",
+        "affordance_hint": "the body of the orange fruit",
+        "refine_prompt": "the body of the orange fruit",
+        "refine_cache_hit": true,
+        "affordance_refined": [
+          0.3672,
+          0.6172
+        ],
+        "affordance_3d_refined": [
+          -0.4288,
+          0.3783,
+          2.8083
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.5877,
+        "affordance": [
+          0.3672,
+          0.6172
+        ]
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "orange_fruit",
+                "gray_plate",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "orange_fruit"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "orange_fruit",
+        "destination": "gray_plate",
+        "affordance_region": "an empty area on the gray plate",
+        "done_when": "above(orange_fruit, gray_plate, 0.05)",
+        "affordance_hint": "an empty area on the gray plate",
+        "refine_prompt": "an empty area on the gray plate",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.4336,
+          0.332
+        ],
+        "affordance_3d_refined": [
+          -0.1143,
+          -0.2891,
+          1.4972
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.4633,
+        "affordance": [
+          0.4336,
+          0.332
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "surface_contact",
+              "args": [
+                "orange_fruit",
+                "gray_plate"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "orange_fruit"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "orange_fruit"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "place",
+        "target": "orange_fruit",
+        "destination": "gray_plate",
+        "affordance_region": "an empty area on the gray plate",
+        "done_when": "surface_contact(orange_fruit, gray_plate) AND released(orange_fruit)",
+        "affordance_hint": "an empty area on the gray plate",
+        "refine_prompt": "an empty area on the gray plate",
+        "refine_cache_hit": true,
+        "affordance_refined": [
+          0.4336,
+          0.332
+        ],
+        "affordance_3d_refined": [
+          -0.1143,
+          -0.2891,
+          1.4972
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.4633,
+        "affordance": [
+          0.4336,
+          0.332
+        ]
+      }
+    ]
+  }
+}

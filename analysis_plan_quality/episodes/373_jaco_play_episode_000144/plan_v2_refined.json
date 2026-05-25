@@ -1,0 +1,244 @@
+{
+  "task": "place the long bread in the table",
+  "scene_objects": [
+    "long_bread",
+    "table",
+    "orange",
+    "black_bowl",
+    "white_plate",
+    "blue_bin",
+    "blue_block",
+    "yellow_block"
+  ],
+  "num_steps": 4,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "long_bread",
+      "affordance": [
+        0.892,
+        0.535
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "long_bread",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "table"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, long_bread) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        1.3577,
+        0.1222,
+        3.0236
+      ],
+      "affordance_hint": "the long bread",
+      "affordance_hint_original": "the long bread",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 2,
+      "action": "grasp",
+      "target": "long_bread",
+      "affordance": [
+        0.431,
+        0.41
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "long_bread"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "holding",
+            "args": [
+              "long_bread"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              0,
+              0,
+              -1
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "holding(long_bread)",
+      "affordance_3d": [
+        -0.2349,
+        -0.3001,
+        2.9062
+      ],
+      "affordance_hint": "the top surface of the long bread",
+      "affordance_hint_original": "long bread",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 3,
+      "action": "transport",
+      "target": "long_bread",
+      "destination": "table",
+      "affordance": [
+        0.428,
+        0.651
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "long_bread"
+            ],
+            "role": "safety"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "above",
+            "args": [
+              "long_bread",
+              "table",
+              0.05
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "long_bread",
+              "table"
+            ]
+          },
+          {
+            "pred": "no_drop",
+            "args": [
+              "long_bread"
+            ]
+          }
+        ]
+      },
+      "done_when": "above(long_bread, table, 0.05) AND aligned_xy(long_bread, table, 0.03)",
+      "affordance_3d": [
+        -0.2634,
+        0.5706,
+        3.2584
+      ],
+      "affordance_hint": "the empty area on the wooden table",
+      "affordance_hint_original": "an empty area on the table",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 4,
+      "action": "place",
+      "target": "long_bread",
+      "destination": "table",
+      "affordance": [
+        0.428,
+        0.651
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "surface_contact",
+            "args": [
+              "long_bread",
+              "table"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "released",
+            "args": [
+              "long_bread"
+            ],
+            "role": "completion"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "stable",
+            "args": [
+              "long_bread"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "support_stable",
+            "args": [
+              "long_bread"
+            ]
+          }
+        ]
+      },
+      "done_when": "surface_contact(long_bread, table) AND released(long_bread) AND stable(long_bread)",
+      "affordance_3d": [
+        -0.2634,
+        0.5706,
+        3.2584
+      ],
+      "affordance_hint": "the empty area on the wooden table",
+      "affordance_hint_original": "an empty area on the table",
+      "affordance_hint_confidence": "ok"
+    }
+  ]
+}

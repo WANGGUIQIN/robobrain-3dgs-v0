@@ -1,0 +1,247 @@
+{
+  "task": "Place the white and black vegetable to the top right corner of the orange cloth.",
+  "parsed": {
+    "scene_objects": [
+      "white_black_vegetable",
+      "orange_cloth",
+      "metal_bowl",
+      "blue_spoon",
+      "table"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "white_black_vegetable",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "white_black_vegetable",
+        "affordance_region": "the body of the white black vegetable",
+        "done_when": "distance(gripper, white_black_vegetable) < 0.03",
+        "affordance_hint": "the body of the white black vegetable",
+        "refine_prompt": "the body of the white black vegetable",
+        "refine_cache_hit": false,
+        "refine_prompt_fallback": "white black vegetable",
+        "affordance_refined": [
+          0.6719,
+          0.7422
+        ],
+        "affordance_3d_refined": [
+          0.3615,
+          0.5094,
+          1.8299
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.4602,
+        "affordance": [
+          0.6719,
+          0.7422
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "white_black_vegetable"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "white_black_vegetable",
+        "affordance_region": "the body of the white black vegetable",
+        "done_when": "holding(white_black_vegetable)",
+        "affordance_hint": "the body of the white black vegetable",
+        "refine_prompt": "the body of the white black vegetable",
+        "refine_cache_hit": true,
+        "affordance_refined": [
+          0.6719,
+          0.7422
+        ],
+        "affordance_3d_refined": [
+          0.3615,
+          0.5094,
+          1.8299
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.4602,
+        "affordance": [
+          0.6719,
+          0.7422
+        ]
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "white_black_vegetable",
+                "orange_cloth",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "white_black_vegetable"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "white_black_vegetable",
+        "destination": "orange_cloth",
+        "affordance_region": "the top right corner of the orange cloth",
+        "done_when": "above(white_black_vegetable, orange_cloth, 0.05)",
+        "affordance_hint": "the top right corner of the orange cloth",
+        "refine_prompt": "the top right corner of the orange cloth",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.7695,
+          0.5039
+        ],
+        "affordance_3d_refined": [
+          0.3972,
+          0.0058,
+          1.282
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.3266,
+        "affordance": [
+          0.7695,
+          0.5039
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "surface_contact",
+              "args": [
+                "white_black_vegetable",
+                "orange_cloth"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "white_black_vegetable"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "white_black_vegetable"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "place",
+        "target": "white_black_vegetable",
+        "destination": "orange_cloth",
+        "affordance_region": "the top right corner of the orange cloth",
+        "done_when": "surface_contact(white_black_vegetable, orange_cloth) AND released(white_black_vegetable) AND stable(white_black_vegetable)",
+        "affordance_hint": "the top right corner of the orange cloth",
+        "refine_prompt": "the top right corner of the orange cloth",
+        "refine_cache_hit": true,
+        "affordance_refined": [
+          0.7695,
+          0.5039
+        ],
+        "affordance_3d_refined": [
+          0.3972,
+          0.0058,
+          1.282
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.3266,
+        "affordance": [
+          0.7695,
+          0.5039
+        ]
+      }
+    ]
+  }
+}

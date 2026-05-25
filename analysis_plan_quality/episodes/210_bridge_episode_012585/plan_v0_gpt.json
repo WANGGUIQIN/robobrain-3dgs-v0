@@ -1,0 +1,233 @@
+{
+  "task": "Put the hotdog to the left of the spoon.",
+  "scene_objects": [
+    "hotdog",
+    "spoon",
+    "green_cloth",
+    "metal_bowl",
+    "stove"
+  ],
+  "num_steps": 4,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "hotdog",
+      "affordance": [
+        0.535,
+        0.516
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "hotdog",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "spoon"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, hotdog) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        0.1008,
+        0.0448,
+        2.4952
+      ],
+      "affordance_hint": "the hotdog"
+    },
+    {
+      "step": 2,
+      "action": "grasp",
+      "target": "hotdog",
+      "affordance": [
+        0.553,
+        0.486
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "hotdog"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "holding",
+            "args": [
+              "hotdog"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              0,
+              0,
+              -1
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "holding(hotdog)",
+      "affordance_3d": [
+        0.1519,
+        -0.0434,
+        2.4169
+      ],
+      "affordance_hint": "the handle of the hotdog"
+    },
+    {
+      "step": 3,
+      "action": "transport",
+      "target": "hotdog",
+      "destination": "left_of_spoon",
+      "affordance": [
+        0.308,
+        0.401
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "hotdog"
+            ],
+            "role": "safety"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "above",
+            "args": [
+              "hotdog",
+              "left_of_spoon",
+              0.05
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "hotdog",
+              "spoon"
+            ]
+          },
+          {
+            "pred": "no_drop",
+            "args": [
+              "hotdog"
+            ]
+          }
+        ]
+      },
+      "done_when": "above(hotdog, left_of_spoon, 0.05) AND aligned_xy(hotdog, left_of_spoon, 0.03)",
+      "affordance_3d": [
+        -0.3553,
+        -0.1813,
+        1.6146
+      ],
+      "affordance_hint": "an empty area on the left of spoon"
+    },
+    {
+      "step": 4,
+      "action": "place",
+      "target": "hotdog",
+      "destination": "left_of_spoon",
+      "affordance": [
+        0.308,
+        0.401
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "surface_contact",
+            "args": [
+              "hotdog",
+              "stove"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "released",
+            "args": [
+              "hotdog"
+            ],
+            "role": "completion"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "stable",
+            "args": [
+              "hotdog"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "support_stable",
+            "args": [
+              "hotdog"
+            ]
+          }
+        ]
+      },
+      "done_when": "surface_contact(hotdog, stove) AND released(hotdog) AND stable(hotdog)",
+      "affordance_3d": [
+        -0.3553,
+        -0.1813,
+        1.6146
+      ],
+      "affordance_hint": "an empty area on the left of spoon"
+    }
+  ]
+}

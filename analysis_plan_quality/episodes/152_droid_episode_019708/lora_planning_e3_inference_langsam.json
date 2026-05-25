@@ -1,0 +1,227 @@
+{
+  "task": "Move the white mug from the right to the left of the travel cups",
+  "scene_objects": [
+    "white_mug",
+    "travel_cups",
+    "table"
+  ],
+  "steps": [
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "white_mug",
+              "<",
+              "0.03"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "approach_axis",
+            "args": [
+              "0",
+              "0",
+              "-1"
+            ],
+            "role": "progress"
+          }
+        ]
+      },
+      "step": 1,
+      "action": "reach",
+      "target": "white_mug",
+      "affordance_region": "the body of the white mug",
+      "done_when": "distance(gripper, white_mug) < 0.03",
+      "affordance_hint": "the body of the white mug",
+      "refine_prompt": "the body of the white mug",
+      "refine_cache_hit": false,
+      "affordance_refined": [
+        0.3438,
+        0.5781
+      ],
+      "affordance_3d_refined": [
+        -0.8701,
+        0.3384,
+        2.4169
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.3723
+    },
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "white_mug"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              "0",
+              "0",
+              "-1"
+            ],
+            "role": "progress"
+          }
+        ]
+      },
+      "step": 2,
+      "action": "grasp",
+      "target": "white_mug",
+      "affordance_region": "the handle of the white mug",
+      "done_when": "holding(white_mug)",
+      "affordance_hint": "the handle of the white mug",
+      "refine_prompt": "the handle of the white mug",
+      "refine_cache_hit": false,
+      "affordance_refined": [
+        0.3789,
+        0.5547
+      ],
+      "affordance_3d_refined": [
+        -0.6935,
+        0.2422,
+        2.2017
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.7833
+    },
+    {
+      "constraints": {
+        "spatial": [
+          {
+            "pred": "above",
+            "args": [
+              "white_mug",
+              "table",
+              "0.05"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_drop",
+            "args": [
+              "white_mug"
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "step": 3,
+      "action": "transport",
+      "target": "white_mug",
+      "destination": "left_of_travel_cups",
+      "affordance_region": "an empty area on the left of the travel cups",
+      "done_when": "above(white_mug, table, 0.05)",
+      "affordance_hint": "an empty area on the left of the travel cups",
+      "refine_prompt": "an empty area on the left of the travel cups",
+      "refine_cache_hit": false,
+      "refine_prompt_fallback": "white mug",
+      "affordance_refined": [
+        0.3438,
+        0.5781
+      ],
+      "affordance_3d_refined": [
+        -0.8701,
+        0.3384,
+        2.4169
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.5345
+    },
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "surface_contact",
+            "args": [
+              "white_mug",
+              "table"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "released",
+            "args": [
+              "white_mug"
+            ],
+            "role": "completion"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "stable",
+            "args": [
+              "white_mug"
+            ],
+            "role": "completion"
+          }
+        ]
+      },
+      "step": 4,
+      "action": "place",
+      "target": "white_mug",
+      "destination": "left_of_travel_cups",
+      "affordance_region": "an empty area on the left of the travel cups",
+      "done_when": "surface_contact(white_mug, table) AND released(white_mug) AND stable(white_mug)",
+      "affordance_hint": "an empty area on the left of the travel cups",
+      "refine_prompt": "an empty area on the left of the travel cups",
+      "refine_cache_hit": true,
+      "affordance_refined": [
+        0.3438,
+        0.5781
+      ],
+      "affordance_3d_refined": [
+        -0.8701,
+        0.3384,
+        2.4169
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.5345
+    }
+  ]
+}

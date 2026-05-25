@@ -1,0 +1,161 @@
+{
+  "task": "place the square bread in the sink",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_3epoch/best",
+  "raw": "SCENE ANALYSIS - A blue plastic container with a yellow square bread inside sits on a wooden table. A white sink with a black basin is visible. The bread is a solid, flat object. STRATEGY - First, grasp the bread from the container. Then, transport it to the sink. Finally, place the bread inside the sink basin. Failure modes include dropping the bread during transport or misplacing it outside the sink. AFFORDANCE REASONING - Step 1: Reach for the bread inside the container. Step 2: Grasp the bread from the container. Step 3: Transport the bread to the sink. Step 4: Place the bread inside the sink basin.\nGoal: inside(yellow_bread, sink)\nScene: yellow_bread, blue_container, sink, table\nStep 1: reach(yellow_bread)\n  affordance_region: the yellow square bread inside the blue container\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, yellow_bread, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, yellow_bread) < 0.03\nStep 2: grasp(yellow_bread)\n  affordance_region: the yellow square bread inside the blue container\n  contact: holding(yellow_bread) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(yellow_bread)\nStep 3: transport(yellow_bread -> sink)\n  affordance_region: an empty area inside the sink basin\n  spatial: above(yellow_bread, sink, 0.05) [completion]\n  safety: no_drop(yellow_bread)\n  done_when: above(yellow_bread, sink, 0.05)\nStep 4: place(yellow_bread -> sink)\n  affordance_region: an empty area inside the sink basin\n  contact: surface_contact(yellow_bread, sink) [completion]; released(yellow_bread) [completion]\n  pose: stable(yellow_bread) [completion]\n  done_when: surface_contact(yellow_bread, sink) AND released(yellow_bread)\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [
+      {
+        "pred": "inside",
+        "args": [
+          "yellow_bread",
+          "sink"
+        ]
+      }
+    ],
+    "scene_objects": [
+      "yellow_bread",
+      "blue_container",
+      "sink",
+      "table"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "yellow_bread",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "yellow_bread",
+        "affordance_region": "the yellow square bread inside the blue container",
+        "done_when": "distance(gripper, yellow_bread) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "yellow_bread"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "yellow_bread",
+        "affordance_region": "the yellow square bread inside the blue container",
+        "done_when": "holding(yellow_bread)"
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "yellow_bread",
+                "sink",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "yellow_bread"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "yellow_bread",
+        "destination": "sink",
+        "affordance_region": "an empty area inside the sink basin",
+        "done_when": "above(yellow_bread, sink, 0.05)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "surface_contact",
+              "args": [
+                "yellow_bread",
+                "sink"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "yellow_bread"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "yellow_bread"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "place",
+        "target": "yellow_bread",
+        "destination": "sink",
+        "affordance_region": "an empty area inside the sink basin",
+        "done_when": "surface_contact(yellow_bread, sink) AND released(yellow_bread)"
+      }
+    ]
+  }
+}

@@ -1,0 +1,226 @@
+{
+  "task": "put the ring on the purple spoke",
+  "scene_objects": [
+    "purple_spoke",
+    "ring",
+    "table"
+  ],
+  "steps": [
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "ring",
+              "<",
+              "0.03"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "approach_axis",
+            "args": [
+              "0",
+              "0",
+              "-1"
+            ],
+            "role": "progress"
+          }
+        ]
+      },
+      "step": 1,
+      "action": "reach",
+      "target": "ring",
+      "affordance_region": "the small blue ring on the table",
+      "done_when": "distance(gripper, ring) < 0.03",
+      "affordance_hint": "the small blue ring on the table",
+      "refine_prompt": "the small blue ring on the table",
+      "refine_cache_hit": false,
+      "affordance_refined": [
+        0.8906,
+        0.9961
+      ],
+      "affordance_3d_refined": [
+        1.6312,
+        2.0717,
+        2.088
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.5137
+    },
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "ring"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              "0",
+              "0",
+              "-1"
+            ],
+            "role": "progress"
+          }
+        ]
+      },
+      "step": 2,
+      "action": "grasp",
+      "target": "ring",
+      "affordance_region": "the small blue ring on the table",
+      "done_when": "holding(ring)",
+      "affordance_hint": "the small blue ring on the table",
+      "refine_prompt": "the small blue ring on the table",
+      "refine_cache_hit": true,
+      "affordance_refined": [
+        0.8906,
+        0.9961
+      ],
+      "affordance_3d_refined": [
+        1.6312,
+        2.0717,
+        2.088
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.5137
+    },
+    {
+      "constraints": {
+        "spatial": [
+          {
+            "pred": "above",
+            "args": [
+              "ring",
+              "purple_spoke",
+              "0.05"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_drop",
+            "args": [
+              "ring"
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "step": 3,
+      "action": "transport",
+      "target": "ring",
+      "destination": "purple_spoke",
+      "affordance_region": "an empty area on the purple spoke",
+      "done_when": "above(ring, purple_spoke, 0.05)",
+      "affordance_hint": "an empty area on the purple spoke",
+      "refine_prompt": "an empty area on the purple spoke",
+      "refine_cache_hit": false,
+      "affordance_refined": [
+        0.9961,
+        0.0
+      ],
+      "affordance_3d_refined": [
+        2.5313,
+        -2.5512,
+        2.5512
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.3558
+    },
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "surface_contact",
+            "args": [
+              "ring",
+              "purple_spoke"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "released",
+            "args": [
+              "ring"
+            ],
+            "role": "completion"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "stable",
+            "args": [
+              "ring"
+            ],
+            "role": "completion"
+          }
+        ]
+      },
+      "step": 4,
+      "action": "place",
+      "target": "ring",
+      "destination": "purple_spoke",
+      "affordance_region": "the top of the purple spoke",
+      "done_when": "surface_contact(ring, purple_spoke) AND released(ring)",
+      "affordance_hint": "the top of the purple spoke",
+      "refine_prompt": "the top of the purple spoke",
+      "refine_cache_hit": false,
+      "affordance_refined": [
+        0.9961,
+        0.0
+      ],
+      "affordance_3d_refined": [
+        2.5313,
+        -2.5512,
+        2.5512
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.3275
+    }
+  ]
+}

@@ -1,0 +1,234 @@
+{
+  "task": "move metal pot to right lower corner",
+  "scene_objects": [
+    "metal_pot",
+    "red_handle",
+    "spoon",
+    "green_object",
+    "purple_cloth",
+    "table"
+  ],
+  "num_steps": 4,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "metal_pot",
+      "affordance": [
+        0.303,
+        0.5
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "metal_pot",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "table"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, metal_pot) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        -0.4899,
+        0.0,
+        2.1821
+      ],
+      "affordance_hint": "the metal pot"
+    },
+    {
+      "step": 2,
+      "action": "grasp",
+      "target": "metal_pot",
+      "affordance": [
+        0.2,
+        0.6
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "metal_pot"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "holding",
+            "args": [
+              "metal_pot"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              0,
+              0,
+              -1
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "holding(metal_pot)",
+      "affordance_3d": [
+        -0.9169,
+        0.3096,
+        2.6518
+      ],
+      "affordance_hint": "the handle of the metal pot"
+    },
+    {
+      "step": 3,
+      "action": "transport",
+      "target": "metal_pot",
+      "destination": "right_lower_corner",
+      "affordance": [
+        0.7,
+        0.7
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "metal_pot"
+            ],
+            "role": "safety"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "above",
+            "args": [
+              "metal_pot",
+              "right_lower_corner",
+              0.05
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "metal_pot",
+              "table"
+            ]
+          },
+          {
+            "pred": "no_drop",
+            "args": [
+              "metal_pot"
+            ]
+          }
+        ]
+      },
+      "done_when": "above(metal_pot, right_lower_corner, 0.05) AND aligned_xy(metal_pot, right_lower_corner, 0.03)",
+      "affordance_3d": [
+        0.7059,
+        0.7059,
+        3.0823
+      ],
+      "affordance_hint": "an empty area on the right lower corner"
+    },
+    {
+      "step": 4,
+      "action": "place",
+      "target": "metal_pot",
+      "destination": "right_lower_corner",
+      "affordance": [
+        0.7,
+        0.7
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "surface_contact",
+            "args": [
+              "metal_pot",
+              "table"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "released",
+            "args": [
+              "metal_pot"
+            ],
+            "role": "completion"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "stable",
+            "args": [
+              "metal_pot"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "support_stable",
+            "args": [
+              "metal_pot"
+            ]
+          }
+        ]
+      },
+      "done_when": "surface_contact(metal_pot, table) AND released(metal_pot) AND stable(metal_pot)",
+      "affordance_3d": [
+        0.7059,
+        0.7059,
+        3.0823
+      ],
+      "affordance_hint": "an empty area on the right lower corner"
+    }
+  ]
+}

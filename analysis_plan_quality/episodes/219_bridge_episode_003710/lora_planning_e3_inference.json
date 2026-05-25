@@ -1,0 +1,79 @@
+{
+  "task": "(These pictures aren't working)",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_planning_3epoch/checkpoint-39957",
+  "raw": "<SCENE_ANALYSIS - A yellow knife, a green cloth, a metal bowl with a black and white object inside, and a blue plate are on a wooden table. STRATEGY - reach the yellow knife, grasp it, transport it to the blue plate, and place it on the blue plate. AFFORDANCE REASONING - Step 1 reach the yellow knife at its handle for a secure grip. Step 2 grasp the yellow knife's handle. Step 3 transport the yellow knife to the blue plate. Step 4 place the yellow knife on the blue plate.\n<SCENE: yellow_knife, green_cloth, metal_bowl, blue_plate, table>\n<STEP 1: reach(yellow_knife)>\n  affordance_region: the yellow plastic handle of the knife\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, yellow_knife, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, yellow_knife) < 0.03\n<STEP 2: grasp(yellow_knife)>\n  affordance_region: the handle of the yellow knife\n  contact: holding(yellow_knife) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(yellow_knife)\n<STEP 3: transport(yellow_knife -> blue_plate)>\n  affordance_region: an empty area on the blue plate\n  spatial: above(yellow_knife, blue_plate, 0.05) [completion]\n  safety: no_drop(yellow_knife)\n  done_when: above(yellow_knife, blue_plate, 0.05)\n<STEP 4: place(yellow_knife -> blue_plate)>\n  affordance_region: an empty area on the blue plate\n  contact: surface_contact(yellow_knife, blue_plate) [completion]; released(yellow_knife) [completion]\n  pose: stable(yellow_knife) [completion]\n  done_when: surface_contact(yellow_knife, blue_plate) AND released(yellow_knife)\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [],
+    "scene_objects": [],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "surface_contact",
+              "args": [
+                "yellow_knife",
+                "blue_plate"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "yellow_knife"
+              ],
+              "role": "completion"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "yellow_knife",
+                "blue_plate",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "yellow_knife"
+              ],
+              "role": "safety"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "yellow_knife"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "yellow_knife",
+        "destination": "blue_plate",
+        "affordance_region": "the yellow plastic handle of the knife",
+        "done_when": "distance(gripper, yellow_knife) < 0.03"
+      }
+    ]
+  }
+}

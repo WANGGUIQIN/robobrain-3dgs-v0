@@ -1,0 +1,114 @@
+{
+  "task": "pick up the black bowl",
+  "scene_objects": [
+    "black_bowl",
+    "table",
+    "robot_gripper"
+  ],
+  "num_steps": 2,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "black_bowl",
+      "affordance": [
+        0.517,
+        0.37
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "black_bowl",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "table"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, black_bowl) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        0.0441,
+        -0.3639,
+        2.4561
+      ],
+      "affordance_hint": "the black bowl"
+    },
+    {
+      "step": 2,
+      "action": "grasp",
+      "target": "black_bowl",
+      "affordance": [
+        0.517,
+        0.352
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "black_bowl"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "holding",
+            "args": [
+              "black_bowl"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              0,
+              0,
+              -1
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "holding(black_bowl)",
+      "affordance_3d": [
+        0.0441,
+        -0.4191,
+        2.4561
+      ],
+      "affordance_hint": "the handle of the black bowl"
+    }
+  ]
+}

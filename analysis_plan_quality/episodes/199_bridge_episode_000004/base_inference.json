@@ -1,0 +1,167 @@
+{
+  "task": "Move the kadai and place it at the right edge of the table.",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_3epoch/best",
+  "raw": "**SCENE ANALYSIS - A stainless steel kadai (pan) is on a wooden table. A white mushroom and a blue-handled utensil are also on the table. The kadai is a rigid container with a handle; the table is a flat surface. STRATEGY - Reach the kadai, grasp its handle for a secure grip, lift it, transport it to the right edge of the table, and place it there. Failure modes include dropping the kadai during transport or misplacing it. AFFORDANCE REASONING - Step 1: Reach the kadai body to position the gripper. Step 2: Grasp the handle for a stable hold. Step 3: Transport the kadai to the right edge. Step 4: Place the kadai on the table edge.**\nGoal: on(kadai, table); at_right_edge(kadai)\nScene: kadai, table, mushroom, utensil\nStep 1: reach(kadai)\n  affordance_region: the body of the stainless steel kadai\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, kadai, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, kadai) < 0.03\nStep 2: grasp(kadai)\n  affordance_region: the handle of the stainless steel kadai\n  contact: holding(kadai) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(kadai)\nStep 3: transport(kadai -> table_right_edge)\n  affordance_region: the right edge of the table\n  spatial: above(kadai, table_right_edge, 0.05) [completion]\n  safety: no_drop(kadai)\n  done_when: above(kadai, table_right_edge, 0.05)\nStep 4: place(kadai -> table_right_edge)\n  affordance_region: the right edge of the table\n  contact: surface_contact(kadai, table_right_edge) [completion]; released(kadai) [completion]\n  pose: stable(kadai) [completion]\n  done_when: surface_contact(kadai, table_right_edge) AND released(kadai)\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [
+      {
+        "pred": "on",
+        "args": [
+          "kadai",
+          "table"
+        ]
+      },
+      {
+        "pred": "at_right_edge",
+        "args": [
+          "kadai"
+        ]
+      }
+    ],
+    "scene_objects": [
+      "kadai",
+      "table",
+      "mushroom",
+      "utensil"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "kadai",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "kadai",
+        "affordance_region": "the body of the stainless steel kadai",
+        "done_when": "distance(gripper, kadai) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "kadai"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "kadai",
+        "affordance_region": "the handle of the stainless steel kadai",
+        "done_when": "holding(kadai)"
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "kadai",
+                "table_right_edge",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "kadai"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "kadai",
+        "destination": "table_right_edge",
+        "affordance_region": "the right edge of the table",
+        "done_when": "above(kadai, table_right_edge, 0.05)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "surface_contact",
+              "args": [
+                "kadai",
+                "table_right_edge"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "kadai"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "kadai"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "place",
+        "target": "kadai",
+        "destination": "table_right_edge",
+        "affordance_region": "the right edge of the table",
+        "done_when": "surface_contact(kadai, table_right_edge) AND released(kadai)"
+      }
+    ]
+  }
+}

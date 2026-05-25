@@ -1,0 +1,135 @@
+{
+  "task": "open the top drawer",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_3epoch/best",
+  "raw": "**SCENE ANALYSIS - A brown drawer is attached to a brown cabinet. The drawer has a front face and a handle. The cabinet is on a wooden floor. STRATEGY - First, reach for the drawer handle to grasp it. Then, pull the drawer in the direction away from the cabinet to open it. Failure modes include not grasping the handle properly or pulling in the wrong direction. AFFORDANCE REASONING - Step 1 reach the drawer handle; Step 2 grasp the handle; Step 3 pull the drawer in the correct direction.**\nGoal: open(drawer)\nScene: drawer, cabinet, floor\nStep 1: reach(drawer)\n  affordance_region: the front face of the drawer\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, drawer, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, drawer) < 0.03\nStep 2: grasp(drawer)\n  affordance_region: the handle of the drawer\n  contact: holding(drawer) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(drawer)\nStep 3: pull(drawer -> away_from_cabinet)\n  affordance_region: the direction away from the cabinet\n  contact: holding(drawer) [progress]\n  spatial: distance(drawer, cabinet, >, 0.1) [completion]\n  direction: pull_axis(0, 0, -1) [completion]\n  done_when: distance(drawer, cabinet) > 0.1\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [
+      {
+        "pred": "open",
+        "args": [
+          "drawer"
+        ]
+      }
+    ],
+    "scene_objects": [
+      "drawer",
+      "cabinet",
+      "floor"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "drawer",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "drawer",
+        "affordance_region": "the front face of the drawer",
+        "done_when": "distance(gripper, drawer) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "drawer"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "drawer",
+        "affordance_region": "the handle of the drawer",
+        "done_when": "holding(drawer)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "drawer"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "drawer",
+                "cabinet",
+                ">",
+                "0.1"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "pull_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "pull",
+        "target": "drawer",
+        "destination": "away_from_cabinet",
+        "affordance_region": "the direction away from the cabinet",
+        "done_when": "distance(drawer, cabinet) > 0.1"
+      }
+    ]
+  }
+}

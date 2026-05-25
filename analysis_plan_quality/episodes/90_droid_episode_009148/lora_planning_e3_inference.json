@@ -1,0 +1,152 @@
+{
+  "task": "Pick up the salt cellar and put it in the bowl",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_planning_3epoch/checkpoint-39957",
+  "raw": "Scene: salt_cellar, bowl, table\nStep 1: reach(salt_cellar)\n  affordance_region: the body of the salt cellar\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, salt_cellar, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, salt_cellar) < 0.03\nStep 2: grasp(salt_cellar)\n  affordance_region: the top surface of the salt cellar\n  contact: holding(salt_cellar) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(salt_cellar)\nStep 3: transport(salt_cellar -> bowl)\n  affordance_region: an empty area on the bowl\n  spatial: above(salt_cellar, bowl, 0.05) [completion]\n  safety: no_drop(salt_cellar)\n  done_when: above(salt_cellar, bowl, 0.05)\nStep 4: place(salt_cellar -> bowl)\n  affordance_region: an empty area on the bowl\n  contact: surface_contact(salt_cellar, bowl) [completion]; released(salt_cellar) [completion]\n  pose: stable(salt_cellar) [completion]\n  done_when: surface_contact(salt_cellar, bowl) AND released(salt_cellar) AND stable(salt_cellar)\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [],
+    "scene_objects": [
+      "salt_cellar",
+      "bowl",
+      "table"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "salt_cellar",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "salt_cellar",
+        "affordance_region": "the body of the salt cellar",
+        "done_when": "distance(gripper, salt_cellar) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "salt_cellar"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "salt_cellar",
+        "affordance_region": "the top surface of the salt cellar",
+        "done_when": "holding(salt_cellar)"
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "salt_cellar",
+                "bowl",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "salt_cellar"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "salt_cellar",
+        "destination": "bowl",
+        "affordance_region": "an empty area on the bowl",
+        "done_when": "above(salt_cellar, bowl, 0.05)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "surface_contact",
+              "args": [
+                "salt_cellar",
+                "bowl"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "salt_cellar"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "salt_cellar"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "place",
+        "target": "salt_cellar",
+        "destination": "bowl",
+        "affordance_region": "an empty area on the bowl",
+        "done_when": "surface_contact(salt_cellar, bowl) AND released(salt_cellar) AND stable(salt_cellar)"
+      }
+    ]
+  }
+}

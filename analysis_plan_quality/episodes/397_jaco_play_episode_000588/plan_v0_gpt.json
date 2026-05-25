@@ -1,0 +1,232 @@
+{
+  "task": "place the butter dairy in the sink",
+  "scene_objects": [
+    "butter_dairy",
+    "sink",
+    "table",
+    "robot_gripper"
+  ],
+  "num_steps": 4,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "butter_dairy",
+      "affordance": [
+        0.425,
+        0.383
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "butter_dairy",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "table"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, butter_dairy) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        -0.1895,
+        -0.2992,
+        2.2213
+      ],
+      "affordance_hint": "the butter dairy"
+    },
+    {
+      "step": 2,
+      "action": "grasp",
+      "target": "butter_dairy",
+      "affordance": [
+        0.52,
+        0.66
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "butter_dairy"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "holding",
+            "args": [
+              "butter_dairy"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              0,
+              0,
+              -1
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "holding(butter_dairy)",
+      "affordance_3d": [
+        0.0683,
+        0.5603,
+        3.0431
+      ],
+      "affordance_hint": "butter dairy"
+    },
+    {
+      "step": 3,
+      "action": "transport",
+      "target": "butter_dairy",
+      "destination": "sink",
+      "affordance": [
+        0.5,
+        0.25
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "butter_dairy"
+            ],
+            "role": "safety"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "above",
+            "args": [
+              "butter_dairy",
+              "sink",
+              0.05
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "butter_dairy",
+              "sink"
+            ]
+          },
+          {
+            "pred": "no_drop",
+            "args": [
+              "butter_dairy"
+            ]
+          }
+        ]
+      },
+      "done_when": "above(butter_dairy, sink, 0.05) AND aligned_xy(butter_dairy, sink, 0.03)",
+      "affordance_3d": [
+        0.0,
+        -0.4471,
+        1.5559
+      ],
+      "affordance_hint": "an empty area on the sink"
+    },
+    {
+      "step": 4,
+      "action": "place",
+      "target": "butter_dairy",
+      "destination": "sink",
+      "affordance": [
+        0.5,
+        0.25
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "surface_contact",
+            "args": [
+              "butter_dairy",
+              "sink"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "released",
+            "args": [
+              "butter_dairy"
+            ],
+            "role": "completion"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "stable",
+            "args": [
+              "butter_dairy"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "support_stable",
+            "args": [
+              "butter_dairy"
+            ]
+          }
+        ]
+      },
+      "done_when": "surface_contact(butter_dairy, sink) AND released(butter_dairy) AND stable(butter_dairy)",
+      "affordance_3d": [
+        0.0,
+        -0.4471,
+        1.5559
+      ],
+      "affordance_hint": "an empty area on the sink"
+    }
+  ]
+}

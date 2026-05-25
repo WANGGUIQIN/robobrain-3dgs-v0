@@ -1,0 +1,139 @@
+{
+  "task": "Approach and touch the side of the small block",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_3epoch/best",
+  "raw": "**SCENE ANALYSIS - A small, light-colored block is positioned on a white surface. The block is a cube with a matte finish. STRATEGY - The task requires approaching the block and touching its side. This involves reaching towards the block, making contact with its side, and then releasing. Failure modes include not making contact with the block or touching the wrong side. AFFORDANCE REASONING - Step 1: Reach towards the block to get close enough for contact. Step 2: Grasp the block to ensure stable contact. Step 3: Push the block to touch its side. Step 4: Release the block to complete the task.**\nGoal: touched(block)\nScene: block\nStep 1: reach(block)\n  affordance_region: the body of the block\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, block, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, block) < 0.03\nStep 2: grasp(block)\n  affordance_region: the body of the block\n  contact: holding(block) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(block)\nStep 3: push(block)\n  affordance_region: the side of the block\n  contact: surface_contact(gripper, block) [completion]\n  pose: gripper_pose(0.05, 0, 0) [completion]\n  done_when: surface_contact(gripper, block)\nStep 4: release(block)\n  affordance_region: the body of the block\n  contact: released(block) [completion]\n  done_when: released(block)\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [
+      {
+        "pred": "touched",
+        "args": [
+          "block"
+        ]
+      }
+    ],
+    "scene_objects": [
+      "block"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "block",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "block",
+        "affordance_region": "the body of the block",
+        "done_when": "distance(gripper, block) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "block"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "block",
+        "affordance_region": "the body of the block",
+        "done_when": "holding(block)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "surface_contact",
+              "args": [
+                "gripper",
+                "block"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "gripper_pose",
+              "args": [
+                "0.05",
+                "0",
+                "0"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "push",
+        "target": "block",
+        "affordance_region": "the side of the block",
+        "done_when": "surface_contact(gripper, block)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "released",
+              "args": [
+                "block"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "release",
+        "target": "block",
+        "affordance_region": "the body of the block",
+        "done_when": "released(block)"
+      }
+    ]
+  }
+}

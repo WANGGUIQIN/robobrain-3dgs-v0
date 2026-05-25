@@ -1,0 +1,238 @@
+{
+  "task": "Screw the lid onto the jar",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_3epoch/best",
+  "raw": "The scene shows a wooden table with a jar and a lid. The jar is a glass container with a metal lid. The task is to screw the lid onto the jar. The jar and lid are both on the table, so the first step is to pick up the lid, then pick up the jar, and then screw the lid onto the jar. The jar has a handle, which is a good grip point. The lid is a flat circular object. The goal is to have the lid screwed onto the jar, which means the lid is on the jar and the jar is stable.\n\nGoal: on(lid, jar); stable(jar)\nScene: jar, lid, table\nStep 1: reach(lid)\n  affordance_region: the body of the lid\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, lid, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, lid) < 0.03\nStep 2: grasp(lid)\n  affordance_region: the body of the lid\n  contact: holding(lid) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(lid)\nStep 3: reach(jar)\n  affordance_region: the handle of the jar\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, jar, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, jar) < 0.03\nStep 4: grasp(jar)\n  affordance_region: the handle of the jar\n  contact: holding(jar) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(jar)\nStep 5: insert(lid -> jar)\n  affordance_region: the opening of the jar\n  contact: lid_contact(jar) [completion]\n  spatial: above(lid, jar, 0.05) [completion]\n  safety: no_drop(lid)\n  done_when: lid_contact(jar)\nStep 6: rotate(lid)\n  affordance_region: the body of the lid\n  contact: holding(lid) [progress]\n  direction: rotate_axis(0, 0, 1) [progress]\n  done_when: lid_screwed(jar)\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [
+      {
+        "pred": "on",
+        "args": [
+          "lid",
+          "jar"
+        ]
+      },
+      {
+        "pred": "stable",
+        "args": [
+          "jar"
+        ]
+      }
+    ],
+    "scene_objects": [
+      "jar",
+      "lid",
+      "table"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "lid",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "lid",
+        "affordance_region": "the body of the lid",
+        "done_when": "distance(gripper, lid) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "lid"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "lid",
+        "affordance_region": "the body of the lid",
+        "done_when": "holding(lid)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "jar",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "reach",
+        "target": "jar",
+        "affordance_region": "the handle of the jar",
+        "done_when": "distance(gripper, jar) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "jar"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "grasp",
+        "target": "jar",
+        "affordance_region": "the handle of the jar",
+        "done_when": "holding(jar)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "lid_contact",
+              "args": [
+                "jar"
+              ],
+              "role": "completion"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "lid",
+                "jar",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "lid"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 5,
+        "action": "insert",
+        "target": "lid",
+        "destination": "jar",
+        "affordance_region": "the opening of the jar",
+        "done_when": "lid_contact(jar)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "lid"
+              ],
+              "role": "progress"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "rotate_axis",
+              "args": [
+                "0",
+                "0",
+                "1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 6,
+        "action": "rotate",
+        "target": "lid",
+        "affordance_region": "the body of the lid",
+        "done_when": "lid_screwed(jar)"
+      }
+    ]
+  }
+}

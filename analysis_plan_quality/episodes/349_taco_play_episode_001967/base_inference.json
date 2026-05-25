@@ -1,0 +1,93 @@
+{
+  "task": "move the blue light switch to turn on the blue light",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_3epoch/best",
+  "raw": "**SCENE ANALYSIS -** A robotic arm is positioned over a kitchen counter. A blue light switch is visible on the wall. The task is to activate the light. The switch is a rigid object with a flat surface that can be pressed. **STRATEGY -** The arm must reach the switch, then press it to activate the light. This is a single-step action as the switch is directly accessible. **AFFORDANCE REASONING -** Step 1 reach the switch body; Step 2 press the switch surface to activate the light.\n\nGoal: light_on(blue_light)\nScene: blue_light, robotic_arm, kitchen_counter\nStep 1: reach(blue_light)\n  affordance_region: the body of the blue light switch\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, blue_light, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, blue_light) < 0.03\nStep 2: push(blue_light)\n  affordance_region: the flat surface of the blue light switch\n  contact: pressed(blue_light) [completion]\n  direction: press_axis(0, 0, -1) [progress]\n  done_when: pressed(blue_light)\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [
+      {
+        "pred": "light_on",
+        "args": [
+          "blue_light"
+        ]
+      }
+    ],
+    "scene_objects": [
+      "blue_light",
+      "robotic_arm",
+      "kitchen_counter"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "blue_light",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "blue_light",
+        "affordance_region": "the body of the blue light switch",
+        "done_when": "distance(gripper, blue_light) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "pressed",
+              "args": [
+                "blue_light"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "press_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "push",
+        "target": "blue_light",
+        "affordance_region": "the flat surface of the blue light switch",
+        "done_when": "pressed(blue_light)"
+      }
+    ]
+  }
+}

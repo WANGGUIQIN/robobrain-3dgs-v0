@@ -1,0 +1,139 @@
+{
+  "task": "Approach and touch the side of the small block",
+  "parsed": {
+    "scene_objects": [
+      "small_block",
+      "table"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "small_block",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "small_block",
+        "affordance_region": "the small block",
+        "done_when": "distance(gripper, small_block) < 0.03",
+        "affordance_hint": "the small block",
+        "refine_prompt": "the small block",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.4883,
+          0.4453
+        ],
+        "affordance_3d_refined": [
+          -0.9243,
+          -0.3128,
+          1.5168
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.5494,
+        "affordance": [
+          0.4883,
+          0.4453
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_contact",
+              "args": [
+                "small_block"
+              ],
+              "role": "completion"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "aligned_xy",
+              "args": [
+                "gripper",
+                "small_block",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_collision",
+              "args": [
+                "gripper",
+                "table"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "touch",
+        "target": "small_block",
+        "affordance_region": "the small block",
+        "done_when": "gripper_contact(small_block)",
+        "affordance_hint": "the small block",
+        "refine_prompt": "the small block",
+        "refine_cache_hit": true,
+        "affordance_refined": [
+          0.4883,
+          0.4453
+        ],
+        "affordance_3d_refined": [
+          -0.9243,
+          -0.3128,
+          1.5168
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.5494,
+        "affordance": [
+          0.4883,
+          0.4453
+        ]
+      }
+    ]
+  }
+}

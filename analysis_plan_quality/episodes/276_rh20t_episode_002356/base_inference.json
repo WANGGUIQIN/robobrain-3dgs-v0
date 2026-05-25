@@ -1,0 +1,158 @@
+{
+  "task": "Build with small Lego blocks for the nth time with n blocks",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_3epoch/best",
+  "raw": "SCENE ANALYSIS - A white tray holds a small pile of colorful small Lego blocks. The blocks are loose and accessible. STRATEGY - First, grasp a block from the pile. Then, transport it to a new location on the tray. Finally, place it down. This sequence builds a structure of one block. Failure modes include dropping the block during transport or placing it incorrectly. AFFORDANCE REASONING - Step 1 reach the pile of blocks to grasp one. Step 2 grasp a single block from the pile. Step 3 transport the block to a target spot on the tray. Step 4 place the block at the target spot.\nGoal: stacked([block_a])\nScene: tray, small_lego_blocks\nStep 1: reach(tray)\n  affordance_region: the surface of the white tray\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, tray, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, tray) < 0.03\nStep 2: grasp(block_a)\n  affordance_region: a single small Lego block from the pile on the tray\n  contact: holding(block_a) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(block_a)\nStep 3: transport(block_a -> tray)\n  affordance_region: an empty area on the white tray\n  spatial: above(block_a, tray, 0.05) [completion]\n  safety: no_drop(block_a)\n  done_when: above(block_a, tray, 0.05)\nStep 4: place(block_a -> tray)\n  affordance_region: an empty area on the white tray\n  contact: surface_contact(block_a, tray) [completion]; released(block_a) [completion]\n  pose: stable(block_a) [completion]\n  done_when: surface_contact(block_a, tray) AND released(block_a)\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [
+      {
+        "pred": "stacked",
+        "args": [
+          "[block_a]"
+        ]
+      }
+    ],
+    "scene_objects": [
+      "tray",
+      "small_lego_blocks"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "tray",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "tray",
+        "affordance_region": "the surface of the white tray",
+        "done_when": "distance(gripper, tray) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "block_a"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "block_a",
+        "affordance_region": "a single small Lego block from the pile on the tray",
+        "done_when": "holding(block_a)"
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "block_a",
+                "tray",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "block_a"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "block_a",
+        "destination": "tray",
+        "affordance_region": "an empty area on the white tray",
+        "done_when": "above(block_a, tray, 0.05)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "surface_contact",
+              "args": [
+                "block_a",
+                "tray"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "block_a"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "block_a"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "place",
+        "target": "block_a",
+        "destination": "tray",
+        "affordance_region": "an empty area on the white tray",
+        "done_when": "surface_contact(block_a, tray) AND released(block_a)"
+      }
+    ]
+  }
+}

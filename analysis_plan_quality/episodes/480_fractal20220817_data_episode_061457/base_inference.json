@@ -1,0 +1,93 @@
+{
+  "task": "pick sponge",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_3epoch/best",
+  "raw": "**SCENE ANALYSIS - A dark blue can, a green can, and a light brown sponge are on a dark countertop. The sponge is a soft, porous object with a distinct shape. STRATEGY - The task is to pick the sponge. First, reach towards the sponge to establish contact. Then, grasp it using a stable grip. No transport or placement is needed as the goal is simply to pick the sponge. Failure modes include misreaching for the wrong object or failing to grasp due to poor grip. AFFORDANCE REASONING - Step 1: Reach for the sponge's body to establish contact. Step 2: Grasp the sponge's body to lift it.**\nGoal: held(sponge)\nScene: dark_blue_can, green_can, sponge\nStep 1: reach(sponge)\n  affordance_region: the body of the light brown sponge\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, sponge, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, sponge) < 0.03\nStep 2: grasp(sponge)\n  affordance_region: the body of the light brown sponge\n  contact: holding(sponge) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(sponge)\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [
+      {
+        "pred": "held",
+        "args": [
+          "sponge"
+        ]
+      }
+    ],
+    "scene_objects": [
+      "dark_blue_can",
+      "green_can",
+      "sponge"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "sponge",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "sponge",
+        "affordance_region": "the body of the light brown sponge",
+        "done_when": "distance(gripper, sponge) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "sponge"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "sponge",
+        "affordance_region": "the body of the light brown sponge",
+        "done_when": "holding(sponge)"
+      }
+    ]
+  }
+}

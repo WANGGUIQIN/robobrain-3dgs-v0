@@ -1,0 +1,162 @@
+{
+  "task": "grasp the pink block",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_3epoch/best",
+  "raw": "**SCENE ANALYSIS -** A white cabinet with open shelves is visible. On the top shelf, there is a red block, a yellow block, and a blue block. On the bottom shelf, there is a red block and a yellow block. The cabinet doors are white with black handles. The floor is a light brown wood. The red block on the top shelf is the target. STRATEGY - The robot must reach the top shelf, grasp the red block, and then transport it to the bottom shelf. Failure modes include the robot not reaching the shelf, not grasping the block, or dropping it during transport. AFFORDANCE REASONING - Step 1 reach the top shelf to access the red block; Step 2 grasp the red block from the top shelf; Step 3 transport the red block to the bottom shelf; Step 4 place the red block on the bottom shelf.\n\nGoal: on(red_block, bottom_shelf)\nScene: red_block, yellow_block, blue_block, top_shelf, bottom_shelf\nStep 1: reach(top_shelf)\n  affordance_region: the top shelf surface\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, top_shelf, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, top_shelf) < 0.03\nStep 2: grasp(red_block)\n  affordance_region: the body of the red block\n  contact: holding(red_block) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(red_block)\nStep 3: transport(red_block -> bottom_shelf)\n  affordance_region: an empty area on the bottom shelf\n  spatial: above(red_block, bottom_shelf, 0.05) [completion]\n  safety: no_drop(red_block)\n  done_when: above(red_block, bottom_shelf, 0.05)\nStep 4: place(red_block -> bottom_shelf)\n  affordance_region: an empty area on the bottom shelf\n  contact: surface_contact(red_block, bottom_shelf) [completion]; released(red_block) [completion]\n  pose: stable(red_block) [completion]\n  done_when: surface_contact(red_block, bottom_shelf) AND released(red_block)\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [
+      {
+        "pred": "on",
+        "args": [
+          "red_block",
+          "bottom_shelf"
+        ]
+      }
+    ],
+    "scene_objects": [
+      "red_block",
+      "yellow_block",
+      "blue_block",
+      "top_shelf",
+      "bottom_shelf"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "top_shelf",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "top_shelf",
+        "affordance_region": "the top shelf surface",
+        "done_when": "distance(gripper, top_shelf) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "red_block"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "red_block",
+        "affordance_region": "the body of the red block",
+        "done_when": "holding(red_block)"
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "red_block",
+                "bottom_shelf",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "red_block"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "red_block",
+        "destination": "bottom_shelf",
+        "affordance_region": "an empty area on the bottom shelf",
+        "done_when": "above(red_block, bottom_shelf, 0.05)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "surface_contact",
+              "args": [
+                "red_block",
+                "bottom_shelf"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "red_block"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "red_block"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "place",
+        "target": "red_block",
+        "destination": "bottom_shelf",
+        "affordance_region": "an empty area on the bottom shelf",
+        "done_when": "surface_contact(red_block, bottom_shelf) AND released(red_block)"
+      }
+    ]
+  }
+}

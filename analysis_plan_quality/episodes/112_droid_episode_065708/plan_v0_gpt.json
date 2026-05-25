@@ -1,0 +1,226 @@
+{
+  "task": "Clean the plate with the towel and move it a bit",
+  "scene_objects": [
+    "plate",
+    "towel",
+    "counter"
+  ],
+  "num_steps": 4,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "towel",
+      "affordance": [
+        0.35,
+        0.566
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "towel",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "plate"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, towel) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        -0.346,
+        0.1236,
+        0.9884
+      ],
+      "affordance_hint": "the towel"
+    },
+    {
+      "step": 2,
+      "action": "grasp",
+      "target": "towel",
+      "affordance": [
+        0.35,
+        0.566
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "towel"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "holding",
+            "args": [
+              "towel"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              0,
+              0,
+              -1
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "holding(towel)",
+      "affordance_3d": [
+        -0.346,
+        0.1236,
+        0.9884
+      ],
+      "affordance_hint": "towel"
+    },
+    {
+      "step": 3,
+      "action": "wipe",
+      "target": "plate",
+      "affordance": [
+        0.45,
+        0.776
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "towel"
+            ],
+            "role": "progress"
+          },
+          {
+            "pred": "surface_contact",
+            "args": [
+              "towel",
+              "plate"
+            ],
+            "role": "completion"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "aligned_xy",
+            "args": [
+              "towel",
+              "plate",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "towel",
+              "plate"
+            ]
+          }
+        ]
+      },
+      "done_when": "surface_contact(towel, plate) AND aligned_xy(towel, plate, 0.03)",
+      "affordance_3d": [
+        -0.284,
+        0.4986,
+        1.2624
+      ],
+      "affordance_hint": "the surface of the plate"
+    },
+    {
+      "step": 4,
+      "action": "push",
+      "target": "plate",
+      "affordance": [
+        0.35,
+        0.65
+      ],
+      "approach": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "surface_contact",
+            "args": [
+              "gripper",
+              "plate"
+            ],
+            "role": "completion"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "clear_path",
+            "args": [
+              "plate",
+              "destination"
+            ],
+            "role": "safety"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "plate",
+              "counter"
+            ]
+          }
+        ]
+      },
+      "done_when": "surface_contact(gripper, plate) AND clear_path(plate, destination)",
+      "affordance_3d": [
+        -0.3528,
+        0.2318,
+        1.008
+      ],
+      "affordance_hint": "the center of the plate"
+    }
+  ]
+}

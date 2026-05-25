@@ -1,0 +1,239 @@
+{
+  "task": "Place the white towel on the tripod.",
+  "scene_objects": [
+    "white_towel",
+    "tripod",
+    "table"
+  ],
+  "num_steps": 4,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "white_towel",
+      "affordance": [
+        0.343,
+        0.308
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "white_towel",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "tripod"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, white_towel) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        -0.5179,
+        -0.2949,
+        1.4385
+      ],
+      "affordance_hint": "the white towel",
+      "affordance_hint_original": "the white towel",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 2,
+      "action": "grasp",
+      "target": "white_towel",
+      "affordance": [
+        0.343,
+        0.308
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "white_towel"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "holding",
+            "args": [
+              "white_towel"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              0,
+              0,
+              -1
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "holding(white_towel)",
+      "affordance_3d": [
+        -0.5179,
+        -0.2949,
+        1.4385
+      ],
+      "affordance_hint": "the white towel",
+      "affordance_hint_original": "white towel",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 3,
+      "action": "transport",
+      "target": "white_towel",
+      "destination": "tripod",
+      "affordance": [
+        0.477,
+        0.343
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "white_towel"
+            ],
+            "role": "safety"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "above",
+            "args": [
+              "white_towel",
+              "tripod",
+              0.05
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "white_towel",
+              "tripod"
+            ]
+          },
+          {
+            "pred": "no_drop",
+            "args": [
+              "white_towel"
+            ]
+          }
+        ]
+      },
+      "done_when": "above(white_towel, tripod, 0.05) AND aligned_xy(white_towel, tripod, 0.03)",
+      "affordance_3d": [
+        -0.225,
+        -0.1895,
+        1.1841
+      ],
+      "affordance_hint": "the empty area on the tripod",
+      "affordance_hint_original": "an empty area on the tripod",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 4,
+      "action": "place",
+      "target": "white_towel",
+      "destination": "tripod",
+      "affordance": [
+        0.477,
+        0.343
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "surface_contact",
+            "args": [
+              "white_towel",
+              "tripod"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "released",
+            "args": [
+              "white_towel"
+            ],
+            "role": "completion"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "stable",
+            "args": [
+              "white_towel"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "support_stable",
+            "args": [
+              "white_towel"
+            ]
+          }
+        ]
+      },
+      "done_when": "surface_contact(white_towel, tripod) AND released(white_towel) AND stable(white_towel)",
+      "affordance_3d": [
+        -0.225,
+        -0.1895,
+        1.1841
+      ],
+      "affordance_hint": "the empty area on the tripod",
+      "affordance_hint_original": "an empty area on the tripod",
+      "affordance_hint_confidence": "ok"
+    }
+  ]
+}

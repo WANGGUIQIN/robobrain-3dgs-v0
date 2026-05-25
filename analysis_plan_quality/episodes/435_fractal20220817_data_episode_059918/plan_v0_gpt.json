@@ -1,0 +1,232 @@
+{
+  "task": "move redbull can near sponge",
+  "scene_objects": [
+    "redbull_can",
+    "sponge",
+    "screwdriver_set",
+    "table"
+  ],
+  "num_steps": 4,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "redbull_can",
+      "affordance": [
+        0.531,
+        0.23
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "redbull_can",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "sponge"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, redbull_can) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        0.1002,
+        -0.864,
+        2.7887
+      ],
+      "affordance_hint": "the redbull can"
+    },
+    {
+      "step": 2,
+      "action": "grasp",
+      "target": "redbull_can",
+      "affordance": [
+        0.531,
+        0.203
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "redbull_can"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "holding",
+            "args": [
+              "redbull_can"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              0,
+              0,
+              -1
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "holding(redbull_can)",
+      "affordance_3d": [
+        0.1037,
+        -0.9851,
+        2.8866
+      ],
+      "affordance_hint": "the handle of the redbull can"
+    },
+    {
+      "step": 3,
+      "action": "transport",
+      "target": "redbull_can",
+      "destination": "near_sponge",
+      "affordance": [
+        0.603,
+        0.75
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "redbull_can"
+            ],
+            "role": "safety"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "near",
+            "args": [
+              "redbull_can",
+              "sponge",
+              0.05
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "redbull_can",
+              "sponge"
+            ]
+          },
+          {
+            "pred": "no_drop",
+            "args": [
+              "redbull_can"
+            ]
+          }
+        ]
+      },
+      "done_when": "near(redbull_can, sponge, 0.05)",
+      "affordance_3d": [
+        0.4375,
+        1.077,
+        3.7476
+      ],
+      "affordance_hint": "an empty area on the near sponge"
+    },
+    {
+      "step": 4,
+      "action": "place",
+      "target": "redbull_can",
+      "destination": "near_sponge",
+      "affordance": [
+        0.603,
+        0.75
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "surface_contact",
+            "args": [
+              "redbull_can",
+              "table"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "released",
+            "args": [
+              "redbull_can"
+            ],
+            "role": "completion"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "stable",
+            "args": [
+              "redbull_can"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "support_stable",
+            "args": [
+              "redbull_can"
+            ]
+          }
+        ]
+      },
+      "done_when": "surface_contact(redbull_can, table) AND released(redbull_can) AND stable(redbull_can)",
+      "affordance_3d": [
+        0.4375,
+        1.077,
+        3.7476
+      ],
+      "affordance_hint": "an empty area on the near sponge"
+    }
+  ]
+}

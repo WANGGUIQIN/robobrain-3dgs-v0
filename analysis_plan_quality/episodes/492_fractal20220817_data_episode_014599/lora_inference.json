@@ -1,0 +1,130 @@
+{
+  "task": "knock coke can over",
+  "parsed": {
+    "scene_objects": [
+      "red_can",
+      "silver_can",
+      "clear_bottle",
+      "table"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "red_can",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "red_can",
+        "affordance_region": "the body of the red can",
+        "done_when": "distance(gripper, red_can) < 0.03",
+        "affordance_hint": "the body of the red can",
+        "refine_prompt": "the body of the red can",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.4648,
+          0.2266
+        ],
+        "affordance_3d_refined": [
+          -0.1214,
+          -0.9442,
+          3.004
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.5278,
+        "affordance": [
+          0.4648,
+          0.2266
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_contact",
+              "args": [
+                "red_can"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "motion_dir",
+              "args": [
+                "red_can",
+                "lateral"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "push",
+        "target": "red_can",
+        "affordance_region": "the body of the red can",
+        "done_when": "red_can is tilted or knocked over",
+        "affordance_hint": "the body of the red can",
+        "refine_prompt": "the body of the red can",
+        "refine_cache_hit": true,
+        "affordance_refined": [
+          0.4648,
+          0.2266
+        ],
+        "affordance_3d_refined": [
+          -0.1214,
+          -0.9442,
+          3.004
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.5278,
+        "affordance": [
+          0.4648,
+          0.2266
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,171 @@
+{
+  "task": "pick banana from white bowl",
+  "scene_objects": [
+    "banana",
+    "white_bowl",
+    "table"
+  ],
+  "num_steps": 3,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "banana",
+      "affordance": [
+        0.553,
+        0.285
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "banana",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "white_bowl"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, banana) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        0.2048,
+        -0.8047,
+        3.2584
+      ],
+      "affordance_hint": "the banana"
+    },
+    {
+      "step": 2,
+      "action": "grasp",
+      "target": "banana",
+      "affordance": [
+        0.553,
+        0.285
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "banana"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "holding",
+            "args": [
+              "banana"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              0,
+              0,
+              -1
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "holding(banana)",
+      "affordance_3d": [
+        0.2048,
+        -0.8047,
+        3.2584
+      ],
+      "affordance_hint": "banana"
+    },
+    {
+      "step": 3,
+      "action": "transport",
+      "target": "banana",
+      "affordance": [
+        0.5,
+        0.453
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "banana"
+            ],
+            "role": "safety"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "clear_path",
+            "args": [
+              "gripper",
+              "workspace"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "banana",
+              "white_bowl"
+            ]
+          },
+          {
+            "pred": "no_drop",
+            "args": [
+              "banana"
+            ]
+          }
+        ]
+      },
+      "done_when": "clear_path(gripper, workspace) AND holding(banana)",
+      "affordance_3d": [
+        0.0,
+        -0.1819,
+        3.3758
+      ],
+      "affordance_hint": "an empty area on the banana"
+    }
+  ]
+}

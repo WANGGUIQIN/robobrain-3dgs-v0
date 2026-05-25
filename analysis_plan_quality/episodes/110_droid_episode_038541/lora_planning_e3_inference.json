@@ -1,0 +1,152 @@
+{
+  "task": "Move the pan to the top right corner of the stove",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_planning_3epoch/checkpoint-39957",
+  "raw": "Scene: pan, stove, top_right_corner\nStep 1: reach(pan)\n  affordance_region: the body of the pan\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, pan, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, pan) < 0.03\nStep 2: grasp(pan)\n  affordance_region: the handle of the pan\n  contact: holding(pan) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(pan)\nStep 3: transport(pan -> top_right_corner)\n  affordance_region: the top right corner of the stove\n  spatial: above(pan, top_right_corner, 0.05) [completion]\n  safety: no_drop(pan)\n  done_when: above(pan, top_right_corner, 0.05)\nStep 4: place(pan -> top_right_corner)\n  affordance_region: the top right corner of the stove\n  contact: surface_contact(pan, top_right_corner) [completion]; released(pan) [completion]\n  pose: stable(pan) [completion]\n  done_when: surface_contact(pan, top_right_corner) AND released(pan) AND stable(pan)\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [],
+    "scene_objects": [
+      "pan",
+      "stove",
+      "top_right_corner"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "pan",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "pan",
+        "affordance_region": "the body of the pan",
+        "done_when": "distance(gripper, pan) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "pan"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "pan",
+        "affordance_region": "the handle of the pan",
+        "done_when": "holding(pan)"
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "pan",
+                "top_right_corner",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "pan"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "pan",
+        "destination": "top_right_corner",
+        "affordance_region": "the top right corner of the stove",
+        "done_when": "above(pan, top_right_corner, 0.05)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "surface_contact",
+              "args": [
+                "pan",
+                "top_right_corner"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "pan"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "pan"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "place",
+        "target": "pan",
+        "destination": "top_right_corner",
+        "affordance_region": "the top right corner of the stove",
+        "done_when": "surface_contact(pan, top_right_corner) AND released(pan) AND stable(pan)"
+      }
+    ]
+  }
+}

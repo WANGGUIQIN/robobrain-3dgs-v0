@@ -1,0 +1,239 @@
+{
+  "task": "Remove the bowl from the cupboard",
+  "scene_objects": [
+    "bowl",
+    "cupboard",
+    "counter"
+  ],
+  "num_steps": 4,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "bowl",
+      "affordance": [
+        0.875,
+        0.8
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "bowl",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "cupboard"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, bowl) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        0.6294,
+        0.8359,
+        1.9669
+      ],
+      "affordance_hint": "the white plastic bowl in the cupboard",
+      "affordance_hint_original": "the bowl",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 2,
+      "action": "grasp",
+      "target": "bowl",
+      "affordance": [
+        0.875,
+        0.8
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "bowl"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "holding",
+            "args": [
+              "bowl"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              0,
+              0,
+              -1
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "holding(bowl)",
+      "affordance_3d": [
+        0.6294,
+        0.8359,
+        1.9669
+      ],
+      "affordance_hint": "the handle of the white bowl",
+      "affordance_hint_original": "the handle of the bowl",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 3,
+      "action": "transport",
+      "target": "bowl",
+      "destination": "counter",
+      "affordance": [
+        0.575,
+        0.875
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "bowl"
+            ],
+            "role": "safety"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "above",
+            "args": [
+              "bowl",
+              "counter",
+              0.05
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "bowl",
+              "cupboard"
+            ]
+          },
+          {
+            "pred": "no_drop",
+            "args": [
+              "bowl"
+            ]
+          }
+        ]
+      },
+      "done_when": "above(bowl, counter, 0.05) AND aligned_xy(bowl, counter, 0.03)",
+      "affordance_3d": [
+        -0.0757,
+        0.6056,
+        1.1645
+      ],
+      "affordance_hint": "the empty area on the counter",
+      "affordance_hint_original": "an empty area on the counter",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 4,
+      "action": "place",
+      "target": "bowl",
+      "destination": "counter",
+      "affordance": [
+        0.575,
+        0.875
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "surface_contact",
+            "args": [
+              "bowl",
+              "counter"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "released",
+            "args": [
+              "bowl"
+            ],
+            "role": "completion"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "stable",
+            "args": [
+              "bowl"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "support_stable",
+            "args": [
+              "bowl"
+            ]
+          }
+        ]
+      },
+      "done_when": "surface_contact(bowl, counter) AND released(bowl) AND stable(bowl)",
+      "affordance_3d": [
+        -0.0757,
+        0.6056,
+        1.1645
+      ],
+      "affordance_hint": "the empty area on the counter",
+      "affordance_hint_original": "an empty area on the counter",
+      "affordance_hint_confidence": "ok"
+    }
+  ]
+}

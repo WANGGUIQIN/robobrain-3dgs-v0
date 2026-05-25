@@ -1,0 +1,234 @@
+{
+  "task": "place the brush at the left side of the pan",
+  "scene_objects": [
+    "brush",
+    "pan",
+    "yellow_pad",
+    "blue_object",
+    "sink",
+    "stove"
+  ],
+  "num_steps": 4,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "brush",
+      "affordance": [
+        0.276,
+        0.343
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "brush",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "pan"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, brush) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        -0.2179,
+        -0.1529,
+        0.8515
+      ],
+      "affordance_hint": "the brush"
+    },
+    {
+      "step": 2,
+      "action": "grasp",
+      "target": "brush",
+      "affordance": [
+        0.2,
+        0.437
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "brush"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "holding",
+            "args": [
+              "brush"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              0,
+              0,
+              -1
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "holding(brush)",
+      "affordance_3d": [
+        -0.3891,
+        -0.0809,
+        1.1254
+      ],
+      "affordance_hint": "the handle of the brush"
+    },
+    {
+      "step": 3,
+      "action": "transport",
+      "target": "brush",
+      "destination": "left_side_of_pan",
+      "affordance": [
+        0.303,
+        0.45
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "brush"
+            ],
+            "role": "safety"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "above",
+            "args": [
+              "brush",
+              "left_side_of_pan",
+              0.05
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "brush",
+              "pan"
+            ]
+          },
+          {
+            "pred": "no_drop",
+            "args": [
+              "brush"
+            ]
+          }
+        ]
+      },
+      "done_when": "above(brush, left_side_of_pan, 0.05) AND aligned_xy(brush, left_side_of_pan, 0.03)",
+      "affordance_3d": [
+        -0.2395,
+        -0.0623,
+        1.0667
+      ],
+      "affordance_hint": "an empty area on the left side of pan"
+    },
+    {
+      "step": 4,
+      "action": "place",
+      "target": "brush",
+      "destination": "left_side_of_pan",
+      "affordance": [
+        0.303,
+        0.45
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "surface_contact",
+            "args": [
+              "brush",
+              "left_side_of_pan"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "released",
+            "args": [
+              "brush"
+            ],
+            "role": "completion"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "stable",
+            "args": [
+              "brush"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "support_stable",
+            "args": [
+              "brush"
+            ]
+          }
+        ]
+      },
+      "done_when": "surface_contact(brush, left_side_of_pan) AND released(brush) AND stable(brush)",
+      "affordance_3d": [
+        -0.2395,
+        -0.0623,
+        1.0667
+      ],
+      "affordance_hint": "an empty area on the left side of pan"
+    }
+  ]
+}

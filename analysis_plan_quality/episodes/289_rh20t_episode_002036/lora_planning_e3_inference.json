@@ -1,0 +1,86 @@
+{
+  "task": "Grasp the moving object",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_planning_3epoch/checkpoint-39957",
+  "raw": "Scene: yellow_object, pink_object, table\nStep 1: reach(yellow_object)\n  affordance_region: the yellow object\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, yellow_object, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, yellow_object) < 0.03\nStep 2: grasp(yellow_object)\n  affordance_region: the body of the yellow object\n  contact: holding(yellow_object) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(yellow_object)\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [],
+    "scene_objects": [
+      "yellow_object",
+      "pink_object",
+      "table"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "yellow_object",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "yellow_object",
+        "affordance_region": "the yellow object",
+        "done_when": "distance(gripper, yellow_object) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "yellow_object"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "yellow_object",
+        "affordance_region": "the body of the yellow object",
+        "done_when": "holding(yellow_object)"
+      }
+    ]
+  }
+}

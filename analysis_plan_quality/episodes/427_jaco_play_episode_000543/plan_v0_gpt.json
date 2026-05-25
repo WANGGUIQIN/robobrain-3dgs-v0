@@ -1,0 +1,235 @@
+{
+  "task": "place the yellow cup in the table",
+  "scene_objects": [
+    "yellow_cup",
+    "table",
+    "blue_rack",
+    "black_bowl",
+    "white_plate",
+    "blue_block",
+    "oven"
+  ],
+  "num_steps": 4,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "yellow_cup",
+      "affordance": [
+        0.941,
+        0.236
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "yellow_cup",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "yellow_cup"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, yellow_cup) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        1.4548,
+        -0.8754,
+        2.867
+      ],
+      "affordance_hint": "the yellow cup"
+    },
+    {
+      "step": 2,
+      "action": "grasp",
+      "target": "yellow_cup",
+      "affordance": [
+        0.937,
+        0.2
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "yellow_cup"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "holding",
+            "args": [
+              "yellow_cup"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              0,
+              0,
+              -1
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "holding(yellow_cup)",
+      "affordance_3d": [
+        1.432,
+        -0.9845,
+        2.8475
+      ],
+      "affordance_hint": "the handle of the yellow cup"
+    },
+    {
+      "step": 3,
+      "action": "transport",
+      "target": "yellow_cup",
+      "destination": "table",
+      "affordance": [
+        0.468,
+        0.575
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "yellow_cup"
+            ],
+            "role": "safety"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "above",
+            "args": [
+              "yellow_cup",
+              "table",
+              0.05
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "yellow_cup",
+              "table"
+            ]
+          },
+          {
+            "pred": "no_drop",
+            "args": [
+              "yellow_cup"
+            ]
+          }
+        ]
+      },
+      "done_when": "above(yellow_cup, table, 0.05) AND aligned_xy(yellow_cup, table, 0.03)",
+      "affordance_3d": [
+        -0.1079,
+        0.2563,
+        3.004
+      ],
+      "affordance_hint": "an empty area on the table"
+    },
+    {
+      "step": 4,
+      "action": "place",
+      "target": "yellow_cup",
+      "destination": "table",
+      "affordance": [
+        0.468,
+        0.575
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "surface_contact",
+            "args": [
+              "yellow_cup",
+              "table"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "released",
+            "args": [
+              "yellow_cup"
+            ],
+            "role": "completion"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "stable",
+            "args": [
+              "yellow_cup"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "support_stable",
+            "args": [
+              "yellow_cup"
+            ]
+          }
+        ]
+      },
+      "done_when": "surface_contact(yellow_cup, table) AND released(yellow_cup) AND stable(yellow_cup)",
+      "affordance_3d": [
+        -0.1079,
+        0.2563,
+        3.004
+      ],
+      "affordance_hint": "an empty area on the table"
+    }
+  ]
+}

@@ -1,0 +1,233 @@
+{
+  "task": "place blue cloth next to yellow knife",
+  "scene_objects": [
+    "blue_cloth",
+    "yellow_knife",
+    "yellow_banana",
+    "metal_pot",
+    "table"
+  ],
+  "num_steps": 4,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "blue_cloth",
+      "affordance": [
+        0.387,
+        0.566
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "blue_cloth",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "yellow_knife"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, blue_cloth) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        -0.2969,
+        0.174,
+        2.28
+      ],
+      "affordance_hint": "the blue cloth"
+    },
+    {
+      "step": 2,
+      "action": "grasp",
+      "target": "blue_cloth",
+      "affordance": [
+        0.387,
+        0.566
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "blue_cloth"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "holding",
+            "args": [
+              "blue_cloth"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              0,
+              0,
+              -1
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "holding(blue_cloth)",
+      "affordance_3d": [
+        -0.2969,
+        0.174,
+        2.28
+      ],
+      "affordance_hint": "blue cloth"
+    },
+    {
+      "step": 3,
+      "action": "transport",
+      "target": "blue_cloth",
+      "destination": "next_to_yellow_knife",
+      "affordance": [
+        0.601,
+        0.5
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "blue_cloth"
+            ],
+            "role": "safety"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "near",
+            "args": [
+              "blue_cloth",
+              "yellow_knife",
+              0.05
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "blue_cloth",
+              "yellow_knife"
+            ]
+          },
+          {
+            "pred": "no_drop",
+            "args": [
+              "blue_cloth"
+            ]
+          }
+        ]
+      },
+      "done_when": "near(blue_cloth, yellow_knife, 0.05) AND aligned_xy(blue_cloth, yellow_knife, 0.03)",
+      "affordance_3d": [
+        0.2319,
+        0.0,
+        1.9864
+      ],
+      "affordance_hint": "an empty area on the next to yellow knife"
+    },
+    {
+      "step": 4,
+      "action": "place",
+      "target": "blue_cloth",
+      "destination": "next_to_yellow_knife",
+      "affordance": [
+        0.601,
+        0.5
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "surface_contact",
+            "args": [
+              "blue_cloth",
+              "table"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "released",
+            "args": [
+              "blue_cloth"
+            ],
+            "role": "completion"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "stable",
+            "args": [
+              "blue_cloth"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "support_stable",
+            "args": [
+              "blue_cloth"
+            ]
+          }
+        ]
+      },
+      "done_when": "surface_contact(blue_cloth, table) AND released(blue_cloth) AND stable(blue_cloth)",
+      "affordance_3d": [
+        0.2319,
+        0.0,
+        1.9864
+      ],
+      "affordance_hint": "an empty area on the next to yellow knife"
+    }
+  ]
+}

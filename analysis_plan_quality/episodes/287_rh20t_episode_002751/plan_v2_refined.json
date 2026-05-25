@@ -1,0 +1,178 @@
+{
+  "task": "Finish setting up the starting position of a chessboard that is almost arranged",
+  "scene_objects": [
+    "chessboard",
+    "chess_pieces",
+    "table"
+  ],
+  "num_steps": 3,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "chess_piece",
+      "affordance": [
+        0.45,
+        0.334
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "chess_piece",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "chessboard"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, chess_piece) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        -1.1723,
+        -0.5375,
+        1.8299
+      ],
+      "affordance_hint": "the white plastic chess piece",
+      "affordance_hint_original": "the chess piece",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 2,
+      "action": "grasp",
+      "target": "chess_piece",
+      "affordance": [
+        0.45,
+        0.334
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "chess_piece"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "holding",
+            "args": [
+              "chess_piece"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              0,
+              0,
+              -1
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "holding(chess_piece)",
+      "affordance_3d": [
+        -1.1723,
+        -0.5375,
+        1.8299
+      ],
+      "affordance_hint": "the white plastic chess piece",
+      "affordance_hint_original": "the handle of the chess piece",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 3,
+      "action": "place",
+      "target": "chess_piece",
+      "destination": "chessboard",
+      "affordance": [
+        0.45,
+        0.45
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "surface_contact",
+            "args": [
+              "chess_piece",
+              "chessboard"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "released",
+            "args": [
+              "chess_piece"
+            ],
+            "role": "completion"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "upright",
+            "args": [
+              "chess_piece"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "support_stable",
+            "args": [
+              "chess_piece"
+            ]
+          }
+        ]
+      },
+      "done_when": "surface_contact(chess_piece, chessboard) AND released(chess_piece) AND upright(chess_piece)",
+      "affordance_3d": [
+        -0.7335,
+        -0.2326,
+        1.145
+      ],
+      "affordance_hint": "the empty area on the chessboard",
+      "affordance_hint_original": "an empty area on the chessboard",
+      "affordance_hint_confidence": "ok"
+    }
+  ]
+}

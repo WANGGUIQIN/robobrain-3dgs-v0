@@ -1,0 +1,119 @@
+{
+  "task": "pick up the square bread",
+  "scene_objects": [
+    "square_bread",
+    "table"
+  ],
+  "steps": [
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "square_bread",
+              "<",
+              "0.03"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "approach_axis",
+            "args": [
+              "0",
+              "0",
+              "-1"
+            ],
+            "role": "progress"
+          }
+        ]
+      },
+      "step": 1,
+      "action": "reach",
+      "target": "square_bread",
+      "affordance_region": "the square bread",
+      "done_when": "distance(gripper, square_bread) < 0.03",
+      "affordance_hint": "the square bread",
+      "refine_prompt": "the square bread",
+      "refine_cache_hit": false,
+      "affordance_refined": [
+        0.9961,
+        0.4805
+      ],
+      "affordance_3d_refined": [
+        1.7577,
+        -0.0692,
+        3.0823
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.3017
+    },
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "square_bread"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              "0",
+              "0",
+              "-1"
+            ],
+            "role": "progress"
+          }
+        ]
+      },
+      "step": 2,
+      "action": "grasp",
+      "target": "square_bread",
+      "affordance_region": "the square bread",
+      "done_when": "holding(square_bread)",
+      "affordance_hint": "the square bread",
+      "refine_prompt": "the square bread",
+      "refine_cache_hit": true,
+      "affordance_refined": [
+        0.9961,
+        0.4805
+      ],
+      "affordance_3d_refined": [
+        1.7577,
+        -0.0692,
+        3.0823
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.3017
+    }
+  ]
+}

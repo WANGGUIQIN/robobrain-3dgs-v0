@@ -1,0 +1,242 @@
+{
+  "task": "Insert the pencil into the pencil sharpener",
+  "scene_objects": [
+    "pencil",
+    "pencil_sharpener",
+    "table"
+  ],
+  "steps": [
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "pencil",
+              "<",
+              "0.03"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "approach_axis",
+            "args": [
+              "0",
+              "0",
+              "-1"
+            ],
+            "role": "progress"
+          }
+        ]
+      },
+      "step": 1,
+      "action": "reach",
+      "target": "pencil",
+      "affordance_region": "the body of the pencil",
+      "done_when": "distance(gripper, pencil) < 0.03",
+      "affordance_hint": "the body of the pencil",
+      "refine_prompt": "the body of the pencil",
+      "refine_cache_hit": false,
+      "affordance_refined": [
+        0.418,
+        0.5625
+      ],
+      "affordance_3d_refined": [
+        -1.0878,
+        -0.1838,
+        1.6342
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.4826
+    },
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "pencil"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              "0",
+              "0",
+              "-1"
+            ],
+            "role": "progress"
+          }
+        ]
+      },
+      "step": 2,
+      "action": "grasp",
+      "target": "pencil",
+      "affordance_region": "the body of the pencil",
+      "done_when": "holding(pencil)",
+      "affordance_hint": "the body of the pencil",
+      "refine_prompt": "the body of the pencil",
+      "refine_cache_hit": true,
+      "affordance_refined": [
+        0.418,
+        0.5625
+      ],
+      "affordance_3d_refined": [
+        -1.0878,
+        -0.1838,
+        1.6342
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.4826
+    },
+    {
+      "constraints": {
+        "spatial": [
+          {
+            "pred": "above",
+            "args": [
+              "pencil",
+              "pencil_sharpener",
+              "0.05"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_drop",
+            "args": [
+              "pencil"
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "step": 3,
+      "action": "transport",
+      "target": "pencil",
+      "destination": "pencil_sharpener",
+      "affordance_region": "an empty area on the pencil sharpener",
+      "done_when": "above(pencil, pencil_sharpener, 0.05)",
+      "affordance_hint": "an empty area on the pencil sharpener",
+      "refine_prompt": "an empty area on the pencil sharpener",
+      "refine_cache_hit": false,
+      "affordance_refined": [
+        0.1758,
+        0.2578
+      ],
+      "affordance_3d_refined": [
+        -1.0008,
+        -0.4149,
+        1.1645
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.3032
+    },
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "inserted",
+            "args": [
+              "pencil",
+              "pencil_sharpener"
+            ],
+            "role": "completion"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "aligned_xy",
+            "args": [
+              "pencil",
+              "pencil_sharpener",
+              "0.03"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "insert_dir",
+            "args": [
+              "0",
+              "0",
+              "-1"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "pencil",
+              "pencil_sharpener"
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "step": 4,
+      "action": "insert",
+      "target": "pencil",
+      "destination": "pencil_sharpener",
+      "affordance_region": "the top opening of the pencil sharpener",
+      "done_when": "inserted(pencil, pencil_sharpener)",
+      "affordance_hint": "the top opening of the pencil sharpener",
+      "refine_prompt": "the top opening of the pencil sharpener",
+      "refine_cache_hit": false,
+      "affordance_refined": [
+        0.4961,
+        0.25
+      ],
+      "affordance_3d_refined": [
+        -0.6198,
+        -0.3725,
+        1.0276
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.3076
+    }
+  ]
+}

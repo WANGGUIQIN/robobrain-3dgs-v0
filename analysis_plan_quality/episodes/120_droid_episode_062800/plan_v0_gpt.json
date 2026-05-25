@@ -1,0 +1,405 @@
+{
+  "task": "Put the cups into each other in the black bowl and put the fork in them beginning with the dark blue one, then the light blue one, and finally the orange one",
+  "scene_objects": [
+    "dark_blue_cup",
+    "light_blue_cup",
+    "orange_cup",
+    "black_bowl",
+    "fork",
+    "table"
+  ],
+  "num_steps": 6,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "dark_blue_cup",
+      "affordance": [
+        0.7,
+        0.794
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "dark_blue_cup",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "table"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, dark_blue_cup) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        0.3839,
+        1.6771,
+        4.0411
+      ],
+      "affordance_hint": "the dark blue cup"
+    },
+    {
+      "step": 2,
+      "action": "grasp",
+      "target": "dark_blue_cup",
+      "affordance": [
+        0.675,
+        0.675
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "dark_blue_cup"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "holding",
+            "args": [
+              "dark_blue_cup"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              0,
+              0,
+              -1
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "holding(dark_blue_cup)",
+      "affordance_3d": [
+        0.2029,
+        0.8272,
+        3.1214
+      ],
+      "affordance_hint": "the handle of the dark blue cup"
+    },
+    {
+      "step": 3,
+      "action": "place",
+      "target": "dark_blue_cup",
+      "destination": "black_bowl",
+      "affordance": [
+        0.593,
+        0.625
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "surface_contact",
+            "args": [
+              "dark_blue_cup",
+              "black_bowl"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "released",
+            "args": [
+              "dark_blue_cup"
+            ],
+            "role": "completion"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "inside",
+            "args": [
+              "dark_blue_cup",
+              "black_bowl"
+            ],
+            "role": "completion"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "upright",
+            "args": [
+              "dark_blue_cup"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "support_stable",
+            "args": [
+              "dark_blue_cup"
+            ]
+          }
+        ]
+      },
+      "done_when": "surface_contact(dark_blue_cup, black_bowl) AND released(dark_blue_cup) AND inside(dark_blue_cup, black_bowl)",
+      "affordance_3d": [
+        -0.1225,
+        0.6125,
+        3.0627
+      ],
+      "affordance_hint": "an empty area on the black bowl"
+    },
+    {
+      "step": 4,
+      "action": "insert",
+      "target": "light_blue_cup",
+      "destination": "dark_blue_cup",
+      "affordance": [
+        0.708,
+        0.78
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "light_blue_cup"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "holding",
+            "args": [
+              "light_blue_cup"
+            ],
+            "role": "completion"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "aligned_xy",
+            "args": [
+              "light_blue_cup",
+              "dark_blue_cup"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "inserted",
+            "args": [
+              "light_blue_cup",
+              "dark_blue_cup"
+            ],
+            "role": "completion"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "upright",
+            "args": [
+              "light_blue_cup"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "light_blue_cup",
+              "dark_blue_cup"
+            ]
+          }
+        ]
+      },
+      "done_when": "inserted(light_blue_cup, dark_blue_cup) AND aligned_xy(light_blue_cup, dark_blue_cup)",
+      "affordance_3d": [
+        0.4264,
+        1.6243,
+        4.0607
+      ],
+      "affordance_hint": "the top opening of the dark blue cup"
+    },
+    {
+      "step": 5,
+      "action": "insert",
+      "target": "orange_cup",
+      "destination": "light_blue_cup",
+      "affordance": [
+        0.584,
+        0.776
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "orange_cup"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "holding",
+            "args": [
+              "orange_cup"
+            ],
+            "role": "completion"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "aligned_xy",
+            "args": [
+              "orange_cup",
+              "light_blue_cup"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "inserted",
+            "args": [
+              "orange_cup",
+              "light_blue_cup"
+            ],
+            "role": "completion"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "upright",
+            "args": [
+              "orange_cup"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "orange_cup",
+              "light_blue_cup"
+            ]
+          }
+        ]
+      },
+      "done_when": "inserted(orange_cup, light_blue_cup) AND aligned_xy(orange_cup, light_blue_cup)",
+      "affordance_3d": [
+        -0.206,
+        1.6272,
+        4.1194
+      ],
+      "affordance_hint": "the top opening of the light blue cup"
+    },
+    {
+      "step": 6,
+      "action": "place",
+      "target": "fork",
+      "destination": "orange_cup",
+      "affordance": [
+        0.558,
+        0.741
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "surface_contact",
+            "args": [
+              "fork",
+              "orange_cup"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "released",
+            "args": [
+              "fork"
+            ],
+            "role": "completion"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "inside",
+            "args": [
+              "fork",
+              "orange_cup"
+            ],
+            "role": "completion"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "stable",
+            "args": [
+              "fork"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "support_stable",
+            "args": [
+              "fork"
+            ]
+          }
+        ]
+      },
+      "done_when": "surface_contact(fork, orange_cup) AND released(fork) AND inside(fork, orange_cup)",
+      "affordance_3d": [
+        -0.2953,
+        1.2158,
+        3.4736
+      ],
+      "affordance_hint": "an empty area on the orange cup"
+    }
+  ]
+}

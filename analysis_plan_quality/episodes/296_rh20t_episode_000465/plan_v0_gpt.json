@@ -1,0 +1,115 @@
+{
+  "task": "Approach and touch the side of the small block",
+  "scene_objects": [
+    "small_block",
+    "table"
+  ],
+  "num_steps": 2,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "small_block",
+      "affordance": [
+        0.48,
+        0.45
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "small_block",
+              "<",
+              0.05
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "table"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, small_block) < 0.05 AND gripper_state(open)",
+      "affordance_3d": [
+        -0.9338,
+        -0.3081,
+        1.5168
+      ],
+      "affordance_hint": "the small block"
+    },
+    {
+      "step": 2,
+      "action": "touch",
+      "target": "small_block",
+      "affordance": [
+        0.48,
+        0.45
+      ],
+      "approach": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "small_block"
+            ],
+            "role": "completion"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "aligned_xy",
+            "args": [
+              "gripper",
+              "small_block",
+              0.02
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "table"
+            ]
+          }
+        ]
+      },
+      "done_when": "gripper_contact(small_block)",
+      "affordance_3d": [
+        -0.9338,
+        -0.3081,
+        1.5168
+      ],
+      "affordance_hint": "small block"
+    }
+  ]
+}

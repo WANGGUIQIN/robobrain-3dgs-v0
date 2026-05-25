@@ -1,0 +1,225 @@
+{
+  "task": "sweep dirt to the tall dustpan",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_3epoch/best",
+  "raw": "**SCENE ANALYSIS -** A robotic arm is positioned over a sandy surface with a tall dustpan (blue, upright) and a broom (brown, with bristles). Small dirt particles are scattered on the sand. The dustpan has a wide, open mouth suitable for receiving dirt. The broom’s bristles are the functional part for sweeping. STRATEGY - First, grasp the broom to sweep the dirt towards the dustpan. Then, grasp the dustpan to collect the dirt. Failure modes include missing dirt with the broom or dropping the dustpan. AFFORDANCE REASONING - Step 1: Reach the broom’s bristles for sweeping. Step 2: Grasp the broom to sweep dirt. Step 3: Transport the broom to the dustpan. Step 4: Release the broom to let dirt fall into the dustpan. Step 5: Grasp the dustpan to secure it. Step 6: Transport the dustpan to a stable position. Step 7: Release the dustpan to complete the task.\n\n**Goal:** dirt_in(dustpan); stable(dustpan)\n**Scene:** broom, dustpan, dirt_particles, sandy_surface\n**Step 1:** reach(broom)\n  affordance_region: the bristles of the brown broom\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, broom, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, broom) < 0.03\n**Step 2:** grasp(broom)\n  affordance_region: the bristles of the brown broom\n  contact: holding(broom) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(broom)\n**Step 3:** transport(broom -> dustpan)\n  affordance_region: the area near the mouth of the blue dustpan\n  spatial: above(broom, dustpan, 0.05) [completion]\n  safety: no_drop(broom)\n  done_when: above(broom, dustpan, 0.05)\n**Step 4:** release(broom)\n  affordance_region: the bristles of the brown broom\n  contact: released(broom) [completion]\n  pose: stable(dirt_particles) [progress]\n  done_when: released(broom)\n**Step 5:** grasp(dustpan)\n  affordance_region: the rim of the blue dustpan\n  contact: holding(dustpan) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(dustpan)\n**Step 6:** transport(dustpan -> stable_surface)\n  affordance_region: a flat area on the sandy surface\n  spatial: above(dustpan, stable_surface, 0.05) [completion]\n  safety: no_drop(dustpan)\n  done_when: above(dustpan, stable_surface, 0.05)\n**Step 7:** release(dustpan)\n  affordance_region: the rim of the blue dustpan\n  contact: released(dustpan) [completion]\n  pose: stable(dustpan) [completion]\n  done_when: released(dustpan)\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [],
+    "scene_objects": [],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "broom",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "broom",
+        "affordance_region": "the bristles of the brown broom",
+        "done_when": "distance(gripper, broom) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "broom"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "broom",
+        "affordance_region": "the bristles of the brown broom",
+        "done_when": "holding(broom)"
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "broom",
+                "dustpan",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "broom"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "broom",
+        "destination": "dustpan",
+        "affordance_region": "the area near the mouth of the blue dustpan",
+        "done_when": "above(broom, dustpan, 0.05)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "released",
+              "args": [
+                "broom"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "dirt_particles"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "release",
+        "target": "broom",
+        "affordance_region": "the bristles of the brown broom",
+        "done_when": "released(broom)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "dustpan"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 5,
+        "action": "grasp",
+        "target": "dustpan",
+        "affordance_region": "the rim of the blue dustpan",
+        "done_when": "holding(dustpan)"
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "dustpan",
+                "stable_surface",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "dustpan"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 6,
+        "action": "transport",
+        "target": "dustpan",
+        "destination": "stable_surface",
+        "affordance_region": "a flat area on the sandy surface",
+        "done_when": "above(dustpan, stable_surface, 0.05)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "released",
+              "args": [
+                "dustpan"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "dustpan"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 7,
+        "action": "release",
+        "target": "dustpan",
+        "affordance_region": "the rim of the blue dustpan",
+        "done_when": "released(dustpan)"
+      }
+    ]
+  }
+}

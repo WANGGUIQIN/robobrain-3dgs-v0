@@ -1,0 +1,163 @@
+{
+  "task": "toggle the green light switch to turn on the green light",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_3epoch/best",
+  "raw": "**SCENE ANALYSIS -** A white cabinet with open shelves is visible. On the countertop, there is a white tray with a yellow object inside, a white sink, and a black handle on the cabinet door. The task is to toggle a green light switch, which is not visible in the image. STRATEGY - The switch is likely on the wall near the cabinet. The robot must reach the wall, locate the switch, and perform a toggle action. Failure modes include mislocating the switch or failing to grasp it. AFFORDANCE REASONING - Step 1 reach the wall near the cabinet; Step 2 locate the green light switch; Step 3 grasp the switch; Step 4 toggle the switch.\n\nGoal: toggled(green_light_switch)\nScene: white_cabinet, white_tray, yellow_object, white_sink, black_handle\nStep 1: reach(wall_near_cabinet)\n  affordance_region: the wall near the cabinet\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, wall_near_cabinet, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, wall_near_cabinet) < 0.03\nStep 2: locate(green_light_switch)\n  affordance_region: the green light switch on the wall\n  contact: visible(green_light_switch) [completion]\n  spatial: near(green_light_switch, gripper) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: visible(green_light_switch)\nStep 3: grasp(green_light_switch)\n  affordance_region: the green light switch\n  contact: holding(green_light_switch) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(green_light_switch)\nStep 4: toggle(green_light_switch)\n  affordance_region: the green light switch\n  contact: toggled(green_light_switch) [completion]\n  direction: toggle_axis(0, 0, -1) [progress]\n  done_when: toggled(green_light_switch)\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [
+      {
+        "pred": "toggled",
+        "args": [
+          "green_light_switch"
+        ]
+      }
+    ],
+    "scene_objects": [
+      "white_cabinet",
+      "white_tray",
+      "yellow_object",
+      "white_sink",
+      "black_handle"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "wall_near_cabinet",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "wall_near_cabinet",
+        "affordance_region": "the wall near the cabinet",
+        "done_when": "distance(gripper, wall_near_cabinet) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "visible",
+              "args": [
+                "green_light_switch"
+              ],
+              "role": "completion"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "near",
+              "args": [
+                "green_light_switch",
+                "gripper"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "locate",
+        "target": "green_light_switch",
+        "affordance_region": "the green light switch on the wall",
+        "done_when": "visible(green_light_switch)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "green_light_switch"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "grasp",
+        "target": "green_light_switch",
+        "affordance_region": "the green light switch",
+        "done_when": "holding(green_light_switch)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "toggled",
+              "args": [
+                "green_light_switch"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "toggle_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "toggle",
+        "target": "green_light_switch",
+        "affordance_region": "the green light switch",
+        "done_when": "toggled(green_light_switch)"
+      }
+    ]
+  }
+}

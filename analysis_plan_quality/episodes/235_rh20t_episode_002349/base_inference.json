@@ -1,0 +1,18 @@
+{
+  "task": "Build with small Lego blocks for the nth time with n blocks",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_3epoch/best",
+  "raw": "SCENE ANALYSIS - A wooden table holds a white baseplate with a red button, a small black object, and a green object. A red cup is on the right. The task is to build with small Lego blocks for the nth time with n blocks. The scene has no visible small Lego blocks, so the task is impossible. STRATEGY - The task cannot be completed due to missing required objects. AFFORDANCE REASONING - No affordances for Lego block manipulation exist as the blocks are not present.\nGoal: <none>\nScene: white_baseplate, red_button, black_object, green_object, red_cup, table\nStep 1: <none>\n  affordance_region: <none>\n  contact: <none>\n  spatial: <none>\n  direction: <none>\n  safety: <none>\n  done_when: <none>\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [],
+    "scene_objects": [
+      "white_baseplate",
+      "red_button",
+      "black_object",
+      "green_object",
+      "red_cup",
+      "table"
+    ],
+    "steps": []
+  }
+}

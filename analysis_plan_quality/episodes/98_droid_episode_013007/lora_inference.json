@@ -1,0 +1,244 @@
+{
+  "task": "Pick up the pot from the stove and put it on the counter",
+  "parsed": {
+    "scene_objects": [
+      "pot",
+      "stove",
+      "counter"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "pot",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "pot",
+        "affordance_region": "the body of the pot",
+        "done_when": "distance(gripper, pot) < 0.03",
+        "affordance_hint": "the body of the pot",
+        "refine_prompt": "the body of the pot",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.543,
+          0.75
+        ],
+        "affordance_3d_refined": [
+          -0.3093,
+          1.0603,
+          2.9453
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.3794,
+        "affordance": [
+          0.543,
+          0.75
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "pot"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "pot",
+        "affordance_region": "the handle of the pot",
+        "done_when": "holding(pot)",
+        "affordance_hint": "the handle of the pot",
+        "refine_prompt": "the handle of the pot",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.543,
+          0.625
+        ],
+        "affordance_3d_refined": [
+          -0.2928,
+          0.5577,
+          2.7887
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.4747,
+        "affordance": [
+          0.543,
+          0.625
+        ]
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "pot",
+                "counter",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "pot"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "pot",
+        "destination": "counter",
+        "affordance_region": "an empty area on the counter",
+        "done_when": "above(pot, counter, 0.05)",
+        "affordance_hint": "an empty area on the counter",
+        "refine_prompt": "an empty area on the counter",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.3906,
+          0.9922
+        ],
+        "affordance_3d_refined": [
+          -0.3846,
+          0.8589,
+          1.282
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.3354,
+        "affordance": [
+          0.3906,
+          0.9922
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "surface_contact",
+              "args": [
+                "pot",
+                "counter"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "pot"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "pot"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "place",
+        "target": "pot",
+        "destination": "counter",
+        "affordance_region": "an empty area on the counter",
+        "done_when": "surface_contact(pot, counter) AND released(pot) AND stable(pot)",
+        "affordance_hint": "an empty area on the counter",
+        "refine_prompt": "an empty area on the counter",
+        "refine_cache_hit": true,
+        "affordance_refined": [
+          0.3906,
+          0.9922
+        ],
+        "affordance_3d_refined": [
+          -0.3846,
+          0.8589,
+          1.282
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.3354,
+        "affordance": [
+          0.3906,
+          0.9922
+        ]
+      }
+    ]
+  }
+}

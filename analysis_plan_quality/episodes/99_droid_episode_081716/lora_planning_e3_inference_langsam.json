@@ -1,0 +1,168 @@
+{
+  "task": "Close the cube-shaped object",
+  "scene_objects": [
+    "cube-shaped_object",
+    "table"
+  ],
+  "steps": [
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "cube-shaped_object",
+              "<",
+              "0.03"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "approach_axis",
+            "args": [
+              "0",
+              "0",
+              "-1"
+            ],
+            "role": "progress"
+          }
+        ]
+      },
+      "step": 1,
+      "action": "reach",
+      "target": "cube-shaped_object",
+      "affordance_region": "the cube-shaped object",
+      "done_when": "distance(gripper, cube-shaped_object) < 0.03",
+      "affordance_hint": "the cube-shaped object",
+      "refine_prompt": "the cube-shaped object",
+      "refine_cache_hit": false,
+      "affordance_refined": [
+        0.7852,
+        0.0312
+      ],
+      "affordance_3d_refined": [
+        0.7121,
+        -1.9452,
+        3.4736
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.3135
+    },
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "cube-shaped_object"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              "0",
+              "0",
+              "-1"
+            ],
+            "role": "progress"
+          }
+        ]
+      },
+      "step": 2,
+      "action": "grasp",
+      "target": "cube-shaped_object",
+      "affordance_region": "the top edge of the cube-shaped object",
+      "done_when": "holding(cube-shaped_object)",
+      "affordance_hint": "the top edge of the cube-shaped object",
+      "refine_prompt": "the top edge of the cube-shaped object",
+      "refine_cache_hit": false,
+      "affordance_refined": [
+        0.7852,
+        0.0312
+      ],
+      "affordance_3d_refined": [
+        0.7121,
+        -1.9452,
+        3.4736
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.3231
+    },
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "cube-shaped_object"
+            ],
+            "role": "safety"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "orientation_match",
+            "args": [
+              "cube-shaped_object",
+              "closed"
+            ],
+            "role": "completion"
+          }
+        ]
+      },
+      "step": 3,
+      "action": "rotate",
+      "target": "cube-shaped_object",
+      "affordance_region": "the body of the cube-shaped object",
+      "done_when": "orientation_match(cube-shaped_object, closed)",
+      "affordance_hint": "the body of the cube-shaped object",
+      "refine_prompt": "the body of the cube-shaped object",
+      "refine_cache_hit": false,
+      "refine_prompt_fallback": "cube-shaped object",
+      "affordance_refined": [
+        0.7852,
+        0.0312
+      ],
+      "affordance_3d_refined": [
+        0.7121,
+        -1.9452,
+        3.4736
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.2842
+    }
+  ]
+}

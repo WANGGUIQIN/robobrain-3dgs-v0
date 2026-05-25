@@ -1,0 +1,117 @@
+{
+  "task": "pick up the purple block",
+  "scene_objects": [
+    "purple_block",
+    "table"
+  ],
+  "num_steps": 2,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "purple_block",
+      "affordance": [
+        0.276,
+        0.92
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "purple_block",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "table"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, purple_block) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        -0.4226,
+        0.8007,
+        1.651
+      ],
+      "affordance_hint": "the purple block",
+      "affordance_hint_original": "the purple block",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 2,
+      "action": "grasp",
+      "target": "purple_block",
+      "affordance": [
+        0.2,
+        0.285
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "purple_block"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "holding",
+            "args": [
+              "purple_block"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              0,
+              0,
+              -1
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "holding(purple_block)",
+      "affordance_3d": [
+        -0.6345,
+        -0.4532,
+        1.835
+      ],
+      "affordance_hint": "the purple block",
+      "affordance_hint_original": "purple block",
+      "affordance_hint_confidence": "ok"
+    }
+  ]
+}

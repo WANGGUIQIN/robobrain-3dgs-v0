@@ -1,0 +1,239 @@
+{
+  "task": "place the milk dairy in the white plate",
+  "scene_objects": [
+    "milk_dairy",
+    "white_plate",
+    "table"
+  ],
+  "num_steps": 4,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "milk_dairy",
+      "affordance": [
+        0.633,
+        0.352
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "milk_dairy",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "table"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, milk_dairy) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        0.3122,
+        -0.349,
+        2.0451
+      ],
+      "affordance_hint": "the blue plastic milk dairy",
+      "affordance_hint_original": "the milk dairy",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 2,
+      "action": "grasp",
+      "target": "milk_dairy",
+      "affordance": [
+        0.633,
+        0.352
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "milk_dairy"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "holding",
+            "args": [
+              "milk_dairy"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              0,
+              0,
+              -1
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "holding(milk_dairy)",
+      "affordance_3d": [
+        0.3122,
+        -0.349,
+        2.0451
+      ],
+      "affordance_hint": "the body of the milk dairy",
+      "affordance_hint_original": "milk dairy",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 3,
+      "action": "transport",
+      "target": "milk_dairy",
+      "destination": "white_plate",
+      "affordance": [
+        0.625,
+        0.361
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "milk_dairy"
+            ],
+            "role": "safety"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "above",
+            "args": [
+              "milk_dairy",
+              "white_plate",
+              0.05
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "milk_dairy",
+              "white_plate"
+            ]
+          },
+          {
+            "pred": "no_drop",
+            "args": [
+              "milk_dairy"
+            ]
+          }
+        ]
+      },
+      "done_when": "above(milk_dairy, white_plate, 0.05) AND aligned_xy(milk_dairy, white_plate, 0.03)",
+      "affordance_3d": [
+        0.2967,
+        -0.3338,
+        2.0647
+      ],
+      "affordance_hint": "the empty area on the white plate",
+      "affordance_hint_original": "an empty area on the white plate",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 4,
+      "action": "place",
+      "target": "milk_dairy",
+      "destination": "white_plate",
+      "affordance": [
+        0.625,
+        0.361
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "surface_contact",
+            "args": [
+              "milk_dairy",
+              "white_plate"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "released",
+            "args": [
+              "milk_dairy"
+            ],
+            "role": "completion"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "stable",
+            "args": [
+              "milk_dairy"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "support_stable",
+            "args": [
+              "milk_dairy"
+            ]
+          }
+        ]
+      },
+      "done_when": "surface_contact(milk_dairy, white_plate) AND released(milk_dairy) AND stable(milk_dairy)",
+      "affordance_3d": [
+        0.2967,
+        -0.3338,
+        2.0647
+      ],
+      "affordance_hint": "the empty area on the white plate",
+      "affordance_hint_original": "an empty area on the white plate",
+      "affordance_hint_confidence": "ok"
+    }
+  ]
+}

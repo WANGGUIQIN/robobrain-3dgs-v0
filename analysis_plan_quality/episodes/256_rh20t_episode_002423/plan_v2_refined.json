@@ -1,0 +1,176 @@
+{
+  "task": "Press a button from top to bottom with obstacles",
+  "scene_objects": [
+    "yellow_button",
+    "green_button",
+    "gray_obstacle",
+    "table"
+  ],
+  "num_steps": 3,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "green_button",
+      "affordance": [
+        0.285,
+        0.544
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "green_button",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "gray_obstacle"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, green_button) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        -1.2916,
+        -0.2144,
+        1.6733
+      ],
+      "affordance_hint": "the green button on the gray obstacle",
+      "affordance_hint_original": "the green button",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 2,
+      "action": "press",
+      "target": "green_button",
+      "affordance": [
+        0.285,
+        0.544
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "green_button"
+            ],
+            "role": "completion"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "aligned_z",
+            "args": [
+              "gripper",
+              "green_button"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "force_limit",
+            "args": [
+              "gripper",
+              "green_button"
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "gripper_contact(green_button) AND aligned_z(gripper, green_button)",
+      "affordance_3d": [
+        -1.2916,
+        -0.2144,
+        1.6733
+      ],
+      "affordance_hint": "the center of the green button",
+      "affordance_hint_original": "the center of the green button",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 3,
+      "action": "retreat",
+      "target": "green_button",
+      "affordance": [
+        0.285,
+        0.544
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "released",
+            "args": [
+              "green_button"
+            ],
+            "role": "completion"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "green_button",
+              ">",
+              0.05
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "gray_obstacle"
+            ]
+          }
+        ]
+      },
+      "done_when": "released(green_button) AND distance(gripper, green_button) > 0.05",
+      "affordance_3d": [
+        -1.2916,
+        -0.2144,
+        1.6733
+      ],
+      "affordance_hint": "the green button on the gray obstacle",
+      "affordance_hint_original": "green button",
+      "affordance_hint_confidence": "ok"
+    }
+  ]
+}

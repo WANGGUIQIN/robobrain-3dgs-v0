@@ -1,0 +1,242 @@
+{
+  "task": "place orange into middle drawer",
+  "scene_objects": [
+    "orange",
+    "middle_drawer",
+    "table",
+    "apple",
+    "bowl",
+    "can"
+  ],
+  "num_steps": 4,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "orange",
+      "affordance": [
+        0.634,
+        0.386
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "orange",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "table"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, orange) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        0.5692,
+        -0.4855,
+        3.728
+      ],
+      "affordance_hint": "the orange",
+      "affordance_hint_original": "the orange",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 2,
+      "action": "grasp",
+      "target": "orange",
+      "affordance": [
+        0.631,
+        0.386
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "orange"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "holding",
+            "args": [
+              "orange"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              0,
+              0,
+              -1
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "holding(orange)",
+      "affordance_3d": [
+        0.5692,
+        -0.4855,
+        3.728
+      ],
+      "affordance_hint": "the body of the orange",
+      "affordance_hint_original": "orange",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 3,
+      "action": "transport",
+      "target": "orange",
+      "destination": "middle_drawer",
+      "affordance": [
+        0.5,
+        0.808
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "orange"
+            ],
+            "role": "safety"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "above",
+            "args": [
+              "orange",
+              "middle_drawer",
+              0.05
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "orange",
+              "middle_drawer"
+            ]
+          },
+          {
+            "pred": "no_drop",
+            "args": [
+              "orange"
+            ]
+          }
+        ]
+      },
+      "done_when": "above(orange, middle_drawer, 0.05) AND aligned_xy(orange, middle_drawer, 0.03)",
+      "affordance_3d": [
+        0.0,
+        0.7533,
+        2.1234
+      ],
+      "affordance_hint": "the empty area in the middle drawer",
+      "affordance_hint_original": "an empty area on the middle drawer",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 4,
+      "action": "place",
+      "target": "orange",
+      "destination": "middle_drawer",
+      "affordance": [
+        0.5,
+        0.808
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "surface_contact",
+            "args": [
+              "orange",
+              "middle_drawer"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "released",
+            "args": [
+              "orange"
+            ],
+            "role": "completion"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "stable",
+            "args": [
+              "orange"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "support_stable",
+            "args": [
+              "orange"
+            ]
+          }
+        ]
+      },
+      "done_when": "surface_contact(orange, middle_drawer) AND released(orange) AND stable(orange)",
+      "affordance_3d": [
+        0.0,
+        0.7533,
+        2.1234
+      ],
+      "affordance_hint": "the empty area in the middle drawer",
+      "affordance_hint_original": "an empty area on the middle drawer",
+      "affordance_hint_confidence": "ok"
+    }
+  ]
+}

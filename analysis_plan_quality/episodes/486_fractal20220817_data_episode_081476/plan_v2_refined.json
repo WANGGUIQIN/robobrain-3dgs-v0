@@ -1,0 +1,240 @@
+{
+  "task": "move rxbar chocolate near sponge",
+  "scene_objects": [
+    "rxbar_chocolate",
+    "sponge",
+    "can",
+    "table"
+  ],
+  "num_steps": 4,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "rxbar_chocolate",
+      "affordance": [
+        0.708,
+        0.459
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "rxbar_chocolate",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "can"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, rxbar_chocolate) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        0.6823,
+        -0.1287,
+        2.867
+      ],
+      "affordance_hint": "the rxbar chocolate",
+      "affordance_hint_original": "the rxbar chocolate",
+      "affordance_hint_confidence": "rejected:missing_token:rxbar chocolate"
+    },
+    {
+      "step": 2,
+      "action": "grasp",
+      "target": "rxbar_chocolate",
+      "affordance": [
+        0.7,
+        0.45
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "rxbar_chocolate"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "holding",
+            "args": [
+              "rxbar_chocolate"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              0,
+              0,
+              -1
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "holding(rxbar_chocolate)",
+      "affordance_3d": [
+        0.6476,
+        -0.1651,
+        2.8279
+      ],
+      "affordance_hint": "the black plastic body of the rxbar chocolate",
+      "affordance_hint_original": "the handle of the rxbar chocolate",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 3,
+      "action": "transport",
+      "target": "rxbar_chocolate",
+      "destination": "near_sponge",
+      "affordance": [
+        0.402,
+        0.425
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "rxbar_chocolate"
+            ],
+            "role": "safety"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "near",
+            "args": [
+              "rxbar_chocolate",
+              "sponge",
+              0.05
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "rxbar_chocolate",
+              "sponge"
+            ]
+          },
+          {
+            "pred": "no_drop",
+            "args": [
+              "rxbar_chocolate"
+            ]
+          }
+        ]
+      },
+      "done_when": "near(rxbar_chocolate, sponge, 0.05)",
+      "affordance_3d": [
+        -0.3087,
+        -0.2346,
+        2.7496
+      ],
+      "affordance_hint": "the empty area on the table near the green sponge",
+      "affordance_hint_original": "an empty area on the near sponge",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 4,
+      "action": "place",
+      "target": "rxbar_chocolate",
+      "destination": "near_sponge",
+      "affordance": [
+        0.402,
+        0.425
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "surface_contact",
+            "args": [
+              "rxbar_chocolate",
+              "table"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "released",
+            "args": [
+              "rxbar_chocolate"
+            ],
+            "role": "completion"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "stable",
+            "args": [
+              "rxbar_chocolate"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "support_stable",
+            "args": [
+              "rxbar_chocolate"
+            ]
+          }
+        ]
+      },
+      "done_when": "surface_contact(rxbar_chocolate, table) AND released(rxbar_chocolate) AND stable(rxbar_chocolate)",
+      "affordance_3d": [
+        -0.3087,
+        -0.2346,
+        2.7496
+      ],
+      "affordance_hint": "the empty area on the table near the green sponge",
+      "affordance_hint_original": "an empty area on the near sponge",
+      "affordance_hint_confidence": "ok"
+    }
+  ]
+}

@@ -1,0 +1,358 @@
+{
+  "task": "Put the cups into each other in the black bowl and put the fork in them beginning with the dark blue one, then the light blue one, and finally the orange one",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_3epoch/best",
+  "raw": "**SCENE ANALYSIS** - A wooden table holds a black bowl, four cups (dark blue, light blue, orange, green), and a fork. The cups are separate; the bowl is empty. The task requires stacking cups in the bowl, starting with dark blue, then light blue, then orange, and finally placing the fork inside. The bowl is the destination container. **STRATEGY** - First, stack the cups in the bowl in the specified order. Then, pick up the fork and place it inside the stacked cups. Failure modes include dropping cups during stacking or the fork, or misplacing the fork. **AFFORDANCE REASONING** - Step 1: Reach for the dark blue cup (body) to grasp. Step 2: Grasp the dark blue cup (rim) and place it in the bowl. Step 3: Repeat for light blue and orange cups, placing each on top of the previous. Step 4: Grasp the fork (handle) and place it inside the stacked cups.\n\nGoal: stacked([dark_blue_cup, light_blue_cup, orange_cup, fork]); all_inside([dark_blue_cup, light_blue_cup, orange_cup, fork], black_bowl)\nScene: black_bowl, dark_blue_cup, light_blue_cup, orange_cup, green_cup, fork, table\nStep 1: reach(dark_blue_cup)\n  affordance_region: the body of the dark blue cup\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, dark_blue_cup, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, dark_blue_cup) < 0.03\nStep 2: grasp(dark_blue_cup)\n  affordance_region: the rim of the dark blue cup\n  contact: holding(dark_blue_cup) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(dark_blue_cup)\nStep 3: transport(dark_blue_cup -> black_bowl)\n  affordance_region: an empty area inside the black bowl\n  spatial: inside(dark_blue_cup, black_bowl) [completion]\n  safety: no_drop(dark_blue_cup)\n  done_when: inside(dark_blue_cup, black_bowl)\nStep 4: place(dark_blue_cup -> black_bowl)\n  affordance_region: an empty area inside the black bowl\n  contact: surface_contact(dark_blue_cup, black_bowl) [completion]; released(dark_blue_cup) [completion]\n  pose: stable(dark_blue_cup) [completion]\n  done_when: surface_contact(dark_blue_cup, black_bowl) AND released(dark_blue_cup)\nStep 5: reach(light_blue_cup)\n  affordance_region: the body of the light blue cup\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, light_blue_cup, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, light_blue_cup) < 0.03\nStep 6: grasp(light_blue_cup)\n  affordance_region: the rim of the light blue cup\n  contact: holding(light_blue_cup) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(light_blue_cup)\nStep 7: transport(light_blue_cup -> black_bowl)\n  affordance_region: an empty area inside the black bowl\n  spatial: inside(light_blue_cup, black_bowl) [completion]\n  safety: no_drop(light_blue_cup)\n  done_when: inside(light_blue_cup, black_bowl)\nStep 8: place(light_blue_cup -> black_bowl)\n  affordance_region: an empty area inside the black bowl\n  contact: surface_contact(light_blue_cup, black_bowl) [completion]; released(light_blue_cup) [completion]\n  pose: stable(light_blue_cup) [completion]\n  done_when: surface_contact(light_blue_cup, black_bowl) AND released(light_blue_cup)\nStep 9: reach(orange_cup)\n  affordance_region: the body of the orange cup\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, orange_cup, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, orange_cup) < 0.03\nStep 10: grasp(orange_cup)\n  affordance_region: the rim",
+  "parsed": {
+    "reasoning": "",
+    "goal": [
+      {
+        "pred": "stacked",
+        "args": [
+          "[dark_blue_cup",
+          "light_blue_cup",
+          "orange_cup",
+          "fork]"
+        ]
+      },
+      {
+        "pred": "all_inside",
+        "args": [
+          "[dark_blue_cup",
+          "light_blue_cup",
+          "orange_cup",
+          "fork]",
+          "black_bowl"
+        ]
+      }
+    ],
+    "scene_objects": [
+      "black_bowl",
+      "dark_blue_cup",
+      "light_blue_cup",
+      "orange_cup",
+      "green_cup",
+      "fork",
+      "table"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "dark_blue_cup",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "dark_blue_cup",
+        "affordance_region": "the body of the dark blue cup",
+        "done_when": "distance(gripper, dark_blue_cup) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "dark_blue_cup"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "dark_blue_cup",
+        "affordance_region": "the rim of the dark blue cup",
+        "done_when": "holding(dark_blue_cup)"
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "inside",
+              "args": [
+                "dark_blue_cup",
+                "black_bowl"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "dark_blue_cup"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "dark_blue_cup",
+        "destination": "black_bowl",
+        "affordance_region": "an empty area inside the black bowl",
+        "done_when": "inside(dark_blue_cup, black_bowl)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "surface_contact",
+              "args": [
+                "dark_blue_cup",
+                "black_bowl"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "dark_blue_cup"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "dark_blue_cup"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "place",
+        "target": "dark_blue_cup",
+        "destination": "black_bowl",
+        "affordance_region": "an empty area inside the black bowl",
+        "done_when": "surface_contact(dark_blue_cup, black_bowl) AND released(dark_blue_cup)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "light_blue_cup",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 5,
+        "action": "reach",
+        "target": "light_blue_cup",
+        "affordance_region": "the body of the light blue cup",
+        "done_when": "distance(gripper, light_blue_cup) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "light_blue_cup"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 6,
+        "action": "grasp",
+        "target": "light_blue_cup",
+        "affordance_region": "the rim of the light blue cup",
+        "done_when": "holding(light_blue_cup)"
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "inside",
+              "args": [
+                "light_blue_cup",
+                "black_bowl"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "light_blue_cup"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 7,
+        "action": "transport",
+        "target": "light_blue_cup",
+        "destination": "black_bowl",
+        "affordance_region": "an empty area inside the black bowl",
+        "done_when": "inside(light_blue_cup, black_bowl)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "surface_contact",
+              "args": [
+                "light_blue_cup",
+                "black_bowl"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "light_blue_cup"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "light_blue_cup"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 8,
+        "action": "place",
+        "target": "light_blue_cup",
+        "destination": "black_bowl",
+        "affordance_region": "an empty area inside the black bowl",
+        "done_when": "surface_contact(light_blue_cup, black_bowl) AND released(light_blue_cup)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "orange_cup",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 9,
+        "action": "reach",
+        "target": "orange_cup",
+        "affordance_region": "the body of the orange cup",
+        "done_when": "distance(gripper, orange_cup) < 0.03"
+      },
+      {
+        "constraints": {},
+        "step": 10,
+        "action": "grasp",
+        "target": "orange_cup",
+        "affordance_region": "the rim"
+      }
+    ]
+  }
+}

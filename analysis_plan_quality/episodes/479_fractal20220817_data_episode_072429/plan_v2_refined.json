@@ -1,0 +1,126 @@
+{
+  "task": "pick 7up can",
+  "scene_objects": [
+    "7up_can",
+    "apple",
+    "water_bottle",
+    "table"
+  ],
+  "num_steps": 2,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "7up_can",
+      "affordance": [
+        0.5,
+        0.459
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "7up_can",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "apple"
+            ]
+          },
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "water_bottle"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, 7up_can) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        0.0,
+        -0.1621,
+        3.6106
+      ],
+      "affordance_hint": "the 7up can",
+      "affordance_hint_original": "the 7up can",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 2,
+      "action": "grasp",
+      "target": "7up_can",
+      "affordance": [
+        0.5,
+        0.445
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "7up_can"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "holding",
+            "args": [
+              "7up_can"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              0,
+              0,
+              -1
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "holding(7up_can)",
+      "affordance_3d": [
+        0.0,
+        -0.2233,
+        3.5519
+      ],
+      "affordance_hint": "the body of the 7up can",
+      "affordance_hint_original": "the handle of the 7up can",
+      "affordance_hint_confidence": "ok"
+    }
+  ]
+}

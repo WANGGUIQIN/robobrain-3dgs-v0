@@ -1,0 +1,130 @@
+{
+  "task": "screw in the white light bulb",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_3epoch/best",
+  "raw": "**SCENE ANALYSIS -** A robotic arm is positioned over a table with a white light bulb, a purple object, and a brown object. The light bulb is the target for the task. The bulb has a screw base, indicating it can be screwed into a socket. The scene contains no visible socket, so the task likely involves screwing the bulb into a fixture not shown. The bulb is on the table, so the first step is to pick it up. The bulb is small and likely requires a precise grasp. The arm must approach the bulb, grasp it, and then move it to a screwing position. The task assumes the presence of a socket or fixture for screwing, which is not visible in the scene but is implied by the task goal.\n\n**STRATEGY -** The plan involves picking up the light bulb, moving it to a screwing position, and then screwing it in. Since the socket is not visible, the plan assumes the bulb is being screwed into a fixture that is either already in place or will be interacted with next. The steps must ensure the bulb is securely held and positioned correctly for screwing.\n\n**AFFORDANCE REASONING -** Step 1 requires reaching the bulb, which is on the table. The bulb's body is the target for grasping. Step 2 involves grasping the bulb, likely at its base for stability. Step 3 is transporting the bulb to a screwing position, which would be a socket or fixture. Step 4 involves screwing the bulb into the socket, which requires rotating the bulb's base into the socket.\n\n**Goal:** screw_in(white_light_bulb); stable(white_light_bulb)\n**Scene:** white_light_bulb, purple_object, brown_object, table\n**Step 1:** reach(white_light_bulb)\n  affordance_region: the body of the white light bulb\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, white_light_bulb, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, white_light_bulb) < 0.03\n**Step 2:** grasp(white_light_bulb)\n  affordance_region: the base of the white light bulb\n  contact: holding(white_light_bulb) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(white_light_bulb)\n**Step 3:** transport(white_light_bulb -> screwing_position)\n  affordance_region: a socket or fixture for screwing\n  spatial: above(white_light_bulb, screwing_position, 0.05) [completion]\n  safety: no_drop(white_light_bulb)\n  done_when: above(white_light_bulb, screwing_position, 0.05)\n**Step 4:** screw_in(white_light_bulb)\n  affordance_region: the socket or fixture\n  contact: inserted(white_light_bulb) [completion]\n  pose: stable(white_light_bulb) [completion]\n  done_when: inserted(white_light_bulb) AND stable(white_light_bulb)\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [],
+    "scene_objects": [],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "white_light_bulb",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "white_light_bulb",
+        "affordance_region": "the body of the white light bulb",
+        "done_when": "distance(gripper, white_light_bulb) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "white_light_bulb"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "white_light_bulb",
+        "affordance_region": "the base of the white light bulb",
+        "done_when": "holding(white_light_bulb)"
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "white_light_bulb",
+                "screwing_position",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "white_light_bulb"
+              ],
+              "role": "safety"
+            }
+          ],
+          "contact": [
+            {
+              "pred": "inserted",
+              "args": [
+                "white_light_bulb"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "white_light_bulb"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "white_light_bulb",
+        "destination": "screwing_position",
+        "affordance_region": "a socket or fixture for screwing",
+        "done_when": "above(white_light_bulb, screwing_position, 0.05)"
+      }
+    ]
+  }
+}

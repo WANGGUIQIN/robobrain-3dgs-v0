@@ -1,0 +1,167 @@
+{
+  "task": "Remove the book from the bowl and put it on the top if the head rest of the sofa",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_3epoch/best",
+  "raw": "**SCENE ANALYSIS - A brown bowl sits on a dark brown sofa. Inside the bowl is a book with a light-colored cover. The sofa has a headrest area. STRATEGY - First, reach into the bowl to grasp the book. Then, transport the book to the headrest area and place it there. Failure modes include dropping the book during transport or misplacing it on the sofa. AFFORDANCE REASONING - Step 1 reach into the bowl to access the book; Step 2 grasp the book from inside the bowl; Step 3 transport the book to the headrest; Step 4 place the book on the headrest.**\nGoal: on(book, sofa_headrest); stable(book)\nScene: brown_bowl, book, sofa, sofa_headrest\nStep 1: reach(brown_bowl)\n  affordance_region: the rim of the brown bowl\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, brown_bowl, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, brown_bowl) < 0.03\nStep 2: grasp(book)\n  affordance_region: the cover of the book inside the brown bowl\n  contact: holding(book) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(book)\nStep 3: transport(book -> sofa_headrest)\n  affordance_region: an empty area on the sofa headrest\n  spatial: above(book, sofa_headrest, 0.05) [completion]\n  safety: no_drop(book)\n  done_when: above(book, sofa_headrest, 0.05)\nStep 4: place(book -> sofa_headrest)\n  affordance_region: an empty area on the sofa headrest\n  contact: surface_contact(book, sofa_headrest) [completion]; released(book) [completion]\n  pose: stable(book) [completion]\n  done_when: surface_contact(book, sofa_headrest) AND released(book)\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [
+      {
+        "pred": "on",
+        "args": [
+          "book",
+          "sofa_headrest"
+        ]
+      },
+      {
+        "pred": "stable",
+        "args": [
+          "book"
+        ]
+      }
+    ],
+    "scene_objects": [
+      "brown_bowl",
+      "book",
+      "sofa",
+      "sofa_headrest"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "brown_bowl",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "brown_bowl",
+        "affordance_region": "the rim of the brown bowl",
+        "done_when": "distance(gripper, brown_bowl) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "book"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "book",
+        "affordance_region": "the cover of the book inside the brown bowl",
+        "done_when": "holding(book)"
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "book",
+                "sofa_headrest",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "book"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "book",
+        "destination": "sofa_headrest",
+        "affordance_region": "an empty area on the sofa headrest",
+        "done_when": "above(book, sofa_headrest, 0.05)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "surface_contact",
+              "args": [
+                "book",
+                "sofa_headrest"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "book"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "book"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "place",
+        "target": "book",
+        "destination": "sofa_headrest",
+        "affordance_region": "an empty area on the sofa headrest",
+        "done_when": "surface_contact(book, sofa_headrest) AND released(book)"
+      }
+    ]
+  }
+}

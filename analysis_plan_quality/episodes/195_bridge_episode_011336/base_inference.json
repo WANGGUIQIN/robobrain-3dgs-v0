@@ -1,0 +1,191 @@
+{
+  "task": "close cabinet",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_3epoch/best",
+  "raw": "**SCENE ANALYSIS - A white cabinet door is open, revealing a yellow bottle inside. The door has a handle and a hinge. STRATEGY - First, reach for the cabinet door handle to grasp it. Then, pull the door towards the hinge to close it. Ensure the door is fully closed and aligned with the cabinet frame. AFFORDANCE REASONING - Step 1: Reach for the cabinet door handle. Step 2: Grasp the handle to pull the door. Step 3: Pull the door towards the hinge until it is closed. Step 4: Verify the door is fully closed and aligned.**\nGoal: closed(cabinet_door); aligned(cabinet_door)\nScene: cabinet_door, handle, hinge\nStep 1: reach(cabinet_door)\n  affordance_region: the handle of the cabinet door\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, handle, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, handle) < 0.03\nStep 2: grasp(handle)\n  affordance_region: the handle of the cabinet door\n  contact: holding(handle) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(handle)\nStep 3: pull(handle -> hinge)\n  affordance_region: the hinge side of the cabinet door\n  contact: holding(handle) [progress]\n  spatial: distance(handle, hinge, <, 0.05) [completion]\n  direction: pull_axis(0, 0, -1) [progress]\n  safety: no_drop(handle)\n  done_when: distance(handle, hinge) < 0.05\nStep 4: release(handle)\n  affordance_region: the handle of the cabinet door\n  contact: released(handle) [completion]\n  spatial: distance(handle, hinge, <, 0.05) [completion]\n  direction: release_axis(0, 0, -1) [progress]\n  done_when: released(handle) AND distance(handle, hinge) < 0.05\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [
+      {
+        "pred": "closed",
+        "args": [
+          "cabinet_door"
+        ]
+      },
+      {
+        "pred": "aligned",
+        "args": [
+          "cabinet_door"
+        ]
+      }
+    ],
+    "scene_objects": [
+      "cabinet_door",
+      "handle",
+      "hinge"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "handle",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "cabinet_door",
+        "affordance_region": "the handle of the cabinet door",
+        "done_when": "distance(gripper, handle) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "handle"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "handle",
+        "affordance_region": "the handle of the cabinet door",
+        "done_when": "holding(handle)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "handle"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "handle",
+                "hinge",
+                "<",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "pull_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "handle"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "pull",
+        "target": "handle",
+        "destination": "hinge",
+        "affordance_region": "the hinge side of the cabinet door",
+        "done_when": "distance(handle, hinge) < 0.05"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "released",
+              "args": [
+                "handle"
+              ],
+              "role": "completion"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "handle",
+                "hinge",
+                "<",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "release_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "release",
+        "target": "handle",
+        "affordance_region": "the handle of the cabinet door",
+        "done_when": "released(handle) AND distance(handle, hinge) < 0.05"
+      }
+    ]
+  }
+}

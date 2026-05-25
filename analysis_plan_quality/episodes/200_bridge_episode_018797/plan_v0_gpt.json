@@ -1,0 +1,170 @@
+{
+  "task": "pick up green mug",
+  "scene_objects": [
+    "green_mug",
+    "dishwasher_rack",
+    "other_glasses_and_mugs"
+  ],
+  "num_steps": 3,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "green_mug",
+      "affordance": [
+        0.631,
+        0.725
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "green_mug",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "dishwasher_rack"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, green_mug) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        0.366,
+        0.6244,
+        2.3974
+      ],
+      "affordance_hint": "the green mug"
+    },
+    {
+      "step": 2,
+      "action": "grasp",
+      "target": "green_mug",
+      "affordance": [
+        0.687,
+        0.837
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "green_mug"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "holding",
+            "args": [
+              "green_mug"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              0,
+              0,
+              -1
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "holding(green_mug)",
+      "affordance_3d": [
+        0.7529,
+        1.349,
+        3.4932
+      ],
+      "affordance_hint": "the handle of the green mug"
+    },
+    {
+      "step": 3,
+      "action": "transport",
+      "target": "green_mug",
+      "affordance": [
+        0.6,
+        0.925
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "green_mug"
+            ],
+            "role": "safety"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "clear_path",
+            "args": [
+              "green_mug"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "green_mug",
+              "dishwasher_rack"
+            ]
+          },
+          {
+            "pred": "no_drop",
+            "args": [
+              "green_mug"
+            ]
+          }
+        ]
+      },
+      "done_when": "clear_path(green_mug) AND holding(green_mug)",
+      "affordance_3d": [
+        0.2982,
+        1.25,
+        2.5539
+      ],
+      "affordance_hint": "an empty area on the green mug"
+    }
+  ]
+}

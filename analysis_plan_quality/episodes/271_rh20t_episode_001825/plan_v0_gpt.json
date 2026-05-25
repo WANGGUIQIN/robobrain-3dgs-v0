@@ -1,0 +1,166 @@
+{
+  "task": "Rotate the steering wheel 90 degrees counterclockwise",
+  "scene_objects": [
+    "steering_wheel",
+    "keyboard",
+    "mouse",
+    "table"
+  ],
+  "num_steps": 3,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "steering_wheel",
+      "affordance": [
+        0.334,
+        0.466
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "steering_wheel",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "keyboard"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, steering_wheel) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        -1.4812,
+        -0.3861,
+        2.0256
+      ],
+      "affordance_hint": "the steering wheel"
+    },
+    {
+      "step": 2,
+      "action": "grasp",
+      "target": "steering_wheel",
+      "affordance": [
+        0.3,
+        0.4
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "steering_wheel"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "holding",
+            "args": [
+              "steering_wheel"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              0,
+              0,
+              -1
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "holding(steering_wheel)",
+      "affordance_3d": [
+        -1.4639,
+        -0.4699,
+        1.9277
+      ],
+      "affordance_hint": "the handle of the steering wheel"
+    },
+    {
+      "step": 3,
+      "action": "rotate",
+      "target": "steering_wheel",
+      "affordance": [
+        0.35,
+        0.55
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "steering_wheel"
+            ],
+            "role": "safety"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "orientation_match",
+            "args": [
+              "steering_wheel",
+              "90_degrees_counterclockwise"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "steering_wheel",
+              "keyboard"
+            ]
+          }
+        ]
+      },
+      "done_when": "orientation_match(steering_wheel, 90_degrees_counterclockwise)",
+      "affordance_3d": [
+        -1.4699,
+        -0.2493,
+        2.0451
+      ],
+      "affordance_hint": "the body of the steering wheel"
+    }
+  ]
+}

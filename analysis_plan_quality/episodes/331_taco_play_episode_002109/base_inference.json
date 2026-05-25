@@ -1,0 +1,168 @@
+{
+  "task": "take the yellow block and rotate it right",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_3epoch/best",
+  "raw": "**SCENE ANALYSIS -** A white cabinet with open doors is visible, containing a red block on the right shelf and a yellow block on the left shelf. The cabinet has a wooden countertop with a white tray. The yellow block is a cube with a matte surface, and the red block is a cube with a glossy surface. The cabinet doors are white with black handles. The robot arm is positioned near the cabinet, ready to interact with the blocks. **STRATEGY -** The task requires rotating the yellow block to the right. This involves grasping the yellow block, rotating it 90 degrees to the right, and placing it back on the shelf. The rotation must be precise to ensure the block is correctly oriented. **AFFORDANCE REASONING -** Step 1: Reach for the yellow block to grasp it. Step 2: Grasp the yellow block securely. Step 3: Rotate the yellow block 90 degrees to the right. Step 4: Place the rotated yellow block back on the shelf.\n\nGoal: rotated(yellow_block, right); on(yellow_block, shelf)\nScene: yellow_block, red_block, cabinet, shelf, tray\nStep 1: reach(yellow_block)\n  affordance_region: the body of the yellow block\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, yellow_block, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, yellow_block) < 0.03\nStep 2: grasp(yellow_block)\n  affordance_region: the body of the yellow block\n  contact: holding(yellow_block) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(yellow_block)\nStep 3: rotate(yellow_block, right, 90)\n  affordance_region: the body of the yellow block\n  contact: holding(yellow_block) [progress]\n  pose: orientation(yellow_block, right, 90) [completion]\n  done_when: orientation(yellow_block, right, 90)\nStep 4: place(yellow_block -> shelf)\n  affordance_region: an empty area on the shelf\n  contact: surface_contact(yellow_block, shelf) [completion]; released(yellow_block) [completion]\n  pose: stable(yellow_block) [completion]\n  done_when: surface_contact(yellow_block, shelf) AND released(yellow_block)\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [
+      {
+        "pred": "rotated",
+        "args": [
+          "yellow_block",
+          "right"
+        ]
+      },
+      {
+        "pred": "on",
+        "args": [
+          "yellow_block",
+          "shelf"
+        ]
+      }
+    ],
+    "scene_objects": [
+      "yellow_block",
+      "red_block",
+      "cabinet",
+      "shelf",
+      "tray"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "yellow_block",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "yellow_block",
+        "affordance_region": "the body of the yellow block",
+        "done_when": "distance(gripper, yellow_block) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "yellow_block"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "yellow_block",
+        "affordance_region": "the body of the yellow block",
+        "done_when": "holding(yellow_block)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "yellow_block"
+              ],
+              "role": "progress"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "orientation",
+              "args": [
+                "yellow_block",
+                "right",
+                "90"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "rotate",
+        "target": "yellow_block, right, 90",
+        "affordance_region": "the body of the yellow block",
+        "done_when": "orientation(yellow_block, right, 90)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "surface_contact",
+              "args": [
+                "yellow_block",
+                "shelf"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "yellow_block"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "yellow_block"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "place",
+        "target": "yellow_block",
+        "destination": "shelf",
+        "affordance_region": "an empty area on the shelf",
+        "done_when": "surface_contact(yellow_block, shelf) AND released(yellow_block)"
+      }
+    ]
+  }
+}

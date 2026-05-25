@@ -1,0 +1,240 @@
+{
+  "task": "Put the white cable in the storage box",
+  "scene_objects": [
+    "white_cable",
+    "storage_box",
+    "shelf"
+  ],
+  "num_steps": 4,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "white_cable",
+      "affordance": [
+        0.437,
+        0.8
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "white_cable",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "shelf"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, white_cable) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        -0.1574,
+        0.2787,
+        0.6558
+      ],
+      "affordance_hint": "the white cable",
+      "affordance_hint_original": "the white cable",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 2,
+      "action": "grasp",
+      "target": "white_cable",
+      "affordance": [
+        0.675,
+        0.675
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "white_cable"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "holding",
+            "args": [
+              "white_cable"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              0,
+              0,
+              -1
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "holding(white_cable)",
+      "affordance_3d": [
+        0.1406,
+        0.5731,
+        2.1625
+      ],
+      "affordance_hint": "the white cable",
+      "affordance_hint_original": "the handle of the white cable",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 3,
+      "action": "transport",
+      "target": "white_cable",
+      "destination": "storage_box",
+      "affordance": [
+        0.45,
+        0.544
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "white_cable"
+            ],
+            "role": "safety"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "above",
+            "args": [
+              "white_cable",
+              "storage_box",
+              0.05
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "white_cable",
+              "storage_box"
+            ]
+          },
+          {
+            "pred": "no_drop",
+            "args": [
+              "white_cable"
+            ]
+          }
+        ]
+      },
+      "done_when": "above(white_cable, storage_box, 0.05) AND aligned_xy(white_cable, storage_box, 0.03)",
+      "affordance_3d": [
+        -0.2048,
+        0.0865,
+        0.9102
+      ],
+      "affordance_hint": "the empty area inside the storage box",
+      "affordance_hint_original": "an empty area on the storage box",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 4,
+      "action": "place",
+      "target": "white_cable",
+      "destination": "storage_box",
+      "affordance": [
+        0.45,
+        0.544
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "surface_contact",
+            "args": [
+              "white_cable",
+              "storage_box"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "released",
+            "args": [
+              "white_cable"
+            ],
+            "role": "completion"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "inside",
+            "args": [
+              "white_cable",
+              "storage_box"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "support_stable",
+            "args": [
+              "white_cable"
+            ]
+          }
+        ]
+      },
+      "done_when": "surface_contact(white_cable, storage_box) AND released(white_cable) AND inside(white_cable, storage_box)",
+      "affordance_3d": [
+        -0.2048,
+        0.0865,
+        0.9102
+      ],
+      "affordance_hint": "the empty area inside the storage box",
+      "affordance_hint_original": "an empty area on the storage box",
+      "affordance_hint_confidence": "ok"
+    }
+  ]
+}

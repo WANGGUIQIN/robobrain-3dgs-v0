@@ -1,0 +1,149 @@
+{
+  "task": "push the red button to turn off the red light",
+  "parsed": {
+    "scene_objects": [
+      "red_button",
+      "robot_arm",
+      "cabinet"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "red_button",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "red_button",
+        "affordance_region": "the red button on the cabinet",
+        "done_when": "distance(gripper, red_button) < 0.03",
+        "affordance_hint": "the red button on the cabinet",
+        "refine_prompt": "the red button on the cabinet",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.043,
+          0.4023
+        ],
+        "affordance_3d_refined": [
+          -1.0649,
+          -0.2275,
+          2.027
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.422,
+        "affordance": [
+          0.043,
+          0.4023
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_contact",
+              "args": [
+                "red_button"
+              ],
+              "role": "completion"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "aligned_xy",
+              "args": [
+                "gripper",
+                "red_button"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "motion_dir",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "force_limit",
+              "args": [
+                "red_button"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "push",
+        "target": "red_button",
+        "affordance_region": "the center of the red button",
+        "done_when": "gripper_contact(red_button) AND motion_dir(0, 0, -1)",
+        "affordance_hint": "the center of the red button",
+        "refine_prompt": "the center of the red button",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.043,
+          0.4023
+        ],
+        "affordance_3d_refined": [
+          -1.0639,
+          -0.2273,
+          2.025
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.3309,
+        "affordance": [
+          0.043,
+          0.4023
+        ]
+      }
+    ]
+  }
+}

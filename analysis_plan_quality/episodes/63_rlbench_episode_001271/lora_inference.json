@@ -1,0 +1,198 @@
+{
+  "task": "use the stick to drag the cube onto the white target",
+  "parsed": {
+    "scene_objects": [
+      "stick",
+      "cube",
+      "white_target",
+      "blue_square",
+      "table"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "stick",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "stick",
+        "affordance_region": "the body of the stick",
+        "done_when": "distance(gripper, stick) < 0.03",
+        "affordance_hint": "the body of the stick",
+        "refine_prompt": "the body of the stick",
+        "refine_cache_hit": false,
+        "refine_prompt_fallback": "stick",
+        "affordance_refined": [
+          0.4883,
+          0.0742
+        ],
+        "affordance_3d_refined": [
+          -0.0584,
+          -2.1204,
+          2.49
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.3416,
+        "affordance": [
+          0.4883,
+          0.0742
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "stick"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "stick",
+        "affordance_region": "the yellow handle of the stick",
+        "done_when": "holding(stick)",
+        "affordance_hint": "the yellow handle of the stick",
+        "refine_prompt": "the yellow handle of the stick",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.5469,
+          0.6406
+        ],
+        "affordance_3d_refined": [
+          0.056,
+          0.1681,
+          0.5977
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.637,
+        "affordance": [
+          0.5469,
+          0.6406
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "stick"
+              ],
+              "role": "safety"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "aligned_xy",
+              "args": [
+                "cube",
+                "white_target",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "motion_dir",
+              "args": [
+                "1",
+                "0",
+                "0"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "push",
+        "target": "cube",
+        "destination": "white_target",
+        "affordance_region": "the center of the white target",
+        "done_when": "aligned_xy(cube, white_target, 0.03)",
+        "affordance_hint": "the center of the white target",
+        "refine_prompt": "the center of the white target",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.4883,
+          0.0742
+        ],
+        "affordance_3d_refined": [
+          -0.0584,
+          -2.1204,
+          2.49
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.5087,
+        "affordance": [
+          0.4883,
+          0.0742
+        ]
+      }
+    ]
+  }
+}

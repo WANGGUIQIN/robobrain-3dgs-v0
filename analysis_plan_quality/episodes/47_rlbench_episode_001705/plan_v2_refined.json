@@ -1,0 +1,202 @@
+{
+  "task": "turn left tap",
+  "scene_objects": [
+    "tap",
+    "table"
+  ],
+  "num_steps": 4,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "tap",
+      "affordance": [
+        0.5,
+        0.66
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "tap",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "table"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, tap) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        0.0,
+        1.3982,
+        4.3652
+      ],
+      "affordance_hint": "the left side of the white tap",
+      "affordance_hint_original": "the tap",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 2,
+      "action": "grasp",
+      "target": "tap",
+      "affordance": [
+        0.445,
+        0.687
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "tap"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "holding",
+            "args": [
+              "tap"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              0,
+              0,
+              -1
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "holding(tap)",
+      "affordance_3d": [
+        -0.2268,
+        0.7776,
+        2.0737
+      ],
+      "affordance_hint": "the white plastic handle of the left tap",
+      "affordance_hint_original": "the handle of the tap",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 3,
+      "action": "rotate",
+      "target": "tap",
+      "affordance": [
+        0.5,
+        0.703
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "tap"
+            ],
+            "role": "safety"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "tilted",
+            "args": [
+              "tap"
+            ],
+            "role": "completion"
+          }
+        ]
+      },
+      "done_when": "tilted(tap)",
+      "affordance_3d": [
+        0.0,
+        0.3456,
+        0.8507
+      ],
+      "affordance_hint": "the body of the left tap",
+      "affordance_hint_original": "the body of the tap",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 4,
+      "action": "release",
+      "target": "tap",
+      "affordance": [
+        0.5,
+        0.66
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "released",
+            "args": [
+              "tap"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_drop",
+            "args": [
+              "tap"
+            ]
+          }
+        ]
+      },
+      "done_when": "released(tap)",
+      "affordance_3d": [
+        0.0,
+        1.3982,
+        4.3652
+      ],
+      "affordance_hint": "the left tap handle",
+      "affordance_hint_original": "the tap",
+      "affordance_hint_confidence": "ok"
+    }
+  ]
+}

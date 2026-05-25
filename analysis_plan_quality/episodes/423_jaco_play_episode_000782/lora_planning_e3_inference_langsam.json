@@ -1,0 +1,120 @@
+{
+  "task": "pick up the milk dairy",
+  "scene_objects": [
+    "red_milk_carton",
+    "blue_plate",
+    "table"
+  ],
+  "steps": [
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "red_milk_carton",
+              "<",
+              "0.03"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "approach_axis",
+            "args": [
+              "0",
+              "0",
+              "-1"
+            ],
+            "role": "progress"
+          }
+        ]
+      },
+      "step": 1,
+      "action": "reach",
+      "target": "red_milk_carton",
+      "affordance_region": "the body of the red milk carton",
+      "done_when": "distance(gripper, red_milk_carton) < 0.03",
+      "affordance_hint": "the body of the red milk carton",
+      "refine_prompt": "the body of the red milk carton",
+      "refine_cache_hit": false,
+      "affordance_refined": [
+        0.8906,
+        0.375
+      ],
+      "affordance_3d_refined": [
+        1.384,
+        -0.4429,
+        3.0823
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.708
+    },
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "red_milk_carton"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              "0",
+              "0",
+              "-1"
+            ],
+            "role": "progress"
+          }
+        ]
+      },
+      "step": 2,
+      "action": "grasp",
+      "target": "red_milk_carton",
+      "affordance_region": "the body of the red milk carton",
+      "done_when": "holding(red_milk_carton)",
+      "affordance_hint": "the body of the red milk carton",
+      "refine_prompt": "the body of the red milk carton",
+      "refine_cache_hit": true,
+      "affordance_refined": [
+        0.8906,
+        0.375
+      ],
+      "affordance_3d_refined": [
+        1.384,
+        -0.4429,
+        3.0823
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.708
+    }
+  ]
+}

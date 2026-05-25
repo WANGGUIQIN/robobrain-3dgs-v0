@@ -1,0 +1,242 @@
+{
+  "task": "Move the blue spoon next to the silver pot.",
+  "scene_objects": [
+    "blue_spoon",
+    "silver_pot",
+    "table",
+    "green_cloth",
+    "purple_eggplant",
+    "cans"
+  ],
+  "num_steps": 4,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "blue_spoon",
+      "affordance": [
+        0.17,
+        0.441
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "blue_spoon",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "silver_pot"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, blue_spoon) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        -0.6459,
+        -0.1153,
+        1.7125
+      ],
+      "affordance_hint": "the blue plastic spoon on the wooden table",
+      "affordance_hint_original": "the blue spoon",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 2,
+      "action": "grasp",
+      "target": "blue_spoon",
+      "affordance": [
+        0.16,
+        0.441
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "blue_spoon"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "holding",
+            "args": [
+              "blue_spoon"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              0,
+              0,
+              -1
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "holding(blue_spoon)",
+      "affordance_3d": [
+        -0.6766,
+        -0.1167,
+        1.732
+      ],
+      "affordance_hint": "the handle of the blue spoon",
+      "affordance_hint_original": "the handle of the blue spoon",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 3,
+      "action": "transport",
+      "target": "blue_spoon",
+      "destination": "silver_pot",
+      "affordance": [
+        0.45,
+        0.45
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "blue_spoon"
+            ],
+            "role": "safety"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "above",
+            "args": [
+              "blue_spoon",
+              "silver_pot",
+              0.05
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "blue_spoon",
+              "silver_pot"
+            ]
+          },
+          {
+            "pred": "no_drop",
+            "args": [
+              "blue_spoon"
+            ]
+          }
+        ]
+      },
+      "done_when": "above(blue_spoon, silver_pot, 0.05) AND aligned_xy(blue_spoon, silver_pot, 0.03)",
+      "affordance_3d": [
+        -0.0943,
+        -0.0943,
+        1.6146
+      ],
+      "affordance_hint": "the empty area on the silver pot",
+      "affordance_hint_original": "an empty area on the silver pot",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 4,
+      "action": "place",
+      "target": "blue_spoon",
+      "destination": "silver_pot",
+      "affordance": [
+        0.45,
+        0.45
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "surface_contact",
+            "args": [
+              "blue_spoon",
+              "table"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "released",
+            "args": [
+              "blue_spoon"
+            ],
+            "role": "completion"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "stable",
+            "args": [
+              "blue_spoon"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "support_stable",
+            "args": [
+              "blue_spoon"
+            ]
+          }
+        ]
+      },
+      "done_when": "surface_contact(blue_spoon, table) AND released(blue_spoon) AND stable(blue_spoon)",
+      "affordance_3d": [
+        -0.0943,
+        -0.0943,
+        1.6146
+      ],
+      "affordance_hint": "the empty area on the silver pot",
+      "affordance_hint_original": "an empty area on the silver pot",
+      "affordance_hint_confidence": "ok"
+    }
+  ]
+}

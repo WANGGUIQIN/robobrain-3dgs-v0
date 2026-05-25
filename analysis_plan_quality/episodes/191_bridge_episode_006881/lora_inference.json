@@ -1,0 +1,238 @@
+{
+  "task": "Take the carrot from the silver vessel and place it above the vessel.",
+  "parsed": {
+    "scene_objects": [
+      "carrot",
+      "silver_vessel",
+      "table",
+      "brush",
+      "cloth"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "carrot",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "carrot",
+        "affordance_region": "the carrot in the silver vessel",
+        "done_when": "distance(gripper, carrot) < 0.03",
+        "affordance_hint": "the carrot in the silver vessel",
+        "refine_prompt": "the carrot in the silver vessel",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.6211,
+          0.7148
+        ],
+        "affordance_3d_refined": [
+          0.4645,
+          0.8241,
+          3.3367
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.364,
+        "affordance": [
+          0.6211,
+          0.7148
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "carrot"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "carrot",
+        "affordance_region": "the orange carrot in the silver vessel",
+        "done_when": "holding(carrot)",
+        "affordance_hint": "the orange carrot in the silver vessel",
+        "refine_prompt": "the orange carrot in the silver vessel",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.6211,
+          0.7148
+        ],
+        "affordance_3d_refined": [
+          0.4645,
+          0.8241,
+          3.3367
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.3318,
+        "affordance": [
+          0.6211,
+          0.7148
+        ]
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "carrot",
+                "silver_vessel",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "carrot"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "carrot",
+        "destination": "above_silver_vessel",
+        "affordance_region": "an empty area above the silver vessel",
+        "done_when": "above(carrot, silver_vessel, 0.05)",
+        "affordance_hint": "an empty area above the silver vessel",
+        "refine_prompt": "an empty area above the silver vessel",
+        "refine_cache_hit": false,
+        "refine_prompt_fallback": "carrot",
+        "affordance_refined": [
+          0.6758,
+          0.7188
+        ],
+        "affordance_3d_refined": [
+          0.7217,
+          0.8981,
+          3.5715
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.4955,
+        "affordance": [
+          0.6758,
+          0.7188
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "released",
+              "args": [
+                "carrot"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "carrot"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "release",
+        "target": "carrot",
+        "affordance_region": "the carrot in the silver vessel",
+        "done_when": "released(carrot) AND stable(carrot)",
+        "affordance_hint": "the carrot in the silver vessel",
+        "refine_prompt": "the carrot in the silver vessel",
+        "refine_cache_hit": true,
+        "affordance_refined": [
+          0.6211,
+          0.7148
+        ],
+        "affordance_3d_refined": [
+          0.4645,
+          0.8241,
+          3.3367
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.364,
+        "affordance": [
+          0.6211,
+          0.7148
+        ]
+      }
+    ]
+  }
+}

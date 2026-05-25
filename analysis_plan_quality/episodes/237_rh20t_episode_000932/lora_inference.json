@@ -1,0 +1,244 @@
+{
+  "task": "Place the block on the scale",
+  "parsed": {
+    "scene_objects": [
+      "block",
+      "scale",
+      "table"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "block",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "block",
+        "affordance_region": "the small brown block",
+        "done_when": "distance(gripper, block) < 0.03",
+        "affordance_hint": "the small brown block",
+        "refine_prompt": "the small brown block",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.3477,
+          0.3672
+        ],
+        "affordance_3d_refined": [
+          -0.9678,
+          -0.3603,
+          1.3407
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.6866,
+        "affordance": [
+          0.3477,
+          0.3672
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "block"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "block",
+        "affordance_region": "the small brown block",
+        "done_when": "holding(block)",
+        "affordance_hint": "the small brown block",
+        "refine_prompt": "the small brown block",
+        "refine_cache_hit": true,
+        "affordance_refined": [
+          0.3477,
+          0.3672
+        ],
+        "affordance_3d_refined": [
+          -0.9678,
+          -0.3603,
+          1.3407
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.6866,
+        "affordance": [
+          0.3477,
+          0.3672
+        ]
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "block",
+                "scale",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "block"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "block",
+        "destination": "scale",
+        "affordance_region": "an empty area on the scale",
+        "done_when": "above(block, scale, 0.05)",
+        "affordance_hint": "an empty area on the scale",
+        "refine_prompt": "an empty area on the scale",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.3672,
+          0.2188
+        ],
+        "affordance_3d_refined": [
+          -0.7119,
+          -0.3906,
+          1.008
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.3927,
+        "affordance": [
+          0.3672,
+          0.2188
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "surface_contact",
+              "args": [
+                "block",
+                "scale"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "block"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "block"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "place",
+        "target": "block",
+        "destination": "scale",
+        "affordance_region": "an empty area on the scale",
+        "done_when": "surface_contact(block, scale) AND released(block) AND stable(block)",
+        "affordance_hint": "an empty area on the scale",
+        "refine_prompt": "an empty area on the scale",
+        "refine_cache_hit": true,
+        "affordance_refined": [
+          0.3672,
+          0.2188
+        ],
+        "affordance_3d_refined": [
+          -0.7119,
+          -0.3906,
+          1.008
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.3927,
+        "affordance": [
+          0.3672,
+          0.2188
+        ]
+      }
+    ]
+  }
+}

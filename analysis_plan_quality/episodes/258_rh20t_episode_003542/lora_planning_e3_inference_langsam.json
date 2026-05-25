@@ -1,0 +1,228 @@
+{
+  "task": "Transfer all large pipette tips from one holder to another holder for large pipette tips",
+  "scene_objects": [
+    "large_pipette_tips_holder_1",
+    "large_pipette_tips_holder_2",
+    "large_pipette_tips",
+    "table"
+  ],
+  "steps": [
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "large_pipette_tips_holder_1",
+              "<",
+              "0.03"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "approach_axis",
+            "args": [
+              "0",
+              "0",
+              "-1"
+            ],
+            "role": "progress"
+          }
+        ]
+      },
+      "step": 1,
+      "action": "reach",
+      "target": "large_pipette_tips_holder_1",
+      "affordance_region": "the body of large pipette tips holder 1",
+      "done_when": "distance(gripper, large_pipette_tips_holder_1) < 0.03",
+      "affordance_hint": "the body of large pipette tips holder 1",
+      "refine_prompt": "the body of large pipette tips holder 1",
+      "refine_cache_hit": false,
+      "affordance_refined": [
+        0.6992,
+        0.0
+      ],
+      "affordance_3d_refined": [
+        -1.4875,
+        -1.8989,
+        3.3758
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.4085
+    },
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "large_pipette_tips"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              "0",
+              "0",
+              "-1"
+            ],
+            "role": "progress"
+          }
+        ]
+      },
+      "step": 2,
+      "action": "grasp",
+      "target": "large_pipette_tips",
+      "affordance_region": "the top of large pipette tips holder 1",
+      "done_when": "holding(large_pipette_tips)",
+      "affordance_hint": "the top of large pipette tips holder 1",
+      "refine_prompt": "the top of large pipette tips holder 1",
+      "refine_cache_hit": false,
+      "affordance_refined": [
+        0.6992,
+        0.0195
+      ],
+      "affordance_3d_refined": [
+        -1.4616,
+        -1.814,
+        3.3171
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.3381
+    },
+    {
+      "constraints": {
+        "spatial": [
+          {
+            "pred": "above",
+            "args": [
+              "large_pipette_tips",
+              "large_pipette_tips_holder_2",
+              "0.05"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_drop",
+            "args": [
+              "large_pipette_tips"
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "step": 3,
+      "action": "transport",
+      "target": "large_pipette_tips",
+      "destination": "large_pipette_tips_holder_2",
+      "affordance_region": "an empty area on large pipette tips holder 2",
+      "done_when": "above(large_pipette_tips, large_pipette_tips_holder_2, 0.05)",
+      "affordance_hint": "an empty area on large pipette tips holder 2",
+      "refine_prompt": "an empty area on large pipette tips holder 2",
+      "refine_cache_hit": false,
+      "refine_prompt_fallback": "large pipette tips",
+      "affordance_refined": [
+        0.543,
+        0.0547
+      ],
+      "affordance_3d_refined": [
+        -1.8541,
+        -1.7004,
+        3.278
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.3432
+    },
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "surface_contact",
+            "args": [
+              "large_pipette_tips",
+              "large_pipette_tips_holder_2"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "released",
+            "args": [
+              "large_pipette_tips"
+            ],
+            "role": "completion"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "stable",
+            "args": [
+              "large_pipette_tips"
+            ],
+            "role": "completion"
+          }
+        ]
+      },
+      "step": 4,
+      "action": "place",
+      "target": "large_pipette_tips",
+      "destination": "large_pipette_tips_holder_2",
+      "affordance_region": "an empty area on large pipette tips holder 2",
+      "done_when": "surface_contact(large_pipette_tips, large_pipette_tips_holder_2) AND released(large_pipette_tips)",
+      "affordance_hint": "an empty area on large pipette tips holder 2",
+      "refine_prompt": "an empty area on large pipette tips holder 2",
+      "refine_cache_hit": true,
+      "affordance_refined": [
+        0.543,
+        0.0547
+      ],
+      "affordance_3d_refined": [
+        -1.8541,
+        -1.7004,
+        3.278
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.3432
+    }
+  ]
+}

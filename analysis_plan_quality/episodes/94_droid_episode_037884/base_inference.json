@@ -1,0 +1,25 @@
+{
+  "task": "Reposition the top remote on the bottom one",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_3epoch/best",
+  "raw": "**SCENE ANALYSIS -** A gray couch has an orange pillow with a remote control on it. A yellow pillow is below the orange one. A dark cloth is on the right side of the couch. The remote is on the orange pillow. The remote is a small, rectangular object with buttons. The task is to reposition the top remote on the bottom one. The goal is to have the remote on the orange pillow. The remote is already on the orange pillow, so the task is complete. **STRATEGY -** The task is already complete, so no action is needed. **AFFORDANCE REASONING -** The remote is already on the orange pillow, so no manipulation is required.\n\nGoal: on(remote, orange_pillow)\nScene: couch, orange_pillow, yellow_pillow, remote, dark_cloth\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [
+      {
+        "pred": "on",
+        "args": [
+          "remote",
+          "orange_pillow"
+        ]
+      }
+    ],
+    "scene_objects": [
+      "couch",
+      "orange_pillow",
+      "yellow_pillow",
+      "remote",
+      "dark_cloth"
+    ],
+    "steps": []
+  }
+}

@@ -1,0 +1,172 @@
+{
+  "task": "Pick the black pen on the table and put it in the pen holder",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_3epoch/best",
+  "raw": "**SCENE ANALYSIS -** A wooden table holds a white pen holder with a green top, a blue pen, a purple pen, a yellow pen, a green pen, and a red pen. The pen holder is rigid with a cylindrical body and a green top; pens are slender, cylindrical, and rigid. STRATEGY - Reach the red pen, grasp it, transport it to the pen holder, and insert it into the top. Failure modes include dropping the pen or misaligning it with the holder. AFFORDANCE REASONING - Step 1 reach the red pen body; Step 2 grasp the red pen body; Step 3 transport to the pen holder; Step 4 insert into the green top.\n\nGoal: inside(red_pen, pen_holder); stacked(red_pen, pen_holder)\nScene: red_pen, pen_holder, blue_pen, purple_pen, yellow_pen, green_pen, table\nStep 1: reach(red_pen)\n  affordance_region: the body of the red pen\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, red_pen, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, red_pen) < 0.03\nStep 2: grasp(red_pen)\n  affordance_region: the body of the red pen\n  contact: holding(red_pen) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(red_pen)\nStep 3: transport(red_pen -> pen_holder)\n  affordance_region: the top opening of the pen holder\n  spatial: above(red_pen, pen_holder, 0.05) [completion]\n  safety: no_drop(red_pen)\n  done_when: above(red_pen, pen_holder, 0.05)\nStep 4: insert(red_pen -> pen_holder)\n  affordance_region: the top opening of the pen holder\n  contact: inside(red_pen, pen_holder) [completion]; released(red_pen) [completion]\n  pose: stacked(red_pen, pen_holder) [completion]\n  done_when: inside(red_pen, pen_holder) AND released(red_pen)\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [
+      {
+        "pred": "inside",
+        "args": [
+          "red_pen",
+          "pen_holder"
+        ]
+      },
+      {
+        "pred": "stacked",
+        "args": [
+          "red_pen",
+          "pen_holder"
+        ]
+      }
+    ],
+    "scene_objects": [
+      "red_pen",
+      "pen_holder",
+      "blue_pen",
+      "purple_pen",
+      "yellow_pen",
+      "green_pen",
+      "table"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "red_pen",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "red_pen",
+        "affordance_region": "the body of the red pen",
+        "done_when": "distance(gripper, red_pen) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "red_pen"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "red_pen",
+        "affordance_region": "the body of the red pen",
+        "done_when": "holding(red_pen)"
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "red_pen",
+                "pen_holder",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "red_pen"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "red_pen",
+        "destination": "pen_holder",
+        "affordance_region": "the top opening of the pen holder",
+        "done_when": "above(red_pen, pen_holder, 0.05)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "inside",
+              "args": [
+                "red_pen",
+                "pen_holder"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "red_pen"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stacked",
+              "args": [
+                "red_pen",
+                "pen_holder"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "insert",
+        "target": "red_pen",
+        "destination": "pen_holder",
+        "affordance_region": "the top opening of the pen holder",
+        "done_when": "inside(red_pen, pen_holder) AND released(red_pen)"
+      }
+    ]
+  }
+}

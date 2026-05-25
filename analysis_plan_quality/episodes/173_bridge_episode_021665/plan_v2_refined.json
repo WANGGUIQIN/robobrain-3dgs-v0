@@ -1,0 +1,243 @@
+{
+  "task": "move potato to below spoon",
+  "scene_objects": [
+    "potato",
+    "spoon",
+    "table",
+    "metal_bowl",
+    "yellow_cloth",
+    "tomato_sauce_can",
+    "peach_can"
+  ],
+  "num_steps": 4,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "potato",
+      "affordance": [
+        0.441,
+        0.233
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "potato",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "spoon"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, potato) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        -0.1509,
+        -0.6842,
+        2.2408
+      ],
+      "affordance_hint": "the body of the potato",
+      "affordance_hint_original": "the potato",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 2,
+      "action": "grasp",
+      "target": "potato",
+      "affordance": [
+        0.441,
+        0.233
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "potato"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "holding",
+            "args": [
+              "potato"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              0,
+              0,
+              -1
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "holding(potato)",
+      "affordance_3d": [
+        -0.1509,
+        -0.6842,
+        2.2408
+      ],
+      "affordance_hint": "the body of the potato",
+      "affordance_hint_original": "potato",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 3,
+      "action": "transport",
+      "target": "potato",
+      "destination": "below_spoon",
+      "affordance": [
+        0.566,
+        0.575
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "potato"
+            ],
+            "role": "safety"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "below",
+            "args": [
+              "potato",
+              "spoon",
+              0.05
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "potato",
+              "spoon"
+            ]
+          },
+          {
+            "pred": "no_drop",
+            "args": [
+              "potato"
+            ]
+          }
+        ]
+      },
+      "done_when": "below(potato, spoon, 0.05) AND aligned_xy(potato, spoon, 0.03)",
+      "affordance_3d": [
+        0.2114,
+        0.2363,
+        2.7692
+      ],
+      "affordance_hint": "the empty area on the table below the spoon",
+      "affordance_hint_original": "an empty area on the below spoon",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 4,
+      "action": "place",
+      "target": "potato",
+      "destination": "below_spoon",
+      "affordance": [
+        0.566,
+        0.575
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "surface_contact",
+            "args": [
+              "potato",
+              "table"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "released",
+            "args": [
+              "potato"
+            ],
+            "role": "completion"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "stable",
+            "args": [
+              "potato"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "support_stable",
+            "args": [
+              "potato"
+            ]
+          }
+        ]
+      },
+      "done_when": "surface_contact(potato, table) AND released(potato) AND stable(potato)",
+      "affordance_3d": [
+        0.2114,
+        0.2363,
+        2.7692
+      ],
+      "affordance_hint": "the empty area on the table below the spoon",
+      "affordance_hint_original": "an empty area on the below spoon",
+      "affordance_hint_confidence": "ok"
+    }
+  ]
+}

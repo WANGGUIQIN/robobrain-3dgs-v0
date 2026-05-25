@@ -1,0 +1,141 @@
+{
+  "task": "turn off the green light",
+  "parsed": {
+    "scene_objects": [
+      "green_light",
+      "switch",
+      "table"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "switch",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "switch",
+        "affordance_region": "the switch",
+        "done_when": "distance(gripper, switch) < 0.03",
+        "affordance_hint": "the switch",
+        "refine_prompt": "the switch",
+        "refine_cache_hit": false,
+        "refine_prompt_fallback": "switch",
+        "affordance_refined": [
+          0.7539,
+          0.2969
+        ],
+        "affordance_3d_refined": [
+          0.0029,
+          -0.0023,
+          0.01
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.3248,
+        "affordance": [
+          0.7539,
+          0.2969
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_contact",
+              "args": [
+                "switch"
+              ],
+              "role": "completion"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "aligned_xy",
+              "args": [
+                "gripper",
+                "switch"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "motion_dir",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "push",
+        "target": "switch",
+        "affordance_region": "the center of the switch",
+        "done_when": "switch_state(off)",
+        "affordance_hint": "the center of the switch",
+        "refine_prompt": "the center of the switch",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.7773,
+          0.2305
+        ],
+        "affordance_3d_refined": [
+          0.4709,
+          -0.4576,
+          1.477
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.3192,
+        "affordance": [
+          0.7773,
+          0.2305
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,159 @@
+{
+  "task": "screw in the azure light bulb",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_3epoch/best",
+  "raw": "**SCENE ANALYSIS** - A robotic arm is positioned over a table with three blue objects: a small blue sphere, a blue cone, and a blue cylinder. The task is to \"screw in the azure light bulb,\" which likely refers to the blue cone as the bulb. The blue cylinder may serve as a base or holder. The scene contains no visible light bulb or screw, so the task likely involves assembling the blue cone onto the blue cylinder. The objects are rigid and have distinct shapes: the cone has a circular base and a pointed top, while the cylinder is a hollow tube. **STRATEGY** - First, grasp the blue cone (bulb) and transport it to the blue cylinder (base). Then, insert the cone into the cylinder to complete the assembly. Failure modes include misaligning the cone with the cylinder or dropping the objects. **AFFORDANCE REASONING** - Step 1: Reach for the blue cone to grasp it. Step 2: Grasp the cone by its base for stability. Step 3: Transport the cone to the cylinder. Step 4: Insert the cone into the cylinder's opening to complete the task.\n\nGoal: inside(blue_cone, blue_cylinder); stable(blue_cone)\nScene: blue_cone, blue_cylinder, table\nStep 1: reach(blue_cone)\n  affordance_region: the circular base of the blue cone\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, blue_cone, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, blue_cone) < 0.03\nStep 2: grasp(blue_cone)\n  affordance_region: the circular base of the blue cone\n  contact: holding(blue_cone) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(blue_cone)\nStep 3: transport(blue_cone -> blue_cylinder)\n  affordance_region: the open top of the blue cylinder\n  spatial: above(blue_cone, blue_cylinder, 0.05) [completion]\n  safety: no_drop(blue_cone)\n  done_when: above(blue_cone, blue_cylinder, 0.05)\nStep 4: insert(blue_cone -> blue_cylinder)\n  affordance_region: the open top of the blue cylinder\n  contact: inside(blue_cone, blue_cylinder) [completion]\n  pose: stable(blue_cone) [completion]\n  done_when: inside(blue_cone, blue_cylinder) AND stable(blue_cone)\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [
+      {
+        "pred": "inside",
+        "args": [
+          "blue_cone",
+          "blue_cylinder"
+        ]
+      },
+      {
+        "pred": "stable",
+        "args": [
+          "blue_cone"
+        ]
+      }
+    ],
+    "scene_objects": [
+      "blue_cone",
+      "blue_cylinder",
+      "table"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "blue_cone",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "blue_cone",
+        "affordance_region": "the circular base of the blue cone",
+        "done_when": "distance(gripper, blue_cone) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "blue_cone"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "blue_cone",
+        "affordance_region": "the circular base of the blue cone",
+        "done_when": "holding(blue_cone)"
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "blue_cone",
+                "blue_cylinder",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "blue_cone"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "blue_cone",
+        "destination": "blue_cylinder",
+        "affordance_region": "the open top of the blue cylinder",
+        "done_when": "above(blue_cone, blue_cylinder, 0.05)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "inside",
+              "args": [
+                "blue_cone",
+                "blue_cylinder"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "blue_cone"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "insert",
+        "target": "blue_cone",
+        "destination": "blue_cylinder",
+        "affordance_region": "the open top of the blue cylinder",
+        "done_when": "inside(blue_cone, blue_cylinder) AND stable(blue_cone)"
+      }
+    ]
+  }
+}

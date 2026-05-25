@@ -1,0 +1,134 @@
+{
+  "task": "Rotate the steering wheel 90 degrees counterclockwise",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_3epoch/best",
+  "raw": "**SCENE ANALYSIS - A black steering wheel is on a patterned surface. It has a central hub and two spokes. The task is to rotate it 90 degrees counterclockwise. STRATEGY - First, grasp the steering wheel at its central hub for stability. Then, rotate the entire wheel 90 degrees counterclockwise around its axis. Failure modes include slipping during rotation or incorrect angle. AFFORDANCE REASONING - Step 1 reach the hub for a stable grasp; Step 2 grasp the hub; Step 3 rotate the wheel 90 degrees counterclockwise.**\nGoal: rotated(steering_wheel, 90, counterclockwise)\nScene: steering_wheel\nStep 1: reach(steering_wheel)\n  affordance_region: the central hub of the steering wheel\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, steering_wheel, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, steering_wheel) < 0.03\nStep 2: grasp(steering_wheel)\n  affordance_region: the central hub of the steering_wheel\n  contact: holding(steering_wheel) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(steering_wheel)\nStep 3: rotate(steering_wheel, 90, counterclockwise)\n  affordance_region: the central hub of the steering_wheel\n  contact: holding(steering_wheel) [progress]\n  spatial: angle(steering_wheel, original_angle, 90, counterclockwise) [completion]\n  direction: rotate_axis(0, 0, -1) [progress]\n  done_when: angle(steering_wheel, original_angle, 90, counterclockwise)\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [
+      {
+        "pred": "rotated",
+        "args": [
+          "steering_wheel",
+          "90",
+          "counterclockwise"
+        ]
+      }
+    ],
+    "scene_objects": [
+      "steering_wheel"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "steering_wheel",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "steering_wheel",
+        "affordance_region": "the central hub of the steering wheel",
+        "done_when": "distance(gripper, steering_wheel) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "steering_wheel"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "steering_wheel",
+        "affordance_region": "the central hub of the steering_wheel",
+        "done_when": "holding(steering_wheel)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "steering_wheel"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "angle",
+              "args": [
+                "steering_wheel",
+                "original_angle",
+                "90",
+                "counterclockwise"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "rotate_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "rotate",
+        "target": "steering_wheel, 90, counterclockwise",
+        "affordance_region": "the central hub of the steering_wheel",
+        "done_when": "angle(steering_wheel, original_angle, 90, counterclockwise)"
+      }
+    ]
+  }
+}

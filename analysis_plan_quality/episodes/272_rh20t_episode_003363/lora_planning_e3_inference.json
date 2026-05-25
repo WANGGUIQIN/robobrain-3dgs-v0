@@ -1,0 +1,168 @@
+{
+  "task": "Insert the pencil into the pencil sharpener",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_planning_3epoch/checkpoint-39957",
+  "raw": "Scene: pencil, pencil_sharpener, table\nStep 1: reach(pencil)\n  affordance_region: the red pencil on the table\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, pencil, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, pencil) < 0.03\nStep 2: grasp(pencil)\n  affordance_region: the red pencil\n  contact: holding(pencil) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(pencil)\nStep 3: transport(pencil -> pencil_sharpener)\n  affordance_region: an empty area on the pencil sharpener\n  spatial: above(pencil, pencil_sharpener, 0.05) [completion]\n  safety: no_drop(pencil)\n  done_when: above(pencil, pencil_sharpener, 0.05)\nStep 4: insert(pencil -> pencil_sharpener)\n  affordance_region: the top opening of the pencil sharpener\n  contact: inserted(pencil, pencil_sharpener) [completion]\n  spatial: aligned_xy(pencil, pencil_sharpener, 0.03) [completion]\n  direction: insert_dir(0, 0, -1) [completion]\n  safety: no_collision(pencil, pencil_sharpener)\n  done_when: inserted(pencil, pencil_sharpener)\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [],
+    "scene_objects": [
+      "pencil",
+      "pencil_sharpener",
+      "table"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "pencil",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "pencil",
+        "affordance_region": "the red pencil on the table",
+        "done_when": "distance(gripper, pencil) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "pencil"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "pencil",
+        "affordance_region": "the red pencil",
+        "done_when": "holding(pencil)"
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "pencil",
+                "pencil_sharpener",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "pencil"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "pencil",
+        "destination": "pencil_sharpener",
+        "affordance_region": "an empty area on the pencil sharpener",
+        "done_when": "above(pencil, pencil_sharpener, 0.05)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "inserted",
+              "args": [
+                "pencil",
+                "pencil_sharpener"
+              ],
+              "role": "completion"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "aligned_xy",
+              "args": [
+                "pencil",
+                "pencil_sharpener",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "insert_dir",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_collision",
+              "args": [
+                "pencil",
+                "pencil_sharpener"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "insert",
+        "target": "pencil",
+        "destination": "pencil_sharpener",
+        "affordance_region": "the top opening of the pencil sharpener",
+        "done_when": "inserted(pencil, pencil_sharpener)"
+      }
+    ]
+  }
+}

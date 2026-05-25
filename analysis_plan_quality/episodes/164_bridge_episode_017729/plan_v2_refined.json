@@ -1,0 +1,241 @@
+{
+  "task": "Put the spatula under the sushi.",
+  "scene_objects": [
+    "spatula",
+    "sushi",
+    "bowl",
+    "yellow_cloth",
+    "table"
+  ],
+  "num_steps": 4,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "spatula",
+      "affordance": [
+        0.294,
+        0.486
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "spatula",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "bowl"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, spatula) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        -0.4495,
+        -0.0339,
+        1.8886
+      ],
+      "affordance_hint": "the metal spatula on the yellow cloth",
+      "affordance_hint_original": "the spatula",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 2,
+      "action": "grasp",
+      "target": "spatula",
+      "affordance": [
+        0.294,
+        0.475
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "spatula"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "holding",
+            "args": [
+              "spatula"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              0,
+              0,
+              -1
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "holding(spatula)",
+      "affordance_3d": [
+        -0.4401,
+        -0.0498,
+        1.8495
+      ],
+      "affordance_hint": "the handle of the spatula",
+      "affordance_hint_original": "the handle of the spatula",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 3,
+      "action": "transport",
+      "target": "spatula",
+      "destination": "under_sushi",
+      "affordance": [
+        0.6,
+        0.5
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "spatula"
+            ],
+            "role": "safety"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "below",
+            "args": [
+              "spatula",
+              "sushi",
+              0.02
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "spatula",
+              "sushi"
+            ]
+          },
+          {
+            "pred": "no_drop",
+            "args": [
+              "spatula"
+            ]
+          }
+        ]
+      },
+      "done_when": "below(spatula, sushi, 0.02) AND aligned_xy(spatula, sushi, 0.03)",
+      "affordance_3d": [
+        0.2022,
+        0.0,
+        1.732
+      ],
+      "affordance_hint": "the empty area under the sushi",
+      "affordance_hint_original": "an empty area on the under sushi",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 4,
+      "action": "place",
+      "target": "spatula",
+      "destination": "under_sushi",
+      "affordance": [
+        0.6,
+        0.5
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "surface_contact",
+            "args": [
+              "spatula",
+              "table"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "released",
+            "args": [
+              "spatula"
+            ],
+            "role": "completion"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "stable",
+            "args": [
+              "spatula"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "support_stable",
+            "args": [
+              "spatula"
+            ]
+          }
+        ]
+      },
+      "done_when": "surface_contact(spatula, table) AND released(spatula) AND stable(spatula)",
+      "affordance_3d": [
+        0.2022,
+        0.0,
+        1.732
+      ],
+      "affordance_hint": "the empty area under the sushi on the table",
+      "affordance_hint_original": "an empty area on the under sushi",
+      "affordance_hint_confidence": "ok"
+    }
+  ]
+}

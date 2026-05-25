@@ -1,0 +1,286 @@
+{
+  "task": "Scatter the objects in the stack, and then place the bottom box on the top one",
+  "scene_objects": [
+    "stacked_objects",
+    "bottom_box",
+    "top_box",
+    "table"
+  ],
+  "num_steps": 5,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "stacked_objects",
+      "affordance": [
+        0.544,
+        0.425
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "stacked_objects",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "table"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, stacked_objects) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        -0.2086,
+        -0.1093,
+        1.9864
+      ],
+      "affordance_hint": "the stacked objects",
+      "affordance_hint_original": "the stacked objects",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 2,
+      "action": "grasp",
+      "target": "stacked_objects",
+      "affordance": [
+        0.544,
+        0.35
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "stacked_objects"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "holding",
+            "args": [
+              "stacked_objects"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              0,
+              0,
+              -1
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "holding(stacked_objects)",
+      "affordance_3d": [
+        -0.2106,
+        -0.3009,
+        2.006
+      ],
+      "affordance_hint": "the top box in the stacked objects",
+      "affordance_hint_original": "the handle of the stacked objects",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 3,
+      "action": "scatter",
+      "target": "stacked_objects",
+      "affordance": [
+        0.544,
+        0.425
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "stacked_objects"
+            ],
+            "role": "safety"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "clear_path",
+            "args": [
+              "stacked_objects"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "stacked_objects",
+              "table"
+            ]
+          }
+        ]
+      },
+      "done_when": "stacked_objects are scattered",
+      "affordance_3d": [
+        -0.2086,
+        -0.1093,
+        1.9864
+      ],
+      "affordance_hint": "the top box in the stacked objects",
+      "affordance_hint_original": "stacked objects",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 4,
+      "action": "reach",
+      "target": "bottom_box",
+      "affordance": [
+        0.656,
+        0.687
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "bottom_box",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "table"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, bottom_box) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        0.0943,
+        0.6603,
+        2.3582
+      ],
+      "affordance_hint": "the bottom box in the stack",
+      "affordance_hint_original": "the bottom box",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 5,
+      "action": "place",
+      "target": "bottom_box",
+      "destination": "top_box",
+      "affordance": [
+        0.651,
+        0.651
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "surface_contact",
+            "args": [
+              "bottom_box",
+              "top_box"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "released",
+            "args": [
+              "bottom_box"
+            ],
+            "role": "completion"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "stable",
+            "args": [
+              "bottom_box"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "support_stable",
+            "args": [
+              "bottom_box"
+            ]
+          }
+        ]
+      },
+      "done_when": "surface_contact(bottom_box, top_box) AND released(bottom_box) AND stable(bottom_box)",
+      "affordance_3d": [
+        0.0784,
+        0.5266,
+        2.2408
+      ],
+      "affordance_hint": "the top surface of the top box",
+      "affordance_hint_original": "an empty area on the top box",
+      "affordance_hint_confidence": "ok"
+    }
+  ]
+}

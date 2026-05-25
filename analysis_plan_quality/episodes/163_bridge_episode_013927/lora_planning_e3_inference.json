@@ -1,0 +1,154 @@
+{
+  "task": "Move potato to middle front of stove top",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_planning_3epoch/checkpoint-39957",
+  "raw": "Scene: potato, stove_top, blue_cloth, metal_bowl, spoon\nStep 1: reach(potato)\n  affordance_region: the body of the potato\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, potato, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, potato) < 0.03\nStep 2: grasp(potato)\n  affordance_region: the body of the potato\n  contact: holding(potato) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(potato)\nStep 3: transport(potato -> middle_front_stove_top)\n  affordance_region: the middle front of the stove top\n  spatial: above(potato, middle_front_stove_top, 0.05) [completion]\n  safety: no_drop(potato)\n  done_when: above(potato, middle_front_stove_top, 0.05)\nStep 4: place(potato -> middle_front_stove_top)\n  affordance_region: the middle front of the stove top\n  contact: surface_contact(potato, middle_front_stove_top) [completion]; released(potato) [completion]\n  pose: stable(potato) [completion]\n  done_when: surface_contact(potato, middle_front_stove_top) AND released(potato) AND stable(potato)\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [],
+    "scene_objects": [
+      "potato",
+      "stove_top",
+      "blue_cloth",
+      "metal_bowl",
+      "spoon"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "potato",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "potato",
+        "affordance_region": "the body of the potato",
+        "done_when": "distance(gripper, potato) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "potato"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "potato",
+        "affordance_region": "the body of the potato",
+        "done_when": "holding(potato)"
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "potato",
+                "middle_front_stove_top",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "potato"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "potato",
+        "destination": "middle_front_stove_top",
+        "affordance_region": "the middle front of the stove top",
+        "done_when": "above(potato, middle_front_stove_top, 0.05)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "surface_contact",
+              "args": [
+                "potato",
+                "middle_front_stove_top"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "potato"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "potato"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "place",
+        "target": "potato",
+        "destination": "middle_front_stove_top",
+        "affordance_region": "the middle front of the stove top",
+        "done_when": "surface_contact(potato, middle_front_stove_top) AND released(potato) AND stable(potato)"
+      }
+    ]
+  }
+}

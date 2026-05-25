@@ -1,0 +1,162 @@
+{
+  "task": "pick up the apple fruit",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_3epoch/best",
+  "raw": "**SCENE ANALYSIS -** A red apple is on a silver circular tray. A blue bowl, green bowl, and blue container are on the wooden table. The apple is a rigid, spherical object. STRATEGY - Reach the apple on the tray, grasp it, transport it to the blue container, and place it inside. Failure modes include dropping the apple during transport or misplacing it outside the container. AFFORDANCE REASONING - Step 1 reach the apple on the tray; Step 2 grasp the apple for secure hold; Step 3 transport to the blue container; Step 4 place inside the container.\n\nGoal: inside(apple, blue_container)\nScene: red_apple, blue_container, table, blue_bowl, green_bowl\nStep 1: reach(red_apple)\n  affordance_region: the body of the red apple\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, red_apple, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, red_apple) < 0.03\nStep 2: grasp(red_apple)\n  affordance_region: the body of the red apple\n  contact: holding(red_apple) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(red_apple)\nStep 3: transport(red_apple -> blue_container)\n  affordance_region: an empty area inside the blue container\n  spatial: above(red_apple, blue_container, 0.05) [completion]\n  safety: no_drop(red_apple)\n  done_when: above(red_apple, blue_container, 0.05)\nStep 4: place(red_apple -> blue_container)\n  affordance_region: an empty area inside the blue container\n  contact: surface_contact(red_apple, blue_container) [completion]; released(red_apple) [completion]\n  pose: stable(red_apple) [completion]\n  done_when: surface_contact(red_apple, blue_container) AND released(red_apple)\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [
+      {
+        "pred": "inside",
+        "args": [
+          "apple",
+          "blue_container"
+        ]
+      }
+    ],
+    "scene_objects": [
+      "red_apple",
+      "blue_container",
+      "table",
+      "blue_bowl",
+      "green_bowl"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "red_apple",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "red_apple",
+        "affordance_region": "the body of the red apple",
+        "done_when": "distance(gripper, red_apple) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "red_apple"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "red_apple",
+        "affordance_region": "the body of the red apple",
+        "done_when": "holding(red_apple)"
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "red_apple",
+                "blue_container",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "red_apple"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "red_apple",
+        "destination": "blue_container",
+        "affordance_region": "an empty area inside the blue container",
+        "done_when": "above(red_apple, blue_container, 0.05)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "surface_contact",
+              "args": [
+                "red_apple",
+                "blue_container"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "red_apple"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "red_apple"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "place",
+        "target": "red_apple",
+        "destination": "blue_container",
+        "affordance_region": "an empty area inside the blue container",
+        "done_when": "surface_contact(red_apple, blue_container) AND released(red_apple)"
+      }
+    ]
+  }
+}

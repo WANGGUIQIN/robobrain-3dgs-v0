@@ -1,0 +1,226 @@
+{
+  "task": "move green rice chip bag near rxbar chocolate",
+  "scene_objects": [
+    "green_rice_chip_bag",
+    "rxbar_chocolate",
+    "table"
+  ],
+  "steps": [
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "green_rice_chip_bag",
+              "<",
+              "0.03"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "approach_axis",
+            "args": [
+              "0",
+              "0",
+              "-1"
+            ],
+            "role": "progress"
+          }
+        ]
+      },
+      "step": 1,
+      "action": "reach",
+      "target": "green_rice_chip_bag",
+      "affordance_region": "the green rice chip bag",
+      "done_when": "distance(gripper, green_rice_chip_bag) < 0.03",
+      "affordance_hint": "the green rice chip bag",
+      "refine_prompt": "the green rice chip bag",
+      "refine_cache_hit": false,
+      "affordance_refined": [
+        0.4922,
+        0.4023
+      ],
+      "affordance_3d_refined": [
+        -0.0257,
+        -0.3218,
+        2.867
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.8604
+    },
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "green_rice_chip_bag"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              "0",
+              "0",
+              "-1"
+            ],
+            "role": "progress"
+          }
+        ]
+      },
+      "step": 2,
+      "action": "grasp",
+      "target": "green_rice_chip_bag",
+      "affordance_region": "the green printed body of the green rice chip bag",
+      "done_when": "holding(green_rice_chip_bag)",
+      "affordance_hint": "the green printed body of the green rice chip bag",
+      "refine_prompt": "the green printed body of the green rice chip bag",
+      "refine_cache_hit": false,
+      "affordance_refined": [
+        0.4922,
+        0.4023
+      ],
+      "affordance_3d_refined": [
+        -0.0257,
+        -0.3218,
+        2.867
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.714
+    },
+    {
+      "constraints": {
+        "spatial": [
+          {
+            "pred": "above",
+            "args": [
+              "green_rice_chip_bag",
+              "rxbar_chocolate",
+              "0.05"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_drop",
+            "args": [
+              "green_rice_chip_bag"
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "step": 3,
+      "action": "transport",
+      "target": "green_rice_chip_bag",
+      "destination": "rxbar_chocolate",
+      "affordance_region": "an empty area on the rxbar chocolate",
+      "done_when": "above(green_rice_chip_bag, rxbar_chocolate, 0.05)",
+      "affordance_hint": "an empty area on the rxbar chocolate",
+      "refine_prompt": "an empty area on the rxbar chocolate",
+      "refine_cache_hit": false,
+      "affordance_refined": [
+        0.6211,
+        0.6875
+      ],
+      "affordance_3d_refined": [
+        0.4454,
+        0.6896,
+        3.1997
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.3273
+    },
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "surface_contact",
+            "args": [
+              "green_rice_chip_bag",
+              "rxbar_chocolate"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "released",
+            "args": [
+              "green_rice_chip_bag"
+            ],
+            "role": "completion"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "stable",
+            "args": [
+              "green_rice_chip_bag"
+            ],
+            "role": "completion"
+          }
+        ]
+      },
+      "step": 4,
+      "action": "place",
+      "target": "green_rice_chip_bag",
+      "destination": "rxbar_chocolate",
+      "affordance_region": "an empty area on the rxbar chocolate",
+      "done_when": "surface_contact(green_rice_chip_bag, rxbar_chocolate) AND released(green_rice_chip_bag)",
+      "affordance_hint": "an empty area on the rxbar chocolate",
+      "refine_prompt": "an empty area on the rxbar chocolate",
+      "refine_cache_hit": true,
+      "affordance_refined": [
+        0.6211,
+        0.6875
+      ],
+      "affordance_3d_refined": [
+        0.4454,
+        0.6896,
+        3.1997
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.3273
+    }
+  ]
+}

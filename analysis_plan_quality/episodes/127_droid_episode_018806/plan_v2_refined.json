@@ -1,0 +1,239 @@
+{
+  "task": "Move the silver object from the storage box to the table",
+  "scene_objects": [
+    "silver_object",
+    "storage_box",
+    "table"
+  ],
+  "num_steps": 4,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "silver_object",
+      "affordance": [
+        0.669,
+        0.78
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "silver_object",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "storage_box"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, silver_object) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        0.162,
+        1.1781,
+        2.9453
+      ],
+      "affordance_hint": "the silver object in the storage box",
+      "affordance_hint_original": "the silver object",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 2,
+      "action": "grasp",
+      "target": "silver_object",
+      "affordance": [
+        0.675,
+        0.76
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "silver_object"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "holding",
+            "args": [
+              "silver_object"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              0,
+              0,
+              -1
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "holding(silver_object)",
+      "affordance_3d": [
+        0.1775,
+        1.0238,
+        2.73
+      ],
+      "affordance_hint": "the small silver object in the storage box",
+      "affordance_hint_original": "the handle of the silver object",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 3,
+      "action": "transport",
+      "target": "silver_object",
+      "destination": "table",
+      "affordance": [
+        0.5,
+        0.7
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "silver_object"
+            ],
+            "role": "safety"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "above",
+            "args": [
+              "silver_object",
+              "table",
+              0.05
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "silver_object",
+              "table"
+            ]
+          },
+          {
+            "pred": "no_drop",
+            "args": [
+              "silver_object"
+            ]
+          }
+        ]
+      },
+      "done_when": "above(silver_object, table, 0.05) AND aligned_xy(silver_object, table, 0.03)",
+      "affordance_3d": [
+        -0.3836,
+        0.7072,
+        2.3974
+      ],
+      "affordance_hint": "the empty area on the table",
+      "affordance_hint_original": "an empty area on the table",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 4,
+      "action": "place",
+      "target": "silver_object",
+      "destination": "table",
+      "affordance": [
+        0.5,
+        0.7
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "surface_contact",
+            "args": [
+              "silver_object",
+              "table"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "released",
+            "args": [
+              "silver_object"
+            ],
+            "role": "completion"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "stable",
+            "args": [
+              "silver_object"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "support_stable",
+            "args": [
+              "silver_object"
+            ]
+          }
+        ]
+      },
+      "done_when": "surface_contact(silver_object, table) AND released(silver_object) AND stable(silver_object)",
+      "affordance_3d": [
+        -0.3836,
+        0.7072,
+        2.3974
+      ],
+      "affordance_hint": "the empty area on the table near the yellow tool",
+      "affordance_hint_original": "an empty area on the table",
+      "affordance_hint_confidence": "ok"
+    }
+  ]
+}

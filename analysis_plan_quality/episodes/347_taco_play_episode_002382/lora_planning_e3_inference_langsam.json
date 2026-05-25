@@ -1,0 +1,119 @@
+{
+  "task": "go towards the yellow block and grasp it",
+  "scene_objects": [
+    "yellow_block",
+    "table"
+  ],
+  "steps": [
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "yellow_block",
+              "<",
+              "0.03"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "approach_axis",
+            "args": [
+              "0",
+              "0",
+              "-1"
+            ],
+            "role": "progress"
+          }
+        ]
+      },
+      "step": 1,
+      "action": "reach",
+      "target": "yellow_block",
+      "affordance_region": "the yellow block",
+      "done_when": "distance(gripper, yellow_block) < 0.03",
+      "affordance_hint": "the yellow block",
+      "refine_prompt": "the yellow block",
+      "refine_cache_hit": false,
+      "affordance_refined": [
+        0.0391,
+        0.3281
+      ],
+      "affordance_3d_refined": [
+        -0.0053,
+        -0.002,
+        0.01
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.4763
+    },
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "yellow_block"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              "0",
+              "0",
+              "-1"
+            ],
+            "role": "progress"
+          }
+        ]
+      },
+      "step": 2,
+      "action": "grasp",
+      "target": "yellow_block",
+      "affordance_region": "the yellow block",
+      "done_when": "holding(yellow_block)",
+      "affordance_hint": "the yellow block",
+      "refine_prompt": "the yellow block",
+      "refine_cache_hit": true,
+      "affordance_refined": [
+        0.0391,
+        0.3281
+      ],
+      "affordance_3d_refined": [
+        -0.0053,
+        -0.002,
+        0.01
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.4763
+    }
+  ]
+}

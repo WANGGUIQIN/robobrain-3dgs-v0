@@ -1,0 +1,171 @@
+{
+  "task": "turn off the red led light",
+  "scene_objects": [
+    "red_led_light",
+    "table",
+    "robot_gripper"
+  ],
+  "num_steps": 3,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "red_led_light",
+      "affordance": [
+        0.308,
+        0.927
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "red_led_light",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "red_led_light"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, red_led_light) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        -0.3749,
+        0.834,
+        1.704
+      ],
+      "affordance_hint": "the red led light"
+    },
+    {
+      "step": 2,
+      "action": "press",
+      "target": "red_led_light",
+      "affordance": [
+        0.308,
+        0.927
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "red_led_light"
+            ],
+            "role": "completion"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "aligned_xy",
+            "args": [
+              "gripper",
+              "red_led_light",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "force_limit",
+            "args": [
+              "gripper",
+              "red_led_light"
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "gripper_contact(red_led_light) AND red_led_light(state=off)",
+      "affordance_3d": [
+        -0.3749,
+        0.834,
+        1.704
+      ],
+      "affordance_hint": "the center of the red led light"
+    },
+    {
+      "step": 3,
+      "action": "retreat",
+      "target": "red_led_light",
+      "affordance": [
+        0.308,
+        0.927
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "released",
+            "args": [
+              "red_led_light"
+            ],
+            "role": "completion"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "red_led_light",
+              ">",
+              0.05
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "red_led_light"
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "distance(gripper, red_led_light) > 0.05 AND released(red_led_light)",
+      "affordance_3d": [
+        -0.3749,
+        0.834,
+        1.704
+      ],
+      "affordance_hint": "red led light"
+    }
+  ]
+}

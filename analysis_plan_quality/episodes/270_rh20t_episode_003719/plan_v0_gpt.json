@@ -1,0 +1,225 @@
+{
+  "task": "Chop the pakchoi",
+  "scene_objects": [
+    "pakchoi",
+    "knife",
+    "cutting_board",
+    "table"
+  ],
+  "num_steps": 4,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "knife",
+      "affordance": [
+        0.45,
+        0.308
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "knife",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "pakchoi"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, knife) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        -0.9215,
+        -0.454,
+        1.4385
+      ],
+      "affordance_hint": "the knife"
+    },
+    {
+      "step": 2,
+      "action": "grasp",
+      "target": "knife",
+      "affordance": [
+        0.45,
+        0.303
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "knife"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "holding",
+            "args": [
+              "knife"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              0,
+              0,
+              -1
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "holding(knife)",
+      "affordance_3d": [
+        -0.9215,
+        -0.4585,
+        1.4385
+      ],
+      "affordance_hint": "the handle of the knife"
+    },
+    {
+      "step": 3,
+      "action": "cut",
+      "target": "pakchoi",
+      "affordance": [
+        0.468,
+        0.387
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "knife"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "aligned_xy",
+            "args": [
+              "knife",
+              "pakchoi"
+            ],
+            "role": "completion"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "stable",
+            "args": [
+              "pakchoi"
+            ],
+            "role": "safety"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "knife",
+              "cutting_board"
+            ]
+          }
+        ]
+      },
+      "done_when": "aligned_xy(knife, pakchoi) AND stable(pakchoi)",
+      "affordance_3d": [
+        -1.0825,
+        -0.4384,
+        1.732
+      ],
+      "affordance_hint": "pakchoi"
+    },
+    {
+      "step": 4,
+      "action": "release",
+      "target": "knife",
+      "affordance": [
+        0.45,
+        0.308
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "released",
+            "args": [
+              "knife"
+            ],
+            "role": "completion"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "on_surface",
+            "args": [
+              "knife",
+              "cutting_board"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "support_stable",
+            "args": [
+              "knife"
+            ]
+          }
+        ]
+      },
+      "done_when": "released(knife) AND on_surface(knife, cutting_board)",
+      "affordance_3d": [
+        -0.9215,
+        -0.454,
+        1.4385
+      ],
+      "affordance_hint": "the knife"
+    }
+  ]
+}

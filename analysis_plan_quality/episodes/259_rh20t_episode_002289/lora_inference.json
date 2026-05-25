@@ -1,0 +1,245 @@
+{
+  "task": "Put the toilet paper on its holder",
+  "parsed": {
+    "scene_objects": [
+      "toilet_paper",
+      "holder",
+      "table"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "toilet_paper",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "toilet_paper",
+        "affordance_region": "the white cylindrical toilet paper",
+        "done_when": "distance(gripper, toilet_paper) < 0.03",
+        "affordance_hint": "the white cylindrical toilet paper",
+        "refine_prompt": "the white cylindrical toilet paper",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.3477,
+          0.6289
+        ],
+        "affordance_3d_refined": [
+          -1.66,
+          -0.1365,
+          2.2995
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.6666,
+        "affordance": [
+          0.3477,
+          0.6289
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "toilet_paper"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "toilet_paper",
+        "affordance_region": "the white cylindrical toilet paper",
+        "done_when": "holding(toilet_paper)",
+        "affordance_hint": "the white cylindrical toilet paper",
+        "refine_prompt": "the white cylindrical toilet paper",
+        "refine_cache_hit": true,
+        "affordance_refined": [
+          0.3477,
+          0.6289
+        ],
+        "affordance_3d_refined": [
+          -1.66,
+          -0.1365,
+          2.2995
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.6666,
+        "affordance": [
+          0.3477,
+          0.6289
+        ]
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "toilet_paper",
+                "holder",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "toilet_paper"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "toilet_paper",
+        "destination": "holder",
+        "affordance_region": "an empty area on the holder",
+        "done_when": "above(toilet_paper, holder, 0.05)",
+        "affordance_hint": "an empty area on the holder",
+        "refine_prompt": "an empty area on the holder",
+        "refine_cache_hit": false,
+        "refine_prompt_fallback": "toilet paper",
+        "affordance_refined": [
+          0.3477,
+          0.6289
+        ],
+        "affordance_3d_refined": [
+          -1.66,
+          -0.1365,
+          2.2995
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.6474,
+        "affordance": [
+          0.3477,
+          0.6289
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "surface_contact",
+              "args": [
+                "toilet_paper",
+                "holder"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "toilet_paper"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "toilet_paper"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "place",
+        "target": "toilet_paper",
+        "destination": "holder",
+        "affordance_region": "an empty area on the holder",
+        "done_when": "surface_contact(toilet_paper, holder) AND released(toilet_paper) AND stable(toilet_paper)",
+        "affordance_hint": "an empty area on the holder",
+        "refine_prompt": "an empty area on the holder",
+        "refine_cache_hit": true,
+        "affordance_refined": [
+          0.3477,
+          0.6289
+        ],
+        "affordance_3d_refined": [
+          -1.66,
+          -0.1365,
+          2.2995
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.6474,
+        "affordance": [
+          0.3477,
+          0.6289
+        ]
+      }
+    ]
+  }
+}

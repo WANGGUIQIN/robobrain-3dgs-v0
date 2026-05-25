@@ -1,0 +1,140 @@
+{
+  "task": "open top drawer",
+  "parsed": {
+    "scene_objects": [
+      "top_drawer",
+      "table",
+      "robot_gripper"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "top_drawer",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "top_drawer",
+        "affordance_region": "the front edge of the top drawer",
+        "done_when": "distance(gripper, top_drawer) < 0.03",
+        "affordance_hint": "the front edge of the top drawer",
+        "refine_prompt": "the front edge of the top drawer",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.6367,
+          0.6172
+        ],
+        "affordance_3d_refined": [
+          0.5982,
+          0.5127,
+          3.8063
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.343,
+        "affordance": [
+          0.6367,
+          0.6172
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "top_drawer"
+              ],
+              "role": "completion"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "aligned_xy",
+              "args": [
+                "gripper",
+                "top_drawer"
+              ],
+              "role": "progress"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "motion_dir",
+              "args": [
+                "0",
+                "-1",
+                "0"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "pull",
+        "target": "top_drawer",
+        "affordance_region": "the front edge of the top drawer",
+        "done_when": "holding(top_drawer)",
+        "affordance_hint": "the front edge of the top drawer",
+        "refine_prompt": "the front edge of the top drawer",
+        "refine_cache_hit": true,
+        "affordance_refined": [
+          0.6367,
+          0.6172
+        ],
+        "affordance_3d_refined": [
+          0.5982,
+          0.5127,
+          3.8063
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.343,
+        "affordance": [
+          0.6367,
+          0.6172
+        ]
+      }
+    ]
+  }
+}

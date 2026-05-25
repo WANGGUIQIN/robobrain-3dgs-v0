@@ -1,0 +1,245 @@
+{
+  "task": "put the grasped purple object inside the box",
+  "parsed": {
+    "scene_objects": [
+      "purple_object",
+      "box",
+      "tray",
+      "table"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "purple_object",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "purple_object",
+        "affordance_region": "the purple object",
+        "done_when": "distance(gripper, purple_object) < 0.03",
+        "affordance_hint": "the purple object",
+        "refine_prompt": "the purple object",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.5898,
+          0.5625
+        ],
+        "affordance_3d_refined": [
+          0.1692,
+          0.1177,
+          1.638
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.399,
+        "affordance": [
+          0.5898,
+          0.5625
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "purple_object"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "purple_object",
+        "affordance_region": "the purple object",
+        "done_when": "holding(purple_object)",
+        "affordance_hint": "the purple object",
+        "refine_prompt": "the purple object",
+        "refine_cache_hit": true,
+        "affordance_refined": [
+          0.5898,
+          0.5625
+        ],
+        "affordance_3d_refined": [
+          0.1692,
+          0.1177,
+          1.638
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.399,
+        "affordance": [
+          0.5898,
+          0.5625
+        ]
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "purple_object",
+                "box",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "purple_object"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "purple_object",
+        "destination": "box",
+        "affordance_region": "an empty area inside the box",
+        "done_when": "above(purple_object, box, 0.05)",
+        "affordance_hint": "an empty area inside the box",
+        "refine_prompt": "an empty area inside the box",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.1836,
+          0.1562
+        ],
+        "affordance_3d_refined": [
+          -0.0036,
+          -0.004,
+          0.01
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.3788,
+        "affordance": [
+          0.1836,
+          0.1562
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "surface_contact",
+              "args": [
+                "purple_object",
+                "box"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "purple_object"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "purple_object"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "place",
+        "target": "purple_object",
+        "destination": "box",
+        "affordance_region": "an empty area inside the box",
+        "done_when": "surface_contact(purple_object, box) AND released(purple_object) AND stable(purple_object)",
+        "affordance_hint": "an empty area inside the box",
+        "refine_prompt": "an empty area inside the box",
+        "refine_cache_hit": true,
+        "affordance_refined": [
+          0.1836,
+          0.1562
+        ],
+        "affordance_3d_refined": [
+          -0.0036,
+          -0.004,
+          0.01
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.3788,
+        "affordance": [
+          0.1836,
+          0.1562
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,231 @@
+{
+  "task": "stack the yellow block on top of the purple block",
+  "scene_objects": [
+    "yellow_block",
+    "purple_block",
+    "table"
+  ],
+  "num_steps": 4,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "yellow_block",
+      "affordance": [
+        0.392,
+        0.445
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "yellow_block",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "purple_block"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, yellow_block) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        -0.2161,
+        -0.1081,
+        1.719
+      ],
+      "affordance_hint": "the yellow block"
+    },
+    {
+      "step": 2,
+      "action": "grasp",
+      "target": "yellow_block",
+      "affordance": [
+        0.392,
+        0.445
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "yellow_block"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "holding",
+            "args": [
+              "yellow_block"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              0,
+              0,
+              -1
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "holding(yellow_block)",
+      "affordance_3d": [
+        -0.2161,
+        -0.1081,
+        1.719
+      ],
+      "affordance_hint": "yellow block"
+    },
+    {
+      "step": 3,
+      "action": "transport",
+      "target": "yellow_block",
+      "destination": "purple_block",
+      "affordance": [
+        0.352,
+        0.57
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "yellow_block"
+            ],
+            "role": "safety"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "above",
+            "args": [
+              "yellow_block",
+              "purple_block",
+              0.05
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "yellow_block",
+              "purple_block"
+            ]
+          },
+          {
+            "pred": "no_drop",
+            "args": [
+              "yellow_block"
+            ]
+          }
+        ]
+      },
+      "done_when": "above(yellow_block, purple_block, 0.05) AND aligned_xy(yellow_block, purple_block, 0.03)",
+      "affordance_3d": [
+        -0.3179,
+        0.1506,
+        1.863
+      ],
+      "affordance_hint": "an empty area on the purple block"
+    },
+    {
+      "step": 4,
+      "action": "place",
+      "target": "yellow_block",
+      "destination": "purple_block",
+      "affordance": [
+        0.352,
+        0.57
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "surface_contact",
+            "args": [
+              "yellow_block",
+              "purple_block"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "released",
+            "args": [
+              "yellow_block"
+            ],
+            "role": "completion"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "stable",
+            "args": [
+              "yellow_block"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "support_stable",
+            "args": [
+              "yellow_block"
+            ]
+          }
+        ]
+      },
+      "done_when": "surface_contact(yellow_block, purple_block) AND released(yellow_block) AND stable(yellow_block)",
+      "affordance_3d": [
+        -0.3179,
+        0.1506,
+        1.863
+      ],
+      "affordance_hint": "an empty area on the purple block"
+    }
+  ]
+}

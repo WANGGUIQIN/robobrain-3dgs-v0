@@ -1,0 +1,228 @@
+{
+  "task": "Move the yellow cloth behind the pot with the corn",
+  "scene_objects": [
+    "yellow_cloth",
+    "pot",
+    "corn",
+    "spatula",
+    "table"
+  ],
+  "steps": [
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "yellow_cloth",
+              "<",
+              "0.03"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "approach_axis",
+            "args": [
+              "0",
+              "0",
+              "-1"
+            ],
+            "role": "progress"
+          }
+        ]
+      },
+      "step": 1,
+      "action": "reach",
+      "target": "yellow_cloth",
+      "affordance_region": "the yellow cloth on the left side of the pot",
+      "done_when": "distance(gripper, yellow_cloth) < 0.03",
+      "affordance_hint": "the yellow cloth on the left side of the pot",
+      "refine_prompt": "the yellow cloth on the left side of the pot",
+      "refine_cache_hit": false,
+      "affordance_refined": [
+        0.2812,
+        0.4688
+      ],
+      "affordance_3d_refined": [
+        -0.3568,
+        -0.051,
+        1.4189
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.7276
+    },
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "yellow_cloth"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              "0",
+              "0",
+              "-1"
+            ],
+            "role": "progress"
+          }
+        ]
+      },
+      "step": 2,
+      "action": "grasp",
+      "target": "yellow_cloth",
+      "affordance_region": "the yellow cloth on the left side of the pot",
+      "done_when": "holding(yellow_cloth)",
+      "affordance_hint": "the yellow cloth on the left side of the pot",
+      "refine_prompt": "the yellow cloth on the left side of the pot",
+      "refine_cache_hit": true,
+      "affordance_refined": [
+        0.2812,
+        0.4688
+      ],
+      "affordance_3d_refined": [
+        -0.3568,
+        -0.051,
+        1.4189
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.7276
+    },
+    {
+      "constraints": {
+        "spatial": [
+          {
+            "pred": "above",
+            "args": [
+              "yellow_cloth",
+              "behind_pot",
+              "0.05"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_drop",
+            "args": [
+              "yellow_cloth"
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "step": 3,
+      "action": "transport",
+      "target": "yellow_cloth",
+      "destination": "behind_pot",
+      "affordance_region": "the empty area behind the pot",
+      "done_when": "above(yellow_cloth, behind_pot, 0.05)",
+      "affordance_hint": "the empty area behind the pot",
+      "refine_prompt": "the empty area behind the pot",
+      "refine_cache_hit": false,
+      "affordance_refined": [
+        0.8203,
+        0.2734
+      ],
+      "affordance_3d_refined": [
+        0.5009,
+        -0.3543,
+        1.3602
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.3277
+    },
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "surface_contact",
+            "args": [
+              "yellow_cloth",
+              "behind_pot"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "released",
+            "args": [
+              "yellow_cloth"
+            ],
+            "role": "completion"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "stable",
+            "args": [
+              "yellow_cloth"
+            ],
+            "role": "completion"
+          }
+        ]
+      },
+      "step": 4,
+      "action": "place",
+      "target": "yellow_cloth",
+      "destination": "behind_pot",
+      "affordance_region": "the empty area behind the pot",
+      "done_when": "surface_contact(yellow_cloth, behind_pot) AND released(yellow_cloth)",
+      "affordance_hint": "the empty area behind the pot",
+      "refine_prompt": "the empty area behind the pot",
+      "refine_cache_hit": true,
+      "affordance_refined": [
+        0.8203,
+        0.2734
+      ],
+      "affordance_3d_refined": [
+        0.5009,
+        -0.3543,
+        1.3602
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.3277
+    }
+  ]
+}

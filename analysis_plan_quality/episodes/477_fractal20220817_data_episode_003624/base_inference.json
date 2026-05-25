@@ -1,0 +1,167 @@
+{
+  "task": "pick rxbar chocolate from middle drawer and place on counter",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_3epoch/best",
+  "raw": "**SCENE ANALYSIS -** A nightstand with a bowl, an orange, and a can on the top surface. A drawer is open, containing a green energy drink can and a black RXBAR chocolate bar. The RXBAR is a small, rectangular object. STRATEGY - First, reach into the drawer to grasp the RXBAR. Then, transport it to the nightstand surface and place it there. Failure modes include not grasping the RXBAR, dropping it during transport, or placing it incorrectly. AFFORDANCE REASONING - Step 1 reach into the drawer to access the RXBAR; Step 2 grasp the RXBAR for secure hold; Step 3 transport it to the nightstand surface; Step 4 place it on the surface.\n\nGoal: on(RXBAR, nightstand); stable(RXBAR)\nScene: nightstand, bowl, orange, can, drawer, RXBAR\nStep 1: reach(drawer)\n  affordance_region: the open area of the drawer\n  contact: gripper_state(open) [progress]\n  spatial: inside(gripper, drawer) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: inside(gripper, drawer)\nStep 2: grasp(RXBAR)\n  affordance_region: the body of the black RXBAR chocolate bar\n  contact: holding(RXBAR) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(RXBAR)\nStep 3: transport(RXBAR -> nightstand)\n  affordance_region: an empty area on the nightstand surface\n  spatial: above(RXBAR, nightstand, 0.05) [completion]\n  safety: no_drop(RXBAR)\n  done_when: above(RXBAR, nightstand, 0.05)\nStep 4: place(RXBAR -> nightstand)\n  affordance_region: an empty area on the nightstand surface\n  contact: surface_contact(RXBAR, nightstand) [completion]; released(RXBAR) [completion]\n  pose: stable(RXBAR) [completion]\n  done_when: surface_contact(RXBAR, nightstand) AND released(RXBAR)\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [
+      {
+        "pred": "on",
+        "args": [
+          "RXBAR",
+          "nightstand"
+        ]
+      },
+      {
+        "pred": "stable",
+        "args": [
+          "RXBAR"
+        ]
+      }
+    ],
+    "scene_objects": [
+      "nightstand",
+      "bowl",
+      "orange",
+      "can",
+      "drawer",
+      "RXBAR"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "inside",
+              "args": [
+                "gripper",
+                "drawer"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "drawer",
+        "affordance_region": "the open area of the drawer",
+        "done_when": "inside(gripper, drawer)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "RXBAR"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "RXBAR",
+        "affordance_region": "the body of the black RXBAR chocolate bar",
+        "done_when": "holding(RXBAR)"
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "RXBAR",
+                "nightstand",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "RXBAR"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "RXBAR",
+        "destination": "nightstand",
+        "affordance_region": "an empty area on the nightstand surface",
+        "done_when": "above(RXBAR, nightstand, 0.05)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "surface_contact",
+              "args": [
+                "RXBAR",
+                "nightstand"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "RXBAR"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "RXBAR"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "place",
+        "target": "RXBAR",
+        "destination": "nightstand",
+        "affordance_region": "an empty area on the nightstand surface",
+        "done_when": "surface_contact(RXBAR, nightstand) AND released(RXBAR)"
+      }
+    ]
+  }
+}

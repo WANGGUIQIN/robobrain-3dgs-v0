@@ -1,0 +1,194 @@
+{
+  "task": "Fold the tissue paper in half",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_3epoch/best",
+  "raw": "The scene shows a robotic arm positioned over a green, textured surface, likely a cutting board, with a white wall and cabinets in the background. The task is to fold a tissue paper in half. Since the tissue paper is not visible in the image, it is assumed to be on the green surface. The plan involves reaching for the tissue paper, grasping it, folding it in half, and placing it back on the surface.\n\nGoal: folded(tissue_paper); on(tissue_paper, green_surface)\nScene: green_surface, tissue_paper\nStep 1: reach(green_surface)\n  affordance_region: the green surface\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, green_surface, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, green_surface) < 0.03\nStep 2: grasp(tissue_paper)\n  affordance_region: the body of the tissue_paper\n  contact: holding(tissue_paper) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(tissue_paper)\nStep 3: transport(tissue_paper -> green_surface)\n  affordance_region: an empty area on the green_surface\n  spatial: above(tissue_paper, green_surface, 0.05) [completion]\n  safety: no_drop(tissue_paper)\n  done_when: above(tissue_paper, green_surface, 0.05)\nStep 4: fold(tissue_paper)\n  affordance_region: the body of the tissue_paper\n  contact: folded(tissue_paper) [completion]\n  direction: fold_axis(0, 0, -1) [progress]\n  done_when: folded(tissue_paper)\nStep 5: place(tissue_paper -> green_surface)\n  affordance_region: an empty area on the green_surface\n  contact: surface_contact(tissue_paper, green_surface) [completion]; released(tissue_paper) [completion]\n  pose: stable(tissue_paper) [completion]\n  done_when: surface_contact(tissue_paper, green_surface) AND released(tissue_paper)\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [
+      {
+        "pred": "folded",
+        "args": [
+          "tissue_paper"
+        ]
+      },
+      {
+        "pred": "on",
+        "args": [
+          "tissue_paper",
+          "green_surface"
+        ]
+      }
+    ],
+    "scene_objects": [
+      "green_surface",
+      "tissue_paper"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "green_surface",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "green_surface",
+        "affordance_region": "the green surface",
+        "done_when": "distance(gripper, green_surface) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "tissue_paper"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "tissue_paper",
+        "affordance_region": "the body of the tissue_paper",
+        "done_when": "holding(tissue_paper)"
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "tissue_paper",
+                "green_surface",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "tissue_paper"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "tissue_paper",
+        "destination": "green_surface",
+        "affordance_region": "an empty area on the green_surface",
+        "done_when": "above(tissue_paper, green_surface, 0.05)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "folded",
+              "args": [
+                "tissue_paper"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "fold_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "fold",
+        "target": "tissue_paper",
+        "affordance_region": "the body of the tissue_paper",
+        "done_when": "folded(tissue_paper)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "surface_contact",
+              "args": [
+                "tissue_paper",
+                "green_surface"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "tissue_paper"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "tissue_paper"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 5,
+        "action": "place",
+        "target": "tissue_paper",
+        "destination": "green_surface",
+        "affordance_region": "an empty area on the green_surface",
+        "done_when": "surface_contact(tissue_paper, green_surface) AND released(tissue_paper)"
+      }
+    ]
+  }
+}

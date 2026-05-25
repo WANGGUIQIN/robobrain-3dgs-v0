@@ -1,0 +1,231 @@
+{
+  "task": "place the yellow object on the table",
+  "scene_objects": [
+    "yellow_object",
+    "table",
+    "tray"
+  ],
+  "num_steps": 4,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "yellow_object",
+      "affordance": [
+        0.3,
+        0.25
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "yellow_object",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "tray"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, yellow_object) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        -0.4422,
+        -0.5549,
+        1.931
+      ],
+      "affordance_hint": "the yellow object"
+    },
+    {
+      "step": 2,
+      "action": "grasp",
+      "target": "yellow_object",
+      "affordance": [
+        0.46,
+        0.1
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "yellow_object"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "holding",
+            "args": [
+              "yellow_object"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              0,
+              0,
+              -1
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "holding(yellow_object)",
+      "affordance_3d": [
+        -0.0784,
+        -0.7992,
+        1.745
+      ],
+      "affordance_hint": "the handle of the yellow object"
+    },
+    {
+      "step": 3,
+      "action": "transport",
+      "target": "yellow_object",
+      "destination": "table",
+      "affordance": [
+        0.45,
+        0.553
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "yellow_object"
+            ],
+            "role": "safety"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "above",
+            "args": [
+              "yellow_object",
+              "table",
+              0.05
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "yellow_object",
+              "tray"
+            ]
+          },
+          {
+            "pred": "no_drop",
+            "args": [
+              "yellow_object"
+            ]
+          }
+        ]
+      },
+      "done_when": "above(yellow_object, table, 0.05) AND aligned_xy(yellow_object, table, 0.03)",
+      "affordance_3d": [
+        -0.1113,
+        0.1199,
+        1.907
+      ],
+      "affordance_hint": "an empty area on the table"
+    },
+    {
+      "step": 4,
+      "action": "place",
+      "target": "yellow_object",
+      "destination": "table",
+      "affordance": [
+        0.45,
+        0.553
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "surface_contact",
+            "args": [
+              "yellow_object",
+              "table"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "released",
+            "args": [
+              "yellow_object"
+            ],
+            "role": "completion"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "stable",
+            "args": [
+              "yellow_object"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "support_stable",
+            "args": [
+              "yellow_object"
+            ]
+          }
+        ]
+      },
+      "done_when": "surface_contact(yellow_object, table) AND released(yellow_object) AND stable(yellow_object)",
+      "affordance_3d": [
+        -0.1113,
+        0.1199,
+        1.907
+      ],
+      "affordance_hint": "an empty area on the table"
+    }
+  ]
+}

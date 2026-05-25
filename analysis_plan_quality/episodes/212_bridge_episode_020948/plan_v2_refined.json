@@ -1,0 +1,247 @@
+{
+  "task": "Move the egg from the back of the table to the front between the bowl and the spoon.",
+  "scene_objects": [
+    "egg",
+    "bowl",
+    "spoon",
+    "table"
+  ],
+  "num_steps": 4,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "egg",
+      "affordance": [
+        0.325,
+        0.316
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "egg",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "bowl"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, egg) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        -0.2709,
+        -0.2829,
+        1.3407
+      ],
+      "affordance_hint": "the egg on the back of the wooden table",
+      "affordance_hint_original": "the egg",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 2,
+      "action": "grasp",
+      "target": "egg",
+      "affordance": [
+        0.325,
+        0.316
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "egg"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "holding",
+            "args": [
+              "egg"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              0,
+              0,
+              -1
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "holding(egg)",
+      "affordance_3d": [
+        -0.2709,
+        -0.2829,
+        1.3407
+      ],
+      "affordance_hint": "the egg on the back of the table",
+      "affordance_hint_original": "egg",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 3,
+      "action": "transport",
+      "target": "egg",
+      "destination": "front_table_between_bowl_and_spoon",
+      "affordance": [
+        0.5,
+        0.651
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "egg"
+            ],
+            "role": "safety"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "above",
+            "args": [
+              "egg",
+              "table",
+              0.05
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "egg",
+              "bowl"
+            ]
+          },
+          {
+            "pred": "no_collision",
+            "args": [
+              "egg",
+              "spoon"
+            ]
+          },
+          {
+            "pred": "no_drop",
+            "args": [
+              "egg"
+            ]
+          }
+        ]
+      },
+      "done_when": "above(egg, table, 0.05) AND aligned_xy(egg, front_table_between_bowl_and_spoon, 0.03)",
+      "affordance_3d": [
+        0.0,
+        0.3376,
+        1.9277
+      ],
+      "affordance_hint": "the front table between the bowl and the spoon",
+      "affordance_hint_original": "an empty area on the front table between bowl and spoon",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 4,
+      "action": "place",
+      "target": "egg",
+      "destination": "front_table_between_bowl_and_spoon",
+      "affordance": [
+        0.5,
+        0.651
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "surface_contact",
+            "args": [
+              "egg",
+              "table"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "released",
+            "args": [
+              "egg"
+            ],
+            "role": "completion"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "stable",
+            "args": [
+              "egg"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "support_stable",
+            "args": [
+              "egg"
+            ]
+          }
+        ]
+      },
+      "done_when": "surface_contact(egg, table) AND released(egg) AND stable(egg)",
+      "affordance_3d": [
+        0.0,
+        0.3376,
+        1.9277
+      ],
+      "affordance_hint": "the empty area on the front table between the bowl and the spoon",
+      "affordance_hint_original": "an empty area on the front table between bowl and spoon",
+      "affordance_hint_confidence": "ok"
+    }
+  ]
+}

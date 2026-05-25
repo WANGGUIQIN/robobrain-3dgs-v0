@@ -1,0 +1,164 @@
+{
+  "task": "Move the green block to the right side of the desk",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_3epoch/best",
+  "raw": "SCENE ANALYSIS - A green block stands on a wooden table. The block is small and cube-shaped. STRATEGY - The task is to move the green block to the right side of the desk. This requires reaching the block, grasping it, transporting it to the right side, and placing it there. Failure modes include dropping the block during transport or placing it in an invalid location. AFFORDANCE REASONING - Step 1 reach the block at its body for initial contact; Step 2 grasp the block at its body for secure hold; Step 3 transport the block to the right side of the desk; Step 4 place the block on the desk surface at the right side.\nGoal: on(green_block, desk); right_of(green_block, blue_cuboid)\nScene: green_block, blue_cuboid, desk\nStep 1: reach(green_block)\n  affordance_region: the body of the green block\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, green_block, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, green_block) < 0.03\nStep 2: grasp(green_block)\n  affordance_region: the body of the green block\n  contact: holding(green_block) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(green_block)\nStep 3: transport(green_block -> right_of(desk))\n  affordance_region: an empty area on the right side of the desk\n  spatial: above(green_block, right_of(desk), 0.05) [completion]\n  safety: no_drop(green_block)\n  done_when: above(green_block, right_of(desk), 0.05)\nStep 4: place(green_block -> right_of(desk))\n  affordance_region: an empty area on the right side of the desk\n  contact: surface_contact(green_block, right_of(desk)) [completion]; released(green_block) [completion]\n  pose: stable(green_block) [completion]\n  done_when: surface_contact(green_block, right_of(desk)) AND released(green_block)\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [
+      {
+        "pred": "on",
+        "args": [
+          "green_block",
+          "desk"
+        ]
+      },
+      {
+        "pred": "right_of",
+        "args": [
+          "green_block",
+          "blue_cuboid"
+        ]
+      }
+    ],
+    "scene_objects": [
+      "green_block",
+      "blue_cuboid",
+      "desk"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "green_block",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "green_block",
+        "affordance_region": "the body of the green block",
+        "done_when": "distance(gripper, green_block) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "green_block"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "green_block",
+        "affordance_region": "the body of the green block",
+        "done_when": "holding(green_block)"
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "green_block",
+                "right_of(desk"
+              ]
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "green_block"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "green_block",
+        "destination": "right_of(desk",
+        "affordance_region": "an empty area on the right side of the desk",
+        "done_when": "above(green_block, right_of(desk), 0.05)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "surface_contact",
+              "args": [
+                "green_block",
+                "right_of(desk"
+              ]
+            },
+            {
+              "pred": "released",
+              "args": [
+                "green_block"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "green_block"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "place",
+        "target": "green_block",
+        "destination": "right_of(desk",
+        "affordance_region": "an empty area on the right side of the desk",
+        "done_when": "surface_contact(green_block, right_of(desk)) AND released(green_block)"
+      }
+    ]
+  }
+}

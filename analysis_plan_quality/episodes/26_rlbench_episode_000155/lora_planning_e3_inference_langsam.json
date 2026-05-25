@@ -1,0 +1,228 @@
+{
+  "task": "put the ring on the rose spoke",
+  "scene_objects": [
+    "red_block",
+    "pink_block",
+    "brown_block",
+    "table"
+  ],
+  "steps": [
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "red_block",
+              "<",
+              "0.03"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "approach_axis",
+            "args": [
+              "0",
+              "0",
+              "-1"
+            ],
+            "role": "progress"
+          }
+        ]
+      },
+      "step": 1,
+      "action": "reach",
+      "target": "red_block",
+      "affordance_region": "the red block on the table",
+      "done_when": "distance(gripper, red_block) < 0.03",
+      "affordance_hint": "the red block on the table",
+      "refine_prompt": "the red block on the table",
+      "refine_cache_hit": false,
+      "affordance_refined": [
+        0.1367,
+        0.9961
+      ],
+      "affordance_3d_refined": [
+        -1.5171,
+        2.0717,
+        2.088
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.4994
+    },
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "red_block"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              "0",
+              "0",
+              "-1"
+            ],
+            "role": "progress"
+          }
+        ]
+      },
+      "step": 2,
+      "action": "grasp",
+      "target": "red_block",
+      "affordance_region": "the red block on the table",
+      "done_when": "holding(red_block)",
+      "affordance_hint": "the red block on the table",
+      "refine_prompt": "the red block on the table",
+      "refine_cache_hit": true,
+      "affordance_refined": [
+        0.1367,
+        0.9961
+      ],
+      "affordance_3d_refined": [
+        -1.5171,
+        2.0717,
+        2.088
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.4994
+    },
+    {
+      "constraints": {
+        "spatial": [
+          {
+            "pred": "above",
+            "args": [
+              "red_block",
+              "pink_block",
+              "0.05"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_drop",
+            "args": [
+              "red_block"
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "step": 3,
+      "action": "transport",
+      "target": "red_block",
+      "destination": "pink_block",
+      "affordance_region": "the top surface of the pink block",
+      "done_when": "above(red_block, pink_block, 0.05)",
+      "affordance_hint": "the top surface of the pink block",
+      "refine_prompt": "the top surface of the pink block",
+      "refine_cache_hit": false,
+      "refine_prompt_fallback": "red block",
+      "affordance_refined": [
+        0.6484,
+        0.6875
+      ],
+      "affordance_3d_refined": [
+        0.7085,
+        0.8949,
+        2.3864
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.3265
+    },
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "surface_contact",
+            "args": [
+              "red_block",
+              "pink_block"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "released",
+            "args": [
+              "red_block"
+            ],
+            "role": "completion"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "stable",
+            "args": [
+              "red_block"
+            ],
+            "role": "completion"
+          }
+        ]
+      },
+      "step": 4,
+      "action": "place",
+      "target": "red_block",
+      "destination": "pink_block",
+      "affordance_region": "the top surface of the pink block",
+      "done_when": "surface_contact(red_block, pink_block) AND released(red_block)",
+      "affordance_hint": "the top surface of the pink block",
+      "refine_prompt": "the top surface of the pink block",
+      "refine_cache_hit": true,
+      "affordance_refined": [
+        0.6484,
+        0.6875
+      ],
+      "affordance_3d_refined": [
+        0.7085,
+        0.8949,
+        2.3864
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.3265
+    }
+  ]
+}

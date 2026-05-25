@@ -1,0 +1,181 @@
+{
+  "task": "Open the top of the grill",
+  "scene_objects": [
+    "grill_top",
+    "grill_base",
+    "counter"
+  ],
+  "num_steps": 3,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "grill_top",
+      "affordance": [
+        0.441,
+        0.691
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "grill_top",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "grill_base"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, grill_top) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        -0.637,
+        0.7725,
+        2.7105
+      ],
+      "affordance_hint": "the top surface of the silver grill top",
+      "affordance_hint_original": "the grill top",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 2,
+      "action": "grasp",
+      "target": "grill_top",
+      "affordance": [
+        0.441,
+        0.678
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "grill_top"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "holding",
+            "args": [
+              "grill_top"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              0,
+              0,
+              -1
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "holding(grill_top)",
+      "affordance_3d": [
+        -0.6554,
+        0.753,
+        2.7887
+      ],
+      "affordance_hint": "the handle of the grill top",
+      "affordance_hint_original": "the handle of the grill top",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 3,
+      "action": "rotate",
+      "target": "grill_top",
+      "affordance": [
+        0.441,
+        0.691
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "grill_top"
+            ],
+            "role": "safety"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "above",
+            "args": [
+              "grill_top",
+              "grill_base",
+              0.05
+            ],
+            "role": "completion"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "tilted",
+            "args": [
+              "grill_top"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "grill_top",
+              "grill_base"
+            ]
+          }
+        ]
+      },
+      "done_when": "tilted(grill_top) AND above(grill_top, grill_base, 0.05)",
+      "affordance_3d": [
+        -0.637,
+        0.7725,
+        2.7105
+      ],
+      "affordance_hint": "the body of the grill top",
+      "affordance_hint_original": "the body of the grill top",
+      "affordance_hint_confidence": "ok"
+    }
+  ]
+}

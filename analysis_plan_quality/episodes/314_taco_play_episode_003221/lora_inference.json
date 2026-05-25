@@ -1,0 +1,125 @@
+{
+  "task": "push the door to the left",
+  "parsed": {
+    "scene_objects": [
+      "door",
+      "robot_arm",
+      "table"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "door",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "door",
+        "affordance_region": "the white door on the right side of the table",
+        "done_when": "distance(gripper, door) < 0.03",
+        "affordance_hint": "the white door on the right side of the table",
+        "refine_prompt": "the white door on the right side of the table",
+        "refine_cache_hit": false,
+        "affordance_refined": null,
+        "affordance_3d_refined": null,
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "no_mask",
+        "refine_confidence": 0.0
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_contact",
+              "args": [
+                "door"
+              ],
+              "role": "completion"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "aligned_xy",
+              "args": [
+                "door",
+                "left_position",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "motion_dir",
+              "args": [
+                "left"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_collision",
+              "args": [
+                "door",
+                "table"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "push",
+        "target": "door",
+        "affordance_region": "the center of the white door",
+        "done_when": "aligned_xy(door, left_position, 0.03)",
+        "affordance_hint": "the center of the white door",
+        "refine_prompt": "the center of the white door",
+        "refine_cache_hit": false,
+        "affordance_refined": null,
+        "affordance_3d_refined": null,
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "no_mask",
+        "refine_confidence": 0.0
+      }
+    ]
+  }
+}

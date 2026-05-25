@@ -1,0 +1,161 @@
+{
+  "task": "take the yellow block and rotate it right",
+  "scene_objects": [
+    "yellow_block",
+    "table",
+    "shelf"
+  ],
+  "num_steps": 3,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "yellow_block",
+      "affordance": [
+        0.35,
+        0.3
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "yellow_block",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "shelf"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, yellow_block) < 0.03 AND gripper_state(open)",
+      "affordance_hint": "the yellow block on the table",
+      "affordance_3d": [
+        -0.1839,
+        -0.2469,
+        1.078
+      ],
+      "affordance_hint_original": "the yellow block",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 2,
+      "action": "grasp",
+      "target": "yellow_block",
+      "affordance": [
+        0.36,
+        0.3
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "yellow_block"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "holding",
+            "args": [
+              "yellow_block"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              0,
+              0,
+              -1
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "holding(yellow_block)",
+      "affordance_hint": "the yellow block",
+      "affordance_hint_original": "yellow block",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 3,
+      "action": "rotate",
+      "target": "yellow_block",
+      "affordance": [
+        0.36,
+        0.3
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "yellow_block"
+            ],
+            "role": "safety"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "orientation_match",
+            "args": [
+              "yellow_block",
+              "rotated_right"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "yellow_block",
+              "table"
+            ]
+          }
+        ]
+      },
+      "done_when": "orientation_match(yellow_block, rotated_right)",
+      "affordance_hint": "the body of the yellow block",
+      "affordance_hint_original": "the body of the yellow block",
+      "affordance_hint_confidence": "ok"
+    }
+  ]
+}

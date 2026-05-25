@@ -1,0 +1,258 @@
+{
+  "task": "use the stick to drag the cube onto the maroon target",
+  "parsed": {
+    "scene_objects": [
+      "yellow_square",
+      "cyan_square",
+      "red_square",
+      "purple_square",
+      "stick",
+      "table"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "stick",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "stick",
+        "affordance_region": "the body of the stick",
+        "done_when": "distance(gripper, stick) < 0.03",
+        "affordance_hint": "the body of the stick",
+        "refine_prompt": "the body of the stick",
+        "refine_cache_hit": false,
+        "refine_prompt_fallback": "stick",
+        "affordance_refined": [
+          0.5859,
+          0.6523
+        ],
+        "affordance_3d_refined": [
+          0.3131,
+          0.555,
+          1.8215
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.3075,
+        "affordance": [
+          0.5859,
+          0.6523
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "stick"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "stick",
+        "affordance_region": "the body of the stick",
+        "done_when": "holding(stick)",
+        "affordance_hint": "the body of the stick",
+        "refine_prompt": "the body of the stick",
+        "refine_cache_hit": true,
+        "affordance_refined": [
+          0.5859,
+          0.6523
+        ],
+        "affordance_3d_refined": [
+          0.3131,
+          0.555,
+          1.8215
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.3075,
+        "affordance": [
+          0.5859,
+          0.6523
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "stick"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "aligned_xy",
+              "args": [
+                "stick",
+                "purple_square"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "motion_dir",
+              "args": [
+                "1",
+                "0"
+              ],
+              "role": "progress"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_collision",
+              "args": [
+                "stick",
+                "table"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "push",
+        "target": "purple_square",
+        "destination": "red_square",
+        "affordance_region": "the purple square",
+        "done_when": "aligned_xy(stick, purple_square) AND on_surface(purple_square, red_square)",
+        "affordance_hint": "the purple square",
+        "refine_prompt": "the purple square",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.1523,
+          0.9961
+        ],
+        "affordance_3d_refined": [
+          -1.4518,
+          2.0717,
+          2.088
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.3056,
+        "affordance": [
+          0.1523,
+          0.9961
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "released",
+              "args": [
+                "stick"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "stick"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "release",
+        "target": "stick",
+        "affordance_region": "the body of the stick",
+        "done_when": "released(stick) AND stable(stick)",
+        "affordance_hint": "the body of the stick",
+        "refine_prompt": "the body of the stick",
+        "refine_cache_hit": true,
+        "affordance_refined": [
+          0.5859,
+          0.6523
+        ],
+        "affordance_3d_refined": [
+          0.3131,
+          0.555,
+          1.8215
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.3075,
+        "affordance": [
+          0.5859,
+          0.6523
+        ]
+      }
+    ]
+  }
+}

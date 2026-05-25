@@ -1,0 +1,171 @@
+{
+  "task": "pick up the square bread",
+  "scene_objects": [
+    "square_bread",
+    "red_ball",
+    "blue_bowl",
+    "black_bowl",
+    "blue_container",
+    "tray",
+    "table"
+  ],
+  "num_steps": 3,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "square_bread",
+      "affordance": [
+        0.633,
+        0.5
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "square_bread",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "red_ball"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, square_bread) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        0.4317,
+        0.0,
+        2.8279
+      ],
+      "affordance_hint": "the square bread on the wooden tray",
+      "affordance_hint_original": "the square bread",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 2,
+      "action": "grasp",
+      "target": "square_bread",
+      "affordance": [
+        0.633,
+        0.495
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "square_bread"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "holding",
+            "args": [
+              "square_bread"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              0,
+              0,
+              -1
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "holding(square_bread)",
+      "affordance_3d": [
+        0.4288,
+        -0.0126,
+        2.8083
+      ],
+      "affordance_hint": "the small square bread on the table",
+      "affordance_hint_original": "square bread",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 3,
+      "action": "transport",
+      "target": "square_bread",
+      "affordance": [
+        0.62,
+        0.526
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "square_bread"
+            ],
+            "role": "safety"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "square_bread",
+              "red_ball"
+            ]
+          },
+          {
+            "pred": "no_drop",
+            "args": [
+              "square_bread"
+            ]
+          }
+        ]
+      },
+      "done_when": "holding(square_bread)",
+      "affordance_3d": [
+        0.41,
+        0.0926,
+        2.9453
+      ],
+      "affordance_hint": "the empty area on the square bread",
+      "affordance_hint_original": "an empty area on the square bread",
+      "affordance_hint_confidence": "ok"
+    }
+  ]
+}

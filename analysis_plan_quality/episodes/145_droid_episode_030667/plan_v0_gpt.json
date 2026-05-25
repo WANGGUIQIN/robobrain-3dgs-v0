@@ -1,0 +1,224 @@
+{
+  "task": "Fold the grey thing in half",
+  "scene_objects": [
+    "grey_cloth",
+    "bed",
+    "robot"
+  ],
+  "num_steps": 4,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "grey_cloth",
+      "affordance": [
+        0.495,
+        0.776
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "grey_cloth",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "bed"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, grey_cloth) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        -0.247,
+        0.5914,
+        1.4972
+      ],
+      "affordance_hint": "the grey cloth"
+    },
+    {
+      "step": 2,
+      "action": "grasp",
+      "target": "grey_cloth",
+      "affordance": [
+        0.495,
+        0.776
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "grey_cloth"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "holding",
+            "args": [
+              "grey_cloth"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              0,
+              0,
+              -1
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "holding(grey_cloth)",
+      "affordance_3d": [
+        -0.247,
+        0.5914,
+        1.4972
+      ],
+      "affordance_hint": "grey cloth"
+    },
+    {
+      "step": 3,
+      "action": "fold",
+      "target": "grey_cloth",
+      "affordance": [
+        0.495,
+        0.776
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "grey_cloth"
+            ],
+            "role": "safety"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "aligned_xy",
+            "args": [
+              "grey_cloth",
+              "folded_position",
+              0.05
+            ],
+            "role": "completion"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "tilted",
+            "args": [
+              "grey_cloth"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "grey_cloth",
+              "bed"
+            ]
+          }
+        ]
+      },
+      "done_when": "aligned_xy(grey_cloth, folded_position, 0.05) AND tilted(grey_cloth)",
+      "affordance_3d": [
+        -0.247,
+        0.5914,
+        1.4972
+      ],
+      "affordance_hint": "grey cloth"
+    },
+    {
+      "step": 4,
+      "action": "release",
+      "target": "grey_cloth",
+      "affordance": [
+        0.495,
+        0.776
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "released",
+            "args": [
+              "grey_cloth"
+            ],
+            "role": "completion"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "stable",
+            "args": [
+              "grey_cloth"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "support_stable",
+            "args": [
+              "grey_cloth"
+            ]
+          }
+        ]
+      },
+      "done_when": "released(grey_cloth) AND stable(grey_cloth)",
+      "affordance_3d": [
+        -0.247,
+        0.5914,
+        1.4972
+      ],
+      "affordance_hint": "the grey cloth"
+    }
+  ]
+}

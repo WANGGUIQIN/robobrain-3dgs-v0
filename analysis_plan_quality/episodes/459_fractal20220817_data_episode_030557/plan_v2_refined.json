@@ -1,0 +1,240 @@
+{
+  "task": "office manipulation",
+  "scene_objects": [
+    "drawer",
+    "snack_bags",
+    "robot_gripper",
+    "table"
+  ],
+  "num_steps": 4,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "snack_bag",
+      "affordance": [
+        0.725,
+        0.769
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "snack_bag",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "drawer"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, snack_bag) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        0.8282,
+        0.9853,
+        3.1801
+      ],
+      "affordance_hint": "the green snack bag in the drawer",
+      "affordance_hint_original": "the snack bag",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 2,
+      "action": "grasp",
+      "target": "snack_bag",
+      "affordance": [
+        0.5,
+        0.835
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "snack_bag"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "holding",
+            "args": [
+              "snack_bag"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              0,
+              0,
+              -1
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "holding(snack_bag)",
+      "affordance_3d": [
+        0.0,
+        1.4245,
+        3.6889
+      ],
+      "affordance_hint": "the green printed body of the snack bag",
+      "affordance_hint_original": "the handle of the snack bag",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 3,
+      "action": "transport",
+      "target": "snack_bag",
+      "destination": "above_table",
+      "affordance": [
+        0.5,
+        0.16
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "snack_bag"
+            ],
+            "role": "safety"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "above",
+            "args": [
+              "snack_bag",
+              "table",
+              0.05
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "snack_bag",
+              "table"
+            ]
+          },
+          {
+            "pred": "no_drop",
+            "args": [
+              "snack_bag"
+            ]
+          }
+        ]
+      },
+      "done_when": "above(snack_bag, table, 0.05) AND aligned_xy(snack_bag, table, 0.03)",
+      "affordance_3d": [
+        0.0,
+        -0.7531,
+        1.9277
+      ],
+      "affordance_hint": "the empty area on the gray table",
+      "affordance_hint_original": "an empty area on the above table",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 4,
+      "action": "place",
+      "target": "snack_bag",
+      "destination": "table",
+      "affordance": [
+        0.5,
+        0.203
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "surface_contact",
+            "args": [
+              "snack_bag",
+              "table"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "released",
+            "args": [
+              "snack_bag"
+            ],
+            "role": "completion"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "stable",
+            "args": [
+              "snack_bag"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "support_stable",
+            "args": [
+              "snack_bag"
+            ]
+          }
+        ]
+      },
+      "done_when": "surface_contact(snack_bag, table) AND released(snack_bag) AND stable(snack_bag)",
+      "affordance_3d": [
+        0.0,
+        -0.718,
+        2.1038
+      ],
+      "affordance_hint": "the empty area on the gray table",
+      "affordance_hint_original": "an empty area on the table",
+      "affordance_hint_confidence": "ok"
+    }
+  ]
+}

@@ -1,0 +1,181 @@
+{
+  "task": "Drag the plate back after holding it down",
+  "scene_objects": [
+    "plate",
+    "cardboard",
+    "table"
+  ],
+  "steps": [
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "plate",
+              "<",
+              "0.03"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "approach_axis",
+            "args": [
+              "0",
+              "0",
+              "-1"
+            ],
+            "role": "progress"
+          }
+        ]
+      },
+      "step": 1,
+      "action": "reach",
+      "target": "plate",
+      "affordance_region": "the white ceramic plate",
+      "done_when": "distance(gripper, plate) < 0.03",
+      "affordance_hint": "the white ceramic plate",
+      "refine_prompt": "the white ceramic plate",
+      "refine_cache_hit": false,
+      "affordance_refined": [
+        0.8984,
+        0.918
+      ],
+      "affordance_3d_refined": [
+        -1.3072,
+        0.7988,
+        4.6478
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.3494
+    },
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "plate"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              "0",
+              "0",
+              "-1"
+            ],
+            "role": "progress"
+          }
+        ]
+      },
+      "step": 2,
+      "action": "grasp",
+      "target": "plate",
+      "affordance_region": "the edge of the plate",
+      "done_when": "holding(plate)",
+      "affordance_hint": "the edge of the plate",
+      "refine_prompt": "the edge of the plate",
+      "refine_cache_hit": false,
+      "refine_prompt_fallback": "plate",
+      "affordance_refined": [
+        0.3594,
+        0.3164
+      ],
+      "affordance_3d_refined": [
+        -0.9413,
+        -0.4087,
+        1.3211
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.3606
+    },
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "plate"
+            ],
+            "role": "safety"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "on_surface",
+            "args": [
+              "plate",
+              "cardboard"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "motion_dir",
+            "args": [
+              "-1",
+              "0",
+              "0"
+            ],
+            "role": "progress"
+          }
+        ]
+      },
+      "step": 3,
+      "action": "push",
+      "target": "plate",
+      "destination": "cardboard",
+      "affordance_region": "the center of the plate",
+      "done_when": "on_surface(plate, cardboard)",
+      "affordance_hint": "the center of the plate",
+      "refine_prompt": "the center of the plate",
+      "refine_cache_hit": false,
+      "affordance_refined": [
+        0.3047,
+        0.5156
+      ],
+      "affordance_3d_refined": [
+        -1.1471,
+        -0.2275,
+        1.5168
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.3383
+    }
+  ]
+}

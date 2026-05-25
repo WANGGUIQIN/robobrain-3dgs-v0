@@ -1,0 +1,234 @@
+{
+  "task": "Move the pot to the bottom middle of stove",
+  "scene_objects": [
+    "pot",
+    "stove",
+    "brush",
+    "cheese",
+    "cloth",
+    "sink"
+  ],
+  "num_steps": 4,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "pot",
+      "affordance": [
+        0.441,
+        0.505
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "pot",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "stove"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, pot) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        -0.1654,
+        0.011,
+        2.4561
+      ],
+      "affordance_hint": "the pot"
+    },
+    {
+      "step": 2,
+      "action": "grasp",
+      "target": "pot",
+      "affordance": [
+        0.391,
+        0.475
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "pot"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "holding",
+            "args": [
+              "pot"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              0,
+              0,
+              -1
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "holding(pot)",
+      "affordance_3d": [
+        -0.3162,
+        -0.0678,
+        2.5148
+      ],
+      "affordance_hint": "the handle of the pot"
+    },
+    {
+      "step": 3,
+      "action": "transport",
+      "target": "pot",
+      "destination": "bottom_middle_stove",
+      "affordance": [
+        0.468,
+        0.45
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "pot"
+            ],
+            "role": "safety"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "above",
+            "args": [
+              "pot",
+              "bottom_middle_stove",
+              0.05
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "pot",
+              "stove"
+            ]
+          },
+          {
+            "pred": "no_drop",
+            "args": [
+              "pot"
+            ]
+          }
+        ]
+      },
+      "done_when": "above(pot, bottom_middle_stove, 0.05) AND aligned_xy(pot, bottom_middle_stove, 0.03)",
+      "affordance_3d": [
+        -0.0889,
+        -0.1445,
+        2.4756
+      ],
+      "affordance_hint": "an empty area on the bottom middle stove"
+    },
+    {
+      "step": 4,
+      "action": "place",
+      "target": "pot",
+      "destination": "bottom_middle_stove",
+      "affordance": [
+        0.468,
+        0.45
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "surface_contact",
+            "args": [
+              "pot",
+              "bottom_middle_stove"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "released",
+            "args": [
+              "pot"
+            ],
+            "role": "completion"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "stable",
+            "args": [
+              "pot"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "support_stable",
+            "args": [
+              "pot"
+            ]
+          }
+        ]
+      },
+      "done_when": "surface_contact(pot, bottom_middle_stove) AND released(pot) AND stable(pot)",
+      "affordance_3d": [
+        -0.0889,
+        -0.1445,
+        2.4756
+      ],
+      "affordance_hint": "an empty area on the bottom middle stove"
+    }
+  ]
+}

@@ -1,0 +1,175 @@
+{
+  "task": "pick up the gray bowl",
+  "scene_objects": [
+    "gray_bowl",
+    "black_bowl",
+    "blue_bowl",
+    "blue_rack",
+    "metal_tray",
+    "table"
+  ],
+  "num_steps": 3,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "gray_bowl",
+      "affordance": [
+        0.486,
+        0.303
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "gray_bowl",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "gray_bowl"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, gray_bowl) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        -0.0381,
+        -0.4767,
+        2.1234
+      ],
+      "affordance_hint": "the gray bowl"
+    },
+    {
+      "step": 2,
+      "action": "grasp",
+      "target": "gray_bowl",
+      "affordance": [
+        0.477,
+        0.285
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "gray_bowl"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "holding",
+            "args": [
+              "gray_bowl"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              0,
+              0,
+              -1
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "holding(gray_bowl)",
+      "affordance_3d": [
+        -0.0577,
+        -0.5292,
+        2.143
+      ],
+      "affordance_hint": "the handle of the gray bowl"
+    },
+    {
+      "step": 3,
+      "action": "lift",
+      "target": "gray_bowl",
+      "affordance": [
+        0.477,
+        0.285
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "gray_bowl"
+            ],
+            "role": "safety"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "above",
+            "args": [
+              "gray_bowl",
+              "table",
+              0.05
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gray_bowl",
+              "table"
+            ]
+          },
+          {
+            "pred": "no_drop",
+            "args": [
+              "gray_bowl"
+            ]
+          }
+        ]
+      },
+      "done_when": "above(gray_bowl, table, 0.05)",
+      "affordance_3d": [
+        -0.0577,
+        -0.5292,
+        2.143
+      ],
+      "affordance_hint": "the handle of the gray bowl"
+    }
+  ]
+}

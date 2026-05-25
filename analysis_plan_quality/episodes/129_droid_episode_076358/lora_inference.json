@@ -1,0 +1,184 @@
+{
+  "task": "Move the brown bowl forward slightly",
+  "parsed": {
+    "scene_objects": [
+      "brown_bowl",
+      "table"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "brown_bowl",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "brown_bowl",
+        "affordance_region": "the body of the brown bowl",
+        "done_when": "distance(gripper, brown_bowl) < 0.03",
+        "affordance_hint": "the body of the brown bowl",
+        "refine_prompt": "the body of the brown bowl",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.5039,
+          0.4609
+        ],
+        "affordance_3d_refined": [
+          -0.4899,
+          -0.0316,
+          3.1605
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.3931,
+        "affordance": [
+          0.5039,
+          0.4609
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "brown_bowl"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "brown_bowl",
+        "affordance_region": "the rim of the brown bowl",
+        "done_when": "holding(brown_bowl)",
+        "affordance_hint": "the rim of the brown bowl",
+        "refine_prompt": "the rim of the brown bowl",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.5039,
+          0.4609
+        ],
+        "affordance_3d_refined": [
+          -0.4899,
+          -0.0316,
+          3.1605
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.4865,
+        "affordance": [
+          0.5039,
+          0.4609
+        ]
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "brown_bowl",
+                "table",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "brown_bowl"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "brown_bowl",
+        "destination": "forward_position",
+        "affordance_region": "an empty area on the forward position",
+        "done_when": "above(brown_bowl, table, 0.05)",
+        "affordance_hint": "an empty area on the forward position",
+        "refine_prompt": "an empty area on the forward position",
+        "refine_cache_hit": false,
+        "refine_prompt_fallback": "brown bowl",
+        "affordance_refined": [
+          0.5039,
+          0.4609
+        ],
+        "affordance_3d_refined": [
+          -0.4899,
+          -0.0316,
+          3.1605
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.4508,
+        "affordance": [
+          0.5039,
+          0.4609
+        ]
+      }
+    ]
+  }
+}

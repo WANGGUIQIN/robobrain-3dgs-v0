@@ -1,0 +1,234 @@
+{
+  "task": "put the yellow object inside the right cabinet",
+  "scene_objects": [
+    "yellow_object",
+    "right_cabinet",
+    "table"
+  ],
+  "num_steps": 4,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "yellow_object",
+      "affordance": [
+        0.1,
+        0.3
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "yellow_object",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "table"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, yellow_object) < 0.03 AND gripper_state(open)",
+      "affordance_hint": "the yellow object",
+      "affordance_hint_original": "the yellow object",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 2,
+      "action": "grasp",
+      "target": "yellow_object",
+      "affordance": [
+        0.485,
+        0.111
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "yellow_object"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "holding",
+            "args": [
+              "yellow_object"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              0,
+              0,
+              -1
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "holding(yellow_object)",
+      "affordance_hint": "the yellow object",
+      "affordance_3d": [
+        -0.0307,
+        -0.7674,
+        1.709
+      ],
+      "affordance_hint_original": "the handle of the yellow object",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 3,
+      "action": "transport",
+      "target": "yellow_object",
+      "destination": "right_cabinet",
+      "affordance": [
+        0.8,
+        0.38
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "yellow_object"
+            ],
+            "role": "safety"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "above",
+            "args": [
+              "yellow_object",
+              "right_cabinet",
+              0.05
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "yellow_object",
+              "right_cabinet"
+            ]
+          },
+          {
+            "pred": "no_drop",
+            "args": [
+              "yellow_object"
+            ]
+          }
+        ]
+      },
+      "done_when": "above(yellow_object, right_cabinet, 0.05) AND aligned_xy(yellow_object, right_cabinet, 0.03)",
+      "affordance_3d": [
+        0.6237,
+        -0.2511,
+        1.804
+      ],
+      "affordance_hint": "the empty area inside the right cabinet",
+      "affordance_hint_original": "an empty area on the right cabinet",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 4,
+      "action": "place",
+      "target": "yellow_object",
+      "destination": "right_cabinet",
+      "affordance": [
+        0.8,
+        0.38
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "surface_contact",
+            "args": [
+              "yellow_object",
+              "right_cabinet"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "released",
+            "args": [
+              "yellow_object"
+            ],
+            "role": "completion"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "stable",
+            "args": [
+              "yellow_object"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "support_stable",
+            "args": [
+              "yellow_object"
+            ]
+          }
+        ]
+      },
+      "done_when": "surface_contact(yellow_object, right_cabinet) AND released(yellow_object) AND stable(yellow_object)",
+      "affordance_3d": [
+        0.6237,
+        -0.2511,
+        1.804
+      ],
+      "affordance_hint": "the empty area inside the right cabinet",
+      "affordance_hint_original": "an empty area on the right cabinet",
+      "affordance_hint_confidence": "ok"
+    }
+  ]
+}

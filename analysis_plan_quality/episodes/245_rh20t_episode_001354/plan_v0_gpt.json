@@ -1,0 +1,172 @@
+{
+  "task": "Cover the box",
+  "scene_objects": [
+    "box",
+    "cover",
+    "table"
+  ],
+  "num_steps": 3,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "cover",
+      "affordance": [
+        0.334,
+        0.334
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "cover",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "box"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, cover) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        -0.8516,
+        -0.3421,
+        1.1645
+      ],
+      "affordance_hint": "the cover"
+    },
+    {
+      "step": 2,
+      "action": "grasp",
+      "target": "cover",
+      "affordance": [
+        0.675,
+        0.3
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "cover"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "holding",
+            "args": [
+              "cover"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              0,
+              0,
+              -1
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "holding(cover)",
+      "affordance_3d": [
+        -0.2383,
+        -0.167,
+        0.5188
+      ],
+      "affordance_hint": "the handle of the cover"
+    },
+    {
+      "step": 3,
+      "action": "place",
+      "target": "cover",
+      "destination": "box",
+      "affordance": [
+        0.401,
+        0.604
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "surface_contact",
+            "args": [
+              "cover",
+              "box"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "released",
+            "args": [
+              "cover"
+            ],
+            "role": "completion"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "stable",
+            "args": [
+              "cover"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "support_stable",
+            "args": [
+              "cover"
+            ]
+          }
+        ]
+      },
+      "done_when": "surface_contact(cover, box) AND released(cover) AND stable(cover)",
+      "affordance_3d": [
+        -1.0153,
+        -0.117,
+        1.4972
+      ],
+      "affordance_hint": "an empty area on the box"
+    }
+  ]
+}

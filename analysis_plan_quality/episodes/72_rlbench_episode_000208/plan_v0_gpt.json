@@ -1,0 +1,231 @@
+{
+  "task": "screw in the navy light bulb",
+  "scene_objects": [
+    "navy_light_bulb",
+    "screw_base",
+    "robot_arm",
+    "table"
+  ],
+  "num_steps": 4,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "navy_light_bulb",
+      "affordance": [
+        0.468,
+        0.781
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "navy_light_bulb",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "screw_base"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, navy_light_bulb) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        -0.2891,
+        2.6017,
+        4.6252
+      ],
+      "affordance_hint": "the navy light bulb"
+    },
+    {
+      "step": 2,
+      "action": "grasp",
+      "target": "navy_light_bulb",
+      "affordance": [
+        0.468,
+        0.781
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "navy_light_bulb"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "holding",
+            "args": [
+              "navy_light_bulb"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              0,
+              0,
+              -1
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "holding(navy_light_bulb)",
+      "affordance_3d": [
+        -0.2891,
+        2.6017,
+        4.6252
+      ],
+      "affordance_hint": "the handle of the navy light bulb"
+    },
+    {
+      "step": 3,
+      "action": "insert",
+      "target": "navy_light_bulb",
+      "destination": "screw_base",
+      "affordance": [
+        0.484,
+        0.5
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "navy_light_bulb"
+            ],
+            "role": "safety"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "above",
+            "args": [
+              "navy_light_bulb",
+              "screw_base",
+              0.05
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "navy_light_bulb",
+              "screw_base"
+            ]
+          },
+          {
+            "pred": "no_drop",
+            "args": [
+              "navy_light_bulb"
+            ]
+          }
+        ]
+      },
+      "done_when": "above(navy_light_bulb, screw_base, 0.05) AND aligned_xy(navy_light_bulb, screw_base, 0.03)",
+      "affordance_3d": [
+        -0.0289,
+        0.0,
+        0.9255
+      ],
+      "affordance_hint": "the top opening of the screw base"
+    },
+    {
+      "step": 4,
+      "action": "screw",
+      "target": "navy_light_bulb",
+      "affordance": [
+        0.468,
+        0.781
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "surface_contact",
+            "args": [
+              "navy_light_bulb",
+              "screw_base"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "released",
+            "args": [
+              "navy_light_bulb"
+            ],
+            "role": "completion"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "stable",
+            "args": [
+              "navy_light_bulb"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "support_stable",
+            "args": [
+              "navy_light_bulb"
+            ]
+          }
+        ]
+      },
+      "done_when": "surface_contact(navy_light_bulb, screw_base) AND released(navy_light_bulb) AND stable(navy_light_bulb)",
+      "affordance_3d": [
+        -0.2891,
+        2.6017,
+        4.6252
+      ],
+      "affordance_hint": "navy light bulb"
+    }
+  ]
+}

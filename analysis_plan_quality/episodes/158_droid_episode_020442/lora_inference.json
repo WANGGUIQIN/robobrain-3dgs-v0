@@ -1,0 +1,245 @@
+{
+  "task": "Remove the book from the bowl and put it on the top if the head rest of the sofa",
+  "parsed": {
+    "scene_objects": [
+      "book",
+      "bowl",
+      "sofa",
+      "head_rest"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "book",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "book",
+        "affordance_region": "the book in the brown bowl",
+        "done_when": "distance(gripper, book) < 0.03",
+        "affordance_hint": "the book in the brown bowl",
+        "refine_prompt": "the book in the brown bowl",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.4766,
+          0.7812
+        ],
+        "affordance_3d_refined": [
+          -0.3886,
+          0.8181,
+          2.0451
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.3946,
+        "affordance": [
+          0.4766,
+          0.7812
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "book"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "book",
+        "affordance_region": "the edge of the book",
+        "done_when": "holding(book)",
+        "affordance_hint": "the edge of the book",
+        "refine_prompt": "the edge of the book",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.4766,
+          0.7852
+        ],
+        "affordance_3d_refined": [
+          -0.3923,
+          0.8362,
+          2.0647
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.4232,
+        "affordance": [
+          0.4766,
+          0.7852
+        ]
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "book",
+                "head_rest",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "book"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "book",
+        "destination": "head_rest",
+        "affordance_region": "the top surface of the head rest",
+        "done_when": "above(book, head_rest, 0.05)",
+        "affordance_hint": "the top surface of the head rest",
+        "refine_prompt": "the top surface of the head rest",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.8125,
+          0.668
+        ],
+        "affordance_3d_refined": [
+          0.4674,
+          0.4966,
+          1.9473
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.368,
+        "affordance": [
+          0.8125,
+          0.668
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "surface_contact",
+              "args": [
+                "book",
+                "head_rest"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "book"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "book"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "place",
+        "target": "book",
+        "destination": "head_rest",
+        "affordance_region": "the top surface of the head rest",
+        "done_when": "surface_contact(book, head_rest) AND released(book) AND stable(book)",
+        "affordance_hint": "the top surface of the head rest",
+        "refine_prompt": "the top surface of the head rest",
+        "refine_cache_hit": true,
+        "affordance_refined": [
+          0.8125,
+          0.668
+        ],
+        "affordance_3d_refined": [
+          0.4674,
+          0.4966,
+          1.9473
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.368,
+        "affordance": [
+          0.8125,
+          0.668
+        ]
+      }
+    ]
+  }
+}

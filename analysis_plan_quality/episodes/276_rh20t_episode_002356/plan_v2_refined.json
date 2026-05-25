@@ -1,0 +1,239 @@
+{
+  "task": "Build with small Lego blocks for the nth time with n blocks",
+  "scene_objects": [
+    "lego_blocks",
+    "grid_plate",
+    "table"
+  ],
+  "num_steps": 4,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "lego_block_1",
+      "affordance": [
+        0.575,
+        0.437
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "lego_block_1",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "grid_plate"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, lego_block_1) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        -0.8412,
+        -0.3306,
+        1.5559
+      ],
+      "affordance_hint": "the small red lego block on the table",
+      "affordance_hint_original": "the lego block 1",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 2,
+      "action": "grasp",
+      "target": "lego_block_1",
+      "affordance": [
+        0.575,
+        0.45
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "lego_block_1"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "holding",
+            "args": [
+              "lego_block_1"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              0,
+              0,
+              -1
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "holding(lego_block_1)",
+      "affordance_3d": [
+        -0.8835,
+        -0.3319,
+        1.6342
+      ],
+      "affordance_hint": "the small red lego block on the table",
+      "affordance_hint_original": "lego block 1",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 3,
+      "action": "transport",
+      "target": "lego_block_1",
+      "destination": "grid_plate",
+      "affordance": [
+        0.45,
+        0.5
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "lego_block_1"
+            ],
+            "role": "safety"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "above",
+            "args": [
+              "lego_block_1",
+              "grid_plate",
+              0.05
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "lego_block_1",
+              "grid_plate"
+            ]
+          },
+          {
+            "pred": "no_drop",
+            "args": [
+              "lego_block_1"
+            ]
+          }
+        ]
+      },
+      "done_when": "above(lego_block_1, grid_plate, 0.05) AND aligned_xy(lego_block_1, grid_plate, 0.03)",
+      "affordance_3d": [
+        -1.2099,
+        -0.3069,
+        1.8886
+      ],
+      "affordance_hint": "the empty area on the gray grid plate",
+      "affordance_hint_original": "an empty area on the grid plate",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 4,
+      "action": "place",
+      "target": "lego_block_1",
+      "destination": "grid_plate",
+      "affordance": [
+        0.45,
+        0.5
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "surface_contact",
+            "args": [
+              "lego_block_1",
+              "grid_plate"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "released",
+            "args": [
+              "lego_block_1"
+            ],
+            "role": "completion"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "stable",
+            "args": [
+              "lego_block_1"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "support_stable",
+            "args": [
+              "lego_block_1"
+            ]
+          }
+        ]
+      },
+      "done_when": "surface_contact(lego_block_1, grid_plate) AND released(lego_block_1) AND stable(lego_block_1)",
+      "affordance_3d": [
+        -1.2099,
+        -0.3069,
+        1.8886
+      ],
+      "affordance_hint": "the empty area on the gray grid plate",
+      "affordance_hint_original": "an empty area on the grid plate",
+      "affordance_hint_confidence": "ok"
+    }
+  ]
+}

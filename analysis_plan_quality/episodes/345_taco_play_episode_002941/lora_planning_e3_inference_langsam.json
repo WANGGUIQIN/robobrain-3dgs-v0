@@ -1,0 +1,226 @@
+{
+  "task": "put the pink block on top of the drawer",
+  "scene_objects": [
+    "pink_block",
+    "drawer",
+    "table"
+  ],
+  "steps": [
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "pink_block",
+              "<",
+              "0.03"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "approach_axis",
+            "args": [
+              "0",
+              "0",
+              "-1"
+            ],
+            "role": "progress"
+          }
+        ]
+      },
+      "step": 1,
+      "action": "reach",
+      "target": "pink_block",
+      "affordance_region": "the pink block",
+      "done_when": "distance(gripper, pink_block) < 0.03",
+      "affordance_hint": "the pink block",
+      "refine_prompt": "the pink block",
+      "refine_cache_hit": false,
+      "affordance_refined": [
+        0.6133,
+        0.8086
+      ],
+      "affordance_3d_refined": [
+        0.2173,
+        0.5921,
+        1.669
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.3518
+    },
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "pink_block"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              "0",
+              "0",
+              "-1"
+            ],
+            "role": "progress"
+          }
+        ]
+      },
+      "step": 2,
+      "action": "grasp",
+      "target": "pink_block",
+      "affordance_region": "the pink block",
+      "done_when": "holding(pink_block)",
+      "affordance_hint": "the pink block",
+      "refine_prompt": "the pink block",
+      "refine_cache_hit": true,
+      "affordance_refined": [
+        0.6133,
+        0.8086
+      ],
+      "affordance_3d_refined": [
+        0.2173,
+        0.5921,
+        1.669
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.3518
+    },
+    {
+      "constraints": {
+        "spatial": [
+          {
+            "pred": "above",
+            "args": [
+              "pink_block",
+              "drawer",
+              "0.05"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_drop",
+            "args": [
+              "pink_block"
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "step": 3,
+      "action": "transport",
+      "target": "pink_block",
+      "destination": "drawer",
+      "affordance_region": "the top surface of the drawer",
+      "done_when": "above(pink_block, drawer, 0.05)",
+      "affordance_hint": "the top surface of the drawer",
+      "refine_prompt": "the top surface of the drawer",
+      "refine_cache_hit": false,
+      "affordance_refined": [
+        0.668,
+        0.1055
+      ],
+      "affordance_3d_refined": [
+        0.2925,
+        -0.6871,
+        1.515
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.306
+    },
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "surface_contact",
+            "args": [
+              "pink_block",
+              "drawer"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "released",
+            "args": [
+              "pink_block"
+            ],
+            "role": "completion"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "stable",
+            "args": [
+              "pink_block"
+            ],
+            "role": "completion"
+          }
+        ]
+      },
+      "step": 4,
+      "action": "place",
+      "target": "pink_block",
+      "destination": "drawer",
+      "affordance_region": "the top surface of the drawer",
+      "done_when": "surface_contact(pink_block, drawer) AND released(pink_block) AND stable(pink_block)",
+      "affordance_hint": "the top surface of the drawer",
+      "refine_prompt": "the top surface of the drawer",
+      "refine_cache_hit": true,
+      "affordance_refined": [
+        0.668,
+        0.1055
+      ],
+      "affordance_3d_refined": [
+        0.2925,
+        -0.6871,
+        1.515
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.306
+    }
+  ]
+}

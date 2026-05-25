@@ -1,0 +1,196 @@
+{
+  "task": "use the stick to drag the cube onto the lime target",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_3epoch/best",
+  "raw": "SCENE ANALYSIS - A robotic arm is positioned over a surface with multiple colored cubes and a long stick. The task requires using the stick to drag a cube onto a lime green target cube. The cubes are small and distinct in color, with the lime green cube being the target. The stick is a long, thin object suitable for manipulation. STRATEGY - First, grasp the stick, then use it to pick up the target cube (lime green) and drag it onto the target. Failure modes include dropping the cube or misaligning the stick. AFFORDANCE REASONING - Step 1: Reach for the stick. Step 2: Grasp the stick. Step 3: Use the stick to grasp the lime green cube. Step 4: Drag the cube onto the target. Step 5: Release the stick.\nGoal: on(lime_green_cube, target); stable(lime_green_cube)\nScene: robotic_arm, stick, lime_green_cube, target, cubes\nStep 1: reach(stick)\n  affordance_region: the body of the stick\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, stick, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, stick) < 0.03\nStep 2: grasp(stick)\n  affordance_region: the body of the stick\n  contact: holding(stick) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(stick)\nStep 3: grasp(lime_green_cube)\n  affordance_region: the body of the lime_green_cube\n  contact: holding(lime_green_cube) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(lime_green_cube)\nStep 4: transport(lime_green_cube -> target)\n  affordance_region: an empty area on the target\n  spatial: above(lime_green_cube, target, 0.05) [completion]\n  safety: no_drop(lime_green_cube)\n  done_when: above(lime_green_cube, target, 0.05)\nStep 5: release(lime_green_cube)\n  affordance_region: an empty area on the target\n  contact: surface_contact(lime_green_cube, target) [completion]; released(lime_green_cube) [completion]\n  pose: stable(lime_green_cube) [completion]\n  done_when: surface_contact(lime_green_cube, target) AND released(lime_green_cube)\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [
+      {
+        "pred": "on",
+        "args": [
+          "lime_green_cube",
+          "target"
+        ]
+      },
+      {
+        "pred": "stable",
+        "args": [
+          "lime_green_cube"
+        ]
+      }
+    ],
+    "scene_objects": [
+      "robotic_arm",
+      "stick",
+      "lime_green_cube",
+      "target",
+      "cubes"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "stick",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "stick",
+        "affordance_region": "the body of the stick",
+        "done_when": "distance(gripper, stick) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "stick"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "stick",
+        "affordance_region": "the body of the stick",
+        "done_when": "holding(stick)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "lime_green_cube"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "grasp",
+        "target": "lime_green_cube",
+        "affordance_region": "the body of the lime_green_cube",
+        "done_when": "holding(lime_green_cube)"
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "lime_green_cube",
+                "target",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "lime_green_cube"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "transport",
+        "target": "lime_green_cube",
+        "destination": "target",
+        "affordance_region": "an empty area on the target",
+        "done_when": "above(lime_green_cube, target, 0.05)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "surface_contact",
+              "args": [
+                "lime_green_cube",
+                "target"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "lime_green_cube"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "lime_green_cube"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 5,
+        "action": "release",
+        "target": "lime_green_cube",
+        "affordance_region": "an empty area on the target",
+        "done_when": "surface_contact(lime_green_cube, target) AND released(lime_green_cube)"
+      }
+    ]
+  }
+}

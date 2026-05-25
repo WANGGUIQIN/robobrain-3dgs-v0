@@ -1,0 +1,232 @@
+{
+  "task": "Put the wooden spoon with holes on the countertop",
+  "scene_objects": [
+    "wooden_spoon_with_holes",
+    "countertop",
+    "utensil_holder",
+    "stove"
+  ],
+  "num_steps": 4,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "wooden_spoon_with_holes",
+      "affordance": [
+        0.64,
+        0.593
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "wooden_spoon_with_holes",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "utensil_holder"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, wooden_spoon_with_holes) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        0.0202,
+        0.1613,
+        1.008
+      ],
+      "affordance_hint": "the wooden spoon with holes"
+    },
+    {
+      "step": 2,
+      "action": "grasp",
+      "target": "wooden_spoon_with_holes",
+      "affordance": [
+        0.64,
+        0.593
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "wooden_spoon_with_holes"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "holding",
+            "args": [
+              "wooden_spoon_with_holes"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              0,
+              0,
+              -1
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "holding(wooden_spoon_with_holes)",
+      "affordance_3d": [
+        0.0202,
+        0.1613,
+        1.008
+      ],
+      "affordance_hint": "the handle of the wooden spoon with holes"
+    },
+    {
+      "step": 3,
+      "action": "transport",
+      "target": "wooden_spoon_with_holes",
+      "destination": "countertop",
+      "affordance": [
+        0.468,
+        0.718
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "wooden_spoon_with_holes"
+            ],
+            "role": "safety"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "above",
+            "args": [
+              "wooden_spoon_with_holes",
+              "countertop",
+              0.05
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "wooden_spoon_with_holes",
+              "countertop"
+            ]
+          },
+          {
+            "pred": "no_drop",
+            "args": [
+              "wooden_spoon_with_holes"
+            ]
+          }
+        ]
+      },
+      "done_when": "above(wooden_spoon_with_holes, countertop, 0.05) AND aligned_xy(wooden_spoon_with_holes, countertop, 0.03)",
+      "affordance_3d": [
+        -0.2173,
+        0.3476,
+        1.0863
+      ],
+      "affordance_hint": "an empty area on the countertop"
+    },
+    {
+      "step": 4,
+      "action": "place",
+      "target": "wooden_spoon_with_holes",
+      "destination": "countertop",
+      "affordance": [
+        0.468,
+        0.718
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "surface_contact",
+            "args": [
+              "wooden_spoon_with_holes",
+              "countertop"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "released",
+            "args": [
+              "wooden_spoon_with_holes"
+            ],
+            "role": "completion"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "stable",
+            "args": [
+              "wooden_spoon_with_holes"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "support_stable",
+            "args": [
+              "wooden_spoon_with_holes"
+            ]
+          }
+        ]
+      },
+      "done_when": "surface_contact(wooden_spoon_with_holes, countertop) AND released(wooden_spoon_with_holes) AND stable(wooden_spoon_with_holes)",
+      "affordance_3d": [
+        -0.2173,
+        0.3476,
+        1.0863
+      ],
+      "affordance_hint": "an empty area on the countertop"
+    }
+  ]
+}

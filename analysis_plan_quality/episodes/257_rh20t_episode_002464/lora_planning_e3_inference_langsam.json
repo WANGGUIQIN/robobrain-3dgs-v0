@@ -1,0 +1,226 @@
+{
+  "task": "Assemble one piece of a puzzle",
+  "scene_objects": [
+    "puzzle_piece",
+    "puzzle_board",
+    "table"
+  ],
+  "steps": [
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "puzzle_piece",
+              "<",
+              "0.03"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "approach_axis",
+            "args": [
+              "0",
+              "0",
+              "-1"
+            ],
+            "role": "progress"
+          }
+        ]
+      },
+      "step": 1,
+      "action": "reach",
+      "target": "puzzle_piece",
+      "affordance_region": "the edge of the puzzle piece",
+      "done_when": "distance(gripper, puzzle_piece) < 0.03",
+      "affordance_hint": "the edge of the puzzle piece",
+      "refine_prompt": "the edge of the puzzle piece",
+      "refine_cache_hit": false,
+      "affordance_refined": [
+        0.2617,
+        0.9688
+      ],
+      "affordance_3d_refined": [
+        -1.6169,
+        0.4346,
+        2.0451
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.388
+    },
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "puzzle_piece"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              "0",
+              "0",
+              "-1"
+            ],
+            "role": "progress"
+          }
+        ]
+      },
+      "step": 2,
+      "action": "grasp",
+      "target": "puzzle_piece",
+      "affordance_region": "the edge of the puzzle piece",
+      "done_when": "holding(puzzle_piece)",
+      "affordance_hint": "the edge of the puzzle piece",
+      "refine_prompt": "the edge of the puzzle piece",
+      "refine_cache_hit": true,
+      "affordance_refined": [
+        0.2617,
+        0.9688
+      ],
+      "affordance_3d_refined": [
+        -1.6169,
+        0.4346,
+        2.0451
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.388
+    },
+    {
+      "constraints": {
+        "spatial": [
+          {
+            "pred": "above",
+            "args": [
+              "puzzle_piece",
+              "puzzle_board",
+              "0.05"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_drop",
+            "args": [
+              "puzzle_piece"
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "step": 3,
+      "action": "transport",
+      "target": "puzzle_piece",
+      "destination": "puzzle_board",
+      "affordance_region": "an empty area on the puzzle board",
+      "done_when": "above(puzzle_piece, puzzle_board, 0.05)",
+      "affordance_hint": "an empty area on the puzzle board",
+      "refine_prompt": "an empty area on the puzzle board",
+      "refine_cache_hit": false,
+      "affordance_refined": [
+        0.2617,
+        0.9688
+      ],
+      "affordance_3d_refined": [
+        -1.6169,
+        0.4346,
+        2.0451
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.3126
+    },
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "surface_contact",
+            "args": [
+              "puzzle_piece",
+              "puzzle_board"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "released",
+            "args": [
+              "puzzle_piece"
+            ],
+            "role": "completion"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "stable",
+            "args": [
+              "puzzle_piece"
+            ],
+            "role": "completion"
+          }
+        ]
+      },
+      "step": 4,
+      "action": "place",
+      "target": "puzzle_piece",
+      "destination": "puzzle_board",
+      "affordance_region": "an empty area on the puzzle board",
+      "done_when": "surface_contact(puzzle_piece, puzzle_board) AND released(puzzle_piece)",
+      "affordance_hint": "an empty area on the puzzle board",
+      "refine_prompt": "an empty area on the puzzle board",
+      "refine_cache_hit": true,
+      "affordance_refined": [
+        0.2617,
+        0.9688
+      ],
+      "affordance_3d_refined": [
+        -1.6169,
+        0.4346,
+        2.0451
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.3126
+    }
+  ]
+}

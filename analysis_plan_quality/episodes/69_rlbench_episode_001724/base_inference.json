@@ -1,0 +1,122 @@
+{
+  "task": "turn left tap",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_3epoch/best",
+  "raw": "**SCENE ANALYSIS - A white faucet is mounted on a wall above a sink. The faucet has a handle on its left side. The task is to turn the left tap. STRATEGY - First, reach and grasp the left tap handle. Then, rotate the handle to turn the tap. Failure modes include misgrasping the handle or insufficient rotation. AFFORDANCE REASONING - Step 1 reach the faucet body to approach the handle; Step 2 grasp the left tap handle for control; Step 3 rotate the handle to turn the tap.**\nGoal: turned(left_tap)\nScene: faucet, sink, wall\nStep 1: reach(faucet)\n  affordance_region: the body of the white faucet\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, faucet, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, faucet) < 0.03\nStep 2: grasp(left_tap)\n  affordance_region: the left tap handle of the faucet\n  contact: holding(left_tap) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(left_tap)\nStep 3: rotate(left_tap)\n  affordance_region: the left tap handle of the faucet\n  contact: holding(left_tap) [progress]\n  direction: rotate_axis(0, 0, 90) [progress]\n  done_when: turned(left_tap)\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [
+      {
+        "pred": "turned",
+        "args": [
+          "left_tap"
+        ]
+      }
+    ],
+    "scene_objects": [
+      "faucet",
+      "sink",
+      "wall"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "faucet",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "faucet",
+        "affordance_region": "the body of the white faucet",
+        "done_when": "distance(gripper, faucet) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "left_tap"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "left_tap",
+        "affordance_region": "the left tap handle of the faucet",
+        "done_when": "holding(left_tap)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "left_tap"
+              ],
+              "role": "progress"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "rotate_axis",
+              "args": [
+                "0",
+                "0",
+                "90"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "rotate",
+        "target": "left_tap",
+        "affordance_region": "the left tap handle of the faucet",
+        "done_when": "turned(left_tap)"
+      }
+    ]
+  }
+}

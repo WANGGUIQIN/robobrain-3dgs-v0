@@ -1,0 +1,359 @@
+{
+  "task": "place the long bread in the table",
+  "scene_objects": [
+    "long_bread",
+    "table",
+    "blue_bin",
+    "gray_bowl",
+    "yellow_cup",
+    "metal_tray",
+    "robot_gripper"
+  ],
+  "num_steps": 4,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "long_bread",
+      "affordance": [
+        0.553,
+        0.544
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "long_bread",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "within_workspace",
+            "args": [
+              "long_bread"
+            ],
+            "role": "safety"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "approach_dir",
+            "args": [
+              0.0,
+              0.0,
+              -1.0
+            ],
+            "role": "safety"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "blue_bin"
+            ],
+            "role": "safety"
+          },
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "gray_bowl"
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "distance(gripper, long_bread) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        0.2258,
+        0.1774,
+        3.5911
+      ],
+      "affordance_hint": "the long bread"
+    },
+    {
+      "step": 2,
+      "action": "grasp",
+      "target": "long_bread",
+      "affordance": [
+        0.553,
+        0.544
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "long_bread"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "holding",
+            "args": [
+              "long_bread"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "gripper_width",
+            "args": [
+              "appropriate_for_long_bread"
+            ],
+            "role": "progress"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              0.0,
+              0.0,
+              -1.0
+            ],
+            "role": "safety"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "force_limit",
+            "args": [
+              "long_bread"
+            ],
+            "role": "safety"
+          },
+          {
+            "pred": "no_drop",
+            "args": [
+              "long_bread"
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "holding(long_bread)",
+      "affordance_3d": [
+        0.2258,
+        0.1774,
+        3.5911
+      ],
+      "affordance_hint": "long bread"
+    },
+    {
+      "step": 3,
+      "action": "transport",
+      "target": "long_bread",
+      "destination": "table",
+      "affordance": [
+        0.45,
+        0.608
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "long_bread"
+            ],
+            "role": "safety"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "above",
+            "args": [
+              "long_bread",
+              "table",
+              0.03
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "near",
+            "args": [
+              "long_bread",
+              "table_target_zone",
+              "<",
+              0.05
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "clear_path",
+            "args": [
+              "gripper",
+              "table_target_zone"
+            ],
+            "role": "safety"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "level",
+            "args": [
+              "long_bread"
+            ],
+            "role": "progress"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "long_bread",
+              "orange_fruit"
+            ],
+            "role": "safety"
+          },
+          {
+            "pred": "no_collision",
+            "args": [
+              "long_bread",
+              "blue_bin"
+            ],
+            "role": "safety"
+          },
+          {
+            "pred": "no_drop",
+            "args": [
+              "long_bread"
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "holding(long_bread) AND above(long_bread, table, 0.03) AND near(long_bread, table_target_zone, <, 0.05)",
+      "affordance_3d": [
+        -0.1868,
+        0.4023,
+        3.1997
+      ],
+      "affordance_hint": "an empty area on the table"
+    },
+    {
+      "step": 4,
+      "action": "place",
+      "target": "long_bread",
+      "destination": "table",
+      "affordance": [
+        0.45,
+        0.608
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "surface_contact",
+            "args": [
+              "long_bread",
+              "table"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "released",
+            "args": [
+              "long_bread"
+            ],
+            "role": "completion"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "on_surface",
+            "args": [
+              "long_bread",
+              "table"
+            ],
+            "role": "completion"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "stable",
+            "args": [
+              "long_bread"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "upright",
+            "args": [
+              "long_bread"
+            ],
+            "role": "progress"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "retreat_dir",
+            "args": [
+              0.0,
+              0.0,
+              1.0
+            ],
+            "role": "progress"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "support_stable",
+            "args": [
+              "long_bread"
+            ],
+            "role": "safety"
+          },
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "long_bread"
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "surface_contact(long_bread, table) AND released(long_bread) AND stable(long_bread)",
+      "affordance_3d": [
+        -0.1868,
+        0.4023,
+        3.1997
+      ],
+      "affordance_hint": "an empty area on the table"
+    }
+  ]
+}

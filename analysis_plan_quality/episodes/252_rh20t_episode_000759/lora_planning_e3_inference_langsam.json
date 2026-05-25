@@ -1,0 +1,218 @@
+{
+  "task": "Take out one Hanoi block and throw it aside",
+  "scene_objects": [
+    "red_hanoi_block",
+    "pink_hanoi_block",
+    "yellow_hanoi_block",
+    "table"
+  ],
+  "steps": [
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "red_hanoi_block",
+              "<",
+              "0.03"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "approach_axis",
+            "args": [
+              "0",
+              "0",
+              "-1"
+            ],
+            "role": "progress"
+          }
+        ]
+      },
+      "step": 1,
+      "action": "reach",
+      "target": "red_hanoi_block",
+      "affordance_region": "the red_hanoi_block",
+      "done_when": "distance(gripper, red_hanoi_block) < 0.03",
+      "affordance_hint": "the red_hanoi_block",
+      "refine_prompt": "the red_hanoi_block",
+      "refine_cache_hit": false,
+      "affordance_refined": [
+        0.5469,
+        0.7227
+      ],
+      "affordance_3d_refined": [
+        -1.0954,
+        0.0304,
+        1.9473
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.3673
+    },
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "red_hanoi_block"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              "0",
+              "0",
+              "-1"
+            ],
+            "role": "progress"
+          }
+        ]
+      },
+      "step": 2,
+      "action": "grasp",
+      "target": "red_hanoi_block",
+      "affordance_region": "the red_hanoi_block",
+      "done_when": "holding(red_hanoi_block)",
+      "affordance_hint": "the red_hanoi_block",
+      "refine_prompt": "the red_hanoi_block",
+      "refine_cache_hit": true,
+      "affordance_refined": [
+        0.5469,
+        0.7227
+      ],
+      "affordance_3d_refined": [
+        -1.0954,
+        0.0304,
+        1.9473
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.3673
+    },
+    {
+      "constraints": {
+        "spatial": [
+          {
+            "pred": "above",
+            "args": [
+              "red_hanoi_block",
+              "table",
+              "0.05"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_drop",
+            "args": [
+              "red_hanoi_block"
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "step": 3,
+      "action": "transport",
+      "target": "red_hanoi_block",
+      "destination": "table",
+      "affordance_region": "an empty area on the table",
+      "done_when": "above(red_hanoi_block, table, 0.05)",
+      "affordance_hint": "an empty area on the table",
+      "refine_prompt": "an empty area on the table",
+      "refine_cache_hit": false,
+      "affordance_refined": [
+        0.3242,
+        0.9961
+      ],
+      "affordance_3d_refined": [
+        -1.5871,
+        0.5023,
+        2.143
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.352
+    },
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "released",
+            "args": [
+              "red_hanoi_block"
+            ],
+            "role": "completion"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "stable",
+            "args": [
+              "red_hanoi_block"
+            ],
+            "role": "completion"
+          }
+        ]
+      },
+      "step": 4,
+      "action": "release",
+      "target": "red_hanoi_block",
+      "affordance_region": "the red_hanoi_block",
+      "done_when": "released(red_hanoi_block) AND stable(red_hanoi_block)",
+      "affordance_hint": "the red_hanoi_block",
+      "refine_prompt": "the red_hanoi_block",
+      "refine_cache_hit": true,
+      "affordance_refined": [
+        0.5469,
+        0.7227
+      ],
+      "affordance_3d_refined": [
+        -1.0954,
+        0.0304,
+        1.9473
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.3673
+    }
+  ]
+}

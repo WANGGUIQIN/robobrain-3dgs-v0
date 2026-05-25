@@ -1,0 +1,123 @@
+{
+  "task": "Turn the faucet to the right",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_3epoch/best",
+  "raw": "**SCENE ANALYSIS -** A stainless steel sink is embedded in a light-colored countertop. A faucet with a single lever handle is positioned above the sink. The task is to turn the faucet to the right. The faucet is a rigid object with a lever handle that can be rotated. **STRATEGY -** First, reach for the faucet handle. Then, grasp the handle to apply force. Finally, rotate the handle to the right. Failure modes include not grasping the handle firmly enough to rotate it or rotating in the wrong direction. **AFFORDANCE REASONING -** Step 1 requires reaching the faucet body to position the gripper. Step 2 requires grasping the lever handle, which is the functional part for rotation. Step 3 requires rotating the handle around its axis to the right.\n\nGoal: rotated(faucet, right)\nScene: sink, faucet, countertop\nStep 1: reach(faucet)\n  affordance_region: the body of the faucet\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, faucet, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, faucet) < 0.03\nStep 2: grasp(faucet)\n  affordance_region: the lever handle of the faucet\n  contact: holding(faucet) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(faucet)\nStep 3: rotate(faucet, right)\n  affordance_region: the lever handle of the faucet\n  contact: holding(faucet) [progress]\n  direction: rotate_axis(0, 1, 0) [progress]\n  done_when: angle(faucet_handle, initial_angle) > 0\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [
+      {
+        "pred": "rotated",
+        "args": [
+          "faucet",
+          "right"
+        ]
+      }
+    ],
+    "scene_objects": [
+      "sink",
+      "faucet",
+      "countertop"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "faucet",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "faucet",
+        "affordance_region": "the body of the faucet",
+        "done_when": "distance(gripper, faucet) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "faucet"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "faucet",
+        "affordance_region": "the lever handle of the faucet",
+        "done_when": "holding(faucet)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "faucet"
+              ],
+              "role": "progress"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "rotate_axis",
+              "args": [
+                "0",
+                "1",
+                "0"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "rotate",
+        "target": "faucet, right",
+        "affordance_region": "the lever handle of the faucet",
+        "done_when": "angle(faucet_handle, initial_angle) > 0"
+      }
+    ]
+  }
+}

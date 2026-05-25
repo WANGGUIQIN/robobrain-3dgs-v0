@@ -1,0 +1,166 @@
+{
+  "task": "Move the blue spoon next to the silver pot.",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_3epoch/best",
+  "raw": "**SCENE ANALYSIS -** A blue spoon rests on a wooden countertop next to a silver pot. The spoon is a rigid object with a handle and a bowl; the pot is metallic with a circular opening. The task requires moving the spoon, so interaction must target its handle for grasping. **STRATEGY -** First, reach for the spoon to establish contact, then grasp its handle to lift it. Transport the spoon to a new position (e.g., near the pot) and place it down. Failure modes include dropping the spoon during transport or misplacing it. **AFFORDANCE REASONING -** Step 1: Reach for the spoon’s handle to initiate grasping. Step 2: Grasp the handle to lift the spoon. Step 3: Transport the spoon to the desired location. Step 4: Place the spoon on the countertop or near the pot.\n\nGoal: on(blue_spoon, silver_pot); stable(blue_spoon)\nScene: blue_spoon, silver_pot, countertop\nStep 1: reach(blue_spoon)\n  affordance_region: the handle of the blue spoon\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, blue_spoon, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, blue_spoon) < 0.03\nStep 2: grasp(blue_spoon)\n  affordance_region: the handle of the blue spoon\n  contact: holding(blue_spoon) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(blue_spoon)\nStep 3: transport(blue_spoon -> silver_pot)\n  affordance_region: an empty area near the silver pot\n  spatial: above(blue_spoon, silver_pot, 0.05) [completion]\n  safety: no_drop(blue_spoon)\n  done_when: above(blue_spoon, silver_pot, 0.05)\nStep 4: place(blue_spoon -> silver_pot)\n  affordance_region: the circular opening of the silver pot\n  contact: surface_contact(blue_spoon, silver_pot) [completion]; released(blue_spoon) [completion]\n  pose: stable(blue_spoon) [completion]\n  done_when: surface_contact(blue_spoon, silver_pot) AND released(blue_spoon)\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [
+      {
+        "pred": "on",
+        "args": [
+          "blue_spoon",
+          "silver_pot"
+        ]
+      },
+      {
+        "pred": "stable",
+        "args": [
+          "blue_spoon"
+        ]
+      }
+    ],
+    "scene_objects": [
+      "blue_spoon",
+      "silver_pot",
+      "countertop"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "blue_spoon",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "blue_spoon",
+        "affordance_region": "the handle of the blue spoon",
+        "done_when": "distance(gripper, blue_spoon) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "blue_spoon"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "blue_spoon",
+        "affordance_region": "the handle of the blue spoon",
+        "done_when": "holding(blue_spoon)"
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "blue_spoon",
+                "silver_pot",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "blue_spoon"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "blue_spoon",
+        "destination": "silver_pot",
+        "affordance_region": "an empty area near the silver pot",
+        "done_when": "above(blue_spoon, silver_pot, 0.05)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "surface_contact",
+              "args": [
+                "blue_spoon",
+                "silver_pot"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "blue_spoon"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "blue_spoon"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "place",
+        "target": "blue_spoon",
+        "destination": "silver_pot",
+        "affordance_region": "the circular opening of the silver pot",
+        "done_when": "surface_contact(blue_spoon, silver_pot) AND released(blue_spoon)"
+      }
+    ]
+  }
+}

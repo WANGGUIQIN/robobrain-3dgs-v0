@@ -1,0 +1,239 @@
+{
+  "task": "put the crackers in the cupboard",
+  "scene_objects": [
+    "crackers",
+    "cupboard",
+    "table"
+  ],
+  "num_steps": 4,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "crackers",
+      "affordance": [
+        0.82,
+        0.765
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "crackers",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "table"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, crackers) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        0.5726,
+        0.4749,
+        0.8939
+      ],
+      "affordance_hint": "the crackers",
+      "affordance_hint_original": "the crackers",
+      "affordance_hint_confidence": "rejected:missing_token:crackers"
+    },
+    {
+      "step": 2,
+      "action": "grasp",
+      "target": "crackers",
+      "affordance": [
+        0.825,
+        0.75
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "crackers"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "holding",
+            "args": [
+              "crackers"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              0,
+              0,
+              -1
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "holding(crackers)",
+      "affordance_3d": [
+        2.7674,
+        2.1339,
+        4.2678
+      ],
+      "affordance_hint": "the body of the crackers",
+      "affordance_hint_original": "the handle of the crackers",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 3,
+      "action": "transport",
+      "target": "crackers",
+      "destination": "cupboard",
+      "affordance": [
+        0.468,
+        0.468
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "crackers"
+            ],
+            "role": "safety"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "above",
+            "args": [
+              "crackers",
+              "cupboard",
+              0.05
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "crackers",
+              "cupboard"
+            ]
+          },
+          {
+            "pred": "no_drop",
+            "args": [
+              "crackers"
+            ]
+          }
+        ]
+      },
+      "done_when": "above(crackers, cupboard, 0.05) AND aligned_xy(crackers, cupboard, 0.03)",
+      "affordance_3d": [
+        -0.0661,
+        -0.0661,
+        1.057
+      ],
+      "affordance_hint": "the empty area on the cupboard",
+      "affordance_hint_original": "an empty area on the cupboard",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 4,
+      "action": "place",
+      "target": "crackers",
+      "destination": "cupboard",
+      "affordance": [
+        0.468,
+        0.468
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "surface_contact",
+            "args": [
+              "crackers",
+              "cupboard"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "released",
+            "args": [
+              "crackers"
+            ],
+            "role": "completion"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "stable",
+            "args": [
+              "crackers"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "support_stable",
+            "args": [
+              "crackers"
+            ]
+          }
+        ]
+      },
+      "done_when": "surface_contact(crackers, cupboard) AND released(crackers) AND stable(crackers)",
+      "affordance_3d": [
+        -0.0661,
+        -0.0661,
+        1.057
+      ],
+      "affordance_hint": "the empty area on the cupboard",
+      "affordance_hint_original": "an empty area on the cupboard",
+      "affordance_hint_confidence": "ok"
+    }
+  ]
+}

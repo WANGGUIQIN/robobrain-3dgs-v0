@@ -1,0 +1,168 @@
+{
+  "task": "Turn the faucet to the right",
+  "scene_objects": [
+    "faucet",
+    "sink",
+    "countertop"
+  ],
+  "steps": [
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "faucet",
+              "<",
+              "0.03"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "approach_axis",
+            "args": [
+              "0",
+              "0",
+              "-1"
+            ],
+            "role": "progress"
+          }
+        ]
+      },
+      "step": 1,
+      "action": "reach",
+      "target": "faucet",
+      "affordance_region": "the body of the faucet",
+      "done_when": "distance(gripper, faucet) < 0.03",
+      "affordance_hint": "the body of the faucet",
+      "refine_prompt": "the body of the faucet",
+      "refine_cache_hit": false,
+      "affordance_refined": [
+        0.5625,
+        0.3594
+      ],
+      "affordance_3d_refined": [
+        -0.1127,
+        -0.1973,
+        1.4092
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.318
+    },
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "faucet"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              "0",
+              "0",
+              "-1"
+            ],
+            "role": "progress"
+          }
+        ]
+      },
+      "step": 2,
+      "action": "grasp",
+      "target": "faucet",
+      "affordance_region": "the handle of the faucet",
+      "done_when": "holding(faucet)",
+      "affordance_hint": "the handle of the faucet",
+      "refine_prompt": "the handle of the faucet",
+      "refine_cache_hit": false,
+      "affordance_refined": [
+        0.5898,
+        0.207
+      ],
+      "affordance_3d_refined": [
+        -0.0709,
+        -0.5278,
+        1.5755
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.7718
+    },
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "faucet"
+            ],
+            "role": "safety"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "orientation_match",
+            "args": [
+              "faucet",
+              "right"
+            ],
+            "role": "completion"
+          }
+        ]
+      },
+      "step": 3,
+      "action": "rotate",
+      "target": "faucet",
+      "affordance_region": "the body of the faucet",
+      "done_when": "orientation_match(faucet, right)",
+      "affordance_hint": "the body of the faucet",
+      "refine_prompt": "the body of the faucet",
+      "refine_cache_hit": true,
+      "affordance_refined": [
+        0.5625,
+        0.3594
+      ],
+      "affordance_3d_refined": [
+        -0.1127,
+        -0.1973,
+        1.4092
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.318
+    }
+  ]
+}

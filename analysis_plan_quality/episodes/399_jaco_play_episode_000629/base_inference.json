@@ -1,0 +1,149 @@
+{
+  "task": "pick up the steak meat",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_3epoch/best",
+  "raw": "**SCENE ANALYSIS -** A wooden table holds a blue plastic container with a grid, a yellow cup, an orange ball, a brown steak, a blue plastic container with a yellow block, a blue plastic container with a yellow block, a yellow block, and a black circular object. The steak is a small, brown, irregularly shaped object. The blue container with the grid is a potential destination. The steak is on the table, not inside any container. STRATEGY - First, reach for the steak to grasp it. Then, transport it to the blue container with the grid. Finally, place the steak inside the container. Failure modes include missing the steak during grasp or dropping it during transport. AFFORDANCE REASONING - Step 1: Reach for the steak on the table. Step 2: Grasp the steak to pick it up. Step 3: Transport the steak to the blue container with the grid. Step 4: Place the steak inside the blue container with the grid.\n\n**Goal:** inside(brown_steak, blue_container_with_grid)\n**Scene:** brown_steak, blue_container_with_grid, yellow_cup, orange_ball, blue_container_with_yellow_block, yellow_block, black_circular_object, table\n**Step 1:** reach(brown_steak)\n  affordance_region: the body of the brown steak\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, brown_steak, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, brown_steak) < 0.03\n**Step 2:** grasp(brown_steak)\n  affordance_region: the body of the brown steak\n  contact: holding(brown_steak) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(brown_steak)\n**Step 3:** transport(brown_steak -> blue_container_with_grid)\n  affordance_region: an empty area inside the blue container with the grid\n  spatial: above(brown_steak, blue_container_with_grid, 0.05) [completion]\n  safety: no_drop(brown_steak)\n  done_when: above(brown_steak, blue_container_with_grid, 0.05)\n**Step 4:** place(brown_steak -> blue_container_with_grid)\n  affordance_region: an empty area inside the blue container with the grid\n  contact: surface_contact(brown_steak, blue_container_with_grid) [completion]; released(brown_steak) [completion]\n  pose: inside(brown_steak, blue_container_with_grid) [completion]\n  done_when: surface_contact(brown_steak, blue_container_with_grid) AND released(brown_steak)\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [],
+    "scene_objects": [],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "brown_steak",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "brown_steak",
+        "affordance_region": "the body of the brown steak",
+        "done_when": "distance(gripper, brown_steak) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "brown_steak"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "brown_steak",
+        "affordance_region": "the body of the brown steak",
+        "done_when": "holding(brown_steak)"
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "brown_steak",
+                "blue_container_with_grid",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "brown_steak"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "brown_steak",
+        "destination": "blue_container_with_grid",
+        "affordance_region": "an empty area inside the blue container with the grid",
+        "done_when": "above(brown_steak, blue_container_with_grid, 0.05)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "surface_contact",
+              "args": [
+                "brown_steak",
+                "blue_container_with_grid"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "brown_steak"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "inside",
+              "args": [
+                "brown_steak",
+                "blue_container_with_grid"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "place",
+        "target": "brown_steak",
+        "destination": "blue_container_with_grid",
+        "affordance_region": "an empty area inside the blue container with the grid",
+        "done_when": "surface_contact(brown_steak, blue_container_with_grid) AND released(brown_steak)"
+      }
+    ]
+  }
+}

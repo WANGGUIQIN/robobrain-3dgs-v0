@@ -1,0 +1,130 @@
+{
+  "task": "pick blue plastic bottle",
+  "parsed": {
+    "scene_objects": [
+      "blue_can",
+      "white_bag",
+      "table"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "blue_can",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "blue_can",
+        "affordance_region": "the body of the blue can",
+        "done_when": "distance(gripper, blue_can) < 0.03",
+        "affordance_hint": "the body of the blue can",
+        "refine_prompt": "the body of the blue can",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.5859,
+          0.4258
+        ],
+        "affordance_3d_refined": [
+          0.4166,
+          -0.3598,
+          4.2173
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.3315,
+        "affordance": [
+          0.5859,
+          0.4258
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "blue_can"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "blue_can",
+        "affordance_region": "the top of the blue can",
+        "done_when": "holding(blue_can)",
+        "affordance_hint": "the top of the blue can",
+        "refine_prompt": "the top of the blue can",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.5977,
+          0.3633
+        ],
+        "affordance_3d_refined": [
+          0.4954,
+          -0.6935,
+          4.4129
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.3175,
+        "affordance": [
+          0.5977,
+          0.3633
+        ]
+      }
+    ]
+  }
+}

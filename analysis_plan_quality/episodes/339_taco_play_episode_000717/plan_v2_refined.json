@@ -1,0 +1,118 @@
+{
+  "task": "push the purple block to the left",
+  "scene_objects": [
+    "purple_block",
+    "table"
+  ],
+  "num_steps": 2,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "purple_block",
+      "affordance": [
+        0.52,
+        0.584
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "purple_block",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "table"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, purple_block) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        0.042,
+        0.1846,
+        1.869
+      ],
+      "affordance_hint": "the purple block",
+      "affordance_hint_original": "the purple block",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 2,
+      "action": "push",
+      "target": "purple_block",
+      "affordance": [
+        0.52,
+        0.584
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "purple_block"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "motion_dir",
+            "args": [
+              "purple_block",
+              "left"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "purple_block",
+              "table"
+            ]
+          }
+        ]
+      },
+      "done_when": "motion_dir(purple_block, left) AND aligned_xy(purple_block, target_position, 0.03)",
+      "affordance_3d": [
+        0.042,
+        0.1846,
+        1.869
+      ],
+      "affordance_hint": "the center of the purple block",
+      "affordance_hint_original": "the center of the purple block",
+      "affordance_hint_confidence": "ok"
+    }
+  ]
+}

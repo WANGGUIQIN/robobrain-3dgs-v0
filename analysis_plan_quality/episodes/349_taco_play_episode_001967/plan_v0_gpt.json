@@ -1,0 +1,169 @@
+{
+  "task": "move the blue light switch to turn on the blue light",
+  "scene_objects": [
+    "blue_light_switch",
+    "blue_light",
+    "table"
+  ],
+  "num_steps": 3,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "blue_light_switch",
+      "affordance": [
+        0.295,
+        0.925
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "blue_light_switch",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "blue_light_switch"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, blue_light_switch) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        -0.3927,
+        0.8233,
+        1.682
+      ],
+      "affordance_hint": "the blue light switch"
+    },
+    {
+      "step": 2,
+      "action": "push",
+      "target": "blue_light_switch",
+      "affordance": [
+        0.3,
+        0.925
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "blue_light_switch"
+            ],
+            "role": "completion"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "motion_dir",
+            "args": [
+              "blue_light_switch",
+              "towards",
+              "activation_position"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "blue_light_switch"
+            ]
+          }
+        ]
+      },
+      "done_when": "motion_dir(blue_light_switch, towards, activation_position)",
+      "affordance_3d": [
+        -0.3856,
+        0.8242,
+        1.684
+      ],
+      "affordance_hint": "the center of the blue light switch"
+    },
+    {
+      "step": 3,
+      "action": "release",
+      "target": "blue_light_switch",
+      "affordance": [
+        0.295,
+        0.925
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "released",
+            "args": [
+              "blue_light_switch"
+            ],
+            "role": "completion"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "blue_light_switch",
+              ">",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "blue_light_switch"
+            ]
+          }
+        ]
+      },
+      "done_when": "released(blue_light_switch) AND distance(gripper, blue_light_switch) > 0.03",
+      "affordance_3d": [
+        -0.3927,
+        0.8233,
+        1.682
+      ],
+      "affordance_hint": "the blue light switch"
+    }
+  ]
+}

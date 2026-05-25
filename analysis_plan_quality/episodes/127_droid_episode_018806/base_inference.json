@@ -1,0 +1,163 @@
+{
+  "task": "Move the silver object from the storage box to the table",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_3epoch/best",
+  "raw": "SCENE ANALYSIS - A clear plastic storage box is on a wooden table. A small silver object is inside the box. The table has other items (a blue bottle, a small black object, a yellow tool). The silver object is small and metallic, likely a screw or bolt. STRATEGY - First, reach into the storage box to grasp the silver object. Then, transport it to a destination on the table. Failure modes include not grasping the object, dropping it during transport, or placing it in an invalid location. AFFORDANCE REASONING - Step 1: Reach into the storage box to locate the silver object. Step 2: Grasp the silver object from inside the box. Step 3: Transport the held object to a target area on the table. Step 4: Place the object on the table surface.\nGoal: on(silver_object, table)\nScene: storage_box, silver_object, table, blue_bottle, small_black_object, yellow_tool\nStep 1: reach(storage_box)\n  affordance_region: the open top of the clear plastic storage box\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, storage_box, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, storage_box) < 0.03\nStep 2: grasp(silver_object)\n  affordance_region: the small silver object inside the storage box\n  contact: holding(silver_object) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(silver_object)\nStep 3: transport(silver_object -> table)\n  affordance_region: an empty area on the table surface\n  spatial: above(silver_object, table, 0.05) [completion]\n  safety: no_drop(silver_object)\n  done_when: above(silver_object, table, 0.05)\nStep 4: place(silver_object -> table)\n  affordance_region: an empty area on the table surface\n  contact: surface_contact(silver_object, table) [completion]; released(silver_object) [completion]\n  pose: stable(silver_object) [completion]\n  done_when: surface_contact(silver_object, table) AND released(silver_object)\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [
+      {
+        "pred": "on",
+        "args": [
+          "silver_object",
+          "table"
+        ]
+      }
+    ],
+    "scene_objects": [
+      "storage_box",
+      "silver_object",
+      "table",
+      "blue_bottle",
+      "small_black_object",
+      "yellow_tool"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "storage_box",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "storage_box",
+        "affordance_region": "the open top of the clear plastic storage box",
+        "done_when": "distance(gripper, storage_box) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "silver_object"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "silver_object",
+        "affordance_region": "the small silver object inside the storage box",
+        "done_when": "holding(silver_object)"
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "silver_object",
+                "table",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "silver_object"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "silver_object",
+        "destination": "table",
+        "affordance_region": "an empty area on the table surface",
+        "done_when": "above(silver_object, table, 0.05)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "surface_contact",
+              "args": [
+                "silver_object",
+                "table"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "silver_object"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "silver_object"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "place",
+        "target": "silver_object",
+        "destination": "table",
+        "affordance_region": "an empty area on the table surface",
+        "done_when": "surface_contact(silver_object, table) AND released(silver_object)"
+      }
+    ]
+  }
+}

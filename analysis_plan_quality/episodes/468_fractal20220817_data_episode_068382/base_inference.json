@@ -1,0 +1,167 @@
+{
+  "task": "pick green rice chip bag from top drawer and place on counter",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_3epoch/best",
+  "raw": "**SCENE ANALYSIS -** A metallic table holds a blue chip bag, an apple, and a can. The chip bag is the target object. The task is to pick it from the table and place it on the counter. The scene is static with no obstacles. **STRATEGY -** First, reach for the chip bag, grasp it, then transport it to the counter and place it down. The order is sequential: reach → grasp → transport → place. Failure modes include missing the chip bag during reach or dropping it during transport. **AFFORDANCE REASONING -** Step 1: Reach for the chip bag by its body. Step 2: Grasp the chip bag by its body for a secure hold. Step 3: Transport the chip bag to the counter, maintaining a safe distance from the table edge. Step 4: Place the chip bag on the counter, ensuring it is stable.\n\nGoal: on(chip_bag, counter); stable(chip_bag)\nScene: chip_bag, apple, can, table\nStep 1: reach(chip_bag)\n  affordance_region: the body of the blue chip bag\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, chip_bag, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, chip_bag) < 0.03\nStep 2: grasp(chip_bag)\n  affordance_region: the body of the blue chip bag\n  contact: holding(chip_bag) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(chip_bag)\nStep 3: transport(chip_bag -> counter)\n  affordance_region: an empty area on the counter\n  spatial: above(chip_bag, counter, 0.05) [completion]\n  safety: no_drop(chip_bag)\n  done_when: above(chip_bag, counter, 0.05)\nStep 4: place(chip_bag -> counter)\n  affordance_region: an empty area on the counter\n  contact: surface_contact(chip_bag, counter) [completion]; released(chip_bag) [completion]\n  pose: stable(chip_bag) [completion]\n  done_when: surface_contact(chip_bag, counter) AND released(chip_bag)\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [
+      {
+        "pred": "on",
+        "args": [
+          "chip_bag",
+          "counter"
+        ]
+      },
+      {
+        "pred": "stable",
+        "args": [
+          "chip_bag"
+        ]
+      }
+    ],
+    "scene_objects": [
+      "chip_bag",
+      "apple",
+      "can",
+      "table"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "chip_bag",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "chip_bag",
+        "affordance_region": "the body of the blue chip bag",
+        "done_when": "distance(gripper, chip_bag) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "chip_bag"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "chip_bag",
+        "affordance_region": "the body of the blue chip bag",
+        "done_when": "holding(chip_bag)"
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "chip_bag",
+                "counter",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "chip_bag"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "chip_bag",
+        "destination": "counter",
+        "affordance_region": "an empty area on the counter",
+        "done_when": "above(chip_bag, counter, 0.05)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "surface_contact",
+              "args": [
+                "chip_bag",
+                "counter"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "chip_bag"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "chip_bag"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "place",
+        "target": "chip_bag",
+        "destination": "counter",
+        "affordance_region": "an empty area on the counter",
+        "done_when": "surface_contact(chip_bag, counter) AND released(chip_bag)"
+      }
+    ]
+  }
+}

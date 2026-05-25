@@ -1,0 +1,245 @@
+{
+  "task": "move brown chip bag near sponge",
+  "parsed": {
+    "scene_objects": [
+      "brown_chip_bag",
+      "sponge",
+      "can",
+      "table"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "brown_chip_bag",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "brown_chip_bag",
+        "affordance_region": "the brown chip bag",
+        "done_when": "distance(gripper, brown_chip_bag) < 0.03",
+        "affordance_hint": "the brown chip bag",
+        "refine_prompt": "the brown chip bag",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.5,
+          0.1875
+        ],
+        "affordance_3d_refined": [
+          0.0,
+          -0.8331,
+          2.3191
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.5745,
+        "affordance": [
+          0.5,
+          0.1875
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "brown_chip_bag"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "brown_chip_bag",
+        "affordance_region": "the top edge of the brown chip bag",
+        "done_when": "holding(brown_chip_bag)",
+        "affordance_hint": "the top edge of the brown chip bag",
+        "refine_prompt": "the top edge of the brown chip bag",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.5,
+          0.1875
+        ],
+        "affordance_3d_refined": [
+          0.0,
+          -0.8331,
+          2.3191
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.3944,
+        "affordance": [
+          0.5,
+          0.1875
+        ]
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "brown_chip_bag",
+                "sponge",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "brown_chip_bag"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "brown_chip_bag",
+        "destination": "near_sponge",
+        "affordance_region": "the empty area on the table near the sponge",
+        "done_when": "above(brown_chip_bag, sponge, 0.05)",
+        "affordance_hint": "the empty area on the table near the sponge",
+        "refine_prompt": "the empty area on the table near the sponge",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.4336,
+          0.5352
+        ],
+        "affordance_3d_refined": [
+          -0.2383,
+          0.1261,
+          3.1214
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.3703,
+        "affordance": [
+          0.4336,
+          0.5352
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "surface_contact",
+              "args": [
+                "brown_chip_bag",
+                "table"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "brown_chip_bag"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "brown_chip_bag"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "place",
+        "target": "brown_chip_bag",
+        "destination": "near_sponge",
+        "affordance_region": "the empty area on the table near the sponge",
+        "done_when": "surface_contact(brown_chip_bag, table) AND released(brown_chip_bag) AND stable(brown_chip_bag)",
+        "affordance_hint": "the empty area on the table near the sponge",
+        "refine_prompt": "the empty area on the table near the sponge",
+        "refine_cache_hit": true,
+        "affordance_refined": [
+          0.4336,
+          0.5352
+        ],
+        "affordance_3d_refined": [
+          -0.2383,
+          0.1261,
+          3.1214
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.3703,
+        "affordance": [
+          0.4336,
+          0.5352
+        ]
+      }
+    ]
+  }
+}

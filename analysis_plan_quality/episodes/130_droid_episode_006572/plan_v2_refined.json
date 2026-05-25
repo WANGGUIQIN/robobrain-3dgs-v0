@@ -1,0 +1,184 @@
+{
+  "task": "Open the first drawer under the fruit plushies",
+  "scene_objects": [
+    "drawer",
+    "fruit_plushies",
+    "robot_arm"
+  ],
+  "num_steps": 3,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "drawer_handle",
+      "affordance": [
+        0.75,
+        0.48
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "drawer_handle",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "fruit_plushies"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, drawer_handle) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        0.5088,
+        0.0477,
+        3.1801
+      ],
+      "affordance_hint": "the metal drawer handle on the left side of the drawer",
+      "affordance_hint_original": "the drawer handle",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 2,
+      "action": "pull",
+      "target": "drawer_handle",
+      "affordance": [
+        0.75,
+        0.5
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "drawer_handle"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "motion_dir",
+            "args": [
+              0,
+              1,
+              0
+            ],
+            "role": "completion"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "drawer",
+              "open_position",
+              "<",
+              0.05
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "drawer",
+              "fruit_plushies"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(drawer, open_position) < 0.05",
+      "affordance_3d": [
+        0.5057,
+        0.1264,
+        3.1605
+      ],
+      "affordance_hint": "the metal drawer handle on the left side of the drawer",
+      "affordance_hint_original": "the handle of the drawer handle",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 3,
+      "action": "release",
+      "target": "drawer_handle",
+      "affordance": [
+        0.75,
+        0.48
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "released",
+            "args": [
+              "drawer_handle"
+            ],
+            "role": "completion"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "stable",
+            "args": [
+              "drawer"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "drawer"
+            ]
+          }
+        ]
+      },
+      "done_when": "released(drawer_handle) AND stable(drawer)",
+      "affordance_3d": [
+        0.5088,
+        0.0477,
+        3.1801
+      ],
+      "affordance_hint": "the metal drawer handle on the left side of the drawer",
+      "affordance_hint_original": "the drawer handle",
+      "affordance_hint_confidence": "ok"
+    }
+  ]
+}

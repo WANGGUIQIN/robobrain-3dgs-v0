@@ -1,0 +1,224 @@
+{
+  "task": "place the grasped pink block inside the left cabinet",
+  "scene_objects": [
+    "pink_block",
+    "left_cabinet",
+    "robot_gripper",
+    "tray",
+    "table"
+  ],
+  "num_steps": 4,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "pink_block",
+      "affordance": [
+        0.675,
+        0.793
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "pink_block",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "tray"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, pink_block) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        0.3136,
+        0.5227,
+        1.552
+      ],
+      "affordance_hint": "the pink block"
+    },
+    {
+      "step": 2,
+      "action": "grasp",
+      "target": "pink_block",
+      "affordance": [
+        0.675,
+        0.793
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "pink_block"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "holding",
+            "args": [
+              "pink_block"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              0,
+              0,
+              -1
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "holding(pink_block)",
+      "affordance_3d": [
+        0.3136,
+        0.5227,
+        1.552
+      ],
+      "affordance_hint": "pink block"
+    },
+    {
+      "step": 3,
+      "action": "transport",
+      "target": "pink_block",
+      "destination": "left_cabinet",
+      "affordance": [
+        0.125,
+        0.25
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "pink_block"
+            ],
+            "role": "safety"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "inside",
+            "args": [
+              "pink_block",
+              "left_cabinet"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "pink_block",
+              "cabinet_door"
+            ]
+          },
+          {
+            "pred": "no_drop",
+            "args": [
+              "pink_block"
+            ]
+          }
+        ]
+      },
+      "done_when": "inside(pink_block, left_cabinet) AND aligned_xy(pink_block, left_cabinet, 0.03)",
+      "affordance_3d": [
+        -0.8078,
+        -0.5386,
+        1.874
+      ],
+      "affordance_hint": "an empty area on the left cabinet"
+    },
+    {
+      "step": 4,
+      "action": "release",
+      "target": "pink_block",
+      "destination": "left_cabinet",
+      "affordance": [
+        0.675,
+        0.793
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "released",
+            "args": [
+              "pink_block"
+            ],
+            "role": "completion"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "stable",
+            "args": [
+              "pink_block"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "support_stable",
+            "args": [
+              "pink_block"
+            ]
+          }
+        ]
+      },
+      "done_when": "released(pink_block) AND stable(pink_block)",
+      "affordance_3d": [
+        0.3136,
+        0.5227,
+        1.552
+      ],
+      "affordance_hint": "the pink block"
+    }
+  ]
+}

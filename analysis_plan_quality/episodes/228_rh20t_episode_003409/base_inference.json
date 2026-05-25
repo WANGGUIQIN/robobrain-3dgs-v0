@@ -1,0 +1,165 @@
+{
+  "task": "Plug in the power cord to the socket",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_3epoch/best",
+  "raw": "**SCENE ANALYSIS -** A white power cord lies on a green and white gradient surface. A white power strip is mounted on the wall. The power cord has two ends with plugs. The power strip has multiple sockets. STRATEGY - First, grasp the power cord to pick it up. Then, transport it to the power strip. Next, align the plug with a socket and insert it. Finally, release the power cord to complete the connection. Failure modes include misaligning the plug, dropping the cord, or choosing the wrong socket. AFFORDANCE REASONING - Step 1: reach the power cord body to grasp it. Step 2: grasp the power cord body to lift it. Step 3: transport the power cord to the power strip. Step 4: align the plug with a socket and insert it. Step 5: release the power cord to ensure it stays in place.\n\n**Goal:** plugged(power_cord, power_strip); stable(power_cord)\n**Scene:** power_cord, power_strip, surface\n**Step 1:** reach(power_cord)\n  affordance_region: the body of the white power cord\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, power_cord, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, power_cord) < 0.03\n**Step 2:** grasp(power_cord)\n  affordance_region: the body of the white power cord\n  contact: holding(power_cord) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(power_cord)\n**Step 3:** transport(power_cord -> power_strip)\n  affordance_region: an empty socket on the power strip\n  spatial: above(power_cord, power_strip, 0.05) [completion]\n  safety: no_drop(power_cord)\n  done_when: above(power_cord, power_strip, 0.05)\n**Step 4:** insert(power_cord)\n  affordance_region: the top opening of a socket on the power strip\n  contact: plugged(power_cord, power_strip) [completion]; released(power_cord) [completion]\n  pose: stable(power_cord) [completion]\n  done_when: plugged(power_cord, power_strip) AND released(power_cord)\n**Step 5:** release(power_cord)\n  affordance_region: the body of the white power cord\n  contact: released(power_cord) [completion]\n  done_when: released(power_cord)\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [],
+    "scene_objects": [],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "power_cord",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "power_cord",
+        "affordance_region": "the body of the white power cord",
+        "done_when": "distance(gripper, power_cord) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "power_cord"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "power_cord",
+        "affordance_region": "the body of the white power cord",
+        "done_when": "holding(power_cord)"
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "power_cord",
+                "power_strip",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "power_cord"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "power_cord",
+        "destination": "power_strip",
+        "affordance_region": "an empty socket on the power strip",
+        "done_when": "above(power_cord, power_strip, 0.05)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "plugged",
+              "args": [
+                "power_cord",
+                "power_strip"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "power_cord"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "power_cord"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "insert",
+        "target": "power_cord",
+        "affordance_region": "the top opening of a socket on the power strip",
+        "done_when": "plugged(power_cord, power_strip) AND released(power_cord)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "released",
+              "args": [
+                "power_cord"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 5,
+        "action": "release",
+        "target": "power_cord",
+        "affordance_region": "the body of the white power cord",
+        "done_when": "released(power_cord)"
+      }
+    ]
+  }
+}

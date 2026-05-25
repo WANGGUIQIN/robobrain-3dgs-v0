@@ -1,0 +1,106 @@
+{
+  "task": "turn off the red led light",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_planning_3epoch/checkpoint-39957",
+  "raw": "Scene: red_led_light, robot_arm, table\nStep 1: reach(red_led_light)\n  affordance_region: the red led light\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, red_led_light, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, red_led_light) < 0.03\nStep 2: push(red_led_light)\n  affordance_region: the center of the red led light\n  contact: gripper_contact(red_led_light) [completion]\n  spatial: aligned_xy(gripper, red_led_light) [completion]\n  direction: motion_dir(0, 0, -1) [progress]\n  safety: no_collision(gripper, red_led_light)\n  done_when: red_led_light(state=off)\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [],
+    "scene_objects": [
+      "red_led_light",
+      "robot_arm",
+      "table"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "red_led_light",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "red_led_light",
+        "affordance_region": "the red led light",
+        "done_when": "distance(gripper, red_led_light) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_contact",
+              "args": [
+                "red_led_light"
+              ],
+              "role": "completion"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "aligned_xy",
+              "args": [
+                "gripper",
+                "red_led_light"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "motion_dir",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_collision",
+              "args": [
+                "gripper",
+                "red_led_light"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "push",
+        "target": "red_led_light",
+        "affordance_region": "the center of the red led light",
+        "done_when": "red_led_light(state=off)"
+      }
+    ]
+  }
+}

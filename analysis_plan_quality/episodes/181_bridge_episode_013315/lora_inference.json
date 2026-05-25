@@ -1,0 +1,246 @@
+{
+  "task": "Slide the silver pot in front of the canned goods on the other side of the chocolate.",
+  "parsed": {
+    "scene_objects": [
+      "silver_pot",
+      "chocolate",
+      "canned_goods",
+      "table"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "silver_pot",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "silver_pot",
+        "affordance_region": "the body of the silver pot",
+        "done_when": "distance(gripper, silver_pot) < 0.03",
+        "affordance_hint": "the body of the silver pot",
+        "refine_prompt": "the body of the silver pot",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.1719,
+          0.4062
+        ],
+        "affordance_3d_refined": [
+          -0.4171,
+          -0.1192,
+          1.1058
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.7505,
+        "affordance": [
+          0.1719,
+          0.4062
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "silver_pot"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "silver_pot",
+        "affordance_region": "the handle of the silver pot",
+        "done_when": "holding(silver_pot)",
+        "affordance_hint": "the handle of the silver pot",
+        "refine_prompt": "the handle of the silver pot",
+        "refine_cache_hit": false,
+        "refine_prompt_fallback": "silver pot",
+        "affordance_refined": [
+          0.1719,
+          0.4062
+        ],
+        "affordance_3d_refined": [
+          -0.4171,
+          -0.1192,
+          1.1058
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.8848,
+        "affordance": [
+          0.1719,
+          0.4062
+        ]
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "silver_pot",
+                "table",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "silver_pot"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "silver_pot",
+        "destination": "in_front_of_canned_goods",
+        "affordance_region": "an empty area on the table in front of the canned goods",
+        "done_when": "above(silver_pot, table, 0.05)",
+        "affordance_hint": "an empty area on the table in front of the canned goods",
+        "refine_prompt": "an empty area on the table in front of the canned goods",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.1719,
+          0.75
+        ],
+        "affordance_3d_refined": [
+          -0.1735,
+          0.1322,
+          0.4601
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.3261,
+        "affordance": [
+          0.1719,
+          0.75
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "surface_contact",
+              "args": [
+                "silver_pot",
+                "table"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "silver_pot"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "silver_pot"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "place",
+        "target": "silver_pot",
+        "destination": "in_front_of_canned_goods",
+        "affordance_region": "an empty area on the table in front of the canned goods",
+        "done_when": "surface_contact(silver_pot, table) AND released(silver_pot)",
+        "affordance_hint": "an empty area on the table in front of the canned goods",
+        "refine_prompt": "an empty area on the table in front of the canned goods",
+        "refine_cache_hit": true,
+        "affordance_refined": [
+          0.1719,
+          0.75
+        ],
+        "affordance_3d_refined": [
+          -0.1735,
+          0.1322,
+          0.4601
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.3261,
+        "affordance": [
+          0.1719,
+          0.75
+        ]
+      }
+    ]
+  }
+}

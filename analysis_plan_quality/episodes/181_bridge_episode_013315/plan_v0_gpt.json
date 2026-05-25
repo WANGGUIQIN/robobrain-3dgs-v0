@@ -1,0 +1,175 @@
+{
+  "task": "Slide the silver pot in front of the canned goods on the other side of the chocolate.",
+  "scene_objects": [
+    "silver_pot",
+    "canned_goods",
+    "chocolate",
+    "orange_cloth",
+    "table"
+  ],
+  "num_steps": 3,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "silver_pot",
+      "affordance": [
+        0.225,
+        0.375
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "silver_pot",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "chocolate"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, silver_pot) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        -0.3353,
+        -0.1533,
+        1.0667
+      ],
+      "affordance_hint": "the silver pot"
+    },
+    {
+      "step": 2,
+      "action": "grasp",
+      "target": "silver_pot",
+      "affordance": [
+        0.2,
+        0.35
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "silver_pot"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "holding",
+            "args": [
+              "silver_pot"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              0,
+              0,
+              -1
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "holding(silver_pot)",
+      "affordance_3d": [
+        -0.3756,
+        -0.1854,
+        1.0863
+      ],
+      "affordance_hint": "the handle of the silver pot"
+    },
+    {
+      "step": 3,
+      "action": "push",
+      "target": "silver_pot",
+      "destination": "in_front_of_canned_goods",
+      "affordance": [
+        0.225,
+        0.375
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "silver_pot"
+            ],
+            "role": "safety"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "aligned_xy",
+            "args": [
+              "silver_pot",
+              "canned_goods",
+              0.05
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "silver_pot",
+              "chocolate"
+            ]
+          },
+          {
+            "pred": "no_drop",
+            "args": [
+              "silver_pot"
+            ]
+          }
+        ]
+      },
+      "done_when": "aligned_xy(silver_pot, canned_goods, 0.05)",
+      "affordance_3d": [
+        -0.3353,
+        -0.1533,
+        1.0667
+      ],
+      "affordance_hint": "the center of the silver pot"
+    }
+  ]
+}

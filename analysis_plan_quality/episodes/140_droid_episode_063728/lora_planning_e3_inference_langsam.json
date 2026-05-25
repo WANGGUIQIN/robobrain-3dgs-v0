@@ -1,0 +1,227 @@
+{
+  "task": "Put the orange can in the open cabinet.",
+  "scene_objects": [
+    "orange_can",
+    "cabinet",
+    "table"
+  ],
+  "steps": [
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "orange_can",
+              "<",
+              "0.03"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "approach_axis",
+            "args": [
+              "0",
+              "0",
+              "-1"
+            ],
+            "role": "progress"
+          }
+        ]
+      },
+      "step": 1,
+      "action": "reach",
+      "target": "orange_can",
+      "affordance_region": "the orange can",
+      "done_when": "distance(gripper, orange_can) < 0.03",
+      "affordance_hint": "the orange can",
+      "refine_prompt": "the orange can",
+      "refine_cache_hit": false,
+      "affordance_refined": [
+        0.4336,
+        0.6914
+      ],
+      "affordance_3d_refined": [
+        -0.4004,
+        0.4657,
+        1.6342
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.5792
+    },
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "orange_can"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              "0",
+              "0",
+              "-1"
+            ],
+            "role": "progress"
+          }
+        ]
+      },
+      "step": 2,
+      "action": "grasp",
+      "target": "orange_can",
+      "affordance_region": "the body of the orange can",
+      "done_when": "holding(orange_can)",
+      "affordance_hint": "the body of the orange can",
+      "refine_prompt": "the body of the orange can",
+      "refine_cache_hit": false,
+      "affordance_refined": [
+        0.4336,
+        0.6914
+      ],
+      "affordance_3d_refined": [
+        -0.4004,
+        0.4657,
+        1.6342
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.3619
+    },
+    {
+      "constraints": {
+        "spatial": [
+          {
+            "pred": "above",
+            "args": [
+              "orange_can",
+              "cabinet",
+              "0.05"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_drop",
+            "args": [
+              "orange_can"
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "step": 3,
+      "action": "transport",
+      "target": "orange_can",
+      "destination": "cabinet",
+      "affordance_region": "an empty area inside the cabinet",
+      "done_when": "above(orange_can, cabinet, 0.05)",
+      "affordance_hint": "an empty area inside the cabinet",
+      "refine_prompt": "an empty area inside the cabinet",
+      "refine_cache_hit": false,
+      "refine_prompt_fallback": "orange can",
+      "affordance_refined": [
+        0.4336,
+        0.6914
+      ],
+      "affordance_3d_refined": [
+        -0.4004,
+        0.4657,
+        1.6342
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.5623
+    },
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "surface_contact",
+            "args": [
+              "orange_can",
+              "cabinet"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "released",
+            "args": [
+              "orange_can"
+            ],
+            "role": "completion"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "stable",
+            "args": [
+              "orange_can"
+            ],
+            "role": "completion"
+          }
+        ]
+      },
+      "step": 4,
+      "action": "place",
+      "target": "orange_can",
+      "destination": "cabinet",
+      "affordance_region": "an empty area inside the cabinet",
+      "done_when": "surface_contact(orange_can, cabinet) AND released(orange_can) AND stable(orange_can)",
+      "affordance_hint": "an empty area inside the cabinet",
+      "refine_prompt": "an empty area inside the cabinet",
+      "refine_cache_hit": true,
+      "affordance_refined": [
+        0.4336,
+        0.6914
+      ],
+      "affordance_3d_refined": [
+        -0.4004,
+        0.4657,
+        1.6342
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.5623
+    }
+  ]
+}

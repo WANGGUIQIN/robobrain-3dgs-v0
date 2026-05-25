@@ -1,0 +1,155 @@
+{
+  "task": "pick up the butter dairy",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_planning_3epoch/checkpoint-39957",
+  "raw": "Scene: yellow_cup, orange_object, red_mug, yellow_spatula, blue_bin, table\nStep 1: reach(yellow_cup)\n  affordance_region: the yellow plastic cup\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, yellow_cup, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, yellow_cup) < 0.03\nStep 2: grasp(yellow_cup)\n  affordance_region: the handle of the yellow cup\n  contact: holding(yellow_cup) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(yellow_cup)\nStep 3: transport(yellow_cup -> table)\n  affordance_region: an empty area on the table\n  spatial: above(yellow_cup, table, 0.05) [completion]\n  safety: no_drop(yellow_cup)\n  done_when: above(yellow_cup, table, 0.05)\nStep 4: place(yellow_cup -> table)\n  affordance_region: an empty area on the table\n  contact: surface_contact(yellow_cup, table) [completion]; released(yellow_cup) [completion]\n  pose: stable(yellow_cup) [completion]\n  done_when: surface_contact(yellow_cup, table) AND released(yellow_cup)\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [],
+    "scene_objects": [
+      "yellow_cup",
+      "orange_object",
+      "red_mug",
+      "yellow_spatula",
+      "blue_bin",
+      "table"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "yellow_cup",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "yellow_cup",
+        "affordance_region": "the yellow plastic cup",
+        "done_when": "distance(gripper, yellow_cup) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "yellow_cup"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "yellow_cup",
+        "affordance_region": "the handle of the yellow cup",
+        "done_when": "holding(yellow_cup)"
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "yellow_cup",
+                "table",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "yellow_cup"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "yellow_cup",
+        "destination": "table",
+        "affordance_region": "an empty area on the table",
+        "done_when": "above(yellow_cup, table, 0.05)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "surface_contact",
+              "args": [
+                "yellow_cup",
+                "table"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "yellow_cup"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "yellow_cup"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "place",
+        "target": "yellow_cup",
+        "destination": "table",
+        "affordance_region": "an empty area on the table",
+        "done_when": "surface_contact(yellow_cup, table) AND released(yellow_cup)"
+      }
+    ]
+  }
+}

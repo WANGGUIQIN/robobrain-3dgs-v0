@@ -1,0 +1,155 @@
+{
+  "task": "put the money away in the safe on the middle shelf",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_3epoch/best",
+  "raw": "SCENE ANALYSIS - A robotic arm is positioned over a large gray safe with a green keypad on top. The safe has a door with a handle on the right side. The task is to put money (implied to be in the robot's gripper) into the safe. STRATEGY - The robot must first reach the safe, then grasp the door handle to open it, insert the money into the safe's interior, and finally release the handle to close the door. Failure modes include not grasping the handle, failing to insert the money, or not releasing the handle. AFFORDANCE REASONING - Step 1 reach the safe door; Step 2 grasp the handle for opening; Step 3 insert money into the safe; Step 4 release the handle to close.\nGoal: inside(money, safe); closed(safe)\nScene: safe, money, robot_arm\nStep 1: reach(safe)\n  affordance_region: the body of the safe\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, safe, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, safe) < 0.03\nStep 2: grasp(handle(safe))\n  affordance_region: the handle on the right side of the safe door\n  contact: holding(handle(safe)) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(handle(safe))\nStep 3: insert(money -> safe)\n  affordance_region: the open interior of the safe\n  contact: inside(money, safe) [completion]\n  spatial: inside(money, safe) [completion]\n  done_when: inside(money, safe)\nStep 4: release(handle(safe))\n  affordance_region: the handle on the right side of the safe door\n  contact: released(handle(safe)) [completion]\n  spatial: closed(safe) [completion]\n  done_when: released(handle(safe)) AND closed(safe)\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [
+      {
+        "pred": "inside",
+        "args": [
+          "money",
+          "safe"
+        ]
+      },
+      {
+        "pred": "closed",
+        "args": [
+          "safe"
+        ]
+      }
+    ],
+    "scene_objects": [
+      "safe",
+      "money",
+      "robot_arm"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "safe",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "safe",
+        "affordance_region": "the body of the safe",
+        "done_when": "distance(gripper, safe) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "handle(safe"
+              ]
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "handle(safe",
+        "affordance_region": "the handle on the right side of the safe door",
+        "done_when": "holding(handle(safe))"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "inside",
+              "args": [
+                "money",
+                "safe"
+              ],
+              "role": "completion"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "inside",
+              "args": [
+                "money",
+                "safe"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "insert",
+        "target": "money",
+        "destination": "safe",
+        "affordance_region": "the open interior of the safe",
+        "done_when": "inside(money, safe)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "released",
+              "args": [
+                "handle(safe"
+              ]
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "closed",
+              "args": [
+                "safe"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "release",
+        "target": "handle(safe",
+        "affordance_region": "the handle on the right side of the safe door",
+        "done_when": "released(handle(safe)) AND closed(safe)"
+      }
+    ]
+  }
+}

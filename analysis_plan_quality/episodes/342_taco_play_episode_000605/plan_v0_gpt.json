@@ -1,0 +1,125 @@
+{
+  "task": "slide the door to the left, then let it go",
+  "scene_objects": [
+    "sliding_door",
+    "robot_arm",
+    "workspace"
+  ],
+  "num_steps": 2,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "sliding_door",
+      "affordance": [
+        0.883,
+        0.35
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "sliding_door",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "workspace"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, sliding_door) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        0.6363,
+        -0.2467,
+        1.446
+      ],
+      "affordance_hint": "the sliding door"
+    },
+    {
+      "step": 2,
+      "action": "push",
+      "target": "sliding_door",
+      "affordance": [
+        0.875,
+        0.3
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "sliding_door"
+            ],
+            "role": "completion"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "aligned_xy",
+            "args": [
+              "sliding_door",
+              "left_position",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "motion_dir",
+            "args": [
+              "left"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "sliding_door",
+              "workspace"
+            ]
+          }
+        ]
+      },
+      "done_when": "aligned_xy(sliding_door, left_position, 0.03)",
+      "affordance_3d": [
+        0.6147,
+        -0.3266,
+        1.426
+      ],
+      "affordance_hint": "the center of the sliding door"
+    }
+  ]
+}

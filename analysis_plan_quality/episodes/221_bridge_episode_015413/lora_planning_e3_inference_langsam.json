@@ -1,0 +1,231 @@
+{
+  "task": "Place the pot immediately to the left of the mushroom",
+  "scene_objects": [
+    "pot",
+    "mushroom",
+    "table",
+    "blue_cloth",
+    "corn",
+    "spoon",
+    "cans",
+    "stove"
+  ],
+  "steps": [
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "pot",
+              "<",
+              "0.03"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "approach_axis",
+            "args": [
+              "0",
+              "0",
+              "-1"
+            ],
+            "role": "progress"
+          }
+        ]
+      },
+      "step": 1,
+      "action": "reach",
+      "target": "pot",
+      "affordance_region": "the body of the metal pot",
+      "done_when": "distance(gripper, pot) < 0.03",
+      "affordance_hint": "the body of the metal pot",
+      "refine_prompt": "the body of the metal pot",
+      "refine_cache_hit": false,
+      "affordance_refined": [
+        0.1719,
+        0.5195
+      ],
+      "affordance_3d_refined": [
+        -0.8969,
+        0.0534,
+        2.3778
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.6896
+    },
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "pot"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              "0",
+              "0",
+              "-1"
+            ],
+            "role": "progress"
+          }
+        ]
+      },
+      "step": 2,
+      "action": "grasp",
+      "target": "pot",
+      "affordance_region": "the handle of the metal pot",
+      "done_when": "holding(pot)",
+      "affordance_hint": "the handle of the metal pot",
+      "refine_prompt": "the handle of the metal pot",
+      "refine_cache_hit": false,
+      "affordance_refined": [
+        0.2266,
+        0.3633
+      ],
+      "affordance_3d_refined": [
+        -0.6121,
+        -0.306,
+        1.9473
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.5956
+    },
+    {
+      "constraints": {
+        "spatial": [
+          {
+            "pred": "above",
+            "args": [
+              "pot",
+              "table",
+              "0.05"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_drop",
+            "args": [
+              "pot"
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "step": 3,
+      "action": "transport",
+      "target": "pot",
+      "destination": "left_of_mushroom",
+      "affordance_region": "an empty area on the table to the left of the mushroom",
+      "done_when": "above(pot, table, 0.05)",
+      "affordance_hint": "an empty area on the table to the left of the mushroom",
+      "refine_prompt": "an empty area on the table to the left of the mushroom",
+      "refine_cache_hit": false,
+      "affordance_refined": [
+        0.0,
+        0.7383
+      ],
+      "affordance_3d_refined": [
+        -0.6581,
+        0.3136,
+        1.145
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.3627
+    },
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "surface_contact",
+            "args": [
+              "pot",
+              "table"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "released",
+            "args": [
+              "pot"
+            ],
+            "role": "completion"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "stable",
+            "args": [
+              "pot"
+            ],
+            "role": "completion"
+          }
+        ]
+      },
+      "step": 4,
+      "action": "place",
+      "target": "pot",
+      "destination": "left_of_mushroom",
+      "affordance_region": "an empty area on the table to the left of the mushroom",
+      "done_when": "surface_contact(pot, table) AND released(pot) AND stable(pot)",
+      "affordance_hint": "an empty area on the table to the left of the mushroom",
+      "refine_prompt": "an empty area on the table to the left of the mushroom",
+      "refine_cache_hit": true,
+      "affordance_refined": [
+        0.0,
+        0.7383
+      ],
+      "affordance_3d_refined": [
+        -0.6581,
+        0.3136,
+        1.145
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.3627
+    }
+  ]
+}

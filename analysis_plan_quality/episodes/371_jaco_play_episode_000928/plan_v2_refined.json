@@ -1,0 +1,242 @@
+{
+  "task": "place the yellow cup in the oven",
+  "scene_objects": [
+    "yellow_cup",
+    "oven",
+    "orange",
+    "blue_bin",
+    "soap",
+    "bowl",
+    "table"
+  ],
+  "num_steps": 4,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "yellow_cup",
+      "affordance": [
+        0.408,
+        0.352
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "yellow_cup",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "table"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, yellow_cup) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        -0.2816,
+        -0.4458,
+        2.6126
+      ],
+      "affordance_hint": "the yellow plastic cup",
+      "affordance_hint_original": "the yellow cup",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 2,
+      "action": "grasp",
+      "target": "yellow_cup",
+      "affordance": [
+        0.408,
+        0.342
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "yellow_cup"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "holding",
+            "args": [
+              "yellow_cup"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              0,
+              0,
+              -1
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "holding(yellow_cup)",
+      "affordance_3d": [
+        -0.2837,
+        -0.4728,
+        2.6322
+      ],
+      "affordance_hint": "the handle of the yellow cup",
+      "affordance_hint_original": "the handle of the yellow cup",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 3,
+      "action": "transport",
+      "target": "yellow_cup",
+      "destination": "oven",
+      "affordance": [
+        0.151,
+        0.334
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "yellow_cup"
+            ],
+            "role": "safety"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "inside",
+            "args": [
+              "yellow_cup",
+              "oven"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "yellow_cup",
+              "oven"
+            ]
+          },
+          {
+            "pred": "no_drop",
+            "args": [
+              "yellow_cup"
+            ]
+          }
+        ]
+      },
+      "done_when": "inside(yellow_cup, oven)",
+      "affordance_3d": [
+        -0.9737,
+        -0.4595,
+        2.4365
+      ],
+      "affordance_hint": "the empty area on the oven",
+      "affordance_hint_original": "an empty area on the oven",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 4,
+      "action": "place",
+      "target": "yellow_cup",
+      "destination": "oven",
+      "affordance": [
+        0.151,
+        0.334
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "surface_contact",
+            "args": [
+              "yellow_cup",
+              "oven"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "released",
+            "args": [
+              "yellow_cup"
+            ],
+            "role": "completion"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "stable",
+            "args": [
+              "yellow_cup"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "support_stable",
+            "args": [
+              "yellow_cup"
+            ]
+          }
+        ]
+      },
+      "done_when": "surface_contact(yellow_cup, oven) AND released(yellow_cup) AND stable(yellow_cup)",
+      "affordance_3d": [
+        -0.9737,
+        -0.4595,
+        2.4365
+      ],
+      "affordance_hint": "the empty area on the oven",
+      "affordance_hint_original": "an empty area on the oven",
+      "affordance_hint_confidence": "ok"
+    }
+  ]
+}

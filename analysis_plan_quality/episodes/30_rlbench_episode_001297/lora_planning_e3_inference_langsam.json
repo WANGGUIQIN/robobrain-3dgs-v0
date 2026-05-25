@@ -1,0 +1,182 @@
+{
+  "task": "use the stick to drag the cube onto the gray target",
+  "scene_objects": [
+    "stick",
+    "cube",
+    "gray_target",
+    "table"
+  ],
+  "steps": [
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "stick",
+              "<",
+              "0.03"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "approach_axis",
+            "args": [
+              "0",
+              "0",
+              "-1"
+            ],
+            "role": "progress"
+          }
+        ]
+      },
+      "step": 1,
+      "action": "reach",
+      "target": "stick",
+      "affordance_region": "the body of the stick",
+      "done_when": "distance(gripper, stick) < 0.03",
+      "affordance_hint": "the body of the stick",
+      "refine_prompt": "the body of the stick",
+      "refine_cache_hit": false,
+      "affordance_refined": [
+        0.6133,
+        0.668
+      ],
+      "affordance_3d_refined": [
+        0.4885,
+        0.7243,
+        2.1561
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.3026
+    },
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "stick"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              "0",
+              "0",
+              "-1"
+            ],
+            "role": "progress"
+          }
+        ]
+      },
+      "step": 2,
+      "action": "grasp",
+      "target": "stick",
+      "affordance_region": "the body of the stick",
+      "done_when": "holding(stick)",
+      "affordance_hint": "the body of the stick",
+      "refine_prompt": "the body of the stick",
+      "refine_cache_hit": true,
+      "affordance_refined": [
+        0.6133,
+        0.668
+      ],
+      "affordance_3d_refined": [
+        0.4885,
+        0.7243,
+        2.1561
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.3026
+    },
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "stick"
+            ],
+            "role": "safety"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "aligned_xy",
+            "args": [
+              "cube",
+              "gray_target",
+              "0.03"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "motion_dir",
+            "args": [
+              "1",
+              "0",
+              "0"
+            ],
+            "role": "progress"
+          }
+        ]
+      },
+      "step": 3,
+      "action": "push",
+      "target": "cube",
+      "destination": "gray_target",
+      "affordance_region": "the center of the gray target",
+      "done_when": "aligned_xy(cube, gray_target, 0.03)",
+      "affordance_hint": "the center of the gray target",
+      "refine_prompt": "the center of the gray target",
+      "refine_cache_hit": false,
+      "affordance_refined": [
+        0.4883,
+        0.0742
+      ],
+      "affordance_3d_refined": [
+        -0.0593,
+        -2.1542,
+        2.5297
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.5212
+    }
+  ]
+}

@@ -1,0 +1,128 @@
+{
+  "task": "pick up the gray bowl",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_3epoch/best",
+  "raw": "**SCENE ANALYSIS -** A gray bowl rests on a light-colored wooden table. A robotic arm is positioned above the bowl. The bowl is a rigid, open container with a circular rim. The task is to pick up the bowl, which requires grasping its rim for stability. **STRATEGY -** First, reach towards the bowl to position the gripper. Then, grasp the rim to lift the bowl. Finally, transport the bowl to a new location (implied by \"pick up,\" though destination is not specified, but the action involves lifting). **AFFORDANCE REASONING -** Step 1: Reach the bowl to align the gripper. Step 2: Grasp the rim for a secure hold. Step 3: Transport the bowl to the desired location (assumed to be a new position on the table or elsewhere, but the task focuses on lifting). The bowl’s rim is the only functional part for grasping, ensuring stability during lifting.\n\nGoal: lifted(gray_bowl); stable(gray_bowl)\nScene: gray_bowl, table\nStep 1: reach(gray_bowl)\n  affordance_region: the rim of the gray bowl\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, gray_bowl, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, gray_bowl) < 0.03\nStep 2: grasp(gray_bowl)\n  affordance_region: the rim of the gray bowl\n  contact: holding(gray_bowl) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(gray_bowl)\nStep 3: transport(gray_bowl -> new_location)\n  affordance_region: an empty area on the table (or new location)\n  spatial: above(gray_bowl, new_location, 0.05) [completion]\n  safety: no_drop(gray_bowl)\n  done_when: above(gray_bowl, new_location, 0.05)\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [
+      {
+        "pred": "lifted",
+        "args": [
+          "gray_bowl"
+        ]
+      },
+      {
+        "pred": "stable",
+        "args": [
+          "gray_bowl"
+        ]
+      }
+    ],
+    "scene_objects": [
+      "gray_bowl",
+      "table"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "gray_bowl",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "gray_bowl",
+        "affordance_region": "the rim of the gray bowl",
+        "done_when": "distance(gripper, gray_bowl) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "gray_bowl"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "gray_bowl",
+        "affordance_region": "the rim of the gray bowl",
+        "done_when": "holding(gray_bowl)"
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "gray_bowl",
+                "new_location",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "gray_bowl"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "gray_bowl",
+        "destination": "new_location",
+        "affordance_region": "an empty area on the table (or new location)",
+        "done_when": "above(gray_bowl, new_location, 0.05)"
+      }
+    ]
+  }
+}

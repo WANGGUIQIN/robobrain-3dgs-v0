@@ -1,0 +1,168 @@
+{
+  "task": "Put the spoon to the right of the cloth.",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_3epoch/best",
+  "raw": "**SCENE ANALYSIS -** A wooden countertop holds a metal bowl with a yellow object, an orange cloth, a red-handled tool, and a metal spoon. The spoon is on the counter, the bowl is on the left, and the cloth is on the right. The task is to move the spoon to the right of the cloth. The spoon is a rigid object with a handle and a bowl; the cloth is a flat, flexible object. **STRATEGY -** First, reach for the spoon at its handle to grasp it. Then, transport it horizontally to the right side of the orange cloth. Finally, place it on the counter in that position. Failure modes include dropping the spoon during transport or placing it incorrectly. **AFFORDANCE REASONING -** Step 1: Reach for the spoon's handle. Step 2: Grasp the handle to lift the spoon. Step 3: Transport the spoon to the right of the cloth. Step 4: Place the spoon on the counter to the right of the cloth.\n\nGoal: on(spoon, counter); right_of(spoon, cloth)\nScene: spoon, cloth, counter, bowl, tool\nStep 1: reach(spoon)\n  affordance_region: the handle of the spoon\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, spoon, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, spoon) < 0.03\nStep 2: grasp(spoon)\n  affordance_region: the handle of the spoon\n  contact: holding(spoon) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(spoon)\nStep 3: transport(spoon -> right_of(cloth))\n  affordance_region: an empty area on the counter to the right of the cloth\n  spatial: right_of(spoon, cloth) [completion]\n  safety: no_drop(spoon)\n  done_when: right_of(spoon, cloth)\nStep 4: place(spoon -> right_of(cloth))\n  affordance_region: an empty area on the counter to the right of the cloth\n  contact: surface_contact(spoon, counter) [completion]; released(spoon) [completion]\n  pose: stable(spoon) [completion]\n  done_when: surface_contact(spoon, counter) AND released(spoon)\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [
+      {
+        "pred": "on",
+        "args": [
+          "spoon",
+          "counter"
+        ]
+      },
+      {
+        "pred": "right_of",
+        "args": [
+          "spoon",
+          "cloth"
+        ]
+      }
+    ],
+    "scene_objects": [
+      "spoon",
+      "cloth",
+      "counter",
+      "bowl",
+      "tool"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "spoon",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "spoon",
+        "affordance_region": "the handle of the spoon",
+        "done_when": "distance(gripper, spoon) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "spoon"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "spoon",
+        "affordance_region": "the handle of the spoon",
+        "done_when": "holding(spoon)"
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "right_of",
+              "args": [
+                "spoon",
+                "cloth"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "spoon"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "spoon",
+        "destination": "right_of(cloth",
+        "affordance_region": "an empty area on the counter to the right of the cloth",
+        "done_when": "right_of(spoon, cloth)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "surface_contact",
+              "args": [
+                "spoon",
+                "counter"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "spoon"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "spoon"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "place",
+        "target": "spoon",
+        "destination": "right_of(cloth",
+        "affordance_region": "an empty area on the counter to the right of the cloth",
+        "done_when": "surface_contact(spoon, counter) AND released(spoon)"
+      }
+    ]
+  }
+}

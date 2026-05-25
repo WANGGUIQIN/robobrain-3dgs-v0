@@ -1,0 +1,232 @@
+{
+  "task": "Put the spoon to the right of the cloth.",
+  "scene_objects": [
+    "spoon",
+    "cloth",
+    "bowl",
+    "table"
+  ],
+  "num_steps": 4,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "spoon",
+      "affordance": [
+        0.391,
+        0.675
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "spoon",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "cloth"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, spoon) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        -0.4195,
+        0.6742,
+        3.3367
+      ],
+      "affordance_hint": "the spoon"
+    },
+    {
+      "step": 2,
+      "action": "grasp",
+      "target": "spoon",
+      "affordance": [
+        0.334,
+        0.558
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "spoon"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "holding",
+            "args": [
+              "spoon"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              0,
+              0,
+              -1
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "holding(spoon)",
+      "affordance_3d": [
+        -0.537,
+        0.1918,
+        2.8475
+      ],
+      "affordance_hint": "the handle of the spoon"
+    },
+    {
+      "step": 3,
+      "action": "transport",
+      "target": "spoon",
+      "destination": "right_of_cloth",
+      "affordance": [
+        0.75,
+        0.468
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "spoon"
+            ],
+            "role": "safety"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "above",
+            "args": [
+              "spoon",
+              "table",
+              0.05
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "spoon",
+              "cloth"
+            ]
+          },
+          {
+            "pred": "no_drop",
+            "args": [
+              "spoon"
+            ]
+          }
+        ]
+      },
+      "done_when": "above(spoon, table, 0.05) AND aligned_xy(spoon, right_of_cloth, 0.03)",
+      "affordance_3d": [
+        0.6383,
+        -0.0798,
+        2.2213
+      ],
+      "affordance_hint": "an empty area on the right of cloth"
+    },
+    {
+      "step": 4,
+      "action": "place",
+      "target": "spoon",
+      "destination": "right_of_cloth",
+      "affordance": [
+        0.75,
+        0.468
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "surface_contact",
+            "args": [
+              "spoon",
+              "table"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "released",
+            "args": [
+              "spoon"
+            ],
+            "role": "completion"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "stable",
+            "args": [
+              "spoon"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "support_stable",
+            "args": [
+              "spoon"
+            ]
+          }
+        ]
+      },
+      "done_when": "surface_contact(spoon, table) AND released(spoon) AND stable(spoon)",
+      "affordance_3d": [
+        0.6383,
+        -0.0798,
+        2.2213
+      ],
+      "affordance_hint": "an empty area on the right of cloth"
+    }
+  ]
+}

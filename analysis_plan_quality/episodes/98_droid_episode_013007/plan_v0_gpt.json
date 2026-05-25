@@ -1,0 +1,231 @@
+{
+  "task": "Pick up the pot from the stove and put it on the counter",
+  "scene_objects": [
+    "pot",
+    "stove",
+    "counter"
+  ],
+  "num_steps": 4,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "pot",
+      "affordance": [
+        0.544,
+        0.666
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "pot",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "stove"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, pot) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        -0.299,
+        0.7119,
+        2.8475
+      ],
+      "affordance_hint": "the pot"
+    },
+    {
+      "step": 2,
+      "action": "grasp",
+      "target": "pot",
+      "affordance": [
+        0.544,
+        0.65
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "pot"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "holding",
+            "args": [
+              "pot"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              0,
+              0,
+              -1
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "holding(pot)",
+      "affordance_3d": [
+        -0.2928,
+        0.6414,
+        2.7887
+      ],
+      "affordance_hint": "the handle of the pot"
+    },
+    {
+      "step": 3,
+      "action": "transport",
+      "target": "pot",
+      "destination": "counter",
+      "affordance": [
+        0.52,
+        0.862
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "pot"
+            ],
+            "role": "safety"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "above",
+            "args": [
+              "pot",
+              "counter",
+              0.05
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "pot",
+              "counter"
+            ]
+          },
+          {
+            "pred": "no_drop",
+            "args": [
+              "pot"
+            ]
+          }
+        ]
+      },
+      "done_when": "above(pot, counter, 0.05) AND aligned_xy(pot, counter, 0.03)",
+      "affordance_3d": [
+        -0.4689,
+        1.7542,
+        3.4736
+      ],
+      "affordance_hint": "an empty area on the counter"
+    },
+    {
+      "step": 4,
+      "action": "place",
+      "target": "pot",
+      "destination": "counter",
+      "affordance": [
+        0.52,
+        0.862
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "surface_contact",
+            "args": [
+              "pot",
+              "counter"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "released",
+            "args": [
+              "pot"
+            ],
+            "role": "completion"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "stable",
+            "args": [
+              "pot"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "support_stable",
+            "args": [
+              "pot"
+            ]
+          }
+        ]
+      },
+      "done_when": "surface_contact(pot, counter) AND released(pot) AND stable(pot)",
+      "affordance_3d": [
+        -0.4689,
+        1.7542,
+        3.4736
+      ],
+      "affordance_hint": "an empty area on the counter"
+    }
+  ]
+}

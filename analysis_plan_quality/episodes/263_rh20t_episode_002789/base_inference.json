@@ -1,0 +1,410 @@
+{
+  "task": "Stack blocks (small Lego) one on top of the other every time",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_3epoch/best",
+  "raw": "SCENE ANALYSIS - A blue baseplate with a grid pattern is on a blue surface. Multiple small, colorful blocks are scattered on the surface. The blocks are small, cube-shaped, and have distinct colors (red, yellow, green, blue, etc.). STRATEGY - Pick up one block at a time, transport it to the baseplate, and place it down. Repeat for all blocks. Failure modes include dropping a block during transport or placing it incorrectly. AFFORDANCE REASONING - Step 1 reach for a block on the surface; Step 2 grasp the block; Step 3 transport to the baseplate; Step 4 place on the baseplate; Repeat for all blocks.\nGoal: all_on(blocks, baseplate)\nScene: blue_baseplate, red_block, yellow_block, green_block, blue_block, purple_block, orange_block, cyan_block, magenta_block\nStep 1: reach(red_block)\n  affordance_region: the body of the red block\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, red_block, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, red_block) < 0.03\nStep 2: grasp(red_block)\n  affordance_region: the body of the red block\n  contact: holding(red_block) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(red_block)\nStep 3: transport(red_block -> blue_baseplate)\n  affordance_region: an empty area on the blue baseplate\n  spatial: above(red_block, blue_baseplate, 0.05) [completion]\n  safety: no_drop(red_block)\n  done_when: above(red_block, blue_baseplate, 0.05)\nStep 4: place(red_block -> blue_baseplate)\n  affordance_region: an empty area on the blue baseplate\n  contact: surface_contact(red_block, blue_baseplate) [completion]; released(red_block) [completion]\n  pose: stable(red_block) [completion]\n  done_when: surface_contact(red_block, blue_baseplate) AND released(red_block)\nStep 5: reach(yellow_block)\n  affordance_region: the body of the yellow block\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, yellow_block, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, yellow_block) < 0.03\nStep 6: grasp(yellow_block)\n  affordance_region: the body of the yellow block\n  contact: holding(yellow_block) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(yellow_block)\nStep 7: transport(yellow_block -> blue_baseplate)\n  affordance_region: an empty area on the blue baseplate\n  spatial: above(yellow_block, blue_baseplate, 0.05) [completion]\n  safety: no_drop(yellow_block)\n  done_when: above(yellow_block, blue_baseplate, 0.05)\nStep 8: place(yellow_block -> blue_baseplate)\n  affordance_region: an empty area on the blue baseplate\n  contact: surface_contact(yellow_block, blue_baseplate) [completion]; released(yellow_block) [completion]\n  pose: stable(yellow_block) [completion]\n  done_when: surface_contact(yellow_block, blue_baseplate) AND released(yellow_block)\nStep 9: reach(green_block)\n  affordance_region: the body of the green block\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, green_block, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, green_block) < 0.03\nStep 10: grasp(green_block)\n  affordance_region: the body of the green block\n  contact: holding(green_block) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(green_block)\nStep 11: transport(green_block -> blue_baseplate)\n  affordance_region: an empty area on the blue baseplate\n  spatial: above(green_block, blue_baseplate, 0.05) [completion]\n  safety: no_drop(green_block)\n  done_when: above(green_block, blue_baseplate, 0.05)\nStep 12: place(green_block -> blue_baseplate)\n  affordance_region: an empty area on the",
+  "parsed": {
+    "reasoning": "",
+    "goal": [
+      {
+        "pred": "all_on",
+        "args": [
+          "blocks",
+          "baseplate"
+        ]
+      }
+    ],
+    "scene_objects": [
+      "blue_baseplate",
+      "red_block",
+      "yellow_block",
+      "green_block",
+      "blue_block",
+      "purple_block",
+      "orange_block",
+      "cyan_block",
+      "magenta_block"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "red_block",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "red_block",
+        "affordance_region": "the body of the red block",
+        "done_when": "distance(gripper, red_block) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "red_block"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "red_block",
+        "affordance_region": "the body of the red block",
+        "done_when": "holding(red_block)"
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "red_block",
+                "blue_baseplate",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "red_block"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "red_block",
+        "destination": "blue_baseplate",
+        "affordance_region": "an empty area on the blue baseplate",
+        "done_when": "above(red_block, blue_baseplate, 0.05)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "surface_contact",
+              "args": [
+                "red_block",
+                "blue_baseplate"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "red_block"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "red_block"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "place",
+        "target": "red_block",
+        "destination": "blue_baseplate",
+        "affordance_region": "an empty area on the blue baseplate",
+        "done_when": "surface_contact(red_block, blue_baseplate) AND released(red_block)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "yellow_block",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 5,
+        "action": "reach",
+        "target": "yellow_block",
+        "affordance_region": "the body of the yellow block",
+        "done_when": "distance(gripper, yellow_block) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "yellow_block"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 6,
+        "action": "grasp",
+        "target": "yellow_block",
+        "affordance_region": "the body of the yellow block",
+        "done_when": "holding(yellow_block)"
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "yellow_block",
+                "blue_baseplate",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "yellow_block"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 7,
+        "action": "transport",
+        "target": "yellow_block",
+        "destination": "blue_baseplate",
+        "affordance_region": "an empty area on the blue baseplate",
+        "done_when": "above(yellow_block, blue_baseplate, 0.05)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "surface_contact",
+              "args": [
+                "yellow_block",
+                "blue_baseplate"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "yellow_block"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "yellow_block"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 8,
+        "action": "place",
+        "target": "yellow_block",
+        "destination": "blue_baseplate",
+        "affordance_region": "an empty area on the blue baseplate",
+        "done_when": "surface_contact(yellow_block, blue_baseplate) AND released(yellow_block)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "green_block",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 9,
+        "action": "reach",
+        "target": "green_block",
+        "affordance_region": "the body of the green block",
+        "done_when": "distance(gripper, green_block) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "green_block"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 10,
+        "action": "grasp",
+        "target": "green_block",
+        "affordance_region": "the body of the green block",
+        "done_when": "holding(green_block)"
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "green_block",
+                "blue_baseplate",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "green_block"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 11,
+        "action": "transport",
+        "target": "green_block",
+        "destination": "blue_baseplate",
+        "affordance_region": "an empty area on the blue baseplate",
+        "done_when": "above(green_block, blue_baseplate, 0.05)"
+      },
+      {
+        "constraints": {},
+        "step": 12,
+        "action": "place",
+        "target": "green_block",
+        "destination": "blue_baseplate",
+        "affordance_region": "an empty area on the"
+      }
+    ]
+  }
+}

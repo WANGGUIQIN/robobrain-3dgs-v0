@@ -1,0 +1,144 @@
+{
+  "task": "close cabinet",
+  "parsed": {
+    "scene_objects": [
+      "cabinet_door",
+      "yellow_object",
+      "red_mug",
+      "blue_plate",
+      "table"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "cabinet_door",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "cabinet_door",
+        "affordance_region": "the white cabinet door",
+        "done_when": "distance(gripper, cabinet_door) < 0.03",
+        "affordance_hint": "the white cabinet door",
+        "refine_prompt": "the white cabinet door",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.1875,
+          0.3438
+        ],
+        "affordance_3d_refined": [
+          -0.3972,
+          -0.1986,
+          1.1058
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.3667,
+        "affordance": [
+          0.1875,
+          0.3438
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_contact",
+              "args": [
+                "cabinet_door"
+              ],
+              "role": "completion"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "aligned_xy",
+              "args": [
+                "cabinet_door",
+                "closed_position",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "motion_dir",
+              "args": [
+                "0",
+                "1",
+                "0"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "push",
+        "target": "cabinet_door",
+        "affordance_region": "the center of the cabinet door",
+        "done_when": "aligned_xy(cabinet_door, closed_position, 0.03)",
+        "affordance_hint": "the center of the cabinet door",
+        "refine_prompt": "the center of the cabinet door",
+        "refine_cache_hit": false,
+        "refine_prompt_fallback": "cabinet door",
+        "affordance_refined": [
+          0.1875,
+          0.3438
+        ],
+        "affordance_3d_refined": [
+          -0.3972,
+          -0.1986,
+          1.1058
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.3007,
+        "affordance": [
+          0.1875,
+          0.3438
+        ]
+      }
+    ]
+  }
+}

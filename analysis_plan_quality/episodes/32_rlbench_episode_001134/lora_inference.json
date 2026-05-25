@@ -1,0 +1,245 @@
+{
+  "task": "put the money away in the safe on the middle shelf",
+  "parsed": {
+    "scene_objects": [
+      "money",
+      "safe",
+      "middle_shelf",
+      "table"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "money",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "money",
+        "affordance_region": "the stack of green money on the top of the safe",
+        "done_when": "distance(gripper, money) < 0.03",
+        "affordance_hint": "the stack of green money on the top of the safe",
+        "refine_prompt": "the stack of green money on the top of the safe",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.2617,
+          0.2734
+        ],
+        "affordance_3d_refined": [
+          -1.1079,
+          -1.0534,
+          2.3248
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.6067,
+        "affordance": [
+          0.2617,
+          0.2734
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "money"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "money",
+        "affordance_region": "the stack of green money on the top of the safe",
+        "done_when": "holding(money)",
+        "affordance_hint": "the stack of green money on the top of the safe",
+        "refine_prompt": "the stack of green money on the top of the safe",
+        "refine_cache_hit": true,
+        "affordance_refined": [
+          0.2617,
+          0.2734
+        ],
+        "affordance_3d_refined": [
+          -1.1079,
+          -1.0534,
+          2.3248
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.6067,
+        "affordance": [
+          0.2617,
+          0.2734
+        ]
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "money",
+                "safe",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "money"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "money",
+        "destination": "safe",
+        "affordance_region": "an empty area inside the safe on the middle shelf",
+        "done_when": "above(money, safe, 0.05)",
+        "affordance_hint": "an empty area inside the safe on the middle shelf",
+        "refine_prompt": "an empty area inside the safe on the middle shelf",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.4062,
+          0.5664
+        ],
+        "affordance_3d_refined": [
+          -0.465,
+          0.3293,
+          2.4797
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.3181,
+        "affordance": [
+          0.4062,
+          0.5664
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "surface_contact",
+              "args": [
+                "money",
+                "safe"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "money"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "money"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "place",
+        "target": "money",
+        "destination": "safe",
+        "affordance_region": "an empty area inside the safe on the middle shelf",
+        "done_when": "surface_contact(money, safe) AND released(money) AND stable(money)",
+        "affordance_hint": "an empty area inside the safe on the middle shelf",
+        "refine_prompt": "an empty area inside the safe on the middle shelf",
+        "refine_cache_hit": true,
+        "affordance_refined": [
+          0.4062,
+          0.5664
+        ],
+        "affordance_3d_refined": [
+          -0.465,
+          0.3293,
+          2.4797
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.3181,
+        "affordance": [
+          0.4062,
+          0.5664
+        ]
+      }
+    ]
+  }
+}

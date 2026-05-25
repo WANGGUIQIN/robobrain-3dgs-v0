@@ -1,0 +1,251 @@
+{
+  "task": "Fold the grey thing in half",
+  "parsed": {
+    "scene_objects": [
+      "grey_cloth",
+      "bed"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "grey_cloth",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "grey_cloth",
+        "affordance_region": "the grey cloth on the bed",
+        "done_when": "distance(gripper, grey_cloth) < 0.03",
+        "affordance_hint": "the grey cloth on the bed",
+        "refine_prompt": "the grey cloth on the bed",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.4648,
+          0.7539
+        ],
+        "affordance_3d_refined": [
+          -0.2909,
+          0.5179,
+          1.4189
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.3371,
+        "affordance": [
+          0.4648,
+          0.7539
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "grey_cloth"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "grey_cloth",
+        "affordance_region": "the grey cloth on the bed",
+        "done_when": "holding(grey_cloth)",
+        "affordance_hint": "the grey cloth on the bed",
+        "refine_prompt": "the grey cloth on the bed",
+        "refine_cache_hit": true,
+        "affordance_refined": [
+          0.4648,
+          0.7539
+        ],
+        "affordance_3d_refined": [
+          -0.2909,
+          0.5179,
+          1.4189
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.3371,
+        "affordance": [
+          0.4648,
+          0.7539
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "grey_cloth"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "aligned_xy",
+              "args": [
+                "grey_cloth",
+                "folded_position",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "grey_cloth"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "fold",
+        "target": "grey_cloth",
+        "affordance_region": "the grey cloth on the bed",
+        "done_when": "aligned_xy(grey_cloth, folded_position, 0.05)",
+        "affordance_hint": "the grey cloth on the bed",
+        "refine_prompt": "the grey cloth on the bed",
+        "refine_cache_hit": true,
+        "affordance_refined": [
+          0.4648,
+          0.7539
+        ],
+        "affordance_3d_refined": [
+          -0.2909,
+          0.5179,
+          1.4189
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.3371,
+        "affordance": [
+          0.4648,
+          0.7539
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "surface_contact",
+              "args": [
+                "grey_cloth",
+                "bed"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "grey_cloth"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "grey_cloth"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "place",
+        "target": "grey_cloth",
+        "destination": "bed",
+        "affordance_region": "an empty area on the bed",
+        "done_when": "surface_contact(grey_cloth, bed) AND released(grey_cloth) AND stable(grey_cloth)",
+        "affordance_hint": "an empty area on the bed",
+        "refine_prompt": "an empty area on the bed",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.4023,
+          0.9961
+        ],
+        "affordance_3d_refined": [
+          -0.4602,
+          1.0899,
+          1.6146
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.5096,
+        "affordance": [
+          0.4023,
+          0.9961
+        ]
+      }
+    ]
+  }
+}

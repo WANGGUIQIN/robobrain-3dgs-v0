@@ -1,0 +1,153 @@
+{
+  "task": "put the pink object inside the right cabinet",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_planning_3epoch/checkpoint-39957",
+  "raw": "Scene: pink_object, right_cabinet, tray, table\nStep 1: reach(pink_object)\n  affordance_region: the pink object on the tray\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, pink_object, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, pink_object) < 0.03\nStep 2: grasp(pink_object)\n  affordance_region: the pink object on the tray\n  contact: holding(pink_object) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(pink_object)\nStep 3: transport(pink_object -> right_cabinet)\n  affordance_region: the empty area inside the right cabinet\n  spatial: above(pink_object, right_cabinet, 0.05) [completion]\n  safety: no_drop(pink_object)\n  done_when: above(pink_object, right_cabinet, 0.05)\nStep 4: place(pink_object -> right_cabinet)\n  affordance_region: the empty area inside the right cabinet\n  contact: surface_contact(pink_object, right_cabinet) [completion]; released(pink_object) [completion]\n  pose: stable(pink_object) [completion]\n  done_when: surface_contact(pink_object, right_cabinet) AND released(pink_object) AND stable(pink_object)\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [],
+    "scene_objects": [
+      "pink_object",
+      "right_cabinet",
+      "tray",
+      "table"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "pink_object",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "pink_object",
+        "affordance_region": "the pink object on the tray",
+        "done_when": "distance(gripper, pink_object) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "pink_object"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "pink_object",
+        "affordance_region": "the pink object on the tray",
+        "done_when": "holding(pink_object)"
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "pink_object",
+                "right_cabinet",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "pink_object"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "pink_object",
+        "destination": "right_cabinet",
+        "affordance_region": "the empty area inside the right cabinet",
+        "done_when": "above(pink_object, right_cabinet, 0.05)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "surface_contact",
+              "args": [
+                "pink_object",
+                "right_cabinet"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "pink_object"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "pink_object"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "place",
+        "target": "pink_object",
+        "destination": "right_cabinet",
+        "affordance_region": "the empty area inside the right cabinet",
+        "done_when": "surface_contact(pink_object, right_cabinet) AND released(pink_object) AND stable(pink_object)"
+      }
+    ]
+  }
+}

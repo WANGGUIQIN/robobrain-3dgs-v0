@@ -1,0 +1,244 @@
+{
+  "task": "put the mustard in the cupboard",
+  "parsed": {
+    "scene_objects": [
+      "mustard",
+      "cupboard",
+      "table"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "mustard",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "mustard",
+        "affordance_region": "the body of the yellow mustard bottle",
+        "done_when": "distance(gripper, mustard) < 0.03",
+        "affordance_hint": "the body of the yellow mustard bottle",
+        "refine_prompt": "the body of the yellow mustard bottle",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.4102,
+          0.6914
+        ],
+        "affordance_3d_refined": [
+          -0.4384,
+          0.9341,
+          2.44
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.5998,
+        "affordance": [
+          0.4102,
+          0.6914
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "mustard"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "mustard",
+        "affordance_region": "the body of the mustard bottle",
+        "done_when": "holding(mustard)",
+        "affordance_hint": "the body of the mustard bottle",
+        "refine_prompt": "the body of the mustard bottle",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.4102,
+          0.6914
+        ],
+        "affordance_3d_refined": [
+          -0.4384,
+          0.9341,
+          2.44
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.602,
+        "affordance": [
+          0.4102,
+          0.6914
+        ]
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "mustard",
+                "cupboard",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "mustard"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "mustard",
+        "destination": "cupboard",
+        "affordance_region": "an empty area on the cupboard",
+        "done_when": "above(mustard, cupboard, 0.05)",
+        "affordance_hint": "an empty area on the cupboard",
+        "refine_prompt": "an empty area on the cupboard",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.7852,
+          0.0
+        ],
+        "affordance_3d_refined": [
+          1.4063,
+          -2.4658,
+          2.4658
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.3185,
+        "affordance": [
+          0.7852,
+          0.0
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "surface_contact",
+              "args": [
+                "mustard",
+                "cupboard"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "mustard"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "mustard"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "place",
+        "target": "mustard",
+        "destination": "cupboard",
+        "affordance_region": "an empty area on the cupboard",
+        "done_when": "surface_contact(mustard, cupboard) AND released(mustard)",
+        "affordance_hint": "an empty area on the cupboard",
+        "refine_prompt": "an empty area on the cupboard",
+        "refine_cache_hit": true,
+        "affordance_refined": [
+          0.7852,
+          0.0
+        ],
+        "affordance_3d_refined": [
+          1.4063,
+          -2.4658,
+          2.4658
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.3185,
+        "affordance": [
+          0.7852,
+          0.0
+        ]
+      }
+    ]
+  }
+}

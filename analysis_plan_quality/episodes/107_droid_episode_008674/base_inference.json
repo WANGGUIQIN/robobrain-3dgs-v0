@@ -1,0 +1,160 @@
+{
+  "task": "Pick up the scoop and put it in the object",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_3epoch/best",
+  "raw": "**SCENE ANALYSIS - A white scoop rests on a dark countertop. A black container with a lid is positioned to the right. The scoop is metallic and has a handle; the container is rigid. STRATEGY - First, grasp the scoop by its handle to lift it. Then, transport it over the container. Finally, place the scoop inside the container. Failure modes include dropping the scoop during transport or misaligning it with the container's opening. AFFORDANCE REASONING - Step 1: Reach for the scoop's handle to grasp it. Step 2: Grasp the handle to lift the scoop. Step 3: Transport the scoop over the container. Step 4: Place the scoop inside the container's opening.**\nGoal: inside(scoop, black_container)\nScene: white_scoop, black_container, countertop\nStep 1: reach(white_scoop)\n  affordance_region: the handle of the white scoop\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, white_scoop, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, white_scoop) < 0.03\nStep 2: grasp(white_scoop)\n  affordance_region: the handle of the white scoop\n  contact: holding(white_scoop) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(white_scoop)\nStep 3: transport(white_scoop -> black_container)\n  affordance_region: the top opening of the black container\n  spatial: above(white_scoop, black_container, 0.05) [completion]\n  safety: no_drop(white_scoop)\n  done_when: above(white_scoop, black_container, 0.05)\nStep 4: place(white_scoop -> black_container)\n  affordance_region: the top opening of the black container\n  contact: inside(white_scoop, black_container) [completion]; released(white_scoop) [completion]\n  pose: stable(white_scoop) [completion]\n  done_when: inside(white_scoop, black_container) AND released(white_scoop)\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [
+      {
+        "pred": "inside",
+        "args": [
+          "scoop",
+          "black_container"
+        ]
+      }
+    ],
+    "scene_objects": [
+      "white_scoop",
+      "black_container",
+      "countertop"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "white_scoop",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "white_scoop",
+        "affordance_region": "the handle of the white scoop",
+        "done_when": "distance(gripper, white_scoop) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "white_scoop"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "white_scoop",
+        "affordance_region": "the handle of the white scoop",
+        "done_when": "holding(white_scoop)"
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "white_scoop",
+                "black_container",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "white_scoop"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "white_scoop",
+        "destination": "black_container",
+        "affordance_region": "the top opening of the black container",
+        "done_when": "above(white_scoop, black_container, 0.05)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "inside",
+              "args": [
+                "white_scoop",
+                "black_container"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "white_scoop"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "white_scoop"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "place",
+        "target": "white_scoop",
+        "destination": "black_container",
+        "affordance_region": "the top opening of the black container",
+        "done_when": "inside(white_scoop, black_container) AND released(white_scoop)"
+      }
+    ]
+  }
+}

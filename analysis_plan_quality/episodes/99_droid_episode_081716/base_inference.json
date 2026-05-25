@@ -1,0 +1,166 @@
+{
+  "task": "Close the cube-shaped object",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_3epoch/best",
+  "raw": "**SCENE ANALYSIS -** A white cube-shaped object with a transparent lid is on a white table. A small yellow object is inside the cube. The cube has a top opening (lid) and a body. The lid is open, and the yellow object is visible inside. The task is to close the cube, which requires grasping the lid and placing it onto the cube's body. The lid is a separate object that must be picked up and positioned on top of the cube. **STRATEGY -** First, reach for the lid, grasp it, then transport it to the cube's body, and place it on top. Ensure the lid is properly aligned to cover the cube. **AFFORDANCE REASONING -** Step 1: Reach for the lid (affordance: the top edge of the lid). Step 2: Grasp the lid (affordance: the top edge of the lid). Step 3: Transport the lid to the cube's body (affordance: the top surface of the cube). Step 4: Place the lid on the cube (affordance: the top surface of the cube).\n\nGoal: closed(cube); all_inside(yellow_object, cube)\nScene: cube, yellow_object, table\nStep 1: reach(lid)\n  affordance_region: the top edge of the lid\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, lid, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, lid) < 0.03\nStep 2: grasp(lid)\n  affordance_region: the top edge of the lid\n  contact: holding(lid) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(lid)\nStep 3: transport(lid -> cube)\n  affordance_region: the top surface of the cube\n  spatial: above(lid, cube, 0.05) [completion]\n  safety: no_drop(lid)\n  done_when: above(lid, cube, 0.05)\nStep 4: place(lid -> cube)\n  affordance_region: the top surface of the cube\n  contact: surface_contact(lid, cube) [completion]; released(lid) [completion]\n  pose: closed(cube) [completion]\n  done_when: surface_contact(lid, cube) AND released(lid)\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [
+      {
+        "pred": "closed",
+        "args": [
+          "cube"
+        ]
+      },
+      {
+        "pred": "all_inside",
+        "args": [
+          "yellow_object",
+          "cube"
+        ]
+      }
+    ],
+    "scene_objects": [
+      "cube",
+      "yellow_object",
+      "table"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "lid",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "lid",
+        "affordance_region": "the top edge of the lid",
+        "done_when": "distance(gripper, lid) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "lid"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "lid",
+        "affordance_region": "the top edge of the lid",
+        "done_when": "holding(lid)"
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "lid",
+                "cube",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "lid"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "lid",
+        "destination": "cube",
+        "affordance_region": "the top surface of the cube",
+        "done_when": "above(lid, cube, 0.05)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "surface_contact",
+              "args": [
+                "lid",
+                "cube"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "lid"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "closed",
+              "args": [
+                "cube"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "place",
+        "target": "lid",
+        "destination": "cube",
+        "affordance_region": "the top surface of the cube",
+        "done_when": "surface_contact(lid, cube) AND released(lid)"
+      }
+    ]
+  }
+}

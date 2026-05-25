@@ -1,0 +1,245 @@
+{
+  "task": "move coke can near green rice chip bag",
+  "parsed": {
+    "scene_objects": [
+      "coke_can",
+      "green_rice_chip_bag",
+      "blue_can",
+      "table"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "coke_can",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "coke_can",
+        "affordance_region": "the body of the red coke can",
+        "done_when": "distance(gripper, coke_can) < 0.03",
+        "affordance_hint": "the body of the red coke can",
+        "refine_prompt": "the body of the red coke can",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.2422,
+          0.6328
+        ],
+        "affordance_3d_refined": [
+          -1.3716,
+          0.7066,
+          4.6282
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.5987,
+        "affordance": [
+          0.2422,
+          0.6328
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "coke_can"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "coke_can",
+        "affordance_region": "the top of the red coke can",
+        "done_when": "holding(coke_can)",
+        "affordance_hint": "the top of the red coke can",
+        "refine_prompt": "the top of the red coke can",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.2422,
+          0.6328
+        ],
+        "affordance_3d_refined": [
+          -1.3716,
+          0.7066,
+          4.6282
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.3507,
+        "affordance": [
+          0.2422,
+          0.6328
+        ]
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "coke_can",
+                "green_rice_chip_bag",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "coke_can"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "coke_can",
+        "destination": "green_rice_chip_bag",
+        "affordance_region": "an empty area on the green rice chip bag",
+        "done_when": "above(coke_can, green_rice_chip_bag, 0.05)",
+        "affordance_hint": "an empty area on the green rice chip bag",
+        "refine_prompt": "an empty area on the green rice chip bag",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.3867,
+          0.3398
+        ],
+        "affordance_3d_refined": [
+          -0.3326,
+          -0.4702,
+          2.5539
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.4013,
+        "affordance": [
+          0.3867,
+          0.3398
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "surface_contact",
+              "args": [
+                "coke_can",
+                "green_rice_chip_bag"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "coke_can"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "coke_can"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "place",
+        "target": "coke_can",
+        "destination": "green_rice_chip_bag",
+        "affordance_region": "an empty area on the green rice chip bag",
+        "done_when": "surface_contact(coke_can, green_rice_chip_bag) AND released(coke_can) AND stable(coke_can)",
+        "affordance_hint": "an empty area on the green rice chip bag",
+        "refine_prompt": "an empty area on the green rice chip bag",
+        "refine_cache_hit": true,
+        "affordance_refined": [
+          0.3867,
+          0.3398
+        ],
+        "affordance_3d_refined": [
+          -0.3326,
+          -0.4702,
+          2.5539
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.4013,
+        "affordance": [
+          0.3867,
+          0.3398
+        ]
+      }
+    ]
+  }
+}

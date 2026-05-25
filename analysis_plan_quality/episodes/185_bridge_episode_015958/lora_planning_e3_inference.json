@@ -1,0 +1,153 @@
+{
+  "task": "Take the green object and put it on the lower right part of the table",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_planning_3epoch/checkpoint-39957",
+  "raw": "Scene: red_fork, metal_pot, blue_cloth, table\nStep 1: reach(red_fork)\n  affordance_region: the red plastic handle of the red fork\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, red_fork, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, red_fork) < 0.03\nStep 2: grasp(red_fork)\n  affordance_region: the red plastic handle of the red fork\n  contact: holding(red_fork) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(red_fork)\nStep 3: transport(red_fork -> lower_right_table)\n  affordance_region: the lower right part of the wooden table\n  spatial: above(red_fork, lower_right_table, 0.05) [completion]\n  safety: no_drop(red_fork)\n  done_when: above(red_fork, lower_right_table, 0.05)\nStep 4: place(red_fork -> lower_right_table)\n  affordance_region: the lower right part of the wooden table\n  contact: surface_contact(red_fork, lower_right_table) [completion]; released(red_fork) [completion]\n  pose: stable(red_fork) [completion]\n  done_when: surface_contact(red_fork, lower_right_table) AND released(red_fork)\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [],
+    "scene_objects": [
+      "red_fork",
+      "metal_pot",
+      "blue_cloth",
+      "table"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "red_fork",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "red_fork",
+        "affordance_region": "the red plastic handle of the red fork",
+        "done_when": "distance(gripper, red_fork) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "red_fork"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "red_fork",
+        "affordance_region": "the red plastic handle of the red fork",
+        "done_when": "holding(red_fork)"
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "red_fork",
+                "lower_right_table",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "red_fork"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "red_fork",
+        "destination": "lower_right_table",
+        "affordance_region": "the lower right part of the wooden table",
+        "done_when": "above(red_fork, lower_right_table, 0.05)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "surface_contact",
+              "args": [
+                "red_fork",
+                "lower_right_table"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "red_fork"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "red_fork"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "place",
+        "target": "red_fork",
+        "destination": "lower_right_table",
+        "affordance_region": "the lower right part of the wooden table",
+        "done_when": "surface_contact(red_fork, lower_right_table) AND released(red_fork)"
+      }
+    ]
+  }
+}

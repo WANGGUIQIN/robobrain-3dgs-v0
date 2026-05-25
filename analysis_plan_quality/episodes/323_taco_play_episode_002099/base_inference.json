@@ -1,0 +1,160 @@
+{
+  "task": "put the purple block inside the box",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_3epoch/best",
+  "raw": "SCENE ANALYSIS - A purple block is on a wooden table. A white plastic box is on the floor. The purple block is a cube with a matte finish; the box has a rectangular opening. STRATEGY - First, reach for and grasp the purple block. Then, transport it to the box. Finally, place the block inside the box. Failure modes include dropping the block during transport or misaligning it with the box opening. AFFORDANCE REASONING - Step 1 reach the block at its body for initial contact. Step 2 grasp the block at its body for a secure hold. Step 3 transport the block to the box's opening. Step 4 place the block inside the box's opening.\nGoal: inside(purple_block, white_box)\nScene: purple_block, white_box, table\nStep 1: reach(purple_block)\n  affordance_region: the body of the purple block\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, purple_block, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, purple_block) < 0.03\nStep 2: grasp(purple_block)\n  affordance_region: the body of the purple block\n  contact: holding(purple_block) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(purple_block)\nStep 3: transport(purple_block -> white_box)\n  affordance_region: the top opening of the white box\n  spatial: above(purple_block, white_box, 0.05) [completion]\n  safety: no_drop(purple_block)\n  done_when: above(purple_block, white_box, 0.05)\nStep 4: place(purple_block -> white_box)\n  affordance_region: the top opening of the white box\n  contact: inside(purple_block, white_box) [completion]; released(purple_block) [completion]\n  pose: stable(purple_block) [completion]\n  done_when: inside(purple_block, white_box) AND released(purple_block)\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [
+      {
+        "pred": "inside",
+        "args": [
+          "purple_block",
+          "white_box"
+        ]
+      }
+    ],
+    "scene_objects": [
+      "purple_block",
+      "white_box",
+      "table"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "purple_block",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "purple_block",
+        "affordance_region": "the body of the purple block",
+        "done_when": "distance(gripper, purple_block) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "purple_block"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "purple_block",
+        "affordance_region": "the body of the purple block",
+        "done_when": "holding(purple_block)"
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "purple_block",
+                "white_box",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "purple_block"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "purple_block",
+        "destination": "white_box",
+        "affordance_region": "the top opening of the white box",
+        "done_when": "above(purple_block, white_box, 0.05)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "inside",
+              "args": [
+                "purple_block",
+                "white_box"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "purple_block"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "purple_block"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "place",
+        "target": "purple_block",
+        "destination": "white_box",
+        "affordance_region": "the top opening of the white box",
+        "done_when": "inside(purple_block, white_box) AND released(purple_block)"
+      }
+    ]
+  }
+}

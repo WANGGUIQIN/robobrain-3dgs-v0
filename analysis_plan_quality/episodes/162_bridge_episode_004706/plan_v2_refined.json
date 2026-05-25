@@ -1,0 +1,240 @@
+{
+  "task": "Place the red item towards the top left corner of counter.",
+  "scene_objects": [
+    "red_item",
+    "bowl",
+    "brush",
+    "counter"
+  ],
+  "num_steps": 4,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "red_item",
+      "affordance": [
+        0.669,
+        0.691
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "red_item",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "bowl"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, red_item) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        0.7463,
+        0.8504,
+        3.865
+      ],
+      "affordance_hint": "the red item",
+      "affordance_hint_original": "the red item",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 2,
+      "action": "grasp",
+      "target": "red_item",
+      "affordance": [
+        0.675,
+        0.675
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "red_item"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "holding",
+            "args": [
+              "red_item"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              0,
+              0,
+              -1
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "holding(red_item)",
+      "affordance_3d": [
+        0.777,
+        0.777,
+        3.8455
+      ],
+      "affordance_hint": "the body of the red apple",
+      "affordance_hint_original": "the handle of the red item",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 3,
+      "action": "transport",
+      "target": "red_item",
+      "destination": "top_left_corner",
+      "affordance": [
+        0.267,
+        0.325
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "red_item"
+            ],
+            "role": "safety"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "above",
+            "args": [
+              "red_item",
+              "top_left_corner",
+              0.05
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "red_item",
+              "counter"
+            ]
+          },
+          {
+            "pred": "no_drop",
+            "args": [
+              "red_item"
+            ]
+          }
+        ]
+      },
+      "done_when": "above(red_item, top_left_corner, 0.05) AND aligned_xy(red_item, top_left_corner, 0.03)",
+      "affordance_3d": [
+        -0.4297,
+        -0.3223,
+        1.5951
+      ],
+      "affordance_hint": "the top left corner of the wooden counter",
+      "affordance_hint_original": "an empty area on the top left corner",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 4,
+      "action": "place",
+      "target": "red_item",
+      "destination": "top_left_corner",
+      "affordance": [
+        0.267,
+        0.325
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "surface_contact",
+            "args": [
+              "red_item",
+              "counter"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "released",
+            "args": [
+              "red_item"
+            ],
+            "role": "completion"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "stable",
+            "args": [
+              "red_item"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "support_stable",
+            "args": [
+              "red_item"
+            ]
+          }
+        ]
+      },
+      "done_when": "surface_contact(red_item, counter) AND released(red_item) AND stable(red_item)",
+      "affordance_3d": [
+        -0.4297,
+        -0.3223,
+        1.5951
+      ],
+      "affordance_hint": "the top left corner of the wooden counter",
+      "affordance_hint_original": "an empty area on the top left corner",
+      "affordance_hint_confidence": "ok"
+    }
+  ]
+}

@@ -1,0 +1,117 @@
+{
+  "task": "pick up the apple fruit",
+  "scene_objects": [
+    "apple_fruit",
+    "table"
+  ],
+  "num_steps": 2,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "apple_fruit",
+      "affordance": [
+        0.535,
+        0.37
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "apple_fruit",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "table"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, apple_fruit) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        0.1182,
+        -0.4335,
+        2.9257
+      ],
+      "affordance_hint": "the red matte body of the apple fruit",
+      "affordance_hint_original": "the apple fruit",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 2,
+      "action": "grasp",
+      "target": "apple_fruit",
+      "affordance": [
+        0.535,
+        0.37
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "apple_fruit"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "holding",
+            "args": [
+              "apple_fruit"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              0,
+              0,
+              -1
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "holding(apple_fruit)",
+      "affordance_3d": [
+        0.1182,
+        -0.4335,
+        2.9257
+      ],
+      "affordance_hint": "the body of the red apple fruit",
+      "affordance_hint_original": "apple fruit",
+      "affordance_hint_confidence": "ok"
+    }
+  ]
+}

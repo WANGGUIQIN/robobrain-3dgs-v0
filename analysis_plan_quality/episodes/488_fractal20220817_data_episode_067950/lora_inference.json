@@ -1,0 +1,246 @@
+{
+  "task": "pick coke can from middle drawer and place on counter",
+  "parsed": {
+    "scene_objects": [
+      "coke_can",
+      "counter",
+      "drawer",
+      "bowl",
+      "green_package"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "coke_can",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "coke_can",
+        "affordance_region": "the body of the coke can",
+        "done_when": "distance(gripper, coke_can) < 0.03",
+        "affordance_hint": "the body of the coke can",
+        "refine_prompt": "the body of the coke can",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.9961,
+          0.1875
+        ],
+        "affordance_3d_refined": [
+          1.5457,
+          -0.9737,
+          2.7105
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.32,
+        "affordance": [
+          0.9961,
+          0.1875
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "coke_can"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "coke_can",
+        "affordance_region": "the body of the coke can",
+        "done_when": "holding(coke_can)",
+        "affordance_hint": "the body of the coke can",
+        "refine_prompt": "the body of the coke can",
+        "refine_cache_hit": true,
+        "affordance_refined": [
+          0.9961,
+          0.1875
+        ],
+        "affordance_3d_refined": [
+          1.5457,
+          -0.9737,
+          2.7105
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.32,
+        "affordance": [
+          0.9961,
+          0.1875
+        ]
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "coke_can",
+                "counter",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "coke_can"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "coke_can",
+        "destination": "counter",
+        "affordance_region": "the empty area on the gray counter",
+        "done_when": "above(coke_can, counter, 0.05)",
+        "affordance_hint": "the empty area on the gray counter",
+        "refine_prompt": "the empty area on the gray counter",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.4844,
+          0.3594
+        ],
+        "affordance_3d_refined": [
+          -0.0659,
+          -0.5932,
+          3.6693
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.3963,
+        "affordance": [
+          0.4844,
+          0.3594
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "surface_contact",
+              "args": [
+                "coke_can",
+                "counter"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "coke_can"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "coke_can"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "place",
+        "target": "coke_can",
+        "destination": "counter",
+        "affordance_region": "the empty area on the gray counter",
+        "done_when": "surface_contact(coke_can, counter) AND released(coke_can) AND stable(coke_can)",
+        "affordance_hint": "the empty area on the gray counter",
+        "refine_prompt": "the empty area on the gray counter",
+        "refine_cache_hit": true,
+        "affordance_refined": [
+          0.4844,
+          0.3594
+        ],
+        "affordance_3d_refined": [
+          -0.0659,
+          -0.5932,
+          3.6693
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.3963,
+        "affordance": [
+          0.4844,
+          0.3594
+        ]
+      }
+    ]
+  }
+}

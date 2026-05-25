@@ -1,0 +1,121 @@
+{
+  "task": "pick green rice chip bag",
+  "scene_objects": [
+    "green_rice_chip_bag",
+    "egg",
+    "can",
+    "table"
+  ],
+  "steps": [
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "green_rice_chip_bag",
+              "<",
+              "0.03"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "approach_axis",
+            "args": [
+              "0",
+              "0",
+              "-1"
+            ],
+            "role": "progress"
+          }
+        ]
+      },
+      "step": 1,
+      "action": "reach",
+      "target": "green_rice_chip_bag",
+      "affordance_region": "the green rice chip bag",
+      "done_when": "distance(gripper, green_rice_chip_bag) < 0.03",
+      "affordance_hint": "the green rice chip bag",
+      "refine_prompt": "the green rice chip bag",
+      "refine_cache_hit": false,
+      "affordance_refined": [
+        0.5352,
+        0.3281
+      ],
+      "affordance_3d_refined": [
+        0.0906,
+        -0.4427,
+        2.2408
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.845
+    },
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "green_rice_chip_bag"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              "0",
+              "0",
+              "-1"
+            ],
+            "role": "progress"
+          }
+        ]
+      },
+      "step": 2,
+      "action": "grasp",
+      "target": "green_rice_chip_bag",
+      "affordance_region": "the body of the green rice chip bag",
+      "done_when": "holding(green_rice_chip_bag)",
+      "affordance_hint": "the body of the green rice chip bag",
+      "refine_prompt": "the body of the green rice chip bag",
+      "refine_cache_hit": false,
+      "affordance_refined": [
+        0.5352,
+        0.3281
+      ],
+      "affordance_3d_refined": [
+        0.0906,
+        -0.4427,
+        2.2408
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.5635
+    }
+  ]
+}

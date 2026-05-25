@@ -1,0 +1,239 @@
+{
+  "task": "Put the the purple plushie in the box",
+  "scene_objects": [
+    "purple_plushie",
+    "box",
+    "table"
+  ],
+  "num_steps": 4,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "purple_plushie",
+      "affordance": [
+        0.678,
+        0.9
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "purple_plushie",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "box"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, purple_plushie) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        0.1897,
+        1.4908,
+        2.7105
+      ],
+      "affordance_hint": "the purple plushie",
+      "affordance_hint_original": "the purple plushie",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 2,
+      "action": "grasp",
+      "target": "purple_plushie",
+      "affordance": [
+        0.678,
+        0.888
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "purple_plushie"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "holding",
+            "args": [
+              "purple_plushie"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              0,
+              0,
+              -1
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "holding(purple_plushie)",
+      "affordance_3d": [
+        0.187,
+        1.4292,
+        2.6713
+      ],
+      "affordance_hint": "the purple plushie",
+      "affordance_hint_original": "the handle of the purple plushie",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 3,
+      "action": "transport",
+      "target": "purple_plushie",
+      "destination": "box",
+      "affordance": [
+        0.608,
+        0.808
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "purple_plushie"
+            ],
+            "role": "safety"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "above",
+            "args": [
+              "purple_plushie",
+              "box",
+              0.05
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "purple_plushie",
+              "box"
+            ]
+          },
+          {
+            "pred": "no_drop",
+            "args": [
+              "purple_plushie"
+            ]
+          }
+        ]
+      },
+      "done_when": "above(purple_plushie, box, 0.05) AND aligned_xy(purple_plushie, box, 0.03)",
+      "affordance_3d": [
+        -0.0479,
+        1.0429,
+        2.3974
+      ],
+      "affordance_hint": "the empty area on the orange box",
+      "affordance_hint_original": "an empty area on the box",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 4,
+      "action": "place",
+      "target": "purple_plushie",
+      "destination": "box",
+      "affordance": [
+        0.608,
+        0.808
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "surface_contact",
+            "args": [
+              "purple_plushie",
+              "box"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "released",
+            "args": [
+              "purple_plushie"
+            ],
+            "role": "completion"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "stable",
+            "args": [
+              "purple_plushie"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "support_stable",
+            "args": [
+              "purple_plushie"
+            ]
+          }
+        ]
+      },
+      "done_when": "surface_contact(purple_plushie, box) AND released(purple_plushie) AND stable(purple_plushie)",
+      "affordance_3d": [
+        -0.0479,
+        1.0429,
+        2.3974
+      ],
+      "affordance_hint": "the empty area on the top of the box",
+      "affordance_hint_original": "an empty area on the box",
+      "affordance_hint_confidence": "ok"
+    }
+  ]
+}

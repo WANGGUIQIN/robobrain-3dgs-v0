@@ -1,0 +1,234 @@
+{
+  "task": "Insert the pencil into the pencil sharpener",
+  "scene_objects": [
+    "pencil",
+    "pencil_sharpener",
+    "table"
+  ],
+  "num_steps": 4,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "pencil",
+      "affordance": [
+        0.41,
+        0.475
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "pencil",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "table"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, pencil) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        -1.0322,
+        -0.2785,
+        1.5364
+      ],
+      "affordance_hint": "the wooden pencil on the table",
+      "affordance_hint_original": "the pencil",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 2,
+      "action": "grasp",
+      "target": "pencil",
+      "affordance": [
+        0.406,
+        0.45
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "pencil"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "holding",
+            "args": [
+              "pencil"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              0,
+              0,
+              -1
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "holding(pencil)",
+      "affordance_3d": [
+        -1.0106,
+        -0.3041,
+        1.4972
+      ],
+      "affordance_hint": "the wooden body of the pencil",
+      "affordance_hint_original": "the handle of the pencil",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 3,
+      "action": "transport",
+      "target": "pencil",
+      "destination": "pencil_sharpener",
+      "affordance": [
+        0.325,
+        0.604
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "pencil"
+            ],
+            "role": "safety"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "above",
+            "args": [
+              "pencil",
+              "pencil_sharpener",
+              0.05
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "pencil",
+              "pencil_sharpener"
+            ]
+          },
+          {
+            "pred": "no_drop",
+            "args": [
+              "pencil"
+            ]
+          }
+        ]
+      },
+      "done_when": "above(pencil, pencil_sharpener, 0.05) AND aligned_xy(pencil, pencil_sharpener, 0.03)",
+      "affordance_3d": [
+        -1.2828,
+        -0.1353,
+        1.732
+      ],
+      "affordance_hint": "the top opening of the pencil sharpener",
+      "affordance_hint_original": "an empty area on the pencil sharpener",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 4,
+      "action": "insert",
+      "target": "pencil",
+      "destination": "pencil_sharpener",
+      "affordance": [
+        0.475,
+        0.55
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "inserted",
+            "args": [
+              "pencil",
+              "pencil_sharpener"
+            ],
+            "role": "completion"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "aligned_z",
+            "args": [
+              "pencil",
+              "pencil_sharpener"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "pencil",
+              "pencil_sharpener"
+            ]
+          }
+        ]
+      },
+      "done_when": "inserted(pencil, pencil_sharpener) AND aligned_z(pencil, pencil_sharpener)",
+      "affordance_3d": [
+        -1.0112,
+        -0.1992,
+        1.6342
+      ],
+      "affordance_hint": "the top opening of the black pencil sharpener",
+      "affordance_hint_original": "the top opening of the pencil sharpener",
+      "affordance_hint_confidence": "ok"
+    }
+  ]
+}

@@ -1,0 +1,208 @@
+{
+  "task": "Put the scoop inside the blue cup and then pour the contents in the orange bowl into the blue bowl",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_planning_3epoch/checkpoint-39957",
+  "raw": "Scene: scoop, blue_cup, orange_bowl, blue_bowl, table\nStep 1: reach(scoop)\n  affordance_region: the body of the scoop\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, scoop, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, scoop) < 0.03\nStep 2: grasp(scoop)\n  affordance_region: the handle of the scoop\n  contact: holding(scoop) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(scoop)\nStep 3: insert(scoop -> blue_cup)\n  affordance_region: the top opening of the blue cup\n  contact: holding(scoop) [safety]\n  spatial: inside(scoop, blue_cup) [completion]\n  direction: insert_dir(0, 0, -1) [progress]\n  done_when: inside(scoop, blue_cup)\nStep 4: reach(orange_bowl)\n  affordance_region: the orange bowl\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, orange_bowl, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, orange_bowl) < 0.03\nStep 5: pour(orange_bowl -> blue_bowl)\n  affordance_region: the mouth of the blue bowl\n  contact: holding(orange_bowl) [safety]\n  spatial: above(orange_bowl, blue_bowl, 0.05) [completion]\n  safety: no_spill(orange_bowl)\n  done_when: above(orange_bowl, blue_bowl, 0.05)\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [],
+    "scene_objects": [
+      "scoop",
+      "blue_cup",
+      "orange_bowl",
+      "blue_bowl",
+      "table"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "scoop",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "scoop",
+        "affordance_region": "the body of the scoop",
+        "done_when": "distance(gripper, scoop) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "scoop"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "scoop",
+        "affordance_region": "the handle of the scoop",
+        "done_when": "holding(scoop)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "scoop"
+              ],
+              "role": "safety"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "inside",
+              "args": [
+                "scoop",
+                "blue_cup"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "insert_dir",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "insert",
+        "target": "scoop",
+        "destination": "blue_cup",
+        "affordance_region": "the top opening of the blue cup",
+        "done_when": "inside(scoop, blue_cup)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "orange_bowl",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "reach",
+        "target": "orange_bowl",
+        "affordance_region": "the orange bowl",
+        "done_when": "distance(gripper, orange_bowl) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "orange_bowl"
+              ],
+              "role": "safety"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "orange_bowl",
+                "blue_bowl",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_spill",
+              "args": [
+                "orange_bowl"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 5,
+        "action": "pour",
+        "target": "orange_bowl",
+        "destination": "blue_bowl",
+        "affordance_region": "the mouth of the blue bowl",
+        "done_when": "above(orange_bowl, blue_bowl, 0.05)"
+      }
+    ]
+  }
+}

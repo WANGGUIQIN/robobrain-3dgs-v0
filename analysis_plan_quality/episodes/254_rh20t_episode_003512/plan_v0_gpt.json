@@ -1,0 +1,226 @@
+{
+  "task": "Insert the tip of a small pipette into the holder for small pipette tips",
+  "scene_objects": [
+    "pipette",
+    "pipette_tip_holder",
+    "table"
+  ],
+  "num_steps": 4,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "pipette",
+      "affordance": [
+        0.475,
+        0.285
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "pipette",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "pipette_tip_holder"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, pipette) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        -1.2533,
+        -0.6773,
+        2.0256
+      ],
+      "affordance_hint": "the pipette"
+    },
+    {
+      "step": 2,
+      "action": "grasp",
+      "target": "pipette",
+      "affordance": [
+        0.475,
+        0.3
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "pipette"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "holding",
+            "args": [
+              "pipette"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              0,
+              0,
+              -1
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "holding(pipette)",
+      "affordance_3d": [
+        -1.2291,
+        -0.6394,
+        1.9864
+      ],
+      "affordance_hint": "the handle of the pipette"
+    },
+    {
+      "step": 3,
+      "action": "transport",
+      "target": "pipette",
+      "destination": "pipette_tip_holder",
+      "affordance": [
+        0.45,
+        0.401
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "pipette"
+            ],
+            "role": "safety"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "above",
+            "args": [
+              "pipette",
+              "pipette_tip_holder",
+              0.05
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "pipette",
+              "pipette_tip_holder"
+            ]
+          },
+          {
+            "pred": "no_drop",
+            "args": [
+              "pipette"
+            ]
+          }
+        ]
+      },
+      "done_when": "above(pipette, pipette_tip_holder, 0.05) AND aligned_xy(pipette, pipette_tip_holder, 0.03)",
+      "affordance_3d": [
+        -1.0594,
+        -0.3979,
+        1.6538
+      ],
+      "affordance_hint": "an empty area on the pipette tip holder"
+    },
+    {
+      "step": 4,
+      "action": "insert",
+      "target": "pipette",
+      "destination": "pipette_tip_holder",
+      "affordance": [
+        0.475,
+        0.236
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "inserted",
+            "args": [
+              "pipette",
+              "pipette_tip_holder"
+            ],
+            "role": "completion"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "aligned_z",
+            "args": [
+              "pipette",
+              "pipette_tip_holder"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "pipette",
+              "pipette_tip_holder"
+            ]
+          }
+        ]
+      },
+      "done_when": "inserted(pipette, pipette_tip_holder) AND aligned_z(pipette, pipette_tip_holder)",
+      "affordance_3d": [
+        -1.3502,
+        -0.8183,
+        2.1821
+      ],
+      "affordance_hint": "the top opening of the pipette tip holder"
+    }
+  ]
+}

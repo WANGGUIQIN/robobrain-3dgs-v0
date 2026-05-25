@@ -1,0 +1,179 @@
+{
+  "task": "Open the microwave door",
+  "scene_objects": [
+    "microwave",
+    "microwave_door",
+    "table"
+  ],
+  "num_steps": 3,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "microwave_door",
+      "affordance": [
+        0.558,
+        0.525
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "microwave_door",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "microwave"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, microwave_door) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        -1.6399,
+        -0.4262,
+        2.9649
+      ],
+      "affordance_hint": "the right side of the microwave door",
+      "affordance_hint_original": "the microwave door",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 2,
+      "action": "grasp",
+      "target": "microwave_door",
+      "affordance": [
+        0.425,
+        0.401
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "microwave_door"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "holding",
+            "args": [
+              "microwave_door"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              0,
+              0,
+              -1
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "holding(microwave_door)",
+      "affordance_3d": [
+        -1.9033,
+        -0.6946,
+        2.8866
+      ],
+      "affordance_hint": "the handle of the microwave door",
+      "affordance_hint_original": "the handle of the microwave door",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 3,
+      "action": "pull",
+      "target": "microwave_door",
+      "affordance": [
+        0.425,
+        0.401
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "microwave_door"
+            ],
+            "role": "safety"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "aligned_xy",
+            "args": [
+              "microwave_door",
+              "open_position",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "microwave_door",
+              "microwave"
+            ]
+          },
+          {
+            "pred": "force_limit",
+            "args": [
+              "microwave_door"
+            ]
+          }
+        ]
+      },
+      "done_when": "aligned_xy(microwave_door, open_position, < 0.03)",
+      "affordance_3d": [
+        -1.9033,
+        -0.6946,
+        2.8866
+      ],
+      "affordance_hint": "the handle of the microwave door",
+      "affordance_hint_original": "the handle of the microwave door",
+      "affordance_hint_confidence": "ok"
+    }
+  ]
+}

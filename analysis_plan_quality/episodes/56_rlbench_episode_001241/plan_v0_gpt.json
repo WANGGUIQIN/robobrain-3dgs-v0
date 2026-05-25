@@ -1,0 +1,229 @@
+{
+  "task": "use the stick to drag the cube onto the magenta target",
+  "scene_objects": [
+    "stick",
+    "cube",
+    "magenta_target",
+    "table"
+  ],
+  "num_steps": 4,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "stick",
+      "affordance": [
+        0.57,
+        0.804
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "stick",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "cube"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, stick) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        0.1037,
+        0.4493,
+        0.7373
+      ],
+      "affordance_hint": "the stick"
+    },
+    {
+      "step": 2,
+      "action": "grasp",
+      "target": "stick",
+      "affordance": [
+        0.632,
+        0.804
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "stick"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "holding",
+            "args": [
+              "stick"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              0,
+              0,
+              -1
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "holding(stick)",
+      "affordance_3d": [
+        1.0549,
+        2.42,
+        3.9714
+      ],
+      "affordance_hint": "the handle of the stick"
+    },
+    {
+      "step": 3,
+      "action": "transport",
+      "target": "stick",
+      "destination": "cube",
+      "affordance": [
+        0.468,
+        0.656
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "stick"
+            ],
+            "role": "safety"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "above",
+            "args": [
+              "stick",
+              "cube",
+              0.05
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "stick",
+              "cube"
+            ]
+          },
+          {
+            "pred": "no_drop",
+            "args": [
+              "stick"
+            ]
+          }
+        ]
+      },
+      "done_when": "above(stick, cube, 0.05) AND aligned_xy(stick, cube, 0.03)",
+      "affordance_3d": [
+        -0.0389,
+        0.1947,
+        0.623
+      ],
+      "affordance_hint": "an empty area on the cube"
+    },
+    {
+      "step": 4,
+      "action": "push",
+      "target": "cube",
+      "destination": "magenta_target",
+      "affordance": [
+        0.375,
+        0.906
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "surface_contact",
+            "args": [
+              "stick",
+              "cube"
+            ],
+            "role": "completion"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "near",
+            "args": [
+              "cube",
+              "magenta_target",
+              "<",
+              0.05
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "stick",
+              "magenta_target"
+            ]
+          }
+        ]
+      },
+      "done_when": "surface_contact(stick, cube) AND near(cube, magenta_target, 0.05)",
+      "affordance_3d": [
+        -0.2212,
+        0.7188,
+        0.8847
+      ],
+      "affordance_hint": "the center of the cube"
+    }
+  ]
+}

@@ -1,0 +1,152 @@
+{
+  "task": "pick apple from white bowl",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_planning_3epoch/checkpoint-39957",
+  "raw": "Scene: apple, white_bowl, table\nStep 1: reach(apple)\n  affordance_region: the apple in the white bowl\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, apple, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, apple) < 0.03\nStep 2: grasp(apple)\n  affordance_region: the body of the apple\n  contact: holding(apple) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(apple)\nStep 3: transport(apple -> table)\n  affordance_region: an empty area on the table\n  spatial: above(apple, table, 0.05) [completion]\n  safety: no_drop(apple)\n  done_when: above(apple, table, 0.05)\nStep 4: place(apple -> table)\n  affordance_region: an empty area on the table\n  contact: surface_contact(apple, table) [completion]; released(apple) [completion]\n  pose: stable(apple) [completion]\n  done_when: surface_contact(apple, table) AND released(apple)\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [],
+    "scene_objects": [
+      "apple",
+      "white_bowl",
+      "table"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "apple",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "apple",
+        "affordance_region": "the apple in the white bowl",
+        "done_when": "distance(gripper, apple) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "apple"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "apple",
+        "affordance_region": "the body of the apple",
+        "done_when": "holding(apple)"
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "apple",
+                "table",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "apple"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "apple",
+        "destination": "table",
+        "affordance_region": "an empty area on the table",
+        "done_when": "above(apple, table, 0.05)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "surface_contact",
+              "args": [
+                "apple",
+                "table"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "apple"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "apple"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "place",
+        "target": "apple",
+        "destination": "table",
+        "affordance_region": "an empty area on the table",
+        "done_when": "surface_contact(apple, table) AND released(apple)"
+      }
+    ]
+  }
+}

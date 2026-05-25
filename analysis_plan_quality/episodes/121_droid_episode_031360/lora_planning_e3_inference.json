@@ -1,0 +1,288 @@
+{
+  "task": "Move the green pot to the right, open the microwave door, place the green pot in the microwave then close the microwave door",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_planning_3epoch/checkpoint-39957",
+  "raw": "Scene: green_pot, microwave, microwave_door, table\nStep 1: reach(green_pot)\n  affordance_region: the green pot\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, green_pot, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, green_pot) < 0.03\nStep 2: grasp(green_pot)\n  affordance_region: the handle of the green pot\n  contact: holding(green_pot) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(green_pot)\nStep 3: transport(green_pot -> table_right)\n  affordance_region: an empty area on the table right\n  spatial: above(green_pot, table_right, 0.05) [completion]\n  safety: no_drop(green_pot)\n  done_when: above(green_pot, table_right, 0.05)\nStep 4: place(green_pot -> table_right)\n  affordance_region: an empty area on the table right\n  contact: surface_contact(green_pot, table_right) [completion]; released(green_pot) [completion]\n  pose: stable(green_pot) [completion]\n  done_when: surface_contact(green_pot, table_right) AND released(green_pot)\nStep 5: reach(microwave_door)\n  affordance_region: the handle of the microwave door\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, microwave_door, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, microwave_door) < 0.03\nStep 6: pull(microwave_door)\n  affordance_region: the handle of the microwave door\n  contact: gripper_contact(microwave_door) [completion]\n  direction: motion_dir(0, 1, 0) [completion]\n  done_when: microwave_door(open)\nStep 7: place(green_pot -> microwave)\n  affordance_region: an empty area inside the microwave\n  contact: surface_contact(green_pot, microwave) [completion]; released(green_pot) [completion]\n  pose: stable(green_pot) [completion]\n  done_when: surface_contact(green_pot, microwave) AND released(green_pot)\nStep 8: push(microwave_door)\n  affordance_region: the handle of the microwave door\n  contact: gripper_contact(microwave_door) [completion]\n  direction: motion_dir(0, -1, 0) [completion]\n  done_when: microwave_door(closed)\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [],
+    "scene_objects": [
+      "green_pot",
+      "microwave",
+      "microwave_door",
+      "table"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "green_pot",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "green_pot",
+        "affordance_region": "the green pot",
+        "done_when": "distance(gripper, green_pot) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "green_pot"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "green_pot",
+        "affordance_region": "the handle of the green pot",
+        "done_when": "holding(green_pot)"
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "green_pot",
+                "table_right",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "green_pot"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "green_pot",
+        "destination": "table_right",
+        "affordance_region": "an empty area on the table right",
+        "done_when": "above(green_pot, table_right, 0.05)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "surface_contact",
+              "args": [
+                "green_pot",
+                "table_right"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "green_pot"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "green_pot"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "place",
+        "target": "green_pot",
+        "destination": "table_right",
+        "affordance_region": "an empty area on the table right",
+        "done_when": "surface_contact(green_pot, table_right) AND released(green_pot)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "microwave_door",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 5,
+        "action": "reach",
+        "target": "microwave_door",
+        "affordance_region": "the handle of the microwave door",
+        "done_when": "distance(gripper, microwave_door) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_contact",
+              "args": [
+                "microwave_door"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "motion_dir",
+              "args": [
+                "0",
+                "1",
+                "0"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 6,
+        "action": "pull",
+        "target": "microwave_door",
+        "affordance_region": "the handle of the microwave door",
+        "done_when": "microwave_door(open)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "surface_contact",
+              "args": [
+                "green_pot",
+                "microwave"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "green_pot"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "green_pot"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 7,
+        "action": "place",
+        "target": "green_pot",
+        "destination": "microwave",
+        "affordance_region": "an empty area inside the microwave",
+        "done_when": "surface_contact(green_pot, microwave) AND released(green_pot)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_contact",
+              "args": [
+                "microwave_door"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "motion_dir",
+              "args": [
+                "0",
+                "-1",
+                "0"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 8,
+        "action": "push",
+        "target": "microwave_door",
+        "affordance_region": "the handle of the microwave door",
+        "done_when": "microwave_door(closed)"
+      }
+    ]
+  }
+}

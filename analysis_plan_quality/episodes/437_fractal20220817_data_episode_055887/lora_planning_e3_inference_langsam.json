@@ -1,0 +1,226 @@
+{
+  "task": "place coke can into white bowl",
+  "scene_objects": [
+    "coke_can",
+    "white_bowl",
+    "table"
+  ],
+  "steps": [
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "coke_can",
+              "<",
+              "0.03"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "approach_axis",
+            "args": [
+              "0",
+              "0",
+              "-1"
+            ],
+            "role": "progress"
+          }
+        ]
+      },
+      "step": 1,
+      "action": "reach",
+      "target": "coke_can",
+      "affordance_region": "the body of the red coke can",
+      "done_when": "distance(gripper, coke_can) < 0.03",
+      "affordance_hint": "the body of the red coke can",
+      "refine_prompt": "the body of the red coke can",
+      "refine_cache_hit": false,
+      "affordance_refined": [
+        0.6367,
+        0.2891
+      ],
+      "affordance_3d_refined": [
+        0.7305,
+        -1.127,
+        4.6478
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.5268
+    },
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "coke_can"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              "0",
+              "0",
+              "-1"
+            ],
+            "role": "progress"
+          }
+        ]
+      },
+      "step": 2,
+      "action": "grasp",
+      "target": "coke_can",
+      "affordance_region": "the body of the red coke can",
+      "done_when": "holding(coke_can)",
+      "affordance_hint": "the body of the red coke can",
+      "refine_prompt": "the body of the red coke can",
+      "refine_cache_hit": true,
+      "affordance_refined": [
+        0.6367,
+        0.2891
+      ],
+      "affordance_3d_refined": [
+        0.7305,
+        -1.127,
+        4.6478
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.5268
+    },
+    {
+      "constraints": {
+        "spatial": [
+          {
+            "pred": "above",
+            "args": [
+              "coke_can",
+              "white_bowl",
+              "0.05"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_drop",
+            "args": [
+              "coke_can"
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "step": 3,
+      "action": "transport",
+      "target": "coke_can",
+      "destination": "white_bowl",
+      "affordance_region": "an empty area on the white bowl",
+      "done_when": "above(coke_can, white_bowl, 0.05)",
+      "affordance_hint": "an empty area on the white bowl",
+      "refine_prompt": "an empty area on the white bowl",
+      "refine_cache_hit": false,
+      "affordance_refined": [
+        0.5625,
+        0.1172
+      ],
+      "affordance_3d_refined": [
+        0.1891,
+        -1.1583,
+        2.6322
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.3831
+    },
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "surface_contact",
+            "args": [
+              "coke_can",
+              "white_bowl"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "released",
+            "args": [
+              "coke_can"
+            ],
+            "role": "completion"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "stable",
+            "args": [
+              "coke_can"
+            ],
+            "role": "completion"
+          }
+        ]
+      },
+      "step": 4,
+      "action": "place",
+      "target": "coke_can",
+      "destination": "white_bowl",
+      "affordance_region": "an empty area on the white bowl",
+      "done_when": "surface_contact(coke_can, white_bowl) AND released(coke_can)",
+      "affordance_hint": "an empty area on the white bowl",
+      "refine_prompt": "an empty area on the white bowl",
+      "refine_cache_hit": true,
+      "affordance_refined": [
+        0.5625,
+        0.1172
+      ],
+      "affordance_3d_refined": [
+        0.1891,
+        -1.1583,
+        2.6322
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.3831
+    }
+  ]
+}

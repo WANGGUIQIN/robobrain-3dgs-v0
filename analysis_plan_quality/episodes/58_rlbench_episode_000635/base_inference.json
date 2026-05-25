@@ -1,0 +1,158 @@
+{
+  "task": "put the triangular prism in the shape sorter",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_3epoch/best",
+  "raw": "SCENE ANALYSIS - A shape sorter with a brown base and a square top is on a tan surface. Scattered around it are several small, colorful geometric blocks: a pink cube, a green triangular prism, a cyan cube, a yellow cube, and a purple cylinder. The green triangular prism is the target object. STRATEGY - First, reach for and grasp the green triangular prism. Then, transport it to the shape sorter's square top. Finally, insert the prism into the appropriate slot on the sorter. Failure modes include misaligning the prism during insertion or dropping it. AFFORDANCE REASONING - Step 1 reach the green triangular prism at its body. Step 2 grasp the prism at its body for a secure hold. Step 3 transport the prism to the shape sorter's top. Step 4 insert the prism into the square slot on the sorter's top.\nGoal: inside(green_triangular_prism, shape_sorter)\nScene: shape_sorter, green_triangular_prism, pink_cube, green_triangular_prism, cyan_cube, yellow_cube, purple_cylinder\nStep 1: reach(green_triangular_prism)\n  affordance_region: the body of the green triangular prism\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, green_triangular_prism, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, green_triangular_prism) < 0.03\nStep 2: grasp(green_triangular_prism)\n  affordance_region: the body of the green triangular prism\n  contact: holding(green_triangular_prism) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(green_triangular_prism)\nStep 3: transport(green_triangular_prism -> shape_sorter)\n  affordance_region: the top surface of the shape sorter\n  spatial: above(green_triangular_prism, shape_sorter, 0.05) [completion]\n  safety: no_drop(green_triangular_prism)\n  done_when: above(green_triangular_prism, shape_sorter, 0.05)\nStep 4: insert(green_triangular_prism -> shape_sorter)\n  affordance_region: the square slot on the top of the shape sorter\n  contact: inserted(green_triangular_prism, shape_sorter) [completion]\n  pose: aligned(green_triangular_prism, shape_sorter_slot) [completion]\n  done_when: inserted(green_triangular_prism, shape_sorter)\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [
+      {
+        "pred": "inside",
+        "args": [
+          "green_triangular_prism",
+          "shape_sorter"
+        ]
+      }
+    ],
+    "scene_objects": [
+      "shape_sorter",
+      "green_triangular_prism",
+      "pink_cube",
+      "green_triangular_prism",
+      "cyan_cube",
+      "yellow_cube",
+      "purple_cylinder"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "green_triangular_prism",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "green_triangular_prism",
+        "affordance_region": "the body of the green triangular prism",
+        "done_when": "distance(gripper, green_triangular_prism) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "green_triangular_prism"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "green_triangular_prism",
+        "affordance_region": "the body of the green triangular prism",
+        "done_when": "holding(green_triangular_prism)"
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "green_triangular_prism",
+                "shape_sorter",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "green_triangular_prism"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "green_triangular_prism",
+        "destination": "shape_sorter",
+        "affordance_region": "the top surface of the shape sorter",
+        "done_when": "above(green_triangular_prism, shape_sorter, 0.05)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "inserted",
+              "args": [
+                "green_triangular_prism",
+                "shape_sorter"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "aligned",
+              "args": [
+                "green_triangular_prism",
+                "shape_sorter_slot"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "insert",
+        "target": "green_triangular_prism",
+        "destination": "shape_sorter",
+        "affordance_region": "the square slot on the top of the shape sorter",
+        "done_when": "inserted(green_triangular_prism, shape_sorter)"
+      }
+    ]
+  }
+}

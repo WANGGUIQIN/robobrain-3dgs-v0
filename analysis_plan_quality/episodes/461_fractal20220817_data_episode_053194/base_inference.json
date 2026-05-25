@@ -1,0 +1,165 @@
+{
+  "task": "pick coke can",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_3epoch/best",
+  "raw": "**SCENE ANALYSIS - A gray table holds two cans: a red can on the left and a gold can on the right. The cans are cylindrical with flat tops and sides. STRATEGY - The task is to pick the gold can. First, reach for the gold can, grasp its body for stability, then lift and transport it to a destination (implied by the task, likely a surface or container not shown). Failure modes include misgrasping (e.g., grabbing the red can instead) or dropping during transport. AFFORDANCE REASONING - Step 1: Reach for the gold can’s body to establish contact. Step 2: Grasp the gold can’s body to secure it. Step 3: Transport the gold can to the destination. Step 4: Place the gold can at the destination.**\nGoal: held(gold_can); stable(gold_can)\nScene: gold_can, red_can, table\nStep 1: reach(gold_can)\n  affordance_region: the body of the gold can\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, gold_can, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, gold_can) < 0.03\nStep 2: grasp(gold_can)\n  affordance_region: the body of the gold can\n  contact: holding(gold_can) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(gold_can)\nStep 3: transport(gold_can -> destination)\n  affordance_region: an empty area at the destination\n  spatial: above(gold_can, destination, 0.05) [completion]\n  safety: no_drop(gold_can)\n  done_when: above(gold_can, destination, 0.05)\nStep 4: place(gold_can -> destination)\n  affordance_region: an empty area at the destination\n  contact: surface_contact(gold_can, destination) [completion]; released(gold_can) [completion]\n  pose: stable(gold_can) [completion]\n  done_when: surface_contact(gold_can, destination) AND released(gold_can)\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [
+      {
+        "pred": "held",
+        "args": [
+          "gold_can"
+        ]
+      },
+      {
+        "pred": "stable",
+        "args": [
+          "gold_can"
+        ]
+      }
+    ],
+    "scene_objects": [
+      "gold_can",
+      "red_can",
+      "table"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "gold_can",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "gold_can",
+        "affordance_region": "the body of the gold can",
+        "done_when": "distance(gripper, gold_can) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "gold_can"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "gold_can",
+        "affordance_region": "the body of the gold can",
+        "done_when": "holding(gold_can)"
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "gold_can",
+                "destination",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "gold_can"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "gold_can",
+        "destination": "destination",
+        "affordance_region": "an empty area at the destination",
+        "done_when": "above(gold_can, destination, 0.05)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "surface_contact",
+              "args": [
+                "gold_can",
+                "destination"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "gold_can"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "gold_can"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "place",
+        "target": "gold_can",
+        "destination": "destination",
+        "affordance_region": "an empty area at the destination",
+        "done_when": "surface_contact(gold_can, destination) AND released(gold_can)"
+      }
+    ]
+  }
+}

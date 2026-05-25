@@ -1,0 +1,165 @@
+{
+  "task": "Move the brown bowl forward slightly",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_3epoch/best",
+  "raw": "**SCENE ANALYSIS - A brown bowl sits on a dark surface. The bowl is a rigid container with a circular rim. STRATEGY - To move the bowl forward, first reach and grasp its rim for stability, then transport it horizontally to the new position. Failure modes include dropping the bowl or misaligning the grasp. AFFORDANCE REASONING - Step 1 reach the bowl at its rim; Step 2 grasp the rim for secure hold; Step 3 transport horizontally; Step 4 place gently.**\nGoal: on(brown_bowl, surface); stable(brown_bowl)\nScene: brown_bowl, surface\nStep 1: reach(brown_bowl)\n  affordance_region: the rim of the brown bowl\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, brown_bowl, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, brown_bowl) < 0.03\nStep 2: grasp(brown_bowl)\n  affordance_region: the rim of the brown bowl\n  contact: holding(brown_bowl) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(brown_bowl)\nStep 3: transport(brown_bowl -> surface)\n  affordance_region: an empty area on the surface in front of the bowl\n  spatial: above(brown_bowl, surface, 0.05) [completion]\n  safety: no_drop(brown_bowl)\n  done_when: above(brown_bowl, surface, 0.05)\nStep 4: place(brown_bowl -> surface)\n  affordance_region: an empty area on the surface in front of the bowl\n  contact: surface_contact(brown_bowl, surface) [completion]; released(brown_bowl) [completion]\n  pose: stable(brown_bowl) [completion]\n  done_when: surface_contact(brown_bowl, surface) AND released(brown_bowl)\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [
+      {
+        "pred": "on",
+        "args": [
+          "brown_bowl",
+          "surface"
+        ]
+      },
+      {
+        "pred": "stable",
+        "args": [
+          "brown_bowl"
+        ]
+      }
+    ],
+    "scene_objects": [
+      "brown_bowl",
+      "surface"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "brown_bowl",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "brown_bowl",
+        "affordance_region": "the rim of the brown bowl",
+        "done_when": "distance(gripper, brown_bowl) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "brown_bowl"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "brown_bowl",
+        "affordance_region": "the rim of the brown bowl",
+        "done_when": "holding(brown_bowl)"
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "brown_bowl",
+                "surface",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "brown_bowl"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "brown_bowl",
+        "destination": "surface",
+        "affordance_region": "an empty area on the surface in front of the bowl",
+        "done_when": "above(brown_bowl, surface, 0.05)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "surface_contact",
+              "args": [
+                "brown_bowl",
+                "surface"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "brown_bowl"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "brown_bowl"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "place",
+        "target": "brown_bowl",
+        "destination": "surface",
+        "affordance_region": "an empty area on the surface in front of the bowl",
+        "done_when": "surface_contact(brown_bowl, surface) AND released(brown_bowl)"
+      }
+    ]
+  }
+}

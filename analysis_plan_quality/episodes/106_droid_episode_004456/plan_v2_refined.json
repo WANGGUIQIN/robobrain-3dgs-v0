@@ -1,0 +1,250 @@
+{
+  "task": "Place the silver spoon in the glass container and put the silver lid on the container.",
+  "scene_objects": [
+    "silver_spoon",
+    "glass_container",
+    "silver_lid",
+    "countertop"
+  ],
+  "num_steps": 4,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "silver_spoon",
+      "affordance": [
+        0.694,
+        0.45
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "silver_spoon",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "glass_container"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, silver_spoon) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        0.0907,
+        -0.0252,
+        1.008
+      ],
+      "affordance_hint": "the silver spoon in the glass container",
+      "affordance_hint_original": "the silver spoon",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 2,
+      "action": "grasp",
+      "target": "silver_spoon",
+      "affordance": [
+        0.85,
+        0.187
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "silver_spoon"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "holding",
+            "args": [
+              "silver_spoon"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              0,
+              0,
+              -1
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "holding(silver_spoon)",
+      "affordance_3d": [
+        0.0426,
+        -0.0529,
+        0.147
+      ],
+      "affordance_hint": "the handle of the silver spoon",
+      "affordance_hint_original": "the handle of the silver spoon",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 3,
+      "action": "place",
+      "target": "silver_spoon",
+      "destination": "glass_container",
+      "affordance": [
+        0.558,
+        0.553
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "released",
+            "args": [
+              "silver_spoon"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "surface_contact",
+            "args": [
+              "silver_spoon",
+              "glass_container"
+            ],
+            "role": "completion"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "inside",
+            "args": [
+              "silver_spoon",
+              "glass_container"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "silver_spoon",
+              "glass_container"
+            ]
+          }
+        ]
+      },
+      "done_when": "released(silver_spoon) AND inside(silver_spoon, glass_container)",
+      "affordance_3d": [
+        -0.1256,
+        0.1625,
+        1.4776
+      ],
+      "affordance_hint": "the empty area inside the glass container",
+      "affordance_hint_original": "an empty area on the glass container",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 4,
+      "action": "place",
+      "target": "silver_lid",
+      "destination": "glass_container",
+      "affordance": [
+        0.558,
+        0.553
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "released",
+            "args": [
+              "silver_lid"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "surface_contact",
+            "args": [
+              "silver_lid",
+              "glass_container"
+            ],
+            "role": "completion"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "aligned_xy",
+            "args": [
+              "silver_lid",
+              "glass_container"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "stable",
+            "args": [
+              "silver_lid"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "silver_lid",
+              "glass_container"
+            ]
+          }
+        ]
+      },
+      "done_when": "released(silver_lid) AND surface_contact(silver_lid, glass_container) AND stable(silver_lid)",
+      "affordance_3d": [
+        -0.1256,
+        0.1625,
+        1.4776
+      ],
+      "affordance_hint": "the top opening of the glass container",
+      "affordance_hint_original": "an empty area on the glass container",
+      "affordance_hint_confidence": "ok"
+    }
+  ]
+}

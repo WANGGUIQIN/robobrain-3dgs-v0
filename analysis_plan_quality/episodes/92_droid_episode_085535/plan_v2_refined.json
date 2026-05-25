@@ -1,0 +1,179 @@
+{
+  "task": "Move a letter piece on the table",
+  "scene_objects": [
+    "letter_piece",
+    "table",
+    "yellow_container"
+  ],
+  "num_steps": 3,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "letter_piece",
+      "affordance": [
+        0.767,
+        0.736
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "letter_piece",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "table"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, letter_piece) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        0.6147,
+        1.1611,
+        3.4149
+      ],
+      "affordance_hint": "the letter piece on the table",
+      "affordance_hint_original": "the letter piece",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 2,
+      "action": "grasp",
+      "target": "letter_piece",
+      "affordance": [
+        0.785,
+        0.642
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "letter_piece"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "holding",
+            "args": [
+              "letter_piece"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              0,
+              0,
+              -1
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "holding(letter_piece)",
+      "affordance_3d": [
+        0.7041,
+        0.7556,
+        3.4345
+      ],
+      "affordance_hint": "the letter piece on the table",
+      "affordance_hint_original": "the handle of the letter piece",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 3,
+      "action": "transport",
+      "target": "letter_piece",
+      "destination": "new_location",
+      "affordance": [
+        0.584,
+        0.633
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "letter_piece"
+            ],
+            "role": "safety"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "above",
+            "args": [
+              "letter_piece",
+              "table",
+              0.05
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "letter_piece",
+              "table"
+            ]
+          },
+          {
+            "pred": "no_drop",
+            "args": [
+              "letter_piece"
+            ]
+          }
+        ]
+      },
+      "done_when": "above(letter_piece, table, 0.05) AND aligned_xy(letter_piece, new_location, 0.03)",
+      "affordance_3d": [
+        -0.1052,
+        0.4418,
+        2.1038
+      ],
+      "affordance_hint": "an empty area on the new location",
+      "affordance_hint_original": "an empty area on the new location",
+      "affordance_hint_confidence": "rejected:missing_token:new location"
+    }
+  ]
+}

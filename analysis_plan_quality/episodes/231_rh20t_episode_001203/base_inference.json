@@ -1,0 +1,112 @@
+{
+  "task": "Wave the flag",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_3epoch/best",
+  "raw": "**SCENE ANALYSIS - A red flag is attached to a pole on a green patterned surface. The flag is flexible and attached to the pole at its top. STRATEGY - grasp the flag body to initiate movement, then release to allow it to wave. Failure modes include grasping the pole instead of the flag, which would prevent waving. AFFORDANCE REASONING - Step 1 reach the flag body; Step 2 grasp the flag body for control; Step 3 release the flag to let it wave.**\nGoal: any_in(flag, waving)\nScene: red_flag, pole, green_surface\nStep 1: reach(red_flag)\n  affordance_region: the body of the red flag\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, red_flag, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, red_flag) < 0.03\nStep 2: grasp(red_flag)\n  affordance_region: the body of the red flag\n  contact: holding(red_flag) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(red_flag)\nStep 3: release(red_flag)\n  affordance_region: the body of the red flag\n  contact: released(red_flag) [completion]\n  done_when: released(red_flag)\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [
+      {
+        "pred": "any_in",
+        "args": [
+          "flag",
+          "waving"
+        ]
+      }
+    ],
+    "scene_objects": [
+      "red_flag",
+      "pole",
+      "green_surface"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "red_flag",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "red_flag",
+        "affordance_region": "the body of the red flag",
+        "done_when": "distance(gripper, red_flag) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "red_flag"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "red_flag",
+        "affordance_region": "the body of the red flag",
+        "done_when": "holding(red_flag)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "released",
+              "args": [
+                "red_flag"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "release",
+        "target": "red_flag",
+        "affordance_region": "the body of the red flag",
+        "done_when": "released(red_flag)"
+      }
+    ]
+  }
+}

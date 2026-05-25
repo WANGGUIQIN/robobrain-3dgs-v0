@@ -1,0 +1,247 @@
+{
+  "task": "Move the blue cloth to the back left corner of the stove.",
+  "parsed": {
+    "scene_objects": [
+      "blue_cloth",
+      "stove",
+      "pan",
+      "yellow_object",
+      "blue_scoop",
+      "sink"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "blue_cloth",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "blue_cloth",
+        "affordance_region": "the blue cloth",
+        "done_when": "distance(gripper, blue_cloth) < 0.03",
+        "affordance_hint": "the blue cloth",
+        "refine_prompt": "the blue cloth",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.2656,
+          0.5859
+        ],
+        "affordance_3d_refined": [
+          -0.7355,
+          0.2697,
+          2.73
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.7026,
+        "affordance": [
+          0.2656,
+          0.5859
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "blue_cloth"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "blue_cloth",
+        "affordance_region": "the blue cloth",
+        "done_when": "holding(blue_cloth)",
+        "affordance_hint": "the blue cloth",
+        "refine_prompt": "the blue cloth",
+        "refine_cache_hit": true,
+        "affordance_refined": [
+          0.2656,
+          0.5859
+        ],
+        "affordance_3d_refined": [
+          -0.7355,
+          0.2697,
+          2.73
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.7026,
+        "affordance": [
+          0.2656,
+          0.5859
+        ]
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "blue_cloth",
+                "back_left_corner_stove",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "blue_cloth"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "blue_cloth",
+        "destination": "back_left_corner_stove",
+        "affordance_region": "the back left corner of the stove",
+        "done_when": "above(blue_cloth, back_left_corner_stove, 0.05)",
+        "affordance_hint": "the back left corner of the stove",
+        "refine_prompt": "the back left corner of the stove",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.1953,
+          0.4609
+        ],
+        "affordance_3d_refined": [
+          -0.6957,
+          -0.0892,
+          1.9864
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.3578,
+        "affordance": [
+          0.1953,
+          0.4609
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "surface_contact",
+              "args": [
+                "blue_cloth",
+                "back_left_corner_stove"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "blue_cloth"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "blue_cloth"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "place",
+        "target": "blue_cloth",
+        "destination": "back_left_corner_stove",
+        "affordance_region": "the back left corner of the stove",
+        "done_when": "surface_contact(blue_cloth, back_left_corner_stove) AND released(blue_cloth) AND stable(blue_cloth)",
+        "affordance_hint": "the back left corner of the stove",
+        "refine_prompt": "the back left corner of the stove",
+        "refine_cache_hit": true,
+        "affordance_refined": [
+          0.1953,
+          0.4609
+        ],
+        "affordance_3d_refined": [
+          -0.6957,
+          -0.0892,
+          1.9864
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.3578,
+        "affordance": [
+          0.1953,
+          0.4609
+        ]
+      }
+    ]
+  }
+}

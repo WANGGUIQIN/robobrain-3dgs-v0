@@ -1,0 +1,170 @@
+{
+  "task": "pick orange from white bowl",
+  "scene_objects": [
+    "orange",
+    "white_bowl",
+    "table"
+  ],
+  "steps": [
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "orange",
+              "<",
+              "0.03"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "approach_axis",
+            "args": [
+              "0",
+              "0",
+              "-1"
+            ],
+            "role": "progress"
+          }
+        ]
+      },
+      "step": 1,
+      "action": "reach",
+      "target": "orange",
+      "affordance_region": "the orange in the white bowl",
+      "done_when": "distance(gripper, orange) < 0.03",
+      "affordance_hint": "the orange in the white bowl",
+      "refine_prompt": "the orange in the white bowl",
+      "refine_cache_hit": false,
+      "affordance_refined": [
+        0.6406,
+        0.2695
+      ],
+      "affordance_3d_refined": [
+        0.397,
+        -0.6507,
+        2.4561
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.5706
+    },
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "orange"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              "0",
+              "0",
+              "-1"
+            ],
+            "role": "progress"
+          }
+        ]
+      },
+      "step": 2,
+      "action": "grasp",
+      "target": "orange",
+      "affordance_region": "the body of an orange in the white bowl",
+      "done_when": "holding(orange)",
+      "affordance_hint": "the body of an orange in the white bowl",
+      "refine_prompt": "the body of an orange in the white bowl",
+      "refine_cache_hit": false,
+      "affordance_refined": [
+        0.6406,
+        0.2695
+      ],
+      "affordance_3d_refined": [
+        0.397,
+        -0.6507,
+        2.4561
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.4676
+    },
+    {
+      "constraints": {
+        "spatial": [
+          {
+            "pred": "above",
+            "args": [
+              "orange",
+              "table",
+              "0.05"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_drop",
+            "args": [
+              "orange"
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "step": 3,
+      "action": "transport",
+      "target": "orange",
+      "destination": "table",
+      "affordance_region": "an empty area on the table",
+      "done_when": "above(orange, table, 0.05)",
+      "affordance_hint": "an empty area on the table",
+      "refine_prompt": "an empty area on the table",
+      "refine_cache_hit": false,
+      "affordance_refined": [
+        0.2539,
+        0.6367
+      ],
+      "affordance_3d_refined": [
+        -0.7446,
+        0.4137,
+        2.6322
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.503
+    }
+  ]
+}

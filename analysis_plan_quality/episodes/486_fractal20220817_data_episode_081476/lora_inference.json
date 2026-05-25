@@ -1,0 +1,245 @@
+{
+  "task": "move rxbar chocolate near sponge",
+  "parsed": {
+    "scene_objects": [
+      "sponge",
+      "table",
+      "can",
+      "remote"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "sponge",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "sponge",
+        "affordance_region": "the green sponge",
+        "done_when": "distance(gripper, sponge) < 0.03",
+        "affordance_hint": "the green sponge",
+        "refine_prompt": "the green sponge",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.3633,
+          0.332
+        ],
+        "affordance_3d_refined": [
+          -0.4106,
+          -0.5045,
+          2.6126
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.3646,
+        "affordance": [
+          0.3633,
+          0.332
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "sponge"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "sponge",
+        "affordance_region": "the green sponge",
+        "done_when": "holding(sponge)",
+        "affordance_hint": "the green sponge",
+        "refine_prompt": "the green sponge",
+        "refine_cache_hit": true,
+        "affordance_refined": [
+          0.3633,
+          0.332
+        ],
+        "affordance_3d_refined": [
+          -0.4106,
+          -0.5045,
+          2.6126
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.3646,
+        "affordance": [
+          0.3633,
+          0.332
+        ]
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "sponge",
+                "table",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "sponge"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "sponge",
+        "destination": "near_can",
+        "affordance_region": "an empty area on the table near the can",
+        "done_when": "above(sponge, table, 0.05)",
+        "affordance_hint": "an empty area on the table near the can",
+        "refine_prompt": "an empty area on the table near the can",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.1445,
+          0.2734
+        ],
+        "affordance_3d_refined": [
+          -0.7477,
+          -0.4766,
+          1.8299
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.3107,
+        "affordance": [
+          0.1445,
+          0.2734
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "surface_contact",
+              "args": [
+                "sponge",
+                "table"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "sponge"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "sponge"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "place",
+        "target": "sponge",
+        "destination": "near_can",
+        "affordance_region": "an empty area on the table near the can",
+        "done_when": "surface_contact(sponge, table) AND released(sponge)",
+        "affordance_hint": "an empty area on the table near the can",
+        "refine_prompt": "an empty area on the table near the can",
+        "refine_cache_hit": true,
+        "affordance_refined": [
+          0.1445,
+          0.2734
+        ],
+        "affordance_3d_refined": [
+          -0.7477,
+          -0.4766,
+          1.8299
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.3107,
+        "affordance": [
+          0.1445,
+          0.2734
+        ]
+      }
+    ]
+  }
+}

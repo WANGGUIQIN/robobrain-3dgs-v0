@@ -1,0 +1,245 @@
+{
+  "task": "Put the cucumber in the pot.",
+  "parsed": {
+    "scene_objects": [
+      "cucumber",
+      "pot",
+      "spatula",
+      "table"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "cucumber",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "cucumber",
+        "affordance_region": "the green cucumber",
+        "done_when": "distance(gripper, cucumber) < 0.03",
+        "affordance_hint": "the green cucumber",
+        "refine_prompt": "the green cucumber",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.6602,
+          0.4453
+        ],
+        "affordance_3d_refined": [
+          0.5278,
+          -0.1802,
+          2.867
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.3343,
+        "affordance": [
+          0.6602,
+          0.4453
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "cucumber"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "cucumber",
+        "affordance_region": "the body of the green cucumber",
+        "done_when": "holding(cucumber)",
+        "affordance_hint": "the body of the green cucumber",
+        "refine_prompt": "the body of the green cucumber",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.7734,
+          0.4727
+        ],
+        "affordance_3d_refined": [
+          0.9504,
+          -0.095,
+          3.0236
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.5659,
+        "affordance": [
+          0.7734,
+          0.4727
+        ]
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "cucumber",
+                "pot",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "cucumber"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "cucumber",
+        "destination": "pot",
+        "affordance_region": "the empty area inside the pot",
+        "done_when": "above(cucumber, pot, 0.05)",
+        "affordance_hint": "the empty area inside the pot",
+        "refine_prompt": "the empty area inside the pot",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.2148,
+          0.4102
+        ],
+        "affordance_3d_refined": [
+          -0.8243,
+          -0.2597,
+          2.5148
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.4264,
+        "affordance": [
+          0.2148,
+          0.4102
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "surface_contact",
+              "args": [
+                "cucumber",
+                "pot"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "cucumber"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "cucumber"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "place",
+        "target": "cucumber",
+        "destination": "pot",
+        "affordance_region": "the empty area inside the pot",
+        "done_when": "surface_contact(cucumber, pot) AND released(cucumber)",
+        "affordance_hint": "the empty area inside the pot",
+        "refine_prompt": "the empty area inside the pot",
+        "refine_cache_hit": true,
+        "affordance_refined": [
+          0.2148,
+          0.4102
+        ],
+        "affordance_3d_refined": [
+          -0.8243,
+          -0.2597,
+          2.5148
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.4264,
+        "affordance": [
+          0.2148,
+          0.4102
+        ]
+      }
+    ]
+  }
+}

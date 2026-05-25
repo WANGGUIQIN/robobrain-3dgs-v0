@@ -1,0 +1,244 @@
+{
+  "task": "Pick up one object and put it on the table",
+  "parsed": {
+    "scene_objects": [
+      "object_1",
+      "object_2",
+      "table"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "object_1",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "object_1",
+        "affordance_region": "the body of object_1",
+        "done_when": "distance(gripper, object_1) < 0.03",
+        "affordance_hint": "the body of object_1",
+        "refine_prompt": "the body of object_1",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.9961,
+          0.2969
+        ],
+        "affordance_3d_refined": [
+          1.4269,
+          -0.6609,
+          3.004
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.3566,
+        "affordance": [
+          0.9961,
+          0.2969
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "object_1"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "object_1",
+        "affordance_region": "the handle of object_1",
+        "done_when": "holding(object_1)",
+        "affordance_hint": "the handle of object_1",
+        "refine_prompt": "the handle of object_1",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.3867,
+          0.6875
+        ],
+        "affordance_3d_refined": [
+          -0.9461,
+          0.8685,
+          3.1018
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.3957,
+        "affordance": [
+          0.3867,
+          0.6875
+        ]
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "object_1",
+                "table",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "object_1"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "object_1",
+        "destination": "table",
+        "affordance_region": "an empty area on the table",
+        "done_when": "above(object_1, table, 0.05)",
+        "affordance_hint": "an empty area on the table",
+        "refine_prompt": "an empty area on the table",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.5781,
+          0.9961
+        ],
+        "affordance_3d_refined": [
+          -0.2037,
+          2.2919,
+          3.3954
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.5339,
+        "affordance": [
+          0.5781,
+          0.9961
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "surface_contact",
+              "args": [
+                "object_1",
+                "table"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "object_1"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "object_1"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "place",
+        "target": "object_1",
+        "destination": "table",
+        "affordance_region": "an empty area on the table",
+        "done_when": "surface_contact(object_1, table) AND released(object_1) AND stable(object_1)",
+        "affordance_hint": "an empty area on the table",
+        "refine_prompt": "an empty area on the table",
+        "refine_cache_hit": true,
+        "affordance_refined": [
+          0.5781,
+          0.9961
+        ],
+        "affordance_3d_refined": [
+          -0.2037,
+          2.2919,
+          3.3954
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.5339,
+        "affordance": [
+          0.5781,
+          0.9961
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,240 @@
+{
+  "task": "place sponge into middle drawer",
+  "scene_objects": [
+    "sponge",
+    "middle_drawer",
+    "table",
+    "chair"
+  ],
+  "num_steps": 4,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "sponge",
+      "affordance": [
+        0.462,
+        0.175
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "sponge",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "table"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, sponge) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        -0.1287,
+        -1.0685,
+        2.867
+      ],
+      "affordance_hint": "the yellow sponge on the table",
+      "affordance_hint_original": "the sponge",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 2,
+      "action": "grasp",
+      "target": "sponge",
+      "affordance": [
+        0.462,
+        0.175
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "sponge"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "holding",
+            "args": [
+              "sponge"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              0,
+              0,
+              -1
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "holding(sponge)",
+      "affordance_3d": [
+        -0.1287,
+        -1.0685,
+        2.867
+      ],
+      "affordance_hint": "the yellow sponge on the table",
+      "affordance_hint_original": "sponge",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 3,
+      "action": "transport",
+      "target": "sponge",
+      "destination": "middle_drawer",
+      "affordance": [
+        0.5,
+        0.699
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "sponge"
+            ],
+            "role": "safety"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "above",
+            "args": [
+              "sponge",
+              "middle_drawer",
+              0.05
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "sponge",
+              "middle_drawer"
+            ]
+          },
+          {
+            "pred": "no_drop",
+            "args": [
+              "sponge"
+            ]
+          }
+        ]
+      },
+      "done_when": "above(sponge, middle_drawer, 0.05) AND aligned_xy(sponge, middle_drawer, 0.03)",
+      "affordance_3d": [
+        0.0,
+        0.4325,
+        1.8886
+      ],
+      "affordance_hint": "the empty area in the middle drawer",
+      "affordance_hint_original": "an empty area on the middle drawer",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 4,
+      "action": "place",
+      "target": "sponge",
+      "destination": "middle_drawer",
+      "affordance": [
+        0.5,
+        0.699
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "surface_contact",
+            "args": [
+              "sponge",
+              "middle_drawer"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "released",
+            "args": [
+              "sponge"
+            ],
+            "role": "completion"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "stable",
+            "args": [
+              "sponge"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "support_stable",
+            "args": [
+              "sponge"
+            ]
+          }
+        ]
+      },
+      "done_when": "surface_contact(sponge, middle_drawer) AND released(sponge) AND stable(sponge)",
+      "affordance_3d": [
+        0.0,
+        0.4325,
+        1.8886
+      ],
+      "affordance_hint": "the empty area in the middle drawer",
+      "affordance_hint_original": "an empty area on the middle drawer",
+      "affordance_hint_confidence": "ok"
+    }
+  ]
+}

@@ -1,0 +1,171 @@
+{
+  "task": "Rotate the silver stand on the right.",
+  "scene_objects": [
+    "silver_stand",
+    "table",
+    "other_objects"
+  ],
+  "num_steps": 3,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "silver_stand",
+      "affordance": [
+        0.156,
+        0.809
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "silver_stand",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "other_objects"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, silver_stand) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        -1.8611,
+        1.3493,
+        3.1018
+      ],
+      "affordance_hint": "the silver stand",
+      "affordance_hint_original": "the silver stand",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 2,
+      "action": "grasp",
+      "target": "silver_stand",
+      "affordance": [
+        0.96,
+        0.7
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "silver_stand"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "holding",
+            "args": [
+              "silver_stand"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              0,
+              0,
+              -1
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "holding(silver_stand)",
+      "affordance_3d": [
+        1.1655,
+        0.7996,
+        2.7105
+      ],
+      "affordance_hint": "the body of the silver stand",
+      "affordance_hint_original": "the handle of the silver stand",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 3,
+      "action": "rotate",
+      "target": "silver_stand",
+      "affordance": [
+        0.156,
+        0.794
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "silver_stand"
+            ],
+            "role": "safety"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "orientation_match",
+            "args": [
+              "silver_stand",
+              "desired_orientation"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "silver_stand",
+              "other_objects"
+            ]
+          }
+        ]
+      },
+      "done_when": "orientation_match(silver_stand, desired_orientation)",
+      "affordance_3d": [
+        -1.8141,
+        1.2548,
+        3.0236
+      ],
+      "affordance_hint": "the body of the silver stand",
+      "affordance_hint_original": "the body of the silver stand",
+      "affordance_hint_confidence": "ok"
+    }
+  ]
+}

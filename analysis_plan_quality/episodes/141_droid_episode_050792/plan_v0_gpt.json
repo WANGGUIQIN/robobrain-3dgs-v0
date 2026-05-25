@@ -1,0 +1,225 @@
+{
+  "task": "Use the wooden spoon to mix inside the pot",
+  "scene_objects": [
+    "wooden_spoon",
+    "pot",
+    "stove",
+    "robot"
+  ],
+  "num_steps": 4,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "wooden_spoon",
+      "affordance": [
+        0.553,
+        0.85
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "wooden_spoon",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "pot"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, wooden_spoon) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        -0.2334,
+        1.2706,
+        2.5931
+      ],
+      "affordance_hint": "the wooden spoon"
+    },
+    {
+      "step": 2,
+      "action": "grasp",
+      "target": "wooden_spoon",
+      "affordance": [
+        0.55,
+        0.75
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "wooden_spoon"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "holding",
+            "args": [
+              "wooden_spoon"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              0,
+              0,
+              -1
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "holding(wooden_spoon)",
+      "affordance_3d": [
+        -0.2073,
+        0.7856,
+        2.1821
+      ],
+      "affordance_hint": "the handle of the wooden spoon"
+    },
+    {
+      "step": 3,
+      "action": "transport",
+      "target": "wooden_spoon",
+      "destination": "pot",
+      "affordance": [
+        0.584,
+        0.808
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "wooden_spoon"
+            ],
+            "role": "safety"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "above",
+            "args": [
+              "wooden_spoon",
+              "pot",
+              0.05
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "wooden_spoon",
+              "pot"
+            ]
+          },
+          {
+            "pred": "no_drop",
+            "args": [
+              "wooden_spoon"
+            ]
+          }
+        ]
+      },
+      "done_when": "above(wooden_spoon, pot, 0.05) AND aligned_xy(wooden_spoon, pot, 0.03)",
+      "affordance_3d": [
+        -0.1111,
+        0.9662,
+        2.2213
+      ],
+      "affordance_hint": "an empty area on the pot"
+    },
+    {
+      "step": 4,
+      "action": "mix",
+      "target": "wooden_spoon",
+      "destination": "pot",
+      "affordance": [
+        0.48,
+        0.862
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "surface_contact",
+            "args": [
+              "wooden_spoon",
+              "pot"
+            ],
+            "role": "completion"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "tilted",
+            "args": [
+              "wooden_spoon"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_spill",
+            "args": [
+              "pot"
+            ]
+          }
+        ]
+      },
+      "done_when": "surface_contact(wooden_spoon, pot) AND tilted(wooden_spoon)",
+      "affordance_3d": [
+        -0.487,
+        1.3293,
+        2.6322
+      ],
+      "affordance_hint": "wooden spoon"
+    }
+  ]
+}

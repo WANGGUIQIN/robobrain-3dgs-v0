@@ -1,0 +1,109 @@
+{
+  "task": "put the money away in the safe on the middle shelf",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_3epoch/best",
+  "raw": "SCENE ANALYSIS - A robotic arm is positioned above a large, gray safe with a visible door. The safe has a recessed handle on its front face. The task is to place money (implied to be in the robot's gripper) into the safe's interior. STRATEGY - The robot must first grasp the safe's handle to open the door, then transport the money into the safe's interior, and finally release the money inside. Failure modes include failing to grasp the handle, dropping the money during transport, or failing to release the money inside. AFFORDANCE REASONING - Step 1: Grasp the safe's handle to open the door. Step 2: Transport the money into the safe's interior. Step 3: Release the money inside the safe.\nGoal: inside(money, safe)\nScene: safe, money, robot_arm\nStep 1: grasp(safe)\n  affordance_region: the recessed handle of the gray safe\n  contact: holding(safe) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(safe)\nStep 2: transport(money -> safe)\n  affordance_region: an empty area inside the gray safe\n  spatial: inside(money, safe) [completion]\n  safety: no_drop(money)\n  done_when: inside(money, safe)\nStep 3: release(money)\n  affordance_region: an empty area inside the gray safe\n  contact: released(money) [completion]\n  pose: stable(money) [completion]\n  done_when: released(money) AND stable(money)\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [
+      {
+        "pred": "inside",
+        "args": [
+          "money",
+          "safe"
+        ]
+      }
+    ],
+    "scene_objects": [
+      "safe",
+      "money",
+      "robot_arm"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "safe"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "grasp",
+        "target": "safe",
+        "affordance_region": "the recessed handle of the gray safe",
+        "done_when": "holding(safe)"
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "inside",
+              "args": [
+                "money",
+                "safe"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "money"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "transport",
+        "target": "money",
+        "destination": "safe",
+        "affordance_region": "an empty area inside the gray safe",
+        "done_when": "inside(money, safe)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "released",
+              "args": [
+                "money"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "money"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "release",
+        "target": "money",
+        "affordance_region": "an empty area inside the gray safe",
+        "done_when": "released(money) AND stable(money)"
+      }
+    ]
+  }
+}

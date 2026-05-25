@@ -1,0 +1,129 @@
+{
+  "task": "push the red button to turn off the red light",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_3epoch/best",
+  "raw": "The scene shows a robotic arm in a kitchen environment with a white cabinet, a cardboard box, and a white plastic container on the floor. The task is to push a red button to turn off a red light. Since the red light and button are not visible in the image, we assume they are on a control panel or appliance within the scene. The strategy involves reaching the control panel, identifying the red button, and pushing it. Failure modes include misidentifying the button or failing to apply sufficient force. The affordance reasoning focuses on the control panel's surface for interaction.\n\nGoal: red_light_off; stable(gripper)\nScene: robotic_arm, white_cabinet, cardboard_box, white_plastic_container, control_panel\nStep 1: reach(control_panel)\n  affordance_region: the surface of the control_panel\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, control_panel, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, control_panel) < 0.03\nStep 2: grasp(control_panel)\n  affordance_region: the surface of the control_panel\n  contact: holding(control_panel) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(control_panel)\nStep 3: push(red_button -> control_panel)\n  affordance_region: the red_button on the control_panel\n  contact: button_contact(red_button) [completion]; released(red_button) [completion]\n  pose: stable(gripper)\n  done_when: button_contact(red_button) AND released(red_button)\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [
+      {
+        "pred": "stable",
+        "args": [
+          "gripper"
+        ]
+      }
+    ],
+    "scene_objects": [
+      "robotic_arm",
+      "white_cabinet",
+      "cardboard_box",
+      "white_plastic_container",
+      "control_panel"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "control_panel",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "control_panel",
+        "affordance_region": "the surface of the control_panel",
+        "done_when": "distance(gripper, control_panel) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "control_panel"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "control_panel",
+        "affordance_region": "the surface of the control_panel",
+        "done_when": "holding(control_panel)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "button_contact",
+              "args": [
+                "red_button"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "red_button"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "gripper"
+              ]
+            }
+          ]
+        },
+        "step": 3,
+        "action": "push",
+        "target": "red_button",
+        "destination": "control_panel",
+        "affordance_region": "the red_button on the control_panel",
+        "done_when": "button_contact(red_button) AND released(red_button)"
+      }
+    ]
+  }
+}

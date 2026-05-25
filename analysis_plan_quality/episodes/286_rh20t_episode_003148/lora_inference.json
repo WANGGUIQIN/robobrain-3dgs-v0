@@ -1,0 +1,182 @@
+{
+  "task": "Dial a number on an old rotary phone",
+  "parsed": {
+    "scene_objects": [
+      "rotary_phone",
+      "dial",
+      "table"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "dial",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "dial",
+        "affordance_region": "the dial of the rotary phone",
+        "done_when": "distance(gripper, dial) < 0.03",
+        "affordance_hint": "the dial of the rotary phone",
+        "refine_prompt": "the dial of the rotary phone",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.6602,
+          0.5
+        ],
+        "affordance_3d_refined": [
+          -0.9558,
+          -0.3292,
+          2.0256
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.412,
+        "affordance": [
+          0.6602,
+          0.5
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "dial"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "dial",
+        "affordance_region": "the dial of the rotary phone",
+        "done_when": "holding(dial)",
+        "affordance_hint": "the dial of the rotary phone",
+        "refine_prompt": "the dial of the rotary phone",
+        "refine_cache_hit": true,
+        "affordance_refined": [
+          0.6602,
+          0.5
+        ],
+        "affordance_3d_refined": [
+          -0.9558,
+          -0.3292,
+          2.0256
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.412,
+        "affordance": [
+          0.6602,
+          0.5
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "dial"
+              ],
+              "role": "safety"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "orientation_match",
+              "args": [
+                "dial",
+                "desired_number"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "rotate",
+        "target": "dial",
+        "affordance_region": "the dial of the rotary phone",
+        "done_when": "orientation_match(dial, desired_number)",
+        "affordance_hint": "the dial of the rotary phone",
+        "refine_prompt": "the dial of the rotary phone",
+        "refine_cache_hit": true,
+        "affordance_refined": [
+          0.6602,
+          0.5
+        ],
+        "affordance_3d_refined": [
+          -0.9558,
+          -0.3292,
+          2.0256
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.412,
+        "affordance": [
+          0.6602,
+          0.5
+        ]
+      }
+    ]
+  }
+}

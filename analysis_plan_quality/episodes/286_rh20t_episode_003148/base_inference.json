@@ -1,0 +1,151 @@
+{
+  "task": "Dial a number on an old rotary phone",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_3epoch/best",
+  "raw": "The user wants to dial a number on an old rotary phone. The scene shows a person holding a rotary phone, which is the target object. The task involves manipulating the phone's dial, which is a circular component with numbered holes. The plan must focus on interacting with the dial's specific affordances (the holes) to simulate dialing.\n\n**SCENE ANALYSIS -** A person is holding an old rotary phone. The phone has a circular dial with numbered holes (0-9) and a finger stop. The dial is the key component for dialing. The person's hand is gripping the phone, so the robot must first reach and grasp the dial. The task requires precise interaction with the dial's holes, which are small and require a specific grip (e.g., a finger or a tool). The goal is to simulate dialing a number, which involves rotating the dial to a specific number and then releasing it.\n\n**STRATEGY -** The plan must first reach and grasp the dial, then rotate it to the desired number, and finally release it. The rotation direction and angle depend on the number being dialed. Failure modes include misaligning the dial, failing to grasp it, or releasing it too early. The plan assumes the robot can interact with the dial's holes and rotate it accurately.\n\n**AFFORDANCE REASONING -** Step 1: Reach the phone to access the dial. Step 2: Grasp the dial's edge for rotation. Step 3: Rotate the dial to the target number. Step 4: Release the dial to complete the dialing action. Each step requires specific contact with the dial's affordances (holes and edge).\n\n**Goal:** dial_number(phone, number); stable(phone)\n**Scene:** phone, person\n**Step 1:** reach(phone)\n  affordance_region: the body of the phone\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, phone, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, phone) < 0.03\n**Step 2:** grasp(dial)\n  affordance_region: the edge of the rotary dial\n  contact: holding(dial) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(dial)\n**Step 3:** rotate(dial -> number)\n  affordance_region: the numbered holes of the dial\n  contact: aligned(dial, number) [completion]\n  spatial: angle(dial, number, =) [completion]\n  direction: rotate_axis(0, 0, -1) [progress]\n  done_when: aligned(dial, number)\n**Step 4:** release(dial)\n  affordance_region: the dial's finger stop\n  contact: released(dial) [completion]\n  pose: stable(phone) [completion]\n  done_when: released(dial) AND stable(phone)\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [],
+    "scene_objects": [],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "phone",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "phone",
+        "affordance_region": "the body of the phone",
+        "done_when": "distance(gripper, phone) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "dial"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "dial",
+        "affordance_region": "the edge of the rotary dial",
+        "done_when": "holding(dial)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "aligned",
+              "args": [
+                "dial",
+                "number"
+              ],
+              "role": "completion"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "angle",
+              "args": [
+                "dial",
+                "number",
+                "="
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "rotate_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "rotate",
+        "target": "dial",
+        "destination": "number",
+        "affordance_region": "the numbered holes of the dial",
+        "done_when": "aligned(dial, number)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "released",
+              "args": [
+                "dial"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "phone"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "release",
+        "target": "dial",
+        "affordance_region": "the dial's finger stop",
+        "done_when": "released(dial) AND stable(phone)"
+      }
+    ]
+  }
+}

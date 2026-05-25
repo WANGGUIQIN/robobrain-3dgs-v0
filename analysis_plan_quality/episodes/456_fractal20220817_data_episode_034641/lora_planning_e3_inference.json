@@ -1,0 +1,96 @@
+{
+  "task": "knock water bottle over",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_planning_3epoch/checkpoint-39957",
+  "raw": "Scene: water_bottle, orange, can, table\nStep 1: reach(water_bottle)\n  affordance_region: the body of the water bottle\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, water_bottle, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, water_bottle) < 0.03\nStep 2: push(water_bottle)\n  affordance_region: the body of the water bottle\n  contact: gripper_contact(water_bottle) [completion]\n  spatial: motion_dir(water_bottle, horizontal) [completion]\n  safety: no_collision(water_bottle, table)\n  done_when: water_bottle is tilted or knocked over\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [],
+    "scene_objects": [
+      "water_bottle",
+      "orange",
+      "can",
+      "table"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "water_bottle",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "water_bottle",
+        "affordance_region": "the body of the water bottle",
+        "done_when": "distance(gripper, water_bottle) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_contact",
+              "args": [
+                "water_bottle"
+              ],
+              "role": "completion"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "motion_dir",
+              "args": [
+                "water_bottle",
+                "horizontal"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_collision",
+              "args": [
+                "water_bottle",
+                "table"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "push",
+        "target": "water_bottle",
+        "affordance_region": "the body of the water bottle",
+        "done_when": "water_bottle is tilted or knocked over"
+      }
+    ]
+  }
+}

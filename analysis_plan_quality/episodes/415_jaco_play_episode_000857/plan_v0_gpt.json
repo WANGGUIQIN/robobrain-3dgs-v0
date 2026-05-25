@@ -1,0 +1,165 @@
+{
+  "task": "pick up the butter dairy",
+  "scene_objects": [
+    "butter_dairy",
+    "yellow_cup",
+    "orange_ball",
+    "red_object",
+    "blue_container",
+    "tray",
+    "table"
+  ],
+  "num_steps": 3,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "butter_dairy",
+      "affordance": [
+        0.678,
+        0.593
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "butter_dairy",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "table"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, butter_dairy) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        0.7094,
+        0.3701,
+        3.4345
+      ],
+      "affordance_hint": "the butter dairy"
+    },
+    {
+      "step": 2,
+      "action": "grasp",
+      "target": "butter_dairy",
+      "affordance": [
+        0.633,
+        0.486
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "butter_dairy"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "holding",
+            "args": [
+              "butter_dairy"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              0,
+              0,
+              -1
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "holding(butter_dairy)",
+      "affordance_3d": [
+        0.4497,
+        -0.0529,
+        2.9453
+      ],
+      "affordance_hint": "butter dairy"
+    },
+    {
+      "step": 3,
+      "action": "transport",
+      "target": "butter_dairy",
+      "affordance": [
+        0.669,
+        0.553
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "butter_dairy"
+            ],
+            "role": "safety"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "butter_dairy",
+              "table"
+            ]
+          },
+          {
+            "pred": "no_drop",
+            "args": [
+              "butter_dairy"
+            ]
+          }
+        ]
+      },
+      "done_when": "holding(butter_dairy)",
+      "affordance_3d": [
+        0.58,
+        0.1888,
+        3.004
+      ],
+      "affordance_hint": "an empty area on the butter dairy"
+    }
+  ]
+}

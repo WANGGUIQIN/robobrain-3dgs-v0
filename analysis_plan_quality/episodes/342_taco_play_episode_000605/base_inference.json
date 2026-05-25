@@ -1,0 +1,153 @@
+{
+  "task": "slide the door to the left, then let it go",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_3epoch/best",
+  "raw": "**SCENE ANALYSIS -** A white cabinet door is partially open, revealing a white drawer with a black handle. The door is hinged on the right side, allowing it to swing left or right. The drawer is in front of the door, and the cabinet is mounted on a wall. The floor is a light-colored tile. **STRATEGY -** To slide the door to the left, the robot must first reach the door, grasp the handle, and pull it in the left direction. The task requires a single pull action to move the door, followed by releasing it. Failure modes include not grasping the handle properly or pulling in the wrong direction. **AFFORDANCE REASONING -** Step 1: Reach the door to locate the handle. Step 2: Grasp the black handle for a secure grip. Step 3: Pull the door to the left, ensuring the direction is correct. Step 4: Release the door to complete the action.\n\nGoal: door_slideto_left; released_door\nScene: cabinet_door, drawer, handle\nStep 1: reach(cabinet_door)\n  affordance_region: the body of the cabinet door\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, cabinet_door, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, cabinet_door) < 0.03\nStep 2: grasp(handle)\n  affordance_region: the black handle of the cabinet door\n  contact: holding(handle) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(handle)\nStep 3: pull(cabinet_door -> left)\n  affordance_region: the body of the cabinet door\n  contact: holding(handle) [progress]\n  spatial: position(cabinet_door, left_of(drawer)) [completion]\n  direction: pull_axis(-1, 0, 0) [completion]\n  safety: no_collision(cabinet_door, wall) [progress]\n  done_when: position(cabinet_door, left_of(drawer))\nStep 4: release(handle)\n  affordance_region: the black handle of the cabinet door\n  contact: released(handle) [completion]\n  done_when: released(handle)\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [],
+    "scene_objects": [
+      "cabinet_door",
+      "drawer",
+      "handle"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "cabinet_door",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "cabinet_door",
+        "affordance_region": "the body of the cabinet door",
+        "done_when": "distance(gripper, cabinet_door) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "handle"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "handle",
+        "affordance_region": "the black handle of the cabinet door",
+        "done_when": "holding(handle)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "handle"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "position",
+              "args": [
+                "cabinet_door",
+                "left_of(drawer"
+              ]
+            }
+          ],
+          "direction": [
+            {
+              "pred": "pull_axis",
+              "args": [
+                "-1",
+                "0",
+                "0"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_collision",
+              "args": [
+                "cabinet_door",
+                "wall"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "pull",
+        "target": "cabinet_door",
+        "destination": "left",
+        "affordance_region": "the body of the cabinet door",
+        "done_when": "position(cabinet_door, left_of(drawer))"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "released",
+              "args": [
+                "handle"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "release",
+        "target": "handle",
+        "affordance_region": "the black handle of the cabinet door",
+        "done_when": "released(handle)"
+      }
+    ]
+  }
+}

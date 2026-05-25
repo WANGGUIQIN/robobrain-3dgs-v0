@@ -1,0 +1,163 @@
+{
+  "task": "Put the orange can in the open cabinet.",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_3epoch/best",
+  "raw": "SCENE ANALYSIS - A kitchen scene with a white countertop, a sink, and an open cabinet above. On the counter, there is an orange can, a green bottle, and a yellow bottle. The cabinet has a blue interior. STRATEGY - First, grasp the orange can from the counter. Then, transport it to the open cabinet. Finally, place the can inside the cabinet. Failure modes include dropping the can during transport or misplacing it in the cabinet. AFFORDANCE REASONING - Step 1: Reach for the orange can on the counter. Step 2: Grasp the can by its body for a secure hold. Step 3: Transport the can towards the open cabinet. Step 4: Place the can inside the cabinet, ensuring it is positioned correctly.\nGoal: inside(orange_can, cabinet)\nScene: orange_can, green_bottle, yellow_bottle, cabinet, sink, countertop\nStep 1: reach(orange_can)\n  affordance_region: the body of the orange can\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, orange_can, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, orange_can) < 0.03\nStep 2: grasp(orange_can)\n  affordance_region: the body of the orange can\n  contact: holding(orange_can) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(orange_can)\nStep 3: transport(orange_can -> cabinet)\n  affordance_region: an empty area inside the cabinet\n  spatial: above(orange_can, cabinet, 0.05) [completion]\n  safety: no_drop(orange_can)\n  done_when: above(orange_can, cabinet, 0.05)\nStep 4: place(orange_can -> cabinet)\n  affordance_region: an empty area inside the cabinet\n  contact: surface_contact(orange_can, cabinet) [completion]; released(orange_can) [completion]\n  pose: stable(orange_can) [completion]\n  done_when: surface_contact(orange_can, cabinet) AND released(orange_can)\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [
+      {
+        "pred": "inside",
+        "args": [
+          "orange_can",
+          "cabinet"
+        ]
+      }
+    ],
+    "scene_objects": [
+      "orange_can",
+      "green_bottle",
+      "yellow_bottle",
+      "cabinet",
+      "sink",
+      "countertop"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "orange_can",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "orange_can",
+        "affordance_region": "the body of the orange can",
+        "done_when": "distance(gripper, orange_can) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "orange_can"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "orange_can",
+        "affordance_region": "the body of the orange can",
+        "done_when": "holding(orange_can)"
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "orange_can",
+                "cabinet",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "orange_can"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "orange_can",
+        "destination": "cabinet",
+        "affordance_region": "an empty area inside the cabinet",
+        "done_when": "above(orange_can, cabinet, 0.05)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "surface_contact",
+              "args": [
+                "orange_can",
+                "cabinet"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "orange_can"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "orange_can"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "place",
+        "target": "orange_can",
+        "destination": "cabinet",
+        "affordance_region": "an empty area inside the cabinet",
+        "done_when": "surface_contact(orange_can, cabinet) AND released(orange_can)"
+      }
+    ]
+  }
+}

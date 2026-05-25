@@ -1,0 +1,118 @@
+{
+  "task": "move brown chip bag near sponge",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_3epoch/best",
+  "raw": "**SCENE ANALYSIS -** A brown chip bag, a yellow sponge, and a green can are on a gray table. The chip bag is a flexible package with a printed design; the sponge is a soft, porous object; the can is a rigid container. The task is to move the chip bag near the sponge. STRATEGY - The chip bag is the target object. To move it, we first grasp it, then transport it to a new position near the sponge. Failure modes include dropping the chip bag during transport or not grasping it properly. AFFORDANCE REASONING - Step 1 reach the chip bag body for initial contact; Step 2 grasp its printed design for a secure hold; Step 3 transport it to a position near the sponge; Step 4 place it on the table near the sponge.\n\n**Goal:** near(sponge, brown_chip_bag)\n**Scene:** brown_chip_bag, sponge, table\n**Step 1:** reach(brown_chip_bag)\n  affordance_region: the body of the brown chip bag\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, brown_chip_bag, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, brown_chip_bag) < 0.03\n**Step 2:** grasp(brown_chip_bag)\n  affordance_region: the printed design on the brown chip bag\n  contact: holding(brown_chip_bag) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(brown_chip_bag)\n**Step 3:** transport(brown_chip_bag -> near(sponge))\n  affordance_region: an empty area on the table near the sponge\n  spatial: distance(brown_chip_bag, sponge, <, 0.15) [completion]\n  safety: no_drop(brown_chip_bag)\n  done_when: distance(brown_chip_bag, sponge) < 0.15\n**Step 4:** place(brown_chip_bag -> table)\n  affordance_region: an empty area on the table near the sponge\n  contact: surface_contact(brown_chip_bag, table) [completion]; released(brown_chip_bag) [completion]\n  pose: stable(brown_chip_bag) [completion]\n  done_when: surface_contact(brown_chip_bag, table) AND released(brown_chip_bag)\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [],
+    "scene_objects": [],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "brown_chip_bag",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "brown_chip_bag",
+        "affordance_region": "the body of the brown chip bag",
+        "done_when": "distance(gripper, brown_chip_bag) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "brown_chip_bag"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "brown_chip_bag",
+        "affordance_region": "the printed design on the brown chip bag",
+        "done_when": "holding(brown_chip_bag)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "surface_contact",
+              "args": [
+                "brown_chip_bag",
+                "table"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "brown_chip_bag"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "brown_chip_bag"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "place",
+        "target": "brown_chip_bag",
+        "destination": "table",
+        "affordance_region": "an empty area on the table near the sponge",
+        "done_when": "surface_contact(brown_chip_bag, table) AND released(brown_chip_bag)"
+      }
+    ]
+  }
+}

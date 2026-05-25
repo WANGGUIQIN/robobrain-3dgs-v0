@@ -1,0 +1,252 @@
+{
+  "task": "Fold the tissue paper in half",
+  "parsed": {
+    "scene_objects": [
+      "tissue_paper",
+      "table"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "tissue_paper",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "tissue_paper",
+        "affordance_region": "the corner of the tissue paper",
+        "done_when": "distance(gripper, tissue_paper) < 0.03",
+        "affordance_hint": "the corner of the tissue paper",
+        "refine_prompt": "the corner of the tissue paper",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.3672,
+          0.4766
+        ],
+        "affordance_3d_refined": [
+          -0.2293,
+          0.0069,
+          0.6949
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.3266,
+        "affordance": [
+          0.3672,
+          0.4766
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "tissue_paper"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "tissue_paper",
+        "affordance_region": "the corner of the tissue paper",
+        "done_when": "holding(tissue_paper)",
+        "affordance_hint": "the corner of the tissue paper",
+        "refine_prompt": "the corner of the tissue paper",
+        "refine_cache_hit": true,
+        "affordance_refined": [
+          0.3672,
+          0.4766
+        ],
+        "affordance_3d_refined": [
+          -0.2293,
+          0.0069,
+          0.6949
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.3266,
+        "affordance": [
+          0.3672,
+          0.4766
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "tissue_paper"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "aligned_xy",
+              "args": [
+                "tissue_paper",
+                "table"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "motion_dir",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "fold",
+        "target": "tissue_paper",
+        "affordance_region": "the corner of the tissue paper",
+        "done_when": "aligned_xy(tissue_paper, table) AND holding(tissue_paper)",
+        "affordance_hint": "the corner of the tissue paper",
+        "refine_prompt": "the corner of the tissue paper",
+        "refine_cache_hit": true,
+        "affordance_refined": [
+          0.3672,
+          0.4766
+        ],
+        "affordance_3d_refined": [
+          -0.2293,
+          0.0069,
+          0.6949
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.3266,
+        "affordance": [
+          0.3672,
+          0.4766
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "surface_contact",
+              "args": [
+                "tissue_paper",
+                "table"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "tissue_paper"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "tissue_paper"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "place",
+        "target": "tissue_paper",
+        "destination": "table",
+        "affordance_region": "an empty area on the table",
+        "done_when": "surface_contact(tissue_paper, table) AND released(tissue_paper) AND stable(tissue_paper)",
+        "affordance_hint": "an empty area on the table",
+        "refine_prompt": "an empty area on the table",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.0,
+          0.9961
+        ],
+        "affordance_3d_refined": [
+          -2.732,
+          2.3051,
+          3.4149
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.4341,
+        "affordance": [
+          0.0,
+          0.9961
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,116 @@
+{
+  "task": "pick banana from white bowl",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_planning_3epoch/checkpoint-39957",
+  "raw": "Scene: banana, white_bowl, table\nStep 1: reach(banana)\n  affordance_region: the banana in the white bowl\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, banana, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, banana) < 0.03\nStep 2: grasp(banana)\n  affordance_region: the yellow banana in the white bowl\n  contact: holding(banana) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(banana)\nStep 3: transport(banana -> table)\n  affordance_region: an empty area on the table\n  spatial: above(banana, table, 0.05) [completion]\n  safety: no_drop(banana)\n  done_when: above(banana, table, 0.05)\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [],
+    "scene_objects": [
+      "banana",
+      "white_bowl",
+      "table"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "banana",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "banana",
+        "affordance_region": "the banana in the white bowl",
+        "done_when": "distance(gripper, banana) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "banana"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "banana",
+        "affordance_region": "the yellow banana in the white bowl",
+        "done_when": "holding(banana)"
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "banana",
+                "table",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "banana"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "banana",
+        "destination": "table",
+        "affordance_region": "an empty area on the table",
+        "done_when": "above(banana, table, 0.05)"
+      }
+    ]
+  }
+}

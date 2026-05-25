@@ -1,0 +1,246 @@
+{
+  "task": "bring the orange to the front edge from back",
+  "parsed": {
+    "scene_objects": [
+      "orange",
+      "spoon",
+      "bowl",
+      "cloth",
+      "table"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "orange",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "orange",
+        "affordance_region": "the orange",
+        "done_when": "distance(gripper, orange) < 0.03",
+        "affordance_hint": "the orange",
+        "refine_prompt": "the orange",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.418,
+          0.3867
+        ],
+        "affordance_3d_refined": [
+          -0.0821,
+          -0.1134,
+          0.871
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.4596,
+        "affordance": [
+          0.418,
+          0.3867
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "orange"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "orange",
+        "affordance_region": "the orange",
+        "done_when": "holding(orange)",
+        "affordance_hint": "the orange",
+        "refine_prompt": "the orange",
+        "refine_cache_hit": true,
+        "affordance_refined": [
+          0.418,
+          0.3867
+        ],
+        "affordance_3d_refined": [
+          -0.0821,
+          -0.1134,
+          0.871
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.4596,
+        "affordance": [
+          0.418,
+          0.3867
+        ]
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "orange",
+                "table",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "orange"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "orange",
+        "destination": "front_edge",
+        "affordance_region": "the front edge of the table",
+        "done_when": "above(orange, table, 0.05) AND aligned_xy(orange, front_edge, 0.03)",
+        "affordance_hint": "the front edge of the table",
+        "refine_prompt": "the front edge of the table",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.3906,
+          0.875
+        ],
+        "affordance_3d_refined": [
+          -0.1538,
+          0.5273,
+          1.2233
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.5071,
+        "affordance": [
+          0.3906,
+          0.875
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "surface_contact",
+              "args": [
+                "orange",
+                "table"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "orange"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "orange"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "place",
+        "target": "orange",
+        "destination": "front_edge",
+        "affordance_region": "the front edge of the table",
+        "done_when": "surface_contact(orange, table) AND released(orange) AND stable(orange)",
+        "affordance_hint": "the front edge of the table",
+        "refine_prompt": "the front edge of the table",
+        "refine_cache_hit": true,
+        "affordance_refined": [
+          0.3906,
+          0.875
+        ],
+        "affordance_3d_refined": [
+          -0.1538,
+          0.5273,
+          1.2233
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.5071,
+        "affordance": [
+          0.3906,
+          0.875
+        ]
+      }
+    ]
+  }
+}

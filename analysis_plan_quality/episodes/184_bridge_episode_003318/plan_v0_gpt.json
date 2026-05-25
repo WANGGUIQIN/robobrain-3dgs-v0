@@ -1,0 +1,164 @@
+{
+  "task": "flip cup upright",
+  "scene_objects": [
+    "pink_cup",
+    "sink",
+    "robot_gripper"
+  ],
+  "num_steps": 3,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "pink_cup",
+      "affordance": [
+        0.544,
+        0.783
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "pink_cup",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "sink"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, pink_cup) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        0.0856,
+        0.56,
+        1.732
+      ],
+      "affordance_hint": "the pink cup"
+    },
+    {
+      "step": 2,
+      "action": "grasp",
+      "target": "pink_cup",
+      "affordance": [
+        0.531,
+        0.76
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "pink_cup"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "holding",
+            "args": [
+              "pink_cup"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              0,
+              0,
+              -1
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "holding(pink_cup)",
+      "affordance_3d": [
+        0.0615,
+        0.5152,
+        1.7125
+      ],
+      "affordance_hint": "the handle of the pink cup"
+    },
+    {
+      "step": 3,
+      "action": "rotate",
+      "target": "pink_cup",
+      "affordance": [
+        0.544,
+        0.775
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "pink_cup"
+            ],
+            "role": "safety"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "upright",
+            "args": [
+              "pink_cup"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "pink_cup",
+              "sink"
+            ]
+          }
+        ]
+      },
+      "done_when": "upright(pink_cup)",
+      "affordance_3d": [
+        0.0856,
+        0.5444,
+        1.732
+      ],
+      "affordance_hint": "the body of the pink cup"
+    }
+  ]
+}

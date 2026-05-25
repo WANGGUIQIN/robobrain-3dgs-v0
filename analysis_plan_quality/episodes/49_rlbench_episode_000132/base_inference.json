@@ -1,0 +1,164 @@
+{
+  "task": "put the ring on the green spoke",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_3epoch/best",
+  "raw": "**SCENE ANALYSIS -** A wooden stand with three vertical spokes (green, black, silver) and a small blue ring on the floor. The spokes are rigid; the ring is a small, flat object. The task requires placing the ring onto the green spoke. **STRATEGY -** First, grasp the ring from the floor, then transport it to the green spoke, and finally place it on the spoke. Failure modes include dropping the ring during transport or misaligning it with the spoke. **AFFORDANCE REASONING -** Step 1: Reach for the ring on the floor (body). Step 2: Grasp the ring (body). Step 3: Transport the ring to the green spoke (empty area near the spoke). Step 4: Place the ring on the green spoke (top of the spoke).\n\nGoal: on(ring, green_spoke)\nScene: wooden_stand, green_spoke, black_spoke, silver_spoke, blue_ring, floor\nStep 1: reach(blue_ring)\n  affordance_region: the body of the blue ring\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, blue_ring, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, blue_ring) < 0.03\nStep 2: grasp(blue_ring)\n  affordance_region: the body of the blue ring\n  contact: holding(blue_ring) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(blue_ring)\nStep 3: transport(blue_ring -> green_spoke)\n  affordance_region: an empty area near the green_spoke\n  spatial: above(blue_ring, green_spoke, 0.05) [completion]\n  safety: no_drop(blue_ring)\n  done_when: above(blue_ring, green_spoke, 0.05)\nStep 4: place(blue_ring -> green_spoke)\n  affordance_region: the top of the green_spoke\n  contact: surface_contact(blue_ring, green_spoke) [completion]; released(blue_ring) [completion]\n  pose: on(blue_ring, green_spoke) [completion]\n  done_when: surface_contact(blue_ring, green_spoke) AND released(blue_ring)\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [
+      {
+        "pred": "on",
+        "args": [
+          "ring",
+          "green_spoke"
+        ]
+      }
+    ],
+    "scene_objects": [
+      "wooden_stand",
+      "green_spoke",
+      "black_spoke",
+      "silver_spoke",
+      "blue_ring",
+      "floor"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "blue_ring",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "blue_ring",
+        "affordance_region": "the body of the blue ring",
+        "done_when": "distance(gripper, blue_ring) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "blue_ring"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "blue_ring",
+        "affordance_region": "the body of the blue ring",
+        "done_when": "holding(blue_ring)"
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "blue_ring",
+                "green_spoke",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "blue_ring"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "blue_ring",
+        "destination": "green_spoke",
+        "affordance_region": "an empty area near the green_spoke",
+        "done_when": "above(blue_ring, green_spoke, 0.05)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "surface_contact",
+              "args": [
+                "blue_ring",
+                "green_spoke"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "blue_ring"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "on",
+              "args": [
+                "blue_ring",
+                "green_spoke"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "place",
+        "target": "blue_ring",
+        "destination": "green_spoke",
+        "affordance_region": "the top of the green_spoke",
+        "done_when": "surface_contact(blue_ring, green_spoke) AND released(blue_ring)"
+      }
+    ]
+  }
+}

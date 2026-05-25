@@ -1,0 +1,227 @@
+{
+  "task": "put the pink object inside the right cabinet",
+  "scene_objects": [
+    "pink_object",
+    "right_cabinet",
+    "tray",
+    "table"
+  ],
+  "steps": [
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "pink_object",
+              "<",
+              "0.03"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "approach_axis",
+            "args": [
+              "0",
+              "0",
+              "-1"
+            ],
+            "role": "progress"
+          }
+        ]
+      },
+      "step": 1,
+      "action": "reach",
+      "target": "pink_object",
+      "affordance_region": "the pink object on the tray",
+      "done_when": "distance(gripper, pink_object) < 0.03",
+      "affordance_hint": "the pink object on the tray",
+      "refine_prompt": "the pink object on the tray",
+      "refine_cache_hit": false,
+      "affordance_refined": [
+        0.7031,
+        0.7695
+      ],
+      "affordance_3d_refined": [
+        0.332,
+        0.4406,
+        1.422
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.3014
+    },
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "pink_object"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              "0",
+              "0",
+              "-1"
+            ],
+            "role": "progress"
+          }
+        ]
+      },
+      "step": 2,
+      "action": "grasp",
+      "target": "pink_object",
+      "affordance_region": "the pink object on the tray",
+      "done_when": "holding(pink_object)",
+      "affordance_hint": "the pink object on the tray",
+      "refine_prompt": "the pink object on the tray",
+      "refine_cache_hit": true,
+      "affordance_refined": [
+        0.7031,
+        0.7695
+      ],
+      "affordance_3d_refined": [
+        0.332,
+        0.4406,
+        1.422
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.3014
+    },
+    {
+      "constraints": {
+        "spatial": [
+          {
+            "pred": "above",
+            "args": [
+              "pink_object",
+              "right_cabinet",
+              "0.05"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_drop",
+            "args": [
+              "pink_object"
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "step": 3,
+      "action": "transport",
+      "target": "pink_object",
+      "destination": "right_cabinet",
+      "affordance_region": "the empty area inside the right cabinet",
+      "done_when": "above(pink_object, right_cabinet, 0.05)",
+      "affordance_hint": "the empty area inside the right cabinet",
+      "refine_prompt": "the empty area inside the right cabinet",
+      "refine_cache_hit": false,
+      "affordance_refined": [
+        0.6992,
+        0.1367
+      ],
+      "affordance_3d_refined": [
+        0.0023,
+        -0.0042,
+        0.01
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.4358
+    },
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "surface_contact",
+            "args": [
+              "pink_object",
+              "right_cabinet"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "released",
+            "args": [
+              "pink_object"
+            ],
+            "role": "completion"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "stable",
+            "args": [
+              "pink_object"
+            ],
+            "role": "completion"
+          }
+        ]
+      },
+      "step": 4,
+      "action": "place",
+      "target": "pink_object",
+      "destination": "right_cabinet",
+      "affordance_region": "the empty area inside the right cabinet",
+      "done_when": "surface_contact(pink_object, right_cabinet) AND released(pink_object) AND stable(pink_object)",
+      "affordance_hint": "the empty area inside the right cabinet",
+      "refine_prompt": "the empty area inside the right cabinet",
+      "refine_cache_hit": true,
+      "affordance_refined": [
+        0.6992,
+        0.1367
+      ],
+      "affordance_3d_refined": [
+        0.0023,
+        -0.0042,
+        0.01
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.4358
+    }
+  ]
+}

@@ -1,0 +1,231 @@
+{
+  "task": "Pick up the wipe and clean the top of the book",
+  "scene_objects": [
+    "wipe",
+    "book",
+    "table"
+  ],
+  "num_steps": 4,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "wipe",
+      "affordance": [
+        0.666,
+        0.695
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "wipe",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "book"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, wipe) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        0.1414,
+        0.8201,
+        2.8279
+      ],
+      "affordance_hint": "the white paper wipe",
+      "affordance_hint_original": "the wipe",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 2,
+      "action": "grasp",
+      "target": "wipe",
+      "affordance": [
+        0.4,
+        0.632
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "wipe"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "holding",
+            "args": [
+              "wipe"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              0,
+              0,
+              -1
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "holding(wipe)",
+      "affordance_3d": [
+        -0.8939,
+        0.6473,
+        3.0823
+      ],
+      "affordance_hint": "the corner of the white wipe",
+      "affordance_hint_original": "the handle of the wipe",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 3,
+      "action": "transport",
+      "target": "wipe",
+      "destination": "book",
+      "affordance": [
+        0.558,
+        0.604
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "wipe"
+            ],
+            "role": "safety"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "above",
+            "args": [
+              "wipe",
+              "book",
+              0.05
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "wipe",
+              "book"
+            ]
+          },
+          {
+            "pred": "no_drop",
+            "args": [
+              "wipe"
+            ]
+          }
+        ]
+      },
+      "done_when": "above(wipe, book, 0.05) AND aligned_xy(wipe, book, 0.03)",
+      "affordance_3d": [
+        -0.2088,
+        0.4298,
+        2.4561
+      ],
+      "affordance_hint": "an empty area on the book",
+      "affordance_hint_original": "an empty area on the book",
+      "affordance_hint_confidence": "rejected:missing_token:book"
+    },
+    {
+      "step": 4,
+      "action": "wipe",
+      "target": "book",
+      "affordance": [
+        0.575,
+        0.591
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "surface_contact",
+            "args": [
+              "wipe",
+              "book"
+            ],
+            "role": "completion"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "stable",
+            "args": [
+              "wipe"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "support_stable",
+            "args": [
+              "wipe"
+            ]
+          }
+        ]
+      },
+      "done_when": "surface_contact(wipe, book) AND stable(wipe)",
+      "affordance_3d": [
+        -0.1546,
+        0.3686,
+        2.3778
+      ],
+      "affordance_hint": "the top surface of the blue book",
+      "affordance_hint_original": "the surface of the book",
+      "affordance_hint_confidence": "ok"
+    }
+  ]
+}

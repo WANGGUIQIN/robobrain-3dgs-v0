@@ -1,0 +1,120 @@
+{
+  "task": "Grasp the moving object",
+  "scene_objects": [
+    "yellow_object",
+    "pink_object",
+    "table"
+  ],
+  "steps": [
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "yellow_object",
+              "<",
+              "0.03"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "approach_axis",
+            "args": [
+              "0",
+              "0",
+              "-1"
+            ],
+            "role": "progress"
+          }
+        ]
+      },
+      "step": 1,
+      "action": "reach",
+      "target": "yellow_object",
+      "affordance_region": "the yellow object",
+      "done_when": "distance(gripper, yellow_object) < 0.03",
+      "affordance_hint": "the yellow object",
+      "refine_prompt": "the yellow object",
+      "refine_cache_hit": false,
+      "affordance_refined": [
+        0.3867,
+        0.5469
+      ],
+      "affordance_3d_refined": [
+        -0.9664,
+        -0.1749,
+        1.3994
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.5053
+    },
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "yellow_object"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              "0",
+              "0",
+              "-1"
+            ],
+            "role": "progress"
+          }
+        ]
+      },
+      "step": 2,
+      "action": "grasp",
+      "target": "yellow_object",
+      "affordance_region": "the body of the yellow object",
+      "done_when": "holding(yellow_object)",
+      "affordance_hint": "the body of the yellow object",
+      "refine_prompt": "the body of the yellow object",
+      "refine_cache_hit": false,
+      "affordance_refined": [
+        0.3867,
+        0.5469
+      ],
+      "affordance_3d_refined": [
+        -0.9664,
+        -0.1749,
+        1.3994
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.47
+    }
+  ]
+}

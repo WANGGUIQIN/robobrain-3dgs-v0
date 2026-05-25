@@ -1,0 +1,245 @@
+{
+  "task": "move green can near blue chip bag",
+  "parsed": {
+    "scene_objects": [
+      "green_can",
+      "blue_chip_bag",
+      "table"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "green_can",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "green_can",
+        "affordance_region": "the body of the green can",
+        "done_when": "distance(gripper, green_can) < 0.03",
+        "affordance_hint": "the body of the green can",
+        "refine_prompt": "the body of the green can",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.418,
+          0.5078
+        ],
+        "affordance_3d_refined": [
+          -0.453,
+          0.0431,
+          4.8043
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.5532,
+        "affordance": [
+          0.418,
+          0.5078
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "green_can"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "green_can",
+        "affordance_region": "the body of the green can",
+        "done_when": "holding(green_can)",
+        "affordance_hint": "the body of the green can",
+        "refine_prompt": "the body of the green can",
+        "refine_cache_hit": true,
+        "affordance_refined": [
+          0.418,
+          0.5078
+        ],
+        "affordance_3d_refined": [
+          -0.453,
+          0.0431,
+          4.8043
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.5532,
+        "affordance": [
+          0.418,
+          0.5078
+        ]
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "green_can",
+                "blue_chip_bag",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "green_can"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "green_can",
+        "destination": "blue_chip_bag",
+        "affordance_region": "an empty area on the blue chip bag",
+        "done_when": "above(green_can, blue_chip_bag, 0.05)",
+        "affordance_hint": "an empty area on the blue chip bag",
+        "refine_prompt": "an empty area on the blue chip bag",
+        "refine_cache_hit": false,
+        "refine_prompt_fallback": "green can",
+        "affordance_refined": [
+          0.3906,
+          0.4609
+        ],
+        "affordance_3d_refined": [
+          -0.609,
+          -0.2175,
+          4.8435
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.5749,
+        "affordance": [
+          0.3906,
+          0.4609
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "surface_contact",
+              "args": [
+                "green_can",
+                "blue_chip_bag"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "green_can"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "green_can"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "place",
+        "target": "green_can",
+        "destination": "blue_chip_bag",
+        "affordance_region": "an empty area on the blue chip bag",
+        "done_when": "surface_contact(green_can, blue_chip_bag) AND released(green_can)",
+        "affordance_hint": "an empty area on the blue chip bag",
+        "refine_prompt": "an empty area on the blue chip bag",
+        "refine_cache_hit": true,
+        "affordance_refined": [
+          0.3906,
+          0.4609
+        ],
+        "affordance_3d_refined": [
+          -0.609,
+          -0.2175,
+          4.8435
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.5749,
+        "affordance": [
+          0.3906,
+          0.4609
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,239 @@
+{
+  "task": "Put the white piece of clothing on the seat.",
+  "scene_objects": [
+    "white_clothing",
+    "chair",
+    "blue_clothing"
+  ],
+  "num_steps": 4,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "white_clothing",
+      "affordance": [
+        0.462,
+        0.6
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "white_clothing",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "chair"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, white_clothing) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        -0.2939,
+        0.2379,
+        1.3994
+      ],
+      "affordance_hint": "the white clothing on the chair",
+      "affordance_hint_original": "the white clothing",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 2,
+      "action": "grasp",
+      "target": "white_clothing",
+      "affordance": [
+        0.462,
+        0.625
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "white_clothing"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "holding",
+            "args": [
+              "white_clothing"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              0,
+              0,
+              -1
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "holding(white_clothing)",
+      "affordance_3d": [
+        -0.2939,
+        0.2799,
+        1.3994
+      ],
+      "affordance_hint": "the white fabric of the white clothing",
+      "affordance_hint_original": "white clothing",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 3,
+      "action": "transport",
+      "target": "white_clothing",
+      "destination": "chair",
+      "affordance": [
+        0.475,
+        0.85
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "white_clothing"
+            ],
+            "role": "safety"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "above",
+            "args": [
+              "white_clothing",
+              "chair",
+              0.05
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "white_clothing",
+              "chair"
+            ]
+          },
+          {
+            "pred": "no_drop",
+            "args": [
+              "white_clothing"
+            ]
+          }
+        ]
+      },
+      "done_when": "above(white_clothing, chair, 0.05) AND aligned_xy(white_clothing, chair, 0.03)",
+      "affordance_3d": [
+        -0.3031,
+        0.7816,
+        1.5951
+      ],
+      "affordance_hint": "the empty area on the orange chair",
+      "affordance_hint_original": "an empty area on the chair",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 4,
+      "action": "place",
+      "target": "white_clothing",
+      "destination": "chair",
+      "affordance": [
+        0.475,
+        0.85
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "surface_contact",
+            "args": [
+              "white_clothing",
+              "chair"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "released",
+            "args": [
+              "white_clothing"
+            ],
+            "role": "completion"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "stable",
+            "args": [
+              "white_clothing"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "support_stable",
+            "args": [
+              "white_clothing"
+            ]
+          }
+        ]
+      },
+      "done_when": "surface_contact(white_clothing, chair) AND released(white_clothing) AND stable(white_clothing)",
+      "affordance_3d": [
+        -0.3031,
+        0.7816,
+        1.5951
+      ],
+      "affordance_hint": "the empty area on the orange chair",
+      "affordance_hint_original": "an empty area on the chair",
+      "affordance_hint_confidence": "ok"
+    }
+  ]
+}

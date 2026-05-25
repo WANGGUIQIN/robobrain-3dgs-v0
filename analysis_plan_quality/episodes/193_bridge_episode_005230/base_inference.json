@@ -1,0 +1,166 @@
+{
+  "task": "Place the spoon in front of the can.",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_3epoch/best",
+  "raw": "**SCENE ANALYSIS -** A wooden table holds a red can, a red bowl with a green object inside, a red spoon, and a small gray object. The red spoon is on the table, the can is to the left of the bowl, and the gray object is to the right of the bowl. The task is to place the spoon in front of the can. The can is a rigid container, the spoon is a rigid object with a handle, and the table is a flat surface. **STRATEGY -** First, reach for the spoon at its handle to grasp it. Then, transport the spoon to a position in front of the can. Finally, place the spoon on the table in front of the can. Failure modes include dropping the spoon during transport or placing it incorrectly. **AFFORDANCE REASONING -** Step 1: Reach for the spoon at its handle. Step 2: Grasp the spoon at its handle. Step 3: Transport the spoon to the area in front of the can. Step 4: Place the spoon on the table in front of the can.\n\nGoal: on(red_spoon, table); in_front_of(red_spoon, can)\nScene: red_spoon, can, table\nStep 1: reach(red_spoon)\n  affordance_region: the handle of the red spoon\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, red_spoon, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, red_spoon) < 0.03\nStep 2: grasp(red_spoon)\n  affordance_region: the handle of the red spoon\n  contact: holding(red_spoon) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(red_spoon)\nStep 3: transport(red_spoon -> in_front_of(can, table))\n  affordance_region: an empty area on the table in front of the can\n  spatial: above(red_spoon, in_front_of(can, table), 0.05) [completion]\n  safety: no_drop(red_spoon)\n  done_when: above(red_spoon, in_front_of(can, table), 0.05)\nStep 4: place(red_spoon -> in_front_of(can, table))\n  affordance_region: an empty area on the table in front of the can\n  contact: surface_contact(red_spoon, table) [completion]; released(red_spoon) [completion]\n  pose: stable(red_spoon) [completion]\n  done_when: surface_contact(red_spoon, table) AND released(red_spoon)\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [
+      {
+        "pred": "on",
+        "args": [
+          "red_spoon",
+          "table"
+        ]
+      },
+      {
+        "pred": "in_front_of",
+        "args": [
+          "red_spoon",
+          "can"
+        ]
+      }
+    ],
+    "scene_objects": [
+      "red_spoon",
+      "can",
+      "table"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "red_spoon",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "red_spoon",
+        "affordance_region": "the handle of the red spoon",
+        "done_when": "distance(gripper, red_spoon) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "red_spoon"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "red_spoon",
+        "affordance_region": "the handle of the red spoon",
+        "done_when": "holding(red_spoon)"
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "red_spoon",
+                "in_front_of(can",
+                "table"
+              ]
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "red_spoon"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "red_spoon",
+        "destination": "in_front_of(can, table",
+        "affordance_region": "an empty area on the table in front of the can",
+        "done_when": "above(red_spoon, in_front_of(can, table), 0.05)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "surface_contact",
+              "args": [
+                "red_spoon",
+                "table"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "red_spoon"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "red_spoon"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "place",
+        "target": "red_spoon",
+        "destination": "in_front_of(can, table",
+        "affordance_region": "an empty area on the table in front of the can",
+        "done_when": "surface_contact(red_spoon, table) AND released(red_spoon)"
+      }
+    ]
+  }
+}

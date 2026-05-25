@@ -1,0 +1,210 @@
+{
+  "task": "Pick up the wipe and clean the top of the book",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_3epoch/best",
+  "raw": "**SCENE ANALYSIS -** A white paper towel is on a table next to a blue book. The paper towel is a flat, absorbent object; the book is a rigid, flat object. The task requires picking the paper towel, moving it to the book, and using it to wipe the book's surface. The paper towel must be grasped by its body for lifting, transported to the book, and then used to make contact with the book's top surface. Failure modes include dropping the paper towel, misplacing it, or not making contact with the book. **STRATEGY -** First, reach and grasp the paper towel. Then, transport it to the book. Finally, use the paper towel to wipe the book's top surface. **AFFORDANCE REASONING -** Step 1: Reach the paper towel by its body. Step 2: Grasp the paper towel by its body for lifting. Step 3: Transport the paper towel to the book. Step 4: Place the paper towel on the book. Step 5: Wipe the book's top surface with the paper towel.\n\nGoal: on(wipe, book); stable(wipe); any_in(wipe, book); any_in(book, wipe)\nScene: wipe, book, table\nStep 1: reach(wipe)\n  affordance_region: the body of the white paper towel\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, wipe, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, wipe) < 0.03\nStep 2: grasp(wipe)\n  affordance_region: the body of the white paper towel\n  contact: holding(wipe) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(wipe)\nStep 3: transport(wipe -> book)\n  affordance_region: an empty area on the top surface of the blue book\n  spatial: above(wipe, book, 0.05) [completion]\n  safety: no_drop(wipe)\n  done_when: above(wipe, book, 0.05)\nStep 4: place(wipe -> book)\n  affordance_region: an empty area on the top surface of the blue book\n  contact: surface_contact(wipe, book) [completion]; released(wipe) [completion]\n  pose: stable(wipe) [completion]\n  done_when: surface_contact(wipe, book) AND released(wipe)\nStep 5: wipe(book)\n  affordance_region: the top surface of the blue book\n  contact: surface_contact(wipe, book) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: surface_contact(wipe, book)\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [
+      {
+        "pred": "on",
+        "args": [
+          "wipe",
+          "book"
+        ]
+      },
+      {
+        "pred": "stable",
+        "args": [
+          "wipe"
+        ]
+      },
+      {
+        "pred": "any_in",
+        "args": [
+          "wipe",
+          "book"
+        ]
+      },
+      {
+        "pred": "any_in",
+        "args": [
+          "book",
+          "wipe"
+        ]
+      }
+    ],
+    "scene_objects": [
+      "wipe",
+      "book",
+      "table"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "wipe",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "wipe",
+        "affordance_region": "the body of the white paper towel",
+        "done_when": "distance(gripper, wipe) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "wipe"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "wipe",
+        "affordance_region": "the body of the white paper towel",
+        "done_when": "holding(wipe)"
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "wipe",
+                "book",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "wipe"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "wipe",
+        "destination": "book",
+        "affordance_region": "an empty area on the top surface of the blue book",
+        "done_when": "above(wipe, book, 0.05)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "surface_contact",
+              "args": [
+                "wipe",
+                "book"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "wipe"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "wipe"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "place",
+        "target": "wipe",
+        "destination": "book",
+        "affordance_region": "an empty area on the top surface of the blue book",
+        "done_when": "surface_contact(wipe, book) AND released(wipe)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "surface_contact",
+              "args": [
+                "wipe",
+                "book"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 5,
+        "action": "wipe",
+        "target": "book",
+        "affordance_region": "the top surface of the blue book",
+        "done_when": "surface_contact(wipe, book)"
+      }
+    ]
+  }
+}

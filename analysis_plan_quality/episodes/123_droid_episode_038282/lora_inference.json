@@ -1,0 +1,191 @@
+{
+  "task": "Use the object to mix the contents in the bowl",
+  "parsed": {
+    "scene_objects": [
+      "green_bowl",
+      "yellow_object",
+      "table"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "green_bowl",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "green_bowl",
+        "affordance_region": "the rim of the green bowl",
+        "done_when": "distance(gripper, green_bowl) < 0.03",
+        "affordance_hint": "the rim of the green bowl",
+        "refine_prompt": "the rim of the green bowl",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.625,
+          0.5703
+        ],
+        "affordance_3d_refined": [
+          0.0,
+          0.1158,
+          0.8906
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.6088,
+        "affordance": [
+          0.625,
+          0.5703
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "yellow_object"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "yellow_object",
+        "affordance_region": "the yellow object in the green bowl",
+        "done_when": "holding(yellow_object)",
+        "affordance_hint": "the yellow object in the green bowl",
+        "refine_prompt": "the yellow object in the green bowl",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.6211,
+          0.5977
+        ],
+        "affordance_3d_refined": [
+          -0.0046,
+          0.1502,
+          0.9102
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.7401,
+        "affordance": [
+          0.6211,
+          0.5977
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "yellow_object"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "inside",
+              "args": [
+                "yellow_object",
+                "green_bowl"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_spill",
+              "args": [
+                "yellow_object"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "mix",
+        "target": "green_bowl",
+        "affordance_region": "the contents inside the green bowl",
+        "done_when": "contents_mixed(green_bowl)",
+        "affordance_hint": "the contents inside the green bowl",
+        "refine_prompt": "the contents inside the green bowl",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.625,
+          0.5703
+        ],
+        "affordance_3d_refined": [
+          0.0,
+          0.1158,
+          0.8906
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.4916,
+        "affordance": [
+          0.625,
+          0.5703
+        ]
+      }
+    ]
+  }
+}

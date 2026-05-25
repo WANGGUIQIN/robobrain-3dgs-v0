@@ -1,0 +1,162 @@
+{
+  "task": "pick up the square bread",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_3epoch/best",
+  "raw": "SCENE ANALYSIS - A blue bowl is on a wooden table. A red ball is on a circular platform. A blue container with a black object is on the right. The red ball is the only square bread. The ball is rigid and spherical, so it can be grasped by its body. STRATEGY - Reach the red ball, grasp it, transport it to the blue bowl, and place it inside. Failure modes include dropping the ball during transport or misplacing it outside the bowl. AFFORDANCE REASONING - Step 1 reach the ball body; Step 2 grasp the ball body for secure hold; Step 3 transport above the bowl; Step 4 lower into the bowl's interior.\nGoal: inside(red_ball, blue_bowl)\nScene: red_ball, blue_bowl, table, blue_container\nStep 1: reach(red_ball)\n  affordance_region: the body of the red ball\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, red_ball, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, red_ball) < 0.03\nStep 2: grasp(red_ball)\n  affordance_region: the body of the red ball\n  contact: holding(red_ball) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(red_ball)\nStep 3: transport(red_ball -> blue_bowl)\n  affordance_region: the interior of the blue bowl\n  spatial: above(red_ball, blue_bowl, 0.05) [completion]\n  safety: no_drop(red_ball)\n  done_when: above(red_ball, blue_bowl, 0.05)\nStep 4: place(red_ball -> blue_bowl)\n  affordance_region: the interior of the blue bowl\n  contact: surface_contact(red_ball, blue_bowl) [completion]; released(red_ball) [completion]\n  pose: inside(red_ball, blue_bowl) [completion]\n  done_when: surface_contact(red_ball, blue_bowl) AND released(red_ball)\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [
+      {
+        "pred": "inside",
+        "args": [
+          "red_ball",
+          "blue_bowl"
+        ]
+      }
+    ],
+    "scene_objects": [
+      "red_ball",
+      "blue_bowl",
+      "table",
+      "blue_container"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "red_ball",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "red_ball",
+        "affordance_region": "the body of the red ball",
+        "done_when": "distance(gripper, red_ball) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "red_ball"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "red_ball",
+        "affordance_region": "the body of the red ball",
+        "done_when": "holding(red_ball)"
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "red_ball",
+                "blue_bowl",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "red_ball"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "red_ball",
+        "destination": "blue_bowl",
+        "affordance_region": "the interior of the blue bowl",
+        "done_when": "above(red_ball, blue_bowl, 0.05)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "surface_contact",
+              "args": [
+                "red_ball",
+                "blue_bowl"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "red_ball"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "inside",
+              "args": [
+                "red_ball",
+                "blue_bowl"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "place",
+        "target": "red_ball",
+        "destination": "blue_bowl",
+        "affordance_region": "the interior of the blue bowl",
+        "done_when": "surface_contact(red_ball, blue_bowl) AND released(red_ball)"
+      }
+    ]
+  }
+}

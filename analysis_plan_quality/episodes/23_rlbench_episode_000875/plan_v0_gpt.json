@@ -1,0 +1,171 @@
+{
+  "task": "push the maroon button, then push the green button, then push the teal button",
+  "scene_objects": [
+    "maroon_button",
+    "green_button",
+    "teal_button",
+    "table"
+  ],
+  "num_steps": 3,
+  "steps": [
+    {
+      "step": 1,
+      "action": "push",
+      "target": "maroon_button",
+      "affordance": [
+        0.156,
+        0.839
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "maroon_button"
+            ],
+            "role": "completion"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "maroon_button",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "green_button"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, maroon_button) < 0.03 AND gripper_contact(maroon_button)",
+      "affordance_3d": [
+        -2.4845,
+        2.4562,
+        3.6138
+      ],
+      "affordance_hint": "the center of the maroon button"
+    },
+    {
+      "step": 2,
+      "action": "push",
+      "target": "green_button",
+      "affordance": [
+        0.453,
+        0.796
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "green_button"
+            ],
+            "role": "completion"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "green_button",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "teal_button"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, green_button) < 0.03 AND gripper_contact(green_button)",
+      "affordance_3d": [
+        -0.1865,
+        1.1815,
+        1.9898
+      ],
+      "affordance_hint": "the center of the green button"
+    },
+    {
+      "step": 3,
+      "action": "push",
+      "target": "teal_button",
+      "affordance": [
+        0.445,
+        0.781
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "teal_button"
+            ],
+            "role": "completion"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "teal_button",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "table"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, teal_button) < 0.03 AND gripper_contact(teal_button)",
+      "affordance_3d": [
+        -0.5413,
+        2.7836,
+        4.9486
+      ],
+      "affordance_hint": "the center of the teal button"
+    }
+  ]
+}

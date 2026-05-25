@@ -1,0 +1,303 @@
+{
+  "task": "Take the blue cup out of the orange cup and put it in the sink",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_3epoch/best",
+  "raw": "**SCENE ANALYSIS -** A small kitchen playset is visible, containing a sink, a stovetop, and a countertop with various colorful plastic cups. The task involves manipulating a blue cup and an orange cup. The blue cup is initially inside the orange cup, which is on the countertop. The goal is to remove the blue cup from the orange cup and place it into the sink. The scene includes the blue cup, orange cup, and sink, with the cups having distinct colors and the sink being a large basin. **STRATEGY -** First, reach for the orange cup to grasp it, then lift it to access the blue cup inside. Next, grasp the blue cup, remove it from the orange cup, and transport it to the sink. Finally, place the blue cup into the sink. Failure modes include not grasping the cups correctly or dropping them during transport. **AFFORDANCE REASONING -** Step 1 requires reaching for the orange cup's body to grasp it. Step 2 involves lifting the orange cup to access the blue cup. Step 3 requires grasping the blue cup from inside the orange cup. Step 4 involves transporting the blue cup to the sink. Step 5 requires placing the blue cup into the sink's basin.\n\nGoal: inside(blue_cup, sink); stable(blue_cup)\nScene: blue_cup, orange_cup, sink, countertop\nStep 1: reach(orange_cup)\n  affordance_region: the body of the orange cup\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, orange_cup, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, orange_cup) < 0.03\nStep 2: grasp(orange_cup)\n  affordance_region: the body of the orange cup\n  contact: holding(orange_cup) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(orange_cup)\nStep 3: transport(orange_cup -> sink)\n  affordance_region: an empty area in the sink\n  spatial: above(orange_cup, sink, 0.05) [completion]\n  safety: no_drop(orange_cup)\n  done_when: above(orange_cup, sink, 0.05)\nStep 4: place(orange_cup -> sink)\n  affordance_region: an empty area in the sink\n  contact: surface_contact(orange_cup, sink) [completion]; released(orange_cup) [completion]\n  pose: stable(orange_cup) [completion]\n  done_when: surface_contact(orange_cup, sink) AND released(orange_cup)\nStep 5: reach(blue_cup)\n  affordance_region: the body of the blue cup\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, blue_cup, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, blue_cup) < 0.03\nStep 6: grasp(blue_cup)\n  affordance_region: the body of the blue cup\n  contact: holding(blue_cup) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(blue_cup)\nStep 7: transport(blue_cup -> sink)\n  affordance_region: an empty area in the sink\n  spatial: above(blue_cup, sink, 0.05) [completion]\n  safety: no_drop(blue_cup)\n  done_when: above(blue_cup, sink, 0.05)\nStep 8: place(blue_cup -> sink)\n  affordance_region: an empty area in the sink\n  contact: surface_contact(blue_cup, sink) [completion]; released(blue_cup) [completion]\n  pose: stable(blue_cup) [completion]\n  done_when: surface_contact(blue_cup, sink) AND released(blue_cup)\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [
+      {
+        "pred": "inside",
+        "args": [
+          "blue_cup",
+          "sink"
+        ]
+      },
+      {
+        "pred": "stable",
+        "args": [
+          "blue_cup"
+        ]
+      }
+    ],
+    "scene_objects": [
+      "blue_cup",
+      "orange_cup",
+      "sink",
+      "countertop"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "orange_cup",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "orange_cup",
+        "affordance_region": "the body of the orange cup",
+        "done_when": "distance(gripper, orange_cup) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "orange_cup"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "orange_cup",
+        "affordance_region": "the body of the orange cup",
+        "done_when": "holding(orange_cup)"
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "orange_cup",
+                "sink",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "orange_cup"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "orange_cup",
+        "destination": "sink",
+        "affordance_region": "an empty area in the sink",
+        "done_when": "above(orange_cup, sink, 0.05)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "surface_contact",
+              "args": [
+                "orange_cup",
+                "sink"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "orange_cup"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "orange_cup"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "place",
+        "target": "orange_cup",
+        "destination": "sink",
+        "affordance_region": "an empty area in the sink",
+        "done_when": "surface_contact(orange_cup, sink) AND released(orange_cup)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "blue_cup",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 5,
+        "action": "reach",
+        "target": "blue_cup",
+        "affordance_region": "the body of the blue cup",
+        "done_when": "distance(gripper, blue_cup) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "blue_cup"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 6,
+        "action": "grasp",
+        "target": "blue_cup",
+        "affordance_region": "the body of the blue cup",
+        "done_when": "holding(blue_cup)"
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "blue_cup",
+                "sink",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "blue_cup"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 7,
+        "action": "transport",
+        "target": "blue_cup",
+        "destination": "sink",
+        "affordance_region": "an empty area in the sink",
+        "done_when": "above(blue_cup, sink, 0.05)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "surface_contact",
+              "args": [
+                "blue_cup",
+                "sink"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "blue_cup"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "blue_cup"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 8,
+        "action": "place",
+        "target": "blue_cup",
+        "destination": "sink",
+        "affordance_region": "an empty area in the sink",
+        "done_when": "surface_contact(blue_cup, sink) AND released(blue_cup)"
+      }
+    ]
+  }
+}

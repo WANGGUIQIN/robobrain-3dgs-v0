@@ -1,0 +1,166 @@
+{
+  "task": "Move the package from left to right.",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_3epoch/best",
+  "raw": "**SCENE ANALYSIS -** A cluttered desk contains a green bowl, a white paper bag, a blue cup, a green bottle, a red circular object, a white rectangular object, and a small package. The small package is on the desk, near the white paper bag. The task is to move the small package from its current position to the right. The package is a small, distinct object on the desk surface. **STRATEGY -** First, reach for the package, grasp it, then transport it to the right side of the desk. The package is on the desk, so it can be directly grasped without needing to lift it over other objects. The destination is the right side of the desk, which is clear of obstacles. **AFFORDANCE REASONING -** Step 1: Reach for the package on the desk. Step 2: Grasp the package. Step 3: Transport the package to the right side of the desk. Step 4: Place the package on the right side of the desk.\n\nGoal: on(package, right_desk); stable(package)\nScene: package, right_desk, desk\nStep 1: reach(package)\n  affordance_region: the body of the small package\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, package, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, package) < 0.03\nStep 2: grasp(package)\n  affordance_region: the body of the small package\n  contact: holding(package) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(package)\nStep 3: transport(package -> right_desk)\n  affordance_region: an empty area on the right side of the desk\n  spatial: above(package, right_desk, 0.05) [completion]\n  safety: no_drop(package)\n  done_when: above(package, right_desk, 0.05)\nStep 4: place(package -> right_desk)\n  affordance_region: an empty area on the right side of the desk\n  contact: surface_contact(package, right_desk) [completion]; released(package) [completion]\n  pose: stable(package) [completion]\n  done_when: surface_contact(package, right_desk) AND released(package)\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [
+      {
+        "pred": "on",
+        "args": [
+          "package",
+          "right_desk"
+        ]
+      },
+      {
+        "pred": "stable",
+        "args": [
+          "package"
+        ]
+      }
+    ],
+    "scene_objects": [
+      "package",
+      "right_desk",
+      "desk"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "package",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "package",
+        "affordance_region": "the body of the small package",
+        "done_when": "distance(gripper, package) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "package"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "package",
+        "affordance_region": "the body of the small package",
+        "done_when": "holding(package)"
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "package",
+                "right_desk",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "package"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "package",
+        "destination": "right_desk",
+        "affordance_region": "an empty area on the right side of the desk",
+        "done_when": "above(package, right_desk, 0.05)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "surface_contact",
+              "args": [
+                "package",
+                "right_desk"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "package"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "package"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "place",
+        "target": "package",
+        "destination": "right_desk",
+        "affordance_region": "an empty area on the right side of the desk",
+        "done_when": "surface_contact(package, right_desk) AND released(package)"
+      }
+    ]
+  }
+}

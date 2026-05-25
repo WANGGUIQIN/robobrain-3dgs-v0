@@ -1,0 +1,116 @@
+{
+  "task": "push the door to the left side",
+  "scene_objects": [
+    "door",
+    "robot_arm",
+    "workspace"
+  ],
+  "num_steps": 2,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "door",
+      "affordance": [
+        0.892,
+        0.36
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "door",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "workspace"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, door) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        0.6475,
+        -0.2331,
+        1.442
+      ],
+      "affordance_hint": "the door"
+    },
+    {
+      "step": 2,
+      "action": "push",
+      "target": "door",
+      "affordance": [
+        0.875,
+        0.35
+      ],
+      "approach": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "door"
+            ],
+            "role": "completion"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "aligned_xy",
+            "args": [
+              "door",
+              "left_side",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "door",
+              "workspace"
+            ]
+          }
+        ]
+      },
+      "done_when": "aligned_xy(door, left_side, 0.03)",
+      "affordance_3d": [
+        0.6263,
+        -0.2479,
+        1.453
+      ],
+      "affordance_hint": "the center of the door"
+    }
+  ]
+}

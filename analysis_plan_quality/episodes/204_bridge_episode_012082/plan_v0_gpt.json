@@ -1,0 +1,232 @@
+{
+  "task": "bring the orange to the front edge from back",
+  "scene_objects": [
+    "orange",
+    "spoon",
+    "metal_bowl",
+    "table"
+  ],
+  "num_steps": 4,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "orange",
+      "affordance": [
+        0.428,
+        0.341
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "orange",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "spoon"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, orange) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        -0.2128,
+        -0.4846,
+        2.6322
+      ],
+      "affordance_hint": "the orange"
+    },
+    {
+      "step": 2,
+      "action": "grasp",
+      "target": "orange",
+      "affordance": [
+        0.428,
+        0.341
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "orange"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "holding",
+            "args": [
+              "orange"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              0,
+              0,
+              -1
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "holding(orange)",
+      "affordance_3d": [
+        -0.2128,
+        -0.4846,
+        2.6322
+      ],
+      "affordance_hint": "orange"
+    },
+    {
+      "step": 3,
+      "action": "transport",
+      "target": "orange",
+      "destination": "front_edge",
+      "affordance": [
+        0.468,
+        0.7
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "orange"
+            ],
+            "role": "safety"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "above",
+            "args": [
+              "orange",
+              "table",
+              0.05
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "orange",
+              "spoon"
+            ]
+          },
+          {
+            "pred": "no_drop",
+            "args": [
+              "orange"
+            ]
+          }
+        ]
+      },
+      "done_when": "above(orange, front_edge, 0.05) AND aligned_xy(orange, front_edge, 0.03)",
+      "affordance_3d": [
+        -0.0376,
+        0.2398,
+        1.0471
+      ],
+      "affordance_hint": "an empty area on the front edge"
+    },
+    {
+      "step": 4,
+      "action": "place",
+      "target": "orange",
+      "destination": "front_edge",
+      "affordance": [
+        0.468,
+        0.7
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "surface_contact",
+            "args": [
+              "orange",
+              "table"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "released",
+            "args": [
+              "orange"
+            ],
+            "role": "completion"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "stable",
+            "args": [
+              "orange"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "support_stable",
+            "args": [
+              "orange"
+            ]
+          }
+        ]
+      },
+      "done_when": "surface_contact(orange, table) AND released(orange) AND stable(orange)",
+      "affordance_3d": [
+        -0.0376,
+        0.2398,
+        1.0471
+      ],
+      "affordance_hint": "an empty area on the front edge"
+    }
+  ]
+}

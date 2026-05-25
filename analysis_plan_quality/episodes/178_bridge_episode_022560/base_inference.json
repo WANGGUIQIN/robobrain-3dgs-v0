@@ -1,0 +1,169 @@
+{
+  "task": "Place the red and white vegetable to the bottom right corner of the table.",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_3epoch/best",
+  "raw": "**SCENE ANALYSIS -** A red and white vegetable (likely a tomato) is on a wooden table. A blue plate is on the table, and a metal bowl is on the blue plate. The vegetable is a rigid object with a smooth surface. STRATEGY - First, reach and grasp the vegetable. Then, transport it to the bottom right corner of the table. Failure modes include dropping the vegetable during transport or misplacing it. AFFORDANCE REASONING - Step 1 reach the vegetable at its body for a stable grasp; Step 2 grasp the vegetable for secure hold; Step 3 transport the vegetable to the bottom right corner; Step 4 place the vegetable there.\n\nGoal: on(red_and_white_vegetable, table); position(red_and_white_vegetable, bottom_right_corner)\nScene: red_and_white_vegetable, table, blue_plate, metal_bowl\nStep 1: reach(red_and_white_vegetable)\n  affordance_region: the body of the red and white vegetable\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, red_and_white_vegetable, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, red_and_white_vegetable) < 0.03\nStep 2: grasp(red_and_white_vegetable)\n  affordance_region: the body of the red and white vegetable\n  contact: holding(red_and_white_vegetable) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(red_and_white_vegetable)\nStep 3: transport(red_and_white_vegetable -> table)\n  affordance_region: the bottom right corner of the table\n  spatial: above(red_and_white_vegetable, table, 0.05) [completion]\n  safety: no_drop(red_and_white_vegetable)\n  done_when: above(red_and_white_vegetable, table, 0.05)\nStep 4: place(red_and_white_vegetable -> table)\n  affordance_region: the bottom right corner of the table\n  contact: surface_contact(red_and_white_vegetable, table) [completion]; released(red_and_white_vegetable) [completion]\n  pose: position(red_and_white_vegetable, bottom_right_corner) [completion]\n  done_when: surface_contact(red_and_white_vegetable, table) AND released(red_and_white_vegetable)\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [
+      {
+        "pred": "on",
+        "args": [
+          "red_and_white_vegetable",
+          "table"
+        ]
+      },
+      {
+        "pred": "position",
+        "args": [
+          "red_and_white_vegetable",
+          "bottom_right_corner"
+        ]
+      }
+    ],
+    "scene_objects": [
+      "red_and_white_vegetable",
+      "table",
+      "blue_plate",
+      "metal_bowl"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "red_and_white_vegetable",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "red_and_white_vegetable",
+        "affordance_region": "the body of the red and white vegetable",
+        "done_when": "distance(gripper, red_and_white_vegetable) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "red_and_white_vegetable"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "red_and_white_vegetable",
+        "affordance_region": "the body of the red and white vegetable",
+        "done_when": "holding(red_and_white_vegetable)"
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "red_and_white_vegetable",
+                "table",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "red_and_white_vegetable"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "red_and_white_vegetable",
+        "destination": "table",
+        "affordance_region": "the bottom right corner of the table",
+        "done_when": "above(red_and_white_vegetable, table, 0.05)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "surface_contact",
+              "args": [
+                "red_and_white_vegetable",
+                "table"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "red_and_white_vegetable"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "position",
+              "args": [
+                "red_and_white_vegetable",
+                "bottom_right_corner"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "place",
+        "target": "red_and_white_vegetable",
+        "destination": "table",
+        "affordance_region": "the bottom right corner of the table",
+        "done_when": "surface_contact(red_and_white_vegetable, table) AND released(red_and_white_vegetable)"
+      }
+    ]
+  }
+}

@@ -1,0 +1,177 @@
+{
+  "task": "pick up the orange fruit",
+  "scene_objects": [
+    "orange_fruit",
+    "black_bowl",
+    "white_plate",
+    "table"
+  ],
+  "num_steps": 3,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "orange_fruit",
+      "affordance": [
+        0.584,
+        0.308
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "orange_fruit",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "black_bowl"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, orange_fruit) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        0.2697,
+        -0.6007,
+        2.73
+      ],
+      "affordance_hint": "the orange fruit in the black bowl",
+      "affordance_hint_original": "the orange fruit",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 2,
+      "action": "grasp",
+      "target": "orange_fruit",
+      "affordance": [
+        0.584,
+        0.308
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "orange_fruit"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "holding",
+            "args": [
+              "orange_fruit"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              0,
+              0,
+              -1
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "holding(orange_fruit)",
+      "affordance_3d": [
+        0.2697,
+        -0.6007,
+        2.73
+      ],
+      "affordance_hint": "the orange fruit in the black bowl",
+      "affordance_hint_original": "orange fruit",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 3,
+      "action": "transport",
+      "target": "orange_fruit",
+      "affordance": [
+        0.584,
+        0.41
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "orange_fruit"
+            ],
+            "role": "safety"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "clear_path",
+            "args": [
+              "orange_fruit"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "orange_fruit",
+              "table"
+            ]
+          },
+          {
+            "pred": "no_drop",
+            "args": [
+              "orange_fruit"
+            ]
+          }
+        ]
+      },
+      "done_when": "clear_path(orange_fruit) AND holding(orange_fruit)",
+      "affordance_3d": [
+        0.2774,
+        -0.29,
+        2.8083
+      ],
+      "affordance_hint": "an empty area on the orange fruit",
+      "affordance_hint_original": "an empty area on the orange fruit",
+      "affordance_hint_confidence": "rejected:missing_token:orange fruit"
+    }
+  ]
+}

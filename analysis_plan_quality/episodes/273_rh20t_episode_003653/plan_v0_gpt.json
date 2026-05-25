@@ -1,0 +1,226 @@
+{
+  "task": "Slice the carrots",
+  "scene_objects": [
+    "carrots",
+    "knife",
+    "cutting_board",
+    "table"
+  ],
+  "num_steps": 4,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "knife",
+      "affordance": [
+        0.5,
+        0.375
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "knife",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "table"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, knife) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        -0.9101,
+        -0.3982,
+        1.5168
+      ],
+      "affordance_hint": "the knife"
+    },
+    {
+      "step": 2,
+      "action": "grasp",
+      "target": "knife",
+      "affordance": [
+        0.526,
+        0.45
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "knife"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "holding",
+            "args": [
+              "knife"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              0,
+              0,
+              -1
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "holding(knife)",
+      "affordance_3d": [
+        -1.0126,
+        -0.3558,
+        1.7516
+      ],
+      "affordance_hint": "the handle of the knife"
+    },
+    {
+      "step": 3,
+      "action": "slice",
+      "target": "carrots",
+      "affordance": [
+        0.6,
+        0.6
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "knife"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "aligned_xy",
+            "args": [
+              "knife",
+              "carrots"
+            ],
+            "role": "completion"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "stable",
+            "args": [
+              "carrots"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "knife",
+              "cutting_board"
+            ]
+          }
+        ]
+      },
+      "done_when": "aligned_xy(knife, carrots) AND stable(carrots)",
+      "affordance_3d": [
+        -1.0102,
+        -0.1582,
+        1.9473
+      ],
+      "affordance_hint": "carrots"
+    },
+    {
+      "step": 4,
+      "action": "release",
+      "target": "knife",
+      "affordance": [
+        0.5,
+        0.375
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "released",
+            "args": [
+              "knife"
+            ],
+            "role": "completion"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "on_surface",
+            "args": [
+              "knife",
+              "table"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "knife",
+              "carrots"
+            ]
+          }
+        ]
+      },
+      "done_when": "released(knife) AND on_surface(knife, table)",
+      "affordance_3d": [
+        -0.9101,
+        -0.3982,
+        1.5168
+      ],
+      "affordance_hint": "the knife"
+    }
+  ]
+}

@@ -1,0 +1,142 @@
+{
+  "task": "knock water bottle over",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_3epoch/best",
+  "raw": "**SCENE ANALYSIS -** A clear plastic water bottle with a white cap stands on a gray table, next to an orange. The bottle is rigid and cylindrical. STRATEGY - To knock the bottle over, first grasp it near the cap for control, then apply a forceful push in a direction away from the table's edge to tip it over. Failure modes include slipping during grasp or pushing too gently. AFFORDANCE REASONING - Step 1 reach the bottle at its cap for a secure grip; Step 2 grasp the cap for stability; Step 3 push the bottle's body in a direction to tip it over the table's edge.\n\nGoal: knocked_over(water_bottle)\nScene: water_bottle, orange, table\nStep 1: reach(water_bottle)\n  affordance_region: the cap of the water bottle\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, water_bottle, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, water_bottle) < 0.03\nStep 2: grasp(water_bottle)\n  affordance_region: the cap of the water bottle\n  contact: holding(water_bottle) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(water_bottle)\nStep 3: push(water_bottle -> table_edge)\n  affordance_region: the body of the water bottle\n  contact: pushing(water_bottle) [completion]\n  spatial: direction(push, table_edge) [completion]\n  direction: push_axis(1, 0, 0) [progress]\n  safety: no_slip(water_bottle)\n  done_when: knocked_over(water_bottle)\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [
+      {
+        "pred": "knocked_over",
+        "args": [
+          "water_bottle"
+        ]
+      }
+    ],
+    "scene_objects": [
+      "water_bottle",
+      "orange",
+      "table"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "water_bottle",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "water_bottle",
+        "affordance_region": "the cap of the water bottle",
+        "done_when": "distance(gripper, water_bottle) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "water_bottle"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "water_bottle",
+        "affordance_region": "the cap of the water bottle",
+        "done_when": "holding(water_bottle)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "pushing",
+              "args": [
+                "water_bottle"
+              ],
+              "role": "completion"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "direction",
+              "args": [
+                "push",
+                "table_edge"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "push_axis",
+              "args": [
+                "1",
+                "0",
+                "0"
+              ],
+              "role": "progress"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_slip",
+              "args": [
+                "water_bottle"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "push",
+        "target": "water_bottle",
+        "destination": "table_edge",
+        "affordance_region": "the body of the water bottle",
+        "done_when": "knocked_over(water_bottle)"
+      }
+    ]
+  }
+}

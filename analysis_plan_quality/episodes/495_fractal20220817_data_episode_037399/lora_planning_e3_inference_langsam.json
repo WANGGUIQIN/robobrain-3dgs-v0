@@ -1,0 +1,226 @@
+{
+  "task": "move water bottle near sponge",
+  "scene_objects": [
+    "water_bottle",
+    "sponge",
+    "table"
+  ],
+  "steps": [
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "water_bottle",
+              "<",
+              "0.03"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "approach_axis",
+            "args": [
+              "0",
+              "0",
+              "-1"
+            ],
+            "role": "progress"
+          }
+        ]
+      },
+      "step": 1,
+      "action": "reach",
+      "target": "water_bottle",
+      "affordance_region": "the body of the transparent water bottle",
+      "done_when": "distance(gripper, water_bottle) < 0.03",
+      "affordance_hint": "the body of the transparent water bottle",
+      "refine_prompt": "the body of the transparent water bottle",
+      "refine_cache_hit": false,
+      "affordance_refined": [
+        0.6953,
+        0.1367
+      ],
+      "affordance_3d_refined": [
+        0.4548,
+        -0.8459,
+        2.0256
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.4552
+    },
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "water_bottle"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              "0",
+              "0",
+              "-1"
+            ],
+            "role": "progress"
+          }
+        ]
+      },
+      "step": 2,
+      "action": "grasp",
+      "target": "water_bottle",
+      "affordance_region": "the body of the water bottle",
+      "done_when": "holding(water_bottle)",
+      "affordance_hint": "the body of the water bottle",
+      "refine_prompt": "the body of the water bottle",
+      "refine_cache_hit": false,
+      "affordance_refined": [
+        0.6719,
+        0.2773
+      ],
+      "affordance_3d_refined": [
+        0.3654,
+        -0.4734,
+        1.8495
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.3183
+    },
+    {
+      "constraints": {
+        "spatial": [
+          {
+            "pred": "above",
+            "args": [
+              "water_bottle",
+              "sponge",
+              "0.05"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_drop",
+            "args": [
+              "water_bottle"
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "step": 3,
+      "action": "transport",
+      "target": "water_bottle",
+      "destination": "near_sponge",
+      "affordance_region": "an empty area on the table near the sponge",
+      "done_when": "above(water_bottle, sponge, 0.05)",
+      "affordance_hint": "an empty area on the table near the sponge",
+      "refine_prompt": "an empty area on the table near the sponge",
+      "refine_cache_hit": false,
+      "affordance_refined": [
+        0.0234,
+        0.1328
+      ],
+      "affordance_3d_refined": [
+        -0.5844,
+        -0.4502,
+        1.0667
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.3503
+    },
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "surface_contact",
+            "args": [
+              "water_bottle",
+              "table"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "released",
+            "args": [
+              "water_bottle"
+            ],
+            "role": "completion"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "stable",
+            "args": [
+              "water_bottle"
+            ],
+            "role": "completion"
+          }
+        ]
+      },
+      "step": 4,
+      "action": "place",
+      "target": "water_bottle",
+      "destination": "near_sponge",
+      "affordance_region": "an empty area on the table near the sponge",
+      "done_when": "surface_contact(water_bottle, table) AND released(water_bottle) AND stable(water_bottle)",
+      "affordance_hint": "an empty area on the table near the sponge",
+      "refine_prompt": "an empty area on the table near the sponge",
+      "refine_cache_hit": true,
+      "affordance_refined": [
+        0.0234,
+        0.1328
+      ],
+      "affordance_3d_refined": [
+        -0.5844,
+        -0.4502,
+        1.0667
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.3503
+    }
+  ]
+}

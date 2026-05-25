@@ -1,0 +1,226 @@
+{
+  "task": "put the chocolate jello in the cupboard",
+  "scene_objects": [
+    "chocolate_jello",
+    "cupboard",
+    "table"
+  ],
+  "steps": [
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "chocolate_jello",
+              "<",
+              "0.03"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "approach_axis",
+            "args": [
+              "0",
+              "0",
+              "-1"
+            ],
+            "role": "progress"
+          }
+        ]
+      },
+      "step": 1,
+      "action": "reach",
+      "target": "chocolate_jello",
+      "affordance_region": "the body of the chocolate jello",
+      "done_when": "distance(gripper, chocolate_jello) < 0.03",
+      "affordance_hint": "the body of the chocolate jello",
+      "refine_prompt": "the body of the chocolate jello",
+      "refine_cache_hit": false,
+      "affordance_refined": [
+        0.2461,
+        0.0
+      ],
+      "affordance_3d_refined": [
+        -1.2596,
+        -2.4805,
+        2.4805
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.5963
+    },
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "chocolate_jello"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              "0",
+              "0",
+              "-1"
+            ],
+            "role": "progress"
+          }
+        ]
+      },
+      "step": 2,
+      "action": "grasp",
+      "target": "chocolate_jello",
+      "affordance_region": "the body of the chocolate jello",
+      "done_when": "holding(chocolate_jello)",
+      "affordance_hint": "the body of the chocolate jello",
+      "refine_prompt": "the body of the chocolate jello",
+      "refine_cache_hit": true,
+      "affordance_refined": [
+        0.2461,
+        0.0
+      ],
+      "affordance_3d_refined": [
+        -1.2596,
+        -2.4805,
+        2.4805
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.5963
+    },
+    {
+      "constraints": {
+        "spatial": [
+          {
+            "pred": "above",
+            "args": [
+              "chocolate_jello",
+              "cupboard",
+              "0.05"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_drop",
+            "args": [
+              "chocolate_jello"
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "step": 3,
+      "action": "transport",
+      "target": "chocolate_jello",
+      "destination": "cupboard",
+      "affordance_region": "an empty area on the cupboard",
+      "done_when": "above(chocolate_jello, cupboard, 0.05)",
+      "affordance_hint": "an empty area on the cupboard",
+      "refine_prompt": "an empty area on the cupboard",
+      "refine_cache_hit": false,
+      "affordance_refined": [
+        0.2461,
+        0.0
+      ],
+      "affordance_3d_refined": [
+        -1.2587,
+        -2.4786,
+        2.4786
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.3325
+    },
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "surface_contact",
+            "args": [
+              "chocolate_jello",
+              "cupboard"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "released",
+            "args": [
+              "chocolate_jello"
+            ],
+            "role": "completion"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "stable",
+            "args": [
+              "chocolate_jello"
+            ],
+            "role": "completion"
+          }
+        ]
+      },
+      "step": 4,
+      "action": "place",
+      "target": "chocolate_jello",
+      "destination": "cupboard",
+      "affordance_region": "an empty area on the cupboard",
+      "done_when": "surface_contact(chocolate_jello, cupboard) AND released(chocolate_jello)",
+      "affordance_hint": "an empty area on the cupboard",
+      "refine_prompt": "an empty area on the cupboard",
+      "refine_cache_hit": true,
+      "affordance_refined": [
+        0.2461,
+        0.0
+      ],
+      "affordance_3d_refined": [
+        -1.2587,
+        -2.4786,
+        2.4786
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.3325
+    }
+  ]
+}

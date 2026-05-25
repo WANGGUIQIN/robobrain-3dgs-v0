@@ -1,0 +1,151 @@
+{
+  "task": "Move the empty plastic pack of snack forward",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_planning_3epoch/checkpoint-39957",
+  "raw": "Scene: empty_plastic_pack, table\nStep 1: reach(empty_plastic_pack)\n  affordance_region: the empty plastic pack\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, empty_plastic_pack, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, empty_plastic_pack) < 0.03\nStep 2: grasp(empty_plastic_pack)\n  affordance_region: the empty plastic pack\n  contact: holding(empty_plastic_pack) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(empty_plastic_pack)\nStep 3: transport(empty_plastic_pack -> forward_position)\n  affordance_region: an empty area on the forward position\n  spatial: above(empty_plastic_pack, table, 0.05) [completion]\n  safety: no_drop(empty_plastic_pack)\n  done_when: above(empty_plastic_pack, table, 0.05)\nStep 4: place(empty_plastic_pack -> forward_position)\n  affordance_region: an empty area on the forward position\n  contact: surface_contact(empty_plastic_pack, table) [completion]; released(empty_plastic_pack) [completion]\n  pose: stable(empty_plastic_pack) [completion]\n  done_when: surface_contact(empty_plastic_pack, table) AND released(empty_plastic_pack)\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [],
+    "scene_objects": [
+      "empty_plastic_pack",
+      "table"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "empty_plastic_pack",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "empty_plastic_pack",
+        "affordance_region": "the empty plastic pack",
+        "done_when": "distance(gripper, empty_plastic_pack) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "empty_plastic_pack"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "empty_plastic_pack",
+        "affordance_region": "the empty plastic pack",
+        "done_when": "holding(empty_plastic_pack)"
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "empty_plastic_pack",
+                "table",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "empty_plastic_pack"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "empty_plastic_pack",
+        "destination": "forward_position",
+        "affordance_region": "an empty area on the forward position",
+        "done_when": "above(empty_plastic_pack, table, 0.05)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "surface_contact",
+              "args": [
+                "empty_plastic_pack",
+                "table"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "empty_plastic_pack"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "empty_plastic_pack"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "place",
+        "target": "empty_plastic_pack",
+        "destination": "forward_position",
+        "affordance_region": "an empty area on the forward position",
+        "done_when": "surface_contact(empty_plastic_pack, table) AND released(empty_plastic_pack)"
+      }
+    ]
+  }
+}

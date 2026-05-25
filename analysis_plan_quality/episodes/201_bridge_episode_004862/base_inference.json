@@ -1,0 +1,161 @@
+{
+  "task": "Place croissant inside of silver pot.",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_3epoch/best",
+  "raw": "**SCENE ANALYSIS -** A silver pot with a handle sits on a yellow cloth on a wooden surface. A croissant is on the cloth to the left of the pot. The pot is metallic and has a handle; the croissant is a light brown pastry. STRATEGY - First, reach for and grasp the croissant. Then, transport it to the pot. Finally, place the croissant inside the pot. Failure modes include dropping the croissant during transport or misplacing it. AFFORDANCE REASONING - Step 1 reach the croissant at its body for a stable grasp. Step 2 grasp the croissant at its body for secure hold. Step 3 transport the croissant to the pot's opening. Step 4 place the croissant inside the pot's interior.\n\nGoal: inside(croissant, silver_pot)\nScene: silver_pot, croissant, yellow_cloth, wooden_surface\nStep 1: reach(croissant)\n  affordance_region: the body of the croissant\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, croissant, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, croissant) < 0.03\nStep 2: grasp(croissant)\n  affordance_region: the body of the croissant\n  contact: holding(croissant) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(croissant)\nStep 3: transport(croissant -> silver_pot)\n  affordance_region: the opening of the silver pot\n  spatial: above(croissant, silver_pot, 0.05) [completion]\n  safety: no_drop(croissant)\n  done_when: above(croissant, silver_pot, 0.05)\nStep 4: place(croissant -> silver_pot)\n  affordance_region: the interior of the silver pot\n  contact: inside(croissant, silver_pot) [completion]; released(croissant) [completion]\n  pose: stable(croissant) [completion]\n  done_when: inside(croissant, silver_pot) AND released(croissant)\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [
+      {
+        "pred": "inside",
+        "args": [
+          "croissant",
+          "silver_pot"
+        ]
+      }
+    ],
+    "scene_objects": [
+      "silver_pot",
+      "croissant",
+      "yellow_cloth",
+      "wooden_surface"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "croissant",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "croissant",
+        "affordance_region": "the body of the croissant",
+        "done_when": "distance(gripper, croissant) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "croissant"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "croissant",
+        "affordance_region": "the body of the croissant",
+        "done_when": "holding(croissant)"
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "croissant",
+                "silver_pot",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "croissant"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "croissant",
+        "destination": "silver_pot",
+        "affordance_region": "the opening of the silver pot",
+        "done_when": "above(croissant, silver_pot, 0.05)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "inside",
+              "args": [
+                "croissant",
+                "silver_pot"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "croissant"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "croissant"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "place",
+        "target": "croissant",
+        "destination": "silver_pot",
+        "affordance_region": "the interior of the silver pot",
+        "done_when": "inside(croissant, silver_pot) AND released(croissant)"
+      }
+    ]
+  }
+}

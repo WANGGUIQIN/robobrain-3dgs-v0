@@ -1,0 +1,233 @@
+{
+  "task": "place pot on green foam. pot placed on foam",
+  "scene_objects": [
+    "pot",
+    "green_foam",
+    "table",
+    "purple_tool",
+    "blue_scoop"
+  ],
+  "num_steps": 4,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "pot",
+      "affordance": [
+        0.525,
+        0.316
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "pot",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "table"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, pot) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        0.043,
+        -0.3366,
+        1.5951
+      ],
+      "affordance_hint": "the pot"
+    },
+    {
+      "step": 2,
+      "action": "grasp",
+      "target": "pot",
+      "affordance": [
+        0.225,
+        0.125
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "pot"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "holding",
+            "args": [
+              "pot"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              0,
+              0,
+              -1
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "holding(pot)",
+      "affordance_3d": [
+        -1.2825,
+        -1.7589,
+        4.0803
+      ],
+      "affordance_hint": "the handle of the pot"
+    },
+    {
+      "step": 3,
+      "action": "transport",
+      "target": "pot",
+      "destination": "green_foam",
+      "affordance": [
+        0.625,
+        0.725
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "pot"
+            ],
+            "role": "safety"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "above",
+            "args": [
+              "pot",
+              "green_foam",
+              0.05
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "pot",
+              "table"
+            ]
+          },
+          {
+            "pred": "no_drop",
+            "args": [
+              "pot"
+            ]
+          }
+        ]
+      },
+      "done_when": "above(pot, green_foam, 0.05) AND aligned_xy(pot, green_foam, 0.03)",
+      "affordance_3d": [
+        0.4513,
+        0.818,
+        3.141
+      ],
+      "affordance_hint": "an empty area on the green foam"
+    },
+    {
+      "step": 4,
+      "action": "place",
+      "target": "pot",
+      "destination": "green_foam",
+      "affordance": [
+        0.625,
+        0.725
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "surface_contact",
+            "args": [
+              "pot",
+              "green_foam"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "released",
+            "args": [
+              "pot"
+            ],
+            "role": "completion"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "stable",
+            "args": [
+              "pot"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "support_stable",
+            "args": [
+              "pot"
+            ]
+          }
+        ]
+      },
+      "done_when": "surface_contact(pot, green_foam) AND released(pot) AND stable(pot)",
+      "affordance_3d": [
+        0.4513,
+        0.818,
+        3.141
+      ],
+      "affordance_hint": "an empty area on the green foam"
+    }
+  ]
+}

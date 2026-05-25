@@ -1,0 +1,226 @@
+{
+  "task": "put the crackers in the cupboard",
+  "scene_objects": [
+    "crackers",
+    "cupboard",
+    "table"
+  ],
+  "steps": [
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "crackers",
+              "<",
+              "0.03"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "approach_axis",
+            "args": [
+              "0",
+              "0",
+              "-1"
+            ],
+            "role": "progress"
+          }
+        ]
+      },
+      "step": 1,
+      "action": "reach",
+      "target": "crackers",
+      "affordance_region": "the crackers",
+      "done_when": "distance(gripper, crackers) < 0.03",
+      "affordance_hint": "the crackers",
+      "refine_prompt": "the crackers",
+      "refine_cache_hit": false,
+      "affordance_refined": [
+        0.5938,
+        0.9961
+      ],
+      "affordance_3d_refined": [
+        0.3915,
+        2.0717,
+        2.088
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.6213
+    },
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "crackers"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              "0",
+              "0",
+              "-1"
+            ],
+            "role": "progress"
+          }
+        ]
+      },
+      "step": 2,
+      "action": "grasp",
+      "target": "crackers",
+      "affordance_region": "the body of the crackers",
+      "done_when": "holding(crackers)",
+      "affordance_hint": "the body of the crackers",
+      "refine_prompt": "the body of the crackers",
+      "refine_cache_hit": false,
+      "affordance_refined": [
+        0.5938,
+        0.9961
+      ],
+      "affordance_3d_refined": [
+        0.3915,
+        2.0717,
+        2.088
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.5129
+    },
+    {
+      "constraints": {
+        "spatial": [
+          {
+            "pred": "above",
+            "args": [
+              "crackers",
+              "cupboard",
+              "0.05"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_drop",
+            "args": [
+              "crackers"
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "step": 3,
+      "action": "transport",
+      "target": "crackers",
+      "destination": "cupboard",
+      "affordance_region": "an empty area on the cupboard",
+      "done_when": "above(crackers, cupboard, 0.05)",
+      "affordance_hint": "an empty area on the cupboard",
+      "refine_prompt": "an empty area on the cupboard",
+      "refine_cache_hit": false,
+      "affordance_refined": [
+        0.5938,
+        0.9961
+      ],
+      "affordance_3d_refined": [
+        0.3915,
+        2.0717,
+        2.088
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.3955
+    },
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "surface_contact",
+            "args": [
+              "crackers",
+              "cupboard"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "released",
+            "args": [
+              "crackers"
+            ],
+            "role": "completion"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "stable",
+            "args": [
+              "crackers"
+            ],
+            "role": "completion"
+          }
+        ]
+      },
+      "step": 4,
+      "action": "place",
+      "target": "crackers",
+      "destination": "cupboard",
+      "affordance_region": "an empty area on the cupboard",
+      "done_when": "surface_contact(crackers, cupboard) AND released(crackers)",
+      "affordance_hint": "an empty area on the cupboard",
+      "refine_prompt": "an empty area on the cupboard",
+      "refine_cache_hit": true,
+      "affordance_refined": [
+        0.5938,
+        0.9961
+      ],
+      "affordance_3d_refined": [
+        0.3915,
+        2.0717,
+        2.088
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.3955
+    }
+  ]
+}

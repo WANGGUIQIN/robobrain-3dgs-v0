@@ -1,0 +1,242 @@
+{
+  "task": "put the ring on the green spoke",
+  "scene_objects": [
+    "ring",
+    "green_spoke",
+    "black_spoke",
+    "white_spoke",
+    "base"
+  ],
+  "num_steps": 4,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "ring",
+      "affordance": [
+        0.476,
+        0.839
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "ring",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "base"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, ring) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        -0.1356,
+        1.9661,
+        2.8926
+      ],
+      "affordance_hint": "the ring"
+    },
+    {
+      "step": 2,
+      "action": "grasp",
+      "target": "ring",
+      "affordance": [
+        0.48,
+        0.5
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "ring"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "holding",
+            "args": [
+              "ring"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              0,
+              0,
+              -1
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "holding(ring)",
+      "affordance_3d": [
+        -0.1787,
+        0.0,
+        4.5735
+      ],
+      "affordance_hint": "the handle of the ring"
+    },
+    {
+      "step": 3,
+      "action": "transport",
+      "target": "ring",
+      "destination": "green_spoke",
+      "affordance": [
+        0.226,
+        0.726
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "ring"
+            ],
+            "role": "safety"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "above",
+            "args": [
+              "ring",
+              "green_spoke",
+              0.05
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "aligned_xy",
+            "args": [
+              "ring",
+              "green_spoke",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "ring",
+              "base"
+            ]
+          },
+          {
+            "pred": "no_drop",
+            "args": [
+              "ring"
+            ]
+          }
+        ]
+      },
+      "done_when": "above(ring, green_spoke, 0.05) AND aligned_xy(ring, green_spoke, 0.03)",
+      "affordance_3d": [
+        -1.0837,
+        0.8979,
+        1.9816
+      ],
+      "affordance_hint": "an empty area on the green spoke"
+    },
+    {
+      "step": 4,
+      "action": "place",
+      "target": "ring",
+      "destination": "green_spoke",
+      "affordance": [
+        0.226,
+        0.726
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "surface_contact",
+            "args": [
+              "ring",
+              "green_spoke"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "released",
+            "args": [
+              "ring"
+            ],
+            "role": "completion"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "stable",
+            "args": [
+              "ring"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "support_stable",
+            "args": [
+              "ring"
+            ]
+          }
+        ]
+      },
+      "done_when": "surface_contact(ring, green_spoke) AND released(ring) AND stable(ring)",
+      "affordance_3d": [
+        -1.0837,
+        0.8979,
+        1.9816
+      ],
+      "affordance_hint": "an empty area on the green spoke"
+    }
+  ]
+}

@@ -1,0 +1,240 @@
+{
+  "task": "store the grasped pink object in the box",
+  "scene_objects": [
+    "pink_object",
+    "box",
+    "table"
+  ],
+  "num_steps": 4,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "pink_object",
+      "affordance": [
+        0.2,
+        0.936
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "pink_object",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "box"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, pink_object) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        -0.567,
+        0.8248,
+        1.64
+      ],
+      "affordance_hint": "the pink object",
+      "affordance_hint_original": "the pink object",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 2,
+      "action": "grasp",
+      "target": "pink_object",
+      "affordance": [
+        0.441,
+        0.2
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "pink_object"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "holding",
+            "args": [
+              "pink_object"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              0,
+              0,
+              -1
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "holding(pink_object)",
+      "affordance_3d": [
+        -0.1258,
+        -0.6455,
+        1.867
+      ],
+      "affordance_hint": "the body of the pink object",
+      "affordance_hint_original": "the handle of the pink object",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 3,
+      "action": "transport",
+      "target": "pink_object",
+      "destination": "box",
+      "affordance": [
+        0.191,
+        0.22
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "pink_object"
+            ],
+            "role": "safety"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "above",
+            "args": [
+              "pink_object",
+              "box",
+              0.05
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "pink_object",
+              "box"
+            ]
+          },
+          {
+            "pred": "no_drop",
+            "args": [
+              "pink_object"
+            ]
+          }
+        ]
+      },
+      "done_when": "above(pink_object, box, 0.05) AND aligned_xy(pink_object, box, 0.03)",
+      "affordance_3d": [
+        -0.69,
+        -0.6288,
+        1.945
+      ],
+      "affordance_hint": "the empty area inside the box",
+      "affordance_hint_original": "an empty area on the box",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 4,
+      "action": "place",
+      "target": "pink_object",
+      "destination": "box",
+      "affordance": [
+        0.191,
+        0.22
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "surface_contact",
+            "args": [
+              "pink_object",
+              "box"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "released",
+            "args": [
+              "pink_object"
+            ],
+            "role": "completion"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "inside",
+            "args": [
+              "pink_object",
+              "box"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "support_stable",
+            "args": [
+              "pink_object"
+            ]
+          }
+        ]
+      },
+      "done_when": "surface_contact(pink_object, box) AND released(pink_object) AND inside(pink_object, box)",
+      "affordance_3d": [
+        -0.69,
+        -0.6288,
+        1.945
+      ],
+      "affordance_hint": "the empty area inside the box",
+      "affordance_hint_original": "an empty area on the box",
+      "affordance_hint_confidence": "ok"
+    }
+  ]
+}

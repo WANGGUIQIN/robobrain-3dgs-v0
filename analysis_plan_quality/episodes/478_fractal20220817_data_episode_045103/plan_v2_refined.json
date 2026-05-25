@@ -1,0 +1,177 @@
+{
+  "task": "pick pepsi can from bottom shelf of fridge",
+  "scene_objects": [
+    "pepsi_can",
+    "fridge",
+    "shelves"
+  ],
+  "num_steps": 3,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "pepsi_can",
+      "affordance": [
+        0.45,
+        0.1
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "pepsi_can",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "shelves"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, pepsi_can) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        -0.1674,
+        -1.3131,
+        2.867
+      ],
+      "affordance_hint": "the pepsi can on the bottom shelf of the fridge",
+      "affordance_hint_original": "the pepsi can",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 2,
+      "action": "grasp",
+      "target": "pepsi_can",
+      "affordance": [
+        0.475,
+        0.1
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "pepsi_can"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "holding",
+            "args": [
+              "pepsi_can"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              0,
+              0,
+              -1
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "holding(pepsi_can)",
+      "affordance_3d": [
+        -0.0778,
+        -1.3221,
+        2.8866
+      ],
+      "affordance_hint": "the body of the pepsi can",
+      "affordance_hint_original": "the handle of the pepsi can",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 3,
+      "action": "transport",
+      "target": "pepsi_can",
+      "affordance": [
+        0.406,
+        0.191
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "pepsi_can"
+            ],
+            "role": "safety"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "clear_path",
+            "args": [
+              "gripper",
+              "outside_fridge"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "pepsi_can",
+              "fridge"
+            ]
+          },
+          {
+            "pred": "no_drop",
+            "args": [
+              "pepsi_can"
+            ]
+          }
+        ]
+      },
+      "done_when": "clear_path(gripper, outside_fridge)",
+      "affordance_3d": [
+        -0.2478,
+        -0.8157,
+        2.2995
+      ],
+      "affordance_hint": "the empty area on the pepsi can",
+      "affordance_hint_original": "an empty area on the pepsi can",
+      "affordance_hint_confidence": "ok"
+    }
+  ]
+}

@@ -1,0 +1,240 @@
+{
+  "task": "put the soup in the cupboard",
+  "scene_objects": [
+    "soup_can",
+    "cupboard",
+    "table"
+  ],
+  "num_steps": 4,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "soup_can",
+      "affordance": [
+        0.953,
+        0.875
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "soup_can",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "table"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, soup_can) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        1.3931,
+        1.1529,
+        1.5373
+      ],
+      "affordance_hint": "the soup can"
+    },
+    {
+      "step": 2,
+      "action": "grasp",
+      "target": "soup_can",
+      "affordance": [
+        0.968,
+        0.835
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "soup_can"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "holding",
+            "args": [
+              "soup_can"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              0,
+              0,
+              -1
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "holding(soup_can)",
+      "affordance_3d": [
+        0.4076,
+        0.2921,
+        0.4348
+      ],
+      "affordance_hint": "the handle of the soup can"
+    },
+    {
+      "step": 3,
+      "action": "transport",
+      "target": "soup_can",
+      "destination": "cupboard",
+      "affordance": [
+        0.171,
+        0.57
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "soup_can"
+            ],
+            "role": "safety"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "above",
+            "args": [
+              "soup_can",
+              "cupboard",
+              0.05
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "aligned_xy",
+            "args": [
+              "soup_can",
+              "cupboard",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "soup_can",
+              "cupboard"
+            ]
+          },
+          {
+            "pred": "no_drop",
+            "args": [
+              "soup_can"
+            ]
+          }
+        ]
+      },
+      "done_when": "above(soup_can, cupboard, 0.05) AND aligned_xy(soup_can, cupboard, 0.03)",
+      "affordance_3d": [
+        -1.0342,
+        0.2216,
+        1.5759
+      ],
+      "affordance_hint": "an empty area on the cupboard"
+    },
+    {
+      "step": 4,
+      "action": "place",
+      "target": "soup_can",
+      "destination": "cupboard",
+      "affordance": [
+        0.171,
+        0.57
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "surface_contact",
+            "args": [
+              "soup_can",
+              "cupboard"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "released",
+            "args": [
+              "soup_can"
+            ],
+            "role": "completion"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "stable",
+            "args": [
+              "soup_can"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "support_stable",
+            "args": [
+              "soup_can"
+            ]
+          }
+        ]
+      },
+      "done_when": "surface_contact(soup_can, cupboard) AND released(soup_can) AND stable(soup_can)",
+      "affordance_3d": [
+        -1.0342,
+        0.2216,
+        1.5759
+      ],
+      "affordance_hint": "an empty area on the cupboard"
+    }
+  ]
+}

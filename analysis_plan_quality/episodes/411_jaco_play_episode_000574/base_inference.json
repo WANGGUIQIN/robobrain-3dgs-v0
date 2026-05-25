@@ -1,0 +1,153 @@
+{
+  "task": "place the burger meat in the oven",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_3epoch/best",
+  "raw": "SCENE ANALYSIS - A burger patty (brown, round) sits on a wooden table. A silver oven with a door is visible on the left. The patty is rigid and flat; the oven door is closed. STRATEGY - First, grasp the burger patty. Then, transport it to the oven. Finally, insert it into the oven's interior. Failure modes include dropping the patty, misaligning it with the oven opening, or failing to open the oven door. AFFORDANCE REASONING - Step 1: Reach for the burger patty at its body. Step 2: Grasp the patty at its body for a secure hold. Step 3: Transport the patty to the oven door. Step 4: Insert the patty into the oven's open interior.\nGoal: inside(burger_patty, oven)\nScene: burger_patty, oven, table\nStep 1: reach(burger_patty)\n  affordance_region: the body of the burger patty\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, burger_patty, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, burger_patty) < 0.03\nStep 2: grasp(burger_patty)\n  affordance_region: the body of the burger patty\n  contact: holding(burger_patty) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(burger_patty)\nStep 3: transport(burger_patty -> oven)\n  affordance_region: the open door of the oven\n  spatial: above(burger_patty, oven, 0.05) [completion]\n  safety: no_drop(burger_patty)\n  done_when: above(burger_patty, oven, 0.05)\nStep 4: insert(burger_patty -> oven)\n  affordance_region: the interior of the oven\n  contact: inside(burger_patty, oven) [completion]\n  pose: stable(burger_patty) [completion]\n  done_when: inside(burger_patty, oven)\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [
+      {
+        "pred": "inside",
+        "args": [
+          "burger_patty",
+          "oven"
+        ]
+      }
+    ],
+    "scene_objects": [
+      "burger_patty",
+      "oven",
+      "table"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "burger_patty",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "burger_patty",
+        "affordance_region": "the body of the burger patty",
+        "done_when": "distance(gripper, burger_patty) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "burger_patty"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "burger_patty",
+        "affordance_region": "the body of the burger patty",
+        "done_when": "holding(burger_patty)"
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "burger_patty",
+                "oven",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "burger_patty"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "burger_patty",
+        "destination": "oven",
+        "affordance_region": "the open door of the oven",
+        "done_when": "above(burger_patty, oven, 0.05)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "inside",
+              "args": [
+                "burger_patty",
+                "oven"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "burger_patty"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "insert",
+        "target": "burger_patty",
+        "destination": "oven",
+        "affordance_region": "the interior of the oven",
+        "done_when": "inside(burger_patty, oven)"
+      }
+    ]
+  }
+}

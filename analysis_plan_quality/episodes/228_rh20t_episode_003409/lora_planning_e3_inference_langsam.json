@@ -1,0 +1,235 @@
+{
+  "task": "Plug in the power cord to the socket",
+  "scene_objects": [
+    "power_cord",
+    "socket",
+    "table"
+  ],
+  "steps": [
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "power_cord",
+              "<",
+              "0.03"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "approach_axis",
+            "args": [
+              "0",
+              "0",
+              "-1"
+            ],
+            "role": "progress"
+          }
+        ]
+      },
+      "step": 1,
+      "action": "reach",
+      "target": "power_cord",
+      "affordance_region": "the white power cord on the table",
+      "done_when": "distance(gripper, power_cord) < 0.03",
+      "affordance_hint": "the white power cord on the table",
+      "refine_prompt": "the white power cord on the table",
+      "refine_cache_hit": false,
+      "affordance_refined": [
+        0.3828,
+        0.5117
+      ],
+      "affordance_3d_refined": [
+        -1.0658,
+        -0.2353,
+        1.5364
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.4126
+    },
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "power_cord"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              "0",
+              "0",
+              "-1"
+            ],
+            "role": "progress"
+          }
+        ]
+      },
+      "step": 2,
+      "action": "grasp",
+      "target": "power_cord",
+      "affordance_region": "the white power cord",
+      "done_when": "holding(power_cord)",
+      "affordance_hint": "the white power cord",
+      "refine_prompt": "the white power cord",
+      "refine_cache_hit": false,
+      "affordance_refined": [
+        0.3711,
+        0.5117
+      ],
+      "affordance_3d_refined": [
+        -1.0802,
+        -0.2353,
+        1.5364
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.4791
+    },
+    {
+      "constraints": {
+        "spatial": [
+          {
+            "pred": "above",
+            "args": [
+              "power_cord",
+              "socket",
+              "0.05"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_drop",
+            "args": [
+              "power_cord"
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "step": 3,
+      "action": "transport",
+      "target": "power_cord",
+      "destination": "socket",
+      "affordance_region": "an empty area on the socket",
+      "done_when": "above(power_cord, socket, 0.05)",
+      "affordance_hint": "an empty area on the socket",
+      "refine_prompt": "an empty area on the socket",
+      "refine_cache_hit": false,
+      "affordance_refined": [
+        0.4531,
+        0.543
+      ],
+      "affordance_3d_refined": [
+        -1.0418,
+        -0.2094,
+        1.6342
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.3448
+    },
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "inserted",
+            "args": [
+              "power_cord",
+              "socket"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "released",
+            "args": [
+              "power_cord"
+            ],
+            "role": "completion"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "stable",
+            "args": [
+              "power_cord"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "support_stable",
+            "args": [
+              "power_cord"
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "step": 4,
+      "action": "insert",
+      "target": "power_cord",
+      "destination": "socket",
+      "affordance_region": "the top opening of the socket",
+      "done_when": "inserted(power_cord, socket) AND released(power_cord)",
+      "affordance_hint": "the top opening of the socket",
+      "refine_prompt": "the top opening of the socket",
+      "refine_cache_hit": false,
+      "affordance_refined": [
+        0.4531,
+        0.543
+      ],
+      "affordance_3d_refined": [
+        -1.0418,
+        -0.2094,
+        1.6342
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.4489
+    }
+  ]
+}

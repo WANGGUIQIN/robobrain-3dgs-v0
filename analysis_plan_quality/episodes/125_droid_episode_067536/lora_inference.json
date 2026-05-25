@@ -1,0 +1,192 @@
+{
+  "task": "Open the top of the grill",
+  "parsed": {
+    "scene_objects": [
+      "grill",
+      "countertop"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "grill",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "grill",
+        "affordance_region": "the body of the grill",
+        "done_when": "distance(gripper, grill) < 0.03",
+        "affordance_hint": "the body of the grill",
+        "refine_prompt": "the body of the grill",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.457,
+          0.6836
+        ],
+        "affordance_3d_refined": [
+          -0.5996,
+          0.7669,
+          2.7887
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.324,
+        "affordance": [
+          0.457,
+          0.6836
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "grill"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "grill",
+        "affordance_region": "the handle of the grill",
+        "done_when": "holding(grill)",
+        "affordance_hint": "the handle of the grill",
+        "refine_prompt": "the handle of the grill",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.5469,
+          0.8945
+        ],
+        "affordance_3d_refined": [
+          -0.2006,
+          1.0933,
+          2.006
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.3011,
+        "affordance": [
+          0.5469,
+          0.8945
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "grill"
+              ],
+              "role": "safety"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "aligned_z",
+              "args": [
+                "grill",
+                "open_position"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "motion_dir",
+              "args": [
+                "0",
+                "1",
+                "0"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "pull",
+        "target": "grill",
+        "affordance_region": "the handle of the grill",
+        "done_when": "aligned_z(grill, open_position)",
+        "affordance_hint": "the handle of the grill",
+        "refine_prompt": "the handle of the grill",
+        "refine_cache_hit": true,
+        "affordance_refined": [
+          0.5469,
+          0.8945
+        ],
+        "affordance_3d_refined": [
+          -0.2006,
+          1.0933,
+          2.006
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.3011,
+        "affordance": [
+          0.5469,
+          0.8945
+        ]
+      }
+    ]
+  }
+}

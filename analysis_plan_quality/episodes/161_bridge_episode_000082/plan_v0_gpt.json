@@ -1,0 +1,232 @@
+{
+  "task": "Move the chocolate from the pan to the left of the cloth.",
+  "scene_objects": [
+    "chocolate",
+    "pan",
+    "cloth",
+    "table"
+  ],
+  "num_steps": 4,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "chocolate",
+      "affordance": [
+        0.5,
+        0.1
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "chocolate",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "pan"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, chocolate) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        0.0,
+        -1.9495,
+        4.2564
+      ],
+      "affordance_hint": "the chocolate"
+    },
+    {
+      "step": 2,
+      "action": "grasp",
+      "target": "chocolate",
+      "affordance": [
+        0.425,
+        0.1
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "chocolate"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "holding",
+            "args": [
+              "chocolate"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              0,
+              0,
+              -1
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "holding(chocolate)",
+      "affordance_3d": [
+        -0.3481,
+        -1.8688,
+        4.0803
+      ],
+      "affordance_hint": "the handle of the chocolate"
+    },
+    {
+      "step": 3,
+      "action": "transport",
+      "target": "chocolate",
+      "destination": "left_of_cloth",
+      "affordance": [
+        0.267,
+        0.687
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "chocolate"
+            ],
+            "role": "safety"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "above",
+            "args": [
+              "chocolate",
+              "table",
+              0.05
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "chocolate",
+              "cloth"
+            ]
+          },
+          {
+            "pred": "no_drop",
+            "args": [
+              "chocolate"
+            ]
+          }
+        ]
+      },
+      "done_when": "above(chocolate, table, 0.05) AND aligned_xy(chocolate, left_of_cloth, 0.03)",
+      "affordance_3d": [
+        -0.7355,
+        0.5884,
+        2.73
+      ],
+      "affordance_hint": "an empty area on the left of cloth"
+    },
+    {
+      "step": 4,
+      "action": "place",
+      "target": "chocolate",
+      "destination": "left_of_cloth",
+      "affordance": [
+        0.267,
+        0.687
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "surface_contact",
+            "args": [
+              "chocolate",
+              "table"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "released",
+            "args": [
+              "chocolate"
+            ],
+            "role": "completion"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "stable",
+            "args": [
+              "chocolate"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "support_stable",
+            "args": [
+              "chocolate"
+            ]
+          }
+        ]
+      },
+      "done_when": "surface_contact(chocolate, table) AND released(chocolate) AND stable(chocolate)",
+      "affordance_3d": [
+        -0.7355,
+        0.5884,
+        2.73
+      ],
+      "affordance_hint": "an empty area on the left of cloth"
+    }
+  ]
+}

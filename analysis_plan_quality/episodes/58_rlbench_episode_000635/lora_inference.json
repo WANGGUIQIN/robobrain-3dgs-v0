@@ -1,0 +1,244 @@
+{
+  "task": "put the triangular prism in the shape sorter",
+  "parsed": {
+    "scene_objects": [
+      "triangular_prism",
+      "shape_sorter",
+      "table"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "triangular_prism",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "triangular_prism",
+        "affordance_region": "the body of the triangular prism",
+        "done_when": "distance(gripper, triangular_prism) < 0.03",
+        "affordance_hint": "the body of the triangular prism",
+        "refine_prompt": "the body of the triangular prism",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.4883,
+          0.0742
+        ],
+        "affordance_3d_refined": [
+          -0.0575,
+          -2.0875,
+          2.4514
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.5135,
+        "affordance": [
+          0.4883,
+          0.0742
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "triangular_prism"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "triangular_prism",
+        "affordance_region": "the pink triangular prism",
+        "done_when": "holding(triangular_prism)",
+        "affordance_hint": "the pink triangular prism",
+        "refine_prompt": "the pink triangular prism",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.3789,
+          0.7461
+        ],
+        "affordance_3d_refined": [
+          -0.4002,
+          0.8133,
+          1.6525
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.4086,
+        "affordance": [
+          0.3789,
+          0.7461
+        ]
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "triangular_prism",
+                "shape_sorter",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "triangular_prism"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "triangular_prism",
+        "destination": "shape_sorter",
+        "affordance_region": "an empty area on the shape sorter",
+        "done_when": "above(triangular_prism, shape_sorter, 0.05)",
+        "affordance_hint": "an empty area on the shape sorter",
+        "refine_prompt": "an empty area on the shape sorter",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.8555,
+          0.9961
+        ],
+        "affordance_3d_refined": [
+          1.4844,
+          2.0717,
+          2.088
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.5237,
+        "affordance": [
+          0.8555,
+          0.9961
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "inserted",
+              "args": [
+                "triangular_prism",
+                "shape_sorter"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "triangular_prism"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "triangular_prism"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "insert",
+        "target": "triangular_prism",
+        "destination": "shape_sorter",
+        "affordance_region": "the top opening of the shape sorter",
+        "done_when": "inserted(triangular_prism, shape_sorter) AND released(triangular_prism)",
+        "affordance_hint": "the top opening of the shape sorter",
+        "refine_prompt": "the top opening of the shape sorter",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.5742,
+          0.0742
+        ],
+        "affordance_3d_refined": [
+          0.3605,
+          -2.0681,
+          2.4286
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.3097,
+        "affordance": [
+          0.5742,
+          0.0742
+        ]
+      }
+    ]
+  }
+}

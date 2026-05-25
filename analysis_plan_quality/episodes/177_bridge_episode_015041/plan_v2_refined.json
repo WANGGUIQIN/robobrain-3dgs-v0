@@ -1,0 +1,241 @@
+{
+  "task": "Move the banana to the top right of the table",
+  "scene_objects": [
+    "banana",
+    "metal_pot",
+    "blue_cloth",
+    "knife",
+    "table"
+  ],
+  "num_steps": 4,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "banana",
+      "affordance": [
+        0.218,
+        0.401
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "banana",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "metal_pot"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, banana) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        -0.6359,
+        -0.2208,
+        1.9669
+      ],
+      "affordance_hint": "the yellow banana on the wooden table",
+      "affordance_hint_original": "the banana",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 2,
+      "action": "grasp",
+      "target": "banana",
+      "affordance": [
+        0.225,
+        0.408
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "banana"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "holding",
+            "args": [
+              "banana"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              0,
+              0,
+              -1
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "holding(banana)",
+      "affordance_3d": [
+        -0.6121,
+        -0.2099,
+        1.9473
+      ],
+      "affordance_hint": "the yellow banana on the right side of the table",
+      "affordance_hint_original": "banana",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 3,
+      "action": "transport",
+      "target": "banana",
+      "destination": "top_right_table",
+      "affordance": [
+        0.75,
+        0.475
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "banana"
+            ],
+            "role": "safety"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "above",
+            "args": [
+              "banana",
+              "top_right_table",
+              0.05
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "banana",
+              "metal_pot"
+            ]
+          },
+          {
+            "pred": "no_drop",
+            "args": [
+              "banana"
+            ]
+          }
+        ]
+      },
+      "done_when": "above(banana, top_right_table, 0.05) AND aligned_xy(banana, top_right_table, 0.03)",
+      "affordance_3d": [
+        0.5484,
+        -0.0514,
+        1.9082
+      ],
+      "affordance_hint": "the top right area of the wooden table",
+      "affordance_hint_original": "an empty area on the top right table",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 4,
+      "action": "place",
+      "target": "banana",
+      "destination": "top_right_table",
+      "affordance": [
+        0.75,
+        0.475
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "surface_contact",
+            "args": [
+              "banana",
+              "top_right_table"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "released",
+            "args": [
+              "banana"
+            ],
+            "role": "completion"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "stable",
+            "args": [
+              "banana"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "support_stable",
+            "args": [
+              "banana"
+            ]
+          }
+        ]
+      },
+      "done_when": "surface_contact(banana, top_right_table) AND released(banana) AND stable(banana)",
+      "affordance_3d": [
+        0.5484,
+        -0.0514,
+        1.9082
+      ],
+      "affordance_hint": "the top right area of the wooden table",
+      "affordance_hint_original": "an empty area on the top right table",
+      "affordance_hint_confidence": "ok"
+    }
+  ]
+}

@@ -1,0 +1,109 @@
+{
+  "task": "turn off the red led light",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_3epoch/best",
+  "raw": "**SCENE ANALYSIS -** A white cabinet with open doors is visible, containing a small red object on a shelf. A white robotic arm is positioned near the cabinet. The task is to turn off a red LED light, which is likely the red object on the shelf. The cabinet doors are open, providing access to the shelf. The robotic arm is the only tool available for manipulation. **STRATEGY -** The robotic arm must reach the red object, grasp it, and perform an action to turn it off. The object is small and likely a button or switch, so precise grasping and pressing are required. Failure modes include missing the object or failing to press it. **AFFORDANCE REASONING -** Step 1: Reach the red object on the shelf. Step 2: Grasp the red object. Step 3: Press the red object to turn it off.\n\n**Goal:** any_in(red_led, cabinet); stable(red_led)\n**Scene:** red_led, cabinet, robotic_arm\n**Step 1:** reach(red_led)\n  affordance_region: the red object on the shelf\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, red_led, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, red_led) < 0.03\n**Step 2:** grasp(red_led)\n  affordance_region: the red object on the shelf\n  contact: holding(red_led) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(red_led)\n**Step 3:** push(red_led)\n  affordance_region: the red object on the shelf\n  contact: pressed(red_led) [completion]\n  pose: stable(red_led) [completion]\n  done_when: pressed(red_led)\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [],
+    "scene_objects": [],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "red_led",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "red_led",
+        "affordance_region": "the red object on the shelf",
+        "done_when": "distance(gripper, red_led) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "red_led"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "red_led",
+        "affordance_region": "the red object on the shelf",
+        "done_when": "holding(red_led)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "pressed",
+              "args": [
+                "red_led"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "red_led"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "push",
+        "target": "red_led",
+        "affordance_region": "the red object on the shelf",
+        "done_when": "pressed(red_led)"
+      }
+    ]
+  }
+}

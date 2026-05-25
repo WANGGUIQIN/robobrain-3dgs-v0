@@ -1,0 +1,184 @@
+{
+  "task": "pick banana from white bowl",
+  "parsed": {
+    "scene_objects": [
+      "banana",
+      "white_bowl",
+      "table"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "banana",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "banana",
+        "affordance_region": "the banana in the white bowl",
+        "done_when": "distance(gripper, banana) < 0.03",
+        "affordance_hint": "the banana in the white bowl",
+        "refine_prompt": "the banana in the white bowl",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.5664,
+          0.2344
+        ],
+        "affordance_3d_refined": [
+          0.2159,
+          -0.8635,
+          2.8279
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.5299,
+        "affordance": [
+          0.5664,
+          0.2344
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "banana"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "banana",
+        "affordance_region": "the yellow banana in the white bowl",
+        "done_when": "holding(banana)",
+        "affordance_hint": "the yellow banana in the white bowl",
+        "refine_prompt": "the yellow banana in the white bowl",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.5664,
+          0.2344
+        ],
+        "affordance_3d_refined": [
+          0.2159,
+          -0.8635,
+          2.8279
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.5423,
+        "affordance": [
+          0.5664,
+          0.2344
+        ]
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "banana",
+                "table",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "banana"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "banana",
+        "destination": "table",
+        "affordance_region": "an empty area on the table",
+        "done_when": "above(banana, table, 0.05)",
+        "affordance_hint": "an empty area on the table",
+        "refine_prompt": "an empty area on the table",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.0156,
+          0.4141
+        ],
+        "affordance_3d_refined": [
+          -1.9777,
+          -0.3509,
+          3.5519
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.4852,
+        "affordance": [
+          0.0156,
+          0.4141
+        ]
+      }
+    ]
+  }
+}

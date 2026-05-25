@@ -1,0 +1,141 @@
+{
+  "task": "go towards the yellow block and lift it",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_3epoch/best",
+  "raw": "SCENE ANALYSIS - A yellow block is on a brown surface. A white robotic arm is present. The yellow block is a cube with a matte finish. STRATEGY - The task is to lift the yellow block. First, the arm must reach the block to grasp it. Since the block is on the surface, the arm will approach from above. The block has a flat top, so grasping any face is possible, but the top face is the most accessible. The arm will use a standard grasp action to lift the block. Failure modes include the arm not reaching the block or the grasp failing due to incorrect orientation. AFFORDANCE REASONING - Step 1: reach the yellow block to position the gripper. Step 2: grasp the top face of the yellow block to lift it. Step 3: transport the block to a destination (if required, but the goal is just to lift it, so transport may not be needed). Step 4: release the block if it was placed, but the goal is just to lift, so release may not be part of the goal.\nGoal: lifted(yellow_block)\nScene: yellow_block, robotic_arm, brown_surface\nStep 1: reach(yellow_block)\n  affordance_region: the top face of the yellow block\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, yellow_block, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, yellow_block) < 0.03\nStep 2: grasp(yellow_block)\n  affordance_region: the top face of the yellow block\n  contact: holding(yellow_block) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(yellow_block)\nStep 3: transport(yellow_block -> destination)  # Assuming a destination is needed, but if not, this step may be omitted. However, the goal is to lift, so transport may not be required.\n  affordance_region: an empty area above the yellow_block\n  spatial: above(yellow_block, destination, 0.05) [completion]\n  safety: no_drop(yellow_block)\n  done_when: above(yellow_block, destination, 0.05)\nStep 4: release(yellow_block)\n  affordance_region: an empty area below the yellow_block\n  contact: released(yellow_block) [completion]\n  done_when: released(yellow_block)\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [
+      {
+        "pred": "lifted",
+        "args": [
+          "yellow_block"
+        ]
+      }
+    ],
+    "scene_objects": [
+      "yellow_block",
+      "robotic_arm",
+      "brown_surface"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "yellow_block",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "yellow_block",
+        "affordance_region": "the top face of the yellow block",
+        "done_when": "distance(gripper, yellow_block) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "yellow_block"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "yellow_block",
+        "affordance_region": "the top face of the yellow block",
+        "done_when": "holding(yellow_block)"
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "yellow_block",
+                "destination",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "yellow_block"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "yellow_block",
+        "destination": "destination",
+        "affordance_region": "an empty area above the yellow_block",
+        "done_when": "above(yellow_block, destination, 0.05)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "released",
+              "args": [
+                "yellow_block"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "release",
+        "target": "yellow_block",
+        "affordance_region": "an empty area below the yellow_block",
+        "done_when": "released(yellow_block)"
+      }
+    ]
+  }
+}

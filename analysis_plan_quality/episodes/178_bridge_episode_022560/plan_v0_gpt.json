@@ -1,0 +1,230 @@
+{
+  "task": "Place the red and white vegetable to the bottom right corner of the table.",
+  "scene_objects": [
+    "red_and_white_vegetable",
+    "table"
+  ],
+  "num_steps": 4,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "red_and_white_vegetable",
+      "affordance": [
+        0.716,
+        0.166
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "red_and_white_vegetable",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "table"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, red_and_white_vegetable) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        0.6066,
+        -0.9485,
+        2.4561
+      ],
+      "affordance_hint": "the red and white vegetable"
+    },
+    {
+      "step": 2,
+      "action": "grasp",
+      "target": "red_and_white_vegetable",
+      "affordance": [
+        0.716,
+        0.125
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "red_and_white_vegetable"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "holding",
+            "args": [
+              "red_and_white_vegetable"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              0,
+              0,
+              -1
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "holding(red_and_white_vegetable)",
+      "affordance_3d": [
+        0.6452,
+        -1.1262,
+        2.6126
+      ],
+      "affordance_hint": "the handle of the red and white vegetable"
+    },
+    {
+      "step": 3,
+      "action": "transport",
+      "target": "red_and_white_vegetable",
+      "destination": "bottom_right_corner",
+      "affordance": [
+        0.75,
+        0.651
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "red_and_white_vegetable"
+            ],
+            "role": "safety"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "above",
+            "args": [
+              "red_and_white_vegetable",
+              "bottom_right_corner",
+              0.05
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "red_and_white_vegetable",
+              "table"
+            ]
+          },
+          {
+            "pred": "no_drop",
+            "args": [
+              "red_and_white_vegetable"
+            ]
+          }
+        ]
+      },
+      "done_when": "above(red_and_white_vegetable, bottom_right_corner, 0.05) AND aligned_xy(red_and_white_vegetable, bottom_right_corner, 0.03)",
+      "affordance_3d": [
+        0.8239,
+        0.5021,
+        2.867
+      ],
+      "affordance_hint": "an empty area on the bottom right corner"
+    },
+    {
+      "step": 4,
+      "action": "place",
+      "target": "red_and_white_vegetable",
+      "destination": "bottom_right_corner",
+      "affordance": [
+        0.75,
+        0.651
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "surface_contact",
+            "args": [
+              "red_and_white_vegetable",
+              "bottom_right_corner"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "released",
+            "args": [
+              "red_and_white_vegetable"
+            ],
+            "role": "completion"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "stable",
+            "args": [
+              "red_and_white_vegetable"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "support_stable",
+            "args": [
+              "red_and_white_vegetable"
+            ]
+          }
+        ]
+      },
+      "done_when": "surface_contact(red_and_white_vegetable, bottom_right_corner) AND released(red_and_white_vegetable) AND stable(red_and_white_vegetable)",
+      "affordance_3d": [
+        0.8239,
+        0.5021,
+        2.867
+      ],
+      "affordance_hint": "an empty area on the bottom right corner"
+    }
+  ]
+}

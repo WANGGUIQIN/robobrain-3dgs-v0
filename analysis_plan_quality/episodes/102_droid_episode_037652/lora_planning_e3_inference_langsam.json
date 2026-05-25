@@ -1,0 +1,225 @@
+{
+  "task": "Pick up the light blue cloth peg and put it on the table.",
+  "scene_objects": [
+    "light_blue_cloth_peg",
+    "table"
+  ],
+  "steps": [
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "light_blue_cloth_peg",
+              "<",
+              "0.03"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "approach_axis",
+            "args": [
+              "0",
+              "0",
+              "-1"
+            ],
+            "role": "progress"
+          }
+        ]
+      },
+      "step": 1,
+      "action": "reach",
+      "target": "light_blue_cloth_peg",
+      "affordance_region": "the light blue cloth peg",
+      "done_when": "distance(gripper, light_blue_cloth_peg) < 0.03",
+      "affordance_hint": "the light blue cloth peg",
+      "refine_prompt": "the light blue cloth peg",
+      "refine_cache_hit": false,
+      "affordance_refined": [
+        0.6602,
+        0.5117
+      ],
+      "affordance_3d_refined": [
+        0.0832,
+        0.1017,
+        1.8495
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.5045
+    },
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "light_blue_cloth_peg"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              "0",
+              "0",
+              "-1"
+            ],
+            "role": "progress"
+          }
+        ]
+      },
+      "step": 2,
+      "action": "grasp",
+      "target": "light_blue_cloth_peg",
+      "affordance_region": "the light blue cloth peg",
+      "done_when": "holding(light_blue_cloth_peg)",
+      "affordance_hint": "the light blue cloth peg",
+      "refine_prompt": "the light blue cloth peg",
+      "refine_cache_hit": true,
+      "affordance_refined": [
+        0.6602,
+        0.5117
+      ],
+      "affordance_3d_refined": [
+        0.0832,
+        0.1017,
+        1.8495
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.5045
+    },
+    {
+      "constraints": {
+        "spatial": [
+          {
+            "pred": "above",
+            "args": [
+              "light_blue_cloth_peg",
+              "table",
+              "0.05"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_drop",
+            "args": [
+              "light_blue_cloth_peg"
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "step": 3,
+      "action": "transport",
+      "target": "light_blue_cloth_peg",
+      "destination": "table",
+      "affordance_region": "an empty area on the table",
+      "done_when": "above(light_blue_cloth_peg, table, 0.05)",
+      "affordance_hint": "an empty area on the table",
+      "refine_prompt": "an empty area on the table",
+      "refine_cache_hit": false,
+      "affordance_refined": [
+        0.7148,
+        0.9961
+      ],
+      "affordance_3d_refined": [
+        0.2847,
+        1.6711,
+        2.4756
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.5124
+    },
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "surface_contact",
+            "args": [
+              "light_blue_cloth_peg",
+              "table"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "released",
+            "args": [
+              "light_blue_cloth_peg"
+            ],
+            "role": "completion"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "stable",
+            "args": [
+              "light_blue_cloth_peg"
+            ],
+            "role": "completion"
+          }
+        ]
+      },
+      "step": 4,
+      "action": "place",
+      "target": "light_blue_cloth_peg",
+      "destination": "table",
+      "affordance_region": "an empty area on the table",
+      "done_when": "surface_contact(light_blue_cloth_peg, table) AND released(light_blue_cloth_peg)",
+      "affordance_hint": "an empty area on the table",
+      "refine_prompt": "an empty area on the table",
+      "refine_cache_hit": true,
+      "affordance_refined": [
+        0.7148,
+        0.9961
+      ],
+      "affordance_3d_refined": [
+        0.2847,
+        1.6711,
+        2.4756
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.5124
+    }
+  ]
+}

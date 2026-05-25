@@ -1,0 +1,248 @@
+{
+  "task": "screw in the green light bulb",
+  "parsed": {
+    "scene_objects": [
+      "green_light_bulb",
+      "screwdriver",
+      "table"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "green_light_bulb",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "green_light_bulb",
+        "affordance_region": "the green light bulb",
+        "done_when": "distance(gripper, green_light_bulb) < 0.03",
+        "affordance_hint": "the green light bulb",
+        "refine_prompt": "the green light bulb",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.3945,
+          0.875
+        ],
+        "affordance_3d_refined": [
+          -0.4844,
+          1.7222,
+          2.2963
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.3181,
+        "affordance": [
+          0.3945,
+          0.875
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "green_light_bulb"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "green_light_bulb",
+        "affordance_region": "the base of the green light bulb",
+        "done_when": "holding(green_light_bulb)",
+        "affordance_hint": "the base of the green light bulb",
+        "refine_prompt": "the base of the green light bulb",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.3945,
+          0.875
+        ],
+        "affordance_3d_refined": [
+          -0.4844,
+          1.7222,
+          2.2963
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.5639,
+        "affordance": [
+          0.3945,
+          0.875
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "inserted",
+              "args": [
+                "green_light_bulb",
+                "screwdriver"
+              ],
+              "role": "completion"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "aligned_xy",
+              "args": [
+                "green_light_bulb",
+                "screwdriver",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "insert_dir",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "insert",
+        "target": "green_light_bulb",
+        "destination": "screwdriver",
+        "affordance_region": "the top opening of the screwdriver",
+        "done_when": "inserted(green_light_bulb, screwdriver)",
+        "affordance_hint": "the top opening of the screwdriver",
+        "refine_prompt": "the top opening of the screwdriver",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.4883,
+          0.0742
+        ],
+        "affordance_3d_refined": [
+          -0.0576,
+          -2.0916,
+          2.4561
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.3339,
+        "affordance": [
+          0.4883,
+          0.0742
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "green_light_bulb"
+              ],
+              "role": "safety"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "orientation_match",
+              "args": [
+                "green_light_bulb",
+                "screwdriver"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "rotate",
+        "target": "green_light_bulb",
+        "affordance_region": "the body of the green light bulb",
+        "done_when": "orientation_match(green_light_bulb, screwdriver)",
+        "affordance_hint": "the body of the green light bulb",
+        "refine_prompt": "the body of the green light bulb",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.3945,
+          0.875
+        ],
+        "affordance_3d_refined": [
+          -0.4844,
+          1.7222,
+          2.2963
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.422,
+        "affordance": [
+          0.3945,
+          0.875
+        ]
+      }
+    ]
+  }
+}

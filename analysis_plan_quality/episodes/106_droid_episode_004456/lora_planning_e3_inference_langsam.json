@@ -1,0 +1,368 @@
+{
+  "task": "Place the silver spoon in the glass container and put the silver lid on the container.",
+  "scene_objects": [
+    "silver_spoon",
+    "silver_lid",
+    "glass_container",
+    "table"
+  ],
+  "steps": [
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "silver_spoon",
+              "<",
+              "0.03"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "approach_axis",
+            "args": [
+              "0",
+              "0",
+              "-1"
+            ],
+            "role": "progress"
+          }
+        ]
+      },
+      "step": 1,
+      "action": "reach",
+      "target": "silver_spoon",
+      "affordance_region": "the body of the silver spoon",
+      "done_when": "distance(gripper, silver_spoon) < 0.03",
+      "affordance_hint": "the body of the silver spoon",
+      "refine_prompt": "the body of the silver spoon",
+      "refine_cache_hit": false,
+      "refine_prompt_fallback": "silver spoon",
+      "affordance_refined": [
+        0.6133,
+        0.3945
+      ],
+      "affordance_3d_refined": [
+        -0.0134,
+        -0.0846,
+        0.8906
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.2611
+    },
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "silver_spoon"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              "0",
+              "0",
+              "-1"
+            ],
+            "role": "progress"
+          }
+        ]
+      },
+      "step": 2,
+      "action": "grasp",
+      "target": "silver_spoon",
+      "affordance_region": "the handle of the silver spoon",
+      "done_when": "holding(silver_spoon)",
+      "affordance_hint": "the handle of the silver spoon",
+      "refine_prompt": "the handle of the silver spoon",
+      "refine_cache_hit": false,
+      "refine_prompt_fallback": "silver spoon",
+      "affordance_refined": [
+        0.6133,
+        0.3945
+      ],
+      "affordance_3d_refined": [
+        -0.0134,
+        -0.0846,
+        0.8906
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.2611
+    },
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "surface_contact",
+            "args": [
+              "silver_spoon",
+              "glass_container"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "released",
+            "args": [
+              "silver_spoon"
+            ],
+            "role": "completion"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "inside",
+            "args": [
+              "silver_spoon",
+              "glass_container"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "support_stable",
+            "args": [
+              "silver_spoon"
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "step": 3,
+      "action": "place",
+      "target": "silver_spoon",
+      "destination": "glass_container",
+      "affordance_region": "an empty area on the glass container",
+      "done_when": "surface_contact(silver_spoon, glass_container) AND released(silver_spoon) AND inside(silver_spoon, glass_container)",
+      "affordance_hint": "an empty area on the glass container",
+      "refine_prompt": "an empty area on the glass container",
+      "refine_cache_hit": false,
+      "refine_prompt_fallback": "silver spoon",
+      "affordance_refined": [
+        0.6133,
+        0.3945
+      ],
+      "affordance_3d_refined": [
+        -0.0134,
+        -0.0846,
+        0.8906
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.2611
+    },
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "silver_lid",
+              "<",
+              "0.03"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "approach_axis",
+            "args": [
+              "0",
+              "0",
+              "-1"
+            ],
+            "role": "progress"
+          }
+        ]
+      },
+      "step": 4,
+      "action": "reach",
+      "target": "silver_lid",
+      "affordance_region": "the body of the silver lid",
+      "done_when": "distance(gripper, silver_lid) < 0.03",
+      "affordance_hint": "the body of the silver lid",
+      "refine_prompt": "the body of the silver lid",
+      "refine_cache_hit": false,
+      "affordance_refined": [
+        0.4258,
+        0.8711
+      ],
+      "affordance_3d_refined": [
+        -0.4367,
+        0.8819,
+        1.7125
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.424
+    },
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "silver_lid"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              "0",
+              "0",
+              "-1"
+            ],
+            "role": "progress"
+          }
+        ]
+      },
+      "step": 5,
+      "action": "grasp",
+      "target": "silver_lid",
+      "affordance_region": "the handle of the silver lid",
+      "done_when": "holding(silver_lid)",
+      "affordance_hint": "the handle of the silver lid",
+      "refine_prompt": "the handle of the silver lid",
+      "refine_cache_hit": false,
+      "refine_prompt_fallback": "silver lid",
+      "affordance_refined": [
+        0.9766,
+        0.9805
+      ],
+      "affordance_3d_refined": [
+        0.6297,
+        0.9166,
+        1.3994
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.3929
+    },
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "surface_contact",
+            "args": [
+              "silver_lid",
+              "glass_container"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "released",
+            "args": [
+              "silver_lid"
+            ],
+            "role": "completion"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "on",
+            "args": [
+              "silver_lid",
+              "glass_container"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "support_stable",
+            "args": [
+              "silver_lid"
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "step": 6,
+      "action": "place",
+      "target": "silver_lid",
+      "destination": "glass_container",
+      "affordance_region": "an empty area on the glass container",
+      "done_when": "surface_contact(silver_lid, glass_container) AND released(silver_lid) AND on(silver_lid, glass_container)",
+      "affordance_hint": "an empty area on the glass container",
+      "refine_prompt": "an empty area on the glass container",
+      "refine_cache_hit": false,
+      "refine_prompt_fallback": "silver lid",
+      "affordance_refined": [
+        0.9766,
+        0.9805
+      ],
+      "affordance_3d_refined": [
+        0.6297,
+        0.9166,
+        1.3994
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.3929
+    }
+  ]
+}

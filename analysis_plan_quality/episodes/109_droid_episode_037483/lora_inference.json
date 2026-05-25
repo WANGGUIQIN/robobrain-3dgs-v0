@@ -1,0 +1,245 @@
+{
+  "task": "Move the foil paper on the counter",
+  "parsed": {
+    "scene_objects": [
+      "foil_paper",
+      "table",
+      "robot_gripper"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "foil_paper",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "foil_paper",
+        "affordance_region": "the crumpled foil paper on the table",
+        "done_when": "distance(gripper, foil_paper) < 0.03",
+        "affordance_hint": "the crumpled foil paper on the table",
+        "refine_prompt": "the crumpled foil paper on the table",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.4727,
+          0.5273
+        ],
+        "affordance_3d_refined": [
+          -0.4389,
+          0.1688,
+          2.2506
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.3439,
+        "affordance": [
+          0.4727,
+          0.5273
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "foil_paper"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "foil_paper",
+        "affordance_region": "the crumpled foil paper on the table",
+        "done_when": "holding(foil_paper)",
+        "affordance_hint": "the crumpled foil paper on the table",
+        "refine_prompt": "the crumpled foil paper on the table",
+        "refine_cache_hit": true,
+        "affordance_refined": [
+          0.4727,
+          0.5273
+        ],
+        "affordance_3d_refined": [
+          -0.4389,
+          0.1688,
+          2.2506
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.3439,
+        "affordance": [
+          0.4727,
+          0.5273
+        ]
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "foil_paper",
+                "new_location",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "foil_paper"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "foil_paper",
+        "destination": "new_location",
+        "affordance_region": "an empty area on the new location",
+        "done_when": "above(foil_paper, new_location, 0.05)",
+        "affordance_hint": "an empty area on the new location",
+        "refine_prompt": "an empty area on the new location",
+        "refine_cache_hit": false,
+        "refine_prompt_fallback": "foil paper",
+        "affordance_refined": [
+          0.4727,
+          0.5273
+        ],
+        "affordance_3d_refined": [
+          -0.4389,
+          0.1688,
+          2.2506
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.2901,
+        "affordance": [
+          0.4727,
+          0.5273
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "surface_contact",
+              "args": [
+                "foil_paper",
+                "new_location"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "foil_paper"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "foil_paper"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "place",
+        "target": "foil_paper",
+        "destination": "new_location",
+        "affordance_region": "an empty area on the new location",
+        "done_when": "surface_contact(foil_paper, new_location) AND released(foil_paper) AND stable(foil_paper)",
+        "affordance_hint": "an empty area on the new location",
+        "refine_prompt": "an empty area on the new location",
+        "refine_cache_hit": true,
+        "affordance_refined": [
+          0.4727,
+          0.5273
+        ],
+        "affordance_3d_refined": [
+          -0.4389,
+          0.1688,
+          2.2506
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.2901,
+        "affordance": [
+          0.4727,
+          0.5273
+        ]
+      }
+    ]
+  }
+}

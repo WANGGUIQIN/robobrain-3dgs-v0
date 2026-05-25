@@ -1,0 +1,228 @@
+{
+  "task": "move the black and white object to the orange cloth",
+  "scene_objects": [
+    "black_and_white_object",
+    "orange_cloth",
+    "metal_bowl",
+    "red_tool",
+    "table"
+  ],
+  "steps": [
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "black_and_white_object",
+              "<",
+              "0.03"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "approach_axis",
+            "args": [
+              "0",
+              "0",
+              "-1"
+            ],
+            "role": "progress"
+          }
+        ]
+      },
+      "step": 1,
+      "action": "reach",
+      "target": "black_and_white_object",
+      "affordance_region": "the black and white object in the metal bowl",
+      "done_when": "distance(gripper, black_and_white_object) < 0.03",
+      "affordance_hint": "the black and white object in the metal bowl",
+      "refine_prompt": "the black and white object in the metal bowl",
+      "refine_cache_hit": false,
+      "affordance_refined": [
+        0.25,
+        0.3398
+      ],
+      "affordance_3d_refined": [
+        -0.4584,
+        -0.2937,
+        1.5951
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.6326
+    },
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "black_and_white_object"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              "0",
+              "0",
+              "-1"
+            ],
+            "role": "progress"
+          }
+        ]
+      },
+      "step": 2,
+      "action": "grasp",
+      "target": "black_and_white_object",
+      "affordance_region": "the black and white object in the metal bowl",
+      "done_when": "holding(black_and_white_object)",
+      "affordance_hint": "the black and white object in the metal bowl",
+      "refine_prompt": "the black and white object in the metal bowl",
+      "refine_cache_hit": true,
+      "affordance_refined": [
+        0.25,
+        0.3398
+      ],
+      "affordance_3d_refined": [
+        -0.4584,
+        -0.2937,
+        1.5951
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.6326
+    },
+    {
+      "constraints": {
+        "spatial": [
+          {
+            "pred": "above",
+            "args": [
+              "black_and_white_object",
+              "orange_cloth",
+              "0.05"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_drop",
+            "args": [
+              "black_and_white_object"
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "step": 3,
+      "action": "transport",
+      "target": "black_and_white_object",
+      "destination": "orange_cloth",
+      "affordance_region": "the empty area on the orange cloth",
+      "done_when": "above(black_and_white_object, orange_cloth, 0.05)",
+      "affordance_hint": "the empty area on the orange cloth",
+      "refine_prompt": "the empty area on the orange cloth",
+      "refine_cache_hit": false,
+      "affordance_refined": [
+        0.6758,
+        0.6953
+      ],
+      "affordance_3d_refined": [
+        0.5042,
+        0.5602,
+        2.4952
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.3559
+    },
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "surface_contact",
+            "args": [
+              "black_and_white_object",
+              "orange_cloth"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "released",
+            "args": [
+              "black_and_white_object"
+            ],
+            "role": "completion"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "stable",
+            "args": [
+              "black_and_white_object"
+            ],
+            "role": "completion"
+          }
+        ]
+      },
+      "step": 4,
+      "action": "place",
+      "target": "black_and_white_object",
+      "destination": "orange_cloth",
+      "affordance_region": "the empty area on the orange cloth",
+      "done_when": "surface_contact(black_and_white_object, orange_cloth) AND released(black_and_white_object)",
+      "affordance_hint": "the empty area on the orange cloth",
+      "refine_prompt": "the empty area on the orange cloth",
+      "refine_cache_hit": true,
+      "affordance_refined": [
+        0.6758,
+        0.6953
+      ],
+      "affordance_3d_refined": [
+        0.5042,
+        0.5602,
+        2.4952
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.3559
+    }
+  ]
+}

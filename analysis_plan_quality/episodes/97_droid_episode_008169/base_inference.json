@@ -1,0 +1,166 @@
+{
+  "task": "Move the black spectacle case to the left side of the desk",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_3epoch/best",
+  "raw": "**SCENE ANALYSIS -** A black spectacle case lies on a desk, next to a white keyboard and a white mug. The case is a rigid, rectangular object with a smooth surface. The desk surface is dark. STRATEGY - First, reach for the spectacle case to grasp it. Then, transport it to the left side of the desk. Failure modes include dropping the case during transport or misplacing it. AFFORDANCE REASONING - Step 1: Reach for the case to establish contact. Step 2: Grasp the case for secure hold. Step 3: Transport the case to the left side of the desk. Step 4: Place the case on the left side of the desk.\n\nGoal: on(spectacle_case, desk) AND position(spectacle_case, left_side_of(desk))\nScene: spectacle_case, desk, keyboard, mug\nStep 1: reach(spectacle_case)\n  affordance_region: the body of the black spectacle case\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, spectacle_case, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, spectacle_case) < 0.03\nStep 2: grasp(spectacle_case)\n  affordance_region: the body of the black spectacle case\n  contact: holding(spectacle_case) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(spectacle_case)\nStep 3: transport(spectacle_case -> left_side_of(desk))\n  affordance_region: an empty area on the left side of the desk\n  spatial: above(spectacle_case, left_side_of(desk), 0.05) [completion]\n  safety: no_drop(spectacle_case)\n  done_when: above(spectacle_case, left_side_of(desk), 0.05)\nStep 4: place(spectacle_case -> left_side_of(desk))\n  affordance_region: an empty area on the left side of the desk\n  contact: surface_contact(spectacle_case, desk) [completion]; released(spectacle_case) [completion]\n  pose: stable(spectacle_case) [completion]\n  done_when: surface_contact(spectacle_case, desk) AND released(spectacle_case)\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [
+      {
+        "pred": "on",
+        "args": [
+          "spectacle_case",
+          "desk"
+        ]
+      },
+      {
+        "pred": "position",
+        "args": [
+          "spectacle_case",
+          "left_side_of(desk"
+        ]
+      }
+    ],
+    "scene_objects": [
+      "spectacle_case",
+      "desk",
+      "keyboard",
+      "mug"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "spectacle_case",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "spectacle_case",
+        "affordance_region": "the body of the black spectacle case",
+        "done_when": "distance(gripper, spectacle_case) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "spectacle_case"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "spectacle_case",
+        "affordance_region": "the body of the black spectacle case",
+        "done_when": "holding(spectacle_case)"
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "spectacle_case",
+                "left_side_of(desk"
+              ]
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "spectacle_case"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "spectacle_case",
+        "destination": "left_side_of(desk",
+        "affordance_region": "an empty area on the left side of the desk",
+        "done_when": "above(spectacle_case, left_side_of(desk), 0.05)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "surface_contact",
+              "args": [
+                "spectacle_case",
+                "desk"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "spectacle_case"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "spectacle_case"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "place",
+        "target": "spectacle_case",
+        "destination": "left_side_of(desk",
+        "affordance_region": "an empty area on the left side of the desk",
+        "done_when": "surface_contact(spectacle_case, desk) AND released(spectacle_case)"
+      }
+    ]
+  }
+}

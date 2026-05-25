@@ -1,0 +1,247 @@
+{
+  "task": "place the milk dairy in the white plate",
+  "parsed": {
+    "scene_objects": [
+      "red_milk_carton",
+      "white_plate",
+      "blue_bin",
+      "green_cup",
+      "brown_object",
+      "table"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "red_milk_carton",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "red_milk_carton",
+        "affordance_region": "the red milk carton",
+        "done_when": "distance(gripper, red_milk_carton) < 0.03",
+        "affordance_hint": "the red milk carton",
+        "refine_prompt": "the red milk carton",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.8828,
+          0.375
+        ],
+        "affordance_3d_refined": [
+          1.2444,
+          -0.4063,
+          2.8279
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.8449,
+        "affordance": [
+          0.8828,
+          0.375
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "red_milk_carton"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "red_milk_carton",
+        "affordance_region": "the body of the red milk carton",
+        "done_when": "holding(red_milk_carton)",
+        "affordance_hint": "the body of the red milk carton",
+        "refine_prompt": "the body of the red milk carton",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.8828,
+          0.375
+        ],
+        "affordance_3d_refined": [
+          1.2444,
+          -0.4063,
+          2.8279
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.7365,
+        "affordance": [
+          0.8828,
+          0.375
+        ]
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "red_milk_carton",
+                "white_plate",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "red_milk_carton"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "red_milk_carton",
+        "destination": "white_plate",
+        "affordance_region": "an empty area on the white plate",
+        "done_when": "above(red_milk_carton, white_plate, 0.05)",
+        "affordance_hint": "an empty area on the white plate",
+        "refine_prompt": "an empty area on the white plate",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.6367,
+          0.293
+        ],
+        "affordance_3d_refined": [
+          0.303,
+          -0.4588,
+          1.9277
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.3198,
+        "affordance": [
+          0.6367,
+          0.293
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "surface_contact",
+              "args": [
+                "red_milk_carton",
+                "white_plate"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "red_milk_carton"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "red_milk_carton"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "place",
+        "target": "red_milk_carton",
+        "destination": "white_plate",
+        "affordance_region": "an empty area on the white plate",
+        "done_when": "surface_contact(red_milk_carton, white_plate) AND released(red_milk_carton) AND stable(red_milk_carton)",
+        "affordance_hint": "an empty area on the white plate",
+        "refine_prompt": "an empty area on the white plate",
+        "refine_cache_hit": true,
+        "affordance_refined": [
+          0.6367,
+          0.293
+        ],
+        "affordance_3d_refined": [
+          0.303,
+          -0.4588,
+          1.9277
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.3198,
+        "affordance": [
+          0.6367,
+          0.293
+        ]
+      }
+    ]
+  }
+}

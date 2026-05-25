@@ -1,0 +1,148 @@
+{
+  "task": "pick up the orange fruit",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_3epoch/best",
+  "raw": "**SCENE ANALYSIS -** A wooden table holds a green cup, a brown bowl, a blue tray, an orange fruit, and a small brown object. The orange fruit is a small, round, orange-colored object. The task is to pick up the orange fruit. STRATEGY - First, reach for the orange fruit to establish contact. Then, grasp it to lift it. Finally, transport it to a destination (the blue tray) and place it there. Failure modes include not grasping the fruit (if reach fails) or dropping it during transport. AFFORDANCE REASONING - Step 1: Reach for the orange fruit's body to make contact. Step 2: Grasp the orange fruit's body to lift it. Step 3: Transport the orange fruit to the blue tray. Step 4: Place the orange fruit on the blue tray.\n\n**Goal:** on(orange_fruit, blue_tray); stable(orange_fruit)\n**Scene:** orange_fruit, blue_tray, green_cup, brown_bowl, table\n**Step 1:** reach(orange_fruit)\n  affordance_region: the body of the orange fruit\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, orange_fruit, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, orange_fruit) < 0.03\n**Step 2:** grasp(orange_fruit)\n  affordance_region: the body of the orange fruit\n  contact: holding(orange_fruit) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(orange_fruit)\n**Step 3:** transport(orange_fruit -> blue_tray)\n  affordance_region: an empty area on the blue tray\n  spatial: above(orange_fruit, blue_tray, 0.05) [completion]\n  safety: no_drop(orange_fruit)\n  done_when: above(orange_fruit, blue_tray, 0.05)\n**Step 4:** place(orange_fruit -> blue_tray)\n  affordance_region: an empty area on the blue tray\n  contact: surface_contact(orange_fruit, blue_tray) [completion]; released(orange_fruit) [completion]\n  pose: stable(orange_fruit) [completion]\n  done_when: surface_contact(orange_fruit, blue_tray) AND released(orange_fruit)\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [],
+    "scene_objects": [],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "orange_fruit",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "orange_fruit",
+        "affordance_region": "the body of the orange fruit",
+        "done_when": "distance(gripper, orange_fruit) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "orange_fruit"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "orange_fruit",
+        "affordance_region": "the body of the orange fruit",
+        "done_when": "holding(orange_fruit)"
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "orange_fruit",
+                "blue_tray",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "orange_fruit"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "orange_fruit",
+        "destination": "blue_tray",
+        "affordance_region": "an empty area on the blue tray",
+        "done_when": "above(orange_fruit, blue_tray, 0.05)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "surface_contact",
+              "args": [
+                "orange_fruit",
+                "blue_tray"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "orange_fruit"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "orange_fruit"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "place",
+        "target": "orange_fruit",
+        "destination": "blue_tray",
+        "affordance_region": "an empty area on the blue tray",
+        "done_when": "surface_contact(orange_fruit, blue_tray) AND released(orange_fruit)"
+      }
+    ]
+  }
+}

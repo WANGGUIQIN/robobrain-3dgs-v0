@@ -1,0 +1,153 @@
+{
+  "task": "place the milk dairy in the gray bowl",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_planning_3epoch/checkpoint-39957",
+  "raw": "Scene: milk_dairy, gray_bowl, blue_plate, table\nStep 1: reach(milk_dairy)\n  affordance_region: the body of the milk dairy\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, milk_dairy, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, milk_dairy) < 0.03\nStep 2: grasp(milk_dairy)\n  affordance_region: the body of the milk dairy\n  contact: holding(milk_dairy) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(milk_dairy)\nStep 3: transport(milk_dairy -> gray_bowl)\n  affordance_region: an empty area on the gray bowl\n  spatial: above(milk_dairy, gray_bowl, 0.05) [completion]\n  safety: no_drop(milk_dairy)\n  done_when: above(milk_dairy, gray_bowl, 0.05)\nStep 4: place(milk_dairy -> gray_bowl)\n  affordance_region: an empty area on the gray bowl\n  contact: surface_contact(milk_dairy, gray_bowl) [completion]; released(milk_dairy) [completion]\n  pose: stable(milk_dairy) [completion]\n  done_when: surface_contact(milk_dairy, gray_bowl) AND released(milk_dairy)\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [],
+    "scene_objects": [
+      "milk_dairy",
+      "gray_bowl",
+      "blue_plate",
+      "table"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "milk_dairy",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "milk_dairy",
+        "affordance_region": "the body of the milk dairy",
+        "done_when": "distance(gripper, milk_dairy) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "milk_dairy"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "milk_dairy",
+        "affordance_region": "the body of the milk dairy",
+        "done_when": "holding(milk_dairy)"
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "milk_dairy",
+                "gray_bowl",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "milk_dairy"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "milk_dairy",
+        "destination": "gray_bowl",
+        "affordance_region": "an empty area on the gray bowl",
+        "done_when": "above(milk_dairy, gray_bowl, 0.05)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "surface_contact",
+              "args": [
+                "milk_dairy",
+                "gray_bowl"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "milk_dairy"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "milk_dairy"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "place",
+        "target": "milk_dairy",
+        "destination": "gray_bowl",
+        "affordance_region": "an empty area on the gray bowl",
+        "done_when": "surface_contact(milk_dairy, gray_bowl) AND released(milk_dairy)"
+      }
+    ]
+  }
+}

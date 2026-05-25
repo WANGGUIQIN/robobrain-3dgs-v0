@@ -1,0 +1,134 @@
+{
+  "task": "Open the microwave door",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_3epoch/best",
+  "raw": "SCENE ANALYSIS - A microwave oven is positioned on a countertop. The microwave door is closed, with a handle on its right side. The task is to open the door, which requires grasping the handle and pulling it towards the user. STRATEGY - First, reach for the microwave door handle. Then, grasp the handle to initiate the opening motion. Finally, pull the handle to open the door. Failure modes include not grasping the handle properly or pulling with insufficient force. AFFORDANCE REASONING - Step 1 reach the microwave door handle; Step 2 grasp the handle for a secure hold; Step 3 pull the handle to open the door.\nGoal: open(microwave_door)\nScene: microwave, handle\nStep 1: reach(microwave)\n  affordance_region: the body of the microwave\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, microwave, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, microwave) < 0.03\nStep 2: grasp(handle)\n  affordance_region: the handle of the microwave door\n  contact: holding(handle) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(handle)\nStep 3: pull(handle -> user)\n  affordance_region: the handle of the microwave door\n  contact: holding(handle) [progress]\n  spatial: distance(handle, user, <, 0.1) [completion]\n  direction: pull_axis(0, 0, -1) [progress]\n  done_when: distance(handle, user) < 0.1\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [
+      {
+        "pred": "open",
+        "args": [
+          "microwave_door"
+        ]
+      }
+    ],
+    "scene_objects": [
+      "microwave",
+      "handle"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "microwave",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "microwave",
+        "affordance_region": "the body of the microwave",
+        "done_when": "distance(gripper, microwave) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "handle"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "handle",
+        "affordance_region": "the handle of the microwave door",
+        "done_when": "holding(handle)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "handle"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "handle",
+                "user",
+                "<",
+                "0.1"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "pull_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "pull",
+        "target": "handle",
+        "destination": "user",
+        "affordance_region": "the handle of the microwave door",
+        "done_when": "distance(handle, user) < 0.1"
+      }
+    ]
+  }
+}

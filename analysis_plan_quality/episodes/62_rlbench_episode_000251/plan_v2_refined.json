@@ -1,0 +1,241 @@
+{
+  "task": "screw in the white light bulb",
+  "scene_objects": [
+    "white_light_bulb",
+    "purple_base",
+    "gray_base",
+    "robot_arm",
+    "table"
+  ],
+  "num_steps": 4,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "white_light_bulb",
+      "affordance": [
+        0.303,
+        0.687
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "white_light_bulb",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "purple_base"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, white_light_bulb) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        -1.5428,
+        1.4811,
+        3.9496
+      ],
+      "affordance_hint": "the white light bulb on the table",
+      "affordance_hint_original": "the white light bulb",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 2,
+      "action": "grasp",
+      "target": "white_light_bulb",
+      "affordance": [
+        0.3,
+        0.66
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "white_light_bulb"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "holding",
+            "args": [
+              "white_light_bulb"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              0,
+              0,
+              -1
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "holding(white_light_bulb)",
+      "affordance_3d": [
+        -0.7574,
+        0.6089,
+        1.901
+      ],
+      "affordance_hint": "the white glass body of the white light bulb",
+      "affordance_hint_original": "the handle of the white light bulb",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 3,
+      "action": "insert",
+      "target": "white_light_bulb",
+      "destination": "purple_base",
+      "affordance": [
+        0.375,
+        0.703
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "white_light_bulb"
+            ],
+            "role": "safety"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "above",
+            "args": [
+              "white_light_bulb",
+              "purple_base",
+              0.05
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "white_light_bulb",
+              "purple_base"
+            ]
+          },
+          {
+            "pred": "no_drop",
+            "args": [
+              "white_light_bulb"
+            ]
+          }
+        ]
+      },
+      "done_when": "above(white_light_bulb, purple_base, 0.05) AND aligned_xy(white_light_bulb, purple_base, 0.03)",
+      "affordance_3d": [
+        -0.4366,
+        0.7095,
+        1.7465
+      ],
+      "affordance_hint": "the top opening of the purple base",
+      "affordance_hint_original": "the top opening of the purple base",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 4,
+      "action": "screw",
+      "target": "white_light_bulb",
+      "destination": "purple_base",
+      "affordance": [
+        0.308,
+        0.687
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "surface_contact",
+            "args": [
+              "white_light_bulb",
+              "purple_base"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "released",
+            "args": [
+              "white_light_bulb"
+            ],
+            "role": "completion"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "stable",
+            "args": [
+              "white_light_bulb"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "support_stable",
+            "args": [
+              "white_light_bulb"
+            ]
+          }
+        ]
+      },
+      "done_when": "surface_contact(white_light_bulb, purple_base) AND released(white_light_bulb) AND stable(white_light_bulb)",
+      "affordance_3d": [
+        -1.5119,
+        1.4811,
+        3.9496
+      ],
+      "affordance_hint": "white light bulb",
+      "affordance_hint_original": "white light bulb",
+      "affordance_hint_confidence": "rejected:missing_token:white light bulb"
+    }
+  ]
+}

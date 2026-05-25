@@ -1,0 +1,243 @@
+{
+  "task": "place the burger meat in the sink",
+  "scene_objects": [
+    "burger_meat",
+    "sink",
+    "table",
+    "green_cup",
+    "orange",
+    "white_bowl",
+    "blue_dish_rack"
+  ],
+  "num_steps": 4,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "burger_meat",
+      "affordance": [
+        0.651,
+        0.558
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "burger_meat",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "table"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, burger_meat) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        0.5638,
+        0.2168,
+        3.2193
+      ],
+      "affordance_hint": "the burger meat on the table",
+      "affordance_hint_original": "the burger meat",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 2,
+      "action": "grasp",
+      "target": "burger_meat",
+      "affordance": [
+        0.651,
+        0.553
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "burger_meat"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "holding",
+            "args": [
+              "burger_meat"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              0,
+              0,
+              -1
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "holding(burger_meat)",
+      "affordance_3d": [
+        0.5638,
+        0.2024,
+        3.2193
+      ],
+      "affordance_hint": "the surface of the burger meat",
+      "affordance_hint_original": "the handle of the burger meat",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 3,
+      "action": "transport",
+      "target": "burger_meat",
+      "destination": "sink",
+      "affordance": [
+        0.883,
+        0.468
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "burger_meat"
+            ],
+            "role": "safety"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "above",
+            "args": [
+              "burger_meat",
+              "sink",
+              0.05
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "burger_meat",
+              "sink"
+            ]
+          },
+          {
+            "pred": "no_drop",
+            "args": [
+              "burger_meat"
+            ]
+          }
+        ]
+      },
+      "done_when": "above(burger_meat, sink, 0.05) AND aligned_xy(burger_meat, sink, 0.03)",
+      "affordance_3d": [
+        1.1841,
+        -0.0967,
+        2.6909
+      ],
+      "affordance_hint": "the empty area on the blue plastic sink",
+      "affordance_hint_original": "an empty area on the sink",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 4,
+      "action": "place",
+      "target": "burger_meat",
+      "destination": "sink",
+      "affordance": [
+        0.883,
+        0.468
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "surface_contact",
+            "args": [
+              "burger_meat",
+              "sink"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "released",
+            "args": [
+              "burger_meat"
+            ],
+            "role": "completion"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "stable",
+            "args": [
+              "burger_meat"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "support_stable",
+            "args": [
+              "burger_meat"
+            ]
+          }
+        ]
+      },
+      "done_when": "surface_contact(burger_meat, sink) AND released(burger_meat) AND stable(burger_meat)",
+      "affordance_3d": [
+        1.1841,
+        -0.0967,
+        2.6909
+      ],
+      "affordance_hint": "the empty area on the blue plastic sink",
+      "affordance_hint_original": "an empty area on the sink",
+      "affordance_hint_confidence": "ok"
+    }
+  ]
+}

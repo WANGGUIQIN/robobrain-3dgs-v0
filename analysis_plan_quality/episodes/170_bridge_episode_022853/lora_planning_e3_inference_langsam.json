@@ -1,0 +1,228 @@
+{
+  "task": "Place red potato inside of silver bowl.",
+  "scene_objects": [
+    "red_potato",
+    "silver_bowl",
+    "orange_cloth",
+    "green_spatula",
+    "table"
+  ],
+  "steps": [
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "red_potato",
+              "<",
+              "0.03"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "approach_axis",
+            "args": [
+              "0",
+              "0",
+              "-1"
+            ],
+            "role": "progress"
+          }
+        ]
+      },
+      "step": 1,
+      "action": "reach",
+      "target": "red_potato",
+      "affordance_region": "the body of the red potato",
+      "done_when": "distance(gripper, red_potato) < 0.03",
+      "affordance_hint": "the body of the red potato",
+      "refine_prompt": "the body of the red potato",
+      "refine_cache_hit": false,
+      "affordance_refined": [
+        0.6484,
+        0.7266
+      ],
+      "affordance_3d_refined": [
+        0.6094,
+        0.9302,
+        3.5715
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.6593
+    },
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "red_potato"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              "0",
+              "0",
+              "-1"
+            ],
+            "role": "progress"
+          }
+        ]
+      },
+      "step": 2,
+      "action": "grasp",
+      "target": "red_potato",
+      "affordance_region": "the body of the red potato",
+      "done_when": "holding(red_potato)",
+      "affordance_hint": "the body of the red potato",
+      "refine_prompt": "the body of the red potato",
+      "refine_cache_hit": true,
+      "affordance_refined": [
+        0.6484,
+        0.7266
+      ],
+      "affordance_3d_refined": [
+        0.6094,
+        0.9302,
+        3.5715
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.6593
+    },
+    {
+      "constraints": {
+        "spatial": [
+          {
+            "pred": "above",
+            "args": [
+              "red_potato",
+              "silver_bowl",
+              "0.05"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_drop",
+            "args": [
+              "red_potato"
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "step": 3,
+      "action": "transport",
+      "target": "red_potato",
+      "destination": "silver_bowl",
+      "affordance_region": "the empty area inside the silver bowl",
+      "done_when": "above(red_potato, silver_bowl, 0.05)",
+      "affordance_hint": "the empty area inside the silver bowl",
+      "refine_prompt": "the empty area inside the silver bowl",
+      "refine_cache_hit": false,
+      "affordance_refined": [
+        0.1953,
+        0.4336
+      ],
+      "affordance_3d_refined": [
+        -0.682,
+        -0.1486,
+        1.9473
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.5635
+    },
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "surface_contact",
+            "args": [
+              "red_potato",
+              "silver_bowl"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "released",
+            "args": [
+              "red_potato"
+            ],
+            "role": "completion"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "stable",
+            "args": [
+              "red_potato"
+            ],
+            "role": "completion"
+          }
+        ]
+      },
+      "step": 4,
+      "action": "place",
+      "target": "red_potato",
+      "destination": "silver_bowl",
+      "affordance_region": "the empty area inside the silver bowl",
+      "done_when": "surface_contact(red_potato, silver_bowl) AND released(red_potato) AND stable(red_potato)",
+      "affordance_hint": "the empty area inside the silver bowl",
+      "refine_prompt": "the empty area inside the silver bowl",
+      "refine_cache_hit": true,
+      "affordance_refined": [
+        0.1953,
+        0.4336
+      ],
+      "affordance_3d_refined": [
+        -0.682,
+        -0.1486,
+        1.9473
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.5635
+    }
+  ]
+}

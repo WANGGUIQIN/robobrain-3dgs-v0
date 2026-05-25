@@ -1,0 +1,203 @@
+{
+  "task": "grasp the door handle, then move the door to the left",
+  "parsed": {
+    "scene_objects": [
+      "door_handle",
+      "door",
+      "table"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "door_handle",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "door_handle",
+        "affordance_region": "the door_handle",
+        "done_when": "distance(gripper, door_handle) < 0.03",
+        "affordance_hint": "the door_handle",
+        "refine_prompt": "the door_handle",
+        "refine_cache_hit": false,
+        "refine_prompt_fallback": "door handle",
+        "affordance_refined": [
+          0.4258,
+          0.2891
+        ],
+        "affordance_3d_refined": [
+          -0.1033,
+          -0.2936,
+          1.211
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.3055,
+        "affordance": [
+          0.4258,
+          0.2891
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "door_handle"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "door_handle",
+        "affordance_region": "the door_handle",
+        "done_when": "holding(door_handle)",
+        "affordance_hint": "the door_handle",
+        "refine_prompt": "the door_handle",
+        "refine_cache_hit": true,
+        "affordance_refined": [
+          0.4258,
+          0.2891
+        ],
+        "affordance_3d_refined": [
+          -0.1033,
+          -0.2936,
+          1.211
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.3055,
+        "affordance": [
+          0.4258,
+          0.2891
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "door_handle"
+              ],
+              "role": "safety"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "aligned_xy",
+              "args": [
+                "door",
+                "left_position",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "motion_dir",
+              "args": [
+                "left"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_collision",
+              "args": [
+                "door"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "pull",
+        "target": "door",
+        "affordance_region": "the door_handle",
+        "done_when": "aligned_xy(door, left_position, 0.05)",
+        "affordance_hint": "the door_handle",
+        "refine_prompt": "the door_handle",
+        "refine_cache_hit": false,
+        "refine_prompt_fallback": "door",
+        "affordance_refined": [
+          0.9961,
+          0.0
+        ],
+        "affordance_3d_refined": [
+          0.8394,
+          -0.8461,
+          1.472
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.2683,
+        "affordance": [
+          0.9961,
+          0.0
+        ]
+      }
+    ]
+  }
+}

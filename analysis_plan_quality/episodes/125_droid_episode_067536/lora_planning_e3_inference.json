@@ -1,0 +1,124 @@
+{
+  "task": "Open the top of the grill",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_planning_3epoch/checkpoint-39957",
+  "raw": "Scene: grill, countertop\nStep 1: reach(grill)\n  affordance_region: the body of the grill\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, grill, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, grill) < 0.03\nStep 2: grasp(grill)\n  affordance_region: the handle of the grill\n  contact: holding(grill) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(grill)\nStep 3: pull(grill)\n  affordance_region: the handle of the grill\n  contact: holding(grill) [safety]\n  spatial: aligned_z(grill, open_position) [completion]\n  direction: motion_dir(0, 1, 0) [progress]\n  done_when: aligned_z(grill, open_position)\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [],
+    "scene_objects": [
+      "grill",
+      "countertop"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "grill",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "grill",
+        "affordance_region": "the body of the grill",
+        "done_when": "distance(gripper, grill) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "grill"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "grill",
+        "affordance_region": "the handle of the grill",
+        "done_when": "holding(grill)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "grill"
+              ],
+              "role": "safety"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "aligned_z",
+              "args": [
+                "grill",
+                "open_position"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "motion_dir",
+              "args": [
+                "0",
+                "1",
+                "0"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "pull",
+        "target": "grill",
+        "affordance_region": "the handle of the grill",
+        "done_when": "aligned_z(grill, open_position)"
+      }
+    ]
+  }
+}

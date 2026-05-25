@@ -1,0 +1,226 @@
+{
+  "task": "pick green jalapeno chip bag from top drawer and place on counter",
+  "scene_objects": [
+    "green_jalapeno_chip_bag",
+    "counter",
+    "drawer"
+  ],
+  "steps": [
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "green_jalapeno_chip_bag",
+              "<",
+              "0.03"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "approach_axis",
+            "args": [
+              "0",
+              "0",
+              "-1"
+            ],
+            "role": "progress"
+          }
+        ]
+      },
+      "step": 1,
+      "action": "reach",
+      "target": "green_jalapeno_chip_bag",
+      "affordance_region": "the green jalapeno chip bag in the drawer",
+      "done_when": "distance(gripper, green_jalapeno_chip_bag) < 0.03",
+      "affordance_hint": "the green jalapeno chip bag in the drawer",
+      "refine_prompt": "the green jalapeno chip bag in the drawer",
+      "refine_cache_hit": false,
+      "affordance_refined": [
+        0.4922,
+        0.2109
+      ],
+      "affordance_3d_refined": [
+        -0.0247,
+        -0.9137,
+        2.7496
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.6316
+    },
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "green_jalapeno_chip_bag"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              "0",
+              "0",
+              "-1"
+            ],
+            "role": "progress"
+          }
+        ]
+      },
+      "step": 2,
+      "action": "grasp",
+      "target": "green_jalapeno_chip_bag",
+      "affordance_region": "the body of the green jalapeno chip bag",
+      "done_when": "holding(green_jalapeno_chip_bag)",
+      "affordance_hint": "the body of the green jalapeno chip bag",
+      "refine_prompt": "the body of the green jalapeno chip bag",
+      "refine_cache_hit": false,
+      "affordance_refined": [
+        0.4922,
+        0.2109
+      ],
+      "affordance_3d_refined": [
+        -0.0247,
+        -0.9137,
+        2.7496
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.3727
+    },
+    {
+      "constraints": {
+        "spatial": [
+          {
+            "pred": "above",
+            "args": [
+              "green_jalapeno_chip_bag",
+              "counter",
+              "0.05"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_drop",
+            "args": [
+              "green_jalapeno_chip_bag"
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "step": 3,
+      "action": "transport",
+      "target": "green_jalapeno_chip_bag",
+      "destination": "counter",
+      "affordance_region": "an empty area on the counter",
+      "done_when": "above(green_jalapeno_chip_bag, counter, 0.05)",
+      "affordance_hint": "an empty area on the counter",
+      "refine_prompt": "an empty area on the counter",
+      "refine_cache_hit": false,
+      "affordance_refined": [
+        0.6328,
+        0.3164
+      ],
+      "affordance_3d_refined": [
+        0.4467,
+        -0.6175,
+        2.9257
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.3245
+    },
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "surface_contact",
+            "args": [
+              "green_jalapeno_chip_bag",
+              "counter"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "released",
+            "args": [
+              "green_jalapeno_chip_bag"
+            ],
+            "role": "completion"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "stable",
+            "args": [
+              "green_jalapeno_chip_bag"
+            ],
+            "role": "completion"
+          }
+        ]
+      },
+      "step": 4,
+      "action": "place",
+      "target": "green_jalapeno_chip_bag",
+      "destination": "counter",
+      "affordance_region": "an empty area on the counter",
+      "done_when": "surface_contact(green_jalapeno_chip_bag, counter) AND released(green_jalapeno_chip_bag) AND stable(green_jalapeno_chip_bag)",
+      "affordance_hint": "an empty area on the counter",
+      "refine_prompt": "an empty area on the counter",
+      "refine_cache_hit": true,
+      "affordance_refined": [
+        0.6328,
+        0.3164
+      ],
+      "affordance_3d_refined": [
+        0.4467,
+        -0.6175,
+        2.9257
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.3245
+    }
+  ]
+}

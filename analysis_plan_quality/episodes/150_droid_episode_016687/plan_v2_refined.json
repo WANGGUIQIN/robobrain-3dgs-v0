@@ -1,0 +1,240 @@
+{
+  "task": "Put the dark bule object in the sink",
+  "scene_objects": [
+    "dark_blue_object",
+    "red_cup",
+    "table",
+    "sink"
+  ],
+  "num_steps": 4,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "dark_blue_object",
+      "affordance": [
+        0.25,
+        0.187
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "dark_blue_object",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "red_cup"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, dark_blue_object) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        -0.2678,
+        -0.2009,
+        0.5579
+      ],
+      "affordance_hint": "the dark blue object",
+      "affordance_hint_original": "the dark blue object",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 2,
+      "action": "grasp",
+      "target": "dark_blue_object",
+      "affordance": [
+        0.575,
+        0.3
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "dark_blue_object"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "holding",
+            "args": [
+              "dark_blue_object"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              0,
+              0,
+              -1
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "holding(dark_blue_object)",
+      "affordance_3d": [
+        -0.0185,
+        -0.0611,
+        0.284
+      ],
+      "affordance_hint": "the dark blue object",
+      "affordance_hint_original": "the handle of the dark blue object",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 3,
+      "action": "transport",
+      "target": "dark_blue_object",
+      "destination": "sink",
+      "affordance": [
+        0.441,
+        0.511
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "dark_blue_object"
+            ],
+            "role": "safety"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "above",
+            "args": [
+              "dark_blue_object",
+              "sink",
+              0.05
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "dark_blue_object",
+              "sink"
+            ]
+          },
+          {
+            "pred": "no_drop",
+            "args": [
+              "dark_blue_object"
+            ]
+          }
+        ]
+      },
+      "done_when": "above(dark_blue_object, sink, 0.05) AND aligned_xy(dark_blue_object, sink, 0.03)",
+      "affordance_3d": [
+        -0.3748,
+        0.0877,
+        1.5951
+      ],
+      "affordance_hint": "the empty area in the sink",
+      "affordance_hint_original": "an empty area on the sink",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 4,
+      "action": "place",
+      "target": "dark_blue_object",
+      "destination": "sink",
+      "affordance": [
+        0.441,
+        0.511
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "surface_contact",
+            "args": [
+              "dark_blue_object",
+              "sink"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "released",
+            "args": [
+              "dark_blue_object"
+            ],
+            "role": "completion"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "stable",
+            "args": [
+              "dark_blue_object"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "support_stable",
+            "args": [
+              "dark_blue_object"
+            ]
+          }
+        ]
+      },
+      "done_when": "surface_contact(dark_blue_object, sink) AND released(dark_blue_object) AND stable(dark_blue_object)",
+      "affordance_3d": [
+        -0.3748,
+        0.0877,
+        1.5951
+      ],
+      "affordance_hint": "the empty area in the sink",
+      "affordance_hint_original": "an empty area on the sink",
+      "affordance_hint_confidence": "ok"
+    }
+  ]
+}

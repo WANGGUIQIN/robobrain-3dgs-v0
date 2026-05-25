@@ -1,0 +1,231 @@
+{
+  "task": "Move the towel below the microwave",
+  "scene_objects": [
+    "yellow_towel",
+    "microwave",
+    "table",
+    "green_bottle",
+    "spoon",
+    "pot",
+    "cans"
+  ],
+  "steps": [
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "yellow_towel",
+              "<",
+              "0.03"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "approach_axis",
+            "args": [
+              "0",
+              "0",
+              "-1"
+            ],
+            "role": "progress"
+          }
+        ]
+      },
+      "step": 1,
+      "action": "reach",
+      "target": "yellow_towel",
+      "affordance_region": "the yellow towel",
+      "done_when": "distance(gripper, yellow_towel) < 0.03",
+      "affordance_hint": "the yellow towel",
+      "refine_prompt": "the yellow towel",
+      "refine_cache_hit": false,
+      "affordance_refined": [
+        0.0234,
+        0.4883
+      ],
+      "affordance_3d_refined": [
+        -1.3241,
+        -0.0326,
+        2.4169
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.8596
+    },
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "yellow_towel"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              "0",
+              "0",
+              "-1"
+            ],
+            "role": "progress"
+          }
+        ]
+      },
+      "step": 2,
+      "action": "grasp",
+      "target": "yellow_towel",
+      "affordance_region": "the corner of the yellow towel",
+      "done_when": "holding(yellow_towel)",
+      "affordance_hint": "the corner of the yellow towel",
+      "refine_prompt": "the corner of the yellow towel",
+      "refine_cache_hit": false,
+      "affordance_refined": [
+        0.0234,
+        0.4883
+      ],
+      "affordance_3d_refined": [
+        -1.3241,
+        -0.0326,
+        2.4169
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.5064
+    },
+    {
+      "constraints": {
+        "spatial": [
+          {
+            "pred": "above",
+            "args": [
+              "yellow_towel",
+              "below_microwave",
+              "0.05"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_drop",
+            "args": [
+              "yellow_towel"
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "step": 3,
+      "action": "transport",
+      "target": "yellow_towel",
+      "destination": "below_microwave",
+      "affordance_region": "an empty area below the microwave",
+      "done_when": "above(yellow_towel, below_microwave, 0.05)",
+      "affordance_hint": "an empty area below the microwave",
+      "refine_prompt": "an empty area below the microwave",
+      "refine_cache_hit": false,
+      "refine_prompt_fallback": "yellow towel",
+      "affordance_refined": [
+        0.0234,
+        0.4883
+      ],
+      "affordance_3d_refined": [
+        -1.3241,
+        -0.0326,
+        2.4169
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.6951
+    },
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "surface_contact",
+            "args": [
+              "yellow_towel",
+              "below_microwave"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "released",
+            "args": [
+              "yellow_towel"
+            ],
+            "role": "completion"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "stable",
+            "args": [
+              "yellow_towel"
+            ],
+            "role": "completion"
+          }
+        ]
+      },
+      "step": 4,
+      "action": "place",
+      "target": "yellow_towel",
+      "destination": "below_microwave",
+      "affordance_region": "an empty area below the microwave",
+      "done_when": "surface_contact(yellow_towel, below_microwave) AND released(yellow_towel) AND stable(yellow_towel)",
+      "affordance_hint": "an empty area below the microwave",
+      "refine_prompt": "an empty area below the microwave",
+      "refine_cache_hit": true,
+      "affordance_refined": [
+        0.0234,
+        0.4883
+      ],
+      "affordance_3d_refined": [
+        -1.3241,
+        -0.0326,
+        2.4169
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.6951
+    }
+  ]
+}

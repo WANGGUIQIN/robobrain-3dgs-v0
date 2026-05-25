@@ -1,0 +1,459 @@
+{
+  "task": "Put the cups into each other in the black bowl and put the fork in them beginning with the dark blue one, then the light blue one, and finally the orange one",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_planning_3epoch/checkpoint-39957",
+  "raw": "Scene: dark_blue_cup, light_blue_cup, orange_cup, black_bowl, fork, table\nStep 1: reach(dark_blue_cup)\n  affordance_region: the body of the dark blue cup\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, dark_blue_cup, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, dark_blue_cup) < 0.03\nStep 2: grasp(dark_blue_cup)\n  affordance_region: the handle of the dark blue cup\n  contact: holding(dark_blue_cup) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(dark_blue_cup)\nStep 3: insert(dark_blue_cup -> black_bowl)\n  affordance_region: the top opening of the black bowl\n  contact: holding(dark_blue_cup) [safety]\n  spatial: inside(dark_blue_cup, black_bowl) [completion]\n  direction: insert_dir(0, 0, -1) [progress]\n  done_when: inside(dark_blue_cup, black_bowl)\nStep 4: reach(light_blue_cup)\n  affordance_region: the body of the light blue cup\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, light_blue_cup, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, light_blue_cup) < 0.03\nStep 5: grasp(light_blue_cup)\n  affordance_region: the handle of the light blue cup\n  contact: holding(light_blue_cup) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(light_blue_cup)\nStep 6: insert(light_blue_cup -> dark_blue_cup)\n  affordance_region: the top opening of the dark blue cup\n  contact: holding(light_blue_cup) [safety]\n  spatial: inside(light_blue_cup, dark_blue_cup) [completion]\n  direction: insert_dir(0, 0, -1) [progress]\n  done_when: inside(light_blue_cup, dark_blue_cup)\nStep 7: reach(orange_cup)\n  affordance_region: the body of the orange cup\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, orange_cup, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, orange_cup) < 0.03\nStep 8: grasp(orange_cup)\n  affordance_region: the handle of the orange cup\n  contact: holding(orange_cup) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(orange_cup)\nStep 9: insert(orange_cup -> light_blue_cup)\n  affordance_region: the top opening of the light blue cup\n  contact: holding(orange_cup) [safety]\n  spatial: inside(orange_cup, light_blue_cup) [completion]\n  direction: insert_dir(0, 0, -1) [progress]\n  done_when: inside(orange_cup, light_blue_cup)\nStep 10: reach(fork)\n  affordance_region: the handle of the fork\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, fork, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, fork) < 0.03\nStep 11: grasp(fork)\n  affordance_region: the handle of the fork\n  contact: holding(fork) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(fork)\nStep 12: insert(fork -> orange_cup)\n  affordance_region: the top opening of the orange cup\n  contact: holding(fork) [safety]\n  spatial: inside(fork, orange_cup) [completion]\n  direction: insert_dir(0, 0, -1) [progress]\n  done_when: inside(fork, orange_cup)\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [],
+    "scene_objects": [
+      "dark_blue_cup",
+      "light_blue_cup",
+      "orange_cup",
+      "black_bowl",
+      "fork",
+      "table"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "dark_blue_cup",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "dark_blue_cup",
+        "affordance_region": "the body of the dark blue cup",
+        "done_when": "distance(gripper, dark_blue_cup) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "dark_blue_cup"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "dark_blue_cup",
+        "affordance_region": "the handle of the dark blue cup",
+        "done_when": "holding(dark_blue_cup)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "dark_blue_cup"
+              ],
+              "role": "safety"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "inside",
+              "args": [
+                "dark_blue_cup",
+                "black_bowl"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "insert_dir",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "insert",
+        "target": "dark_blue_cup",
+        "destination": "black_bowl",
+        "affordance_region": "the top opening of the black bowl",
+        "done_when": "inside(dark_blue_cup, black_bowl)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "light_blue_cup",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "reach",
+        "target": "light_blue_cup",
+        "affordance_region": "the body of the light blue cup",
+        "done_when": "distance(gripper, light_blue_cup) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "light_blue_cup"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 5,
+        "action": "grasp",
+        "target": "light_blue_cup",
+        "affordance_region": "the handle of the light blue cup",
+        "done_when": "holding(light_blue_cup)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "light_blue_cup"
+              ],
+              "role": "safety"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "inside",
+              "args": [
+                "light_blue_cup",
+                "dark_blue_cup"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "insert_dir",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 6,
+        "action": "insert",
+        "target": "light_blue_cup",
+        "destination": "dark_blue_cup",
+        "affordance_region": "the top opening of the dark blue cup",
+        "done_when": "inside(light_blue_cup, dark_blue_cup)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "orange_cup",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 7,
+        "action": "reach",
+        "target": "orange_cup",
+        "affordance_region": "the body of the orange cup",
+        "done_when": "distance(gripper, orange_cup) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "orange_cup"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 8,
+        "action": "grasp",
+        "target": "orange_cup",
+        "affordance_region": "the handle of the orange cup",
+        "done_when": "holding(orange_cup)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "orange_cup"
+              ],
+              "role": "safety"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "inside",
+              "args": [
+                "orange_cup",
+                "light_blue_cup"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "insert_dir",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 9,
+        "action": "insert",
+        "target": "orange_cup",
+        "destination": "light_blue_cup",
+        "affordance_region": "the top opening of the light blue cup",
+        "done_when": "inside(orange_cup, light_blue_cup)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "fork",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 10,
+        "action": "reach",
+        "target": "fork",
+        "affordance_region": "the handle of the fork",
+        "done_when": "distance(gripper, fork) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "fork"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 11,
+        "action": "grasp",
+        "target": "fork",
+        "affordance_region": "the handle of the fork",
+        "done_when": "holding(fork)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "fork"
+              ],
+              "role": "safety"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "inside",
+              "args": [
+                "fork",
+                "orange_cup"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "insert_dir",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 12,
+        "action": "insert",
+        "target": "fork",
+        "destination": "orange_cup",
+        "affordance_region": "the top opening of the orange cup",
+        "done_when": "inside(fork, orange_cup)"
+      }
+    ]
+  }
+}

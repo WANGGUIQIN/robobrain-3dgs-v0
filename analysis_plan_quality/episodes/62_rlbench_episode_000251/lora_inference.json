@@ -1,0 +1,246 @@
+{
+  "task": "screw in the white light bulb",
+  "parsed": {
+    "scene_objects": [
+      "white_light_bulb",
+      "screwdriver",
+      "table"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "white_light_bulb",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "white_light_bulb",
+        "affordance_region": "the white light bulb",
+        "done_when": "distance(gripper, white_light_bulb) < 0.03",
+        "affordance_hint": "the white light bulb",
+        "refine_prompt": "the white light bulb",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.3008,
+          0.6484
+        ],
+        "affordance_3d_refined": [
+          -0.8573,
+          0.6388,
+          2.1517
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.3213,
+        "affordance": [
+          0.3008,
+          0.6484
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "white_light_bulb"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "white_light_bulb",
+        "affordance_region": "the base of the white light bulb",
+        "done_when": "holding(white_light_bulb)",
+        "affordance_hint": "the base of the white light bulb",
+        "refine_prompt": "the base of the white light bulb",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.3359,
+          0.7031
+        ],
+        "affordance_3d_refined": [
+          -0.5207,
+          0.6447,
+          1.5869
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.3252,
+        "affordance": [
+          0.3359,
+          0.7031
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "white_light_bulb"
+              ],
+              "role": "safety"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "aligned_xy",
+              "args": [
+                "white_light_bulb",
+                "screwdriver",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "insert_dir",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "insert",
+        "target": "white_light_bulb",
+        "destination": "screwdriver",
+        "affordance_region": "the top opening of the screwdriver",
+        "done_when": "aligned_xy(white_light_bulb, screwdriver, 0.03)",
+        "affordance_hint": "the top opening of the screwdriver",
+        "refine_prompt": "the top opening of the screwdriver",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.5977,
+          0.4922
+        ],
+        "affordance_3d_refined": [
+          0.4425,
+          -0.0354,
+          2.2655
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.503,
+        "affordance": [
+          0.5977,
+          0.4922
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "white_light_bulb"
+              ],
+              "role": "safety"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "white_light_bulb"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "rotate",
+        "target": "white_light_bulb",
+        "affordance_region": "the white light bulb",
+        "done_when": "stable(white_light_bulb)",
+        "affordance_hint": "the white light bulb",
+        "refine_prompt": "the white light bulb",
+        "refine_cache_hit": true,
+        "affordance_refined": [
+          0.3008,
+          0.6484
+        ],
+        "affordance_3d_refined": [
+          -0.8573,
+          0.6388,
+          2.1517
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.3213,
+        "affordance": [
+          0.3008,
+          0.6484
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,245 @@
+{
+  "task": "put the money away in the safe on the middle shelf",
+  "parsed": {
+    "scene_objects": [
+      "money",
+      "safe",
+      "middle_shelf",
+      "table"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "money",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "money",
+        "affordance_region": "the green money on the table",
+        "done_when": "distance(gripper, money) < 0.03",
+        "affordance_hint": "the green money on the table",
+        "refine_prompt": "the green money on the table",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.1836,
+          0.2656
+        ],
+        "affordance_3d_refined": [
+          -1.5116,
+          -1.1197,
+          2.3887
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.6526,
+        "affordance": [
+          0.1836,
+          0.2656
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "money"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "money",
+        "affordance_region": "the green leafy money",
+        "done_when": "holding(money)",
+        "affordance_hint": "the green leafy money",
+        "refine_prompt": "the green leafy money",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.1836,
+          0.2656
+        ],
+        "affordance_3d_refined": [
+          -1.5116,
+          -1.1197,
+          2.3887
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.6645,
+        "affordance": [
+          0.1836,
+          0.2656
+        ]
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "money",
+                "safe",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "money"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "money",
+        "destination": "safe",
+        "affordance_region": "an empty area on the safe",
+        "done_when": "above(money, safe, 0.05)",
+        "affordance_hint": "an empty area on the safe",
+        "refine_prompt": "an empty area on the safe",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.3125,
+          0.5703
+        ],
+        "affordance_3d_refined": [
+          -0.9471,
+          0.3552,
+          2.5257
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.311,
+        "affordance": [
+          0.3125,
+          0.5703
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "surface_contact",
+              "args": [
+                "money",
+                "safe"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "money"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "money"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "place",
+        "target": "money",
+        "destination": "safe",
+        "affordance_region": "an empty area on the safe",
+        "done_when": "surface_contact(money, safe) AND released(money) AND stable(money)",
+        "affordance_hint": "an empty area on the safe",
+        "refine_prompt": "an empty area on the safe",
+        "refine_cache_hit": true,
+        "affordance_refined": [
+          0.3125,
+          0.5703
+        ],
+        "affordance_3d_refined": [
+          -0.9471,
+          0.3552,
+          2.5257
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.311,
+        "affordance": [
+          0.3125,
+          0.5703
+        ]
+      }
+    ]
+  }
+}

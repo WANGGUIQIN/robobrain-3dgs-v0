@@ -1,0 +1,162 @@
+{
+  "task": "turn right tap",
+  "scene_objects": [
+    "tap",
+    "table"
+  ],
+  "num_steps": 3,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "tap",
+      "affordance": [
+        0.5,
+        0.703
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "tap",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "table"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, tap) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        0.0,
+        2.0187,
+        4.9691
+      ],
+      "affordance_hint": "the tap"
+    },
+    {
+      "step": 2,
+      "action": "grasp",
+      "target": "tap",
+      "affordance": [
+        0.468,
+        0.687
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "tap"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "holding",
+            "args": [
+              "tap"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              0,
+              0,
+              -1
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "holding(tap)",
+      "affordance_3d": [
+        -0.2928,
+        1.757,
+        4.6853
+      ],
+      "affordance_hint": "the handle of the tap"
+    },
+    {
+      "step": 3,
+      "action": "rotate",
+      "target": "tap",
+      "affordance": [
+        0.5,
+        0.703
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "tap"
+            ],
+            "role": "safety"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "tilt",
+            "args": [
+              "tap"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_drop",
+            "args": [
+              "tap"
+            ]
+          }
+        ]
+      },
+      "done_when": "tilt(tap)",
+      "affordance_3d": [
+        0.0,
+        2.0187,
+        4.9691
+      ],
+      "affordance_hint": "the body of the tap"
+    }
+  ]
+}

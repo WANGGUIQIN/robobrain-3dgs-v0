@@ -1,0 +1,226 @@
+{
+  "task": "Move the lid to the table",
+  "scene_objects": [
+    "lid",
+    "pot",
+    "table"
+  ],
+  "steps": [
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "lid",
+              "<",
+              "0.03"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "approach_axis",
+            "args": [
+              "0",
+              "0",
+              "-1"
+            ],
+            "role": "progress"
+          }
+        ]
+      },
+      "step": 1,
+      "action": "reach",
+      "target": "lid",
+      "affordance_region": "the lid of the black pot",
+      "done_when": "distance(gripper, lid) < 0.03",
+      "affordance_hint": "the lid of the black pot",
+      "refine_prompt": "the lid of the black pot",
+      "refine_cache_hit": false,
+      "affordance_refined": [
+        0.4336,
+        0.7109
+      ],
+      "affordance_3d_refined": [
+        -0.7839,
+        0.9919,
+        3.1997
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.8472
+    },
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "lid"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              "0",
+              "0",
+              "-1"
+            ],
+            "role": "progress"
+          }
+        ]
+      },
+      "step": 2,
+      "action": "grasp",
+      "target": "lid",
+      "affordance_region": "the handle of the lid",
+      "done_when": "holding(lid)",
+      "affordance_hint": "the handle of the lid",
+      "refine_prompt": "the handle of the lid",
+      "refine_cache_hit": false,
+      "affordance_refined": [
+        0.4102,
+        0.6445
+      ],
+      "affordance_3d_refined": [
+        -0.5678,
+        0.4646,
+        2.0647
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.3102
+    },
+    {
+      "constraints": {
+        "spatial": [
+          {
+            "pred": "above",
+            "args": [
+              "lid",
+              "table",
+              "0.05"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_drop",
+            "args": [
+              "lid"
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "step": 3,
+      "action": "transport",
+      "target": "lid",
+      "destination": "table",
+      "affordance_region": "an empty area on the table",
+      "done_when": "above(lid, table, 0.05)",
+      "affordance_hint": "an empty area on the table",
+      "refine_prompt": "an empty area on the table",
+      "refine_cache_hit": false,
+      "affordance_refined": [
+        0.3242,
+        0.9961
+      ],
+      "affordance_3d_refined": [
+        -1.36,
+        2.3843,
+        3.5324
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.5038
+    },
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "surface_contact",
+            "args": [
+              "lid",
+              "table"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "released",
+            "args": [
+              "lid"
+            ],
+            "role": "completion"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "stable",
+            "args": [
+              "lid"
+            ],
+            "role": "completion"
+          }
+        ]
+      },
+      "step": 4,
+      "action": "place",
+      "target": "lid",
+      "destination": "table",
+      "affordance_region": "an empty area on the table",
+      "done_when": "surface_contact(lid, table) AND released(lid) AND stable(lid)",
+      "affordance_hint": "an empty area on the table",
+      "refine_prompt": "an empty area on the table",
+      "refine_cache_hit": true,
+      "affordance_refined": [
+        0.3242,
+        0.9961
+      ],
+      "affordance_3d_refined": [
+        -1.36,
+        2.3843,
+        3.5324
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.5038
+    }
+  ]
+}

@@ -1,0 +1,226 @@
+{
+  "task": "close the black jar",
+  "scene_objects": [
+    "black_jar",
+    "pink_lid",
+    "table"
+  ],
+  "steps": [
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "pink_lid",
+              "<",
+              "0.03"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "approach_axis",
+            "args": [
+              "0",
+              "0",
+              "-1"
+            ],
+            "role": "progress"
+          }
+        ]
+      },
+      "step": 1,
+      "action": "reach",
+      "target": "pink_lid",
+      "affordance_region": "the pink lid",
+      "done_when": "distance(gripper, pink_lid) < 0.03",
+      "affordance_hint": "the pink lid",
+      "refine_prompt": "the pink lid",
+      "refine_cache_hit": false,
+      "affordance_refined": [
+        0.3594,
+        0.6406
+      ],
+      "affordance_3d_refined": [
+        -0.7353,
+        0.7353,
+        2.6144
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.527
+    },
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "pink_lid"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              "0",
+              "0",
+              "-1"
+            ],
+            "role": "progress"
+          }
+        ]
+      },
+      "step": 2,
+      "action": "grasp",
+      "target": "pink_lid",
+      "affordance_region": "the pink lid",
+      "done_when": "holding(pink_lid)",
+      "affordance_hint": "the pink lid",
+      "refine_prompt": "the pink lid",
+      "refine_cache_hit": true,
+      "affordance_refined": [
+        0.3594,
+        0.6406
+      ],
+      "affordance_3d_refined": [
+        -0.7353,
+        0.7353,
+        2.6144
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.527
+    },
+    {
+      "constraints": {
+        "spatial": [
+          {
+            "pred": "above",
+            "args": [
+              "pink_lid",
+              "black_jar",
+              "0.05"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_drop",
+            "args": [
+              "pink_lid"
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "step": 3,
+      "action": "transport",
+      "target": "pink_lid",
+      "destination": "black_jar",
+      "affordance_region": "the top opening of the black jar",
+      "done_when": "above(pink_lid, black_jar, 0.05)",
+      "affordance_hint": "the top opening of the black jar",
+      "refine_prompt": "the top opening of the black jar",
+      "refine_cache_hit": false,
+      "affordance_refined": [
+        0.3281,
+        0.7227
+      ],
+      "affordance_3d_refined": [
+        -0.8158,
+        1.0568,
+        2.3731
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.5174
+    },
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "surface_contact",
+            "args": [
+              "pink_lid",
+              "black_jar"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "released",
+            "args": [
+              "pink_lid"
+            ],
+            "role": "completion"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "stable",
+            "args": [
+              "pink_lid"
+            ],
+            "role": "completion"
+          }
+        ]
+      },
+      "step": 4,
+      "action": "place",
+      "target": "pink_lid",
+      "destination": "black_jar",
+      "affordance_region": "the top opening of the black jar",
+      "done_when": "surface_contact(pink_lid, black_jar) AND released(pink_lid)",
+      "affordance_hint": "the top opening of the black jar",
+      "refine_prompt": "the top opening of the black jar",
+      "refine_cache_hit": true,
+      "affordance_refined": [
+        0.3281,
+        0.7227
+      ],
+      "affordance_3d_refined": [
+        -0.8158,
+        1.0568,
+        2.3731
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.5174
+    }
+  ]
+}

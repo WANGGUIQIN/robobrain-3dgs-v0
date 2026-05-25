@@ -1,0 +1,127 @@
+{
+  "task": "open the cabinet drawer",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_planning_3epoch/checkpoint-39957",
+  "raw": "Scene: cabinet_drawer, robot_arm, workspace\nStep 1: reach(cabinet_drawer)\n  affordance_region: the front edge of the cabinet drawer\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, cabinet_drawer, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, cabinet_drawer) < 0.03\nStep 2: grasp(cabinet_drawer)\n  affordance_region: the black handle of the cabinet drawer\n  contact: holding(cabinet_drawer) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(cabinet_drawer)\nStep 3: pull(cabinet_drawer)\n  affordance_region: the black handle of the cabinet drawer\n  contact: holding(cabinet_drawer) [safety]\n  spatial: distance(cabinet_drawer, workspace, >, 0.1) [completion]\n  direction: motion_dir(0, 1, 0) [completion]\n  done_when: distance(cabinet_drawer, workspace) > 0.1\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [],
+    "scene_objects": [
+      "cabinet_drawer",
+      "robot_arm",
+      "workspace"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "cabinet_drawer",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "cabinet_drawer",
+        "affordance_region": "the front edge of the cabinet drawer",
+        "done_when": "distance(gripper, cabinet_drawer) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "cabinet_drawer"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "cabinet_drawer",
+        "affordance_region": "the black handle of the cabinet drawer",
+        "done_when": "holding(cabinet_drawer)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "cabinet_drawer"
+              ],
+              "role": "safety"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "cabinet_drawer",
+                "workspace",
+                ">",
+                "0.1"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "motion_dir",
+              "args": [
+                "0",
+                "1",
+                "0"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "pull",
+        "target": "cabinet_drawer",
+        "affordance_region": "the black handle of the cabinet drawer",
+        "done_when": "distance(cabinet_drawer, workspace) > 0.1"
+      }
+    ]
+  }
+}

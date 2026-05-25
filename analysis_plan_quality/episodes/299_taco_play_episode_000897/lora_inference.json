@@ -1,0 +1,191 @@
+{
+  "task": "go towards the pink block and lift it",
+  "parsed": {
+    "scene_objects": [
+      "pink_block",
+      "table"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "pink_block",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "pink_block",
+        "affordance_region": "the pink block",
+        "done_when": "distance(gripper, pink_block) < 0.03",
+        "affordance_hint": "the pink block",
+        "refine_prompt": "the pink block",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.7422,
+          0.7969
+        ],
+        "affordance_3d_refined": [
+          0.4697,
+          0.5757,
+          1.687
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.3433,
+        "affordance": [
+          0.7422,
+          0.7969
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "pink_block"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "pink_block",
+        "affordance_region": "the pink block",
+        "done_when": "holding(pink_block)",
+        "affordance_hint": "the pink block",
+        "refine_prompt": "the pink block",
+        "refine_cache_hit": true,
+        "affordance_refined": [
+          0.7422,
+          0.7969
+        ],
+        "affordance_3d_refined": [
+          0.4697,
+          0.5757,
+          1.687
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.3433,
+        "affordance": [
+          0.7422,
+          0.7969
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "pink_block"
+              ],
+              "role": "safety"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "pink_block",
+                "table",
+                "0.1"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "pink_block"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "lift",
+        "target": "pink_block",
+        "affordance_region": "the pink block",
+        "done_when": "above(pink_block, table, 0.1)",
+        "affordance_hint": "the pink block",
+        "refine_prompt": "the pink block",
+        "refine_cache_hit": true,
+        "affordance_refined": [
+          0.7422,
+          0.7969
+        ],
+        "affordance_3d_refined": [
+          0.4697,
+          0.5757,
+          1.687
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.3433,
+        "affordance": [
+          0.7422,
+          0.7969
+        ]
+      }
+    ]
+  }
+}

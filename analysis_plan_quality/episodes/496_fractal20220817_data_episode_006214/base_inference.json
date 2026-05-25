@@ -1,0 +1,134 @@
+{
+  "task": "knock green can over",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_3epoch/best",
+  "raw": "**SCENE ANALYSIS - A green can and an apple are on a table. The green can is a cylindrical container with a top opening; the apple is a round fruit. STRATEGY - To knock the can over, push it with a finger or a tool. Since no tool is visible, use the gripper to grasp the can's body and apply a force to tip it. Failure mode: if the can is too stable, it may not tip. AFFORDANCE REASONING - Step 1 reach the can body for a stable grasp; Step 2 grasp the can body; Step 3 apply a force to tip the can.**\nGoal: tipped(green_can)\nScene: green_can, apple, table\nStep 1: reach(green_can)\n  affordance_region: the body of the green can\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, green_can, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, green_can) < 0.03\nStep 2: grasp(green_can)\n  affordance_region: the body of the green can\n  contact: holding(green_can) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(green_can)\nStep 3: push(green_can)\n  affordance_region: the body of the green can\n  contact: contact(gripper, green_can) [progress]\n  spatial: force(gripper, green_can, tip) [completion]\n  direction: push_axis(0, 0, -1) [progress]\n  done_when: tipped(green_can)\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [
+      {
+        "pred": "tipped",
+        "args": [
+          "green_can"
+        ]
+      }
+    ],
+    "scene_objects": [
+      "green_can",
+      "apple",
+      "table"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "green_can",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "green_can",
+        "affordance_region": "the body of the green can",
+        "done_when": "distance(gripper, green_can) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "green_can"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "green_can",
+        "affordance_region": "the body of the green can",
+        "done_when": "holding(green_can)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "contact",
+              "args": [
+                "gripper",
+                "green_can"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "force",
+              "args": [
+                "gripper",
+                "green_can",
+                "tip"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "push_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "push",
+        "target": "green_can",
+        "affordance_region": "the body of the green can",
+        "done_when": "tipped(green_can)"
+      }
+    ]
+  }
+}

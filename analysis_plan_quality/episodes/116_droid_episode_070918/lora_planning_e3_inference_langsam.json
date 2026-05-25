@@ -1,0 +1,176 @@
+{
+  "task": "Close the trash can lid.",
+  "scene_objects": [
+    "trash_can",
+    "trash_can_lid",
+    "robot_arm"
+  ],
+  "steps": [
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "trash_can_lid",
+              "<",
+              "0.03"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "approach_axis",
+            "args": [
+              "0",
+              "0",
+              "-1"
+            ],
+            "role": "progress"
+          }
+        ]
+      },
+      "step": 1,
+      "action": "reach",
+      "target": "trash_can_lid",
+      "affordance_region": "the white plastic lid of the trash can",
+      "done_when": "distance(gripper, trash_can_lid) < 0.03",
+      "affordance_hint": "the white plastic lid of the trash can",
+      "refine_prompt": "the white plastic lid of the trash can",
+      "refine_cache_hit": false,
+      "affordance_refined": [
+        0.3672,
+        0.7969
+      ],
+      "affordance_3d_refined": [
+        -0.4683,
+        0.596,
+        1.4189
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.5569
+    },
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "trash_can_lid"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              "0",
+              "0",
+              "-1"
+            ],
+            "role": "progress"
+          }
+        ]
+      },
+      "step": 2,
+      "action": "grasp",
+      "target": "trash_can_lid",
+      "affordance_region": "the handle of the trash can lid",
+      "done_when": "holding(trash_can_lid)",
+      "affordance_hint": "the handle of the trash can lid",
+      "refine_prompt": "the handle of the trash can lid",
+      "refine_cache_hit": false,
+      "affordance_refined": [
+        0.3672,
+        0.7969
+      ],
+      "affordance_3d_refined": [
+        -0.4683,
+        0.596,
+        1.4189
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.5409
+    },
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "surface_contact",
+            "args": [
+              "trash_can_lid",
+              "trash_can"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "released",
+            "args": [
+              "trash_can_lid"
+            ],
+            "role": "completion"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "stable",
+            "args": [
+              "trash_can_lid"
+            ],
+            "role": "completion"
+          }
+        ]
+      },
+      "step": 3,
+      "action": "place",
+      "target": "trash_can_lid",
+      "destination": "trash_can",
+      "affordance_region": "the empty area on the trash can",
+      "done_when": "surface_contact(trash_can_lid, trash_can) AND released(trash_can_lid) AND stable(trash_can_lid)",
+      "affordance_hint": "the empty area on the trash can",
+      "refine_prompt": "the empty area on the trash can",
+      "refine_cache_hit": false,
+      "affordance_refined": [
+        0.3672,
+        0.7969
+      ],
+      "affordance_3d_refined": [
+        -0.4683,
+        0.596,
+        1.4189
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.5069
+    }
+  ]
+}

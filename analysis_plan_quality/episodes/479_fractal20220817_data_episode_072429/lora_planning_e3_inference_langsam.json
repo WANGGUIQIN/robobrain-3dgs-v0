@@ -1,0 +1,122 @@
+{
+  "task": "pick 7up can",
+  "scene_objects": [
+    "7up_can",
+    "apple",
+    "water_bottle",
+    "table"
+  ],
+  "steps": [
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "7up_can",
+              "<",
+              "0.03"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "approach_axis",
+            "args": [
+              "0",
+              "0",
+              "-1"
+            ],
+            "role": "progress"
+          }
+        ]
+      },
+      "step": 1,
+      "action": "reach",
+      "target": "7up_can",
+      "affordance_region": "the body of the 7up can",
+      "done_when": "distance(gripper, 7up_can) < 0.03",
+      "affordance_hint": "the body of the 7up can",
+      "refine_prompt": "the body of the 7up can",
+      "refine_cache_hit": false,
+      "refine_prompt_fallback": "7up can",
+      "affordance_refined": [
+        0.4883,
+        0.543
+      ],
+      "affordance_3d_refined": [
+        -0.0492,
+        0.1803,
+        3.6498
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.3625
+    },
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "7up_can"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              "0",
+              "0",
+              "-1"
+            ],
+            "role": "progress"
+          }
+        ]
+      },
+      "step": 2,
+      "action": "grasp",
+      "target": "7up_can",
+      "affordance_region": "the top of the 7up can",
+      "done_when": "holding(7up_can)",
+      "affordance_hint": "the top of the 7up can",
+      "refine_prompt": "the top of the 7up can",
+      "refine_cache_hit": false,
+      "affordance_refined": [
+        0.4883,
+        0.543
+      ],
+      "affordance_3d_refined": [
+        -0.0492,
+        0.1803,
+        3.6498
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.4719
+    }
+  ]
+}

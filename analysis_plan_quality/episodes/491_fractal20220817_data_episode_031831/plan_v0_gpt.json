@@ -1,0 +1,233 @@
+{
+  "task": "place blue chip bag into white bowl",
+  "scene_objects": [
+    "blue_chip_bag",
+    "white_bowl",
+    "apple",
+    "green_can",
+    "table"
+  ],
+  "num_steps": 4,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "blue_chip_bag",
+      "affordance": [
+        0.516,
+        0.408
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "blue_chip_bag",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "apple"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, blue_chip_bag) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        0.054,
+        -0.3237,
+        3.004
+      ],
+      "affordance_hint": "the blue chip bag"
+    },
+    {
+      "step": 2,
+      "action": "grasp",
+      "target": "blue_chip_bag",
+      "affordance": [
+        0.5,
+        0.408
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "blue_chip_bag"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "holding",
+            "args": [
+              "blue_chip_bag"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              0,
+              0,
+              -1
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "holding(blue_chip_bag)",
+      "affordance_3d": [
+        0.0,
+        -0.3258,
+        3.0236
+      ],
+      "affordance_hint": "the handle of the blue chip bag"
+    },
+    {
+      "step": 3,
+      "action": "transport",
+      "target": "blue_chip_bag",
+      "destination": "white_bowl",
+      "affordance": [
+        0.351,
+        0.601
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "blue_chip_bag"
+            ],
+            "role": "safety"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "above",
+            "args": [
+              "blue_chip_bag",
+              "white_bowl",
+              0.05
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "blue_chip_bag",
+              "white_bowl"
+            ]
+          },
+          {
+            "pred": "no_drop",
+            "args": [
+              "blue_chip_bag"
+            ]
+          }
+        ]
+      },
+      "done_when": "above(blue_chip_bag, white_bowl, 0.05) AND aligned_xy(blue_chip_bag, white_bowl, 0.03)",
+      "affordance_3d": [
+        -0.5961,
+        0.4078,
+        3.4932
+      ],
+      "affordance_hint": "an empty area on the white bowl"
+    },
+    {
+      "step": 4,
+      "action": "place",
+      "target": "blue_chip_bag",
+      "destination": "white_bowl",
+      "affordance": [
+        0.351,
+        0.601
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "surface_contact",
+            "args": [
+              "blue_chip_bag",
+              "white_bowl"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "released",
+            "args": [
+              "blue_chip_bag"
+            ],
+            "role": "completion"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "stable",
+            "args": [
+              "blue_chip_bag"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "support_stable",
+            "args": [
+              "blue_chip_bag"
+            ]
+          }
+        ]
+      },
+      "done_when": "surface_contact(blue_chip_bag, white_bowl) AND released(blue_chip_bag) AND stable(blue_chip_bag)",
+      "affordance_3d": [
+        -0.5961,
+        0.4078,
+        3.4932
+      ],
+      "affordance_hint": "an empty area on the white bowl"
+    }
+  ]
+}

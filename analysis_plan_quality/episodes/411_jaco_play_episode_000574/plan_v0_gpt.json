@@ -1,0 +1,235 @@
+{
+  "task": "place the burger meat in the oven",
+  "scene_objects": [
+    "burger_meat",
+    "oven",
+    "table",
+    "plate",
+    "green cup",
+    "orange object",
+    "blue container"
+  ],
+  "num_steps": 4,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "burger_meat",
+      "affordance": [
+        0.651,
+        0.544
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "burger_meat",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "table"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, burger_meat) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        0.4781,
+        0.1348,
+        2.73
+      ],
+      "affordance_hint": "the burger meat"
+    },
+    {
+      "step": 2,
+      "action": "grasp",
+      "target": "burger_meat",
+      "affordance": [
+        0.651,
+        0.543
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "burger_meat"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "holding",
+            "args": [
+              "burger_meat"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              0,
+              0,
+              -1
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "holding(burger_meat)",
+      "affordance_3d": [
+        0.4781,
+        0.1348,
+        2.73
+      ],
+      "affordance_hint": "the handle of the burger meat"
+    },
+    {
+      "step": 3,
+      "action": "transport",
+      "target": "burger_meat",
+      "destination": "oven",
+      "affordance": [
+        0.16,
+        0.431
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "burger_meat"
+            ],
+            "role": "safety"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "above",
+            "args": [
+              "burger_meat",
+              "oven",
+              0.05
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "burger_meat",
+              "oven"
+            ]
+          },
+          {
+            "pred": "no_drop",
+            "args": [
+              "burger_meat"
+            ]
+          }
+        ]
+      },
+      "done_when": "above(burger_meat, oven, 0.05) AND aligned_xy(burger_meat, oven, 0.03)",
+      "affordance_3d": [
+        -0.8983,
+        -0.1859,
+        2.2995
+      ],
+      "affordance_hint": "an empty area on the oven"
+    },
+    {
+      "step": 4,
+      "action": "place",
+      "target": "burger_meat",
+      "destination": "oven",
+      "affordance": [
+        0.16,
+        0.431
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "surface_contact",
+            "args": [
+              "burger_meat",
+              "oven"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "released",
+            "args": [
+              "burger_meat"
+            ],
+            "role": "completion"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "stable",
+            "args": [
+              "burger_meat"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "support_stable",
+            "args": [
+              "burger_meat"
+            ]
+          }
+        ]
+      },
+      "done_when": "surface_contact(burger_meat, oven) AND released(burger_meat) AND stable(burger_meat)",
+      "affordance_3d": [
+        -0.8983,
+        -0.1859,
+        2.2995
+      ],
+      "affordance_hint": "an empty area on the oven"
+    }
+  ]
+}

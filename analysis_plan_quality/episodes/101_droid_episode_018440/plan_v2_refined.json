@@ -1,0 +1,180 @@
+{
+  "task": "Fold the tissue paper in half",
+  "scene_objects": [
+    "tissue_paper",
+    "table"
+  ],
+  "num_steps": 3,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "tissue_paper",
+      "affordance": [
+        0.382,
+        0.546
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "tissue_paper",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "table"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, tissue_paper) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        -0.2154,
+        0.0695,
+        0.6949
+      ],
+      "affordance_hint": "the white tissue paper on the table",
+      "affordance_hint_original": "the tissue paper",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 2,
+      "action": "grasp",
+      "target": "tissue_paper",
+      "affordance": [
+        0.382,
+        0.544
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "tissue_paper"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "holding",
+            "args": [
+              "tissue_paper"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              0,
+              0,
+              -1
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "holding(tissue_paper)",
+      "affordance_3d": [
+        -0.2215,
+        0.0679,
+        0.7145
+      ],
+      "affordance_hint": "the corner of the white tissue paper",
+      "affordance_hint_original": "tissue paper",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 3,
+      "action": "fold",
+      "target": "tissue_paper",
+      "affordance": [
+        0.382,
+        0.544
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "tissue_paper"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "aligned_xy",
+            "args": [
+              "tissue_paper",
+              "folded_position",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "tilted",
+            "args": [
+              "tissue_paper"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "table"
+            ]
+          }
+        ]
+      },
+      "done_when": "aligned_xy(tissue_paper, folded_position, 0.03) AND tilted(tissue_paper)",
+      "affordance_3d": [
+        -0.2215,
+        0.0679,
+        0.7145
+      ],
+      "affordance_hint": "the corner of the white tissue paper",
+      "affordance_hint_original": "tissue paper",
+      "affordance_hint_confidence": "ok"
+    }
+  ]
+}

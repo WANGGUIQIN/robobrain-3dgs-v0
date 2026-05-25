@@ -1,0 +1,524 @@
+{
+  "task": "Press the buttons on a row of four power strips to turn them on",
+  "parsed": {
+    "scene_objects": [
+      "power_strip_1",
+      "power_strip_2",
+      "power_strip_3",
+      "power_strip_4",
+      "table"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "power_strip_1",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "power_strip_1",
+        "affordance_region": "the body of power strip 1",
+        "done_when": "distance(gripper, power_strip_1) < 0.03",
+        "affordance_hint": "the body of power strip 1",
+        "refine_prompt": "the body of power strip 1",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.9102,
+          0.2539
+        ],
+        "affordance_3d_refined": [
+          -0.3166,
+          -0.4185,
+          1.1645
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.4669,
+        "affordance": [
+          0.9102,
+          0.2539
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_contact",
+              "args": [
+                "power_strip_1"
+              ],
+              "role": "completion"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "aligned_xy",
+              "args": [
+                "gripper",
+                "power_strip_1"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "force_limit",
+              "args": [
+                "gripper",
+                "power_strip_1"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "push",
+        "target": "power_strip_1",
+        "affordance_region": "the center of the power strip 1",
+        "done_when": "gripper_contact(power_strip_1)",
+        "affordance_hint": "the center of the power strip 1",
+        "refine_prompt": "the center of the power strip 1",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.4805,
+          0.5039
+        ],
+        "affordance_3d_refined": [
+          -1.0783,
+          -0.2792,
+          1.7516
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.3187,
+        "affordance": [
+          0.4805,
+          0.5039
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "power_strip_2",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "reach",
+        "target": "power_strip_2",
+        "affordance_region": "the body of power strip 2",
+        "done_when": "distance(gripper, power_strip_2) < 0.03",
+        "affordance_hint": "the body of power strip 2",
+        "refine_prompt": "the body of power strip 2",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.9102,
+          0.2539
+        ],
+        "affordance_3d_refined": [
+          -0.3166,
+          -0.4185,
+          1.1645
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.4218,
+        "affordance": [
+          0.9102,
+          0.2539
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_contact",
+              "args": [
+                "power_strip_2"
+              ],
+              "role": "completion"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "aligned_xy",
+              "args": [
+                "gripper",
+                "power_strip_2"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "force_limit",
+              "args": [
+                "gripper",
+                "power_strip_2"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "push",
+        "target": "power_strip_2",
+        "affordance_region": "the center of the power strip 2",
+        "done_when": "gripper_contact(power_strip_2)",
+        "affordance_hint": "the center of the power strip 2",
+        "refine_prompt": "the center of the power strip 2",
+        "refine_cache_hit": false,
+        "refine_prompt_fallback": "power strip 2",
+        "affordance_refined": [
+          0.9648,
+          0.9961
+        ],
+        "affordance_3d_refined": [
+          -0.8951,
+          0.9196,
+          3.9237
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.3688,
+        "affordance": [
+          0.9648,
+          0.9961
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "power_strip_3",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 5,
+        "action": "reach",
+        "target": "power_strip_3",
+        "affordance_region": "the body of power strip 3",
+        "done_when": "distance(gripper, power_strip_3) < 0.03",
+        "affordance_hint": "the body of power strip 3",
+        "refine_prompt": "the body of power strip 3",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.9102,
+          0.2539
+        ],
+        "affordance_3d_refined": [
+          -0.3166,
+          -0.4185,
+          1.1645
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.4334,
+        "affordance": [
+          0.9102,
+          0.2539
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_contact",
+              "args": [
+                "power_strip_3"
+              ],
+              "role": "completion"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "aligned_xy",
+              "args": [
+                "gripper",
+                "power_strip_3"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "force_limit",
+              "args": [
+                "gripper",
+                "power_strip_3"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 6,
+        "action": "push",
+        "target": "power_strip_3",
+        "affordance_region": "the center of the power strip 3",
+        "done_when": "gripper_contact(power_strip_3)",
+        "affordance_hint": "the center of the power strip 3",
+        "refine_prompt": "the center of the power strip 3",
+        "refine_cache_hit": false,
+        "refine_prompt_fallback": "power strip 3",
+        "affordance_refined": [
+          0.9648,
+          0.9961
+        ],
+        "affordance_3d_refined": [
+          -0.8951,
+          0.9196,
+          3.9237
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.4002,
+        "affordance": [
+          0.9648,
+          0.9961
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "power_strip_4",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 7,
+        "action": "reach",
+        "target": "power_strip_4",
+        "affordance_region": "the body of power strip 4",
+        "done_when": "distance(gripper, power_strip_4) < 0.03",
+        "affordance_hint": "the body of power strip 4",
+        "refine_prompt": "the body of power strip 4",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.9648,
+          0.9961
+        ],
+        "affordance_3d_refined": [
+          -0.8951,
+          0.9196,
+          3.9237
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.4236,
+        "affordance": [
+          0.9648,
+          0.9961
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_contact",
+              "args": [
+                "power_strip_4"
+              ],
+              "role": "completion"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "aligned_xy",
+              "args": [
+                "gripper",
+                "power_strip_4"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "force_limit",
+              "args": [
+                "gripper",
+                "power_strip_4"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 8,
+        "action": "push",
+        "target": "power_strip_4",
+        "affordance_region": "the center of the power strip 4",
+        "done_when": "gripper_contact(power_strip_4)",
+        "affordance_hint": "the center of the power strip 4",
+        "refine_prompt": "the center of the power strip 4",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.4805,
+          0.5039
+        ],
+        "affordance_3d_refined": [
+          -1.0783,
+          -0.2792,
+          1.7516
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.3212,
+        "affordance": [
+          0.4805,
+          0.5039
+        ]
+      }
+    ]
+  }
+}

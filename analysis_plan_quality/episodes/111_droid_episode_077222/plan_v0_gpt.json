@@ -1,0 +1,231 @@
+{
+  "task": "Put the wrench in the bowl",
+  "scene_objects": [
+    "wrench",
+    "bowl",
+    "table"
+  ],
+  "num_steps": 4,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "wrench",
+      "affordance": [
+        0.36,
+        0.85
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "wrench",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "bowl"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, wrench) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        -1.2875,
+        1.8555,
+        3.7867
+      ],
+      "affordance_hint": "the wrench"
+    },
+    {
+      "step": 2,
+      "action": "grasp",
+      "target": "wrench",
+      "affordance": [
+        0.425,
+        0.65
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "wrench"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "holding",
+            "args": [
+              "wrench"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              0,
+              0,
+              -1
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "holding(wrench)",
+      "affordance_3d": [
+        -0.6562,
+        0.5919,
+        2.5735
+      ],
+      "affordance_hint": "the handle of the wrench"
+    },
+    {
+      "step": 3,
+      "action": "transport",
+      "target": "wrench",
+      "destination": "bowl",
+      "affordance": [
+        0.333,
+        0.7
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "wrench"
+            ],
+            "role": "safety"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "above",
+            "args": [
+              "wrench",
+              "bowl",
+              0.05
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "wrench",
+              "bowl"
+            ]
+          },
+          {
+            "pred": "no_drop",
+            "args": [
+              "wrench"
+            ]
+          }
+        ]
+      },
+      "done_when": "above(wrench, bowl, 0.05) AND aligned_xy(wrench, bowl, 0.03)",
+      "affordance_3d": [
+        -0.9357,
+        0.7361,
+        2.4952
+      ],
+      "affordance_hint": "an empty area on the bowl"
+    },
+    {
+      "step": 4,
+      "action": "place",
+      "target": "wrench",
+      "destination": "bowl",
+      "affordance": [
+        0.333,
+        0.7
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "surface_contact",
+            "args": [
+              "wrench",
+              "bowl"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "released",
+            "args": [
+              "wrench"
+            ],
+            "role": "completion"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "stable",
+            "args": [
+              "wrench"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "support_stable",
+            "args": [
+              "wrench"
+            ]
+          }
+        ]
+      },
+      "done_when": "surface_contact(wrench, bowl) AND released(wrench) AND stable(wrench)",
+      "affordance_3d": [
+        -0.9357,
+        0.7361,
+        2.4952
+      ],
+      "affordance_hint": "an empty area on the bowl"
+    }
+  ]
+}

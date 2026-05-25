@@ -1,0 +1,384 @@
+{
+  "task": "Slice the carrots",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_3epoch/best",
+  "raw": "**SCENE ANALYSIS -** A wooden cutting board holds a white ball and several small, light-brown, round objects (carrots). A white cloth is on the floor to the right. The carrots are clustered together on the board. STRATEGY - First, grasp one carrot to isolate it for slicing. Then, transport it to a position where it can be sliced (e.g., near the ball or another carrot). After slicing, place the pieces back on the board. Failure modes include dropping the carrot during transport or misaligning it for slicing. AFFORDANCE REASONING - Step 1: Reach for a carrot to grasp it. Step 2: Grasp the carrot by its body for a secure hold. Step 3: Transport the carrot to a slicing position. Step 4: Slice the carrot (action not in primitives, but the plan assumes slicing is done). Step 5: Place the sliced pieces back on the board.\n\n**Goal:** sliced(carrots); all_on(carrots, cutting_board)\n**Scene:** cutting_board, carrots, white_ball, white_cloth\n**Step 1:** reach(carrot)\n  affordance_region: the body of a light-brown carrot\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, carrot, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, carrot) < 0.03\n**Step 2:** grasp(carrot)\n  affordance_region: the body of a light-brown carrot\n  contact: holding(carrot) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(carrot)\n**Step 3:** transport(carrot -> cutting_board)\n  affordance_region: an empty area on the cutting_board\n  spatial: above(carrot, cutting_board, 0.05) [completion]\n  safety: no_drop(carrot)\n  done_when: above(carrot, cutting_board, 0.05)\n**Step 4:** place(carrot -> cutting_board)\n  affordance_region: an empty area on the cutting_board\n  contact: surface_contact(carrot, cutting_board) [completion]; released(carrot) [completion]\n  pose: stable(carrot) [completion]\n  done_when: surface_contact(carrot, cutting_board) AND released(carrot)\n**Step 5:** reach(carrot)\n  affordance_region: the body of a light-brown carrot\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, carrot, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, carrot) < 0.03\n**Step 6:** grasp(carrot)\n  affordance_region: the body of a light-brown carrot\n  contact: holding(carrot) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(carrot)\n**Step 7:** transport(carrot -> cutting_board)\n  affordance_region: an empty area on the cutting_board\n  spatial: above(carrot, cutting_board, 0.05) [completion]\n  safety: no_drop(carrot)\n  done_when: above(carrot, cutting_board, 0.05)\n**Step 8:** place(carrot -> cutting_board)\n  affordance_region: an empty area on the cutting_board\n  contact: surface_contact(carrot, cutting_board) [completion]; released(carrot) [completion]\n  pose: stable(carrot) [completion]\n  done_when: surface_contact(carrot, cutting_board) AND released(carrot)\n**Step 9:** reach(carrot)\n  affordance_region: the body of a light-brown carrot\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, carrot, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, carrot) < 0.03\n**Step 10:** grasp(carrot)\n  affordance_region: the body of a light-brown carrot\n  contact: holding(carrot) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(carrot)\n**Step 11:** transport(carrot -> cutting_board)\n  affordance_region: an empty area on the cutting_board\n  spatial: above(carrot, cutting_board, 0.05) [completion]\n  safety: no_drop(carrot)\n  done_when: above(carrot, cutting_board, 0.05)\n**Step 12:** place",
+  "parsed": {
+    "reasoning": "",
+    "goal": [],
+    "scene_objects": [],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "carrot",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "carrot",
+        "affordance_region": "the body of a light-brown carrot",
+        "done_when": "distance(gripper, carrot) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "carrot"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "carrot",
+        "affordance_region": "the body of a light-brown carrot",
+        "done_when": "holding(carrot)"
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "carrot",
+                "cutting_board",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "carrot"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "carrot",
+        "destination": "cutting_board",
+        "affordance_region": "an empty area on the cutting_board",
+        "done_when": "above(carrot, cutting_board, 0.05)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "surface_contact",
+              "args": [
+                "carrot",
+                "cutting_board"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "carrot"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "carrot"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "place",
+        "target": "carrot",
+        "destination": "cutting_board",
+        "affordance_region": "an empty area on the cutting_board",
+        "done_when": "surface_contact(carrot, cutting_board) AND released(carrot)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "carrot",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 5,
+        "action": "reach",
+        "target": "carrot",
+        "affordance_region": "the body of a light-brown carrot",
+        "done_when": "distance(gripper, carrot) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "carrot"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 6,
+        "action": "grasp",
+        "target": "carrot",
+        "affordance_region": "the body of a light-brown carrot",
+        "done_when": "holding(carrot)"
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "carrot",
+                "cutting_board",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "carrot"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 7,
+        "action": "transport",
+        "target": "carrot",
+        "destination": "cutting_board",
+        "affordance_region": "an empty area on the cutting_board",
+        "done_when": "above(carrot, cutting_board, 0.05)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "surface_contact",
+              "args": [
+                "carrot",
+                "cutting_board"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "carrot"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "carrot"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 8,
+        "action": "place",
+        "target": "carrot",
+        "destination": "cutting_board",
+        "affordance_region": "an empty area on the cutting_board",
+        "done_when": "surface_contact(carrot, cutting_board) AND released(carrot)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "carrot",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 9,
+        "action": "reach",
+        "target": "carrot",
+        "affordance_region": "the body of a light-brown carrot",
+        "done_when": "distance(gripper, carrot) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "carrot"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 10,
+        "action": "grasp",
+        "target": "carrot",
+        "affordance_region": "the body of a light-brown carrot",
+        "done_when": "holding(carrot)"
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "carrot",
+                "cutting_board",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "carrot"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 11,
+        "action": "transport",
+        "target": "carrot",
+        "destination": "cutting_board",
+        "affordance_region": "an empty area on the cutting_board",
+        "done_when": "above(carrot, cutting_board, 0.05)"
+      }
+    ]
+  }
+}

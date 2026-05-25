@@ -1,0 +1,124 @@
+{
+  "task": "Unscrew the lid from the jar",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_planning_3epoch/checkpoint-39957",
+  "raw": "Scene: lid, jar, table\nStep 1: reach(lid)\n  affordance_region: the metallic lid on the jar\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, lid, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, lid) < 0.03\nStep 2: grasp(lid)\n  affordance_region: the edge of the lid\n  contact: holding(lid) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(lid)\nStep 3: rotate(lid -> table)\n  affordance_region: the lid\n  contact: holding(lid) [safety]\n  spatial: on_surface(lid, table) [completion]\n  direction: motion_dir(counterclockwise) [progress]\n  done_when: on_surface(lid, table) AND released(lid)\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [],
+    "scene_objects": [
+      "lid",
+      "jar",
+      "table"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "lid",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "lid",
+        "affordance_region": "the metallic lid on the jar",
+        "done_when": "distance(gripper, lid) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "lid"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "lid",
+        "affordance_region": "the edge of the lid",
+        "done_when": "holding(lid)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "lid"
+              ],
+              "role": "safety"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "on_surface",
+              "args": [
+                "lid",
+                "table"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "motion_dir",
+              "args": [
+                "counterclockwise"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "rotate",
+        "target": "lid",
+        "destination": "table",
+        "affordance_region": "the lid",
+        "done_when": "on_surface(lid, table) AND released(lid)"
+      }
+    ]
+  }
+}

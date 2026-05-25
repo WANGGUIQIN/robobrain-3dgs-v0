@@ -1,0 +1,167 @@
+{
+  "task": "move redbull can near blue chip bag",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_3epoch/best",
+  "raw": "**SCENE ANALYSIS -** A table holds a blue chip bag, a green chip bag, and a silver can. The can is positioned between the two bags. The task is to move the can closer to the blue chip bag. The can is a rigid cylinder with a top opening, suitable for grasping. The blue chip bag is a flat, flexible object. The goal is to reposition the can relative to the blue chip bag, which requires grasping the can and moving it to a new location near the blue chip bag. **STRATEGY -** First, reach for the can, grasp it, then transport it to a position near the blue chip bag. The can must be lifted and moved without dropping, ensuring it is placed in a stable position relative to the blue chip bag. **AFFORDANCE REASONING -** Step 1: Reach for the can's body to approach it. Step 2: Grasp the can's top opening for a secure hold. Step 3: Transport the can to a position near the blue chip bag, ensuring it is not dropped. Step 4: Place the can in a stable position near the blue chip bag.\n\nGoal: near(red_bull_can, blue_chip_bag); stable(red_bull_can)\nScene: red_bull_can, blue_chip_bag, green_chip_bag, table\nStep 1: reach(red_bull_can)\n  affordance_region: the body of the red bull can\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, red_bull_can, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, red_bull_can) < 0.03\nStep 2: grasp(red_bull_can)\n  affordance_region: the top opening of the red bull can\n  contact: holding(red_bull_can) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(red_bull_can)\nStep 3: transport(red_bull_can -> near(blue_chip_bag))\n  affordance_region: an empty area on the table near the blue chip bag\n  spatial: above(red_bull_can, table, 0.05) [completion]\n  safety: no_drop(red_bull_can)\n  done_when: above(red_bull_can, table, 0.05)\nStep 4: place(red_bull_can -> near(blue_chip_bag))\n  affordance_region: an empty area on the table near the blue chip bag\n  contact: surface_contact(red_bull_can, table) [completion]; released(red_bull_can) [completion]\n  pose: stable(red_bull_can) [completion]\n  done_when: surface_contact(red_bull_can, table) AND released(red_bull_can)\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [
+      {
+        "pred": "near",
+        "args": [
+          "red_bull_can",
+          "blue_chip_bag"
+        ]
+      },
+      {
+        "pred": "stable",
+        "args": [
+          "red_bull_can"
+        ]
+      }
+    ],
+    "scene_objects": [
+      "red_bull_can",
+      "blue_chip_bag",
+      "green_chip_bag",
+      "table"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "red_bull_can",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "red_bull_can",
+        "affordance_region": "the body of the red bull can",
+        "done_when": "distance(gripper, red_bull_can) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "red_bull_can"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "red_bull_can",
+        "affordance_region": "the top opening of the red bull can",
+        "done_when": "holding(red_bull_can)"
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "red_bull_can",
+                "table",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "red_bull_can"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "red_bull_can",
+        "destination": "near(blue_chip_bag",
+        "affordance_region": "an empty area on the table near the blue chip bag",
+        "done_when": "above(red_bull_can, table, 0.05)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "surface_contact",
+              "args": [
+                "red_bull_can",
+                "table"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "red_bull_can"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "red_bull_can"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "place",
+        "target": "red_bull_can",
+        "destination": "near(blue_chip_bag",
+        "affordance_region": "an empty area on the table near the blue chip bag",
+        "done_when": "surface_contact(red_bull_can, table) AND released(red_bull_can)"
+      }
+    ]
+  }
+}

@@ -1,0 +1,113 @@
+{
+  "task": "pick up the steak meat",
+  "scene_objects": [
+    "steak_meat",
+    "table"
+  ],
+  "num_steps": 2,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "steak_meat",
+      "affordance": [
+        0.558,
+        0.428
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "steak_meat",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "table"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, steak_meat) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        0.1773,
+        -0.2128,
+        2.6322
+      ],
+      "affordance_hint": "the steak meat"
+    },
+    {
+      "step": 2,
+      "action": "grasp",
+      "target": "steak_meat",
+      "affordance": [
+        0.558,
+        0.419
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "steak_meat"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "holding",
+            "args": [
+              "steak_meat"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              0,
+              0,
+              -1
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "holding(steak_meat)",
+      "affordance_3d": [
+        0.1773,
+        -0.2482,
+        2.6322
+      ],
+      "affordance_hint": "the handle of the steak meat"
+    }
+  ]
+}

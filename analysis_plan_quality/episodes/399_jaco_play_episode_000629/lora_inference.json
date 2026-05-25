@@ -1,0 +1,135 @@
+{
+  "task": "pick up the steak meat",
+  "parsed": {
+    "scene_objects": [
+      "steak_meat",
+      "yellow_cup",
+      "blue_bin",
+      "orange_bowl",
+      "yellow_block",
+      "table"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "steak_meat",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "steak_meat",
+        "affordance_region": "the steak meat",
+        "done_when": "distance(gripper, steak_meat) < 0.03",
+        "affordance_hint": "the steak meat",
+        "refine_prompt": "the steak meat",
+        "refine_cache_hit": false,
+        "refine_prompt_fallback": "steak meat",
+        "affordance_refined": [
+          0.457,
+          0.5859
+        ],
+        "affordance_3d_refined": [
+          -0.1812,
+          0.3625,
+          3.6693
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.2363,
+        "affordance": [
+          0.457,
+          0.5859
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "steak_meat"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "steak_meat",
+        "affordance_region": "the body of the steak meat",
+        "done_when": "holding(steak_meat)",
+        "affordance_hint": "the body of the steak meat",
+        "refine_prompt": "the body of the steak meat",
+        "refine_cache_hit": false,
+        "refine_prompt_fallback": "steak meat",
+        "affordance_refined": [
+          0.457,
+          0.5859
+        ],
+        "affordance_3d_refined": [
+          -0.1812,
+          0.3625,
+          3.6693
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.2363,
+        "affordance": [
+          0.457,
+          0.5859
+        ]
+      }
+    ]
+  }
+}

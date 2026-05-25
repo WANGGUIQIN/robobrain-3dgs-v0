@@ -1,0 +1,239 @@
+{
+  "task": "Remove the glue stick from the open drawer and put it on the countertop",
+  "scene_objects": [
+    "glue_stick",
+    "drawer",
+    "countertop"
+  ],
+  "num_steps": 4,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "glue_stick",
+      "affordance": [
+        0.553,
+        0.695
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "glue_stick",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "drawer"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, glue_stick) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        -0.1629,
+        0.525,
+        1.8103
+      ],
+      "affordance_hint": "the orange glue stick in the drawer",
+      "affordance_hint_original": "the glue stick",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 2,
+      "action": "grasp",
+      "target": "glue_stick",
+      "affordance": [
+        0.553,
+        0.695
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "glue_stick"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "holding",
+            "args": [
+              "glue_stick"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              0,
+              0,
+              -1
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "holding(glue_stick)",
+      "affordance_3d": [
+        -0.1629,
+        0.525,
+        1.8103
+      ],
+      "affordance_hint": "the body of the orange glue stick",
+      "affordance_hint_original": "the handle of the glue stick",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 3,
+      "action": "transport",
+      "target": "glue_stick",
+      "destination": "countertop",
+      "affordance": [
+        0.351,
+        0.351
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "glue_stick"
+            ],
+            "role": "safety"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "above",
+            "args": [
+              "glue_stick",
+              "countertop",
+              0.05
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "glue_stick",
+              "countertop"
+            ]
+          },
+          {
+            "pred": "no_drop",
+            "args": [
+              "glue_stick"
+            ]
+          }
+        ]
+      },
+      "done_when": "above(glue_stick, countertop, 0.05) AND aligned_xy(glue_stick, countertop, 0.03)",
+      "affordance_3d": [
+        -0.6336,
+        -0.2715,
+        1.8103
+      ],
+      "affordance_hint": "the empty area on the white countertop",
+      "affordance_hint_original": "an empty area on the countertop",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 4,
+      "action": "place",
+      "target": "glue_stick",
+      "destination": "countertop",
+      "affordance": [
+        0.351,
+        0.351
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "surface_contact",
+            "args": [
+              "glue_stick",
+              "countertop"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "released",
+            "args": [
+              "glue_stick"
+            ],
+            "role": "completion"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "stable",
+            "args": [
+              "glue_stick"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "support_stable",
+            "args": [
+              "glue_stick"
+            ]
+          }
+        ]
+      },
+      "done_when": "surface_contact(glue_stick, countertop) AND released(glue_stick) AND stable(glue_stick)",
+      "affordance_3d": [
+        -0.6336,
+        -0.2715,
+        1.8103
+      ],
+      "affordance_hint": "the empty area on the white countertop",
+      "affordance_hint_original": "an empty area on the countertop",
+      "affordance_hint_confidence": "ok"
+    }
+  ]
+}

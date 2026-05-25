@@ -1,0 +1,159 @@
+{
+  "task": "go towards the yellow block and grasp it",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_3epoch/best",
+  "raw": "SCENE ANALYSIS - A white cabinet with an open door is visible, containing a red block and a yellow block. A white tray is on the floor. The cabinet door is ajar, and the blocks are inside the cabinet. STRATEGY - First, reach into the cabinet to locate the yellow block. Then, grasp it. Finally, transport it to the white tray on the floor. Failure modes include misreaching for the wrong block or dropping the block during transport. AFFORDANCE REASONING - Step 1 reach into the cabinet to find the yellow block; Step 2 grasp the yellow block by its body; Step 3 transport it to the tray; Step 4 place it on the tray.\nGoal: on(yellow_block, white_tray)\nScene: white_cabinet, red_block, yellow_block, white_tray\nStep 1: reach(yellow_block)\n  affordance_region: the body of the yellow block inside the white_cabinet\n  contact: gripper_state(open) [progress]\n  spatial: inside(gripper, white_cabinet) [progress]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: inside(gripper, white_cabinet)\nStep 2: grasp(yellow_block)\n  affordance_region: the body of the yellow block\n  contact: holding(yellow_block) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(yellow_block)\nStep 3: transport(yellow_block -> white_tray)\n  affordance_region: an empty area on the white_tray\n  spatial: above(yellow_block, white_tray, 0.05) [completion]\n  safety: no_drop(yellow_block)\n  done_when: above(yellow_block, white_tray, 0.05)\nStep 4: place(yellow_block -> white_tray)\n  affordance_region: an empty area on the white_tray\n  contact: surface_contact(yellow_block, white_tray) [completion]; released(yellow_block) [completion]\n  pose: stable(yellow_block) [completion]\n  done_when: surface_contact(yellow_block, white_tray) AND released(yellow_block)\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [
+      {
+        "pred": "on",
+        "args": [
+          "yellow_block",
+          "white_tray"
+        ]
+      }
+    ],
+    "scene_objects": [
+      "white_cabinet",
+      "red_block",
+      "yellow_block",
+      "white_tray"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "inside",
+              "args": [
+                "gripper",
+                "white_cabinet"
+              ],
+              "role": "progress"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "yellow_block",
+        "affordance_region": "the body of the yellow block inside the white_cabinet",
+        "done_when": "inside(gripper, white_cabinet)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "yellow_block"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "yellow_block",
+        "affordance_region": "the body of the yellow block",
+        "done_when": "holding(yellow_block)"
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "yellow_block",
+                "white_tray",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "yellow_block"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "yellow_block",
+        "destination": "white_tray",
+        "affordance_region": "an empty area on the white_tray",
+        "done_when": "above(yellow_block, white_tray, 0.05)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "surface_contact",
+              "args": [
+                "yellow_block",
+                "white_tray"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "yellow_block"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "yellow_block"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "place",
+        "target": "yellow_block",
+        "destination": "white_tray",
+        "affordance_region": "an empty area on the white_tray",
+        "done_when": "surface_contact(yellow_block, white_tray) AND released(yellow_block)"
+      }
+    ]
+  }
+}

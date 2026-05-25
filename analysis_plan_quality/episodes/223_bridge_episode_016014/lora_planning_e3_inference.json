@@ -1,0 +1,154 @@
+{
+  "task": "Lift the toy potato sitting in the silver pot on the upper left side of the stove. Pick it up and move the right side and down. Place it on the orange square at the lower right side of the stove.",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_planning_3epoch/checkpoint-39957",
+  "raw": "Scene: toy_potato, silver_pot, stove, orange_cloth, blue_bottle\nStep 1: reach(toy_potato)\n  affordance_region: the toy potato in the silver pot\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, toy_potato, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, toy_potato) < 0.03\nStep 2: grasp(toy_potato)\n  affordance_region: the body of the toy potato\n  contact: holding(toy_potato) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(toy_potato)\nStep 3: transport(toy_potato -> orange_cloth)\n  affordance_region: an empty area on the orange cloth\n  spatial: above(toy_potato, orange_cloth, 0.05) [completion]\n  safety: no_drop(toy_potato)\n  done_when: above(toy_potato, orange_cloth, 0.05)\nStep 4: place(toy_potato -> orange_cloth)\n  affordance_region: an empty area on the orange cloth\n  contact: surface_contact(toy_potato, orange_cloth) [completion]; released(toy_potato) [completion]\n  pose: stable(toy_potato) [completion]\n  done_when: surface_contact(toy_potato, orange_cloth) AND released(toy_potato) AND stable(toy_potato)\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [],
+    "scene_objects": [
+      "toy_potato",
+      "silver_pot",
+      "stove",
+      "orange_cloth",
+      "blue_bottle"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "toy_potato",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "toy_potato",
+        "affordance_region": "the toy potato in the silver pot",
+        "done_when": "distance(gripper, toy_potato) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "toy_potato"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "toy_potato",
+        "affordance_region": "the body of the toy potato",
+        "done_when": "holding(toy_potato)"
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "toy_potato",
+                "orange_cloth",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "toy_potato"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "toy_potato",
+        "destination": "orange_cloth",
+        "affordance_region": "an empty area on the orange cloth",
+        "done_when": "above(toy_potato, orange_cloth, 0.05)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "surface_contact",
+              "args": [
+                "toy_potato",
+                "orange_cloth"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "toy_potato"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "toy_potato"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "place",
+        "target": "toy_potato",
+        "destination": "orange_cloth",
+        "affordance_region": "an empty area on the orange cloth",
+        "done_when": "surface_contact(toy_potato, orange_cloth) AND released(toy_potato) AND stable(toy_potato)"
+      }
+    ]
+  }
+}

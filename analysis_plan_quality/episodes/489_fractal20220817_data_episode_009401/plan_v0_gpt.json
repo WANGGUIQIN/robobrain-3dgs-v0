@@ -1,0 +1,158 @@
+{
+  "task": "knock green can over",
+  "scene_objects": [
+    "green_can",
+    "water_bottle",
+    "sponge",
+    "table"
+  ],
+  "num_steps": 3,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "green_can",
+      "affordance": [
+        0.343,
+        0.486
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "green_can",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "water_bottle"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, green_can) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        -0.8875,
+        -0.0888,
+        4.9413
+      ],
+      "affordance_hint": "the green can"
+    },
+    {
+      "step": 2,
+      "action": "push",
+      "target": "green_can",
+      "affordance": [
+        0.343,
+        0.486
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "green_can"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "motion_dir",
+            "args": [
+              "gripper",
+              "green_can",
+              "lateral"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "water_bottle"
+            ]
+          }
+        ]
+      },
+      "done_when": "green_can is tilted or knocked over",
+      "affordance_3d": [
+        -0.8875,
+        -0.0888,
+        4.9413
+      ],
+      "affordance_hint": "the center of the green can"
+    },
+    {
+      "step": 3,
+      "action": "release",
+      "target": "green_can",
+      "affordance": [
+        0.343,
+        0.486
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "released",
+            "args": [
+              "green_can"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "table"
+            ]
+          }
+        ]
+      },
+      "done_when": "gripper_state(open)",
+      "affordance_3d": [
+        -0.8875,
+        -0.0888,
+        4.9413
+      ],
+      "affordance_hint": "the green can"
+    }
+  ]
+}

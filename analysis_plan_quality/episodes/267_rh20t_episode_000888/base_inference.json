@@ -1,0 +1,147 @@
+{
+  "task": "Push the soccer ball into the goal",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_3epoch/best",
+  "raw": "**SCENE ANALYSIS - A soccer ball is on a green surface, and a white goal structure is nearby. The ball is spherical and the goal has a net. STRATEGY - Push the ball towards the goal using the gripper. The ball must be in contact with the goal's net to be considered in the goal. Failure modes include missing the goal or not pushing the ball far enough. AFFORDANCE REASONING - Step 1 reach the ball for contact; Step 2 push the ball towards the goal; Step 3 ensure the ball is in the goal's net.**\nGoal: any_in(soccer_ball, goal)\nScene: soccer_ball, goal, green_surface\nStep 1: reach(soccer_ball)\n  affordance_region: the body of the soccer ball\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, soccer_ball, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, soccer_ball) < 0.03\nStep 2: push(soccer_ball -> goal)\n  affordance_region: the body of the soccer ball\n  contact: pushing(soccer_ball) [completion]\n  spatial: distance(soccer_ball, goal, <, 0.1) [completion]\n  direction: push_axis(0, 0, -1) [progress]\n  done_when: distance(soccer_ball, goal) < 0.1\nStep 3: push(soccer_ball -> goal)\n  affordance_region: the body of the soccer ball\n  contact: pushing(soccer_ball) [completion]\n  spatial: inside(soccer_ball, goal) [completion]\n  direction: push_axis(0, 0, -1) [progress]\n  done_when: inside(soccer_ball, goal)\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [
+      {
+        "pred": "any_in",
+        "args": [
+          "soccer_ball",
+          "goal"
+        ]
+      }
+    ],
+    "scene_objects": [
+      "soccer_ball",
+      "goal",
+      "green_surface"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "soccer_ball",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "soccer_ball",
+        "affordance_region": "the body of the soccer ball",
+        "done_when": "distance(gripper, soccer_ball) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "pushing",
+              "args": [
+                "soccer_ball"
+              ],
+              "role": "completion"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "soccer_ball",
+                "goal",
+                "<",
+                "0.1"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "push_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "push",
+        "target": "soccer_ball",
+        "destination": "goal",
+        "affordance_region": "the body of the soccer ball",
+        "done_when": "distance(soccer_ball, goal) < 0.1"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "pushing",
+              "args": [
+                "soccer_ball"
+              ],
+              "role": "completion"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "inside",
+              "args": [
+                "soccer_ball",
+                "goal"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "push_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "push",
+        "target": "soccer_ball",
+        "destination": "goal",
+        "affordance_region": "the body of the soccer ball",
+        "done_when": "inside(soccer_ball, goal)"
+      }
+    ]
+  }
+}

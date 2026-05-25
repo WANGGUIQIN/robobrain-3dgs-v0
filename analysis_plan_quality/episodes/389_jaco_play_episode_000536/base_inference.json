@@ -1,0 +1,161 @@
+{
+  "task": "pick up the milk dairy",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_3epoch/best",
+  "raw": "**SCENE ANALYSIS -** A blue plastic container is on the right, a white bowl with a brown substance is in the center, a light blue cube is on the left, and a brown circular object is near the center. The scene is on a wooden table. The blue container is empty and has a flat base. STRATEGY - First, reach for the blue container to grasp it. Then, lift it and transport it to the white bowl. Finally, place the blue container inside the white bowl. Failure modes include not grasping the container properly or misplacing it. AFFORDANCE REASONING - Step 1 reach the blue container body; Step 2 grasp its body for secure hold; Step 3 transport above the white bowl; Step 4 lower and place inside the white bowl.\n\nGoal: inside(blue_container, white_bowl)\nScene: blue_container, white_bowl, table\nStep 1: reach(blue_container)\n  affordance_region: the body of the blue container\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, blue_container, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, blue_container) < 0.03\nStep 2: grasp(blue_container)\n  affordance_region: the body of the blue container\n  contact: holding(blue_container) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(blue_container)\nStep 3: transport(blue_container -> white_bowl)\n  affordance_region: an empty area inside the white bowl\n  spatial: above(blue_container, white_bowl, 0.05) [completion]\n  safety: no_drop(blue_container)\n  done_when: above(blue_container, white_bowl, 0.05)\nStep 4: place(blue_container -> white_bowl)\n  affordance_region: an empty area inside the white bowl\n  contact: surface_contact(blue_container, white_bowl) [completion]; released(blue_container) [completion]\n  pose: inside(blue_container, white_bowl) [completion]\n  done_when: surface_contact(blue_container, white_bowl) AND released(blue_container)\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [
+      {
+        "pred": "inside",
+        "args": [
+          "blue_container",
+          "white_bowl"
+        ]
+      }
+    ],
+    "scene_objects": [
+      "blue_container",
+      "white_bowl",
+      "table"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "blue_container",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "blue_container",
+        "affordance_region": "the body of the blue container",
+        "done_when": "distance(gripper, blue_container) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "blue_container"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "blue_container",
+        "affordance_region": "the body of the blue container",
+        "done_when": "holding(blue_container)"
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "blue_container",
+                "white_bowl",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "blue_container"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "blue_container",
+        "destination": "white_bowl",
+        "affordance_region": "an empty area inside the white bowl",
+        "done_when": "above(blue_container, white_bowl, 0.05)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "surface_contact",
+              "args": [
+                "blue_container",
+                "white_bowl"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "blue_container"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "inside",
+              "args": [
+                "blue_container",
+                "white_bowl"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "place",
+        "target": "blue_container",
+        "destination": "white_bowl",
+        "affordance_region": "an empty area inside the white bowl",
+        "done_when": "surface_contact(blue_container, white_bowl) AND released(blue_container)"
+      }
+    ]
+  }
+}

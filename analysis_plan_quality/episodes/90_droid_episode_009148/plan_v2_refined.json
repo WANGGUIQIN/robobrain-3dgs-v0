@@ -1,0 +1,239 @@
+{
+  "task": "Pick up the salt cellar and put it in the bowl",
+  "scene_objects": [
+    "salt_cellar",
+    "bowl",
+    "table"
+  ],
+  "num_steps": 4,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "salt_cellar",
+      "affordance": [
+        0.535,
+        0.316
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "salt_cellar",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "table"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, salt_cellar) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        -0.1632,
+        -0.2767,
+        1.4189
+      ],
+      "affordance_hint": "the small white salt cellar",
+      "affordance_hint_original": "the salt cellar",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 2,
+      "action": "grasp",
+      "target": "salt_cellar",
+      "affordance": [
+        0.535,
+        0.3
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "salt_cellar"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "holding",
+            "args": [
+              "salt_cellar"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              0,
+              0,
+              -1
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "holding(salt_cellar)",
+      "affordance_3d": [
+        -0.1632,
+        -0.3051,
+        1.4189
+      ],
+      "affordance_hint": "the top of the salt cellar",
+      "affordance_hint_original": "the handle of the salt cellar",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 3,
+      "action": "transport",
+      "target": "salt_cellar",
+      "destination": "bowl",
+      "affordance": [
+        0.625,
+        0.425
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "salt_cellar"
+            ],
+            "role": "safety"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "above",
+            "args": [
+              "salt_cellar",
+              "bowl",
+              0.05
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "salt_cellar",
+              "bowl"
+            ]
+          },
+          {
+            "pred": "no_drop",
+            "args": [
+              "salt_cellar"
+            ]
+          }
+        ]
+      },
+      "done_when": "above(salt_cellar, bowl, 0.05) AND aligned_xy(salt_cellar, bowl, 0.03)",
+      "affordance_3d": [
+        0.0,
+        -0.0899,
+        1.6342
+      ],
+      "affordance_hint": "the empty area inside the metal bowl",
+      "affordance_hint_original": "an empty area on the bowl",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 4,
+      "action": "place",
+      "target": "salt_cellar",
+      "destination": "bowl",
+      "affordance": [
+        0.625,
+        0.425
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "surface_contact",
+            "args": [
+              "salt_cellar",
+              "bowl"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "released",
+            "args": [
+              "salt_cellar"
+            ],
+            "role": "completion"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "stable",
+            "args": [
+              "salt_cellar"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "support_stable",
+            "args": [
+              "salt_cellar"
+            ]
+          }
+        ]
+      },
+      "done_when": "surface_contact(salt_cellar, bowl) AND released(salt_cellar) AND stable(salt_cellar)",
+      "affordance_3d": [
+        0.0,
+        -0.0899,
+        1.6342
+      ],
+      "affordance_hint": "the empty area inside the metal bowl",
+      "affordance_hint_original": "an empty area on the bowl",
+      "affordance_hint_confidence": "ok"
+    }
+  ]
+}

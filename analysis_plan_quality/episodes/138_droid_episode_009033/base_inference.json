@@ -1,0 +1,365 @@
+{
+  "task": "Scatter the objects in the stack, and then place the bottom box on the top one",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_3epoch/best",
+  "raw": "**SCENE ANALYSIS - A stack of three boxes sits on a dark wooden table. The top box is light blue, the middle is dark blue, and the bottom is light brown. All boxes are rigid and rectangular. The task requires unstacking the boxes and placing the bottom box on top of the middle one. STRATEGY - First, grasp the top box and place it on the table to the side. Then, grasp the middle box and place it on the bottom box. Finally, grasp the bottom box and place it on top of the middle box. Failure modes include dropping boxes or misaligning them during placement. AFFORDANCE REASONING - Step 1: Reach for the top box, grasp its top surface, and place it on the table. Step 2: Reach for the middle box, grasp its top surface, and place it on the bottom box. Step 3: Reach for the bottom box, grasp its top surface, and place it on top of the middle box.**\nGoal: stacked([light_blue_box, dark_blue_box, light_brown_box]); all_on([light_blue_box, dark_blue_box, light_brown_box], table)\nScene: light_blue_box, dark_blue_box, light_brown_box, table\nStep 1: reach(light_blue_box)\n  affordance_region: the top surface of the light blue box\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, light_blue_box, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, light_blue_box) < 0.03\nStep 2: grasp(light_blue_box)\n  affordance_region: the top surface of the light blue box\n  contact: holding(light_blue_box) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(light_blue_box)\nStep 3: transport(light_blue_box -> table)\n  affordance_region: an empty area on the table\n  spatial: above(light_blue_box, table, 0.05) [completion]\n  safety: no_drop(light_blue_box)\n  done_when: above(light_blue_box, table, 0.05)\nStep 4: place(light_blue_box -> table)\n  affordance_region: an empty area on the table\n  contact: surface_contact(light_blue_box, table) [completion]; released(light_blue_box) [completion]\n  pose: stable(light_blue_box) [completion]\n  done_when: surface_contact(light_blue_box, table) AND released(light_blue_box)\nStep 5: reach(dark_blue_box)\n  affordance_region: the top surface of the dark blue box\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, dark_blue_box, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, dark_blue_box) < 0.03\nStep 6: grasp(dark_blue_box)\n  affordance_region: the top surface of the dark blue box\n  contact: holding(dark_blue_box) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(dark_blue_box)\nStep 7: transport(dark_blue_box -> light_brown_box)\n  affordance_region: the top surface of the light brown box\n  spatial: above(dark_blue_box, light_brown_box, 0.05) [completion]\n  safety: no_drop(dark_blue_box)\n  done_when: above(dark_blue_box, light_brown_box, 0.05)\nStep 8: place(dark_blue_box -> light_brown_box)\n  affordance_region: the top surface of the light brown box\n  contact: surface_contact(dark_blue_box, light_brown_box) [completion]; released(dark_blue_box) [completion]\n  pose: stable(dark_blue_box) [completion]\n  done_when: surface_contact(dark_blue_box, light_brown_box) AND released(dark_blue_box)\nStep 9: reach(light_brown_box)\n  affordance_region: the top surface of the light brown box\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, light_brown_box, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, light_brown_box) < 0.03\nStep 10: grasp(light_brown_box)\n  affordance_region: the top surface of the light brown box\n  contact: holding(light_brown_box) [completion]\n  direction: grasp_axis(0, 0,",
+  "parsed": {
+    "reasoning": "",
+    "goal": [
+      {
+        "pred": "stacked",
+        "args": [
+          "[light_blue_box",
+          "dark_blue_box",
+          "light_brown_box]"
+        ]
+      },
+      {
+        "pred": "all_on",
+        "args": [
+          "[light_blue_box",
+          "dark_blue_box",
+          "light_brown_box]",
+          "table"
+        ]
+      }
+    ],
+    "scene_objects": [
+      "light_blue_box",
+      "dark_blue_box",
+      "light_brown_box",
+      "table"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "light_blue_box",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "light_blue_box",
+        "affordance_region": "the top surface of the light blue box",
+        "done_when": "distance(gripper, light_blue_box) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "light_blue_box"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "light_blue_box",
+        "affordance_region": "the top surface of the light blue box",
+        "done_when": "holding(light_blue_box)"
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "light_blue_box",
+                "table",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "light_blue_box"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "light_blue_box",
+        "destination": "table",
+        "affordance_region": "an empty area on the table",
+        "done_when": "above(light_blue_box, table, 0.05)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "surface_contact",
+              "args": [
+                "light_blue_box",
+                "table"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "light_blue_box"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "light_blue_box"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "place",
+        "target": "light_blue_box",
+        "destination": "table",
+        "affordance_region": "an empty area on the table",
+        "done_when": "surface_contact(light_blue_box, table) AND released(light_blue_box)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "dark_blue_box",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 5,
+        "action": "reach",
+        "target": "dark_blue_box",
+        "affordance_region": "the top surface of the dark blue box",
+        "done_when": "distance(gripper, dark_blue_box) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "dark_blue_box"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 6,
+        "action": "grasp",
+        "target": "dark_blue_box",
+        "affordance_region": "the top surface of the dark blue box",
+        "done_when": "holding(dark_blue_box)"
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "dark_blue_box",
+                "light_brown_box",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "dark_blue_box"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 7,
+        "action": "transport",
+        "target": "dark_blue_box",
+        "destination": "light_brown_box",
+        "affordance_region": "the top surface of the light brown box",
+        "done_when": "above(dark_blue_box, light_brown_box, 0.05)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "surface_contact",
+              "args": [
+                "dark_blue_box",
+                "light_brown_box"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "dark_blue_box"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "dark_blue_box"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 8,
+        "action": "place",
+        "target": "dark_blue_box",
+        "destination": "light_brown_box",
+        "affordance_region": "the top surface of the light brown box",
+        "done_when": "surface_contact(dark_blue_box, light_brown_box) AND released(dark_blue_box)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "light_brown_box",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 9,
+        "action": "reach",
+        "target": "light_brown_box",
+        "affordance_region": "the top surface of the light brown box",
+        "done_when": "distance(gripper, light_brown_box) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "light_brown_box"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 10,
+        "action": "grasp",
+        "target": "light_brown_box",
+        "affordance_region": "the top surface of the light brown box"
+      }
+    ]
+  }
+}

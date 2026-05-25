@@ -1,0 +1,226 @@
+{
+  "task": "Pick up the bottle from the base top and put it on the stove",
+  "scene_objects": [
+    "bottle",
+    "stove",
+    "counter"
+  ],
+  "steps": [
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "bottle",
+              "<",
+              "0.03"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "approach_axis",
+            "args": [
+              "0",
+              "0",
+              "-1"
+            ],
+            "role": "progress"
+          }
+        ]
+      },
+      "step": 1,
+      "action": "reach",
+      "target": "bottle",
+      "affordance_region": "the body of the bottle",
+      "done_when": "distance(gripper, bottle) < 0.03",
+      "affordance_hint": "the body of the bottle",
+      "refine_prompt": "the body of the bottle",
+      "refine_cache_hit": false,
+      "affordance_refined": [
+        0.7969,
+        0.9297
+      ],
+      "affordance_3d_refined": [
+        0.8761,
+        2.3496,
+        3.9824
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.3863
+    },
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "bottle"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              "0",
+              "0",
+              "-1"
+            ],
+            "role": "progress"
+          }
+        ]
+      },
+      "step": 2,
+      "action": "grasp",
+      "target": "bottle",
+      "affordance_region": "the red cap of the bottle",
+      "done_when": "holding(bottle)",
+      "affordance_hint": "the red cap of the bottle",
+      "refine_prompt": "the red cap of the bottle",
+      "refine_cache_hit": false,
+      "affordance_refined": [
+        0.7969,
+        0.9297
+      ],
+      "affordance_3d_refined": [
+        0.8761,
+        2.3496,
+        3.9824
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.5978
+    },
+    {
+      "constraints": {
+        "spatial": [
+          {
+            "pred": "above",
+            "args": [
+              "bottle",
+              "stove",
+              "0.05"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_drop",
+            "args": [
+              "bottle"
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "step": 3,
+      "action": "transport",
+      "target": "bottle",
+      "destination": "stove",
+      "affordance_region": "an empty area on the stove",
+      "done_when": "above(bottle, stove, 0.05)",
+      "affordance_hint": "an empty area on the stove",
+      "refine_prompt": "an empty area on the stove",
+      "refine_cache_hit": false,
+      "affordance_refined": [
+        0.9961,
+        0.2617
+      ],
+      "affordance_3d_refined": [
+        1.2178,
+        -0.6794,
+        2.5637
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.3862
+    },
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "surface_contact",
+            "args": [
+              "bottle",
+              "stove"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "released",
+            "args": [
+              "bottle"
+            ],
+            "role": "completion"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "stable",
+            "args": [
+              "bottle"
+            ],
+            "role": "completion"
+          }
+        ]
+      },
+      "step": 4,
+      "action": "place",
+      "target": "bottle",
+      "destination": "stove",
+      "affordance_region": "an empty area on the stove",
+      "done_when": "surface_contact(bottle, stove) AND released(bottle) AND stable(bottle)",
+      "affordance_hint": "an empty area on the stove",
+      "refine_prompt": "an empty area on the stove",
+      "refine_cache_hit": true,
+      "affordance_refined": [
+        0.9961,
+        0.2617
+      ],
+      "affordance_3d_refined": [
+        1.2178,
+        -0.6794,
+        2.5637
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.3862
+    }
+  ]
+}

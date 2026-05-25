@@ -1,0 +1,231 @@
+{
+  "task": "close the black jar",
+  "scene_objects": [
+    "black_jar",
+    "pink_lid",
+    "table"
+  ],
+  "num_steps": 4,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "pink_lid",
+      "affordance": [
+        0.351,
+        0.632
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "pink_lid",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "black_jar"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, pink_lid) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        -0.0432,
+        0.0387,
+        0.1456
+      ],
+      "affordance_hint": "the pink lid"
+    },
+    {
+      "step": 2,
+      "action": "grasp",
+      "target": "pink_lid",
+      "affordance": [
+        0.351,
+        0.66
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "pink_lid"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "holding",
+            "args": [
+              "pink_lid"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              0,
+              0,
+              -1
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "holding(pink_lid)",
+      "affordance_3d": [
+        -0.8816,
+        0.9512,
+        2.9696
+      ],
+      "affordance_hint": "the handle of the pink lid"
+    },
+    {
+      "step": 3,
+      "action": "transport",
+      "target": "pink_lid",
+      "destination": "black_jar",
+      "affordance": [
+        0.468,
+        0.656
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "pink_lid"
+            ],
+            "role": "safety"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "above",
+            "args": [
+              "pink_lid",
+              "black_jar",
+              0.05
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "pink_lid",
+              "black_jar"
+            ]
+          },
+          {
+            "pred": "no_drop",
+            "args": [
+              "pink_lid"
+            ]
+          }
+        ]
+      },
+      "done_when": "above(pink_lid, black_jar, 0.05) AND aligned_xy(pink_lid, black_jar, 0.03)",
+      "affordance_3d": [
+        -0.0389,
+        0.1947,
+        0.623
+      ],
+      "affordance_hint": "an empty area on the black jar"
+    },
+    {
+      "step": 4,
+      "action": "place",
+      "target": "pink_lid",
+      "destination": "black_jar",
+      "affordance": [
+        0.468,
+        0.656
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "surface_contact",
+            "args": [
+              "pink_lid",
+              "black_jar"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "released",
+            "args": [
+              "pink_lid"
+            ],
+            "role": "completion"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "stable",
+            "args": [
+              "pink_lid"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "support_stable",
+            "args": [
+              "pink_lid"
+            ]
+          }
+        ]
+      },
+      "done_when": "surface_contact(pink_lid, black_jar) AND released(pink_lid) AND stable(pink_lid)",
+      "affordance_3d": [
+        -0.0389,
+        0.1947,
+        0.623
+      ],
+      "affordance_hint": "an empty area on the black jar"
+    }
+  ]
+}

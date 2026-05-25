@@ -1,0 +1,243 @@
+{
+  "task": "Move cloth to left edge of table in front of microwave.",
+  "scene_objects": [
+    "cloth",
+    "pot",
+    "spoon",
+    "corn",
+    "mushroom",
+    "microwave",
+    "table"
+  ],
+  "num_steps": 4,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "cloth",
+      "affordance": [
+        0.486,
+        0.6
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "cloth",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "pot"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, cloth) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        -0.0431,
+        0.2799,
+        2.3974
+      ],
+      "affordance_hint": "the light blue cloth",
+      "affordance_hint_original": "the cloth",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 2,
+      "action": "grasp",
+      "target": "cloth",
+      "affordance": [
+        0.486,
+        0.6
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "cloth"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "holding",
+            "args": [
+              "cloth"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              0,
+              0,
+              -1
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "holding(cloth)",
+      "affordance_3d": [
+        -0.0431,
+        0.2799,
+        2.3974
+      ],
+      "affordance_hint": "the light blue cloth",
+      "affordance_hint_original": "cloth",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 3,
+      "action": "transport",
+      "target": "cloth",
+      "destination": "left_edge_table",
+      "affordance": [
+        0.2,
+        0.352
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "cloth"
+            ],
+            "role": "safety"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "above",
+            "args": [
+              "cloth",
+              "left_edge_table",
+              0.05
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "cloth",
+              "microwave"
+            ]
+          },
+          {
+            "pred": "no_drop",
+            "args": [
+              "cloth"
+            ]
+          }
+        ]
+      },
+      "done_when": "above(cloth, left_edge_table, 0.05) AND aligned_xy(cloth, left_edge_table, 0.03)",
+      "affordance_3d": [
+        -0.6327,
+        -0.3122,
+        1.8299
+      ],
+      "affordance_hint": "the left edge of the table",
+      "affordance_hint_original": "an empty area on the left edge table",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 4,
+      "action": "place",
+      "target": "cloth",
+      "destination": "left_edge_table",
+      "affordance": [
+        0.2,
+        0.352
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "surface_contact",
+            "args": [
+              "cloth",
+              "left_edge_table"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "released",
+            "args": [
+              "cloth"
+            ],
+            "role": "completion"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "stable",
+            "args": [
+              "cloth"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "support_stable",
+            "args": [
+              "cloth"
+            ]
+          }
+        ]
+      },
+      "done_when": "surface_contact(cloth, left_edge_table) AND released(cloth) AND stable(cloth)",
+      "affordance_3d": [
+        -0.6327,
+        -0.3122,
+        1.8299
+      ],
+      "affordance_hint": "the left edge of the table",
+      "affordance_hint_original": "an empty area on the left edge table",
+      "affordance_hint_confidence": "ok"
+    }
+  ]
+}

@@ -1,0 +1,173 @@
+{
+  "task": "knock green can over",
+  "scene_objects": [
+    "green_can",
+    "apple",
+    "snack_bar",
+    "table"
+  ],
+  "num_steps": 3,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "green_can",
+      "affordance": [
+        0.633,
+        0.285
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "green_can",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "apple"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, green_can) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        0.4288,
+        -0.6936,
+        2.8083
+      ],
+      "affordance_hint": "the green metallic can",
+      "affordance_hint_original": "the green can",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 2,
+      "action": "push",
+      "target": "green_can",
+      "affordance": [
+        0.633,
+        0.285
+      ],
+      "approach": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "green_can"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "motion_dir",
+            "args": [
+              0.0,
+              1.0,
+              0.0
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "green_can",
+              "snack_bar"
+            ]
+          }
+        ]
+      },
+      "done_when": "green_can is tilted or knocked over",
+      "affordance_3d": [
+        0.4288,
+        -0.6936,
+        2.8083
+      ],
+      "affordance_hint": "the body of the green can",
+      "affordance_hint_original": "the center of the green can",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 3,
+      "action": "retreat",
+      "target": "gripper",
+      "affordance": [
+        0.925,
+        0.382
+      ],
+      "approach": [
+        0.0,
+        -1.0,
+        0.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "released",
+            "args": [
+              "green_can"
+            ],
+            "role": "completion"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "clear_path",
+            "args": [
+              "gripper"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "table"
+            ]
+          }
+        ]
+      },
+      "done_when": "gripper is away from green_can",
+      "affordance_3d": [
+        1.6906,
+        -0.4653,
+        3.4541
+      ],
+      "affordance_hint": "the gripper",
+      "affordance_hint_original": "gripper",
+      "affordance_hint_confidence": "ok"
+    }
+  ]
+}

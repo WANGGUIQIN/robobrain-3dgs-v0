@@ -1,0 +1,165 @@
+{
+  "task": "Pick up one object and put it on the table",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_3epoch/best",
+  "raw": "**SCENE ANALYSIS - A white pen lies on a white table. The pen is slender and cylindrical. STRATEGY - The task is to pick up the pen and place it on the table. Since the pen is already on the table, the action is to grasp it and then place it back in the same location. Failure modes include misgrasping the pen or dropping it. AFFORDANCE REASONING - Step 1 reach the pen body; Step 2 grasp the pen body for secure hold; Step 3 transport the pen to the same table location; Step 4 place the pen back on the table.**\nGoal: on(white_pen, table); stable(white_pen)\nScene: white_pen, table\nStep 1: reach(white_pen)\n  affordance_region: the body of the white pen\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, white_pen, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, white_pen) < 0.03\nStep 2: grasp(white_pen)\n  affordance_region: the body of the white pen\n  contact: holding(white_pen) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(white_pen)\nStep 3: transport(white_pen -> table)\n  affordance_region: an empty area on the table\n  spatial: above(white_pen, table, 0.05) [completion]\n  safety: no_drop(white_pen)\n  done_when: above(white_pen, table, 0.05)\nStep 4: place(white_pen -> table)\n  affordance_region: an empty area on the table\n  contact: surface_contact(white_pen, table) [completion]; released(white_pen) [completion]\n  pose: stable(white_pen) [completion]\n  done_when: surface_contact(white_pen, table) AND released(white_pen)\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [
+      {
+        "pred": "on",
+        "args": [
+          "white_pen",
+          "table"
+        ]
+      },
+      {
+        "pred": "stable",
+        "args": [
+          "white_pen"
+        ]
+      }
+    ],
+    "scene_objects": [
+      "white_pen",
+      "table"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "white_pen",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "white_pen",
+        "affordance_region": "the body of the white pen",
+        "done_when": "distance(gripper, white_pen) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "white_pen"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "white_pen",
+        "affordance_region": "the body of the white pen",
+        "done_when": "holding(white_pen)"
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "white_pen",
+                "table",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "white_pen"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "white_pen",
+        "destination": "table",
+        "affordance_region": "an empty area on the table",
+        "done_when": "above(white_pen, table, 0.05)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "surface_contact",
+              "args": [
+                "white_pen",
+                "table"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "white_pen"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "white_pen"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "place",
+        "target": "white_pen",
+        "destination": "table",
+        "affordance_region": "an empty area on the table",
+        "done_when": "surface_contact(white_pen, table) AND released(white_pen)"
+      }
+    ]
+  }
+}

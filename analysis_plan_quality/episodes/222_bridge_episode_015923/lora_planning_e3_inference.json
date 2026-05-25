@@ -1,0 +1,152 @@
+{
+  "task": "put spatula in pan",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_planning_3epoch/checkpoint-39957",
+  "raw": "Scene: spatula, pan, table\nStep 1: reach(spatula)\n  affordance_region: the blue plastic spatula\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, spatula, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, spatula) < 0.03\nStep 2: grasp(spatula)\n  affordance_region: the blue plastic handle of the spatula\n  contact: holding(spatula) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(spatula)\nStep 3: transport(spatula -> pan)\n  affordance_region: the empty area inside the metal pan\n  spatial: above(spatula, pan, 0.05) [completion]\n  safety: no_drop(spatula)\n  done_when: above(spatula, pan, 0.05)\nStep 4: place(spatula -> pan)\n  affordance_region: the empty area inside the metal pan\n  contact: surface_contact(spatula, pan) [completion]; released(spatula) [completion]\n  pose: stable(spatula) [completion]\n  done_when: surface_contact(spatula, pan) AND released(spatula)\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [],
+    "scene_objects": [
+      "spatula",
+      "pan",
+      "table"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "spatula",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "spatula",
+        "affordance_region": "the blue plastic spatula",
+        "done_when": "distance(gripper, spatula) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "spatula"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "spatula",
+        "affordance_region": "the blue plastic handle of the spatula",
+        "done_when": "holding(spatula)"
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "spatula",
+                "pan",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "spatula"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "spatula",
+        "destination": "pan",
+        "affordance_region": "the empty area inside the metal pan",
+        "done_when": "above(spatula, pan, 0.05)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "surface_contact",
+              "args": [
+                "spatula",
+                "pan"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "spatula"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "spatula"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "place",
+        "target": "spatula",
+        "destination": "pan",
+        "affordance_region": "the empty area inside the metal pan",
+        "done_when": "surface_contact(spatula, pan) AND released(spatula)"
+      }
+    ]
+  }
+}

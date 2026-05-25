@@ -1,0 +1,135 @@
+{
+  "task": "Close the trash can lid.",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_3epoch/best",
+  "raw": "**SCENE ANALYSIS - A white trash can with its lid open is on the floor. The lid is a flat, hinged panel attached to the can's body. STRATEGY - First, reach for the trash can body to position the arm. Then, grasp the lid's edge to lift it. Finally, place the lid back onto the can's opening. Failure modes include misaligning the lid during placement or dropping it. AFFORDANCE REASONING - Step 1 reach the trash can body for stable positioning; Step 2 grasp the lid's edge for lifting; Step 3 place the lid onto the can's opening.**\nGoal: on(lid, trash_can); stable(lid)\nScene: trash_can, lid\nStep 1: reach(trash_can)\n  affordance_region: the body of the white trash can\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, trash_can, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, trash_can) < 0.03\nStep 2: grasp(lid)\n  affordance_region: the edge of the white trash can lid\n  contact: holding(lid) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(lid)\nStep 3: place(lid -> trash_can)\n  affordance_region: the opening of the white trash can\n  contact: surface_contact(lid, trash_can) [completion]; released(lid) [completion]\n  pose: stable(lid) [completion]\n  done_when: surface_contact(lid, trash_can) AND released(lid)\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [
+      {
+        "pred": "on",
+        "args": [
+          "lid",
+          "trash_can"
+        ]
+      },
+      {
+        "pred": "stable",
+        "args": [
+          "lid"
+        ]
+      }
+    ],
+    "scene_objects": [
+      "trash_can",
+      "lid"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "trash_can",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "trash_can",
+        "affordance_region": "the body of the white trash can",
+        "done_when": "distance(gripper, trash_can) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "lid"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "lid",
+        "affordance_region": "the edge of the white trash can lid",
+        "done_when": "holding(lid)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "surface_contact",
+              "args": [
+                "lid",
+                "trash_can"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "lid"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "lid"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "place",
+        "target": "lid",
+        "destination": "trash_can",
+        "affordance_region": "the opening of the white trash can",
+        "done_when": "surface_contact(lid, trash_can) AND released(lid)"
+      }
+    ]
+  }
+}

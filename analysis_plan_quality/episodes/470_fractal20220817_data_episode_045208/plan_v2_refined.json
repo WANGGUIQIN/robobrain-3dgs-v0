@@ -1,0 +1,177 @@
+{
+  "task": "pick orange from white bowl",
+  "scene_objects": [
+    "orange",
+    "white_bowl",
+    "table"
+  ],
+  "num_steps": 3,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "orange",
+      "affordance": [
+        0.593,
+        0.387
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "orange",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "white_bowl"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, orange) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        0.3659,
+        -0.4421,
+        3.3954
+      ],
+      "affordance_hint": "the orange in the white bowl",
+      "affordance_hint_original": "the orange",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 2,
+      "action": "grasp",
+      "target": "orange",
+      "affordance": [
+        0.593,
+        0.382
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "orange"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "holding",
+            "args": [
+              "orange"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              0,
+              0,
+              -1
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "holding(orange)",
+      "affordance_3d": [
+        0.3638,
+        -0.4548,
+        3.3758
+      ],
+      "affordance_hint": "the orange in the white bowl",
+      "affordance_hint_original": "orange",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 3,
+      "action": "transport",
+      "target": "orange",
+      "affordance": [
+        0.5,
+        0.554
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "orange"
+            ],
+            "role": "safety"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "clear_path",
+            "args": [
+              "gripper",
+              "table"
+            ],
+            "role": "safety"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "orange",
+              "white_bowl"
+            ]
+          },
+          {
+            "pred": "no_drop",
+            "args": [
+              "orange"
+            ]
+          }
+        ]
+      },
+      "done_when": "orange is lifted and clear of the white bowl",
+      "affordance_3d": [
+        0.0,
+        0.1679,
+        2.6713
+      ],
+      "affordance_hint": "an empty area on the orange",
+      "affordance_hint_original": "an empty area on the orange",
+      "affordance_hint_confidence": "rejected:missing_token:orange"
+    }
+  ]
+}

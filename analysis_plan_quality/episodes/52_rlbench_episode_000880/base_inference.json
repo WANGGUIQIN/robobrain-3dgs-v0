@@ -1,0 +1,106 @@
+{
+  "task": "push the maroon button",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_3epoch/best",
+  "raw": "**SCENE ANALYSIS -** A robotic arm is positioned over a table with four square objects: two black with red centers, one red, and one blue. The task is to push the maroon button, which is on the red square object. The red square is a flat, rigid object with a distinct red center (the button). The robot must first reach the red square, then push the button. **STRATEGY -** The robot will approach the red square, reach for it, and then push the red center (button) to complete the task. Failure modes include misidentifying the red square or failing to push the button with sufficient force. **AFFORDANCE REASONING -** Step 1: Reach for the red square to establish contact. Step 2: Push the red center (button) to activate it.\n\nGoal: pushed(red_button)\nScene: red_square, black_square1, black_square2, blue_square, table\nStep 1: reach(red_square)\n  affordance_region: the body of the red square\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, red_square, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, red_square) < 0.03\nStep 2: push(red_square)\n  affordance_region: the red center of the red square\n  contact: gripper_contact(red_square) [progress]\n  spatial: above(gripper, red_square, 0.02) [progress]\n  direction: push_axis(0, 0, -1) [completion]\n  done_when: pushed(red_button)\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [
+      {
+        "pred": "pushed",
+        "args": [
+          "red_button"
+        ]
+      }
+    ],
+    "scene_objects": [
+      "red_square",
+      "black_square1",
+      "black_square2",
+      "blue_square",
+      "table"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "red_square",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "red_square",
+        "affordance_region": "the body of the red square",
+        "done_when": "distance(gripper, red_square) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_contact",
+              "args": [
+                "red_square"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "gripper",
+                "red_square",
+                "0.02"
+              ],
+              "role": "progress"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "push_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "push",
+        "target": "red_square",
+        "affordance_region": "the red center of the red square",
+        "done_when": "pushed(red_button)"
+      }
+    ]
+  }
+}

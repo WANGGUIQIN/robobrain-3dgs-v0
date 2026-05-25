@@ -1,0 +1,95 @@
+{
+  "task": "open bottom drawer",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_planning_3epoch/checkpoint-39957",
+  "raw": "Scene: bottom_drawer, cabinet, robot_arm\nStep 1: reach(bottom_drawer)\n  affordance_region: the front edge of the bottom drawer\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, bottom_drawer, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, bottom_drawer) < 0.03\nStep 2: pull(bottom_drawer)\n  affordance_region: the front edge of the bottom drawer\n  contact: holding(bottom_drawer) [completion]\n  spatial: motion_dir(bottom_drawer, outward) [completion]\n  safety: no_collision(bottom_drawer, cabinet)\n  done_when: bottom_drawer is partially open\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [],
+    "scene_objects": [
+      "bottom_drawer",
+      "cabinet",
+      "robot_arm"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "bottom_drawer",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "bottom_drawer",
+        "affordance_region": "the front edge of the bottom drawer",
+        "done_when": "distance(gripper, bottom_drawer) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "bottom_drawer"
+              ],
+              "role": "completion"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "motion_dir",
+              "args": [
+                "bottom_drawer",
+                "outward"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_collision",
+              "args": [
+                "bottom_drawer",
+                "cabinet"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "pull",
+        "target": "bottom_drawer",
+        "affordance_region": "the front edge of the bottom drawer",
+        "done_when": "bottom_drawer is partially open"
+      }
+    ]
+  }
+}

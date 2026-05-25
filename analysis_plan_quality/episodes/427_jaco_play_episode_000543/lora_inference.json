@@ -1,0 +1,244 @@
+{
+  "task": "place the yellow cup in the table",
+  "parsed": {
+    "scene_objects": [
+      "yellow_cup",
+      "blue_plate",
+      "table"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "yellow_cup",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "yellow_cup",
+        "affordance_region": "the yellow cup",
+        "done_when": "distance(gripper, yellow_cup) < 0.03",
+        "affordance_hint": "the yellow cup",
+        "refine_prompt": "the yellow cup",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.9805,
+          0.2148
+        ],
+        "affordance_3d_refined": [
+          1.6159,
+          -0.959,
+          2.9257
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.5805,
+        "affordance": [
+          0.9805,
+          0.2148
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "yellow_cup"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "yellow_cup",
+        "affordance_region": "the handle of the yellow cup",
+        "done_when": "holding(yellow_cup)",
+        "affordance_hint": "the handle of the yellow cup",
+        "refine_prompt": "the handle of the yellow cup",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.9414,
+          0.2422
+        ],
+        "affordance_3d_refined": [
+          1.703,
+          -0.9947,
+          3.3562
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.5242,
+        "affordance": [
+          0.9414,
+          0.2422
+        ]
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "yellow_cup",
+                "blue_plate",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "yellow_cup"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "yellow_cup",
+        "destination": "blue_plate",
+        "affordance_region": "an empty area on the blue plate",
+        "done_when": "above(yellow_cup, blue_plate, 0.05)",
+        "affordance_hint": "an empty area on the blue plate",
+        "refine_prompt": "an empty area on the blue plate",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.5742,
+          0.2656
+        ],
+        "affordance_3d_refined": [
+          0.1661,
+          -0.5246,
+          1.9473
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.4268,
+        "affordance": [
+          0.5742,
+          0.2656
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "surface_contact",
+              "args": [
+                "yellow_cup",
+                "blue_plate"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "yellow_cup"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "yellow_cup"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "place",
+        "target": "yellow_cup",
+        "destination": "blue_plate",
+        "affordance_region": "an empty area on the blue plate",
+        "done_when": "surface_contact(yellow_cup, blue_plate) AND released(yellow_cup)",
+        "affordance_hint": "an empty area on the blue plate",
+        "refine_prompt": "an empty area on the blue plate",
+        "refine_cache_hit": true,
+        "affordance_refined": [
+          0.5742,
+          0.2656
+        ],
+        "affordance_3d_refined": [
+          0.1661,
+          -0.5246,
+          1.9473
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.4268,
+        "affordance": [
+          0.5742,
+          0.2656
+        ]
+      }
+    ]
+  }
+}

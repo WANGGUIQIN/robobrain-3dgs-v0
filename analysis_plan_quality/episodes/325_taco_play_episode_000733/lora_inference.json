@@ -1,0 +1,149 @@
+{
+  "task": "push the drawer",
+  "parsed": {
+    "scene_objects": [
+      "drawer",
+      "table"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "drawer",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "drawer",
+        "affordance_region": "the black handle of the drawer",
+        "done_when": "distance(gripper, drawer) < 0.03",
+        "affordance_hint": "the black handle of the drawer",
+        "refine_prompt": "the black handle of the drawer",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.7031,
+          0.1367
+        ],
+        "affordance_3d_refined": [
+          0.35,
+          -0.626,
+          1.499
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.5479,
+        "affordance": [
+          0.7031,
+          0.1367
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_contact",
+              "args": [
+                "drawer"
+              ],
+              "role": "completion"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "aligned_xy",
+              "args": [
+                "drawer",
+                "table"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "motion_dir",
+              "args": [
+                "0",
+                "1",
+                "0"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_collision",
+              "args": [
+                "drawer",
+                "table"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "push",
+        "target": "drawer",
+        "affordance_region": "the black handle of the drawer",
+        "done_when": "aligned_xy(drawer, table)",
+        "affordance_hint": "the black handle of the drawer",
+        "refine_prompt": "the black handle of the drawer",
+        "refine_cache_hit": true,
+        "affordance_refined": [
+          0.7031,
+          0.1367
+        ],
+        "affordance_3d_refined": [
+          0.35,
+          -0.626,
+          1.499
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.5479,
+        "affordance": [
+          0.7031,
+          0.1367
+        ]
+      }
+    ]
+  }
+}

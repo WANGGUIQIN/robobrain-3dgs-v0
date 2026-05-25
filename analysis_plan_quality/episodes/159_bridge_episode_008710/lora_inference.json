@@ -1,0 +1,246 @@
+{
+  "task": "place pot on green foam. pot placed on foam",
+  "parsed": {
+    "scene_objects": [
+      "purple_object",
+      "metal_bowl",
+      "blue_scoop",
+      "green_foam",
+      "table"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "metal_bowl",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "metal_bowl",
+        "affordance_region": "the rim of the metal bowl",
+        "done_when": "distance(gripper, metal_bowl) < 0.03",
+        "affordance_hint": "the rim of the metal bowl",
+        "refine_prompt": "the rim of the metal bowl",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.5586,
+          0.3672
+        ],
+        "affordance_3d_refined": [
+          0.114,
+          -0.2585,
+          1.6929
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.5207,
+        "affordance": [
+          0.5586,
+          0.3672
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "metal_bowl"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "metal_bowl",
+        "affordance_region": "the rim of the metal bowl",
+        "done_when": "holding(metal_bowl)",
+        "affordance_hint": "the rim of the metal bowl",
+        "refine_prompt": "the rim of the metal bowl",
+        "refine_cache_hit": true,
+        "affordance_refined": [
+          0.5586,
+          0.3672
+        ],
+        "affordance_3d_refined": [
+          0.114,
+          -0.2585,
+          1.6929
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.5207,
+        "affordance": [
+          0.5586,
+          0.3672
+        ]
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "metal_bowl",
+                "green_foam",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "metal_bowl"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "metal_bowl",
+        "destination": "green_foam",
+        "affordance_region": "an empty area on the green foam",
+        "done_when": "above(metal_bowl, green_foam, 0.05)",
+        "affordance_hint": "an empty area on the green foam",
+        "refine_prompt": "an empty area on the green foam",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.668,
+          0.7422
+        ],
+        "affordance_3d_refined": [
+          0.6216,
+          0.8962,
+          3.2193
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.4018,
+        "affordance": [
+          0.668,
+          0.7422
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "surface_contact",
+              "args": [
+                "metal_bowl",
+                "green_foam"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "metal_bowl"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "metal_bowl"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "place",
+        "target": "metal_bowl",
+        "destination": "green_foam",
+        "affordance_region": "an empty area on the green foam",
+        "done_when": "surface_contact(metal_bowl, green_foam) AND released(metal_bowl) AND stable(metal_bowl)",
+        "affordance_hint": "an empty area on the green foam",
+        "refine_prompt": "an empty area on the green foam",
+        "refine_cache_hit": true,
+        "affordance_refined": [
+          0.668,
+          0.7422
+        ],
+        "affordance_3d_refined": [
+          0.6216,
+          0.8962,
+          3.2193
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.4018,
+        "affordance": [
+          0.668,
+          0.7422
+        ]
+      }
+    ]
+  }
+}

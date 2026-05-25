@@ -1,0 +1,142 @@
+{
+  "task": "Rotate the silver stand on the right.",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_3epoch/best",
+  "raw": "**SCENE ANALYSIS - A silver stand with multiple cylindrical containers is on a dark countertop. The stand has a central base and several upright cylinders. The task is to rotate the stand, which requires grasping the base and applying a rotational force. STRATEGY - First, reach and grasp the base of the stand to ensure stability. Then, apply a rotational force around the vertical axis. Failure modes include losing grip on the base or rotating the stand too quickly, causing it to tip. AFFORDANCE REASONING - Step 1: Reach the base of the stand. Step 2: Grasp the base firmly to prevent slipping. Step 3: Apply a rotational force to rotate the stand.**\nGoal: rotated(silver_stand)\nScene: silver_stand, countertop\nStep 1: reach(silver_stand)\n  affordance_region: the base of the silver stand\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, silver_stand, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, silver_stand) < 0.03\nStep 2: grasp(silver_stand)\n  affordance_region: the base of the silver stand\n  contact: holding(silver_stand) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(silver_stand)\nStep 3: rotate(silver_stand)\n  affordance_region: the base of the silver stand\n  contact: holding(silver_stand) [progress]\n  spatial: angle(gripper, silver_stand, 0, 360) [progress]\n  direction: rotate_axis(0, 0, 1) [progress]\n  safety: no_tipping(silver_stand)\n  done_when: angle(gripper, silver_stand) > 360\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [
+      {
+        "pred": "rotated",
+        "args": [
+          "silver_stand"
+        ]
+      }
+    ],
+    "scene_objects": [
+      "silver_stand",
+      "countertop"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "silver_stand",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "silver_stand",
+        "affordance_region": "the base of the silver stand",
+        "done_when": "distance(gripper, silver_stand) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "silver_stand"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "silver_stand",
+        "affordance_region": "the base of the silver stand",
+        "done_when": "holding(silver_stand)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "silver_stand"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "angle",
+              "args": [
+                "gripper",
+                "silver_stand",
+                "0",
+                "360"
+              ],
+              "role": "progress"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "rotate_axis",
+              "args": [
+                "0",
+                "0",
+                "1"
+              ],
+              "role": "progress"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_tipping",
+              "args": [
+                "silver_stand"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "rotate",
+        "target": "silver_stand",
+        "affordance_region": "the base of the silver stand",
+        "done_when": "angle(gripper, silver_stand) > 360"
+      }
+    ]
+  }
+}

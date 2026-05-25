@@ -1,0 +1,161 @@
+{
+  "task": "Put the white cable in the storage box",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_3epoch/best",
+  "raw": "SCENE ANALYSIS - A white cable is coiled on a shelf, with a black storage box nearby. The cable is flexible and tangled; the box has an open top. STRATEGY - First, grasp the cable to untangle it slightly for easier handling. Then, transport it to the box and insert it into the open top. Failure modes include dropping the cable or misaligning it with the box. AFFORDANCE REASONING - Step 1 reach the cable body to grasp it; Step 2 grasp the cable body to lift it; Step 3 transport the cable to the box; Step 4 insert the cable into the box top.\nGoal: inside(white_cable, storage_box)\nScene: white_cable, storage_box, shelf\nStep 1: reach(white_cable)\n  affordance_region: the body of the white cable\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, white_cable, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, white_cable) < 0.03\nStep 2: grasp(white_cable)\n  affordance_region: the body of the white cable\n  contact: holding(white_cable) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(white_cable)\nStep 3: transport(white_cable -> storage_box)\n  affordance_region: an empty area on top of the storage_box\n  spatial: above(white_cable, storage_box, 0.05) [completion]\n  safety: no_drop(white_cable)\n  done_when: above(white_cable, storage_box, 0.05)\nStep 4: insert(white_cable -> storage_box)\n  affordance_region: the open top of the storage_box\n  contact: surface_contact(white_cable, storage_box) [completion]; released(white_cable) [completion]\n  pose: inside(white_cable, storage_box) [completion]\n  done_when: surface_contact(white_cable, storage_box) AND released(white_cable)\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [
+      {
+        "pred": "inside",
+        "args": [
+          "white_cable",
+          "storage_box"
+        ]
+      }
+    ],
+    "scene_objects": [
+      "white_cable",
+      "storage_box",
+      "shelf"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "white_cable",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "white_cable",
+        "affordance_region": "the body of the white cable",
+        "done_when": "distance(gripper, white_cable) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "white_cable"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "white_cable",
+        "affordance_region": "the body of the white cable",
+        "done_when": "holding(white_cable)"
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "white_cable",
+                "storage_box",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "white_cable"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "white_cable",
+        "destination": "storage_box",
+        "affordance_region": "an empty area on top of the storage_box",
+        "done_when": "above(white_cable, storage_box, 0.05)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "surface_contact",
+              "args": [
+                "white_cable",
+                "storage_box"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "white_cable"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "inside",
+              "args": [
+                "white_cable",
+                "storage_box"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "insert",
+        "target": "white_cable",
+        "destination": "storage_box",
+        "affordance_region": "the open top of the storage_box",
+        "done_when": "surface_contact(white_cable, storage_box) AND released(white_cable)"
+      }
+    ]
+  }
+}

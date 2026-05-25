@@ -1,0 +1,238 @@
+{
+  "task": "Pick up the small block on the left and move it to the right",
+  "scene_objects": [
+    "small_block",
+    "table"
+  ],
+  "num_steps": 4,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "small_block",
+      "affordance": [
+        0.611,
+        0.675
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "small_block",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "table"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, small_block) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        -0.8275,
+        -0.0353,
+        1.6146
+      ],
+      "affordance_hint": "the small block on the left side of the table",
+      "affordance_hint_original": "the small block",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 2,
+      "action": "grasp",
+      "target": "small_block",
+      "affordance": [
+        0.611,
+        0.675
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "small_block"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "holding",
+            "args": [
+              "small_block"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              0,
+              0,
+              -1
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "holding(small_block)",
+      "affordance_3d": [
+        -0.8275,
+        -0.0353,
+        1.6146
+      ],
+      "affordance_hint": "the small block on the left side of the table",
+      "affordance_hint_original": "small block",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 3,
+      "action": "transport",
+      "target": "small_block",
+      "destination": "right_position",
+      "affordance": [
+        0.7,
+        0.7
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "small_block"
+            ],
+            "role": "safety"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "above",
+            "args": [
+              "small_block",
+              "table",
+              0.05
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "small_block",
+              "table"
+            ]
+          },
+          {
+            "pred": "no_drop",
+            "args": [
+              "small_block"
+            ]
+          }
+        ]
+      },
+      "done_when": "above(small_block, right_position, 0.05) AND aligned_xy(small_block, right_position, 0.03)",
+      "affordance_3d": [
+        -0.6425,
+        -0.0046,
+        1.4581
+      ],
+      "affordance_hint": "the empty area on the right side of the table",
+      "affordance_hint_original": "an empty area on the right position",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 4,
+      "action": "place",
+      "target": "small_block",
+      "destination": "right_position",
+      "affordance": [
+        0.7,
+        0.7
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "surface_contact",
+            "args": [
+              "small_block",
+              "table"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "released",
+            "args": [
+              "small_block"
+            ],
+            "role": "completion"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "stable",
+            "args": [
+              "small_block"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "support_stable",
+            "args": [
+              "small_block"
+            ]
+          }
+        ]
+      },
+      "done_when": "surface_contact(small_block, table) AND released(small_block) AND stable(small_block)",
+      "affordance_3d": [
+        -0.6425,
+        -0.0046,
+        1.4581
+      ],
+      "affordance_hint": "the empty area on the right side of the table",
+      "affordance_hint_original": "an empty area on the right position",
+      "affordance_hint_confidence": "ok"
+    }
+  ]
+}

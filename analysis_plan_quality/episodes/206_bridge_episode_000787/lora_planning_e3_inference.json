@@ -1,0 +1,153 @@
+{
+  "task": "Place the blue cloth between the pot and tin cans",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_planning_3epoch/checkpoint-39957",
+  "raw": "Scene: blue_cloth, pot, tin_cans, table\nStep 1: reach(blue_cloth)\n  affordance_region: the blue cloth\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, blue_cloth, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, blue_cloth) < 0.03\nStep 2: grasp(blue_cloth)\n  affordance_region: the light blue cloth\n  contact: holding(blue_cloth) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(blue_cloth)\nStep 3: transport(blue_cloth -> between_pot_and_tin_cans)\n  affordance_region: an empty area between the pot and the tin cans\n  spatial: above(blue_cloth, table, 0.05) [completion]\n  safety: no_drop(blue_cloth)\n  done_when: above(blue_cloth, table, 0.05)\nStep 4: place(blue_cloth -> between_pot_and_tin_cans)\n  affordance_region: an empty area between the pot and the tin cans\n  contact: surface_contact(blue_cloth, table) [completion]; released(blue_cloth) [completion]\n  pose: stable(blue_cloth) [completion]\n  done_when: surface_contact(blue_cloth, table) AND released(blue_cloth)\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [],
+    "scene_objects": [
+      "blue_cloth",
+      "pot",
+      "tin_cans",
+      "table"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "blue_cloth",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "blue_cloth",
+        "affordance_region": "the blue cloth",
+        "done_when": "distance(gripper, blue_cloth) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "blue_cloth"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "blue_cloth",
+        "affordance_region": "the light blue cloth",
+        "done_when": "holding(blue_cloth)"
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "blue_cloth",
+                "table",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "blue_cloth"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "blue_cloth",
+        "destination": "between_pot_and_tin_cans",
+        "affordance_region": "an empty area between the pot and the tin cans",
+        "done_when": "above(blue_cloth, table, 0.05)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "surface_contact",
+              "args": [
+                "blue_cloth",
+                "table"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "blue_cloth"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "blue_cloth"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "place",
+        "target": "blue_cloth",
+        "destination": "between_pot_and_tin_cans",
+        "affordance_region": "an empty area between the pot and the tin cans",
+        "done_when": "surface_contact(blue_cloth, table) AND released(blue_cloth)"
+      }
+    ]
+  }
+}

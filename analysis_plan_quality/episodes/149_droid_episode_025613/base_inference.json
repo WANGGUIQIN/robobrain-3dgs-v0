@@ -1,0 +1,148 @@
+{
+  "task": "Move the white mug backwards",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_3epoch/best",
+  "raw": "**SCENE ANALYSIS -** A wooden table holds a yellow cup, a red cup, a green cup, a blue bowl, a gray container, and a white mug. The white mug is on the table, with a handle on its side. The task is to move the white mug backward. The goal is to reposition the mug to a new location on the table behind its current position. STRATEGY - First, reach for the mug's body to approach it, then grasp the handle for a secure grip. Lift the mug and transport it backward over the table surface, ensuring it doesn't tip. Finally, place it gently on the table in the new position. Failure modes include dropping the mug during transport or placing it in an unstable position. AFFORDANCE REASONING - Step 1: Reach for the mug body to approach it. Step 2: Grasp the handle for a stable grip. Step 3: Transport the mug backward over the table. Step 4: Place the mug on the table in the new position.\n\n**Goal:** on(white_mug, table); position(white_mug, backward)\n**Scene:** white_mug, table, yellow_cup, red_cup, green_cup, blue_bowl, gray_container\n**Step 1:** reach(white_mug)\n  affordance_region: the body of the white mug\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, white_mug, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, white_mug) < 0.03\n**Step 2:** grasp(white_mug)\n  affordance_region: the side handle of the white mug\n  contact: holding(white_mug) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(white_mug)\n**Step 3:** transport(white_mug -> table)\n  affordance_region: an empty area on the table behind the white mug\n  spatial: above(white_mug, table, 0.05) [completion]\n  safety: no_drop(white_mug)\n  done_when: above(white_mug, table, 0.05)\n**Step 4:** place(white_mug -> table)\n  affordance_region: an empty area on the table behind the white mug\n  contact: surface_contact(white_mug, table) [completion]; released(white_mug) [completion]\n  pose: stable(white_mug) [completion]\n  done_when: surface_contact(white_mug, table) AND released(white_mug)\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [],
+    "scene_objects": [],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "white_mug",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "white_mug",
+        "affordance_region": "the body of the white mug",
+        "done_when": "distance(gripper, white_mug) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "white_mug"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "white_mug",
+        "affordance_region": "the side handle of the white mug",
+        "done_when": "holding(white_mug)"
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "white_mug",
+                "table",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "white_mug"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "white_mug",
+        "destination": "table",
+        "affordance_region": "an empty area on the table behind the white mug",
+        "done_when": "above(white_mug, table, 0.05)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "surface_contact",
+              "args": [
+                "white_mug",
+                "table"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "white_mug"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "white_mug"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "place",
+        "target": "white_mug",
+        "destination": "table",
+        "affordance_region": "an empty area on the table behind the white mug",
+        "done_when": "surface_contact(white_mug, table) AND released(white_mug)"
+      }
+    ]
+  }
+}

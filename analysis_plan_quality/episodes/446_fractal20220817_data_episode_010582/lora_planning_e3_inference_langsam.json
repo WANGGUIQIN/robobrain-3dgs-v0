@@ -1,0 +1,229 @@
+{
+  "task": "pick brown chip bag from middle drawer and place on counter",
+  "scene_objects": [
+    "brown_chip_bag",
+    "middle_drawer",
+    "counter",
+    "bowl",
+    "can",
+    "green_bottle"
+  ],
+  "steps": [
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "brown_chip_bag",
+              "<",
+              "0.03"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "approach_axis",
+            "args": [
+              "0",
+              "0",
+              "-1"
+            ],
+            "role": "progress"
+          }
+        ]
+      },
+      "step": 1,
+      "action": "reach",
+      "target": "brown_chip_bag",
+      "affordance_region": "the brown chip bag in the middle drawer",
+      "done_when": "distance(gripper, brown_chip_bag) < 0.03",
+      "affordance_hint": "the brown chip bag in the middle drawer",
+      "refine_prompt": "the brown chip bag in the middle drawer",
+      "refine_cache_hit": false,
+      "affordance_refined": [
+        0.5234,
+        0.8203
+      ],
+      "affordance_3d_refined": [
+        0.0894,
+        1.2214,
+        3.3171
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.7122
+    },
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "brown_chip_bag"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              "0",
+              "0",
+              "-1"
+            ],
+            "role": "progress"
+          }
+        ]
+      },
+      "step": 2,
+      "action": "grasp",
+      "target": "brown_chip_bag",
+      "affordance_region": "the body of the brown chip bag",
+      "done_when": "holding(brown_chip_bag)",
+      "affordance_hint": "the body of the brown chip bag",
+      "refine_prompt": "the body of the brown chip bag",
+      "refine_cache_hit": false,
+      "affordance_refined": [
+        0.5234,
+        0.8203
+      ],
+      "affordance_3d_refined": [
+        0.0894,
+        1.2214,
+        3.3171
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.7441
+    },
+    {
+      "constraints": {
+        "spatial": [
+          {
+            "pred": "above",
+            "args": [
+              "brown_chip_bag",
+              "counter",
+              "0.05"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_drop",
+            "args": [
+              "brown_chip_bag"
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "step": 3,
+      "action": "transport",
+      "target": "brown_chip_bag",
+      "destination": "counter",
+      "affordance_region": "an empty area on the counter",
+      "done_when": "above(brown_chip_bag, counter, 0.05)",
+      "affordance_hint": "an empty area on the counter",
+      "refine_prompt": "an empty area on the counter",
+      "refine_cache_hit": false,
+      "affordance_refined": [
+        0.4414,
+        0.3086
+      ],
+      "affordance_3d_refined": [
+        -0.2537,
+        -0.8289,
+        3.7672
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.3521
+    },
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "surface_contact",
+            "args": [
+              "brown_chip_bag",
+              "counter"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "released",
+            "args": [
+              "brown_chip_bag"
+            ],
+            "role": "completion"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "stable",
+            "args": [
+              "brown_chip_bag"
+            ],
+            "role": "completion"
+          }
+        ]
+      },
+      "step": 4,
+      "action": "place",
+      "target": "brown_chip_bag",
+      "destination": "counter",
+      "affordance_region": "an empty area on the counter",
+      "done_when": "surface_contact(brown_chip_bag, counter) AND released(brown_chip_bag) AND stable(brown_chip_bag)",
+      "affordance_hint": "an empty area on the counter",
+      "refine_prompt": "an empty area on the counter",
+      "refine_cache_hit": true,
+      "affordance_refined": [
+        0.4414,
+        0.3086
+      ],
+      "affordance_3d_refined": [
+        -0.2537,
+        -0.8289,
+        3.7672
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.3521
+    }
+  ]
+}

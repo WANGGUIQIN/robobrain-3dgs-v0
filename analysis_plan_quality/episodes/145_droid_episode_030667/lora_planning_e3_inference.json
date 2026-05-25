@@ -1,0 +1,159 @@
+{
+  "task": "Fold the grey thing in half",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_planning_3epoch/checkpoint-39957",
+  "raw": "Scene: grey_cloth, bed\nStep 1: reach(grey_cloth)\n  affordance_region: the grey cloth on the bed\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, grey_cloth, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, grey_cloth) < 0.03\nStep 2: grasp(grey_cloth)\n  affordance_region: the grey cloth on the bed\n  contact: holding(grey_cloth) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(grey_cloth)\nStep 3: fold(grey_cloth)\n  affordance_region: the grey cloth on the bed\n  contact: holding(grey_cloth) [progress]\n  spatial: aligned_xy(grey_cloth, folded_position, 0.05) [completion]\n  safety: no_drop(grey_cloth)\n  done_when: aligned_xy(grey_cloth, folded_position, 0.05)\nStep 4: place(grey_cloth -> bed)\n  affordance_region: an empty area on the bed\n  contact: surface_contact(grey_cloth, bed) [completion]; released(grey_cloth) [completion]\n  pose: stable(grey_cloth) [completion]\n  done_when: surface_contact(grey_cloth, bed) AND released(grey_cloth) AND stable(grey_cloth)\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [],
+    "scene_objects": [
+      "grey_cloth",
+      "bed"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "grey_cloth",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "grey_cloth",
+        "affordance_region": "the grey cloth on the bed",
+        "done_when": "distance(gripper, grey_cloth) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "grey_cloth"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "grey_cloth",
+        "affordance_region": "the grey cloth on the bed",
+        "done_when": "holding(grey_cloth)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "grey_cloth"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "aligned_xy",
+              "args": [
+                "grey_cloth",
+                "folded_position",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "grey_cloth"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "fold",
+        "target": "grey_cloth",
+        "affordance_region": "the grey cloth on the bed",
+        "done_when": "aligned_xy(grey_cloth, folded_position, 0.05)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "surface_contact",
+              "args": [
+                "grey_cloth",
+                "bed"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "grey_cloth"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "grey_cloth"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "place",
+        "target": "grey_cloth",
+        "destination": "bed",
+        "affordance_region": "an empty area on the bed",
+        "done_when": "surface_contact(grey_cloth, bed) AND released(grey_cloth) AND stable(grey_cloth)"
+      }
+    ]
+  }
+}

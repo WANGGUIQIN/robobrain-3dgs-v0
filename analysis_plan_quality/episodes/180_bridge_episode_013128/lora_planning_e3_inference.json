@@ -1,0 +1,154 @@
+{
+  "task": "move metal pot to right lower corner",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_planning_3epoch/checkpoint-39957",
+  "raw": "Scene: metal_pot, red_spoon, green_bottle, purple_cloth, table\nStep 1: reach(metal_pot)\n  affordance_region: the rim of the metal pot\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, metal_pot, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, metal_pot) < 0.03\nStep 2: grasp(metal_pot)\n  affordance_region: the handle of the metal pot\n  contact: holding(metal_pot) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(metal_pot)\nStep 3: transport(metal_pot -> right_lower_corner)\n  affordance_region: the right lower corner of the wooden table\n  spatial: above(metal_pot, right_lower_corner, 0.05) [completion]\n  safety: no_drop(metal_pot)\n  done_when: above(metal_pot, right_lower_corner, 0.05)\nStep 4: place(metal_pot -> right_lower_corner)\n  affordance_region: the right lower corner of the wooden table\n  contact: surface_contact(metal_pot, table) [completion]; released(metal_pot) [completion]\n  pose: stable(metal_pot) [completion]\n  done_when: surface_contact(metal_pot, table) AND released(metal_pot) AND stable(metal_pot)\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [],
+    "scene_objects": [
+      "metal_pot",
+      "red_spoon",
+      "green_bottle",
+      "purple_cloth",
+      "table"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "metal_pot",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "metal_pot",
+        "affordance_region": "the rim of the metal pot",
+        "done_when": "distance(gripper, metal_pot) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "metal_pot"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "metal_pot",
+        "affordance_region": "the handle of the metal pot",
+        "done_when": "holding(metal_pot)"
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "metal_pot",
+                "right_lower_corner",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "metal_pot"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "metal_pot",
+        "destination": "right_lower_corner",
+        "affordance_region": "the right lower corner of the wooden table",
+        "done_when": "above(metal_pot, right_lower_corner, 0.05)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "surface_contact",
+              "args": [
+                "metal_pot",
+                "table"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "metal_pot"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "metal_pot"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "place",
+        "target": "metal_pot",
+        "destination": "right_lower_corner",
+        "affordance_region": "the right lower corner of the wooden table",
+        "done_when": "surface_contact(metal_pot, table) AND released(metal_pot) AND stable(metal_pot)"
+      }
+    ]
+  }
+}

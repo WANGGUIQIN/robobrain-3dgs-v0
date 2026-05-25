@@ -1,0 +1,247 @@
+{
+  "task": "Build with small Lego blocks for the nth time with n blocks",
+  "parsed": {
+    "scene_objects": [
+      "red_block",
+      "green_block",
+      "blue_block",
+      "yellow_block",
+      "table"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "red_block",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "red_block",
+        "affordance_region": "the red block on the table",
+        "done_when": "distance(gripper, red_block) < 0.03",
+        "affordance_hint": "the red block on the table",
+        "refine_prompt": "the red block on the table",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.543,
+          0.4062
+        ],
+        "affordance_3d_refined": [
+          -0.9243,
+          -0.3881,
+          1.6342
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.4472,
+        "affordance": [
+          0.543,
+          0.4062
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "red_block"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "red_block",
+        "affordance_region": "the red block on the table",
+        "done_when": "holding(red_block)",
+        "affordance_hint": "the red block on the table",
+        "refine_prompt": "the red block on the table",
+        "refine_cache_hit": true,
+        "affordance_refined": [
+          0.543,
+          0.4062
+        ],
+        "affordance_3d_refined": [
+          -0.9243,
+          -0.3881,
+          1.6342
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.4472,
+        "affordance": [
+          0.543,
+          0.4062
+        ]
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "red_block",
+                "green_block",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "red_block"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "red_block",
+        "destination": "green_block",
+        "affordance_region": "an empty area on the green block",
+        "done_when": "above(red_block, green_block, 0.05)",
+        "affordance_hint": "an empty area on the green block",
+        "refine_prompt": "an empty area on the green block",
+        "refine_cache_hit": false,
+        "refine_prompt_fallback": "red block",
+        "affordance_refined": [
+          0.3086,
+          0.3164
+        ],
+        "affordance_3d_refined": [
+          -1.6581,
+          -0.6811,
+          2.2017
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.4212,
+        "affordance": [
+          0.3086,
+          0.3164
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "surface_contact",
+              "args": [
+                "red_block",
+                "green_block"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "red_block"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "red_block"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "place",
+        "target": "red_block",
+        "destination": "green_block",
+        "affordance_region": "an empty area on the green block",
+        "done_when": "surface_contact(red_block, green_block) AND released(red_block)",
+        "affordance_hint": "an empty area on the green block",
+        "refine_prompt": "an empty area on the green block",
+        "refine_cache_hit": true,
+        "affordance_refined": [
+          0.3086,
+          0.3164
+        ],
+        "affordance_3d_refined": [
+          -1.6581,
+          -0.6811,
+          2.2017
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.4212,
+        "affordance": [
+          0.3086,
+          0.3164
+        ]
+      }
+    ]
+  }
+}

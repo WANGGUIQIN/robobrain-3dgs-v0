@@ -1,0 +1,246 @@
+{
+  "task": "pick rxbar blueberry from top drawer and place on counter",
+  "parsed": {
+    "scene_objects": [
+      "rxbar_blueberry",
+      "drawer",
+      "counter",
+      "bowl",
+      "chips_bag"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "rxbar_blueberry",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "rxbar_blueberry",
+        "affordance_region": "the rxbar blueberry in the drawer",
+        "done_when": "distance(gripper, rxbar_blueberry) < 0.03",
+        "affordance_hint": "the rxbar blueberry in the drawer",
+        "refine_prompt": "the rxbar blueberry in the drawer",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.4805,
+          0.9961
+        ],
+        "affordance_3d_refined": [
+          -0.0529,
+          1.3448,
+          2.3582
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.3079,
+        "affordance": [
+          0.4805,
+          0.9961
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "rxbar_blueberry"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "rxbar_blueberry",
+        "affordance_region": "the rxbar blueberry in the drawer",
+        "done_when": "holding(rxbar_blueberry)",
+        "affordance_hint": "the rxbar blueberry in the drawer",
+        "refine_prompt": "the rxbar blueberry in the drawer",
+        "refine_cache_hit": true,
+        "affordance_refined": [
+          0.4805,
+          0.9961
+        ],
+        "affordance_3d_refined": [
+          -0.0529,
+          1.3448,
+          2.3582
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.3079,
+        "affordance": [
+          0.4805,
+          0.9961
+        ]
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "rxbar_blueberry",
+                "counter",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "rxbar_blueberry"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "rxbar_blueberry",
+        "destination": "counter",
+        "affordance_region": "the empty area on the counter",
+        "done_when": "above(rxbar_blueberry, counter, 0.05)",
+        "affordance_hint": "the empty area on the counter",
+        "refine_prompt": "the empty area on the counter",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.5273,
+          0.4219
+        ],
+        "affordance_3d_refined": [
+          0.1055,
+          -0.3014,
+          3.3562
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.3076,
+        "affordance": [
+          0.5273,
+          0.4219
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "surface_contact",
+              "args": [
+                "rxbar_blueberry",
+                "counter"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "rxbar_blueberry"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "rxbar_blueberry"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "place",
+        "target": "rxbar_blueberry",
+        "destination": "counter",
+        "affordance_region": "the empty area on the counter",
+        "done_when": "surface_contact(rxbar_blueberry, counter) AND released(rxbar_blueberry) AND stable(rxbar_blueberry)",
+        "affordance_hint": "the empty area on the counter",
+        "refine_prompt": "the empty area on the counter",
+        "refine_cache_hit": true,
+        "affordance_refined": [
+          0.5273,
+          0.4219
+        ],
+        "affordance_3d_refined": [
+          0.1055,
+          -0.3014,
+          3.3562
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.3076,
+        "affordance": [
+          0.5273,
+          0.4219
+        ]
+      }
+    ]
+  }
+}

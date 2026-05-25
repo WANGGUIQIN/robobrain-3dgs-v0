@@ -1,0 +1,174 @@
+{
+  "task": "Pick up the blueberries and place them on the orange pad",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_3epoch/best",
+  "raw": "**SCENE ANALYSIS -** A wooden table holds a green bottle, an orange cloth, a fork, a tomato, a yellow can, a red can, a white can, and a white mug. The blueberries are in a small transparent container on the table. The orange pad is a flat, orange cloth. The task requires moving the blueberries from their container to the orange pad. The blueberries are in a small, transparent container, so grasping the container is necessary. The orange pad is a flat surface, so placing the container there is feasible. STRATEGY - First, reach for and grasp the container holding the blueberries. Then, transport the container to the orange pad. Finally, place the container on the orange pad. Failure modes include dropping the container during transport or misplacing it on the pad. AFFORDANCE REASONING - Step 1: Reach for the container to grasp it. Step 2: Grasp the container's body to lift it. Step 3: Transport the container to the orange pad. Step 4: Place the container on the orange pad.\n\nGoal: on(container, orange_pad); stable(container)\nScene: blueberries, container, orange_pad, green_bottle, fork, tomato, yellow_can, red_can, white_can, white_mug, table\nStep 1: reach(container)\n  affordance_region: the body of the transparent container\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, container, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, container) < 0.03\nStep 2: grasp(container)\n  affordance_region: the body of the transparent container\n  contact: holding(container) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(container)\nStep 3: transport(container -> orange_pad)\n  affordance_region: an empty area on the orange pad\n  spatial: above(container, orange_pad, 0.05) [completion]\n  safety: no_drop(container)\n  done_when: above(container, orange_pad, 0.05)\nStep 4: place(container -> orange_pad)\n  affordance_region: an empty area on the orange pad\n  contact: surface_contact(container, orange_pad) [completion]; released(container) [completion]\n  pose: stable(container) [completion]\n  done_when: surface_contact(container, orange_pad) AND released(container)\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [
+      {
+        "pred": "on",
+        "args": [
+          "container",
+          "orange_pad"
+        ]
+      },
+      {
+        "pred": "stable",
+        "args": [
+          "container"
+        ]
+      }
+    ],
+    "scene_objects": [
+      "blueberries",
+      "container",
+      "orange_pad",
+      "green_bottle",
+      "fork",
+      "tomato",
+      "yellow_can",
+      "red_can",
+      "white_can",
+      "white_mug",
+      "table"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "container",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "container",
+        "affordance_region": "the body of the transparent container",
+        "done_when": "distance(gripper, container) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "container"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "container",
+        "affordance_region": "the body of the transparent container",
+        "done_when": "holding(container)"
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "container",
+                "orange_pad",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "container"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "container",
+        "destination": "orange_pad",
+        "affordance_region": "an empty area on the orange pad",
+        "done_when": "above(container, orange_pad, 0.05)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "surface_contact",
+              "args": [
+                "container",
+                "orange_pad"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "container"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "container"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "place",
+        "target": "container",
+        "destination": "orange_pad",
+        "affordance_region": "an empty area on the orange pad",
+        "done_when": "surface_contact(container, orange_pad) AND released(container)"
+      }
+    ]
+  }
+}

@@ -1,0 +1,233 @@
+{
+  "task": "sweep dirt to the short dustpan",
+  "scene_objects": [
+    "dirt",
+    "short_dustpan",
+    "sweeper",
+    "table"
+  ],
+  "num_steps": 4,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "sweeper",
+      "affordance": [
+        0.445,
+        0.203
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "sweeper",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "table"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, sweeper) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        -0.1198,
+        -0.6504,
+        1.0954
+      ],
+      "affordance_hint": "the long metal handle of the sweeper",
+      "affordance_hint_original": "the sweeper",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 2,
+      "action": "grasp",
+      "target": "sweeper",
+      "affordance": [
+        0.04,
+        0.3
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "sweeper"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "holding",
+            "args": [
+              "sweeper"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              0,
+              0,
+              -1
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "holding(sweeper)",
+      "affordance_3d": [
+        -0.4328,
+        -0.1871,
+        0.4695
+      ],
+      "affordance_hint": "the long wooden handle of the sweeper",
+      "affordance_hint_original": "the handle of the sweeper",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 3,
+      "action": "sweep",
+      "target": "dirt",
+      "affordance": [
+        0.468,
+        0.75
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "sweeper"
+            ],
+            "role": "safety"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "above",
+            "args": [
+              "sweeper",
+              "dirt",
+              0.05
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "sweeper",
+              "table"
+            ]
+          }
+        ]
+      },
+      "done_when": "above(sweeper, dirt, 0.05)",
+      "affordance_3d": [
+        -0.0579,
+        0.4628,
+        0.9256
+      ],
+      "affordance_hint": "the small dirt particles on the table",
+      "affordance_hint_original": "dirt",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 4,
+      "action": "place",
+      "target": "sweeper",
+      "destination": "short_dustpan",
+      "affordance": [
+        0.265,
+        0.601
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "surface_contact",
+            "args": [
+              "sweeper",
+              "short_dustpan"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "released",
+            "args": [
+              "sweeper"
+            ],
+            "role": "completion"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "stable",
+            "args": [
+              "sweeper"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "support_stable",
+            "args": [
+              "sweeper"
+            ]
+          }
+        ]
+      },
+      "done_when": "surface_contact(sweeper, short_dustpan) AND released(sweeper) AND stable(sweeper)",
+      "affordance_3d": [
+        -1.1799,
+        0.5113,
+        2.5172
+      ],
+      "affordance_hint": "the empty area on the short dustpan",
+      "affordance_hint_original": "an empty area on the short dustpan",
+      "affordance_hint_confidence": "ok"
+    }
+  ]
+}

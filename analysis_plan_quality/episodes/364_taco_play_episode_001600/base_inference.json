@@ -1,0 +1,133 @@
+{
+  "task": "open the cabinet drawer",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_3epoch/best",
+  "raw": "SCENE ANALYSIS - A white cabinet with a black handle is visible. The handle is a protruding part on the front of the cabinet door. STRATEGY - First, reach for the cabinet handle. Then, grasp it to apply force. Finally, pull the handle to open the cabinet. Failure modes include not grasping the handle firmly enough or pulling in the wrong direction. AFFORDANCE REASONING - Step 1 reach the cabinet handle for contact; Step 2 grasp the handle to apply force; Step 3 pull the handle to open the cabinet door.\nGoal: open(cabinet)\nScene: cabinet, handle\nStep 1: reach(handle)\n  affordance_region: the black handle of the cabinet\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, handle, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, handle) < 0.03\nStep 2: grasp(handle)\n  affordance_region: the black handle of the cabinet\n  contact: holding(handle) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(handle)\nStep 3: pull(handle)\n  affordance_region: the black handle of the cabinet\n  contact: holding(handle) [progress]\n  spatial: distance(handle, cabinet, >, 0.1) [completion]\n  direction: pull_axis(0, 0, -1) [progress]\n  done_when: distance(handle, cabinet) > 0.1\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [
+      {
+        "pred": "open",
+        "args": [
+          "cabinet"
+        ]
+      }
+    ],
+    "scene_objects": [
+      "cabinet",
+      "handle"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "handle",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "handle",
+        "affordance_region": "the black handle of the cabinet",
+        "done_when": "distance(gripper, handle) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "handle"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "handle",
+        "affordance_region": "the black handle of the cabinet",
+        "done_when": "holding(handle)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "handle"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "handle",
+                "cabinet",
+                ">",
+                "0.1"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "pull_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "pull",
+        "target": "handle",
+        "affordance_region": "the black handle of the cabinet",
+        "done_when": "distance(handle, cabinet) > 0.1"
+      }
+    ]
+  }
+}

@@ -1,0 +1,248 @@
+{
+  "task": "put the item in the bottom drawer",
+  "scene_objects": [
+    "item",
+    "bottom_drawer",
+    "table"
+  ],
+  "num_steps": 4,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "item",
+      "affordance": [
+        0.335,
+        0.468
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "item",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "table"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, item) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        -0.0856,
+        -0.0163,
+        0.2609
+      ],
+      "affordance_hint": "the small blue item on the top surface of the brown drawer",
+      "affordance_hint_original": "the item",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 2,
+      "action": "grasp",
+      "target": "item",
+      "affordance": [
+        0.428,
+        0.1
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "item"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "holding",
+            "args": [
+              "item"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              0,
+              0,
+              -1
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "holding(item)",
+      "affordance_3d": [
+        -0.2989,
+        -1.694,
+        2.1258
+      ],
+      "affordance_hint": "the small blue item on the top of the brown drawer",
+      "affordance_hint_original": "the handle of the item",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 3,
+      "action": "transport",
+      "target": "item",
+      "destination": "bottom_drawer",
+      "affordance": [
+        0.468,
+        0.75
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "item"
+            ],
+            "role": "safety"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "above",
+            "args": [
+              "item",
+              "bottom_drawer",
+              0.05
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "aligned_xy",
+            "args": [
+              "item",
+              "bottom_drawer",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "item",
+              "bottom_drawer"
+            ]
+          },
+          {
+            "pred": "no_drop",
+            "args": [
+              "item"
+            ]
+          }
+        ]
+      },
+      "done_when": "above(item, bottom_drawer, 0.05) AND aligned_xy(item, bottom_drawer, 0.03)",
+      "affordance_3d": [
+        -0.3107,
+        2.4858,
+        4.9717
+      ],
+      "affordance_hint": "the empty area on the bottom drawer",
+      "affordance_hint_original": "an empty area on the bottom drawer",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 4,
+      "action": "place",
+      "target": "item",
+      "destination": "bottom_drawer",
+      "affordance": [
+        0.468,
+        0.75
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "surface_contact",
+            "args": [
+              "item",
+              "bottom_drawer"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "released",
+            "args": [
+              "item"
+            ],
+            "role": "completion"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "stable",
+            "args": [
+              "item"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "support_stable",
+            "args": [
+              "item"
+            ]
+          }
+        ]
+      },
+      "done_when": "surface_contact(item, bottom_drawer) AND released(item) AND stable(item)",
+      "affordance_3d": [
+        -0.3107,
+        2.4858,
+        4.9717
+      ],
+      "affordance_hint": "the empty area on the bottom drawer",
+      "affordance_hint_original": "an empty area on the bottom drawer",
+      "affordance_hint_confidence": "ok"
+    }
+  ]
+}

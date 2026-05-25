@@ -1,0 +1,152 @@
+{
+  "task": "Put the white piece of clothing on the seat.",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_planning_3epoch/checkpoint-39957",
+  "raw": "Scene: white_clothing, blue_clothing, chair\nStep 1: reach(white_clothing)\n  affordance_region: the white clothing on the chair\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, white_clothing, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, white_clothing) < 0.03\nStep 2: grasp(white_clothing)\n  affordance_region: the white clothing on the chair\n  contact: holding(white_clothing) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(white_clothing)\nStep 3: transport(white_clothing -> chair)\n  affordance_region: an empty area on the chair\n  spatial: above(white_clothing, chair, 0.05) [completion]\n  safety: no_drop(white_clothing)\n  done_when: above(white_clothing, chair, 0.05)\nStep 4: place(white_clothing -> chair)\n  affordance_region: an empty area on the chair\n  contact: surface_contact(white_clothing, chair) [completion]; released(white_clothing) [completion]\n  pose: stable(white_clothing) [completion]\n  done_when: surface_contact(white_clothing, chair) AND released(white_clothing)\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [],
+    "scene_objects": [
+      "white_clothing",
+      "blue_clothing",
+      "chair"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "white_clothing",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "white_clothing",
+        "affordance_region": "the white clothing on the chair",
+        "done_when": "distance(gripper, white_clothing) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "white_clothing"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "white_clothing",
+        "affordance_region": "the white clothing on the chair",
+        "done_when": "holding(white_clothing)"
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "white_clothing",
+                "chair",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "white_clothing"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "white_clothing",
+        "destination": "chair",
+        "affordance_region": "an empty area on the chair",
+        "done_when": "above(white_clothing, chair, 0.05)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "surface_contact",
+              "args": [
+                "white_clothing",
+                "chair"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "white_clothing"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "white_clothing"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "place",
+        "target": "white_clothing",
+        "destination": "chair",
+        "affordance_region": "an empty area on the chair",
+        "done_when": "surface_contact(white_clothing, chair) AND released(white_clothing)"
+      }
+    ]
+  }
+}

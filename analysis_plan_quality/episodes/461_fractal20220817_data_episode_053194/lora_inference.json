@@ -1,0 +1,131 @@
+{
+  "task": "pick coke can",
+  "parsed": {
+    "scene_objects": [
+      "red_can",
+      "gold_can",
+      "blue_package",
+      "table"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "red_can",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "red_can",
+        "affordance_region": "the body of the red can",
+        "done_when": "distance(gripper, red_can) < 0.03",
+        "affordance_hint": "the body of the red can",
+        "refine_prompt": "the body of the red can",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.7148,
+          0.4648
+        ],
+        "affordance_3d_refined": [
+          1.2058,
+          -0.1973,
+          4.8826
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.3196,
+        "affordance": [
+          0.7148,
+          0.4648
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "red_can"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "red_can",
+        "affordance_region": "the body of the red can",
+        "done_when": "holding(red_can)",
+        "affordance_hint": "the body of the red can",
+        "refine_prompt": "the body of the red can",
+        "refine_cache_hit": true,
+        "affordance_refined": [
+          0.7148,
+          0.4648
+        ],
+        "affordance_3d_refined": [
+          1.2058,
+          -0.1973,
+          4.8826
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.3196,
+        "affordance": [
+          0.7148,
+          0.4648
+        ]
+      }
+    ]
+  }
+}

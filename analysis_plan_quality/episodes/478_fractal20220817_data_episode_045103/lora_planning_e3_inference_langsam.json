@@ -1,0 +1,224 @@
+{
+  "task": "pick pepsi can from bottom shelf of fridge",
+  "scene_objects": [
+    "pepsi_can",
+    "fridge",
+    "bottom_shelf"
+  ],
+  "steps": [
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "pepsi_can",
+              "<",
+              "0.03"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "approach_axis",
+            "args": [
+              "0",
+              "0",
+              "-1"
+            ],
+            "role": "progress"
+          }
+        ]
+      },
+      "step": 1,
+      "action": "reach",
+      "target": "pepsi_can",
+      "affordance_region": "the body of the pepsi can",
+      "done_when": "distance(gripper, pepsi_can) < 0.03",
+      "affordance_hint": "the body of the pepsi can",
+      "refine_prompt": "the body of the pepsi can",
+      "refine_cache_hit": false,
+      "affordance_refined": [
+        0.9961,
+        0.2578
+      ],
+      "affordance_3d_refined": [
+        2.5389,
+        -1.2395,
+        4.4521
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.3248
+    },
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "pepsi_can"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              "0",
+              "0",
+              "-1"
+            ],
+            "role": "progress"
+          }
+        ]
+      },
+      "step": 2,
+      "action": "grasp",
+      "target": "pepsi_can",
+      "affordance_region": "the body of the pepsi can",
+      "done_when": "holding(pepsi_can)",
+      "affordance_hint": "the body of the pepsi can",
+      "refine_prompt": "the body of the pepsi can",
+      "refine_cache_hit": true,
+      "affordance_refined": [
+        0.9961,
+        0.2578
+      ],
+      "affordance_3d_refined": [
+        2.5389,
+        -1.2395,
+        4.4521
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.3248
+    },
+    {
+      "constraints": {
+        "spatial": [
+          {
+            "pred": "clear_path",
+            "args": [
+              "pepsi_can",
+              "outside_fridge"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "pepsi_can",
+              "fridge"
+            ],
+            "role": "safety"
+          },
+          {
+            "pred": "no_drop",
+            "args": [
+              "pepsi_can"
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "step": 3,
+      "action": "transport",
+      "target": "pepsi_can",
+      "destination": "outside_fridge",
+      "affordance_region": "an empty area outside the fridge",
+      "done_when": "clear_path(pepsi_can, outside_fridge)",
+      "affordance_hint": "an empty area outside the fridge",
+      "refine_prompt": "an empty area outside the fridge",
+      "refine_cache_hit": false,
+      "affordance_refined": [
+        0.2227,
+        0.0
+      ],
+      "affordance_3d_refined": [
+        -0.521,
+        -0.9393,
+        1.6342
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.3477
+    },
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "released",
+            "args": [
+              "pepsi_can"
+            ],
+            "role": "completion"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "stable",
+            "args": [
+              "pepsi_can"
+            ],
+            "role": "completion"
+          }
+        ]
+      },
+      "step": 4,
+      "action": "release",
+      "target": "pepsi_can",
+      "affordance_region": "the body of the pepsi can",
+      "done_when": "released(pepsi_can) AND stable(pepsi_can)",
+      "affordance_hint": "the body of the pepsi can",
+      "refine_prompt": "the body of the pepsi can",
+      "refine_cache_hit": true,
+      "affordance_refined": [
+        0.9961,
+        0.2578
+      ],
+      "affordance_3d_refined": [
+        2.5389,
+        -1.2395,
+        4.4521
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.3248
+    }
+  ]
+}

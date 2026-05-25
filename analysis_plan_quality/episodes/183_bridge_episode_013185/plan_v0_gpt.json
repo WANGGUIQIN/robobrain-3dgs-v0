@@ -1,0 +1,232 @@
+{
+  "task": "Move the silver pot forward to the empty corner of the table.",
+  "scene_objects": [
+    "silver_pot",
+    "blue_cloth",
+    "yellow_spoon",
+    "table"
+  ],
+  "num_steps": 4,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "silver_pot",
+      "affordance": [
+        0.486,
+        0.2
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "silver_pot",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "table"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, silver_pot) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        -0.0265,
+        -0.5109,
+        1.4776
+      ],
+      "affordance_hint": "the silver pot"
+    },
+    {
+      "step": 2,
+      "action": "grasp",
+      "target": "silver_pot",
+      "affordance": [
+        0.486,
+        0.2
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "silver_pot"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "holding",
+            "args": [
+              "silver_pot"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              0,
+              0,
+              -1
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "holding(silver_pot)",
+      "affordance_3d": [
+        -0.0265,
+        -0.5109,
+        1.4776
+      ],
+      "affordance_hint": "the handle of the silver pot"
+    },
+    {
+      "step": 3,
+      "action": "transport",
+      "target": "silver_pot",
+      "destination": "empty_corner",
+      "affordance": [
+        0.308,
+        0.352
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "silver_pot"
+            ],
+            "role": "safety"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "above",
+            "args": [
+              "silver_pot",
+              "empty_corner",
+              0.05
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "silver_pot",
+              "table"
+            ]
+          },
+          {
+            "pred": "no_drop",
+            "args": [
+              "silver_pot"
+            ]
+          }
+        ]
+      },
+      "done_when": "above(silver_pot, empty_corner, 0.05) AND aligned_xy(silver_pot, empty_corner, 0.03)",
+      "affordance_3d": [
+        -0.5964,
+        -0.4625,
+        2.7105
+      ],
+      "affordance_hint": "an empty area on the empty corner"
+    },
+    {
+      "step": 4,
+      "action": "place",
+      "target": "silver_pot",
+      "destination": "empty_corner",
+      "affordance": [
+        0.308,
+        0.352
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "surface_contact",
+            "args": [
+              "silver_pot",
+              "empty_corner"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "released",
+            "args": [
+              "silver_pot"
+            ],
+            "role": "completion"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "stable",
+            "args": [
+              "silver_pot"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "support_stable",
+            "args": [
+              "silver_pot"
+            ]
+          }
+        ]
+      },
+      "done_when": "surface_contact(silver_pot, empty_corner) AND released(silver_pot) AND stable(silver_pot)",
+      "affordance_3d": [
+        -0.5964,
+        -0.4625,
+        2.7105
+      ],
+      "affordance_hint": "an empty area on the empty corner"
+    }
+  ]
+}

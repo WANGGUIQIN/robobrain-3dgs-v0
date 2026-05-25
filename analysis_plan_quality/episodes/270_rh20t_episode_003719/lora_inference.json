@@ -1,0 +1,256 @@
+{
+  "task": "Chop the pakchoi",
+  "parsed": {
+    "scene_objects": [
+      "pakchoi",
+      "knife",
+      "cutting_board",
+      "table"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "knife",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "knife",
+        "affordance_region": "the blade of the chef's knife",
+        "done_when": "distance(gripper, knife) < 0.03",
+        "affordance_hint": "the blade of the chef's knife",
+        "refine_prompt": "the blade of the chef's knife",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.7422,
+          0.3906
+        ],
+        "affordance_3d_refined": [
+          -0.5764,
+          -0.3547,
+          1.4189
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.3426,
+        "affordance": [
+          0.7422,
+          0.3906
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "knife"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "knife",
+        "affordance_region": "the handle of the chef's knife",
+        "done_when": "holding(knife)",
+        "affordance_hint": "the handle of the chef's knife",
+        "refine_prompt": "the handle of the chef's knife",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.7383,
+          0.3906
+        ],
+        "affordance_3d_refined": [
+          -0.5809,
+          -0.3547,
+          1.4189
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.3564,
+        "affordance": [
+          0.7383,
+          0.3906
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_contact",
+              "args": [
+                "knife",
+                "pakchoi"
+              ],
+              "role": "completion"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "aligned_xy",
+              "args": [
+                "knife",
+                "pakchoi",
+                "0.02"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "motion_dir",
+              "args": [
+                "knife",
+                "downward"
+              ],
+              "role": "progress"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_slip",
+              "args": [
+                "pakchoi"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "cut",
+        "target": "pakchoi",
+        "affordance_region": "the green stalk of the pakchoi",
+        "done_when": "pakchoi is cut into pieces",
+        "affordance_hint": "the green stalk of the pakchoi",
+        "refine_prompt": "the green stalk of the pakchoi",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.4727,
+          0.3984
+        ],
+        "affordance_3d_refined": [
+          -1.0771,
+          -0.4222,
+          1.732
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.4699,
+        "affordance": [
+          0.4727,
+          0.3984
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "released",
+              "args": [
+                "knife"
+              ],
+              "role": "completion"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "on_surface",
+              "args": [
+                "knife",
+                "cutting_board"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "release",
+        "target": "knife",
+        "affordance_region": "the blade of the chef's knife",
+        "done_when": "released(knife) AND on_surface(knife, cutting_board)",
+        "affordance_hint": "the blade of the chef's knife",
+        "refine_prompt": "the blade of the chef's knife",
+        "refine_cache_hit": true,
+        "affordance_refined": [
+          0.7422,
+          0.3906
+        ],
+        "affordance_3d_refined": [
+          -0.5764,
+          -0.3547,
+          1.4189
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.3426,
+        "affordance": [
+          0.7422,
+          0.3906
+        ]
+      }
+    ]
+  }
+}

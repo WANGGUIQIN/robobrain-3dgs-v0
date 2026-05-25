@@ -1,0 +1,152 @@
+{
+  "task": "Put the toilet paper on its holder",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_planning_3epoch/checkpoint-39957",
+  "raw": "Scene: toilet_paper, holder, table\nStep 1: reach(toilet_paper)\n  affordance_region: the white cylindrical toilet paper\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, toilet_paper, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, toilet_paper) < 0.03\nStep 2: grasp(toilet_paper)\n  affordance_region: the white cylindrical toilet paper\n  contact: holding(toilet_paper) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(toilet_paper)\nStep 3: transport(toilet_paper -> holder)\n  affordance_region: an empty area on the holder\n  spatial: above(toilet_paper, holder, 0.05) [completion]\n  safety: no_drop(toilet_paper)\n  done_when: above(toilet_paper, holder, 0.05)\nStep 4: place(toilet_paper -> holder)\n  affordance_region: an empty area on the holder\n  contact: surface_contact(toilet_paper, holder) [completion]; released(toilet_paper) [completion]\n  pose: stable(toilet_paper) [completion]\n  done_when: surface_contact(toilet_paper, holder) AND released(toilet_paper) AND stable(toilet_paper)\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [],
+    "scene_objects": [
+      "toilet_paper",
+      "holder",
+      "table"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "toilet_paper",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "toilet_paper",
+        "affordance_region": "the white cylindrical toilet paper",
+        "done_when": "distance(gripper, toilet_paper) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "toilet_paper"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "toilet_paper",
+        "affordance_region": "the white cylindrical toilet paper",
+        "done_when": "holding(toilet_paper)"
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "toilet_paper",
+                "holder",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "toilet_paper"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "toilet_paper",
+        "destination": "holder",
+        "affordance_region": "an empty area on the holder",
+        "done_when": "above(toilet_paper, holder, 0.05)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "surface_contact",
+              "args": [
+                "toilet_paper",
+                "holder"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "toilet_paper"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "toilet_paper"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "place",
+        "target": "toilet_paper",
+        "destination": "holder",
+        "affordance_region": "an empty area on the holder",
+        "done_when": "surface_contact(toilet_paper, holder) AND released(toilet_paper) AND stable(toilet_paper)"
+      }
+    ]
+  }
+}

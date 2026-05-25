@@ -1,0 +1,234 @@
+{
+  "task": "pick brown chip bag from middle drawer and place on counter",
+  "scene_objects": [
+    "brown_chip_bag",
+    "middle_drawer",
+    "counter",
+    "green_can",
+    "white_bowl",
+    "blue_can"
+  ],
+  "num_steps": 4,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "brown_chip_bag",
+      "affordance": [
+        0.566,
+        0.825
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "brown_chip_bag",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "drawer"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, brown_chip_bag) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        0.2562,
+        1.2509,
+        3.3562
+      ],
+      "affordance_hint": "the brown chip bag"
+    },
+    {
+      "step": 2,
+      "action": "grasp",
+      "target": "brown_chip_bag",
+      "affordance": [
+        0.566,
+        0.825
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "brown_chip_bag"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "holding",
+            "args": [
+              "brown_chip_bag"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              0,
+              0,
+              -1
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "holding(brown_chip_bag)",
+      "affordance_3d": [
+        0.2562,
+        1.2509,
+        3.3562
+      ],
+      "affordance_hint": "the handle of the brown chip bag"
+    },
+    {
+      "step": 3,
+      "action": "transport",
+      "target": "brown_chip_bag",
+      "destination": "counter",
+      "affordance": [
+        0.5,
+        0.203
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "brown_chip_bag"
+            ],
+            "role": "safety"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "above",
+            "args": [
+              "brown_chip_bag",
+              "counter",
+              0.05
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "brown_chip_bag",
+              "counter"
+            ]
+          },
+          {
+            "pred": "no_drop",
+            "args": [
+              "brown_chip_bag"
+            ]
+          }
+        ]
+      },
+      "done_when": "above(brown_chip_bag, counter, 0.05) AND aligned_xy(brown_chip_bag, counter, 0.03)",
+      "affordance_3d": [
+        0.0,
+        -1.0452,
+        3.0627
+      ],
+      "affordance_hint": "an empty area on the counter"
+    },
+    {
+      "step": 4,
+      "action": "place",
+      "target": "brown_chip_bag",
+      "destination": "counter",
+      "affordance": [
+        0.5,
+        0.203
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "surface_contact",
+            "args": [
+              "brown_chip_bag",
+              "counter"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "released",
+            "args": [
+              "brown_chip_bag"
+            ],
+            "role": "completion"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "stable",
+            "args": [
+              "brown_chip_bag"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "support_stable",
+            "args": [
+              "brown_chip_bag"
+            ]
+          }
+        ]
+      },
+      "done_when": "surface_contact(brown_chip_bag, counter) AND released(brown_chip_bag) AND stable(brown_chip_bag)",
+      "affordance_3d": [
+        0.0,
+        -1.0452,
+        3.0627
+      ],
+      "affordance_hint": "an empty area on the counter"
+    }
+  ]
+}

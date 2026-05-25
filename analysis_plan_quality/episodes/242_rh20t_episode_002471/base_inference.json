@@ -1,0 +1,154 @@
+{
+  "task": "Assemble one piece of a puzzle",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_3epoch/best",
+  "raw": "SCENE ANALYSIS - A wooden table holds a green puzzle piece (left) and a blue puzzle piece (right). The green piece is near the table's edge, the blue piece is further right. Both are rigid, flat, and have interlocking tabs. STRATEGY - First, grasp the green piece, then transport it to the blue piece, and finally insert the green piece's tab into the blue piece's slot. Failure modes include dropping the piece or misaligning the tabs. AFFORDANCE REASONING - Step 1 reach the green piece at its body; Step 2 grasp its body for secure hold; Step 3 transport to the blue piece; Step 4 insert the green piece's tab into the blue piece's slot.\nGoal: assembled({green_puzzle_piece, blue_puzzle_piece})\nScene: green_puzzle_piece, blue_puzzle_piece, table\nStep 1: reach(green_puzzle_piece)\n  affordance_region: the body of the green puzzle piece\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, green_puzzle_piece, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, green_puzzle_piece) < 0.03\nStep 2: grasp(green_puzzle_piece)\n  affordance_region: the body of the green puzzle piece\n  contact: holding(green_puzzle_piece) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(green_puzzle_piece)\nStep 3: transport(green_puzzle_piece -> blue_puzzle_piece)\n  affordance_region: the body of the blue puzzle piece\n  spatial: above(green_puzzle_piece, blue_puzzle_piece, 0.05) [completion]\n  safety: no_drop(green_puzzle_piece)\n  done_when: above(green_puzzle_piece, blue_puzzle_piece, 0.05)\nStep 4: insert(green_puzzle_piece -> blue_puzzle_piece)\n  affordance_region: the slot on the body of the blue puzzle piece\n  contact: inserted(green_puzzle_piece, blue_puzzle_piece) [completion]\n  pose: assembled(green_puzzle_piece, blue_puzzle_piece) [completion]\n  done_when: inserted(green_puzzle_piece, blue_puzzle_piece)\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [
+      {
+        "pred": "assembled",
+        "args": [
+          "{green_puzzle_piece",
+          "blue_puzzle_piece}"
+        ]
+      }
+    ],
+    "scene_objects": [
+      "green_puzzle_piece",
+      "blue_puzzle_piece",
+      "table"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "green_puzzle_piece",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "green_puzzle_piece",
+        "affordance_region": "the body of the green puzzle piece",
+        "done_when": "distance(gripper, green_puzzle_piece) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "green_puzzle_piece"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "green_puzzle_piece",
+        "affordance_region": "the body of the green puzzle piece",
+        "done_when": "holding(green_puzzle_piece)"
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "green_puzzle_piece",
+                "blue_puzzle_piece",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "green_puzzle_piece"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "green_puzzle_piece",
+        "destination": "blue_puzzle_piece",
+        "affordance_region": "the body of the blue puzzle piece",
+        "done_when": "above(green_puzzle_piece, blue_puzzle_piece, 0.05)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "inserted",
+              "args": [
+                "green_puzzle_piece",
+                "blue_puzzle_piece"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "assembled",
+              "args": [
+                "green_puzzle_piece",
+                "blue_puzzle_piece"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "insert",
+        "target": "green_puzzle_piece",
+        "destination": "blue_puzzle_piece",
+        "affordance_region": "the slot on the body of the blue puzzle piece",
+        "done_when": "inserted(green_puzzle_piece, blue_puzzle_piece)"
+      }
+    ]
+  }
+}

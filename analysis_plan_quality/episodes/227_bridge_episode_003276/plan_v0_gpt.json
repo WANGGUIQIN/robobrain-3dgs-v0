@@ -1,0 +1,233 @@
+{
+  "task": "Place red utensil above the yellow cloth next to blue utensil.",
+  "scene_objects": [
+    "red_utensil",
+    "yellow_cloth",
+    "blue_utensil",
+    "can",
+    "table"
+  ],
+  "num_steps": 4,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "red_utensil",
+      "affordance": [
+        0.236,
+        0.462
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "red_utensil",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "yellow_cloth"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, red_utensil) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        -0.6185,
+        -0.091,
+        2.0256
+      ],
+      "affordance_hint": "the red utensil"
+    },
+    {
+      "step": 2,
+      "action": "grasp",
+      "target": "red_utensil",
+      "affordance": [
+        0.392,
+        0.475
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "red_utensil"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "holding",
+            "args": [
+              "red_utensil"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              0,
+              0,
+              -1
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "holding(red_utensil)",
+      "affordance_3d": [
+        -0.2547,
+        -0.0546,
+        2.0256
+      ],
+      "affordance_hint": "the handle of the red utensil"
+    },
+    {
+      "step": 3,
+      "action": "transport",
+      "target": "red_utensil",
+      "destination": "above_yellow_cloth_next_to_blue_utensil",
+      "affordance": [
+        0.5,
+        0.401
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "red_utensil"
+            ],
+            "role": "safety"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "above",
+            "args": [
+              "red_utensil",
+              "yellow_cloth",
+              0.05
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "red_utensil",
+              "blue_utensil"
+            ]
+          },
+          {
+            "pred": "no_drop",
+            "args": [
+              "red_utensil"
+            ]
+          }
+        ]
+      },
+      "done_when": "above(red_utensil, yellow_cloth, 0.05) AND aligned_xy(red_utensil, yellow_cloth, 0.03)",
+      "affordance_3d": [
+        0.0,
+        -0.1856,
+        1.6538
+      ],
+      "affordance_hint": "an empty area on the above yellow cloth next to blue utensil"
+    },
+    {
+      "step": 4,
+      "action": "place",
+      "target": "red_utensil",
+      "destination": "above_yellow_cloth_next_to_blue_utensil",
+      "affordance": [
+        0.5,
+        0.401
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "surface_contact",
+            "args": [
+              "red_utensil",
+              "yellow_cloth"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "released",
+            "args": [
+              "red_utensil"
+            ],
+            "role": "completion"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "stable",
+            "args": [
+              "red_utensil"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "support_stable",
+            "args": [
+              "red_utensil"
+            ]
+          }
+        ]
+      },
+      "done_when": "surface_contact(red_utensil, yellow_cloth) AND released(red_utensil) AND stable(red_utensil)",
+      "affordance_3d": [
+        0.0,
+        -0.1856,
+        1.6538
+      ],
+      "affordance_hint": "an empty area on the above yellow cloth next to blue utensil"
+    }
+  ]
+}

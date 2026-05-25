@@ -1,0 +1,244 @@
+{
+  "task": "put the soup in the cupboard",
+  "parsed": {
+    "scene_objects": [
+      "red_can",
+      "blue_can",
+      "table"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "red_can",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "red_can",
+        "affordance_region": "the body of the red can",
+        "done_when": "distance(gripper, red_can) < 0.03",
+        "affordance_hint": "the body of the red can",
+        "refine_prompt": "the body of the red can",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.9258,
+          0.8828
+        ],
+        "affordance_3d_refined": [
+          2.1461,
+          1.9295,
+          2.5202
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.3406,
+        "affordance": [
+          0.9258,
+          0.8828
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "red_can"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "red_can",
+        "affordance_region": "the top of the red can",
+        "done_when": "holding(red_can)",
+        "affordance_hint": "the top of the red can",
+        "refine_prompt": "the top of the red can",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.2734,
+          0.5977
+        ],
+        "affordance_3d_refined": [
+          -1.0261,
+          0.4423,
+          2.2644
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.3475,
+        "affordance": [
+          0.2734,
+          0.5977
+        ]
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "red_can",
+                "blue_can",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "red_can"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "red_can",
+        "destination": "blue_can",
+        "affordance_region": "an empty area on the blue can",
+        "done_when": "above(red_can, blue_can, 0.05)",
+        "affordance_hint": "an empty area on the blue can",
+        "refine_prompt": "an empty area on the blue can",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.9414,
+          0.9609
+        ],
+        "affordance_3d_refined": [
+          2.2248,
+          2.3233,
+          2.5202
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.329,
+        "affordance": [
+          0.9414,
+          0.9609
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "surface_contact",
+              "args": [
+                "red_can",
+                "blue_can"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "red_can"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "red_can"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "place",
+        "target": "red_can",
+        "destination": "blue_can",
+        "affordance_region": "an empty area on the blue can",
+        "done_when": "surface_contact(red_can, blue_can) AND released(red_can)",
+        "affordance_hint": "an empty area on the blue can",
+        "refine_prompt": "an empty area on the blue can",
+        "refine_cache_hit": true,
+        "affordance_refined": [
+          0.9414,
+          0.9609
+        ],
+        "affordance_3d_refined": [
+          2.2248,
+          2.3233,
+          2.5202
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.329,
+        "affordance": [
+          0.9414,
+          0.9609
+        ]
+      }
+    ]
+  }
+}

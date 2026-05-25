@@ -1,0 +1,239 @@
+{
+  "task": "Move the package from left to right.",
+  "scene_objects": [
+    "package",
+    "table",
+    "robot_gripper"
+  ],
+  "num_steps": 4,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "package",
+      "affordance": [
+        0.6,
+        0.7
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "package",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "table"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, package) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        -0.1154,
+        1.1344,
+        3.8455
+      ],
+      "affordance_hint": "the white paper package on the table",
+      "affordance_hint_original": "the package",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 2,
+      "action": "grasp",
+      "target": "package",
+      "affordance": [
+        0.6,
+        0.695
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "package"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "holding",
+            "args": [
+              "package"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              0,
+              0,
+              -1
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "holding(package)",
+      "affordance_3d": [
+        -0.1142,
+        1.1038,
+        3.8063
+      ],
+      "affordance_hint": "the white paper package on the table",
+      "affordance_hint_original": "package",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 3,
+      "action": "transport",
+      "target": "package",
+      "destination": "right_side",
+      "affordance": [
+        0.725,
+        0.651
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "package"
+            ],
+            "role": "safety"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "above",
+            "args": [
+              "package",
+              "table",
+              0.05
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "package",
+              "table"
+            ]
+          },
+          {
+            "pred": "no_drop",
+            "args": [
+              "package"
+            ]
+          }
+        ]
+      },
+      "done_when": "above(package, table, 0.05) AND aligned_xy(package, right_side, 0.03)",
+      "affordance_3d": [
+        0.594,
+        1.0738,
+        4.5695
+      ],
+      "affordance_hint": "the empty area on the right side of the table",
+      "affordance_hint_original": "an empty area on the right side",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 4,
+      "action": "place",
+      "target": "package",
+      "destination": "right_side",
+      "affordance": [
+        0.725,
+        0.651
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "surface_contact",
+            "args": [
+              "package",
+              "table"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "released",
+            "args": [
+              "package"
+            ],
+            "role": "completion"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "stable",
+            "args": [
+              "package"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "support_stable",
+            "args": [
+              "package"
+            ]
+          }
+        ]
+      },
+      "done_when": "surface_contact(package, table) AND released(package) AND stable(package)",
+      "affordance_3d": [
+        0.594,
+        1.0738,
+        4.5695
+      ],
+      "affordance_hint": "the empty area on the right side of the table",
+      "affordance_hint_original": "an empty area on the right side",
+      "affordance_hint_confidence": "ok"
+    }
+  ]
+}

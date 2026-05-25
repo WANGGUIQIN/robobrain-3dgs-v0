@@ -1,0 +1,151 @@
+{
+  "task": "Press a button from top to bottom with obstacles",
+  "parsed": {
+    "scene_objects": [
+      "red_button",
+      "yellow_button",
+      "green_button",
+      "table"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "red_button",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "red_button",
+        "affordance_region": "the red button on the table",
+        "done_when": "distance(gripper, red_button) < 0.03",
+        "affordance_hint": "the red button on the table",
+        "refine_prompt": "the red button on the table",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.3359,
+          0.9961
+        ],
+        "affordance_3d_refined": [
+          -1.1664,
+          0.3738,
+          1.5951
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.3624,
+        "affordance": [
+          0.3359,
+          0.9961
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_contact",
+              "args": [
+                "red_button"
+              ],
+              "role": "completion"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "aligned_z",
+              "args": [
+                "gripper",
+                "red_button"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "motion_dir",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "force_limit",
+              "args": [
+                "gripper",
+                "red_button"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "push",
+        "target": "red_button",
+        "affordance_region": "the center of the red button",
+        "done_when": "gripper_contact(red_button)",
+        "affordance_hint": "the center of the red button",
+        "refine_prompt": "the center of the red button",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.0391,
+          0.7148
+        ],
+        "affordance_3d_refined": [
+          -1.9812,
+          0.0192,
+          2.0451
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.4689,
+        "affordance": [
+          0.0391,
+          0.7148
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,134 @@
+{
+  "task": "open the middle drawer",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_3epoch/best",
+  "raw": "**SCENE ANALYSIS - A brown chest of drawers with three visible drawers. The middle drawer has a front panel and a handle. The robot arm is positioned above the chest. STRATEGY - First, reach and grasp the handle of the middle drawer. Then, apply a pulling force to open the drawer. Failure modes include misgrasping the handle or insufficient force to open. AFFORDANCE REASONING - Step 1 reach the drawer handle; Step 2 grasp the handle for a secure hold; Step 3 pull the handle to open the drawer.**\nGoal: open(middle_drawer)\nScene: chest_of_drawers, middle_drawer, robot_arm\nStep 1: reach(middle_drawer)\n  affordance_region: the front panel of the middle drawer\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, middle_drawer, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, middle_drawer) < 0.03\nStep 2: grasp(middle_drawer)\n  affordance_region: the handle of the middle drawer\n  contact: holding(middle_drawer) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(middle_drawer)\nStep 3: pull(middle_drawer)\n  affordance_region: the handle of the middle drawer\n  contact: holding(middle_drawer) [progress]\n  spatial: distance(middle_drawer, chest_of_drawers, >, 0.1) [completion]\n  direction: pull_axis(0, 0, -1) [progress]\n  done_when: distance(middle_drawer, chest_of_drawers) > 0.1\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [
+      {
+        "pred": "open",
+        "args": [
+          "middle_drawer"
+        ]
+      }
+    ],
+    "scene_objects": [
+      "chest_of_drawers",
+      "middle_drawer",
+      "robot_arm"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "middle_drawer",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "middle_drawer",
+        "affordance_region": "the front panel of the middle drawer",
+        "done_when": "distance(gripper, middle_drawer) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "middle_drawer"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "middle_drawer",
+        "affordance_region": "the handle of the middle drawer",
+        "done_when": "holding(middle_drawer)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "middle_drawer"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "middle_drawer",
+                "chest_of_drawers",
+                ">",
+                "0.1"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "pull_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "pull",
+        "target": "middle_drawer",
+        "affordance_region": "the handle of the middle drawer",
+        "done_when": "distance(middle_drawer, chest_of_drawers) > 0.1"
+      }
+    ]
+  }
+}

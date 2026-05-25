@@ -1,0 +1,248 @@
+{
+  "task": "put the cylinder in the shape sorter",
+  "scene_objects": [
+    "cylinder",
+    "shape_sorter",
+    "table"
+  ],
+  "num_steps": 4,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "cylinder",
+      "affordance": [
+        0.48,
+        0.48
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "cylinder",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "table"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, cylinder) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        -0.0708,
+        -0.0708,
+        1.8112
+      ],
+      "affordance_hint": "the small green cylinder on the table",
+      "affordance_hint_original": "the cylinder",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 2,
+      "action": "grasp",
+      "target": "cylinder",
+      "affordance": [
+        0.492,
+        0.5
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "cylinder"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "holding",
+            "args": [
+              "cylinder"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              0,
+              0,
+              -1
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "holding(cylinder)",
+      "affordance_3d": [
+        -0.0607,
+        0.0,
+        3.8879
+      ],
+      "affordance_hint": "the small green cylinder",
+      "affordance_hint_original": "the handle of the cylinder",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 3,
+      "action": "transport",
+      "target": "cylinder",
+      "destination": "shape_sorter",
+      "affordance": [
+        0.468,
+        0.601
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "cylinder"
+            ],
+            "role": "safety"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "above",
+            "args": [
+              "cylinder",
+              "shape_sorter",
+              0.05
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "aligned_xy",
+            "args": [
+              "cylinder",
+              "shape_sorter",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "cylinder",
+              "shape_sorter"
+            ]
+          },
+          {
+            "pred": "no_drop",
+            "args": [
+              "cylinder"
+            ]
+          }
+        ]
+      },
+      "done_when": "above(cylinder, shape_sorter, 0.05) AND aligned_xy(cylinder, shape_sorter, 0.03)",
+      "affordance_3d": [
+        -0.0811,
+        0.2637,
+        1.2981
+      ],
+      "affordance_hint": "the empty area on the top of the brown shape sorter",
+      "affordance_hint_original": "an empty area on the shape sorter",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 4,
+      "action": "insert",
+      "target": "cylinder",
+      "destination": "shape_sorter",
+      "affordance": [
+        0.734,
+        0.687
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "surface_contact",
+            "args": [
+              "cylinder",
+              "shape_sorter"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "released",
+            "args": [
+              "cylinder"
+            ],
+            "role": "completion"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "stable",
+            "args": [
+              "cylinder"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "support_stable",
+            "args": [
+              "cylinder"
+            ]
+          }
+        ]
+      },
+      "done_when": "surface_contact(cylinder, shape_sorter) AND released(cylinder) AND stable(cylinder)",
+      "affordance_3d": [
+        0.4294,
+        0.3435,
+        0.916
+      ],
+      "affordance_hint": "the top opening of the brown shape sorter",
+      "affordance_hint_original": "the top opening of the shape sorter",
+      "affordance_hint_confidence": "ok"
+    }
+  ]
+}

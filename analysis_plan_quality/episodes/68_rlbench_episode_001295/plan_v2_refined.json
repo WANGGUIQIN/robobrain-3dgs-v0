@@ -1,0 +1,243 @@
+{
+  "task": "use the stick to drag the cube onto the lime target",
+  "scene_objects": [
+    "stick",
+    "cube",
+    "lime_target",
+    "table"
+  ],
+  "num_steps": 4,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "stick",
+      "affordance": [
+        0.834,
+        0.804
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "stick",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "table"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, stick) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        2.6683,
+        2.42,
+        3.9714
+      ],
+      "affordance_hint": "the wooden stick on the table",
+      "affordance_hint_original": "the stick",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 2,
+      "action": "grasp",
+      "target": "stick",
+      "affordance": [
+        0.633,
+        0.609
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "stick"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "holding",
+            "args": [
+              "stick"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              0,
+              0,
+              -1
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "holding(stick)",
+      "affordance_3d": [
+        0.3914,
+        0.3223,
+        1.4734
+      ],
+      "affordance_hint": "the wooden stick",
+      "affordance_hint_original": "the handle of the stick",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 3,
+      "action": "transport",
+      "target": "stick",
+      "destination": "cube",
+      "affordance": [
+        0.468,
+        0.75
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "stick"
+            ],
+            "role": "safety"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "above",
+            "args": [
+              "stick",
+              "cube",
+              0.05
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "stick",
+              "cube"
+            ]
+          },
+          {
+            "pred": "no_drop",
+            "args": [
+              "stick"
+            ]
+          }
+        ]
+      },
+      "done_when": "above(stick, cube, 0.05) AND aligned_xy(stick, cube, 0.03)",
+      "affordance_3d": [
+        -0.0579,
+        0.4628,
+        0.9256
+      ],
+      "affordance_hint": "the empty area on the gray cube",
+      "affordance_hint_original": "an empty area on the cube",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 4,
+      "action": "push",
+      "target": "cube",
+      "destination": "lime_target",
+      "affordance": [
+        0.6,
+        0.8
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "surface_contact",
+            "args": [
+              "cube",
+              "lime_target"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "released",
+            "args": [
+              "cube"
+            ],
+            "role": "completion"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "aligned_xy",
+            "args": [
+              "cube",
+              "lime_target",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "stick",
+              "lime_target"
+            ]
+          }
+        ]
+      },
+      "done_when": "surface_contact(cube, lime_target) AND released(cube)",
+      "affordance_3d": [
+        0.8635,
+        2.5574,
+        4.2513
+      ],
+      "affordance_hint": "the center of the gray cube",
+      "affordance_hint_original": "the center of the cube",
+      "affordance_hint_confidence": "ok"
+    }
+  ]
+}

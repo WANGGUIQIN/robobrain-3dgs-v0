@@ -1,0 +1,226 @@
+{
+  "task": "Move a letter piece on the table",
+  "scene_objects": [
+    "letter_piece",
+    "table"
+  ],
+  "steps": [
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "letter_piece",
+              "<",
+              "0.03"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "approach_axis",
+            "args": [
+              "0",
+              "0",
+              "-1"
+            ],
+            "role": "progress"
+          }
+        ]
+      },
+      "step": 1,
+      "action": "reach",
+      "target": "letter_piece",
+      "affordance_region": "the letter piece on the table",
+      "done_when": "distance(gripper, letter_piece) < 0.03",
+      "affordance_hint": "the letter piece on the table",
+      "refine_prompt": "the letter piece on the table",
+      "refine_cache_hit": false,
+      "affordance_refined": [
+        0.582,
+        0.6055
+      ],
+      "affordance_3d_refined": [
+        -0.1039,
+        0.3305,
+        1.8886
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.3078
+    },
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "letter_piece"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              "0",
+              "0",
+              "-1"
+            ],
+            "role": "progress"
+          }
+        ]
+      },
+      "step": 2,
+      "action": "grasp",
+      "target": "letter_piece",
+      "affordance_region": "the letter piece",
+      "done_when": "holding(letter_piece)",
+      "affordance_hint": "the letter piece",
+      "refine_prompt": "the letter piece",
+      "refine_cache_hit": false,
+      "refine_prompt_fallback": "letter piece",
+      "affordance_refined": [
+        0.1289,
+        0.1875
+      ],
+      "affordance_3d_refined": [
+        -2.2306,
+        -1.2646,
+        3.5128
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.2312
+    },
+    {
+      "constraints": {
+        "spatial": [
+          {
+            "pred": "above",
+            "args": [
+              "letter_piece",
+              "new_location",
+              "0.05"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_drop",
+            "args": [
+              "letter_piece"
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "step": 3,
+      "action": "transport",
+      "target": "letter_piece",
+      "destination": "new_location",
+      "affordance_region": "an empty area on the table",
+      "done_when": "above(letter_piece, new_location, 0.05)",
+      "affordance_hint": "an empty area on the table",
+      "refine_prompt": "an empty area on the table",
+      "refine_cache_hit": false,
+      "affordance_refined": [
+        0.5391,
+        0.9961
+      ],
+      "affordance_3d_refined": [
+        -0.4101,
+        2.5164,
+        3.728
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.5258
+    },
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "surface_contact",
+            "args": [
+              "letter_piece",
+              "new_location"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "released",
+            "args": [
+              "letter_piece"
+            ],
+            "role": "completion"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "stable",
+            "args": [
+              "letter_piece"
+            ],
+            "role": "completion"
+          }
+        ]
+      },
+      "step": 4,
+      "action": "place",
+      "target": "letter_piece",
+      "destination": "new_location",
+      "affordance_region": "an empty area on the table",
+      "done_when": "surface_contact(letter_piece, new_location) AND released(letter_piece) AND stable(letter_piece)",
+      "affordance_hint": "an empty area on the table",
+      "refine_prompt": "an empty area on the table",
+      "refine_cache_hit": true,
+      "affordance_refined": [
+        0.5391,
+        0.9961
+      ],
+      "affordance_3d_refined": [
+        -0.4101,
+        2.5164,
+        3.728
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.5258
+    }
+  ]
+}

@@ -1,0 +1,233 @@
+{
+  "task": "place rxbar blueberry into bottom drawer",
+  "scene_objects": [
+    "rxbar_blueberry",
+    "bottom_drawer",
+    "table",
+    "bowl",
+    "box"
+  ],
+  "num_steps": 4,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "rxbar_blueberry",
+      "affordance": [
+        0.558,
+        0.296
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "rxbar_blueberry",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "table"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, rxbar_blueberry) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        0.2906,
+        -1.0076,
+        4.3151
+      ],
+      "affordance_hint": "the rxbar blueberry"
+    },
+    {
+      "step": 2,
+      "action": "grasp",
+      "target": "rxbar_blueberry",
+      "affordance": [
+        0.558,
+        0.292
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "rxbar_blueberry"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "holding",
+            "args": [
+              "rxbar_blueberry"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              0,
+              0,
+              -1
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "holding(rxbar_blueberry)",
+      "affordance_3d": [
+        0.288,
+        -1.0176,
+        4.276
+      ],
+      "affordance_hint": "the handle of the rxbar blueberry"
+    },
+    {
+      "step": 3,
+      "action": "transport",
+      "target": "rxbar_blueberry",
+      "destination": "bottom_drawer",
+      "affordance": [
+        0.5,
+        0.882
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "rxbar_blueberry"
+            ],
+            "role": "safety"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "above",
+            "args": [
+              "rxbar_blueberry",
+              "bottom_drawer",
+              0.05
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "rxbar_blueberry",
+              "bottom_drawer"
+            ]
+          },
+          {
+            "pred": "no_drop",
+            "args": [
+              "rxbar_blueberry"
+            ]
+          }
+        ]
+      },
+      "done_when": "above(rxbar_blueberry, bottom_drawer, 0.05) AND aligned_xy(rxbar_blueberry, bottom_drawer, 0.03)",
+      "affordance_3d": [
+        0.0,
+        0.9,
+        2.0451
+      ],
+      "affordance_hint": "an empty area on the bottom drawer"
+    },
+    {
+      "step": 4,
+      "action": "place",
+      "target": "rxbar_blueberry",
+      "destination": "bottom_drawer",
+      "affordance": [
+        0.5,
+        0.882
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "surface_contact",
+            "args": [
+              "rxbar_blueberry",
+              "bottom_drawer"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "released",
+            "args": [
+              "rxbar_blueberry"
+            ],
+            "role": "completion"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "stable",
+            "args": [
+              "rxbar_blueberry"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "support_stable",
+            "args": [
+              "rxbar_blueberry"
+            ]
+          }
+        ]
+      },
+      "done_when": "surface_contact(rxbar_blueberry, bottom_drawer) AND released(rxbar_blueberry) AND stable(rxbar_blueberry)",
+      "affordance_3d": [
+        0.0,
+        0.9,
+        2.0451
+      ],
+      "affordance_hint": "an empty area on the bottom drawer"
+    }
+  ]
+}

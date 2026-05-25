@@ -1,0 +1,134 @@
+{
+  "task": "pick up the green cup",
+  "parsed": {
+    "scene_objects": [
+      "green_cup",
+      "blue_bowl",
+      "black_bowl",
+      "orange_ball",
+      "yellow_block",
+      "blue_bin",
+      "table"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "green_cup",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "green_cup",
+        "affordance_region": "the body of the green cup",
+        "done_when": "distance(gripper, green_cup) < 0.03",
+        "affordance_hint": "the body of the green cup",
+        "refine_prompt": "the body of the green cup",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.4297,
+          0.4062
+        ],
+        "affordance_3d_refined": [
+          -0.2412,
+          -0.3216,
+          2.9844
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.3036,
+        "affordance": [
+          0.4297,
+          0.4062
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "green_cup"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "green_cup",
+        "affordance_region": "the handle of the green cup",
+        "done_when": "holding(green_cup)",
+        "affordance_hint": "the handle of the green cup",
+        "refine_prompt": "the handle of the green cup",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.4297,
+          0.4062
+        ],
+        "affordance_3d_refined": [
+          -0.2412,
+          -0.3216,
+          2.9844
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.3944,
+        "affordance": [
+          0.4297,
+          0.4062
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,226 @@
+{
+  "task": "pick sponge from white bowl and place on counter",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_3epoch/best",
+  "raw": "**SCENE ANALYSIS - A white bowl with a yellow sponge inside sits on a dark table. An orange is on the table to the left. The bowl is rigid with a rim; the sponge is soft and inside the bowl. STRATEGY - First, reach for the bowl to grasp the sponge. Since the sponge is inside, the bowl must be lifted to access it. Grasp the bowl's rim, lift it, then grasp the sponge from inside. Transport the sponge to a destination on the table, then place it. Failure modes include dropping the bowl or sponge, or not grasping the sponge properly. AFFORDANCE REASONING - Step 1 reach bowl rim; Step 2 grasp bowl rim; Step 3 lift bowl; Step 4 grasp sponge inside bowl; Step 5 transport sponge to table; Step 6 place sponge on table.**\nGoal: on(sponge, table); stable(sponge)\nScene: white_bowl, yellow_sponge, orange, table\nStep 1: reach(white_bowl)\n  affordance_region: the rim of the white bowl\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, white_bowl, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, white_bowl) < 0.03\nStep 2: grasp(white_bowl)\n  affordance_region: the rim of the white bowl\n  contact: holding(white_bowl) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(white_bowl)\nStep 3: transport(white_bowl -> table)\n  affordance_region: an empty area on the table\n  spatial: above(white_bowl, table, 0.05) [completion]\n  safety: no_drop(white_bowl)\n  done_when: above(white_bowl, table, 0.05)\nStep 4: grasp(yellow_sponge)\n  affordance_region: the body of the yellow sponge (inside the bowl)\n  contact: holding(yellow_sponge) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(yellow_sponge)\nStep 5: transport(yellow_sponge -> table)\n  affordance_region: an empty area on the table\n  spatial: above(yellow_sponge, table, 0.05) [completion]\n  safety: no_drop(yellow_sponge)\n  done_when: above(yellow_sponge, table, 0.05)\nStep 6: place(yellow_sponge -> table)\n  affordance_region: an empty area on the table\n  contact: surface_contact(yellow_sponge, table) [completion]; released(yellow_sponge) [completion]\n  pose: stable(yellow_sponge) [completion]\n  done_when: surface_contact(yellow_sponge, table) AND released(yellow_sponge)\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [
+      {
+        "pred": "on",
+        "args": [
+          "sponge",
+          "table"
+        ]
+      },
+      {
+        "pred": "stable",
+        "args": [
+          "sponge"
+        ]
+      }
+    ],
+    "scene_objects": [
+      "white_bowl",
+      "yellow_sponge",
+      "orange",
+      "table"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "white_bowl",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "white_bowl",
+        "affordance_region": "the rim of the white bowl",
+        "done_when": "distance(gripper, white_bowl) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "white_bowl"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "white_bowl",
+        "affordance_region": "the rim of the white bowl",
+        "done_when": "holding(white_bowl)"
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "white_bowl",
+                "table",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "white_bowl"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "white_bowl",
+        "destination": "table",
+        "affordance_region": "an empty area on the table",
+        "done_when": "above(white_bowl, table, 0.05)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "yellow_sponge"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "grasp",
+        "target": "yellow_sponge",
+        "affordance_region": "the body of the yellow sponge (inside the bowl)",
+        "done_when": "holding(yellow_sponge)"
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "yellow_sponge",
+                "table",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "yellow_sponge"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 5,
+        "action": "transport",
+        "target": "yellow_sponge",
+        "destination": "table",
+        "affordance_region": "an empty area on the table",
+        "done_when": "above(yellow_sponge, table, 0.05)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "surface_contact",
+              "args": [
+                "yellow_sponge",
+                "table"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "yellow_sponge"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "yellow_sponge"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 6,
+        "action": "place",
+        "target": "yellow_sponge",
+        "destination": "table",
+        "affordance_region": "an empty area on the table",
+        "done_when": "surface_contact(yellow_sponge, table) AND released(yellow_sponge)"
+      }
+    ]
+  }
+}

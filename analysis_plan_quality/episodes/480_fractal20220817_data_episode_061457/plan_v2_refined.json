@@ -1,0 +1,193 @@
+{
+  "task": "pick sponge",
+  "scene_objects": [
+    "sponge",
+    "can_1",
+    "can_2",
+    "table"
+  ],
+  "num_steps": 3,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "sponge",
+      "affordance": [
+        0.525,
+        0.367
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "sponge",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "can_1"
+            ]
+          },
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "can_2"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, sponge) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        0.0746,
+        -0.4228,
+        2.7692
+      ],
+      "affordance_hint": "the yellow sponge",
+      "affordance_hint_original": "the sponge",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 2,
+      "action": "grasp",
+      "target": "sponge",
+      "affordance": [
+        0.525,
+        0.367
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "sponge"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "holding",
+            "args": [
+              "sponge"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              0,
+              0,
+              -1
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "holding(sponge)",
+      "affordance_3d": [
+        0.0746,
+        -0.4228,
+        2.7692
+      ],
+      "affordance_hint": "the yellow sponge",
+      "affordance_hint_original": "sponge",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 3,
+      "action": "lift",
+      "target": "sponge",
+      "affordance": [
+        0.525,
+        0.367
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "sponge"
+            ],
+            "role": "safety"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "above",
+            "args": [
+              "sponge",
+              "table",
+              0.05
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "sponge",
+              "can_1"
+            ]
+          },
+          {
+            "pred": "no_collision",
+            "args": [
+              "sponge",
+              "can_2"
+            ]
+          },
+          {
+            "pred": "no_drop",
+            "args": [
+              "sponge"
+            ]
+          }
+        ]
+      },
+      "done_when": "above(sponge, table, 0.05)",
+      "affordance_3d": [
+        0.0746,
+        -0.4228,
+        2.7692
+      ],
+      "affordance_hint": "the yellow sponge",
+      "affordance_hint_original": "sponge",
+      "affordance_hint_confidence": "ok"
+    }
+  ]
+}

@@ -1,0 +1,124 @@
+{
+  "task": "open the middle drawer",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_planning_3epoch/checkpoint-39957",
+  "raw": "Scene: middle_drawer, table\nStep 1: reach(middle_drawer)\n  affordance_region: the front edge of the middle drawer\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, middle_drawer, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, middle_drawer) < 0.03\nStep 2: grasp(middle_drawer)\n  affordance_region: the handle of the middle drawer\n  contact: holding(middle_drawer) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(middle_drawer)\nStep 3: pull(middle_drawer)\n  affordance_region: the front edge of the middle drawer\n  contact: holding(middle_drawer) [safety]\n  spatial: aligned_xy(middle_drawer, table) [completion]\n  direction: motion_dir(0, -1, 0) [progress]\n  done_when: aligned_xy(middle_drawer, table)\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [],
+    "scene_objects": [
+      "middle_drawer",
+      "table"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "middle_drawer",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "middle_drawer",
+        "affordance_region": "the front edge of the middle drawer",
+        "done_when": "distance(gripper, middle_drawer) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "middle_drawer"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "middle_drawer",
+        "affordance_region": "the handle of the middle drawer",
+        "done_when": "holding(middle_drawer)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "middle_drawer"
+              ],
+              "role": "safety"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "aligned_xy",
+              "args": [
+                "middle_drawer",
+                "table"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "motion_dir",
+              "args": [
+                "0",
+                "-1",
+                "0"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "pull",
+        "target": "middle_drawer",
+        "affordance_region": "the front edge of the middle drawer",
+        "done_when": "aligned_xy(middle_drawer, table)"
+      }
+    ]
+  }
+}

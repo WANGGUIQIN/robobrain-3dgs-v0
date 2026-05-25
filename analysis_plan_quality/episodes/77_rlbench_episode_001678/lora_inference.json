@@ -1,0 +1,254 @@
+{
+  "task": "sweep dirt to the tall dustpan",
+  "parsed": {
+    "scene_objects": [
+      "dirt",
+      "tall_dustpan",
+      "broom",
+      "floor"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "broom",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "broom",
+        "affordance_region": "the long handle of the broom",
+        "done_when": "distance(gripper, broom) < 0.03",
+        "affordance_hint": "the long handle of the broom",
+        "refine_prompt": "the long handle of the broom",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.1562,
+          0.8438
+        ],
+        "affordance_3d_refined": [
+          -1.7202,
+          1.7202,
+          2.5021
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.3792,
+        "affordance": [
+          0.1562,
+          0.8438
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "broom"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "broom",
+        "affordance_region": "the handle of the broom",
+        "done_when": "holding(broom)",
+        "affordance_hint": "the handle of the broom",
+        "refine_prompt": "the handle of the broom",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.1562,
+          0.8438
+        ],
+        "affordance_3d_refined": [
+          -1.7202,
+          1.7202,
+          2.5021
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.4663,
+        "affordance": [
+          0.1562,
+          0.8438
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "broom"
+              ],
+              "role": "safety"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "broom",
+                "dirt",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "broom"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "sweep",
+        "target": "dirt",
+        "destination": "tall_dustpan",
+        "affordance_region": "the dirt on the floor",
+        "done_when": "above(broom, dirt, 0.05)",
+        "affordance_hint": "the dirt on the floor",
+        "refine_prompt": "the dirt on the floor",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.457,
+          0.9961
+        ],
+        "affordance_3d_refined": [
+          -0.1703,
+          1.9661,
+          1.9816
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.4927,
+        "affordance": [
+          0.457,
+          0.9961
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "surface_contact",
+              "args": [
+                "dirt",
+                "tall_dustpan"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "dirt"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "dirt"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "place",
+        "target": "dirt",
+        "destination": "tall_dustpan",
+        "affordance_region": "an empty area on the tall dustpan",
+        "done_when": "surface_contact(dirt, tall_dustpan) AND released(dirt)",
+        "affordance_hint": "an empty area on the tall dustpan",
+        "refine_prompt": "an empty area on the tall dustpan",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.1797,
+          0.8789
+        ],
+        "affordance_3d_refined": [
+          -1.5675,
+          1.8542,
+          2.4468
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.3091,
+        "affordance": [
+          0.1797,
+          0.8789
+        ]
+      }
+    ]
+  }
+}

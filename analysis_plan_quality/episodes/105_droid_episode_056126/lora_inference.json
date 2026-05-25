@@ -1,0 +1,245 @@
+{
+  "task": "Pick the black pen on the table and put it in the pen holder",
+  "parsed": {
+    "scene_objects": [
+      "black_pen",
+      "pen_holder",
+      "table"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "black_pen",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "black_pen",
+        "affordance_region": "the black pen on the table",
+        "done_when": "distance(gripper, black_pen) < 0.03",
+        "affordance_hint": "the black pen on the table",
+        "refine_prompt": "the black pen on the table",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.4648,
+          0.7734
+        ],
+        "affordance_3d_refined": [
+          -0.7362,
+          1.4005,
+          3.5911
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.4124,
+        "affordance": [
+          0.4648,
+          0.7734
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "black_pen"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "black_pen",
+        "affordance_region": "the body of the black pen",
+        "done_when": "holding(black_pen)",
+        "affordance_hint": "the body of the black pen",
+        "refine_prompt": "the body of the black pen",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.4648,
+          0.7734
+        ],
+        "affordance_3d_refined": [
+          -0.7362,
+          1.4005,
+          3.5911
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.3498,
+        "affordance": [
+          0.4648,
+          0.7734
+        ]
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "black_pen",
+                "pen_holder",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "black_pen"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "black_pen",
+        "destination": "pen_holder",
+        "affordance_region": "an empty area on the pen holder",
+        "done_when": "above(black_pen, pen_holder, 0.05)",
+        "affordance_hint": "an empty area on the pen holder",
+        "refine_prompt": "an empty area on the pen holder",
+        "refine_cache_hit": false,
+        "refine_prompt_fallback": "black pen",
+        "affordance_refined": [
+          0.4648,
+          0.7734
+        ],
+        "affordance_3d_refined": [
+          -0.7362,
+          1.4005,
+          3.5911
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.4249,
+        "affordance": [
+          0.4648,
+          0.7734
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "surface_contact",
+              "args": [
+                "black_pen",
+                "pen_holder"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "black_pen"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "black_pen"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "place",
+        "target": "black_pen",
+        "destination": "pen_holder",
+        "affordance_region": "an empty area on the pen holder",
+        "done_when": "surface_contact(black_pen, pen_holder) AND released(black_pen) AND stable(black_pen)",
+        "affordance_hint": "an empty area on the pen holder",
+        "refine_prompt": "an empty area on the pen holder",
+        "refine_cache_hit": true,
+        "affordance_refined": [
+          0.4648,
+          0.7734
+        ],
+        "affordance_3d_refined": [
+          -0.7362,
+          1.4005,
+          3.5911
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.4249,
+        "affordance": [
+          0.4648,
+          0.7734
+        ]
+      }
+    ]
+  }
+}

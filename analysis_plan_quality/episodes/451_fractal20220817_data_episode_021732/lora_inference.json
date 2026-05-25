@@ -1,0 +1,246 @@
+{
+  "task": "place blue plastic bottle upright",
+  "parsed": {
+    "scene_objects": [
+      "green_can",
+      "blue_wrapper",
+      "white_bottle",
+      "table"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "white_bottle",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "white_bottle",
+        "affordance_region": "the body of the white bottle",
+        "done_when": "distance(gripper, white_bottle) < 0.03",
+        "affordance_hint": "the body of the white bottle",
+        "refine_prompt": "the body of the white bottle",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.4375,
+          0.5547
+        ],
+        "affordance_3d_refined": [
+          -0.2622,
+          0.2294,
+          3.6498
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.3531,
+        "affordance": [
+          0.4375,
+          0.5547
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "white_bottle"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "white_bottle",
+        "affordance_region": "the neck of the white bottle",
+        "done_when": "holding(white_bottle)",
+        "affordance_hint": "the neck of the white bottle",
+        "refine_prompt": "the neck of the white bottle",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.4375,
+          0.5547
+        ],
+        "affordance_3d_refined": [
+          -0.2622,
+          0.2294,
+          3.6498
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.374,
+        "affordance": [
+          0.4375,
+          0.5547
+        ]
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "white_bottle",
+                "table",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "white_bottle"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "white_bottle",
+        "destination": "upright_position",
+        "affordance_region": "an empty area on the table near the upright position",
+        "done_when": "above(white_bottle, table, 0.05)",
+        "affordance_hint": "an empty area on the table near the upright position",
+        "refine_prompt": "an empty area on the table near the upright position",
+        "refine_cache_hit": false,
+        "refine_prompt_fallback": "white bottle",
+        "affordance_refined": [
+          0.4375,
+          0.5547
+        ],
+        "affordance_3d_refined": [
+          -0.2622,
+          0.2294,
+          3.6498
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.3054,
+        "affordance": [
+          0.4375,
+          0.5547
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "surface_contact",
+              "args": [
+                "white_bottle",
+                "table"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "white_bottle"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "upright",
+              "args": [
+                "white_bottle"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "place",
+        "target": "white_bottle",
+        "destination": "upright_position",
+        "affordance_region": "an empty area on the table near the upright position",
+        "done_when": "surface_contact(white_bottle, table) AND released(white_bottle) AND upright(white_bottle)",
+        "affordance_hint": "an empty area on the table near the upright position",
+        "refine_prompt": "an empty area on the table near the upright position",
+        "refine_cache_hit": true,
+        "affordance_refined": [
+          0.4375,
+          0.5547
+        ],
+        "affordance_3d_refined": [
+          -0.2622,
+          0.2294,
+          3.6498
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.3054,
+        "affordance": [
+          0.4375,
+          0.5547
+        ]
+      }
+    ]
+  }
+}

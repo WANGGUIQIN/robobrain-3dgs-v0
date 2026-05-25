@@ -1,0 +1,178 @@
+{
+  "task": "slide the door to the left side",
+  "scene_objects": [
+    "door",
+    "cabinet",
+    "table"
+  ],
+  "num_steps": 3,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "door",
+      "affordance": [
+        0.875,
+        0.33
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "door",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "cabinet"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, door) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        0.6203,
+        -0.2843,
+        1.439
+      ],
+      "affordance_hint": "the white plastic door on the right side of the cabinet",
+      "affordance_hint_original": "the door",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 2,
+      "action": "grasp",
+      "target": "door",
+      "affordance": [
+        0.74,
+        0.16
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "door"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "holding",
+            "args": [
+              "door"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              0,
+              0,
+              -1
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "holding(door)",
+      "affordance_3d": [
+        0.3347,
+        -0.4774,
+        1.222
+      ],
+      "affordance_hint": "the handle of the white door",
+      "affordance_hint_original": "the handle of the door",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 3,
+      "action": "push",
+      "target": "door",
+      "affordance": [
+        0.85,
+        0.32
+      ],
+      "approach": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "door"
+            ],
+            "role": "safety"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "aligned_xy",
+            "args": [
+              "door",
+              "cabinet",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "door",
+              "cabinet"
+            ]
+          },
+          {
+            "pred": "force_limit",
+            "args": [
+              "door"
+            ]
+          }
+        ]
+      },
+      "done_when": "aligned_xy(door, cabinet, 0.03)",
+      "affordance_3d": [
+        0.5896,
+        -0.3014,
+        1.459
+      ],
+      "affordance_hint": "the center of the white door",
+      "affordance_hint_original": "the center of the door",
+      "affordance_hint_confidence": "ok"
+    }
+  ]
+}

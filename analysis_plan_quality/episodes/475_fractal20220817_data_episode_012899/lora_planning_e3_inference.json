@@ -1,0 +1,154 @@
+{
+  "task": "pick rxbar blueberry from top drawer and place on counter",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_planning_3epoch/checkpoint-39957",
+  "raw": "Scene: rxbar_blueberry, drawer, counter, bowl, chips_bag\nStep 1: reach(rxbar_blueberry)\n  affordance_region: the rxbar blueberry in the drawer\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, rxbar_blueberry, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, rxbar_blueberry) < 0.03\nStep 2: grasp(rxbar_blueberry)\n  affordance_region: the rxbar blueberry in the drawer\n  contact: holding(rxbar_blueberry) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(rxbar_blueberry)\nStep 3: transport(rxbar_blueberry -> counter)\n  affordance_region: the empty area on the counter\n  spatial: above(rxbar_blueberry, counter, 0.05) [completion]\n  safety: no_drop(rxbar_blueberry)\n  done_when: above(rxbar_blueberry, counter, 0.05)\nStep 4: place(rxbar_blueberry -> counter)\n  affordance_region: the empty area on the counter\n  contact: surface_contact(rxbar_blueberry, counter) [completion]; released(rxbar_blueberry) [completion]\n  pose: stable(rxbar_blueberry) [completion]\n  done_when: surface_contact(rxbar_blueberry, counter) AND released(rxbar_blueberry) AND stable(rxbar_blueberry)\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [],
+    "scene_objects": [
+      "rxbar_blueberry",
+      "drawer",
+      "counter",
+      "bowl",
+      "chips_bag"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "rxbar_blueberry",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "rxbar_blueberry",
+        "affordance_region": "the rxbar blueberry in the drawer",
+        "done_when": "distance(gripper, rxbar_blueberry) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "rxbar_blueberry"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "rxbar_blueberry",
+        "affordance_region": "the rxbar blueberry in the drawer",
+        "done_when": "holding(rxbar_blueberry)"
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "rxbar_blueberry",
+                "counter",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "rxbar_blueberry"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "rxbar_blueberry",
+        "destination": "counter",
+        "affordance_region": "the empty area on the counter",
+        "done_when": "above(rxbar_blueberry, counter, 0.05)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "surface_contact",
+              "args": [
+                "rxbar_blueberry",
+                "counter"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "rxbar_blueberry"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "rxbar_blueberry"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "place",
+        "target": "rxbar_blueberry",
+        "destination": "counter",
+        "affordance_region": "the empty area on the counter",
+        "done_when": "surface_contact(rxbar_blueberry, counter) AND released(rxbar_blueberry) AND stable(rxbar_blueberry)"
+      }
+    ]
+  }
+}

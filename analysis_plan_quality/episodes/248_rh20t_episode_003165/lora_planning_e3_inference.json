@@ -1,0 +1,153 @@
+{
+  "task": "Move an object from one box to another",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_planning_3epoch/checkpoint-39957",
+  "raw": "Scene: object, box_1, box_2, table\nStep 1: reach(object)\n  affordance_region: the object\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, object, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, object) < 0.03\nStep 2: grasp(object)\n  affordance_region: the handle of the object\n  contact: holding(object) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(object)\nStep 3: transport(object -> box_2)\n  affordance_region: an empty area on the box_2\n  spatial: above(object, box_2, 0.05) [completion]\n  safety: no_drop(object)\n  done_when: above(object, box_2, 0.05)\nStep 4: place(object -> box_2)\n  affordance_region: an empty area on the box_2\n  contact: surface_contact(object, box_2) [completion]; released(object) [completion]\n  pose: stable(object) [completion]\n  done_when: surface_contact(object, box_2) AND released(object)\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [],
+    "scene_objects": [
+      "object",
+      "box_1",
+      "box_2",
+      "table"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "object",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "object",
+        "affordance_region": "the object",
+        "done_when": "distance(gripper, object) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "object"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "object",
+        "affordance_region": "the handle of the object",
+        "done_when": "holding(object)"
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "object",
+                "box_2",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "object"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "object",
+        "destination": "box_2",
+        "affordance_region": "an empty area on the box_2",
+        "done_when": "above(object, box_2, 0.05)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "surface_contact",
+              "args": [
+                "object",
+                "box_2"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "object"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "object"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "place",
+        "target": "object",
+        "destination": "box_2",
+        "affordance_region": "an empty area on the box_2",
+        "done_when": "surface_contact(object, box_2) AND released(object)"
+      }
+    ]
+  }
+}

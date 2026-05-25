@@ -1,0 +1,181 @@
+{
+  "task": "take the yellow block and rotate it right",
+  "parsed": {
+    "scene_objects": [
+      "yellow_block",
+      "table"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "yellow_block",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "yellow_block",
+        "affordance_region": "the yellow block",
+        "done_when": "distance(gripper, yellow_block) < 0.03",
+        "affordance_hint": "the yellow block",
+        "refine_prompt": "the yellow block",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.1445,
+          0.168
+        ],
+        "affordance_3d_refined": [
+          -0.0041,
+          -0.0038,
+          0.01
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.3256,
+        "affordance": [
+          0.1445,
+          0.168
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "yellow_block"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "yellow_block",
+        "affordance_region": "the yellow block",
+        "done_when": "holding(yellow_block)",
+        "affordance_hint": "the yellow block",
+        "refine_prompt": "the yellow block",
+        "refine_cache_hit": true,
+        "affordance_refined": [
+          0.1445,
+          0.168
+        ],
+        "affordance_3d_refined": [
+          -0.0041,
+          -0.0038,
+          0.01
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.3256,
+        "affordance": [
+          0.1445,
+          0.168
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "yellow_block"
+              ],
+              "role": "safety"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "orientation_match",
+              "args": [
+                "yellow_block",
+                "right"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "rotate",
+        "target": "yellow_block",
+        "affordance_region": "the body of the yellow block",
+        "done_when": "orientation_match(yellow_block, right)",
+        "affordance_hint": "the body of the yellow block",
+        "refine_prompt": "the body of the yellow block",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.1445,
+          0.168
+        ],
+        "affordance_3d_refined": [
+          -0.0041,
+          -0.0038,
+          0.01
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.3547,
+        "affordance": [
+          0.1445,
+          0.168
+        ]
+      }
+    ]
+  }
+}

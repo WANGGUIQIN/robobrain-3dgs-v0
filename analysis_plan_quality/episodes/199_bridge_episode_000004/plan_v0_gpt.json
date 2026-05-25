@@ -1,0 +1,233 @@
+{
+  "task": "Move the kadai and place it at the right edge of the table.",
+  "scene_objects": [
+    "kadai",
+    "blue_cloth",
+    "mushroom",
+    "fork",
+    "table"
+  ],
+  "num_steps": 4,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "kadai",
+      "affordance": [
+        0.352,
+        0.3
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "kadai",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "table"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, kadai) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        -0.2354,
+        -0.316,
+        1.3798
+      ],
+      "affordance_hint": "the kadai"
+    },
+    {
+      "step": 2,
+      "action": "grasp",
+      "target": "kadai",
+      "affordance": [
+        0.267,
+        0.25
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "kadai"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "holding",
+            "args": [
+              "kadai"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              0,
+              0,
+              -1
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "holding(kadai)",
+      "affordance_3d": [
+        -0.2768,
+        -0.2953,
+        1.0276
+      ],
+      "affordance_hint": "the handle of the kadai"
+    },
+    {
+      "step": 3,
+      "action": "transport",
+      "target": "kadai",
+      "destination": "right_edge_of_table",
+      "affordance": [
+        0.7,
+        0.558
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "kadai"
+            ],
+            "role": "safety"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "above",
+            "args": [
+              "kadai",
+              "table",
+              0.05
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "kadai",
+              "table"
+            ]
+          },
+          {
+            "pred": "no_drop",
+            "args": [
+              "kadai"
+            ]
+          }
+        ]
+      },
+      "done_when": "above(kadai, table, 0.05) AND aligned_xy(kadai, right_edge_of_table, 0.03)",
+      "affordance_3d": [
+        0.4684,
+        0.1378,
+        2.0451
+      ],
+      "affordance_hint": "an empty area on the right edge of table"
+    },
+    {
+      "step": 4,
+      "action": "place",
+      "target": "kadai",
+      "destination": "right_edge_of_table",
+      "affordance": [
+        0.7,
+        0.558
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "surface_contact",
+            "args": [
+              "kadai",
+              "table"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "released",
+            "args": [
+              "kadai"
+            ],
+            "role": "completion"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "stable",
+            "args": [
+              "kadai"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "support_stable",
+            "args": [
+              "kadai"
+            ]
+          }
+        ]
+      },
+      "done_when": "surface_contact(kadai, table) AND released(kadai) AND stable(kadai)",
+      "affordance_3d": [
+        0.4684,
+        0.1378,
+        2.0451
+      ],
+      "affordance_hint": "an empty area on the right edge of table"
+    }
+  ]
+}

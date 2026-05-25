@@ -1,0 +1,183 @@
+{
+  "task": "Pick up the small block on the left and move it to the right",
+  "parsed": {
+    "scene_objects": [
+      "small_block",
+      "table"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "small_block",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "small_block",
+        "affordance_region": "the small block",
+        "done_when": "distance(gripper, small_block) < 0.03",
+        "affordance_hint": "the small block",
+        "refine_prompt": "the small block",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.1914,
+          0.3945
+        ],
+        "affordance_3d_refined": [
+          -1.5,
+          -0.4373,
+          1.7712
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.3575,
+        "affordance": [
+          0.1914,
+          0.3945
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "small_block"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "small_block",
+        "affordance_region": "the small block",
+        "done_when": "holding(small_block)",
+        "affordance_hint": "the small block",
+        "refine_prompt": "the small block",
+        "refine_cache_hit": true,
+        "affordance_refined": [
+          0.1914,
+          0.3945
+        ],
+        "affordance_3d_refined": [
+          -1.5,
+          -0.4373,
+          1.7712
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.3575,
+        "affordance": [
+          0.1914,
+          0.3945
+        ]
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "small_block",
+                "table",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "small_block"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "small_block",
+        "destination": "right_side",
+        "affordance_region": "the right side of the table",
+        "done_when": "above(small_block, table, 0.05)",
+        "affordance_hint": "the right side of the table",
+        "refine_prompt": "the right side of the table",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.4414,
+          0.1914
+        ],
+        "affordance_3d_refined": [
+          -0.7407,
+          -0.4687,
+          1.145
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.354,
+        "affordance": [
+          0.4414,
+          0.1914
+        ]
+      }
+    ]
+  }
+}

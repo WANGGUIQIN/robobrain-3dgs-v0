@@ -1,0 +1,153 @@
+{
+  "task": "Move the fish to the left of the green towel",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_planning_3epoch/checkpoint-39957",
+  "raw": "Scene: fish, green_towel, pot, table\nStep 1: reach(fish)\n  affordance_region: the orange fish in the metal pot\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, fish, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, fish) < 0.03\nStep 2: grasp(fish)\n  affordance_region: the body of the fish\n  contact: holding(fish) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(fish)\nStep 3: transport(fish -> left_of_green_towel)\n  affordance_region: the empty area on the left of the green towel\n  spatial: above(fish, table, 0.05) [completion]\n  safety: no_drop(fish)\n  done_when: above(fish, table, 0.05)\nStep 4: place(fish -> left_of_green_towel)\n  affordance_region: the empty area on the left of the green towel\n  contact: surface_contact(fish, table) [completion]; released(fish) [completion]\n  pose: stable(fish) [completion]\n  done_when: surface_contact(fish, table) AND released(fish) AND stable(fish)\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [],
+    "scene_objects": [
+      "fish",
+      "green_towel",
+      "pot",
+      "table"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "fish",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "fish",
+        "affordance_region": "the orange fish in the metal pot",
+        "done_when": "distance(gripper, fish) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "fish"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "fish",
+        "affordance_region": "the body of the fish",
+        "done_when": "holding(fish)"
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "fish",
+                "table",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "fish"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "fish",
+        "destination": "left_of_green_towel",
+        "affordance_region": "the empty area on the left of the green towel",
+        "done_when": "above(fish, table, 0.05)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "surface_contact",
+              "args": [
+                "fish",
+                "table"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "fish"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "fish"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "place",
+        "target": "fish",
+        "destination": "left_of_green_towel",
+        "affordance_region": "the empty area on the left of the green towel",
+        "done_when": "surface_contact(fish, table) AND released(fish) AND stable(fish)"
+      }
+    ]
+  }
+}

@@ -1,0 +1,181 @@
+{
+  "task": "turn off the blue light lamp",
+  "parsed": {
+    "scene_objects": [
+      "blue_light_lamp",
+      "table"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "blue_light_lamp",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "blue_light_lamp",
+        "affordance_region": "the blue light lamp",
+        "done_when": "distance(gripper, blue_light_lamp) < 0.03",
+        "affordance_hint": "the blue light lamp",
+        "refine_prompt": "the blue light lamp",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.1992,
+          0.8125
+        ],
+        "affordance_3d_refined": [
+          -0.0035,
+          0.0036,
+          0.01
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.3227,
+        "affordance": [
+          0.1992,
+          0.8125
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "blue_light_lamp"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "blue_light_lamp",
+        "affordance_region": "the base of the blue light lamp",
+        "done_when": "holding(blue_light_lamp)",
+        "affordance_hint": "the base of the blue light lamp",
+        "refine_prompt": "the base of the blue light lamp",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.1523,
+          0.9844
+        ],
+        "affordance_3d_refined": [
+          -0.004,
+          0.0056,
+          0.01
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.4099,
+        "affordance": [
+          0.1523,
+          0.9844
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "blue_light_lamp"
+              ],
+              "role": "safety"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "orientation_match",
+              "args": [
+                "blue_light_lamp",
+                "off_position"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "rotate",
+        "target": "blue_light_lamp",
+        "affordance_region": "the body of the blue light lamp",
+        "done_when": "orientation_match(blue_light_lamp, off_position)",
+        "affordance_hint": "the body of the blue light lamp",
+        "refine_prompt": "the body of the blue light lamp",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.3008,
+          0.9141
+        ],
+        "affordance_3d_refined": [
+          -0.3862,
+          0.8027,
+          1.6865
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.3236,
+        "affordance": [
+          0.3008,
+          0.9141
+        ]
+      }
+    ]
+  }
+}

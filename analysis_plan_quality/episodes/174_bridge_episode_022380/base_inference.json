@@ -1,0 +1,173 @@
+{
+  "task": "Place cucumber at diagonal angle at bottom right of table.",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_3epoch/best",
+  "raw": "**SCENE ANALYSIS -** A green cucumber, a red-handled fork, and a stainless steel pot are on a wooden table. The cucumber is a rigid, elongated object with a smooth surface. The task requires placing it at a diagonal angle at the bottom right of the table. The table surface is flat and provides a stable base. **STRATEGY -** First, reach for the cucumber, grasp it securely, then transport it to the bottom right corner of the table, and finally place it diagonally. Failure modes include dropping the cucumber during transport or misaligning it at the destination. **AFFORDANCE REASONING -** Step 1: Reach for the cucumber by its body. Step 2: Grasp the cucumber near its middle for stability. Step 3: Transport it diagonally to the bottom right corner. Step 4: Place it diagonally, ensuring it rests on the table surface.\n\nGoal: on(cucumber, table); stable(cucumber); angle(cucumber, diagonal)\nScene: cucumber, table\nStep 1: reach(cucumber)\n  affordance_region: the body of the cucumber\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, cucumber, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, cucumber) < 0.03\nStep 2: grasp(cucumber)\n  affordance_region: the middle of the cucumber\n  contact: holding(cucumber) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(cucumber)\nStep 3: transport(cucumber -> bottom_right_corner)\n  affordance_region: an empty area at the bottom right corner of the table\n  spatial: above(cucumber, bottom_right_corner, 0.05) [completion]\n  safety: no_drop(cucumber)\n  done_when: above(cucumber, bottom_right_corner, 0.05)\nStep 4: place(cucumber -> bottom_right_corner)\n  affordance_region: an empty area at the bottom right corner of the table\n  contact: surface_contact(cucumber, table) [completion]; released(cucumber) [completion]\n  pose: angle(cucumber, diagonal) [completion]\n  done_when: surface_contact(cucumber, table) AND released(cucumber) AND angle(cucumber, diagonal)\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [
+      {
+        "pred": "on",
+        "args": [
+          "cucumber",
+          "table"
+        ]
+      },
+      {
+        "pred": "stable",
+        "args": [
+          "cucumber"
+        ]
+      },
+      {
+        "pred": "angle",
+        "args": [
+          "cucumber",
+          "diagonal"
+        ]
+      }
+    ],
+    "scene_objects": [
+      "cucumber",
+      "table"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "cucumber",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "cucumber",
+        "affordance_region": "the body of the cucumber",
+        "done_when": "distance(gripper, cucumber) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "cucumber"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "cucumber",
+        "affordance_region": "the middle of the cucumber",
+        "done_when": "holding(cucumber)"
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "cucumber",
+                "bottom_right_corner",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "cucumber"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "cucumber",
+        "destination": "bottom_right_corner",
+        "affordance_region": "an empty area at the bottom right corner of the table",
+        "done_when": "above(cucumber, bottom_right_corner, 0.05)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "surface_contact",
+              "args": [
+                "cucumber",
+                "table"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "cucumber"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "angle",
+              "args": [
+                "cucumber",
+                "diagonal"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "place",
+        "target": "cucumber",
+        "destination": "bottom_right_corner",
+        "affordance_region": "an empty area at the bottom right corner of the table",
+        "done_when": "surface_contact(cucumber, table) AND released(cucumber) AND angle(cucumber, diagonal)"
+      }
+    ]
+  }
+}

@@ -1,0 +1,227 @@
+{
+  "task": "place the square bread in the sink",
+  "scene_objects": [
+    "square_bread",
+    "sink",
+    "table",
+    "robot_gripper"
+  ],
+  "steps": [
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "square_bread",
+              "<",
+              "0.03"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "approach_axis",
+            "args": [
+              "0",
+              "0",
+              "-1"
+            ],
+            "role": "progress"
+          }
+        ]
+      },
+      "step": 1,
+      "action": "reach",
+      "target": "square_bread",
+      "affordance_region": "the square bread",
+      "done_when": "distance(gripper, square_bread) < 0.03",
+      "affordance_hint": "the square bread",
+      "refine_prompt": "the square bread",
+      "refine_cache_hit": false,
+      "affordance_refined": [
+        0.8828,
+        0.4766
+      ],
+      "affordance_3d_refined": [
+        0.8741,
+        -0.0535,
+        1.9864
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.4083
+    },
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "square_bread"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              "0",
+              "0",
+              "-1"
+            ],
+            "role": "progress"
+          }
+        ]
+      },
+      "step": 2,
+      "action": "grasp",
+      "target": "square_bread",
+      "affordance_region": "the square bread",
+      "done_when": "holding(square_bread)",
+      "affordance_hint": "the square bread",
+      "refine_prompt": "the square bread",
+      "refine_cache_hit": true,
+      "affordance_refined": [
+        0.8828,
+        0.4766
+      ],
+      "affordance_3d_refined": [
+        0.8741,
+        -0.0535,
+        1.9864
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.4083
+    },
+    {
+      "constraints": {
+        "spatial": [
+          {
+            "pred": "above",
+            "args": [
+              "square_bread",
+              "sink",
+              "0.05"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_drop",
+            "args": [
+              "square_bread"
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "step": 3,
+      "action": "transport",
+      "target": "square_bread",
+      "destination": "sink",
+      "affordance_region": "an empty area on the sink",
+      "done_when": "above(square_bread, sink, 0.05)",
+      "affordance_hint": "an empty area on the sink",
+      "refine_prompt": "an empty area on the sink",
+      "refine_cache_hit": false,
+      "affordance_refined": [
+        0.6211,
+        0.3555
+      ],
+      "affordance_3d_refined": [
+        0.2084,
+        -0.2488,
+        1.4972
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.3202
+    },
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "surface_contact",
+            "args": [
+              "square_bread",
+              "sink"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "released",
+            "args": [
+              "square_bread"
+            ],
+            "role": "completion"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "stable",
+            "args": [
+              "square_bread"
+            ],
+            "role": "completion"
+          }
+        ]
+      },
+      "step": 4,
+      "action": "place",
+      "target": "square_bread",
+      "destination": "sink",
+      "affordance_region": "an empty area on the sink",
+      "done_when": "surface_contact(square_bread, sink) AND released(square_bread)",
+      "affordance_hint": "an empty area on the sink",
+      "refine_prompt": "an empty area on the sink",
+      "refine_cache_hit": true,
+      "affordance_refined": [
+        0.6211,
+        0.3555
+      ],
+      "affordance_3d_refined": [
+        0.2084,
+        -0.2488,
+        1.4972
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.3202
+    }
+  ]
+}

@@ -1,0 +1,172 @@
+{
+  "task": "Pick up the spoon and drop it at the bottom right corner",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_3epoch/best",
+  "raw": "**SCENE ANALYSIS -** A wooden table holds a metal bowl with a spoon inside, a red can, a yellow can, a tomato, a yellow banana, and a white mushroom. The spoon is inside the bowl, which is on a light blue cloth. The task is to pick up the spoon and place it at the bottom right corner of the table. The bowl is a container, so the spoon must be lifted from inside it. The destination is a specific area on the table, requiring precise placement. **STRATEGY -** First, reach for the bowl to grasp the spoon. Since the spoon is inside the bowl, the bowl must be lifted to access the spoon. Then, transport the spoon to the bottom right corner and place it there. Failure modes include dropping the spoon during transport or misplacing it. **AFFORDANCE REASONING -** Step 1: Reach for the bowl to grasp the spoon. The bowl's body is the target. Step 2: Grasp the bowl's handle to lift it. Step 3: Transport the bowl (with the spoon inside) to the destination area. Step 4: Place the spoon at the bottom right corner by releasing it from the bowl.\n\nGoal: on(spoon, table); at(spoon, bottom_right_corner)\nScene: spoon, bowl, table, red_can, yellow_can, tomato, banana, mushroom\nStep 1: reach(bowl)\n  affordance_region: the body of the bowl\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, bowl, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, bowl) < 0.03\nStep 2: grasp(bowl)\n  affordance_region: the handle of the bowl\n  contact: holding(bowl) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(bowl)\nStep 3: transport(bowl -> table)\n  affordance_region: an empty area at the bottom right corner of the table\n  spatial: above(bowl, table, 0.05) [completion]\n  safety: no_drop(bowl)\n  done_when: above(bowl, table, 0.05)\nStep 4: place(bowl -> table)\n  affordance_region: an empty area at the bottom right corner of the table\n  contact: surface_contact(bowl, table) [completion]; released(bowl) [completion]\n  pose: stable(bowl) [completion]\n  done_when: surface_contact(bowl, table) AND released(bowl)\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [
+      {
+        "pred": "on",
+        "args": [
+          "spoon",
+          "table"
+        ]
+      },
+      {
+        "pred": "at",
+        "args": [
+          "spoon",
+          "bottom_right_corner"
+        ]
+      }
+    ],
+    "scene_objects": [
+      "spoon",
+      "bowl",
+      "table",
+      "red_can",
+      "yellow_can",
+      "tomato",
+      "banana",
+      "mushroom"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "bowl",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "bowl",
+        "affordance_region": "the body of the bowl",
+        "done_when": "distance(gripper, bowl) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "bowl"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "bowl",
+        "affordance_region": "the handle of the bowl",
+        "done_when": "holding(bowl)"
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "bowl",
+                "table",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "bowl"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "bowl",
+        "destination": "table",
+        "affordance_region": "an empty area at the bottom right corner of the table",
+        "done_when": "above(bowl, table, 0.05)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "surface_contact",
+              "args": [
+                "bowl",
+                "table"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "bowl"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "bowl"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "place",
+        "target": "bowl",
+        "destination": "table",
+        "affordance_region": "an empty area at the bottom right corner of the table",
+        "done_when": "surface_contact(bowl, table) AND released(bowl)"
+      }
+    ]
+  }
+}

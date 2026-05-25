@@ -1,0 +1,246 @@
+{
+  "task": "Move the green napkin from left end to right end of the table.",
+  "parsed": {
+    "scene_objects": [
+      "green_napkin",
+      "blue_brush",
+      "yellow_object",
+      "metal_bowl",
+      "table"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "green_napkin",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "green_napkin",
+        "affordance_region": "the green napkin on the left side of the table",
+        "done_when": "distance(gripper, green_napkin) < 0.03",
+        "affordance_hint": "the green napkin on the left side of the table",
+        "refine_prompt": "the green napkin on the left side of the table",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.1055,
+          0.4805
+        ],
+        "affordance_3d_refined": [
+          -0.821,
+          -0.0406,
+          1.8103
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.8707,
+        "affordance": [
+          0.1055,
+          0.4805
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "green_napkin"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "green_napkin",
+        "affordance_region": "the corner of the green napkin",
+        "done_when": "holding(green_napkin)",
+        "affordance_hint": "the corner of the green napkin",
+        "refine_prompt": "the corner of the green napkin",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.1055,
+          0.4805
+        ],
+        "affordance_3d_refined": [
+          -0.821,
+          -0.0406,
+          1.8103
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.5326,
+        "affordance": [
+          0.1055,
+          0.4805
+        ]
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "green_napkin",
+                "table",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "green_napkin"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "green_napkin",
+        "destination": "right_end_of_table",
+        "affordance_region": "the right end of the wooden table",
+        "done_when": "above(green_napkin, table, 0.05) AND aligned_xy(green_napkin, right_end_of_table, 0.03)",
+        "affordance_hint": "the right end of the wooden table",
+        "refine_prompt": "the right end of the wooden table",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.4102,
+          0.6445
+        ],
+        "affordance_3d_refined": [
+          -0.2092,
+          0.3365,
+          2.0256
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.4062,
+        "affordance": [
+          0.4102,
+          0.6445
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "surface_contact",
+              "args": [
+                "green_napkin",
+                "table"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "green_napkin"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "green_napkin"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "place",
+        "target": "green_napkin",
+        "destination": "right_end_of_table",
+        "affordance_region": "the right end of the wooden table",
+        "done_when": "surface_contact(green_napkin, table) AND released(green_napkin) AND stable(green_napkin)",
+        "affordance_hint": "the right end of the wooden table",
+        "refine_prompt": "the right end of the wooden table",
+        "refine_cache_hit": true,
+        "affordance_refined": [
+          0.4102,
+          0.6445
+        ],
+        "affordance_3d_refined": [
+          -0.2092,
+          0.3365,
+          2.0256
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.4062,
+        "affordance": [
+          0.4102,
+          0.6445
+        ]
+      }
+    ]
+  }
+}

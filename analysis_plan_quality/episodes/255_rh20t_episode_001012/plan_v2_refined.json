@@ -1,0 +1,182 @@
+{
+  "task": "Play the drum",
+  "scene_objects": [
+    "drum",
+    "drumstick",
+    "table"
+  ],
+  "num_steps": 3,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "drumstick",
+      "affordance": [
+        0.403,
+        0.334
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "drumstick",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "table"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, drumstick) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        -0.9622,
+        -0.4168,
+        1.4189
+      ],
+      "affordance_hint": "the red drumstick",
+      "affordance_hint_original": "the drumstick",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 2,
+      "action": "grasp",
+      "target": "drumstick",
+      "affordance": [
+        0.4,
+        0.334
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "drumstick"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "holding",
+            "args": [
+              "drumstick"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              0,
+              0,
+              -1
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "holding(drumstick)",
+      "affordance_3d": [
+        -0.9667,
+        -0.4168,
+        1.4189
+      ],
+      "affordance_hint": "the red rubber grip of the drumstick",
+      "affordance_hint_original": "the handle of the drumstick",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 3,
+      "action": "push",
+      "target": "drum",
+      "affordance": [
+        0.525,
+        0.416
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "drumstick"
+            ],
+            "role": "safety"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "drumstick",
+              "drum",
+              "<",
+              0.05
+            ],
+            "role": "completion"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "stable",
+            "args": [
+              "drum"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "drumstick",
+              "drum"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(drumstick, drum) < 0.05 AND stable(drum)",
+      "affordance_3d": [
+        -1.1774,
+        -0.4684,
+        2.0256
+      ],
+      "affordance_hint": "the center of the red drum",
+      "affordance_hint_original": "the center of the drum",
+      "affordance_hint_confidence": "ok"
+    }
+  ]
+}

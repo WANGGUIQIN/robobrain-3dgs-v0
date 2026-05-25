@@ -1,0 +1,123 @@
+{
+  "task": "pick 7up can",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_3epoch/best",
+  "raw": "**SCENE ANALYSIS -** A can of 7UP is on a dark countertop. A red apple and a clear bottle are also present. The 7UP can is cylindrical with a label, the apple is round and red, and the bottle is transparent with a cap. The can is the target object. STRATEGY - Reach for the can, grasp it, and lift it. Failure modes include misreaching the can or dropping it. AFFORDANCE REASONING - Step 1 reach the can body; Step 2 grasp the can body for secure hold; Step 3 lift the can.\n\nGoal: held(7up_can)\nScene: 7up_can, apple, bottle, countertop\nStep 1: reach(7up_can)\n  affordance_region: the body of the 7up can\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, 7up_can, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, 7up_can) < 0.03\nStep 2: grasp(7up_can)\n  affordance_region: the body of the 7up can\n  contact: holding(7up_can) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(7up_can)\nStep 3: lift(7up_can)\n  affordance_region: the body of the 7up can\n  contact: holding(7up_can) [progress]\n  spatial: above(7up_can, countertop, 0.1) [completion]\n  done_when: above(7up_can, countertop, 0.1)\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [
+      {
+        "pred": "held",
+        "args": [
+          "7up_can"
+        ]
+      }
+    ],
+    "scene_objects": [
+      "7up_can",
+      "apple",
+      "bottle",
+      "countertop"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "7up_can",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "7up_can",
+        "affordance_region": "the body of the 7up can",
+        "done_when": "distance(gripper, 7up_can) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "7up_can"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "7up_can",
+        "affordance_region": "the body of the 7up can",
+        "done_when": "holding(7up_can)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "7up_can"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "7up_can",
+                "countertop",
+                "0.1"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "lift",
+        "target": "7up_can",
+        "affordance_region": "the body of the 7up can",
+        "done_when": "above(7up_can, countertop, 0.1)"
+      }
+    ]
+  }
+}

@@ -1,0 +1,223 @@
+{
+  "task": "flip cup upright",
+  "scene_objects": [
+    "pink_cup",
+    "sink",
+    "robot_gripper"
+  ],
+  "steps": [
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "pink_cup",
+              "<",
+              "0.03"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "approach_axis",
+            "args": [
+              "0",
+              "0",
+              "-1"
+            ],
+            "role": "progress"
+          }
+        ]
+      },
+      "step": 1,
+      "action": "reach",
+      "target": "pink_cup",
+      "affordance_region": "the body of the pink cup",
+      "done_when": "distance(gripper, pink_cup) < 0.03",
+      "affordance_hint": "the body of the pink cup",
+      "refine_prompt": "the body of the pink cup",
+      "refine_cache_hit": false,
+      "affordance_refined": [
+        0.5547,
+        0.7891
+      ],
+      "affordance_3d_refined": [
+        0.1089,
+        0.5755,
+        1.732
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.4476
+    },
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "pink_cup"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              "0",
+              "0",
+              "-1"
+            ],
+            "role": "progress"
+          }
+        ]
+      },
+      "step": 2,
+      "action": "grasp",
+      "target": "pink_cup",
+      "affordance_region": "the handle of the pink cup",
+      "done_when": "holding(pink_cup)",
+      "affordance_hint": "the handle of the pink cup",
+      "refine_prompt": "the handle of the pink cup",
+      "refine_cache_hit": false,
+      "affordance_refined": [
+        0.5938,
+        0.8711
+      ],
+      "affordance_3d_refined": [
+        0.1614,
+        0.6387,
+        1.4972
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.8496
+    },
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "pink_cup"
+            ],
+            "role": "safety"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "upright",
+            "args": [
+              "pink_cup"
+            ],
+            "role": "completion"
+          }
+        ]
+      },
+      "step": 3,
+      "action": "rotate",
+      "target": "pink_cup",
+      "affordance_region": "the body of the pink cup",
+      "done_when": "upright(pink_cup)",
+      "affordance_hint": "the body of the pink cup",
+      "refine_prompt": "the body of the pink cup",
+      "refine_cache_hit": true,
+      "affordance_refined": [
+        0.5547,
+        0.7891
+      ],
+      "affordance_3d_refined": [
+        0.1089,
+        0.5755,
+        1.732
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.4476
+    },
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "surface_contact",
+            "args": [
+              "pink_cup",
+              "sink"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "released",
+            "args": [
+              "pink_cup"
+            ],
+            "role": "completion"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "stable",
+            "args": [
+              "pink_cup"
+            ],
+            "role": "completion"
+          }
+        ]
+      },
+      "step": 4,
+      "action": "place",
+      "target": "pink_cup",
+      "destination": "sink",
+      "affordance_region": "an empty area on the sink",
+      "done_when": "surface_contact(pink_cup, sink) AND released(pink_cup) AND stable(pink_cup)",
+      "affordance_hint": "an empty area on the sink",
+      "refine_prompt": "an empty area on the sink",
+      "refine_cache_hit": false,
+      "affordance_refined": [
+        0.6875,
+        0.6641
+      ],
+      "affordance_3d_refined": [
+        0.3143,
+        0.275,
+        1.4581
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.4679
+    }
+  ]
+}

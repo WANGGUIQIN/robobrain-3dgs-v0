@@ -1,0 +1,239 @@
+{
+  "task": "Put the toilet paper on its holder",
+  "scene_objects": [
+    "toilet_paper",
+    "holder",
+    "table"
+  ],
+  "num_steps": 4,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "toilet_paper",
+      "affordance": [
+        0.352,
+        0.65
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "toilet_paper",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "holder"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, toilet_paper) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        -1.695,
+        -0.1032,
+        2.3582
+      ],
+      "affordance_hint": "the white cylindrical toilet paper",
+      "affordance_hint_original": "the toilet paper",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 2,
+      "action": "grasp",
+      "target": "toilet_paper",
+      "affordance": [
+        0.352,
+        0.65
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "toilet_paper"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "holding",
+            "args": [
+              "toilet_paper"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              0,
+              0,
+              -1
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "holding(toilet_paper)",
+      "affordance_3d": [
+        -1.695,
+        -0.1032,
+        2.3582
+      ],
+      "affordance_hint": "the white cylindrical toilet paper",
+      "affordance_hint_original": "toilet paper",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 3,
+      "action": "transport",
+      "target": "toilet_paper",
+      "destination": "holder",
+      "affordance": [
+        0.401,
+        0.401
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "toilet_paper"
+            ],
+            "role": "safety"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "above",
+            "args": [
+              "toilet_paper",
+              "holder",
+              0.05
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "toilet_paper",
+              "holder"
+            ]
+          },
+          {
+            "pred": "no_drop",
+            "args": [
+              "toilet_paper"
+            ]
+          }
+        ]
+      },
+      "done_when": "above(toilet_paper, holder, 0.05) AND aligned_xy(toilet_paper, holder, 0.03)",
+      "affordance_3d": [
+        -1.0418,
+        -0.3697,
+        1.5364
+      ],
+      "affordance_hint": "the empty area on the holder",
+      "affordance_hint_original": "an empty area on the holder",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 4,
+      "action": "place",
+      "target": "toilet_paper",
+      "destination": "holder",
+      "affordance": [
+        0.401,
+        0.401
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "surface_contact",
+            "args": [
+              "toilet_paper",
+              "holder"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "released",
+            "args": [
+              "toilet_paper"
+            ],
+            "role": "completion"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "stable",
+            "args": [
+              "toilet_paper"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "support_stable",
+            "args": [
+              "toilet_paper"
+            ]
+          }
+        ]
+      },
+      "done_when": "surface_contact(toilet_paper, holder) AND released(toilet_paper) AND stable(toilet_paper)",
+      "affordance_3d": [
+        -1.0418,
+        -0.3697,
+        1.5364
+      ],
+      "affordance_hint": "the empty area on the holder",
+      "affordance_hint_original": "an empty area on the holder",
+      "affordance_hint_confidence": "ok"
+    }
+  ]
+}

@@ -1,0 +1,148 @@
+{
+  "task": "pick green jalapeno chip bag from bottom drawer and place on counter",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_3epoch/best",
+  "raw": "**SCENE ANALYSIS -** A kitchen scene with a gray countertop, a sink, and a drawer. On the counter, there is a red apple and a white bowl. Inside the open drawer, a green jalapeno chip bag is visible. The task is to pick the chip bag from the drawer and place it on the counter. The drawer is open, so the chip bag is accessible. The counter is clear, providing a suitable destination. The chip bag is likely to be a soft, flexible object, so grasping it may require a gentle approach to avoid dropping it. The goal is to successfully transfer the chip bag from the drawer to the counter without any failure modes such as dropping or misplacing it.\n\n**STRATEGY -** The plan involves reaching into the drawer, grasping the chip bag, lifting it, and then placing it on the counter. The sequence is straightforward as there are no obstacles in the drawer or on the counter. The key is to ensure a secure grasp and a smooth transfer to avoid any issues.\n\n**AFFORDANCE REASONING -** Step 1 requires reaching into the drawer to access the chip bag. The affordance region is the body of the chip bag, as it is the main part to interact with. Step 2 involves grasping the chip bag, which can be done by holding its body. Step 3 is transporting the chip bag to the counter, where the affordance region is an empty area on the counter. Step 4 is placing the chip bag on the counter, which requires a stable surface contact.\n\n**Goal:** on(green_jalapeno_chip_bag, counter); stable(green_jalapeno_chip_bag)\n**Scene:** green_jalapeno_chip_bag, counter, drawer\n**Step 1:** reach(drawer)\n  affordance_region: the body of the green jalapeno chip bag\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, drawer, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, drawer) < 0.03\n**Step 2:** grasp(green_jalapeno_chip_bag)\n  affordance_region: the body of the green jalapeno chip bag\n  contact: holding(green_jalapeno_chip_bag) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(green_jalapeno_chip_bag)\n**Step 3:** transport(green_jalapeno_chip_bag -> counter)\n  affordance_region: an empty area on the counter\n  spatial: above(green_jalapeno_chip_bag, counter, 0.05) [completion]\n  safety: no_drop(green_jalapeno_chip_bag)\n  done_when: above(green_jalapeno_chip_bag, counter, 0.05)\n**Step 4:** place(green_jalapeno_chip_bag -> counter)\n  affordance_region: an empty area on the counter\n  contact: surface_contact(green_jalapeno_chip_bag, counter) [completion]; released(green_jalapeno_chip_bag) [completion]\n  pose: stable(green_jalapeno_chip_bag) [completion]\n  done_when: surface_contact(green_jalapeno_chip_bag, counter) AND released(green_jalapeno_chip_bag)\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [],
+    "scene_objects": [],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "drawer",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "drawer",
+        "affordance_region": "the body of the green jalapeno chip bag",
+        "done_when": "distance(gripper, drawer) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "green_jalapeno_chip_bag"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "green_jalapeno_chip_bag",
+        "affordance_region": "the body of the green jalapeno chip bag",
+        "done_when": "holding(green_jalapeno_chip_bag)"
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "green_jalapeno_chip_bag",
+                "counter",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "green_jalapeno_chip_bag"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "green_jalapeno_chip_bag",
+        "destination": "counter",
+        "affordance_region": "an empty area on the counter",
+        "done_when": "above(green_jalapeno_chip_bag, counter, 0.05)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "surface_contact",
+              "args": [
+                "green_jalapeno_chip_bag",
+                "counter"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "green_jalapeno_chip_bag"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "green_jalapeno_chip_bag"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "place",
+        "target": "green_jalapeno_chip_bag",
+        "destination": "counter",
+        "affordance_region": "an empty area on the counter",
+        "done_when": "surface_contact(green_jalapeno_chip_bag, counter) AND released(green_jalapeno_chip_bag)"
+      }
+    ]
+  }
+}

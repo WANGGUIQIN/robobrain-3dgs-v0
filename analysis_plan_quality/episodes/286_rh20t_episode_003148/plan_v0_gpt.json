@@ -1,0 +1,219 @@
+{
+  "task": "Dial a number on an old rotary phone",
+  "scene_objects": [
+    "rotary_phone",
+    "dial",
+    "table"
+  ],
+  "num_steps": 4,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "dial",
+      "affordance": [
+        0.666,
+        0.45
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "dial",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "rotary_phone"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, dial) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        -0.7202,
+        -0.3121,
+        1.5364
+      ],
+      "affordance_hint": "the dial"
+    },
+    {
+      "step": 2,
+      "action": "grasp",
+      "target": "dial",
+      "affordance": [
+        0.666,
+        0.437
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "dial"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "holding",
+            "args": [
+              "dial"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              0,
+              0,
+              -1
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "holding(dial)",
+      "affordance_3d": [
+        -0.6193,
+        -0.2807,
+        1.3211
+      ],
+      "affordance_hint": "the handle of the dial"
+    },
+    {
+      "step": 3,
+      "action": "rotate",
+      "target": "dial",
+      "affordance": [
+        0.666,
+        0.45
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "dial"
+            ],
+            "role": "safety"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "tilted",
+            "args": [
+              "dial"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "dial",
+              "rotary_phone"
+            ]
+          },
+          {
+            "pred": "force_limit",
+            "args": [
+              "dial"
+            ]
+          }
+        ]
+      },
+      "done_when": "dial_rotated_to_target_position",
+      "affordance_3d": [
+        -0.7202,
+        -0.3121,
+        1.5364
+      ],
+      "affordance_hint": "the body of the dial"
+    },
+    {
+      "step": 4,
+      "action": "release",
+      "target": "dial",
+      "affordance": [
+        0.666,
+        0.45
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "released",
+            "args": [
+              "dial"
+            ],
+            "role": "completion"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "stable",
+            "args": [
+              "dial"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "support_stable",
+            "args": [
+              "dial"
+            ]
+          }
+        ]
+      },
+      "done_when": "released(dial) AND stable(dial)",
+      "affordance_3d": [
+        -0.7202,
+        -0.3121,
+        1.5364
+      ],
+      "affordance_hint": "the dial"
+    }
+  ]
+}

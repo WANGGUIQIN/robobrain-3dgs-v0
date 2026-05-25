@@ -1,0 +1,203 @@
+{
+  "task": "screw in the azure light bulb",
+  "scene_objects": [
+    "azure_light_bulb",
+    "robot_arm",
+    "table"
+  ],
+  "num_steps": 4,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "azure_light_bulb",
+      "affordance": [
+        0.535,
+        0.937
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "azure_light_bulb",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "table"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, azure_light_bulb) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        0.3351,
+        4.1697,
+        4.7654
+      ],
+      "affordance_hint": "the body of the azure light bulb",
+      "affordance_hint_original": "the azure light bulb",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 2,
+      "action": "grasp",
+      "target": "azure_light_bulb",
+      "affordance": [
+        0.5,
+        0.1
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "azure_light_bulb"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "holding",
+            "args": [
+              "azure_light_bulb"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              0,
+              0,
+              -1
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "holding(azure_light_bulb)",
+      "affordance_3d": [
+        0.0,
+        -1.5173,
+        1.904
+      ],
+      "affordance_hint": "the white spherical body of the azure light bulb",
+      "affordance_hint_original": "the handle of the azure light bulb",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 3,
+      "action": "rotate",
+      "target": "azure_light_bulb",
+      "affordance": [
+        0.526,
+        0.281
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "azure_light_bulb"
+            ],
+            "role": "safety"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "upright",
+            "args": [
+              "azure_light_bulb"
+            ],
+            "role": "completion"
+          }
+        ]
+      },
+      "done_when": "screwed_in(azure_light_bulb)",
+      "affordance_3d": [
+        0.0376,
+        -0.3008,
+        0.6875
+      ],
+      "affordance_hint": "the body of the azure light bulb",
+      "affordance_hint_original": "the body of the azure light bulb",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 4,
+      "action": "release",
+      "target": "azure_light_bulb",
+      "affordance": [
+        0.535,
+        0.937
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "released",
+            "args": [
+              "azure_light_bulb"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_drop",
+            "args": [
+              "azure_light_bulb"
+            ]
+          }
+        ]
+      },
+      "done_when": "released(azure_light_bulb)",
+      "affordance_3d": [
+        0.3351,
+        4.1697,
+        4.7654
+      ],
+      "affordance_hint": "the body of the azure light bulb",
+      "affordance_hint_original": "the azure light bulb",
+      "affordance_hint_confidence": "ok"
+    }
+  ]
+}

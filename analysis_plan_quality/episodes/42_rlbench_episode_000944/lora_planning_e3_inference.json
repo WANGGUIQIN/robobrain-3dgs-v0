@@ -1,0 +1,152 @@
+{
+  "task": "put the chocolate jello in the cupboard",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_planning_3epoch/checkpoint-39957",
+  "raw": "Scene: chocolate_jello, cupboard, table\nStep 1: reach(chocolate_jello)\n  affordance_region: the body of the chocolate jello\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, chocolate_jello, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, chocolate_jello) < 0.03\nStep 2: grasp(chocolate_jello)\n  affordance_region: the body of the chocolate jello\n  contact: holding(chocolate_jello) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(chocolate_jello)\nStep 3: transport(chocolate_jello -> cupboard)\n  affordance_region: an empty area on the cupboard\n  spatial: above(chocolate_jello, cupboard, 0.05) [completion]\n  safety: no_drop(chocolate_jello)\n  done_when: above(chocolate_jello, cupboard, 0.05)\nStep 4: place(chocolate_jello -> cupboard)\n  affordance_region: an empty area on the cupboard\n  contact: surface_contact(chocolate_jello, cupboard) [completion]; released(chocolate_jello) [completion]\n  pose: stable(chocolate_jello) [completion]\n  done_when: surface_contact(chocolate_jello, cupboard) AND released(chocolate_jello)\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [],
+    "scene_objects": [
+      "chocolate_jello",
+      "cupboard",
+      "table"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "chocolate_jello",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "chocolate_jello",
+        "affordance_region": "the body of the chocolate jello",
+        "done_when": "distance(gripper, chocolate_jello) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "chocolate_jello"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "chocolate_jello",
+        "affordance_region": "the body of the chocolate jello",
+        "done_when": "holding(chocolate_jello)"
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "chocolate_jello",
+                "cupboard",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "chocolate_jello"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "chocolate_jello",
+        "destination": "cupboard",
+        "affordance_region": "an empty area on the cupboard",
+        "done_when": "above(chocolate_jello, cupboard, 0.05)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "surface_contact",
+              "args": [
+                "chocolate_jello",
+                "cupboard"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "chocolate_jello"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "chocolate_jello"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "place",
+        "target": "chocolate_jello",
+        "destination": "cupboard",
+        "affordance_region": "an empty area on the cupboard",
+        "done_when": "surface_contact(chocolate_jello, cupboard) AND released(chocolate_jello)"
+      }
+    ]
+  }
+}

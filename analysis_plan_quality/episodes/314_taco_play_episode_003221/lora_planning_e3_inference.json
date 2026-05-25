@@ -1,0 +1,105 @@
+{
+  "task": "push the door to the left",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_planning_3epoch/checkpoint-39957",
+  "raw": "Scene: door, robot_arm, table\nStep 1: reach(door)\n  affordance_region: the white door on the right side of the table\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, door, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, door) < 0.03\nStep 2: push(door)\n  affordance_region: the center of the white door\n  contact: gripper_contact(door) [completion]\n  spatial: aligned_xy(door, left_position, 0.03) [completion]\n  direction: motion_dir(left) [completion]\n  safety: no_collision(door, table)\n  done_when: aligned_xy(door, left_position, 0.03)\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [],
+    "scene_objects": [
+      "door",
+      "robot_arm",
+      "table"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "door",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "door",
+        "affordance_region": "the white door on the right side of the table",
+        "done_when": "distance(gripper, door) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_contact",
+              "args": [
+                "door"
+              ],
+              "role": "completion"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "aligned_xy",
+              "args": [
+                "door",
+                "left_position",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "motion_dir",
+              "args": [
+                "left"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_collision",
+              "args": [
+                "door",
+                "table"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "push",
+        "target": "door",
+        "affordance_region": "the center of the white door",
+        "done_when": "aligned_xy(door, left_position, 0.03)"
+      }
+    ]
+  }
+}

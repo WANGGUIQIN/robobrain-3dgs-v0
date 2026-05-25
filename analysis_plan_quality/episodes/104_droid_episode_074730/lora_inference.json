@@ -1,0 +1,183 @@
+{
+  "task": "Move the pineapple plushie to the right",
+  "parsed": {
+    "scene_objects": [
+      "pineapple_plushie",
+      "table"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "pineapple_plushie",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "pineapple_plushie",
+        "affordance_region": "the body of the pineapple plushie",
+        "done_when": "distance(gripper, pineapple_plushie) < 0.03",
+        "affordance_hint": "the body of the pineapple plushie",
+        "refine_prompt": "the body of the pineapple plushie",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.1211,
+          0.582
+        ],
+        "affordance_3d_refined": [
+          -2.7075,
+          0.6087,
+          4.1977
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.3195,
+        "affordance": [
+          0.1211,
+          0.582
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "pineapple_plushie"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "pineapple_plushie",
+        "affordance_region": "the body of the pineapple plushie",
+        "done_when": "holding(pineapple_plushie)",
+        "affordance_hint": "the body of the pineapple plushie",
+        "refine_prompt": "the body of the pineapple plushie",
+        "refine_cache_hit": true,
+        "affordance_refined": [
+          0.1211,
+          0.582
+        ],
+        "affordance_3d_refined": [
+          -2.7075,
+          0.6087,
+          4.1977
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.3195,
+        "affordance": [
+          0.1211,
+          0.582
+        ]
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "pineapple_plushie",
+                "table",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "pineapple_plushie"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "pineapple_plushie",
+        "destination": "right_side_of_table",
+        "affordance_region": "the right side of the table",
+        "done_when": "above(pineapple_plushie, table, 0.05)",
+        "affordance_hint": "the right side of the table",
+        "refine_prompt": "the right side of the table",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.9961,
+          0.9961
+        ],
+        "affordance_3d_refined": [
+          1.3525,
+          1.922,
+          2.8475
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.3924,
+        "affordance": [
+          0.9961,
+          0.9961
+        ]
+      }
+    ]
+  }
+}

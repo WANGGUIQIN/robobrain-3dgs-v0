@@ -1,0 +1,122 @@
+{
+  "task": "pick blue plastic bottle",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_3epoch/best",
+  "raw": "**SCENE ANALYSIS - A blue plastic bottle stands on a gray countertop. The bottle is rigid with a body suitable for grasping. STRATEGY - reach the bottle at its body for a stable grasp, lift it, and transport it to a destination (implied by the task). Failure modes include misgrasping the bottle or dropping it during transport. AFFORDANCE REASONING - Step 1 reach bottle body; Step 2 grasp body for secure hold; Step 3 transport to destination.**\nGoal: held(blue_plastic_bottle)\nScene: blue_plastic_bottle, countertop\nStep 1: reach(blue_plastic_bottle)\n  affordance_region: the body of the blue plastic bottle\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, blue_plastic_bottle, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, blue_plastic_bottle) < 0.03\nStep 2: grasp(blue_plastic_bottle)\n  affordance_region: the body of the blue plastic bottle\n  contact: holding(blue_plastic_bottle) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(blue_plastic_bottle)\nStep 3: transport(blue_plastic_bottle -> <destination>)\n  affordance_region: an empty area at the destination\n  spatial: above(blue_plastic_bottle, <destination>, 0.05) [completion]\n  safety: no_drop(blue_plastic_bottle)\n  done_when: above(blue_plastic_bottle, <destination>, 0.05)\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [
+      {
+        "pred": "held",
+        "args": [
+          "blue_plastic_bottle"
+        ]
+      }
+    ],
+    "scene_objects": [
+      "blue_plastic_bottle",
+      "countertop"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "blue_plastic_bottle",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "blue_plastic_bottle",
+        "affordance_region": "the body of the blue plastic bottle",
+        "done_when": "distance(gripper, blue_plastic_bottle) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "blue_plastic_bottle"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "blue_plastic_bottle",
+        "affordance_region": "the body of the blue plastic bottle",
+        "done_when": "holding(blue_plastic_bottle)"
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "blue_plastic_bottle",
+                "<destination>",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "blue_plastic_bottle"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "blue_plastic_bottle",
+        "destination": "<destination>",
+        "affordance_region": "an empty area at the destination",
+        "done_when": "above(blue_plastic_bottle, <destination>, 0.05)"
+      }
+    ]
+  }
+}

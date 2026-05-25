@@ -1,0 +1,245 @@
+{
+  "task": "put the cylinder in the shape sorter",
+  "parsed": {
+    "scene_objects": [
+      "cylinder",
+      "shape_sorter",
+      "table"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "cylinder",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "cylinder",
+        "affordance_region": "the small green cylinder",
+        "done_when": "distance(gripper, cylinder) < 0.03",
+        "affordance_hint": "the small green cylinder",
+        "refine_prompt": "the small green cylinder",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.4883,
+          0.0742
+        ],
+        "affordance_3d_refined": [
+          -0.0572,
+          -2.0799,
+          2.4424
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.3598,
+        "affordance": [
+          0.4883,
+          0.0742
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "cylinder"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "cylinder",
+        "affordance_region": "the top surface of the small green cylinder",
+        "done_when": "holding(cylinder)",
+        "affordance_hint": "the top surface of the small green cylinder",
+        "refine_prompt": "the top surface of the small green cylinder",
+        "refine_cache_hit": false,
+        "refine_prompt_fallback": "cylinder",
+        "affordance_refined": [
+          0.4883,
+          0.0742
+        ],
+        "affordance_3d_refined": [
+          -0.0572,
+          -2.0799,
+          2.4424
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.339,
+        "affordance": [
+          0.4883,
+          0.0742
+        ]
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "cylinder",
+                "shape_sorter",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "cylinder"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "cylinder",
+        "destination": "shape_sorter",
+        "affordance_region": "an empty area on the shape sorter",
+        "done_when": "above(cylinder, shape_sorter, 0.05)",
+        "affordance_hint": "an empty area on the shape sorter",
+        "refine_prompt": "an empty area on the shape sorter",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.082,
+          0.9961
+        ],
+        "affordance_3d_refined": [
+          -1.7454,
+          2.0717,
+          2.088
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.5044,
+        "affordance": [
+          0.082,
+          0.9961
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "inserted",
+              "args": [
+                "cylinder",
+                "shape_sorter"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "cylinder"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "cylinder"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "insert",
+        "target": "cylinder",
+        "destination": "shape_sorter",
+        "affordance_region": "the top opening of the brown shape sorter",
+        "done_when": "inserted(cylinder, shape_sorter) AND released(cylinder)",
+        "affordance_hint": "the top opening of the brown shape sorter",
+        "refine_prompt": "the top opening of the brown shape sorter",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.5742,
+          0.0742
+        ],
+        "affordance_3d_refined": [
+          0.3775,
+          -2.1659,
+          2.5434
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.344,
+        "affordance": [
+          0.5742,
+          0.0742
+        ]
+      }
+    ]
+  }
+}

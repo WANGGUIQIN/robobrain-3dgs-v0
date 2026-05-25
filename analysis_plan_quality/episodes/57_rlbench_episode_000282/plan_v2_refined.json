@@ -1,0 +1,239 @@
+{
+  "task": "screw in the yellow light bulb",
+  "scene_objects": [
+    "yellow_light_bulb",
+    "screw_base",
+    "robot_arm",
+    "table"
+  ],
+  "num_steps": 4,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "yellow_light_bulb",
+      "affordance": [
+        0.5,
+        0.75
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "yellow_light_bulb",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "screw_base"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, yellow_light_bulb) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        0.0,
+        1.0109,
+        2.0218
+      ],
+      "affordance_hint": "the yellow light bulb on the table",
+      "affordance_hint_original": "the yellow light bulb",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 2,
+      "action": "grasp",
+      "target": "yellow_light_bulb",
+      "affordance": [
+        0.5,
+        0.734
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "yellow_light_bulb"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "holding",
+            "args": [
+              "yellow_light_bulb"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              0,
+              0,
+              -1
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "holding(yellow_light_bulb)",
+      "affordance_3d": [
+        0.0,
+        1.2691,
+        2.7074
+      ],
+      "affordance_hint": "the base of the yellow light bulb",
+      "affordance_hint_original": "the handle of the yellow light bulb",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 3,
+      "action": "insert",
+      "target": "yellow_light_bulb",
+      "destination": "screw_base",
+      "affordance": [
+        0.234,
+        0.5
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "yellow_light_bulb"
+            ],
+            "role": "safety"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "above",
+            "args": [
+              "yellow_light_bulb",
+              "screw_base",
+              0.05
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "yellow_light_bulb",
+              "screw_base"
+            ]
+          },
+          {
+            "pred": "no_drop",
+            "args": [
+              "yellow_light_bulb"
+            ]
+          }
+        ]
+      },
+      "done_when": "above(yellow_light_bulb, screw_base, 0.05) AND aligned_xy(yellow_light_bulb, screw_base, 0.03)",
+      "affordance_3d": [
+        -2.1787,
+        0.0,
+        4.101
+      ],
+      "affordance_hint": "the top opening of the screw base",
+      "affordance_hint_original": "the top opening of the screw base",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 4,
+      "action": "rotate",
+      "target": "yellow_light_bulb",
+      "affordance": [
+        0.5,
+        0.75
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "surface_contact",
+            "args": [
+              "yellow_light_bulb",
+              "screw_base"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "released",
+            "args": [
+              "yellow_light_bulb"
+            ],
+            "role": "completion"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "stable",
+            "args": [
+              "yellow_light_bulb"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "support_stable",
+            "args": [
+              "yellow_light_bulb"
+            ]
+          }
+        ]
+      },
+      "done_when": "surface_contact(yellow_light_bulb, screw_base) AND released(yellow_light_bulb) AND stable(yellow_light_bulb)",
+      "affordance_3d": [
+        0.0,
+        1.0109,
+        2.0218
+      ],
+      "affordance_hint": "the body of the yellow light bulb",
+      "affordance_hint_original": "the body of the yellow light bulb",
+      "affordance_hint_confidence": "ok"
+    }
+  ]
+}

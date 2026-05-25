@@ -1,0 +1,230 @@
+{
+  "task": "Move the black spectacle case to the left side of the desk",
+  "scene_objects": [
+    "black_spectacle_case",
+    "desk",
+    "lamp",
+    "monitor",
+    "keyboard",
+    "cup"
+  ],
+  "steps": [
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "black_spectacle_case",
+              "<",
+              "0.03"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "approach_axis",
+            "args": [
+              "0",
+              "0",
+              "-1"
+            ],
+            "role": "progress"
+          }
+        ]
+      },
+      "step": 1,
+      "action": "reach",
+      "target": "black_spectacle_case",
+      "affordance_region": "the black spectacle case",
+      "done_when": "distance(gripper, black_spectacle_case) < 0.03",
+      "affordance_hint": "the black spectacle case",
+      "refine_prompt": "the black spectacle case",
+      "refine_cache_hit": false,
+      "refine_prompt_fallback": "black spectacle case",
+      "affordance_refined": [
+        0.3086,
+        0.9766
+      ],
+      "affordance_3d_refined": [
+        -1.5495,
+        2.4868,
+        3.8259
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.2509
+    },
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "black_spectacle_case"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              "0",
+              "0",
+              "-1"
+            ],
+            "role": "progress"
+          }
+        ]
+      },
+      "step": 2,
+      "action": "grasp",
+      "target": "black_spectacle_case",
+      "affordance_region": "the handle of the black spectacle case",
+      "done_when": "holding(black_spectacle_case)",
+      "affordance_hint": "the handle of the black spectacle case",
+      "refine_prompt": "the handle of the black spectacle case",
+      "refine_cache_hit": false,
+      "affordance_refined": [
+        0.3086,
+        0.9766
+      ],
+      "affordance_3d_refined": [
+        -1.5495,
+        2.4868,
+        3.8259
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.3313
+    },
+    {
+      "constraints": {
+        "spatial": [
+          {
+            "pred": "above",
+            "args": [
+              "black_spectacle_case",
+              "desk",
+              "0.05"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_drop",
+            "args": [
+              "black_spectacle_case"
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "step": 3,
+      "action": "transport",
+      "target": "black_spectacle_case",
+      "destination": "left_side_of_desk",
+      "affordance_region": "the left side of the desk",
+      "done_when": "above(black_spectacle_case, desk, 0.05)",
+      "affordance_hint": "the left side of the desk",
+      "refine_prompt": "the left side of the desk",
+      "refine_cache_hit": false,
+      "affordance_refined": [
+        0.6289,
+        0.8164
+      ],
+      "affordance_3d_refined": [
+        0.0134,
+        1.1887,
+        2.6713
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.3758
+    },
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "surface_contact",
+            "args": [
+              "black_spectacle_case",
+              "desk"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "released",
+            "args": [
+              "black_spectacle_case"
+            ],
+            "role": "completion"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "stable",
+            "args": [
+              "black_spectacle_case"
+            ],
+            "role": "completion"
+          }
+        ]
+      },
+      "step": 4,
+      "action": "place",
+      "target": "black_spectacle_case",
+      "destination": "left_side_of_desk",
+      "affordance_region": "the left side of the desk",
+      "done_when": "surface_contact(black_spectacle_case, desk) AND released(black_spectacle_case) AND stable(black_spectacle_case)",
+      "affordance_hint": "the left side of the desk",
+      "refine_prompt": "the left side of the desk",
+      "refine_cache_hit": true,
+      "affordance_refined": [
+        0.6289,
+        0.8164
+      ],
+      "affordance_3d_refined": [
+        0.0134,
+        1.1887,
+        2.6713
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.3758
+    }
+  ]
+}

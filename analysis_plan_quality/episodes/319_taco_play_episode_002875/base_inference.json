@@ -1,0 +1,18 @@
+{
+  "task": "place the yellow object on the table",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_3epoch/best",
+  "raw": "**SCENE ANALYSIS -** A white cabinet with open shelves is visible. On the top shelf, there is a small red object. On the bottom shelf, a white plastic container is present. The cabinet door has a black handle. The floor is a light brown color. The yellow object is not visible in the scene, so it must be located outside the current view. STRATEGY - Since the yellow object is not in the scene, the task cannot be completed with the available information. AFFORDANCE REASONING - The scene analysis shows no yellow object, so no manipulation steps can be planned.\n\nGoal: <pred>(<args>); <pred>(<args>); ...\nScene: white_cabinet, top_shelf, bottom_shelf, red_object, white_plastic_container, cabinet_door\nStep 1: <action>(<target>)\n  affordance_region: <specific, visually distinctive part description>\n  contact: <pred>(<args>) [<role>]; ...\n  spatial: <pred>(<args>) [<role>]; ...\n  direction: <pred>(<args>) [<role>]; ...\n  safety: <pred>(<args>); ...\n  done_when: <expression>\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [],
+    "scene_objects": [
+      "white_cabinet",
+      "top_shelf",
+      "bottom_shelf",
+      "red_object",
+      "white_plastic_container",
+      "cabinet_door"
+    ],
+    "steps": []
+  }
+}

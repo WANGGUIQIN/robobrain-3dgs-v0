@@ -1,0 +1,244 @@
+{
+  "task": "place the milk dairy in the blue bowl",
+  "parsed": {
+    "scene_objects": [
+      "red_milk_dairy",
+      "blue_bowl",
+      "table"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "red_milk_dairy",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "red_milk_dairy",
+        "affordance_region": "the body of the red milk dairy",
+        "done_when": "distance(gripper, red_milk_dairy) < 0.03",
+        "affordance_hint": "the body of the red milk dairy",
+        "refine_prompt": "the body of the red milk dairy",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.8555,
+          0.3789
+        ],
+        "affordance_3d_refined": [
+          1.0996,
+          -0.3746,
+          2.6909
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.5398,
+        "affordance": [
+          0.8555,
+          0.3789
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "red_milk_dairy"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "red_milk_dairy",
+        "affordance_region": "the body of the red milk dairy",
+        "done_when": "holding(red_milk_dairy)",
+        "affordance_hint": "the body of the red milk dairy",
+        "refine_prompt": "the body of the red milk dairy",
+        "refine_cache_hit": true,
+        "affordance_refined": [
+          0.8555,
+          0.3789
+        ],
+        "affordance_3d_refined": [
+          1.0996,
+          -0.3746,
+          2.6909
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.5398,
+        "affordance": [
+          0.8555,
+          0.3789
+        ]
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "red_milk_dairy",
+                "blue_bowl",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "red_milk_dairy"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "red_milk_dairy",
+        "destination": "blue_bowl",
+        "affordance_region": "an empty area on the blue bowl",
+        "done_when": "above(red_milk_dairy, blue_bowl, 0.05)",
+        "affordance_hint": "an empty area on the blue bowl",
+        "refine_prompt": "an empty area on the blue bowl",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.9453,
+          0.457
+        ],
+        "affordance_3d_refined": [
+          1.2673,
+          -0.1223,
+          2.4756
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.4932,
+        "affordance": [
+          0.9453,
+          0.457
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "surface_contact",
+              "args": [
+                "red_milk_dairy",
+                "blue_bowl"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "red_milk_dairy"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "red_milk_dairy"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "place",
+        "target": "red_milk_dairy",
+        "destination": "blue_bowl",
+        "affordance_region": "an empty area on the blue bowl",
+        "done_when": "surface_contact(red_milk_dairy, blue_bowl) AND released(red_milk_dairy)",
+        "affordance_hint": "an empty area on the blue bowl",
+        "refine_prompt": "an empty area on the blue bowl",
+        "refine_cache_hit": true,
+        "affordance_refined": [
+          0.9453,
+          0.457
+        ],
+        "affordance_3d_refined": [
+          1.2673,
+          -0.1223,
+          2.4756
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.4932,
+        "affordance": [
+          0.9453,
+          0.457
+        ]
+      }
+    ]
+  }
+}

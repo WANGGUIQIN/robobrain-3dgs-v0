@@ -1,0 +1,113 @@
+{
+  "task": "turn right tap",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_planning_3epoch/checkpoint-39957",
+  "raw": "Scene: tap, table\nStep 1: reach(tap)\n  affordance_region: the body of the white tap\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, tap, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, tap) < 0.03\nStep 2: grasp(tap)\n  affordance_region: the handle of the white tap\n  contact: holding(tap) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(tap)\nStep 3: rotate(tap)\n  affordance_region: the body of the white tap\n  contact: holding(tap) [safety]\n  direction: motion_dir(tap, right) [completion]\n  done_when: tap_rotated(tap, right)\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [],
+    "scene_objects": [
+      "tap",
+      "table"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "tap",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "tap",
+        "affordance_region": "the body of the white tap",
+        "done_when": "distance(gripper, tap) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "tap"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "tap",
+        "affordance_region": "the handle of the white tap",
+        "done_when": "holding(tap)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "tap"
+              ],
+              "role": "safety"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "motion_dir",
+              "args": [
+                "tap",
+                "right"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "rotate",
+        "target": "tap",
+        "affordance_region": "the body of the white tap",
+        "done_when": "tap_rotated(tap, right)"
+      }
+    ]
+  }
+}

@@ -1,0 +1,231 @@
+{
+  "task": "take the chicken off the grill",
+  "scene_objects": [
+    "grill",
+    "chicken",
+    "robot"
+  ],
+  "num_steps": 4,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "chicken",
+      "affordance": [
+        0.453,
+        0.102
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "chicken",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "grill"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, chicken) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        -0.3286,
+        -2.7934,
+        3.5054
+      ],
+      "affordance_hint": "the chicken"
+    },
+    {
+      "step": 2,
+      "action": "grasp",
+      "target": "chicken",
+      "affordance": [
+        0.402,
+        0.402
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "chicken"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "holding",
+            "args": [
+              "chicken"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              0,
+              0,
+              -1
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "holding(chicken)",
+      "affordance_3d": [
+        -0.7042,
+        -0.7042,
+        3.6053
+      ],
+      "affordance_hint": "the handle of the chicken"
+    },
+    {
+      "step": 3,
+      "action": "transport",
+      "target": "chicken",
+      "destination": "table",
+      "affordance": [
+        0.5,
+        0.75
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "chicken"
+            ],
+            "role": "safety"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "above",
+            "args": [
+              "chicken",
+              "table",
+              0.05
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "chicken",
+              "table"
+            ]
+          },
+          {
+            "pred": "no_drop",
+            "args": [
+              "chicken"
+            ]
+          }
+        ]
+      },
+      "done_when": "above(chicken, table, 0.05) AND aligned_xy(chicken, table, 0.03)",
+      "affordance_3d": [
+        0.0,
+        2.2318,
+        4.4637
+      ],
+      "affordance_hint": "an empty area on the table"
+    },
+    {
+      "step": 4,
+      "action": "place",
+      "target": "chicken",
+      "destination": "table",
+      "affordance": [
+        0.5,
+        0.75
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "surface_contact",
+            "args": [
+              "chicken",
+              "table"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "released",
+            "args": [
+              "chicken"
+            ],
+            "role": "completion"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "stable",
+            "args": [
+              "chicken"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "support_stable",
+            "args": [
+              "chicken"
+            ]
+          }
+        ]
+      },
+      "done_when": "surface_contact(chicken, table) AND released(chicken) AND stable(chicken)",
+      "affordance_3d": [
+        0.0,
+        2.2318,
+        4.4637
+      ],
+      "affordance_hint": "an empty area on the table"
+    }
+  ]
+}

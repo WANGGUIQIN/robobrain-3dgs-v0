@@ -1,0 +1,223 @@
+{
+  "task": "place redbull can upright",
+  "scene_objects": [
+    "redbull_can",
+    "table"
+  ],
+  "steps": [
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "redbull_can",
+              "<",
+              "0.03"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "approach_axis",
+            "args": [
+              "0",
+              "0",
+              "-1"
+            ],
+            "role": "progress"
+          }
+        ]
+      },
+      "step": 1,
+      "action": "reach",
+      "target": "redbull_can",
+      "affordance_region": "the body of the redbull can",
+      "done_when": "distance(gripper, redbull_can) < 0.03",
+      "affordance_hint": "the body of the redbull can",
+      "refine_prompt": "the body of the redbull can",
+      "refine_cache_hit": false,
+      "refine_prompt_fallback": "redbull can",
+      "affordance_refined": [
+        0.6172,
+        0.6641
+      ],
+      "affordance_3d_refined": [
+        0.663,
+        0.9282,
+        4.9217
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.4206
+    },
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "redbull_can"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              "0",
+              "0",
+              "-1"
+            ],
+            "role": "progress"
+          }
+        ]
+      },
+      "step": 2,
+      "action": "grasp",
+      "target": "redbull_can",
+      "affordance_region": "the body of the redbull can",
+      "done_when": "holding(redbull_can)",
+      "affordance_hint": "the body of the redbull can",
+      "refine_prompt": "the body of the redbull can",
+      "refine_cache_hit": true,
+      "affordance_refined": [
+        0.6172,
+        0.6641
+      ],
+      "affordance_3d_refined": [
+        0.663,
+        0.9282,
+        4.9217
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.4206
+    },
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "redbull_can"
+            ],
+            "role": "safety"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "upright",
+            "args": [
+              "redbull_can"
+            ],
+            "role": "completion"
+          }
+        ]
+      },
+      "step": 3,
+      "action": "rotate",
+      "target": "redbull_can",
+      "affordance_region": "the body of the redbull can",
+      "done_when": "upright(redbull_can)",
+      "affordance_hint": "the body of the redbull can",
+      "refine_prompt": "the body of the redbull can",
+      "refine_cache_hit": true,
+      "affordance_refined": [
+        0.6172,
+        0.6641
+      ],
+      "affordance_3d_refined": [
+        0.663,
+        0.9282,
+        4.9217
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.4206
+    },
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "surface_contact",
+            "args": [
+              "redbull_can",
+              "table"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "released",
+            "args": [
+              "redbull_can"
+            ],
+            "role": "completion"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "stable",
+            "args": [
+              "redbull_can"
+            ],
+            "role": "completion"
+          }
+        ]
+      },
+      "step": 4,
+      "action": "place",
+      "target": "redbull_can",
+      "destination": "table",
+      "affordance_region": "an empty area on the table",
+      "done_when": "surface_contact(redbull_can, table) AND released(redbull_can) AND stable(redbull_can)",
+      "affordance_hint": "an empty area on the table",
+      "refine_prompt": "an empty area on the table",
+      "refine_cache_hit": false,
+      "affordance_refined": [
+        0.3711,
+        0.582
+      ],
+      "affordance_3d_refined": [
+        -0.5118,
+        0.3257,
+        3.4541
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.4041
+    }
+  ]
+}

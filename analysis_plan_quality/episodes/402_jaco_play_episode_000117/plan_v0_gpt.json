@@ -1,0 +1,116 @@
+{
+  "task": "pick up the orange fruit",
+  "scene_objects": [
+    "orange_fruit",
+    "white_bowl",
+    "blue tray",
+    "black bowl",
+    "table"
+  ],
+  "num_steps": 2,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "orange_fruit",
+      "affordance": [
+        0.477,
+        0.619
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "orange_fruit",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "table"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, orange_fruit) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        -0.1062,
+        0.5312,
+        3.9433
+      ],
+      "affordance_hint": "the orange fruit"
+    },
+    {
+      "step": 2,
+      "action": "grasp",
+      "target": "orange_fruit",
+      "affordance": [
+        0.477,
+        0.619
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "orange_fruit"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "holding",
+            "args": [
+              "orange_fruit"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              0,
+              0,
+              -1
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "holding(orange_fruit)",
+      "affordance_3d": [
+        -0.1062,
+        0.5312,
+        3.9433
+      ],
+      "affordance_hint": "orange fruit"
+    }
+  ]
+}

@@ -1,0 +1,178 @@
+{
+  "task": "go towards the yellow block and lift it",
+  "scene_objects": [
+    "yellow_block",
+    "table",
+    "robot_gripper"
+  ],
+  "num_steps": 3,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "yellow_block",
+      "affordance": [
+        0.33,
+        0.425
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "yellow_block",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "yellow_block"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, yellow_block) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        -0.3586,
+        -0.1548,
+        1.815
+      ],
+      "affordance_hint": "the yellow block",
+      "affordance_hint_original": "the yellow block",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 2,
+      "action": "grasp",
+      "target": "yellow_block",
+      "affordance": [
+        0.33,
+        0.419
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "yellow_block"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "holding",
+            "args": [
+              "yellow_block"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              0,
+              0,
+              -1
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "holding(yellow_block)",
+      "affordance_3d": [
+        -0.3699,
+        -0.1765,
+        1.872
+      ],
+      "affordance_hint": "the yellow block",
+      "affordance_hint_original": "yellow block",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 3,
+      "action": "lift",
+      "target": "yellow_block",
+      "affordance": [
+        0.33,
+        0.419
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "yellow_block"
+            ],
+            "role": "safety"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "above",
+            "args": [
+              "yellow_block",
+              "table",
+              0.1
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "yellow_block",
+              "table"
+            ]
+          },
+          {
+            "pred": "no_drop",
+            "args": [
+              "yellow_block"
+            ]
+          }
+        ]
+      },
+      "done_when": "above(yellow_block, table, 0.10)",
+      "affordance_3d": [
+        -0.3699,
+        -0.1765,
+        1.872
+      ],
+      "affordance_hint": "the yellow block",
+      "affordance_hint_original": "yellow block",
+      "affordance_hint_confidence": "ok"
+    }
+  ]
+}

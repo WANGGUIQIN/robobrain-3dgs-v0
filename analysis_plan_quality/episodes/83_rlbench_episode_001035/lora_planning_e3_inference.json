@@ -1,0 +1,152 @@
+{
+  "task": "put the item in the middle drawer",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_planning_3epoch/checkpoint-39957",
+  "raw": "Scene: item, middle_drawer, table\nStep 1: reach(item)\n  affordance_region: the small purple item on the table\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, item, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, item) < 0.03\nStep 2: grasp(item)\n  affordance_region: the small purple item\n  contact: holding(item) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(item)\nStep 3: transport(item -> middle_drawer)\n  affordance_region: the empty area on the middle drawer\n  spatial: above(item, middle_drawer, 0.05) [completion]\n  safety: no_drop(item)\n  done_when: above(item, middle_drawer, 0.05)\nStep 4: place(item -> middle_drawer)\n  affordance_region: the empty area on the middle drawer\n  contact: surface_contact(item, middle_drawer) [completion]; released(item) [completion]\n  pose: stable(item) [completion]\n  done_when: surface_contact(item, middle_drawer) AND released(item)\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [],
+    "scene_objects": [
+      "item",
+      "middle_drawer",
+      "table"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "item",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "item",
+        "affordance_region": "the small purple item on the table",
+        "done_when": "distance(gripper, item) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "item"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "item",
+        "affordance_region": "the small purple item",
+        "done_when": "holding(item)"
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "item",
+                "middle_drawer",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "item"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "item",
+        "destination": "middle_drawer",
+        "affordance_region": "the empty area on the middle drawer",
+        "done_when": "above(item, middle_drawer, 0.05)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "surface_contact",
+              "args": [
+                "item",
+                "middle_drawer"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "item"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "item"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "place",
+        "target": "item",
+        "destination": "middle_drawer",
+        "affordance_region": "the empty area on the middle drawer",
+        "done_when": "surface_contact(item, middle_drawer) AND released(item)"
+      }
+    ]
+  }
+}

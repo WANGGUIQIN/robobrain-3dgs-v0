@@ -1,0 +1,240 @@
+{
+  "task": "Place the blue cloth between the pot and tin cans",
+  "scene_objects": [
+    "blue_cloth",
+    "pot",
+    "tin_cans",
+    "table"
+  ],
+  "num_steps": 4,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "blue_cloth",
+      "affordance": [
+        0.25,
+        0.343
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "blue_cloth",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "pot"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, blue_cloth) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        -0.6046,
+        -0.3779,
+        2.1038
+      ],
+      "affordance_hint": "the blue cloth",
+      "affordance_hint_original": "the blue cloth",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 2,
+      "action": "grasp",
+      "target": "blue_cloth",
+      "affordance": [
+        0.25,
+        0.343
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "blue_cloth"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "holding",
+            "args": [
+              "blue_cloth"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              0,
+              0,
+              -1
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "holding(blue_cloth)",
+      "affordance_3d": [
+        -0.6046,
+        -0.3779,
+        2.1038
+      ],
+      "affordance_hint": "the light blue cloth on the table",
+      "affordance_hint_original": "blue cloth",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 3,
+      "action": "transport",
+      "target": "blue_cloth",
+      "destination": "between_pot_and_tin_cans",
+      "affordance": [
+        0.642,
+        0.401
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "blue_cloth"
+            ],
+            "role": "safety"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "above",
+            "args": [
+              "blue_cloth",
+              "table",
+              0.05
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "blue_cloth",
+              "tin_cans"
+            ]
+          },
+          {
+            "pred": "no_drop",
+            "args": [
+              "blue_cloth"
+            ]
+          }
+        ]
+      },
+      "done_when": "above(blue_cloth, table, 0.05) AND aligned_xy(blue_cloth, between_pot_and_tin_cans, 0.03)",
+      "affordance_3d": [
+        0.3433,
+        -0.2384,
+        2.1234
+      ],
+      "affordance_hint": "the empty area on the table between the pot and the tin cans",
+      "affordance_hint_original": "an empty area on the between pot and tin cans",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 4,
+      "action": "place",
+      "target": "blue_cloth",
+      "destination": "between_pot_and_tin_cans",
+      "affordance": [
+        0.642,
+        0.401
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "surface_contact",
+            "args": [
+              "blue_cloth",
+              "table"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "released",
+            "args": [
+              "blue_cloth"
+            ],
+            "role": "completion"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "stable",
+            "args": [
+              "blue_cloth"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "support_stable",
+            "args": [
+              "blue_cloth"
+            ]
+          }
+        ]
+      },
+      "done_when": "surface_contact(blue_cloth, table) AND released(blue_cloth) AND stable(blue_cloth)",
+      "affordance_3d": [
+        0.3433,
+        -0.2384,
+        2.1234
+      ],
+      "affordance_hint": "the empty area on the table between the pot and the tin cans",
+      "affordance_hint_original": "an empty area on the between pot and tin cans",
+      "affordance_hint_confidence": "ok"
+    }
+  ]
+}

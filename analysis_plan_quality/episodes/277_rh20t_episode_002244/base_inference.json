@@ -1,0 +1,136 @@
+{
+  "task": "Turn the knob to decrease the volume of the speaker",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_3epoch/best",
+  "raw": "The user wants to turn the knob to decrease the volume of the speaker. The scene shows a white speaker on a desk with a black knob on its front panel. The task requires interacting with the knob, which is a small, circular component on the speaker's body. The strategy involves reaching for the knob, grasping it, and then rotating it to decrease the volume. Failure modes could include misaligning the gripper with the knob or applying the wrong direction of rotation. The affordance for interacting with the knob is its circular surface, which is distinct from the speaker's body.\n\nGoal: volume_decrease(speaker); stable(speaker)\nScene: speaker, desk\nStep 1: reach(speaker)\n  affordance_region: the front panel of the speaker\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, speaker, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, speaker) < 0.03\nStep 2: grasp(speaker)\n  affordance_region: the circular knob on the speaker's front panel\n  contact: holding(speaker) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(speaker)\nStep 3: rotate(speaker)\n  affordance_region: the circular knob on the speaker's front panel\n  contact: holding(speaker) [progress]\n  direction: rotate_axis(0, 0, -1) [progress]\n  safety: no_drop(speaker)\n  done_when: volume_decrease(speaker)\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [
+      {
+        "pred": "volume_decrease",
+        "args": [
+          "speaker"
+        ]
+      },
+      {
+        "pred": "stable",
+        "args": [
+          "speaker"
+        ]
+      }
+    ],
+    "scene_objects": [
+      "speaker",
+      "desk"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "speaker",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "speaker",
+        "affordance_region": "the front panel of the speaker",
+        "done_when": "distance(gripper, speaker) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "speaker"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "speaker",
+        "affordance_region": "the circular knob on the speaker's front panel",
+        "done_when": "holding(speaker)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "speaker"
+              ],
+              "role": "progress"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "rotate_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "speaker"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "rotate",
+        "target": "speaker",
+        "affordance_region": "the circular knob on the speaker's front panel",
+        "done_when": "volume_decrease(speaker)"
+      }
+    ]
+  }
+}

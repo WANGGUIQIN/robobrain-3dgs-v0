@@ -1,0 +1,114 @@
+{
+  "task": "pick coke can",
+  "scene_objects": [
+    "coke_can",
+    "other_can",
+    "table"
+  ],
+  "num_steps": 2,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "coke_can",
+      "affordance": [
+        0.742,
+        0.515
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "coke_can",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "table"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, coke_can) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        1.3757,
+        0.0888,
+        4.9413
+      ],
+      "affordance_hint": "the coke can"
+    },
+    {
+      "step": 2,
+      "action": "grasp",
+      "target": "coke_can",
+      "affordance": [
+        0.742,
+        0.5
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "coke_can"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "holding",
+            "args": [
+              "coke_can"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              0,
+              0,
+              -1
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "holding(coke_can)",
+      "affordance_3d": [
+        1.3866,
+        0.0,
+        4.9804
+      ],
+      "affordance_hint": "the handle of the coke can"
+    }
+  ]
+}

@@ -1,0 +1,177 @@
+{
+  "task": "pick up the milk dairy",
+  "scene_objects": [
+    "milk_dairy",
+    "plate",
+    "table",
+    "toaster",
+    "blue_bin",
+    "red_object",
+    "green_cup"
+  ],
+  "num_steps": 3,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "milk_dairy",
+      "affordance": [
+        0.553,
+        0.344
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "milk_dairy",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "milk_dairy"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, milk_dairy) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        0.1384,
+        -0.3955,
+        2.2017
+      ],
+      "affordance_hint": "the milk dairy"
+    },
+    {
+      "step": 2,
+      "action": "grasp",
+      "target": "milk_dairy",
+      "affordance": [
+        0.553,
+        0.352
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "milk_dairy"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "holding",
+            "args": [
+              "milk_dairy"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              0,
+              0,
+              -1
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "holding(milk_dairy)",
+      "affordance_3d": [
+        0.1409,
+        -0.3824,
+        2.2408
+      ],
+      "affordance_hint": "milk dairy"
+    },
+    {
+      "step": 3,
+      "action": "transport",
+      "target": "milk_dairy",
+      "destination": "above_table",
+      "affordance": [
+        0.375,
+        0.575
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "milk_dairy"
+            ],
+            "role": "safety"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "above",
+            "args": [
+              "milk_dairy",
+              "table",
+              0.05
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "milk_dairy",
+              "table"
+            ]
+          },
+          {
+            "pred": "no_drop",
+            "args": [
+              "milk_dairy"
+            ]
+          }
+        ]
+      },
+      "done_when": "above(milk_dairy, table, 0.05)",
+      "affordance_3d": [
+        -0.4345,
+        0.258,
+        3.0236
+      ],
+      "affordance_hint": "an empty area on the above table"
+    }
+  ]
+}

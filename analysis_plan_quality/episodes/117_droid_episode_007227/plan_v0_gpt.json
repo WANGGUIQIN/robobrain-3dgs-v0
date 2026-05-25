@@ -1,0 +1,165 @@
+{
+  "task": "Turn the object on the arm of the sofa towards the left",
+  "scene_objects": [
+    "object_on_sofa_arm",
+    "sofa",
+    "robot_arm"
+  ],
+  "num_steps": 3,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "object_on_sofa_arm",
+      "affordance": [
+        0.6,
+        0.775
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "object_on_sofa_arm",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "sofa"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, object_on_sofa_arm) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        -0.0848,
+        1.1029,
+        2.8279
+      ],
+      "affordance_hint": "the object on sofa arm"
+    },
+    {
+      "step": 2,
+      "action": "grasp",
+      "target": "object_on_sofa_arm",
+      "affordance": [
+        0.6,
+        0.77
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "object_on_sofa_arm"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "holding",
+            "args": [
+              "object_on_sofa_arm"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              0,
+              0,
+              -1
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "holding(object_on_sofa_arm)",
+      "affordance_3d": [
+        -0.0842,
+        1.0812,
+        2.8083
+      ],
+      "affordance_hint": "the handle of the object on sofa arm"
+    },
+    {
+      "step": 3,
+      "action": "rotate",
+      "target": "object_on_sofa_arm",
+      "affordance": [
+        0.6,
+        0.75
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "object_on_sofa_arm"
+            ],
+            "role": "safety"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "orientation_match",
+            "args": [
+              "object_on_sofa_arm",
+              "left_direction"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "object_on_sofa_arm",
+              "sofa"
+            ]
+          }
+        ]
+      },
+      "done_when": "orientation_match(object_on_sofa_arm, left_direction)",
+      "affordance_3d": [
+        -0.0796,
+        0.9546,
+        2.6518
+      ],
+      "affordance_hint": "the body of the object on sofa arm"
+    }
+  ]
+}

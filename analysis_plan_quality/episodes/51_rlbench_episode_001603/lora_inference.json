@@ -1,0 +1,256 @@
+{
+  "task": "sweep dirt to the short dustpan",
+  "parsed": {
+    "scene_objects": [
+      "dirt",
+      "short_dustpan",
+      "broom",
+      "table"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "broom",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "broom",
+        "affordance_region": "the long handle of the broom",
+        "done_when": "distance(gripper, broom) < 0.03",
+        "affordance_hint": "the long handle of the broom",
+        "refine_prompt": "the long handle of the broom",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.0,
+          0.293
+        ],
+        "affordance_3d_refined": [
+          -2.2552,
+          -0.9338,
+          2.2552
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.3252,
+        "affordance": [
+          0.0,
+          0.293
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "broom"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "broom",
+        "affordance_region": "the long handle of the broom",
+        "done_when": "holding(broom)",
+        "affordance_hint": "the long handle of the broom",
+        "refine_prompt": "the long handle of the broom",
+        "refine_cache_hit": true,
+        "affordance_refined": [
+          0.0,
+          0.293
+        ],
+        "affordance_3d_refined": [
+          -2.2552,
+          -0.9338,
+          2.2552
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.3252,
+        "affordance": [
+          0.0,
+          0.293
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "broom"
+              ],
+              "role": "safety"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "aligned_xy",
+              "args": [
+                "broom",
+                "dirt",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "motion_dir",
+              "args": [
+                "-1",
+                "0",
+                "0"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "sweep",
+        "target": "dirt",
+        "affordance_region": "the small dark specks of dirt",
+        "done_when": "aligned_xy(broom, dirt, 0.05)",
+        "affordance_hint": "the small dark specks of dirt",
+        "refine_prompt": "the small dark specks of dirt",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.4961,
+          0.7734
+        ],
+        "affordance_3d_refined": [
+          -0.0147,
+          1.0278,
+          1.8794
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.3896,
+        "affordance": [
+          0.4961,
+          0.7734
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "surface_contact",
+              "args": [
+                "dirt",
+                "short_dustpan"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "dirt"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "dirt"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "place",
+        "target": "dirt",
+        "destination": "short_dustpan",
+        "affordance_region": "the empty area on the short dustpan",
+        "done_when": "surface_contact(dirt, short_dustpan) AND released(dirt)",
+        "affordance_hint": "the empty area on the short dustpan",
+        "refine_prompt": "the empty area on the short dustpan",
+        "refine_cache_hit": false,
+        "refine_prompt_fallback": "dirt",
+        "affordance_refined": [
+          0.5898,
+          0.9961
+        ],
+        "affordance_3d_refined": [
+          0.3659,
+          2.0202,
+          2.0361
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.6716,
+        "affordance": [
+          0.5898,
+          0.9961
+        ]
+      }
+    ]
+  }
+}

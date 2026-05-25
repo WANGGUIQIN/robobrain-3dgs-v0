@@ -1,0 +1,239 @@
+{
+  "task": "Grab the block and place it at the designated location",
+  "scene_objects": [
+    "block",
+    "designated_location",
+    "table"
+  ],
+  "num_steps": 4,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "block",
+      "affordance": [
+        0.611,
+        0.925
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "block",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "table"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, block) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        -1.349,
+        0.4689,
+        2.6322
+      ],
+      "affordance_hint": "the small brown block",
+      "affordance_hint_original": "the block",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 2,
+      "action": "grasp",
+      "target": "block",
+      "affordance": [
+        0.611,
+        0.91
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "block"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "holding",
+            "args": [
+              "block"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              0,
+              0,
+              -1
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "holding(block)",
+      "affordance_3d": [
+        -1.3289,
+        0.4295,
+        2.5931
+      ],
+      "affordance_hint": "the small brown block",
+      "affordance_hint_original": "block",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 3,
+      "action": "transport",
+      "target": "block",
+      "destination": "designated_location",
+      "affordance": [
+        0.5,
+        0.75
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "block"
+            ],
+            "role": "safety"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "above",
+            "args": [
+              "block",
+              "designated_location",
+              0.05
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "block",
+              "designated_location"
+            ]
+          },
+          {
+            "pred": "no_drop",
+            "args": [
+              "block"
+            ]
+          }
+        ]
+      },
+      "done_when": "above(block, designated_location, 0.05) AND aligned_xy(block, designated_location, 0.03)",
+      "affordance_3d": [
+        -1.321,
+        0.0826,
+        2.2017
+      ],
+      "affordance_hint": "the empty area on the designated location",
+      "affordance_hint_original": "an empty area on the designated location",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 4,
+      "action": "place",
+      "target": "block",
+      "destination": "designated_location",
+      "affordance": [
+        0.5,
+        0.75
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "surface_contact",
+            "args": [
+              "block",
+              "designated_location"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "released",
+            "args": [
+              "block"
+            ],
+            "role": "completion"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "stable",
+            "args": [
+              "block"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "support_stable",
+            "args": [
+              "block"
+            ]
+          }
+        ]
+      },
+      "done_when": "surface_contact(block, designated_location) AND released(block) AND stable(block)",
+      "affordance_3d": [
+        -1.321,
+        0.0826,
+        2.2017
+      ],
+      "affordance_hint": "the empty area on the designated location",
+      "affordance_hint_original": "an empty area on the designated location",
+      "affordance_hint_confidence": "ok"
+    }
+  ]
+}

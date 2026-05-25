@@ -1,0 +1,248 @@
+{
+  "task": "put the cube in the shape sorter",
+  "scene_objects": [
+    "cube",
+    "shape_sorter",
+    "table"
+  ],
+  "num_steps": 4,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "cube",
+      "affordance": [
+        0.476,
+        0.781
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "cube",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "shape_sorter"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, cube) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        -0.232,
+        2.7844,
+        4.95
+      ],
+      "affordance_hint": "the small purple cube on the table",
+      "affordance_hint_original": "the cube",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 2,
+      "action": "grasp",
+      "target": "cube",
+      "affordance": [
+        0.476,
+        0.781
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "cube"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "holding",
+            "args": [
+              "cube"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              0,
+              0,
+              -1
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "holding(cube)",
+      "affordance_3d": [
+        -0.232,
+        2.7844,
+        4.95
+      ],
+      "affordance_hint": "the small purple cube",
+      "affordance_hint_original": "cube",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 3,
+      "action": "transport",
+      "target": "cube",
+      "destination": "shape_sorter",
+      "affordance": [
+        0.25,
+        0.656
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "cube"
+            ],
+            "role": "safety"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "above",
+            "args": [
+              "cube",
+              "shape_sorter",
+              0.05
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "aligned_xy",
+            "args": [
+              "cube",
+              "shape_sorter",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "cube",
+              "shape_sorter"
+            ]
+          },
+          {
+            "pred": "no_drop",
+            "args": [
+              "cube"
+            ]
+          }
+        ]
+      },
+      "done_when": "above(cube, shape_sorter, 0.05) AND aligned_xy(cube, shape_sorter, 0.03)",
+      "affordance_3d": [
+        -0.3115,
+        0.1947,
+        0.623
+      ],
+      "affordance_hint": "the empty area on the top of the brown shape sorter",
+      "affordance_hint_original": "an empty area on the shape sorter",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 4,
+      "action": "insert",
+      "target": "cube",
+      "destination": "shape_sorter",
+      "affordance": [
+        0.453,
+        0.703
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "inserted",
+            "args": [
+              "cube",
+              "shape_sorter"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "released",
+            "args": [
+              "cube"
+            ],
+            "role": "completion"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "stable",
+            "args": [
+              "cube"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "support_stable",
+            "args": [
+              "cube"
+            ]
+          }
+        ]
+      },
+      "done_when": "inserted(cube, shape_sorter) AND released(cube) AND stable(cube)",
+      "affordance_3d": [
+        -0.152,
+        0.6585,
+        1.6209
+      ],
+      "affordance_hint": "the top opening of the brown shape sorter",
+      "affordance_hint_original": "the top opening of the shape sorter",
+      "affordance_hint_confidence": "ok"
+    }
+  ]
+}

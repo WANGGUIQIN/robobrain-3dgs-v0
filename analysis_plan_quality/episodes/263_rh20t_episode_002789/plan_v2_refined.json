@@ -1,0 +1,238 @@
+{
+  "task": "Stack blocks (small Lego) one on top of the other every time",
+  "scene_objects": [
+    "blocks (various colors)",
+    "table"
+  ],
+  "num_steps": 4,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "blue_block",
+      "affordance": [
+        0.308,
+        0.437
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "blue_block",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "blocks"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, blue_block) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        -0.9507,
+        -0.2683,
+        1.2624
+      ],
+      "affordance_hint": "the blue block on the table",
+      "affordance_hint_original": "the blue block",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 2,
+      "action": "grasp",
+      "target": "blue_block",
+      "affordance": [
+        0.334,
+        0.425
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "blue_block"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "holding",
+            "args": [
+              "blue_block"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              0,
+              0,
+              -1
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "holding(blue_block)",
+      "affordance_3d": [
+        -0.8945,
+        -0.2714,
+        1.2233
+      ],
+      "affordance_hint": "the blue block on the table",
+      "affordance_hint_original": "blue block",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 3,
+      "action": "transport",
+      "target": "blue_block",
+      "destination": "red_block",
+      "affordance": [
+        0.425,
+        0.45
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "blue_block"
+            ],
+            "role": "safety"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "above",
+            "args": [
+              "blue_block",
+              "red_block",
+              0.05
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "blue_block",
+              "red_block"
+            ]
+          },
+          {
+            "pred": "no_drop",
+            "args": [
+              "blue_block"
+            ]
+          }
+        ]
+      },
+      "done_when": "above(blue_block, red_block, 0.05) AND aligned_xy(blue_block, red_block, 0.03)",
+      "affordance_3d": [
+        -0.8195,
+        -0.2524,
+        1.2428
+      ],
+      "affordance_hint": "the top surface of the red block",
+      "affordance_hint_original": "an empty area on the red block",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 4,
+      "action": "place",
+      "target": "blue_block",
+      "destination": "red_block",
+      "affordance": [
+        0.425,
+        0.45
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "surface_contact",
+            "args": [
+              "blue_block",
+              "red_block"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "released",
+            "args": [
+              "blue_block"
+            ],
+            "role": "completion"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "stable",
+            "args": [
+              "blue_block"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "support_stable",
+            "args": [
+              "blue_block"
+            ]
+          }
+        ]
+      },
+      "done_when": "surface_contact(blue_block, red_block) AND released(blue_block) AND stable(blue_block)",
+      "affordance_3d": [
+        -0.8195,
+        -0.2524,
+        1.2428
+      ],
+      "affordance_hint": "the top surface of the red block",
+      "affordance_hint_original": "an empty area on the red block",
+      "affordance_hint_confidence": "ok"
+    }
+  ]
+}

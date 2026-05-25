@@ -1,0 +1,234 @@
+{
+  "task": "Move the green eraser to the right",
+  "scene_objects": [
+    "green_eraser",
+    "table",
+    "black_container",
+    "spoon",
+    "glass_beakers",
+    "whiteboard"
+  ],
+  "num_steps": 4,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "green_eraser",
+      "affordance": [
+        0.492,
+        0.437
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "green_eraser",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "table"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, green_eraser) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        -0.3909,
+        -0.092,
+        2.2995
+      ],
+      "affordance_hint": "the green eraser"
+    },
+    {
+      "step": 2,
+      "action": "grasp",
+      "target": "green_eraser",
+      "affordance": [
+        0.48,
+        0.437
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "green_eraser"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "holding",
+            "args": [
+              "green_eraser"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              0,
+              0,
+              -1
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "holding(green_eraser)",
+      "affordance_3d": [
+        -0.4037,
+        -0.0873,
+        2.1821
+      ],
+      "affordance_hint": "the handle of the green eraser"
+    },
+    {
+      "step": 3,
+      "action": "transport",
+      "target": "green_eraser",
+      "destination": "right_side",
+      "affordance": [
+        0.825,
+        0.401
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "green_eraser"
+            ],
+            "role": "safety"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "above",
+            "args": [
+              "green_eraser",
+              "table",
+              0.05
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "green_eraser",
+              "table"
+            ]
+          },
+          {
+            "pred": "no_drop",
+            "args": [
+              "green_eraser"
+            ]
+          }
+        ]
+      },
+      "done_when": "above(green_eraser, table, 0.05) AND aligned_xy(green_eraser, right_side, 0.03)",
+      "affordance_3d": [
+        0.9506,
+        -0.3169,
+        3.728
+      ],
+      "affordance_hint": "an empty area on the right side"
+    },
+    {
+      "step": 4,
+      "action": "place",
+      "target": "green_eraser",
+      "destination": "right_side",
+      "affordance": [
+        0.825,
+        0.401
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "surface_contact",
+            "args": [
+              "green_eraser",
+              "table"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "released",
+            "args": [
+              "green_eraser"
+            ],
+            "role": "completion"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "stable",
+            "args": [
+              "green_eraser"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "support_stable",
+            "args": [
+              "green_eraser"
+            ]
+          }
+        ]
+      },
+      "done_when": "surface_contact(green_eraser, table) AND released(green_eraser) AND stable(green_eraser)",
+      "affordance_3d": [
+        0.9506,
+        -0.3169,
+        3.728
+      ],
+      "affordance_hint": "an empty area on the right side"
+    }
+  ]
+}

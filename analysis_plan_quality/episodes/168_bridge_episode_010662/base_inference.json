@@ -1,0 +1,148 @@
+{
+  "task": "Move the red pepper to the right of the blue spoon",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_3epoch/best",
+  "raw": "**SCENE ANALYSIS -** A red pepper sits on a green plate, which is on a black stovetop. A blue brush is on the stovetop to the left of the plate. The task is to move the red pepper to the right of the blue brush. The red pepper is a solid object with a distinct shape, the green plate is a flat surface, and the stovetop is a stable surface. STRATEGY - First, reach for the red pepper, grasp it, then transport it to the right of the blue brush on the stovetop, and place it there. Failure modes include dropping the pepper during transport or placing it in an invalid location. AFFORDANCE REASONING - Step 1: Reach for the red pepper on the green plate. Step 2: Grasp the red pepper by its body. Step 3: Transport the red pepper to the right of the blue brush on the stovetop. Step 4: Place the red pepper on the stovetop to the right of the blue brush.\n\n**Goal:** on(red_pepper, stovetop); right_of(red_pepper, blue_brush)\n**Scene:** red_pepper, green_plate, blue_brush, stovetop\n**Step 1:** reach(red_pepper)\n  affordance_region: the body of the red pepper\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, red_pepper, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, red_pepper) < 0.03\n**Step 2:** grasp(red_pepper)\n  affordance_region: the body of the red pepper\n  contact: holding(red_pepper) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(red_pepper)\n**Step 3:** transport(red_pepper -> stovetop)\n  affordance_region: an empty area on the stovetop to the right of the blue brush\n  spatial: above(red_pepper, stovetop, 0.05) [completion]\n  safety: no_drop(red_pepper)\n  done_when: above(red_pepper, stovetop, 0.05)\n**Step 4:** place(red_pepper -> stovetop)\n  affordance_region: an empty area on the stovetop to the right of the blue brush\n  contact: surface_contact(red_pepper, stovetop) [completion]; released(red_pepper) [completion]\n  pose: stable(red_pepper) [completion]\n  done_when: surface_contact(red_pepper, stovetop) AND released(red_pepper)\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [],
+    "scene_objects": [],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "red_pepper",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "red_pepper",
+        "affordance_region": "the body of the red pepper",
+        "done_when": "distance(gripper, red_pepper) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "red_pepper"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "red_pepper",
+        "affordance_region": "the body of the red pepper",
+        "done_when": "holding(red_pepper)"
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "red_pepper",
+                "stovetop",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "red_pepper"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "red_pepper",
+        "destination": "stovetop",
+        "affordance_region": "an empty area on the stovetop to the right of the blue brush",
+        "done_when": "above(red_pepper, stovetop, 0.05)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "surface_contact",
+              "args": [
+                "red_pepper",
+                "stovetop"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "red_pepper"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "red_pepper"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "place",
+        "target": "red_pepper",
+        "destination": "stovetop",
+        "affordance_region": "an empty area on the stovetop to the right of the blue brush",
+        "done_when": "surface_contact(red_pepper, stovetop) AND released(red_pepper)"
+      }
+    ]
+  }
+}

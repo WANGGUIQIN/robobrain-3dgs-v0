@@ -1,0 +1,175 @@
+{
+  "task": "Transfer all large pipette tips from one holder to another holder for large pipette tips",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_3epoch/best",
+  "raw": "SCENE ANALYSIS - Two clear plastic pipette tip holders are on a blue mat. Each holder has a vertical array of large pipette tips. The holders are rigid, with tips inserted into slots. The task requires moving all tips from one holder to the other. STRATEGY - First, grasp the top tip from the source holder, transport it to the destination holder, and place it. Repeat for all tips in the source holder. Failure modes include dropping tips during transport or misaligning them in the destination holder. AFFORDANCE REASONING - Step 1: Reach the source holder to grasp the top tip. Step 2: Grasp the tip from the source holder. Step 3: Transport the tip to the destination holder. Step 4: Place the tip in the destination holder. Repeat Steps 2-4 for all tips in the source holder.\nGoal: all_inside(large_pipette_tip, destination_holder); all_on(large_pipette_tip, source_holder) -> all_inside(large_pipette_tip, destination_holder)\nScene: source_holder, destination_holder, large_pipette_tip, blue_mat\nStep 1: reach(source_holder)\n  affordance_region: the body of the source holder\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, source_holder, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, source_holder) < 0.03\nStep 2: grasp(large_pipette_tip)\n  affordance_region: the top tip in the source_holder\n  contact: holding(large_pipette_tip) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(large_pipette_tip)\nStep 3: transport(large_pipette_tip -> destination_holder)\n  affordance_region: an empty slot in the destination_holder\n  spatial: above(large_pipette_tip, destination_holder, 0.05) [completion]\n  safety: no_drop(large_pipette_tip)\n  done_when: above(large_pipette_tip, destination_holder, 0.05)\nStep 4: place(large_pipette_tip -> destination_holder)\n  affordance_region: an empty slot in the destination_holder\n  contact: inside(large_pipette_tip, destination_holder) [completion]; released(large_pipette_tip) [completion]\n  pose: stable(large_pipette_tip) [completion]\n  done_when: inside(large_pipette_tip, destination_holder) AND released(large_pipette_tip)\nStep 5: repeat Steps 2-4 for all remaining large_pipette_tip in source_holder\n  affordance_region: the next tip in the source_holder\n  contact: holding(large_pipette_tip) [completion]\n  spatial: above(large_pipette_tip, destination_holder, 0.05) [completion]\n  safety: no_drop(large_pipette_tip)\n  done_when: inside(large_pipette_tip, destination_holder) AND released(large_pipette_tip)\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [
+      {
+        "pred": "all_inside",
+        "args": [
+          "large_pipette_tip",
+          "destination_holder"
+        ]
+      },
+      {
+        "pred": "all_on",
+        "args": [
+          "large_pipette_tip",
+          "source_holder"
+        ]
+      },
+      {
+        "pred": "all_inside",
+        "args": [
+          "large_pipette_tip",
+          "destination_holder"
+        ]
+      }
+    ],
+    "scene_objects": [
+      "source_holder",
+      "destination_holder",
+      "large_pipette_tip",
+      "blue_mat"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "source_holder",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "source_holder",
+        "affordance_region": "the body of the source holder",
+        "done_when": "distance(gripper, source_holder) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "large_pipette_tip"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "large_pipette_tip",
+        "affordance_region": "the top tip in the source_holder",
+        "done_when": "holding(large_pipette_tip)"
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "large_pipette_tip",
+                "destination_holder",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "large_pipette_tip"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "large_pipette_tip",
+        "destination": "destination_holder",
+        "affordance_region": "an empty slot in the destination_holder",
+        "done_when": "above(large_pipette_tip, destination_holder, 0.05)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "inside",
+              "args": [
+                "large_pipette_tip",
+                "destination_holder"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "large_pipette_tip"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "large_pipette_tip"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "place",
+        "target": "large_pipette_tip",
+        "destination": "destination_holder",
+        "affordance_region": "an empty slot in the destination_holder",
+        "done_when": "inside(large_pipette_tip, destination_holder) AND released(large_pipette_tip)"
+      }
+    ]
+  }
+}

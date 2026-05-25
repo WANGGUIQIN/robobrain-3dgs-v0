@@ -1,0 +1,178 @@
+{
+  "task": "pick apple from white bowl",
+  "scene_objects": [
+    "apple",
+    "white_bowl",
+    "table"
+  ],
+  "num_steps": 3,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "apple",
+      "affordance": [
+        0.403,
+        0.416
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "apple",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "white_bowl"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, apple) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        -0.2362,
+        -0.2078,
+        2.1038
+      ],
+      "affordance_hint": "the apple in the white bowl",
+      "affordance_hint_original": "the apple",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 2,
+      "action": "grasp",
+      "target": "apple",
+      "affordance": [
+        0.403,
+        0.425
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "apple"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "holding",
+            "args": [
+              "apple"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              0,
+              0,
+              -1
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "holding(apple)",
+      "affordance_3d": [
+        -0.2362,
+        -0.1795,
+        2.1038
+      ],
+      "affordance_hint": "the apple in the white bowl",
+      "affordance_hint_original": "apple",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 3,
+      "action": "transport",
+      "target": "apple",
+      "affordance": [
+        0.406,
+        0.554
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "apple"
+            ],
+            "role": "safety"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "above",
+            "args": [
+              "apple",
+              "white_bowl",
+              0.1
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "apple",
+              "white_bowl"
+            ]
+          },
+          {
+            "pred": "no_drop",
+            "args": [
+              "apple"
+            ]
+          }
+        ]
+      },
+      "done_when": "above(apple, white_bowl, 0.10)",
+      "affordance_3d": [
+        -0.2204,
+        0.1286,
+        2.0451
+      ],
+      "affordance_hint": "an empty area on the apple",
+      "affordance_hint_original": "an empty area on the apple",
+      "affordance_hint_confidence": "rejected:missing_token:apple"
+    }
+  ]
+}

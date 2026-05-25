@@ -1,0 +1,135 @@
+{
+  "task": "Use the gripper to push and close the drawer",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_3epoch/best",
+  "raw": "SCENE ANALYSIS - A white drawer is open on a table. A red object (likely a handle) is visible on the table to the right of the drawer. The drawer has a front face and a handle (the red object). STRATEGY - First, reach for the drawer's handle (the red object) to grasp it. Then, pull the drawer towards the gripper to close it. Failure modes include not grasping the handle properly or pulling with insufficient force. AFFORDANCE REASONING - Step 1: Reach for the drawer's handle (the red object) to grasp it. Step 2: Grasp the handle to secure the grip. Step 3: Pull the drawer towards the gripper to close it.\nGoal: closed(drawer)\nScene: drawer, red_handle, table\nStep 1: reach(red_handle)\n  affordance_region: the red handle on the table\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, red_handle, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, red_handle) < 0.03\nStep 2: grasp(red_handle)\n  affordance_region: the red handle on the table\n  contact: holding(red_handle) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(red_handle)\nStep 3: pull(drawer -> gripper)\n  affordance_region: the front face of the open drawer\n  contact: holding(red_handle) [progress]\n  spatial: distance(gripper, drawer, <, 0.1) [completion]\n  direction: pull_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, drawer) < 0.1\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [
+      {
+        "pred": "closed",
+        "args": [
+          "drawer"
+        ]
+      }
+    ],
+    "scene_objects": [
+      "drawer",
+      "red_handle",
+      "table"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "red_handle",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "red_handle",
+        "affordance_region": "the red handle on the table",
+        "done_when": "distance(gripper, red_handle) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "red_handle"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "red_handle",
+        "affordance_region": "the red handle on the table",
+        "done_when": "holding(red_handle)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "red_handle"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "drawer",
+                "<",
+                "0.1"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "pull_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "pull",
+        "target": "drawer",
+        "destination": "gripper",
+        "affordance_region": "the front face of the open drawer",
+        "done_when": "distance(gripper, drawer) < 0.1"
+      }
+    ]
+  }
+}

@@ -1,0 +1,299 @@
+{
+  "task": "Put the scoop inside the blue cup and then pour the contents in the orange bowl into the blue bowl",
+  "scene_objects": [
+    "scoop",
+    "blue_cup",
+    "orange_bowl",
+    "blue_bowl",
+    "washing_machine"
+  ],
+  "num_steps": 5,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "scoop",
+      "affordance": [
+        0.566,
+        0.675
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "scoop",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "blue_cup"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, scoop) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        -0.1328,
+        0.4694,
+        1.7712
+      ],
+      "affordance_hint": "the scoop"
+    },
+    {
+      "step": 2,
+      "action": "grasp",
+      "target": "scoop",
+      "affordance": [
+        0.375,
+        0.675
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "scoop"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "holding",
+            "args": [
+              "scoop"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              0,
+              0,
+              -1
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "holding(scoop)",
+      "affordance_3d": [
+        -0.404,
+        0.3345,
+        1.2624
+      ],
+      "affordance_hint": "the handle of the scoop"
+    },
+    {
+      "step": 3,
+      "action": "place",
+      "target": "scoop",
+      "destination": "blue_cup",
+      "affordance": [
+        0.428,
+        0.656
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "surface_contact",
+            "args": [
+              "scoop",
+              "blue_cup"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "released",
+            "args": [
+              "scoop"
+            ],
+            "role": "completion"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "inside",
+            "args": [
+              "scoop",
+              "blue_cup"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "scoop",
+              "blue_cup"
+            ]
+          }
+        ]
+      },
+      "done_when": "inside(scoop, blue_cup) AND released(scoop)",
+      "affordance_3d": [
+        -0.2765,
+        0.2654,
+        1.1058
+      ],
+      "affordance_hint": "an empty area on the blue cup"
+    },
+    {
+      "step": 4,
+      "action": "reach",
+      "target": "orange_bowl",
+      "affordance": [
+        0.566,
+        0.675
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "orange_bowl",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "blue_bowl"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, orange_bowl) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        -0.1328,
+        0.4694,
+        1.7712
+      ],
+      "affordance_hint": "the orange bowl"
+    },
+    {
+      "step": 5,
+      "action": "pour",
+      "target": "orange_bowl",
+      "destination": "blue_bowl",
+      "affordance": [
+        0.558,
+        0.678
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "orange_bowl"
+            ],
+            "role": "safety"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "above",
+            "args": [
+              "orange_bowl",
+              "blue_bowl",
+              0.05
+            ],
+            "role": "completion"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "tilt",
+            "args": [
+              "orange_bowl",
+              "towards",
+              "blue_bowl"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_spill",
+            "args": [
+              "orange_bowl"
+            ]
+          },
+          {
+            "pred": "no_collision",
+            "args": [
+              "orange_bowl",
+              "blue_bowl"
+            ]
+          }
+        ]
+      },
+      "done_when": "contents_transferred(orange_bowl, blue_bowl)",
+      "affordance_3d": [
+        -0.1522,
+        0.4835,
+        1.7907
+      ],
+      "affordance_hint": "the inside of the blue bowl"
+    }
+  ]
+}

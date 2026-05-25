@@ -1,0 +1,226 @@
+{
+  "task": "Move the empty plastic pack of snack forward",
+  "scene_objects": [
+    "empty_plastic_pack",
+    "table"
+  ],
+  "steps": [
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "empty_plastic_pack",
+              "<",
+              "0.03"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "approach_axis",
+            "args": [
+              "0",
+              "0",
+              "-1"
+            ],
+            "role": "progress"
+          }
+        ]
+      },
+      "step": 1,
+      "action": "reach",
+      "target": "empty_plastic_pack",
+      "affordance_region": "the empty plastic pack",
+      "done_when": "distance(gripper, empty_plastic_pack) < 0.03",
+      "affordance_hint": "the empty plastic pack",
+      "refine_prompt": "the empty plastic pack",
+      "refine_cache_hit": false,
+      "affordance_refined": [
+        0.5977,
+        0.5547
+      ],
+      "affordance_3d_refined": [
+        -0.1086,
+        0.3412,
+        3.1018
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.5195
+    },
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "empty_plastic_pack"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              "0",
+              "0",
+              "-1"
+            ],
+            "role": "progress"
+          }
+        ]
+      },
+      "step": 2,
+      "action": "grasp",
+      "target": "empty_plastic_pack",
+      "affordance_region": "the empty plastic pack",
+      "done_when": "holding(empty_plastic_pack)",
+      "affordance_hint": "the empty plastic pack",
+      "refine_prompt": "the empty plastic pack",
+      "refine_cache_hit": true,
+      "affordance_refined": [
+        0.5977,
+        0.5547
+      ],
+      "affordance_3d_refined": [
+        -0.1086,
+        0.3412,
+        3.1018
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.5195
+    },
+    {
+      "constraints": {
+        "spatial": [
+          {
+            "pred": "above",
+            "args": [
+              "empty_plastic_pack",
+              "table",
+              "0.05"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_drop",
+            "args": [
+              "empty_plastic_pack"
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "step": 3,
+      "action": "transport",
+      "target": "empty_plastic_pack",
+      "destination": "forward_position",
+      "affordance_region": "an empty area on the forward position",
+      "done_when": "above(empty_plastic_pack, table, 0.05)",
+      "affordance_hint": "an empty area on the forward position",
+      "refine_prompt": "an empty area on the forward position",
+      "refine_cache_hit": false,
+      "refine_prompt_fallback": "empty plastic pack",
+      "affordance_refined": [
+        0.5977,
+        0.5547
+      ],
+      "affordance_3d_refined": [
+        -0.1086,
+        0.3412,
+        3.1018
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.5233
+    },
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "surface_contact",
+            "args": [
+              "empty_plastic_pack",
+              "table"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "released",
+            "args": [
+              "empty_plastic_pack"
+            ],
+            "role": "completion"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "stable",
+            "args": [
+              "empty_plastic_pack"
+            ],
+            "role": "completion"
+          }
+        ]
+      },
+      "step": 4,
+      "action": "place",
+      "target": "empty_plastic_pack",
+      "destination": "forward_position",
+      "affordance_region": "an empty area on the forward position",
+      "done_when": "surface_contact(empty_plastic_pack, table) AND released(empty_plastic_pack)",
+      "affordance_hint": "an empty area on the forward position",
+      "refine_prompt": "an empty area on the forward position",
+      "refine_cache_hit": true,
+      "affordance_refined": [
+        0.5977,
+        0.5547
+      ],
+      "affordance_3d_refined": [
+        -0.1086,
+        0.3412,
+        3.1018
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.5233
+    }
+  ]
+}

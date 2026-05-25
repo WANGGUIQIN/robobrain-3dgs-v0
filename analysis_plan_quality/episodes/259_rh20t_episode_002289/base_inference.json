@@ -1,0 +1,166 @@
+{
+  "task": "Put the toilet paper on its holder",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_3epoch/best",
+  "raw": "SCENE ANALYSIS - A white toilet paper roll is on a wooden table. A toilet paper holder with a silver base and a red top is also on the table. The roll is cylindrical and the holder has a central spindle. STRATEGY - First, grasp the toilet paper roll. Then, transport it to the holder. Finally, insert the roll onto the holder's spindle. Failure modes include dropping the roll during transport or misaligning it with the spindle. AFFORDANCE REASONING - Step 1 reach the roll at its body for initial contact. Step 2 grasp the roll at its body for a secure hold. Step 3 transport the roll to the holder's spindle area. Step 4 insert the roll onto the spindle.\nGoal: on(toilet_paper_roll, toilet_paper_holder); stable(toilet_paper_roll)\nScene: toilet_paper_roll, toilet_paper_holder, table\nStep 1: reach(toilet_paper_roll)\n  affordance_region: the body of the white toilet paper roll\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, toilet_paper_roll, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, toilet_paper_roll) < 0.03\nStep 2: grasp(toilet_paper_roll)\n  affordance_region: the body of the white toilet paper roll\n  contact: holding(toilet_paper_roll) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(toilet_paper_roll)\nStep 3: transport(toilet_paper_roll -> toilet_paper_holder)\n  affordance_region: the central spindle of the toilet_paper_holder\n  spatial: above(toilet_paper_roll, toilet_paper_holder, 0.05) [completion]\n  safety: no_drop(toilet_paper_roll)\n  done_when: above(toilet_paper_roll, toilet_paper_holder, 0.05)\nStep 4: insert(toilet_paper_roll -> toilet_paper_holder)\n  affordance_region: the central spindle of the toilet_paper_holder\n  contact: spindle_contact(toilet_paper_roll, toilet_paper_holder) [completion]; released(toilet_paper_roll) [completion]\n  pose: stable(toilet_paper_roll) [completion]\n  done_when: spindle_contact(toilet_paper_roll, toilet_paper_holder) AND released(toilet_paper_roll)\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [
+      {
+        "pred": "on",
+        "args": [
+          "toilet_paper_roll",
+          "toilet_paper_holder"
+        ]
+      },
+      {
+        "pred": "stable",
+        "args": [
+          "toilet_paper_roll"
+        ]
+      }
+    ],
+    "scene_objects": [
+      "toilet_paper_roll",
+      "toilet_paper_holder",
+      "table"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "toilet_paper_roll",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "toilet_paper_roll",
+        "affordance_region": "the body of the white toilet paper roll",
+        "done_when": "distance(gripper, toilet_paper_roll) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "toilet_paper_roll"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "toilet_paper_roll",
+        "affordance_region": "the body of the white toilet paper roll",
+        "done_when": "holding(toilet_paper_roll)"
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "toilet_paper_roll",
+                "toilet_paper_holder",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "toilet_paper_roll"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "toilet_paper_roll",
+        "destination": "toilet_paper_holder",
+        "affordance_region": "the central spindle of the toilet_paper_holder",
+        "done_when": "above(toilet_paper_roll, toilet_paper_holder, 0.05)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "spindle_contact",
+              "args": [
+                "toilet_paper_roll",
+                "toilet_paper_holder"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "toilet_paper_roll"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "toilet_paper_roll"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "insert",
+        "target": "toilet_paper_roll",
+        "destination": "toilet_paper_holder",
+        "affordance_region": "the central spindle of the toilet_paper_holder",
+        "done_when": "spindle_contact(toilet_paper_roll, toilet_paper_holder) AND released(toilet_paper_roll)"
+      }
+    ]
+  }
+}

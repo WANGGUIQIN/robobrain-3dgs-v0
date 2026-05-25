@@ -1,0 +1,167 @@
+{
+  "task": "Rotate the steering wheel 90 degrees counterclockwise",
+  "scene_objects": [
+    "steering_wheel",
+    "table"
+  ],
+  "steps": [
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "steering_wheel",
+              "<",
+              "0.03"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "approach_axis",
+            "args": [
+              "0",
+              "0",
+              "-1"
+            ],
+            "role": "progress"
+          }
+        ]
+      },
+      "step": 1,
+      "action": "reach",
+      "target": "steering_wheel",
+      "affordance_region": "the body of the black steering wheel",
+      "done_when": "distance(gripper, steering_wheel) < 0.03",
+      "affordance_hint": "the body of the black steering wheel",
+      "refine_prompt": "the body of the black steering wheel",
+      "refine_cache_hit": false,
+      "affordance_refined": [
+        0.2695,
+        0.4922
+      ],
+      "affordance_3d_refined": [
+        -1.773,
+        -0.3814,
+        2.2604
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.4954
+    },
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "steering_wheel"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              "0",
+              "0",
+              "-1"
+            ],
+            "role": "progress"
+          }
+        ]
+      },
+      "step": 2,
+      "action": "grasp",
+      "target": "steering_wheel",
+      "affordance_region": "the black rubber grip of the steering wheel",
+      "done_when": "holding(steering_wheel)",
+      "affordance_hint": "the black rubber grip of the steering wheel",
+      "refine_prompt": "the black rubber grip of the steering wheel",
+      "refine_cache_hit": false,
+      "affordance_refined": [
+        0.2695,
+        0.4922
+      ],
+      "affordance_3d_refined": [
+        -1.773,
+        -0.3814,
+        2.2604
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.5379
+    },
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "steering_wheel"
+            ],
+            "role": "safety"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "orientation_match",
+            "args": [
+              "steering_wheel",
+              "90_deg_counterclockwise"
+            ],
+            "role": "completion"
+          }
+        ]
+      },
+      "step": 3,
+      "action": "rotate",
+      "target": "steering_wheel",
+      "affordance_region": "the body of the black steering wheel",
+      "done_when": "orientation_match(steering_wheel, 90_deg_counterclockwise)",
+      "affordance_hint": "the body of the black steering wheel",
+      "refine_prompt": "the body of the black steering wheel",
+      "refine_cache_hit": true,
+      "affordance_refined": [
+        0.2695,
+        0.4922
+      ],
+      "affordance_3d_refined": [
+        -1.773,
+        -0.3814,
+        2.2604
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.4954
+    }
+  ]
+}

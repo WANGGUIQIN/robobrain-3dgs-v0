@@ -1,0 +1,248 @@
+{
+  "task": "Place the red and white vegetable to the bottom right corner of the table.",
+  "parsed": {
+    "scene_objects": [
+      "red_mug",
+      "blue_scoop",
+      "table",
+      "blue_plate",
+      "metal_bowl",
+      "tomato_sauce_can",
+      "yellow_can"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "red_mug",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "red_mug",
+        "affordance_region": "the body of the red mug",
+        "done_when": "distance(gripper, red_mug) < 0.03",
+        "affordance_hint": "the body of the red mug",
+        "refine_prompt": "the body of the red mug",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.7148,
+          0.207
+        ],
+        "affordance_3d_refined": [
+          0.5679,
+          -0.7744,
+          2.2995
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.3191,
+        "affordance": [
+          0.7148,
+          0.207
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "red_mug"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "red_mug",
+        "affordance_region": "the handle of the red mug",
+        "done_when": "holding(red_mug)",
+        "affordance_hint": "the handle of the red mug",
+        "refine_prompt": "the handle of the red mug",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.3047,
+          0.0
+        ],
+        "affordance_3d_refined": [
+          -0.8678,
+          -2.2215,
+          3.865
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.3082,
+        "affordance": [
+          0.3047,
+          0.0
+        ]
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "red_mug",
+                "bottom_right_corner",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "red_mug"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "red_mug",
+        "destination": "bottom_right_corner",
+        "affordance_region": "the bottom right corner of the table",
+        "done_when": "above(red_mug, bottom_right_corner, 0.05)",
+        "affordance_hint": "the bottom right corner of the table",
+        "refine_prompt": "the bottom right corner of the table",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.543,
+          0.625
+        ],
+        "affordance_3d_refined": [
+          0.1261,
+          0.367,
+          2.5539
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.4145,
+        "affordance": [
+          0.543,
+          0.625
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "surface_contact",
+              "args": [
+                "red_mug",
+                "table"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "red_mug"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "red_mug"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "place",
+        "target": "red_mug",
+        "destination": "bottom_right_corner",
+        "affordance_region": "the bottom right corner of the table",
+        "done_when": "surface_contact(red_mug, table) AND released(red_mug) AND stable(red_mug)",
+        "affordance_hint": "the bottom right corner of the table",
+        "refine_prompt": "the bottom right corner of the table",
+        "refine_cache_hit": true,
+        "affordance_refined": [
+          0.543,
+          0.625
+        ],
+        "affordance_3d_refined": [
+          0.1261,
+          0.367,
+          2.5539
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.4145,
+        "affordance": [
+          0.543,
+          0.625
+        ]
+      }
+    ]
+  }
+}

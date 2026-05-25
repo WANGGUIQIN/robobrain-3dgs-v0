@@ -1,0 +1,229 @@
+{
+  "task": "screw in the yellow light bulb",
+  "scene_objects": [
+    "yellow_light_bulb",
+    "blue_base",
+    "table"
+  ],
+  "steps": [
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "yellow_light_bulb",
+              "<",
+              "0.03"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "approach_axis",
+            "args": [
+              "0",
+              "0",
+              "-1"
+            ],
+            "role": "progress"
+          }
+        ]
+      },
+      "step": 1,
+      "action": "reach",
+      "target": "yellow_light_bulb",
+      "affordance_region": "the yellow light bulb",
+      "done_when": "distance(gripper, yellow_light_bulb) < 0.03",
+      "affordance_hint": "the yellow light bulb",
+      "refine_prompt": "the yellow light bulb",
+      "refine_cache_hit": false,
+      "affordance_refined": [
+        0.5156,
+        0.793
+      ],
+      "affordance_3d_refined": [
+        0.0823,
+        1.5425,
+        2.6325
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.3874
+    },
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "yellow_light_bulb"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              "0",
+              "0",
+              "-1"
+            ],
+            "role": "progress"
+          }
+        ]
+      },
+      "step": 2,
+      "action": "grasp",
+      "target": "yellow_light_bulb",
+      "affordance_region": "the base of the yellow light bulb",
+      "done_when": "holding(yellow_light_bulb)",
+      "affordance_hint": "the base of the yellow light bulb",
+      "refine_prompt": "the base of the yellow light bulb",
+      "refine_cache_hit": false,
+      "affordance_refined": [
+        0.5156,
+        0.8008
+      ],
+      "affordance_3d_refined": [
+        0.0845,
+        1.6263,
+        2.7035
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.313
+    },
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "inserted",
+            "args": [
+              "yellow_light_bulb",
+              "blue_base"
+            ],
+            "role": "completion"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "aligned_xy",
+            "args": [
+              "yellow_light_bulb",
+              "blue_base",
+              "0.03"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "insert_dir",
+            "args": [
+              "0",
+              "0",
+              "-1"
+            ],
+            "role": "progress"
+          }
+        ]
+      },
+      "step": 3,
+      "action": "insert",
+      "target": "yellow_light_bulb",
+      "destination": "blue_base",
+      "affordance_region": "the top opening of the blue base",
+      "done_when": "inserted(yellow_light_bulb, blue_base)",
+      "affordance_hint": "the top opening of the blue base",
+      "refine_prompt": "the top opening of the blue base",
+      "refine_cache_hit": false,
+      "affordance_refined": [
+        0.6328,
+        0.8633
+      ],
+      "affordance_3d_refined": [
+        0.604,
+        1.6521,
+        2.2739
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.445
+    },
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "yellow_light_bulb"
+            ],
+            "role": "safety"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "stable",
+            "args": [
+              "yellow_light_bulb"
+            ],
+            "role": "completion"
+          }
+        ]
+      },
+      "step": 4,
+      "action": "rotate",
+      "target": "yellow_light_bulb",
+      "affordance_region": "the body of the yellow light bulb",
+      "done_when": "yellow_light_bulb is securely screwed into blue_base",
+      "affordance_hint": "the body of the yellow light bulb",
+      "refine_prompt": "the body of the yellow light bulb",
+      "refine_cache_hit": false,
+      "affordance_refined": [
+        0.5156,
+        0.793
+      ],
+      "affordance_3d_refined": [
+        0.0823,
+        1.5425,
+        2.6325
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.32
+    }
+  ]
+}

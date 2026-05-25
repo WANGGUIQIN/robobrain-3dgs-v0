@@ -1,0 +1,227 @@
+{
+  "task": "Place the spoon in front of the can.",
+  "scene_objects": [
+    "spoon",
+    "can",
+    "bowl",
+    "table"
+  ],
+  "steps": [
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "spoon",
+              "<",
+              "0.03"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "approach_axis",
+            "args": [
+              "0",
+              "0",
+              "-1"
+            ],
+            "role": "progress"
+          }
+        ]
+      },
+      "step": 1,
+      "action": "reach",
+      "target": "spoon",
+      "affordance_region": "the red plastic handle of the spoon",
+      "done_when": "distance(gripper, spoon) < 0.03",
+      "affordance_hint": "the red plastic handle of the spoon",
+      "refine_prompt": "the red plastic handle of the spoon",
+      "refine_cache_hit": false,
+      "affordance_refined": [
+        0.6367,
+        0.6211
+      ],
+      "affordance_3d_refined": [
+        0.4875,
+        0.4318,
+        3.1018
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.8255
+    },
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "spoon"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              "0",
+              "0",
+              "-1"
+            ],
+            "role": "progress"
+          }
+        ]
+      },
+      "step": 2,
+      "action": "grasp",
+      "target": "spoon",
+      "affordance_region": "the red plastic handle of the spoon",
+      "done_when": "holding(spoon)",
+      "affordance_hint": "the red plastic handle of the spoon",
+      "refine_prompt": "the red plastic handle of the spoon",
+      "refine_cache_hit": true,
+      "affordance_refined": [
+        0.6367,
+        0.6211
+      ],
+      "affordance_3d_refined": [
+        0.4875,
+        0.4318,
+        3.1018
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.8255
+    },
+    {
+      "constraints": {
+        "spatial": [
+          {
+            "pred": "above",
+            "args": [
+              "spoon",
+              "front_of_can",
+              "0.05"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_drop",
+            "args": [
+              "spoon"
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "step": 3,
+      "action": "transport",
+      "target": "spoon",
+      "destination": "front_of_can",
+      "affordance_region": "the empty area on the front of the can",
+      "done_when": "above(spoon, front_of_can, 0.05)",
+      "affordance_hint": "the empty area on the front of the can",
+      "refine_prompt": "the empty area on the front of the can",
+      "refine_cache_hit": false,
+      "affordance_refined": [
+        0.4062,
+        0.1602
+      ],
+      "affordance_3d_refined": [
+        -0.252,
+        -0.9136,
+        2.3387
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.4267
+    },
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "surface_contact",
+            "args": [
+              "spoon",
+              "table"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "released",
+            "args": [
+              "spoon"
+            ],
+            "role": "completion"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "stable",
+            "args": [
+              "spoon"
+            ],
+            "role": "completion"
+          }
+        ]
+      },
+      "step": 4,
+      "action": "place",
+      "target": "spoon",
+      "destination": "front_of_can",
+      "affordance_region": "the empty area on the front of the can",
+      "done_when": "surface_contact(spoon, table) AND released(spoon) AND stable(spoon)",
+      "affordance_hint": "the empty area on the front of the can",
+      "refine_prompt": "the empty area on the front of the can",
+      "refine_cache_hit": true,
+      "affordance_refined": [
+        0.4062,
+        0.1602
+      ],
+      "affordance_3d_refined": [
+        -0.252,
+        -0.9136,
+        2.3387
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.4267
+    }
+  ]
+}

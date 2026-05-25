@@ -1,0 +1,231 @@
+{
+  "task": "Put the pen into the pen holder",
+  "scene_objects": [
+    "pen",
+    "pen_holder",
+    "table"
+  ],
+  "num_steps": 4,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "pen",
+      "affordance": [
+        0.441,
+        0.76
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "pen",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "pen_holder"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, pen) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        -1.3229,
+        0.0959,
+        2.0451
+      ],
+      "affordance_hint": "the pen"
+    },
+    {
+      "step": 2,
+      "action": "grasp",
+      "target": "pen",
+      "affordance": [
+        0.525,
+        0.687
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "pen"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "holding",
+            "args": [
+              "pen"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              0,
+              0,
+              -1
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "holding(pen)",
+      "affordance_3d": [
+        -1.1774,
+        -0.0253,
+        2.0256
+      ],
+      "affordance_hint": "the handle of the pen"
+    },
+    {
+      "step": 3,
+      "action": "transport",
+      "target": "pen",
+      "destination": "pen_holder",
+      "affordance": [
+        0.428,
+        0.651
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "pen"
+            ],
+            "role": "safety"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "above",
+            "args": [
+              "pen",
+              "pen_holder",
+              0.05
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "pen",
+              "pen_holder"
+            ]
+          },
+          {
+            "pred": "no_drop",
+            "args": [
+              "pen"
+            ]
+          }
+        ]
+      },
+      "done_when": "above(pen, pen_holder, 0.05) AND aligned_xy(pen, pen_holder, 0.03)",
+      "affordance_3d": [
+        -1.2137,
+        -0.0751,
+        1.8495
+      ],
+      "affordance_hint": "an empty area on the pen holder"
+    },
+    {
+      "step": 4,
+      "action": "insert",
+      "target": "pen",
+      "destination": "pen_holder",
+      "affordance": [
+        0.525,
+        0.651
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "inserted",
+            "args": [
+              "pen",
+              "pen_holder"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "released",
+            "args": [
+              "pen"
+            ],
+            "role": "completion"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "upright",
+            "args": [
+              "pen"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "support_stable",
+            "args": [
+              "pen"
+            ]
+          }
+        ]
+      },
+      "done_when": "inserted(pen, pen_holder) AND released(pen) AND upright(pen)",
+      "affordance_3d": [
+        -1.348,
+        -0.0942,
+        2.3191
+      ],
+      "affordance_hint": "the top opening of the pen holder"
+    }
+  ]
+}

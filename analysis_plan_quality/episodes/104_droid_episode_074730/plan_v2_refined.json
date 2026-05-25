@@ -1,0 +1,238 @@
+{
+  "task": "Move the pineapple plushie to the right",
+  "scene_objects": [
+    "pineapple_plushie",
+    "table"
+  ],
+  "num_steps": 4,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "pineapple_plushie",
+      "affordance": [
+        0.584,
+        0.544
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "pineapple_plushie",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "table"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, pineapple_plushie) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        -0.1081,
+        0.2054,
+        2.1625
+      ],
+      "affordance_hint": "the pineapple plushie",
+      "affordance_hint_original": "the pineapple plushie",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 2,
+      "action": "grasp",
+      "target": "pineapple_plushie",
+      "affordance": [
+        0.584,
+        0.544
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "pineapple_plushie"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "holding",
+            "args": [
+              "pineapple_plushie"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              0,
+              0,
+              -1
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "holding(pineapple_plushie)",
+      "affordance_3d": [
+        -0.1081,
+        0.2054,
+        2.1625
+      ],
+      "affordance_hint": "the body of the pineapple plushie",
+      "affordance_hint_original": "pineapple plushie",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 3,
+      "action": "transport",
+      "target": "pineapple_plushie",
+      "destination": "right_position",
+      "affordance": [
+        0.75,
+        0.651
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "pineapple_plushie"
+            ],
+            "role": "safety"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "above",
+            "args": [
+              "pineapple_plushie",
+              "table",
+              0.05
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "pineapple_plushie",
+              "table"
+            ]
+          },
+          {
+            "pred": "no_drop",
+            "args": [
+              "pineapple_plushie"
+            ]
+          }
+        ]
+      },
+      "done_when": "above(pineapple_plushie, table, 0.05) AND aligned_xy(pineapple_plushie, right_position, 0.03)",
+      "affordance_3d": [
+        0.4556,
+        0.6692,
+        2.8475
+      ],
+      "affordance_hint": "the empty area on the right side of the table",
+      "affordance_hint_original": "an empty area on the right position",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 4,
+      "action": "place",
+      "target": "pineapple_plushie",
+      "destination": "right_position",
+      "affordance": [
+        0.75,
+        0.651
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "surface_contact",
+            "args": [
+              "pineapple_plushie",
+              "table"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "released",
+            "args": [
+              "pineapple_plushie"
+            ],
+            "role": "completion"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "stable",
+            "args": [
+              "pineapple_plushie"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "support_stable",
+            "args": [
+              "pineapple_plushie"
+            ]
+          }
+        ]
+      },
+      "done_when": "surface_contact(pineapple_plushie, table) AND released(pineapple_plushie) AND stable(pineapple_plushie)",
+      "affordance_3d": [
+        0.4556,
+        0.6692,
+        2.8475
+      ],
+      "affordance_hint": "the empty area on the right side of the table",
+      "affordance_hint_original": "an empty area on the right position",
+      "affordance_hint_confidence": "ok"
+    }
+  ]
+}

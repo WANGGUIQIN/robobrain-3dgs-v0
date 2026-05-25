@@ -1,0 +1,161 @@
+{
+  "task": "put the yellow object inside the right cabinet",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_3epoch/best",
+  "raw": "**SCENE ANALYSIS -** A yellow object is on a white tray, and a red object is on a lower shelf. The right cabinet door is open, revealing an empty interior. The yellow object is small and likely a ball. STRATEGY - First, grasp the yellow object from the tray, then transport it to the open cabinet, and finally place it inside. Failure modes include dropping the object during transport or misplacing it. AFFORDANCE REASONING - Step 1: Reach for the yellow object on the tray. Step 2: Grasp the yellow object (likely the body since it's a ball). Step 3: Transport the object to the cabinet. Step 4: Place the object inside the cabinet.\n\nGoal: inside(yellow_object, right_cabinet)\nScene: yellow_object, red_object, white_tray, right_cabinet, lower_shelf\nStep 1: reach(yellow_object)\n  affordance_region: the body of the yellow object\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, yellow_object, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, yellow_object) < 0.03\nStep 2: grasp(yellow_object)\n  affordance_region: the body of the yellow object\n  contact: holding(yellow_object) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(yellow_object)\nStep 3: transport(yellow_object -> right_cabinet)\n  affordance_region: an empty area inside the right cabinet\n  spatial: inside(yellow_object, right_cabinet) [completion]\n  safety: no_drop(yellow_object)\n  done_when: inside(yellow_object, right_cabinet)\nStep 4: place(yellow_object -> right_cabinet)\n  affordance_region: an empty area inside the right cabinet\n  contact: surface_contact(yellow_object, right_cabinet) [completion]; released(yellow_object) [completion]\n  pose: stable(yellow_object) [completion]\n  done_when: surface_contact(yellow_object, right_cabinet) AND released(yellow_object)\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [
+      {
+        "pred": "inside",
+        "args": [
+          "yellow_object",
+          "right_cabinet"
+        ]
+      }
+    ],
+    "scene_objects": [
+      "yellow_object",
+      "red_object",
+      "white_tray",
+      "right_cabinet",
+      "lower_shelf"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "yellow_object",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "yellow_object",
+        "affordance_region": "the body of the yellow object",
+        "done_when": "distance(gripper, yellow_object) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "yellow_object"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "yellow_object",
+        "affordance_region": "the body of the yellow object",
+        "done_when": "holding(yellow_object)"
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "inside",
+              "args": [
+                "yellow_object",
+                "right_cabinet"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "yellow_object"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "yellow_object",
+        "destination": "right_cabinet",
+        "affordance_region": "an empty area inside the right cabinet",
+        "done_when": "inside(yellow_object, right_cabinet)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "surface_contact",
+              "args": [
+                "yellow_object",
+                "right_cabinet"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "yellow_object"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "yellow_object"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "place",
+        "target": "yellow_object",
+        "destination": "right_cabinet",
+        "affordance_region": "an empty area inside the right cabinet",
+        "done_when": "surface_contact(yellow_object, right_cabinet) AND released(yellow_object)"
+      }
+    ]
+  }
+}

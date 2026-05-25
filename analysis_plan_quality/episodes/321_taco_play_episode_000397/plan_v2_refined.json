@@ -1,0 +1,173 @@
+{
+  "task": "move the red light switch to turn on the red light",
+  "scene_objects": [
+    "red_light_switch",
+    "red_light",
+    "table"
+  ],
+  "num_steps": 3,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "red_light_switch",
+      "affordance": [
+        0.1,
+        0.25
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "red_light_switch",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "red_light"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, red_light_switch) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        -0.8615,
+        -0.5406,
+        1.881
+      ],
+      "affordance_hint": "the red light switch on the white cabinet",
+      "affordance_hint_original": "the red light switch",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 2,
+      "action": "push",
+      "target": "red_light_switch",
+      "affordance": [
+        0.1,
+        0.25
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "red_light_switch"
+            ],
+            "role": "completion"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "aligned_xy",
+            "args": [
+              "red_light_switch",
+              "target_position"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "motion_dir",
+            "args": [
+              0,
+              1,
+              0
+            ],
+            "role": "progress"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "red_light"
+            ]
+          }
+        ]
+      },
+      "done_when": "aligned_xy(red_light_switch, target_position)",
+      "affordance_3d": [
+        -0.8615,
+        -0.5406,
+        1.881
+      ],
+      "affordance_hint": "the center of the red light switch",
+      "affordance_hint_original": "the center of the red light switch",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 3,
+      "action": "release",
+      "target": "red_light_switch",
+      "affordance": [
+        0.1,
+        0.25
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "released",
+            "args": [
+              "red_light_switch"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "red_light"
+            ]
+          }
+        ]
+      },
+      "done_when": "released(red_light_switch)",
+      "affordance_3d": [
+        -0.8615,
+        -0.5406,
+        1.881
+      ],
+      "affordance_hint": "the red light switch on the white cabinet",
+      "affordance_hint_original": "the red light switch",
+      "affordance_hint_confidence": "ok"
+    }
+  ]
+}

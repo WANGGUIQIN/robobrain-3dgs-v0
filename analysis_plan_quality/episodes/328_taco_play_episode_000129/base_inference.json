@@ -1,0 +1,142 @@
+{
+  "task": "grasp the yellow block, then rotate it right",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_3epoch/best",
+  "raw": "**SCENE ANALYSIS -** A yellow block is located on a white surface within a cabinet. The block is a cube with a matte finish. The cabinet has a wooden door with a black handle. The task requires manipulating the block, so the block's body is the primary affordance for grasping and rotating. **STRATEGY -** First, reach for and grasp the yellow block. Then, rotate the block 90 degrees to the right. The rotation must be performed while holding the block to ensure it remains in place. Failure modes include dropping the block during rotation or not grasping it properly. **AFFORDANCE REASONING -** Step 1: Reach for the block's body to establish contact. Step 2: Grasp the block's body for a secure hold. Step 3: Rotate the block 90 degrees to the right while maintaining contact.\n\nGoal: rotate(yellow_block, right); stable(yellow_block)\nScene: yellow_block, cabinet, wooden_door, black_handle\nStep 1: reach(yellow_block)\n  affordance_region: the body of the yellow block\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, yellow_block, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, yellow_block) < 0.03\nStep 2: grasp(yellow_block)\n  affordance_region: the body of the yellow block\n  contact: holding(yellow_block) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(yellow_block)\nStep 3: rotate(yellow_block, right)\n  affordance_region: the body of the yellow block\n  contact: holding(yellow_block) [progress]\n  spatial: angle(yellow_block, initial_orientation, >, 90) [completion]\n  direction: rotate_axis(0, 0, -1) [progress]\n  done_when: angle(yellow_block, initial_orientation) > 90\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [
+      {
+        "pred": "rotate",
+        "args": [
+          "yellow_block",
+          "right"
+        ]
+      },
+      {
+        "pred": "stable",
+        "args": [
+          "yellow_block"
+        ]
+      }
+    ],
+    "scene_objects": [
+      "yellow_block",
+      "cabinet",
+      "wooden_door",
+      "black_handle"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "yellow_block",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "yellow_block",
+        "affordance_region": "the body of the yellow block",
+        "done_when": "distance(gripper, yellow_block) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "yellow_block"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "yellow_block",
+        "affordance_region": "the body of the yellow block",
+        "done_when": "holding(yellow_block)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "yellow_block"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "angle",
+              "args": [
+                "yellow_block",
+                "initial_orientation",
+                ">",
+                "90"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "rotate_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "rotate",
+        "target": "yellow_block, right",
+        "affordance_region": "the body of the yellow block",
+        "done_when": "angle(yellow_block, initial_orientation) > 90"
+      }
+    ]
+  }
+}

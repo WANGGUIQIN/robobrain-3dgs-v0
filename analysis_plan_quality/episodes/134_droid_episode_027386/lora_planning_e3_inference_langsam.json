@@ -1,0 +1,286 @@
+{
+  "task": "Put the scoop inside the blue cup and then pour the contents in the orange bowl into the blue bowl",
+  "scene_objects": [
+    "scoop",
+    "blue_cup",
+    "orange_bowl",
+    "blue_bowl",
+    "table"
+  ],
+  "steps": [
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "scoop",
+              "<",
+              "0.03"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "approach_axis",
+            "args": [
+              "0",
+              "0",
+              "-1"
+            ],
+            "role": "progress"
+          }
+        ]
+      },
+      "step": 1,
+      "action": "reach",
+      "target": "scoop",
+      "affordance_region": "the body of the scoop",
+      "done_when": "distance(gripper, scoop) < 0.03",
+      "affordance_hint": "the body of the scoop",
+      "refine_prompt": "the body of the scoop",
+      "refine_cache_hit": false,
+      "affordance_refined": null,
+      "affordance_3d_refined": null,
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "no_mask",
+      "refine_confidence": 0.0
+    },
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "scoop"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              "0",
+              "0",
+              "-1"
+            ],
+            "role": "progress"
+          }
+        ]
+      },
+      "step": 2,
+      "action": "grasp",
+      "target": "scoop",
+      "affordance_region": "the handle of the scoop",
+      "done_when": "holding(scoop)",
+      "affordance_hint": "the handle of the scoop",
+      "refine_prompt": "the handle of the scoop",
+      "refine_cache_hit": false,
+      "affordance_refined": null,
+      "affordance_3d_refined": null,
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "no_mask",
+      "refine_confidence": 0.0
+    },
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "scoop"
+            ],
+            "role": "safety"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "inside",
+            "args": [
+              "scoop",
+              "blue_cup"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "insert_dir",
+            "args": [
+              "0",
+              "0",
+              "-1"
+            ],
+            "role": "progress"
+          }
+        ]
+      },
+      "step": 3,
+      "action": "insert",
+      "target": "scoop",
+      "destination": "blue_cup",
+      "affordance_region": "the top opening of the blue cup",
+      "done_when": "inside(scoop, blue_cup)",
+      "affordance_hint": "the top opening of the blue cup",
+      "refine_prompt": "the top opening of the blue cup",
+      "refine_cache_hit": false,
+      "affordance_refined": [
+        0.4648,
+        0.5898
+      ],
+      "affordance_3d_refined": [
+        -0.1906,
+        0.1441,
+        0.9297
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.3919
+    },
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "orange_bowl",
+              "<",
+              "0.03"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "approach_axis",
+            "args": [
+              "0",
+              "0",
+              "-1"
+            ],
+            "role": "progress"
+          }
+        ]
+      },
+      "step": 4,
+      "action": "reach",
+      "target": "orange_bowl",
+      "affordance_region": "the orange bowl",
+      "done_when": "distance(gripper, orange_bowl) < 0.03",
+      "affordance_hint": "the orange bowl",
+      "refine_prompt": "the orange bowl",
+      "refine_cache_hit": false,
+      "affordance_refined": [
+        0.9961,
+        0.8867
+      ],
+      "affordance_3d_refined": [
+        2.0776,
+        2.34,
+        4.3738
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.3992
+    },
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "orange_bowl"
+            ],
+            "role": "safety"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "above",
+            "args": [
+              "orange_bowl",
+              "blue_bowl",
+              "0.05"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_spill",
+            "args": [
+              "orange_bowl"
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "step": 5,
+      "action": "pour",
+      "target": "orange_bowl",
+      "destination": "blue_bowl",
+      "affordance_region": "the mouth of the blue bowl",
+      "done_when": "above(orange_bowl, blue_bowl, 0.05)",
+      "affordance_hint": "the mouth of the blue bowl",
+      "refine_prompt": "the mouth of the blue bowl",
+      "refine_cache_hit": false,
+      "affordance_refined": [
+        0.4414,
+        0.625
+      ],
+      "affordance_3d_refined": [
+        -0.2507,
+        0.2133,
+        1.0667
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.3791
+    }
+  ]
+}

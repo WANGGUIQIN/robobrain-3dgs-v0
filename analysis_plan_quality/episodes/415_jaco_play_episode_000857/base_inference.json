@@ -1,0 +1,111 @@
+{
+  "task": "pick up the butter dairy",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_3epoch/best",
+  "raw": "**SCENE ANALYSIS -** A yellow plastic container, a blue plastic container, a yellow plastic brush, an orange ball, a small brown object, and a yellow rectangular object are on a wooden table. The yellow container is a rigid plastic container with a handle. The blue container is a rigid plastic container with a grid pattern. The yellow brush has a yellow handle and bristles. The orange ball is a rigid plastic ball. The small brown object is a rigid object. The yellow rectangular object is a rigid object. The task is to pick up the butter dairy (the small brown object). STRATEGY - First, reach for the small brown object, then grasp it, and finally transport it to a destination (the blue container). Failure modes include not grasping the object due to incorrect affordance or dropping it during transport. AFFORDANCE REASONING - Step 1 reach the small brown object at its body for initial contact. Step 2 grasp the small brown object at its body for secure hold. Step 3 transport the small brown object to the blue container.\n\n**Goal:** any_in(butter_dairy, blue_container)\n**Scene:** yellow_container, blue_container, yellow_brush, orange_ball, butter_dairy, yellow_rectangular_object\n**Step 1:** reach(butter_dairy)\n  affordance_region: the body of the small brown object\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, butter_dairy, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, butter_dairy) < 0.03\n**Step 2:** grasp(butter_dairy)\n  affordance_region: the body of the small brown object\n  contact: holding(butter_dairy) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(butter_dairy)\n**Step 3:** transport(butter_dairy -> blue_container)\n  affordance_region: an empty area inside the blue container\n  spatial: inside(butter_dairy, blue_container) [completion]\n  safety: no_drop(butter_dairy)\n  done_when: inside(butter_dairy, blue_container)\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [],
+    "scene_objects": [],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "butter_dairy",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "butter_dairy",
+        "affordance_region": "the body of the small brown object",
+        "done_when": "distance(gripper, butter_dairy) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "butter_dairy"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "butter_dairy",
+        "affordance_region": "the body of the small brown object",
+        "done_when": "holding(butter_dairy)"
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "inside",
+              "args": [
+                "butter_dairy",
+                "blue_container"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "butter_dairy"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "butter_dairy",
+        "destination": "blue_container",
+        "affordance_region": "an empty area inside the blue container",
+        "done_when": "inside(butter_dairy, blue_container)"
+      }
+    ]
+  }
+}

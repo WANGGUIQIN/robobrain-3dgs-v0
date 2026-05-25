@@ -1,0 +1,164 @@
+{
+  "task": "Use the wooden spoon to mix inside the pot",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_planning_3epoch/checkpoint-39957",
+  "raw": "Scene: wooden_spoon, pot, stove, counter\nStep 1: reach(wooden_spoon)\n  affordance_region: the wooden spoon\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, wooden_spoon, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, wooden_spoon) < 0.03\nStep 2: grasp(wooden_spoon)\n  affordance_region: the handle of the wooden spoon\n  contact: holding(wooden_spoon) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(wooden_spoon)\nStep 3: insert(wooden_spoon -> pot)\n  affordance_region: the top opening of the pot\n  contact: holding(wooden_spoon) [safety]\n  spatial: inside(wooden_spoon, pot) [completion]\n  direction: insert_dir(0, 0, -1) [progress]\n  done_when: inside(wooden_spoon, pot)\nStep 4: rotate(wooden_spoon)\n  affordance_region: the body of the wooden spoon\n  contact: holding(wooden_spoon) [safety]\n  spatial: inside(wooden_spoon, pot) [safety]\n  direction: motion_dir(circular) [completion]\n  done_when: mixing_complete\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [],
+    "scene_objects": [
+      "wooden_spoon",
+      "pot",
+      "stove",
+      "counter"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "wooden_spoon",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "wooden_spoon",
+        "affordance_region": "the wooden spoon",
+        "done_when": "distance(gripper, wooden_spoon) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "wooden_spoon"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "wooden_spoon",
+        "affordance_region": "the handle of the wooden spoon",
+        "done_when": "holding(wooden_spoon)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "wooden_spoon"
+              ],
+              "role": "safety"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "inside",
+              "args": [
+                "wooden_spoon",
+                "pot"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "insert_dir",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "insert",
+        "target": "wooden_spoon",
+        "destination": "pot",
+        "affordance_region": "the top opening of the pot",
+        "done_when": "inside(wooden_spoon, pot)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "wooden_spoon"
+              ],
+              "role": "safety"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "inside",
+              "args": [
+                "wooden_spoon",
+                "pot"
+              ],
+              "role": "safety"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "motion_dir",
+              "args": [
+                "circular"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "rotate",
+        "target": "wooden_spoon",
+        "affordance_region": "the body of the wooden spoon",
+        "done_when": "mixing_complete"
+      }
+    ]
+  }
+}

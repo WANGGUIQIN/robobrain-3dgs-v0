@@ -1,0 +1,227 @@
+{
+  "task": "Chop the orange",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_3epoch/best",
+  "raw": "SCENE ANALYSIS - A wooden cutting board is on a table. An orange is on the cutting board. A knife is on the table to the right of the cutting board. The orange is a solid, round object; the knife has a blade and a handle. STRATEGY - First, grasp the orange to move it to a position suitable for chopping. Then, grasp the knife to perform the chopping action. Failure modes include dropping the orange or knife, or misaligning the knife with the orange. AFFORDANCE REASONING - Step 1: Reach for the orange on the cutting board. Step 2: Grasp the orange to pick it up. Step 3: Transport the orange to a central position on the cutting board. Step 4: Grasp the knife from the table. Step 5: Transport the knife to the orange. Step 6: Insert the knife into the orange and perform a chopping motion. Step 7: Release the knife and the orange.\nGoal: chopped(orange)\nScene: cutting_board, orange, knife, table\nStep 1: reach(orange)\n  affordance_region: the body of the orange\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, orange, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, orange) < 0.03\nStep 2: grasp(orange)\n  affordance_region: the body of the orange\n  contact: holding(orange) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(orange)\nStep 3: transport(orange -> cutting_board)\n  affordance_region: a central area on the cutting board\n  spatial: on(orange, cutting_board) [completion]\n  safety: no_drop(orange)\n  done_when: on(orange, cutting_board)\nStep 4: grasp(knife)\n  affordance_region: the handle of the knife\n  contact: holding(knife) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(knife)\nStep 5: transport(knife -> orange)\n  affordance_region: the body of the orange\n  spatial: near(knife, orange) [completion]\n  safety: no_drop(knife)\n  done_when: near(knife, orange)\nStep 6: insert(knife -> orange)\n  affordance_region: the top surface of the orange\n  contact: knife_contact(orange) [completion]\n  pose: knife_angle(orange) [completion]\n  done_when: knife_contact(orange)\nStep 7: release(knife)\n  affordance_region: the body of the orange\n  contact: released(knife) [completion]\n  done_when: released(knife)\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [
+      {
+        "pred": "chopped",
+        "args": [
+          "orange"
+        ]
+      }
+    ],
+    "scene_objects": [
+      "cutting_board",
+      "orange",
+      "knife",
+      "table"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "orange",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "orange",
+        "affordance_region": "the body of the orange",
+        "done_when": "distance(gripper, orange) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "orange"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "orange",
+        "affordance_region": "the body of the orange",
+        "done_when": "holding(orange)"
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "on",
+              "args": [
+                "orange",
+                "cutting_board"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "orange"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "orange",
+        "destination": "cutting_board",
+        "affordance_region": "a central area on the cutting board",
+        "done_when": "on(orange, cutting_board)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "knife"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "grasp",
+        "target": "knife",
+        "affordance_region": "the handle of the knife",
+        "done_when": "holding(knife)"
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "near",
+              "args": [
+                "knife",
+                "orange"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "knife"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 5,
+        "action": "transport",
+        "target": "knife",
+        "destination": "orange",
+        "affordance_region": "the body of the orange",
+        "done_when": "near(knife, orange)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "knife_contact",
+              "args": [
+                "orange"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "knife_angle",
+              "args": [
+                "orange"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 6,
+        "action": "insert",
+        "target": "knife",
+        "destination": "orange",
+        "affordance_region": "the top surface of the orange",
+        "done_when": "knife_contact(orange)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "released",
+              "args": [
+                "knife"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 7,
+        "action": "release",
+        "target": "knife",
+        "affordance_region": "the body of the orange",
+        "done_when": "released(knife)"
+      }
+    ]
+  }
+}

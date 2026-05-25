@@ -1,0 +1,112 @@
+{
+  "task": "switch off the blue light",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_3epoch/best",
+  "raw": "**SCENE ANALYSIS -** A robotic arm is positioned in a kitchen environment with white cabinets, a countertop, and a sink. On the countertop, there is a white tray containing a yellow object (likely a ball). The task is to switch off a blue light, which is not visible in the image but is assumed to be present in the environment. The scene contains no visible blue light, so the plan must account for its potential location and the need to interact with it. **STRATEGY -** The plan assumes the blue light is located on a surface or device within the scene. The robot will first reach for the light, then perform an action (e.g., push or flip) to switch it off. Failure modes include the light being out of reach or the action not being performed correctly. **AFFORDANCE REASONING -** The robot must first locate the blue light, then interact with it using a suitable affordance (e.g., a switch or button). The action must be precise to ensure the light is switched off.\n\nGoal: switched_off(blue_light)\nScene: robotic_arm, white_cabinets, countertop, white_tray, yellow_object\nStep 1: reach(blue_light)\n  affordance_region: the surface of the blue light (assumed to be a switch or button)\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, blue_light, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, blue_light) < 0.03\nStep 2: push(blue_light)\n  affordance_region: the surface of the blue light\n  contact: surface_contact(gripper, blue_light) [completion]\n  pose: gripper_pose(over_blue_light) [completion]\n  done_when: surface_contact(gripper, blue_light)\nStep 3: release(blue_light)\n  affordance_region: the surface of the blue light\n  contact: released(gripper) [completion]\n  done_when: released(gripper)\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [
+      {
+        "pred": "switched_off",
+        "args": [
+          "blue_light"
+        ]
+      }
+    ],
+    "scene_objects": [
+      "robotic_arm",
+      "white_cabinets",
+      "countertop",
+      "white_tray",
+      "yellow_object"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "blue_light",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "blue_light",
+        "affordance_region": "the surface of the blue light (assumed to be a switch or button)",
+        "done_when": "distance(gripper, blue_light) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "surface_contact",
+              "args": [
+                "gripper",
+                "blue_light"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "gripper_pose",
+              "args": [
+                "over_blue_light"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "push",
+        "target": "blue_light",
+        "affordance_region": "the surface of the blue light",
+        "done_when": "surface_contact(gripper, blue_light)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "released",
+              "args": [
+                "gripper"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "release",
+        "target": "blue_light",
+        "affordance_region": "the surface of the blue light",
+        "done_when": "released(gripper)"
+      }
+    ]
+  }
+}

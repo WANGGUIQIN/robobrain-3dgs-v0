@@ -1,0 +1,128 @@
+{
+  "task": "Turn off the desk lamp by pressing the button",
+  "scene_objects": [
+    "desk_lamp",
+    "button",
+    "table"
+  ],
+  "steps": [
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "button",
+              "<",
+              "0.03"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "approach_axis",
+            "args": [
+              "0",
+              "0",
+              "-1"
+            ],
+            "role": "progress"
+          }
+        ]
+      },
+      "step": 1,
+      "action": "reach",
+      "target": "button",
+      "affordance_region": "the button on the desk lamp",
+      "done_when": "distance(gripper, button) < 0.03",
+      "affordance_hint": "the button on the desk lamp",
+      "refine_prompt": "the button on the desk lamp",
+      "refine_cache_hit": false,
+      "affordance_refined": [
+        0.8281,
+        0.3242
+      ],
+      "affordance_3d_refined": [
+        -1.2714,
+        -1.1419,
+        3.7672
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.3445
+    },
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "button"
+            ],
+            "role": "completion"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "aligned_z",
+            "args": [
+              "gripper",
+              "button"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "force_limit",
+            "args": [
+              "button"
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "step": 2,
+      "action": "push",
+      "target": "button",
+      "affordance_region": "the button on the desk lamp",
+      "done_when": "button_state(off)",
+      "affordance_hint": "the button on the desk lamp",
+      "refine_prompt": "the button on the desk lamp",
+      "refine_cache_hit": true,
+      "affordance_refined": [
+        0.8281,
+        0.3242
+      ],
+      "affordance_3d_refined": [
+        -1.2714,
+        -1.1419,
+        3.7672
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.3445
+    }
+  ]
+}

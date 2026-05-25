@@ -1,0 +1,228 @@
+{
+  "task": "move paper bowl near green can",
+  "scene_objects": [
+    "green_can",
+    "paper_bowl",
+    "chips_bag",
+    "table",
+    "drawer"
+  ],
+  "steps": [
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "paper_bowl",
+              "<",
+              "0.03"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "approach_axis",
+            "args": [
+              "0",
+              "0",
+              "-1"
+            ],
+            "role": "progress"
+          }
+        ]
+      },
+      "step": 1,
+      "action": "reach",
+      "target": "paper_bowl",
+      "affordance_region": "the rim of the white paper bowl",
+      "done_when": "distance(gripper, paper_bowl) < 0.03",
+      "affordance_hint": "the rim of the white paper bowl",
+      "refine_prompt": "the rim of the white paper bowl",
+      "refine_cache_hit": false,
+      "affordance_refined": [
+        0.6406,
+        0.3672
+      ],
+      "affordance_3d_refined": [
+        0.5552,
+        -0.5244,
+        3.4345
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.5015
+    },
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "paper_bowl"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              "0",
+              "0",
+              "-1"
+            ],
+            "role": "progress"
+          }
+        ]
+      },
+      "step": 2,
+      "action": "grasp",
+      "target": "paper_bowl",
+      "affordance_region": "the rim of the white paper bowl",
+      "done_when": "holding(paper_bowl)",
+      "affordance_hint": "the rim of the white paper bowl",
+      "refine_prompt": "the rim of the white paper bowl",
+      "refine_cache_hit": true,
+      "affordance_refined": [
+        0.6406,
+        0.3672
+      ],
+      "affordance_3d_refined": [
+        0.5552,
+        -0.5244,
+        3.4345
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.5015
+    },
+    {
+      "constraints": {
+        "spatial": [
+          {
+            "pred": "above",
+            "args": [
+              "paper_bowl",
+              "green_can",
+              "0.05"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_drop",
+            "args": [
+              "paper_bowl"
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "step": 3,
+      "action": "transport",
+      "target": "paper_bowl",
+      "destination": "near_green_can",
+      "affordance_region": "an empty area on the table near the green can",
+      "done_when": "above(paper_bowl, green_can, 0.05)",
+      "affordance_hint": "an empty area on the table near the green can",
+      "refine_prompt": "an empty area on the table near the green can",
+      "refine_cache_hit": false,
+      "affordance_refined": [
+        0.4844,
+        0.9961
+      ],
+      "affordance_3d_refined": [
+        -0.0511,
+        1.6238,
+        2.8475
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.3063
+    },
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "surface_contact",
+            "args": [
+              "paper_bowl",
+              "table"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "released",
+            "args": [
+              "paper_bowl"
+            ],
+            "role": "completion"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "stable",
+            "args": [
+              "paper_bowl"
+            ],
+            "role": "completion"
+          }
+        ]
+      },
+      "step": 4,
+      "action": "place",
+      "target": "paper_bowl",
+      "destination": "near_green_can",
+      "affordance_region": "an empty area on the table near the green can",
+      "done_when": "surface_contact(paper_bowl, table) AND released(paper_bowl) AND stable(paper_bowl)",
+      "affordance_hint": "an empty area on the table near the green can",
+      "refine_prompt": "an empty area on the table near the green can",
+      "refine_cache_hit": true,
+      "affordance_refined": [
+        0.4844,
+        0.9961
+      ],
+      "affordance_3d_refined": [
+        -0.0511,
+        1.6238,
+        2.8475
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.3063
+    }
+  ]
+}

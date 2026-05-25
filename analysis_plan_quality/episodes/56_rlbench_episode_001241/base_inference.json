@@ -1,0 +1,195 @@
+{
+  "task": "use the stick to drag the cube onto the magenta target",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_3epoch/best",
+  "raw": "SCENE ANALYSIS - A robotic arm is positioned over a surface with a blue cube, a magenta target, a green cube, a purple cube, a gray cube, and a stick. The cubes are scattered, and the stick is near the blue cube. The task requires using the stick to drag the blue cube onto the magenta target. STRATEGY - First, grasp the stick, then use it to push the blue cube towards the magenta target. Ensure the stick is used as a tool for pushing, not lifting, to avoid dropping the cube. Failure modes include dropping the stick or cube, or misaligning the push. AFFORDANCE REASONING - Step 1: Reach for the stick. Step 2: Grasp the stick. Step 3: Push the blue cube with the stick towards the magenta target. Step 4: Release the stick. Step 5: Ensure the blue cube is on the magenta target.\nGoal: on(blue_cube, magenta_target)\nScene: blue_cube, magenta_target, green_cube, purple_cube, gray_cube, stick\nStep 1: reach(stick)\n  affordance_region: the body of the stick\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, stick, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, stick) < 0.03\nStep 2: grasp(stick)\n  affordance_region: the body of the stick\n  contact: holding(stick) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(stick)\nStep 3: push(blue_cube -> magenta_target)\n  affordance_region: the body of the blue cube\n  contact: holding(stick) [progress]\n  spatial: distance(stick, blue_cube, <, 0.1) [progress]; distance(stick, magenta_target, >, 0.1) [progress]\n  direction: push_axis(0, 0, -1) [progress]\n  safety: no_drop(blue_cube)\n  done_when: distance(blue_cube, magenta_target) < 0.05\nStep 4: release(stick)\n  affordance_region: the body of the stick\n  contact: released(stick) [completion]\n  done_when: released(stick)\nStep 5: check(on(blue_cube, magenta_target))\n  affordance_region: the body of the blue cube\n  contact: surface_contact(blue_cube, magenta_target) [completion]\n  done_when: surface_contact(blue_cube, magenta_target)\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [
+      {
+        "pred": "on",
+        "args": [
+          "blue_cube",
+          "magenta_target"
+        ]
+      }
+    ],
+    "scene_objects": [
+      "blue_cube",
+      "magenta_target",
+      "green_cube",
+      "purple_cube",
+      "gray_cube",
+      "stick"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "stick",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "stick",
+        "affordance_region": "the body of the stick",
+        "done_when": "distance(gripper, stick) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "stick"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "stick",
+        "affordance_region": "the body of the stick",
+        "done_when": "holding(stick)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "stick"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "stick",
+                "blue_cube",
+                "<",
+                "0.1"
+              ],
+              "role": "progress"
+            },
+            {
+              "pred": "distance",
+              "args": [
+                "stick",
+                "magenta_target",
+                ">",
+                "0.1"
+              ],
+              "role": "progress"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "push_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "blue_cube"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "push",
+        "target": "blue_cube",
+        "destination": "magenta_target",
+        "affordance_region": "the body of the blue cube",
+        "done_when": "distance(blue_cube, magenta_target) < 0.05"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "released",
+              "args": [
+                "stick"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "release",
+        "target": "stick",
+        "affordance_region": "the body of the stick",
+        "done_when": "released(stick)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "surface_contact",
+              "args": [
+                "blue_cube",
+                "magenta_target"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 5,
+        "action": "check",
+        "target": "on(blue_cube, magenta_target",
+        "affordance_region": "the body of the blue cube",
+        "done_when": "surface_contact(blue_cube, magenta_target)"
+      }
+    ]
+  }
+}

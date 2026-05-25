@@ -1,0 +1,268 @@
+{
+  "task": "slide the door to the left, then let it go",
+  "parsed": {
+    "scene_objects": [
+      "door",
+      "robot_arm",
+      "table"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "door",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "door",
+        "affordance_region": "the white door on the right side of the table",
+        "done_when": "distance(gripper, door) < 0.03",
+        "affordance_hint": "the white door on the right side of the table",
+        "refine_prompt": "the white door on the right side of the table",
+        "refine_cache_hit": false,
+        "refine_prompt_fallback": "door",
+        "affordance_refined": [
+          0.9961,
+          0.4922
+        ],
+        "affordance_3d_refined": [
+          0.9295,
+          -0.0146,
+          1.63
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.2406,
+        "affordance": [
+          0.9961,
+          0.4922
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "door"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "door",
+        "affordance_region": "the handle of the white door",
+        "done_when": "holding(door)",
+        "affordance_hint": "the handle of the white door",
+        "refine_prompt": "the handle of the white door",
+        "refine_cache_hit": false,
+        "refine_prompt_fallback": "door",
+        "affordance_refined": [
+          0.9961,
+          0.4922
+        ],
+        "affordance_3d_refined": [
+          0.9295,
+          -0.0146,
+          1.63
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.2406,
+        "affordance": [
+          0.9961,
+          0.4922
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "door"
+              ],
+              "role": "safety"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "aligned_xy",
+              "args": [
+                "door",
+                "left_position",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "motion_dir",
+              "args": [
+                "left"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_collision",
+              "args": [
+                "door",
+                "table"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "push",
+        "target": "door",
+        "destination": "left_position",
+        "affordance_region": "the center of the white door",
+        "done_when": "aligned_xy(door, left_position, 0.03)",
+        "affordance_hint": "the center of the white door",
+        "refine_prompt": "the center of the white door",
+        "refine_cache_hit": false,
+        "refine_prompt_fallback": "door",
+        "affordance_refined": [
+          0.9961,
+          0.4922
+        ],
+        "affordance_3d_refined": [
+          0.9295,
+          -0.0146,
+          1.63
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.2406,
+        "affordance": [
+          0.9961,
+          0.4922
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "released",
+              "args": [
+                "door"
+              ],
+              "role": "completion"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "on_surface",
+              "args": [
+                "door",
+                "table"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "support_stable",
+              "args": [
+                "door"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "release",
+        "target": "door",
+        "affordance_region": "the body of the white door",
+        "done_when": "released(door) AND on_surface(door, table)",
+        "affordance_hint": "the body of the white door",
+        "refine_prompt": "the body of the white door",
+        "refine_cache_hit": false,
+        "refine_prompt_fallback": "door",
+        "affordance_refined": [
+          0.9961,
+          0.4922
+        ],
+        "affordance_3d_refined": [
+          0.9295,
+          -0.0146,
+          1.63
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.2406,
+        "affordance": [
+          0.9961,
+          0.4922
+        ]
+      }
+    ]
+  }
+}

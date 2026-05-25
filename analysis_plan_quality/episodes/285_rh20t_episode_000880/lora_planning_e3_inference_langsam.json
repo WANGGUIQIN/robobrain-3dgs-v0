@@ -1,0 +1,131 @@
+{
+  "task": "Push the soccer ball into the goal",
+  "scene_objects": [
+    "soccer_ball",
+    "goal",
+    "table"
+  ],
+  "steps": [
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "soccer_ball",
+              "<",
+              "0.03"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "approach_axis",
+            "args": [
+              "0",
+              "0",
+              "-1"
+            ],
+            "role": "progress"
+          }
+        ]
+      },
+      "step": 1,
+      "action": "reach",
+      "target": "soccer_ball",
+      "affordance_region": "the small black soccer ball",
+      "done_when": "distance(gripper, soccer_ball) < 0.03",
+      "affordance_hint": "the small black soccer ball",
+      "refine_prompt": "the small black soccer ball",
+      "refine_cache_hit": false,
+      "affordance_refined": [
+        0.5547,
+        0.2695
+      ],
+      "affordance_3d_refined": [
+        -0.5063,
+        -0.3157,
+        0.9102
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.4771
+    },
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "soccer_ball"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "aligned_xy",
+            "args": [
+              "soccer_ball",
+              "goal",
+              "0.05"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "soccer_ball",
+              "goal"
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "step": 2,
+      "action": "push",
+      "target": "soccer_ball",
+      "destination": "goal",
+      "affordance_region": "the center of the soccer ball",
+      "done_when": "aligned_xy(soccer_ball, goal, 0.05)",
+      "affordance_hint": "the center of the soccer ball",
+      "refine_prompt": "the center of the soccer ball",
+      "refine_cache_hit": false,
+      "affordance_refined": [
+        0.418,
+        0.5469
+      ],
+      "affordance_3d_refined": [
+        -1.0096,
+        -0.1896,
+        1.5168
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.4454
+    }
+  ]
+}

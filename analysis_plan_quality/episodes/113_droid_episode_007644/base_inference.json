@@ -1,0 +1,102 @@
+{
+  "task": "Press the button on the top right side of the breakfast marker to open the chamber on the right",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_3epoch/best",
+  "raw": "**SCENE ANALYSIS - A light blue toaster sits on a white table. It has a top surface with a metallic tray. The task is to press a button on the top right to open the right chamber. The toaster is rigid with a flat top surface. STRATEGY - Reach the toaster, locate the right button, and press it. Failure mode: mislocating the button. AFFORDANCE REASONING - Step 1 reach the toaster body; Step 2 locate the right button on the top surface; Step 3 press the button to trigger the opening mechanism.**\nGoal: opened(chamber_right)\nScene: light_blue_toaster, white_table\nStep 1: reach(light_blue_toaster)\n  affordance_region: the body of the light blue toaster\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, light_blue_toaster, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, light_blue_toaster) < 0.03\nStep 2: press(button_right)\n  affordance_region: the top right button on the light blue toaster\n  contact: button_pressed(button_right) [completion]\n  spatial: on(button_right, light_blue_toaster) [progress]\n  direction: press_axis(0, 0, -1) [progress]\n  done_when: button_pressed(button_right)\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [
+      {
+        "pred": "opened",
+        "args": [
+          "chamber_right"
+        ]
+      }
+    ],
+    "scene_objects": [
+      "light_blue_toaster",
+      "white_table"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "light_blue_toaster",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "light_blue_toaster",
+        "affordance_region": "the body of the light blue toaster",
+        "done_when": "distance(gripper, light_blue_toaster) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "button_pressed",
+              "args": [
+                "button_right"
+              ],
+              "role": "completion"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "on",
+              "args": [
+                "button_right",
+                "light_blue_toaster"
+              ],
+              "role": "progress"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "press_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "press",
+        "target": "button_right",
+        "affordance_region": "the top right button on the light blue toaster",
+        "done_when": "button_pressed(button_right)"
+      }
+    ]
+  }
+}

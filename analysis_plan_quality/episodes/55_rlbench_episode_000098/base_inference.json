@@ -1,0 +1,166 @@
+{
+  "task": "close the black jar",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_3epoch/best",
+  "raw": "**SCENE ANALYSIS -** A black jar with a pink lid sits on a wooden surface. A gray lid is nearby. The jar has a cylindrical body and a flat lid; the gray lid is circular. To close the jar, the gray lid must be picked up and placed on the jar's opening. **STRATEGY -** First, reach for and grasp the gray lid. Then, transport it to the jar. Finally, place the lid onto the jar's opening. Failure modes include dropping the lid or misaligning it with the jar. **AFFORDANCE REASONING -** Step 1: Reach for the gray lid (body). Step 2: Grasp the gray lid (body) for secure hold. Step 3: Transport the gray lid to the jar. Step 4: Place the gray lid onto the jar's opening.\n\nGoal: on(gray_lid, black_jar); stable(gray_lid)\nScene: black_jar, gray_lid, wooden_surface\nStep 1: reach(gray_lid)\n  affordance_region: the body of the gray lid\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, gray_lid, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, gray_lid) < 0.03\nStep 2: grasp(gray_lid)\n  affordance_region: the body of the gray lid\n  contact: holding(gray_lid) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(gray_lid)\nStep 3: transport(gray_lid -> black_jar)\n  affordance_region: the top opening of the black jar\n  spatial: above(gray_lid, black_jar, 0.05) [completion]\n  safety: no_drop(gray_lid)\n  done_when: above(gray_lid, black_jar, 0.05)\nStep 4: place(gray_lid -> black_jar)\n  affordance_region: the top opening of the black jar\n  contact: surface_contact(gray_lid, black_jar) [completion]; released(gray_lid) [completion]\n  pose: stable(gray_lid) [completion]\n  done_when: surface_contact(gray_lid, black_jar) AND released(gray_lid)\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [
+      {
+        "pred": "on",
+        "args": [
+          "gray_lid",
+          "black_jar"
+        ]
+      },
+      {
+        "pred": "stable",
+        "args": [
+          "gray_lid"
+        ]
+      }
+    ],
+    "scene_objects": [
+      "black_jar",
+      "gray_lid",
+      "wooden_surface"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "gray_lid",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "gray_lid",
+        "affordance_region": "the body of the gray lid",
+        "done_when": "distance(gripper, gray_lid) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "gray_lid"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "gray_lid",
+        "affordance_region": "the body of the gray lid",
+        "done_when": "holding(gray_lid)"
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "gray_lid",
+                "black_jar",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "gray_lid"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "gray_lid",
+        "destination": "black_jar",
+        "affordance_region": "the top opening of the black jar",
+        "done_when": "above(gray_lid, black_jar, 0.05)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "surface_contact",
+              "args": [
+                "gray_lid",
+                "black_jar"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "gray_lid"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "gray_lid"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "place",
+        "target": "gray_lid",
+        "destination": "black_jar",
+        "affordance_region": "the top opening of the black jar",
+        "done_when": "surface_contact(gray_lid, black_jar) AND released(gray_lid)"
+      }
+    ]
+  }
+}

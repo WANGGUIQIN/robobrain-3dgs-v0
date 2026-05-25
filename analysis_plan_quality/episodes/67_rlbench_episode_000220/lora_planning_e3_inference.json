@@ -1,0 +1,156 @@
+{
+  "task": "screw in the green light bulb",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_planning_3epoch/checkpoint-39957",
+  "raw": "Scene: green_light_bulb, screwdriver, table\nStep 1: reach(green_light_bulb)\n  affordance_region: the green light bulb\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, green_light_bulb, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, green_light_bulb) < 0.03\nStep 2: grasp(green_light_bulb)\n  affordance_region: the base of the green light bulb\n  contact: holding(green_light_bulb) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(green_light_bulb)\nStep 3: insert(green_light_bulb -> screwdriver)\n  affordance_region: the top opening of the screwdriver\n  contact: inserted(green_light_bulb, screwdriver) [completion]\n  spatial: aligned_xy(green_light_bulb, screwdriver, 0.03) [completion]\n  direction: insert_dir(0, 0, -1) [progress]\n  done_when: inserted(green_light_bulb, screwdriver)\nStep 4: rotate(green_light_bulb)\n  affordance_region: the body of the green light bulb\n  contact: holding(green_light_bulb) [safety]\n  pose: orientation_match(green_light_bulb, screwdriver) [completion]\n  done_when: orientation_match(green_light_bulb, screwdriver)\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [],
+    "scene_objects": [
+      "green_light_bulb",
+      "screwdriver",
+      "table"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "green_light_bulb",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "green_light_bulb",
+        "affordance_region": "the green light bulb",
+        "done_when": "distance(gripper, green_light_bulb) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "green_light_bulb"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "green_light_bulb",
+        "affordance_region": "the base of the green light bulb",
+        "done_when": "holding(green_light_bulb)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "inserted",
+              "args": [
+                "green_light_bulb",
+                "screwdriver"
+              ],
+              "role": "completion"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "aligned_xy",
+              "args": [
+                "green_light_bulb",
+                "screwdriver",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "insert_dir",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "insert",
+        "target": "green_light_bulb",
+        "destination": "screwdriver",
+        "affordance_region": "the top opening of the screwdriver",
+        "done_when": "inserted(green_light_bulb, screwdriver)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "green_light_bulb"
+              ],
+              "role": "safety"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "orientation_match",
+              "args": [
+                "green_light_bulb",
+                "screwdriver"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "rotate",
+        "target": "green_light_bulb",
+        "affordance_region": "the body of the green light bulb",
+        "done_when": "orientation_match(green_light_bulb, screwdriver)"
+      }
+    ]
+  }
+}

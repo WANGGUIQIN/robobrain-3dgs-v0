@@ -1,0 +1,108 @@
+{
+  "task": "Play the drum",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_3epoch/best",
+  "raw": "**SCENE ANALYSIS - A red drum with a white drumhead is on a table. A person's hand is near the drum. The drum is rigid with a circular drumhead. STRATEGY - The task is to play the drum, which requires striking the drumhead. The person's hand is the agent, so the plan involves the hand reaching the drumhead, striking it, and then releasing. Failure modes include missing the drumhead or striking too hard. AFFORDANCE REASONING - Step 1 reach the drumhead for striking; Step 2 strike the drumhead; Step 3 release the drumhead.**\nGoal: struck(drumhead)\nScene: red_drum, person_hand\nStep 1: reach(drumhead)\n  affordance_region: the circular drumhead of the red drum\n  contact: hand_state(open) [progress]\n  spatial: distance(hand, drumhead, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(hand, drumhead) < 0.03\nStep 2: strike(drumhead)\n  affordance_region: the circular drumhead of the red drum\n  contact: hand_contact(drumhead) [completion]\n  pose: hand_pose(striking) [completion]\n  done_when: hand_contact(drumhead)\nStep 3: release(drumhead)\n  affordance_region: the circular drumhead of the red drum\n  contact: hand_state(open) [completion]\n  done_when: hand_state(open)\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [
+      {
+        "pred": "struck",
+        "args": [
+          "drumhead"
+        ]
+      }
+    ],
+    "scene_objects": [
+      "red_drum",
+      "person_hand"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "hand_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "hand",
+                "drumhead",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "drumhead",
+        "affordance_region": "the circular drumhead of the red drum",
+        "done_when": "distance(hand, drumhead) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "hand_contact",
+              "args": [
+                "drumhead"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "hand_pose",
+              "args": [
+                "striking"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "strike",
+        "target": "drumhead",
+        "affordance_region": "the circular drumhead of the red drum",
+        "done_when": "hand_contact(drumhead)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "hand_state",
+              "args": [
+                "open"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "release",
+        "target": "drumhead",
+        "affordance_region": "the circular drumhead of the red drum",
+        "done_when": "hand_state(open)"
+      }
+    ]
+  }
+}

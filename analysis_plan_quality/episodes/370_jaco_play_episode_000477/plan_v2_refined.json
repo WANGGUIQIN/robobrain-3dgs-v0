@@ -1,0 +1,398 @@
+{
+  "task": "place the orange fruit in the sink",
+  "scene_objects": [
+    "orange_fruit",
+    "blue_sink_bin",
+    "green_cup",
+    "white_utensil_rack",
+    "yellow_block",
+    "red_bowl",
+    "metal_tray",
+    "table",
+    "robot_gripper"
+  ],
+  "num_steps": 4,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "orange_fruit",
+      "affordance": [
+        0.383,
+        0.535
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "orange_fruit",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "within_workspace",
+            "args": [
+              "orange_fruit"
+            ],
+            "role": "safety"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "approach_dir",
+            "args": [
+              0.0,
+              0.0,
+              -1.0
+            ],
+            "role": "safety"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "table"
+            ],
+            "role": "safety"
+          },
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "metal_tray"
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "distance(gripper, orange_fruit) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        -0.3836,
+        0.1151,
+        2.8475
+      ],
+      "affordance_hint": "the orange fruit",
+      "affordance_hint_original": "the orange fruit",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 2,
+      "action": "grasp",
+      "target": "orange_fruit",
+      "affordance": [
+        0.383,
+        0.535
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "orange_fruit"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "holding",
+            "args": [
+              "orange_fruit"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "gripper_width",
+            "args": [
+              "appropriate_for_fruit"
+            ],
+            "role": "progress"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "stable",
+            "args": [
+              "orange_fruit"
+            ],
+            "role": "progress"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              0.0,
+              0.0,
+              -1.0
+            ],
+            "role": "safety"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "force_limit",
+            "args": [
+              "orange_fruit"
+            ],
+            "role": "safety"
+          },
+          {
+            "pred": "no_drop",
+            "args": [
+              "orange_fruit"
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "holding(orange_fruit)",
+      "affordance_3d": [
+        -0.3836,
+        0.1151,
+        2.8475
+      ],
+      "affordance_hint": "the orange body of the orange fruit",
+      "affordance_hint_original": "orange fruit",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 3,
+      "action": "transport",
+      "target": "orange_fruit",
+      "destination": "blue_sink_bin",
+      "affordance": [
+        0.883,
+        0.66
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "orange_fruit"
+            ],
+            "role": "safety"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "above",
+            "args": [
+              "orange_fruit",
+              "blue_sink_bin",
+              0.05
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "aligned_xy",
+            "args": [
+              "orange_fruit",
+              "blue_sink_bin",
+              0.05
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "clear_path",
+            "args": [
+              "orange_fruit",
+              "blue_sink_bin"
+            ],
+            "role": "safety"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "upright",
+            "args": [
+              "orange_fruit"
+            ],
+            "role": "progress"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "motion_dir",
+            "args": [
+              1.0,
+              0.0,
+              0.0
+            ],
+            "role": "progress"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "orange_fruit",
+              "green_cup"
+            ],
+            "role": "safety"
+          },
+          {
+            "pred": "no_collision",
+            "args": [
+              "orange_fruit",
+              "white_utensil_rack"
+            ],
+            "role": "safety"
+          },
+          {
+            "pred": "no_drop",
+            "args": [
+              "orange_fruit"
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "holding(orange_fruit) AND above(orange_fruit, blue_sink_bin, 0.05) AND aligned_xy(orange_fruit, blue_sink_bin, 0.05)",
+      "affordance_3d": [
+        1.3047,
+        0.5458,
+        2.9649
+      ],
+      "affordance_hint": "the empty area on the blue sink bin",
+      "affordance_hint_original": "an empty area on the blue sink bin",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 4,
+      "action": "place",
+      "target": "orange_fruit",
+      "destination": "blue_sink_bin",
+      "affordance": [
+        0.883,
+        0.66
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "surface_contact",
+            "args": [
+              "orange_fruit",
+              "blue_sink_bin"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "released",
+            "args": [
+              "orange_fruit"
+            ],
+            "role": "completion"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "inside",
+            "args": [
+              "orange_fruit",
+              "blue_sink_bin"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "below",
+            "args": [
+              "gripper",
+              "blue_sink_bin_rim",
+              0.02
+            ],
+            "role": "progress"
+          },
+          {
+            "pred": "on_surface",
+            "args": [
+              "orange_fruit",
+              "blue_sink_bin_bottom"
+            ],
+            "role": "completion"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "stable",
+            "args": [
+              "orange_fruit"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "retreat_dir",
+            "args": [
+              0.0,
+              0.0,
+              1.0
+            ],
+            "role": "progress"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "support_stable",
+            "args": [
+              "orange_fruit"
+            ],
+            "role": "safety"
+          },
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "blue_sink_bin"
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "inside(orange_fruit, blue_sink_bin) AND surface_contact(orange_fruit, blue_sink_bin) AND released(orange_fruit) AND stable(orange_fruit)",
+      "affordance_3d": [
+        1.3047,
+        0.5458,
+        2.9649
+      ],
+      "affordance_hint": "the empty area on the blue sink bin",
+      "affordance_hint_original": "an empty area on the blue sink bin",
+      "affordance_hint_confidence": "ok"
+    }
+  ]
+}

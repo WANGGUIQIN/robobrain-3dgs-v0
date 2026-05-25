@@ -1,0 +1,232 @@
+{
+  "task": "Move an object from one box to another",
+  "scene_objects": [
+    "pink_box",
+    "blue_box",
+    "wooden_cube",
+    "table"
+  ],
+  "num_steps": 4,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "wooden_cube",
+      "affordance": [
+        0.419,
+        0.558
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "wooden_cube",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "pink_box"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, wooden_cube) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        -1.4004,
+        -0.2433,
+        2.1038
+      ],
+      "affordance_hint": "the wooden cube"
+    },
+    {
+      "step": 2,
+      "action": "grasp",
+      "target": "wooden_cube",
+      "affordance": [
+        0.419,
+        0.558
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "wooden_cube"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "holding",
+            "args": [
+              "wooden_cube"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              0,
+              0,
+              -1
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "holding(wooden_cube)",
+      "affordance_3d": [
+        -1.4004,
+        -0.2433,
+        2.1038
+      ],
+      "affordance_hint": "wooden cube"
+    },
+    {
+      "step": 3,
+      "action": "transport",
+      "target": "wooden_cube",
+      "destination": "blue_box",
+      "affordance": [
+        0.406,
+        0.64
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "wooden_cube"
+            ],
+            "role": "safety"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "above",
+            "args": [
+              "wooden_cube",
+              "blue_box",
+              0.05
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "wooden_cube",
+              "blue_box"
+            ]
+          },
+          {
+            "pred": "no_drop",
+            "args": [
+              "wooden_cube"
+            ]
+          }
+        ]
+      },
+      "done_when": "above(wooden_cube, blue_box, 0.05) AND aligned_xy(wooden_cube, blue_box, 0.03)",
+      "affordance_3d": [
+        -1.4861,
+        -0.1101,
+        2.2017
+      ],
+      "affordance_hint": "an empty area on the blue box"
+    },
+    {
+      "step": 4,
+      "action": "place",
+      "target": "wooden_cube",
+      "destination": "blue_box",
+      "affordance": [
+        0.406,
+        0.64
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "surface_contact",
+            "args": [
+              "wooden_cube",
+              "blue_box"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "released",
+            "args": [
+              "wooden_cube"
+            ],
+            "role": "completion"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "stable",
+            "args": [
+              "wooden_cube"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "support_stable",
+            "args": [
+              "wooden_cube"
+            ]
+          }
+        ]
+      },
+      "done_when": "surface_contact(wooden_cube, blue_box) AND released(wooden_cube) AND stable(wooden_cube)",
+      "affordance_3d": [
+        -1.4861,
+        -0.1101,
+        2.2017
+      ],
+      "affordance_hint": "an empty area on the blue box"
+    }
+  ]
+}

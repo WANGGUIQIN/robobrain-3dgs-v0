@@ -1,0 +1,244 @@
+{
+  "task": "stack the wine bottle to the left of the rack",
+  "parsed": {
+    "scene_objects": [
+      "wine_bottle",
+      "rack",
+      "table"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "wine_bottle",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "wine_bottle",
+        "affordance_region": "the body of the wine bottle",
+        "done_when": "distance(gripper, wine_bottle) < 0.03",
+        "affordance_hint": "the body of the wine bottle",
+        "refine_prompt": "the body of the wine bottle",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.4883,
+          0.0742
+        ],
+        "affordance_3d_refined": [
+          -0.0576,
+          -2.0916,
+          2.4561
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.3246,
+        "affordance": [
+          0.4883,
+          0.0742
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "wine_bottle"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "wine_bottle",
+        "affordance_region": "the neck of the wine bottle",
+        "done_when": "holding(wine_bottle)",
+        "affordance_hint": "the neck of the wine bottle",
+        "refine_prompt": "the neck of the wine bottle",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.0078,
+          0.6211
+        ],
+        "affordance_3d_refined": [
+          -2.606,
+          0.6412,
+          2.6474
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.3207,
+        "affordance": [
+          0.0078,
+          0.6211
+        ]
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "wine_bottle",
+                "rack",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "wine_bottle"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "wine_bottle",
+        "destination": "rack",
+        "affordance_region": "an empty area on the rack",
+        "done_when": "above(wine_bottle, rack, 0.05)",
+        "affordance_hint": "an empty area on the rack",
+        "refine_prompt": "an empty area on the rack",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.6797,
+          0.793
+        ],
+        "affordance_3d_refined": [
+          0.9078,
+          1.4801,
+          2.5261
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.3367,
+        "affordance": [
+          0.6797,
+          0.793
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "surface_contact",
+              "args": [
+                "wine_bottle",
+                "rack"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "wine_bottle"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "wine_bottle"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "place",
+        "target": "wine_bottle",
+        "destination": "rack",
+        "affordance_region": "an empty area on the rack",
+        "done_when": "surface_contact(wine_bottle, rack) AND released(wine_bottle)",
+        "affordance_hint": "an empty area on the rack",
+        "refine_prompt": "an empty area on the rack",
+        "refine_cache_hit": true,
+        "affordance_refined": [
+          0.6797,
+          0.793
+        ],
+        "affordance_3d_refined": [
+          0.9078,
+          1.4801,
+          2.5261
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.3367,
+        "affordance": [
+          0.6797,
+          0.793
+        ]
+      }
+    ]
+  }
+}

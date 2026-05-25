@@ -1,0 +1,250 @@
+{
+  "task": "move potato to below spoon",
+  "parsed": {
+    "scene_objects": [
+      "potato",
+      "spoon",
+      "metal_bowl",
+      "yellow_cloth",
+      "red_mug",
+      "tomato_sauce_can",
+      "island_fruit_can",
+      "stove",
+      "microwave"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "potato",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "potato",
+        "affordance_region": "the body of the potato",
+        "done_when": "distance(gripper, potato) < 0.03",
+        "affordance_hint": "the body of the potato",
+        "refine_prompt": "the body of the potato",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.4492,
+          0.25
+        ],
+        "affordance_3d_refined": [
+          -0.1308,
+          -0.644,
+          2.2408
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.4355,
+        "affordance": [
+          0.4492,
+          0.25
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "potato"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "potato",
+        "affordance_region": "the body of the potato",
+        "done_when": "holding(potato)",
+        "affordance_hint": "the body of the potato",
+        "refine_prompt": "the body of the potato",
+        "refine_cache_hit": true,
+        "affordance_refined": [
+          0.4492,
+          0.25
+        ],
+        "affordance_3d_refined": [
+          -0.1308,
+          -0.644,
+          2.2408
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.4355,
+        "affordance": [
+          0.4492,
+          0.25
+        ]
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "below",
+              "args": [
+                "potato",
+                "spoon",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "potato"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "potato",
+        "destination": "below_spoon",
+        "affordance_region": "an empty area below the spoon",
+        "done_when": "below(potato, spoon, 0.05)",
+        "affordance_hint": "an empty area below the spoon",
+        "refine_prompt": "an empty area below the spoon",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.4453,
+          0.6055
+        ],
+        "affordance_3d_refined": [
+          -0.1729,
+          0.3334,
+          2.7496
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.3273,
+        "affordance": [
+          0.4453,
+          0.6055
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "surface_contact",
+              "args": [
+                "potato",
+                "table"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "potato"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "potato"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "place",
+        "target": "potato",
+        "destination": "below_spoon",
+        "affordance_region": "an empty area below the spoon",
+        "done_when": "surface_contact(potato, table) AND released(potato) AND stable(potato)",
+        "affordance_hint": "an empty area below the spoon",
+        "refine_prompt": "an empty area below the spoon",
+        "refine_cache_hit": true,
+        "affordance_refined": [
+          0.4453,
+          0.6055
+        ],
+        "affordance_3d_refined": [
+          -0.1729,
+          0.3334,
+          2.7496
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.3273,
+        "affordance": [
+          0.4453,
+          0.6055
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,104 @@
+{
+  "task": "push the sliding door to the left",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_planning_3epoch/checkpoint-39957",
+  "raw": "Scene: sliding_door, robot_arm, workspace\nStep 1: reach(sliding_door)\n  affordance_region: the sliding door\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, sliding_door, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, sliding_door) < 0.03\nStep 2: push(sliding_door)\n  affordance_region: the center of the sliding door\n  contact: gripper_contact(sliding_door) [completion]\n  spatial: aligned_xy(sliding_door, workspace, 0.03) [completion]\n  direction: motion_dir(left) [completion]\n  safety: no_collision(sliding_door)\n  done_when: aligned_xy(sliding_door, workspace, 0.03)\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [],
+    "scene_objects": [
+      "sliding_door",
+      "robot_arm",
+      "workspace"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "sliding_door",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "sliding_door",
+        "affordance_region": "the sliding door",
+        "done_when": "distance(gripper, sliding_door) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_contact",
+              "args": [
+                "sliding_door"
+              ],
+              "role": "completion"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "aligned_xy",
+              "args": [
+                "sliding_door",
+                "workspace",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "motion_dir",
+              "args": [
+                "left"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_collision",
+              "args": [
+                "sliding_door"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "push",
+        "target": "sliding_door",
+        "affordance_region": "the center of the sliding door",
+        "done_when": "aligned_xy(sliding_door, workspace, 0.03)"
+      }
+    ]
+  }
+}

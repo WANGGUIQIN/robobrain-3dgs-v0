@@ -1,0 +1,149 @@
+{
+  "task": "flip cup upright",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_planning_3epoch/checkpoint-39957",
+  "raw": "Scene: pink_cup, sink, robot_gripper\nStep 1: reach(pink_cup)\n  affordance_region: the body of the pink cup\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, pink_cup, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, pink_cup) < 0.03\nStep 2: grasp(pink_cup)\n  affordance_region: the handle of the pink cup\n  contact: holding(pink_cup) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(pink_cup)\nStep 3: rotate(pink_cup)\n  affordance_region: the body of the pink cup\n  contact: holding(pink_cup) [safety]\n  pose: upright(pink_cup) [completion]\n  done_when: upright(pink_cup)\nStep 4: place(pink_cup -> sink)\n  affordance_region: an empty area on the sink\n  contact: surface_contact(pink_cup, sink) [completion]; released(pink_cup) [completion]\n  pose: stable(pink_cup) [completion]\n  done_when: surface_contact(pink_cup, sink) AND released(pink_cup) AND stable(pink_cup)\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [],
+    "scene_objects": [
+      "pink_cup",
+      "sink",
+      "robot_gripper"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "pink_cup",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "pink_cup",
+        "affordance_region": "the body of the pink cup",
+        "done_when": "distance(gripper, pink_cup) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "pink_cup"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "pink_cup",
+        "affordance_region": "the handle of the pink cup",
+        "done_when": "holding(pink_cup)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "pink_cup"
+              ],
+              "role": "safety"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "upright",
+              "args": [
+                "pink_cup"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "rotate",
+        "target": "pink_cup",
+        "affordance_region": "the body of the pink cup",
+        "done_when": "upright(pink_cup)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "surface_contact",
+              "args": [
+                "pink_cup",
+                "sink"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "pink_cup"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "pink_cup"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "place",
+        "target": "pink_cup",
+        "destination": "sink",
+        "affordance_region": "an empty area on the sink",
+        "done_when": "surface_contact(pink_cup, sink) AND released(pink_cup) AND stable(pink_cup)"
+      }
+    ]
+  }
+}

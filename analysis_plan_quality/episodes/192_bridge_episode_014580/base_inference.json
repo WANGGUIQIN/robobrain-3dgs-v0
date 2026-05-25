@@ -1,0 +1,171 @@
+{
+  "task": "Move the towel below the microwave",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_3epoch/best",
+  "raw": "**SCENE ANALYSIS -** A kitchen scene with a wooden countertop. On the left, a white microwave with a blue control panel. On the right, a stovetop with a burner. Between them, a yellow cloth (towel) lies on the counter. A green bottle, a red cup, a spoon, and a small metal pot are also present. The towel is a flat, rectangular object suitable for grasping. **STRATEGY -** First, reach for the towel to grasp it. Then, transport it to the microwave and place it on top. The task requires moving the towel from the counter to the microwave, so the sequence is grasp, transport, and place. **AFFORDANCE REASONING -** Step 1: Reach for the towel on the counter. Step 2: Grasp the towel by its body for a secure hold. Step 3: Transport the towel to the microwave. Step 4: Place the towel on top of the microwave.\n\nGoal: on(towel, microwave); stable(towel)\nScene: towel, microwave, countertop, stovetop, green_bottle, red_cup, spoon, pot\nStep 1: reach(towel)\n  affordance_region: the body of the yellow towel\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, towel, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, towel) < 0.03\nStep 2: grasp(towel)\n  affordance_region: the body of the yellow towel\n  contact: holding(towel) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(towel)\nStep 3: transport(towel -> microwave)\n  affordance_region: the top surface of the white microwave\n  spatial: above(towel, microwave, 0.05) [completion]\n  safety: no_drop(towel)\n  done_when: above(towel, microwave, 0.05)\nStep 4: place(towel -> microwave)\n  affordance_region: the top surface of the white microwave\n  contact: surface_contact(towel, microwave) [completion]; released(towel) [completion]\n  pose: stable(towel) [completion]\n  done_when: surface_contact(towel, microwave) AND released(towel)\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [
+      {
+        "pred": "on",
+        "args": [
+          "towel",
+          "microwave"
+        ]
+      },
+      {
+        "pred": "stable",
+        "args": [
+          "towel"
+        ]
+      }
+    ],
+    "scene_objects": [
+      "towel",
+      "microwave",
+      "countertop",
+      "stovetop",
+      "green_bottle",
+      "red_cup",
+      "spoon",
+      "pot"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "towel",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "towel",
+        "affordance_region": "the body of the yellow towel",
+        "done_when": "distance(gripper, towel) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "towel"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "towel",
+        "affordance_region": "the body of the yellow towel",
+        "done_when": "holding(towel)"
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "towel",
+                "microwave",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "towel"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "towel",
+        "destination": "microwave",
+        "affordance_region": "the top surface of the white microwave",
+        "done_when": "above(towel, microwave, 0.05)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "surface_contact",
+              "args": [
+                "towel",
+                "microwave"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "towel"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "towel"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "place",
+        "target": "towel",
+        "destination": "microwave",
+        "affordance_region": "the top surface of the white microwave",
+        "done_when": "surface_contact(towel, microwave) AND released(towel)"
+      }
+    ]
+  }
+}

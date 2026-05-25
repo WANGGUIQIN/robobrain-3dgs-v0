@@ -43,29 +43,35 @@ The Lang-SAM grounder lives in `w50037733/scripts/postprocess_affordance.py`
 (not included here): GroundingDINO-base → SAM-ViT-large, with a target-noun
 fallback at a relaxed box threshold.
 
-## Headline results (20-episode probe, V2 LoRA epoch 3 + Lang-SAM)
+## Headline results (500-episode probe, V2 LoRA epoch 3 + Lang-SAM)
 
 Mean across episodes, scored vs refined GT. Full table in [`scores.md`](scores.md).
+Grounding success rate: **99.1%**.
 
 | Metric | LoRA (C) | Base (A) | GPT-v0 (B) | Δ LoRA vs Base |
 |--------|----------|----------|------------|----------------|
-| Action seq exact match | **0.700** | 0.500 | 1.000 | +20 pp |
-| Action set Jaccard | **0.887** | 0.805 | 1.000 | +8 pp |
-| Target Jaccard | **0.800** | 0.500 | 1.000 | +30 pp |
-| Scene Jaccard | **0.660** | 0.563 | 1.000 | +10 pp |
-| Affordance UV MAE | 0.176 | 0.162 | 0.000 | −8% (Lang-SAM ceiling) |
-| [0.5,0.5] center-collapse rate | 0.000 | 0.000 | 0.000 | fix confirmed |
-| Hint specificity (tokens) | **5.75** | 5.18 | 4.85 | +11% |
-| Task-keyword preservation | **50%** | 17% | n/a | 3× |
+| Action seq exact match | **0.710** | 0.492 | 1.000 | +22 pp |
+| Action set Jaccard | **0.887** | 0.769 | 1.000 | +12 pp |
+| Target Jaccard | **0.784** | 0.550 | 1.000 | +23 pp |
+| Scene Jaccard | **0.662** | 0.308 | 1.000 | +35 pp |
+| Affordance UV MAE | 0.165 | 0.162 | 0.000 | ≈tied (Lang-SAM ceiling) |
+| [0.5,0.5] center-collapse rate | 0.000 | 0.000 | 0.004 | fix confirmed |
+| Hint specificity (tokens) | **5.96** | 5.18 | 4.85 | +15% |
+| Task-keyword preservation | **54%** | 39% | n/a | +15 pp |
 
-Anchor findings:
-- **rlbench**: LoRA EM 67% vs Base 0%; **taco_play**: LoRA EM 67% vs Base 0%.
-- LoRA wins decisively on plan *structure* (actions, targets, scene); on UV it
-  is bottlenecked by Lang-SAM grounding rather than by the LM — motivating the
-  parallel V1 (direct-UV) track.
+Findings (n=500):
+- LoRA wins decisively on plan *structure* — the **Scene Jaccard gap (+35 pp)**
+  is the largest, with Base at 0.31 vs LoRA 0.66.
+- On UV the two are effectively tied (0.165 vs 0.162): the affordance落点 is
+  bottlenecked by Lang-SAM grounding, not the LM — motivating the parallel V1
+  (direct-UV / ReKep) track.
+- Scaling from 20→500 ep corrected a small-sample artifact: Base task-keyword
+  preservation was 17% at n=20 but 39% at n=500 (only 12 directional episodes
+  in the 20-ep set). LoRA still leads, by a smaller margin than the 20-ep
+  table implied.
 
-> A 500-episode expansion of this probe is in progress; the 20-episode reports
-> here are final and the 500-episode reports will be added in a follow-up commit.
+> The 20-episode version of this table is preserved in git history (the initial
+> commit of this directory).
 
 ## File guide
 

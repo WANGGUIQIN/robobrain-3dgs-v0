@@ -1,0 +1,53 @@
+{
+  "task": "push the yellow block to the left",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_3epoch/best",
+  "raw": "**SCENE ANALYSIS -** A white cabinet with an open door reveals a shelf with a yellow block and a red block. A white tray with a red block is on the floor. The yellow block is on the shelf, the red block is on the tray. The shelf is a rigid surface. **STRATEGY -** The yellow block is already on the shelf, so no manipulation is needed. The task is to ensure the yellow block is on the shelf. **AFFORDANCE REASONING -** The yellow block is already on the shelf, so no action is required.\n\nGoal: on(yellow_block, shelf)\nScene: yellow_block, red_block, shelf, tray\nStep 1: verify(yellow_block)\n  affordance_region: the body of the yellow block\n  contact: visible(yellow_block) [completion]\n  spatial: on(yellow_block, shelf) [completion]\n  done_when: on(yellow_block, shelf)\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [
+      {
+        "pred": "on",
+        "args": [
+          "yellow_block",
+          "shelf"
+        ]
+      }
+    ],
+    "scene_objects": [
+      "yellow_block",
+      "red_block",
+      "shelf",
+      "tray"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "visible",
+              "args": [
+                "yellow_block"
+              ],
+              "role": "completion"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "on",
+              "args": [
+                "yellow_block",
+                "shelf"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "verify",
+        "target": "yellow_block",
+        "affordance_region": "the body of the yellow block",
+        "done_when": "on(yellow_block, shelf)"
+      }
+    ]
+  }
+}

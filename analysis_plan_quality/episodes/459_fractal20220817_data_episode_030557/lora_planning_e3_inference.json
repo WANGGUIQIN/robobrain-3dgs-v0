@@ -1,0 +1,152 @@
+{
+  "task": "office manipulation",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_planning_3epoch/checkpoint-39957",
+  "raw": "Scene: drawer, snack_bags, robot_gripper\nStep 1: reach(drawer)\n  affordance_region: the front edge of the open drawer\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, drawer, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, drawer) < 0.03\nStep 2: grasp(snack_bags)\n  affordance_region: the green snack bag in the drawer\n  contact: holding(snack_bags) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(snack_bags)\nStep 3: transport(snack_bags -> table)\n  affordance_region: the empty area on the table\n  spatial: above(snack_bags, table, 0.05) [completion]\n  safety: no_drop(snack_bags)\n  done_when: above(snack_bags, table, 0.05)\nStep 4: place(snack_bags -> table)\n  affordance_region: the empty area on the table\n  contact: surface_contact(snack_bags, table) [completion]; released(snack_bags) [completion]\n  pose: stable(snack_bags) [completion]\n  done_when: surface_contact(snack_bags, table) AND released(snack_bags)\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [],
+    "scene_objects": [
+      "drawer",
+      "snack_bags",
+      "robot_gripper"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "drawer",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "drawer",
+        "affordance_region": "the front edge of the open drawer",
+        "done_when": "distance(gripper, drawer) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "snack_bags"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "snack_bags",
+        "affordance_region": "the green snack bag in the drawer",
+        "done_when": "holding(snack_bags)"
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "snack_bags",
+                "table",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "snack_bags"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "snack_bags",
+        "destination": "table",
+        "affordance_region": "the empty area on the table",
+        "done_when": "above(snack_bags, table, 0.05)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "surface_contact",
+              "args": [
+                "snack_bags",
+                "table"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "snack_bags"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "snack_bags"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "place",
+        "target": "snack_bags",
+        "destination": "table",
+        "affordance_region": "the empty area on the table",
+        "done_when": "surface_contact(snack_bags, table) AND released(snack_bags)"
+      }
+    ]
+  }
+}

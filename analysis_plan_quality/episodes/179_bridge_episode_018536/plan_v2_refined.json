@@ -1,0 +1,242 @@
+{
+  "task": "move the pot to the towel",
+  "scene_objects": [
+    "pot",
+    "towel",
+    "brush",
+    "green_object",
+    "stove",
+    "sink"
+  ],
+  "num_steps": 4,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "pot",
+      "affordance": [
+        0.262,
+        0.393
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "pot",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "stove"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, pot) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        -0.4423,
+        -0.1958,
+        1.6146
+      ],
+      "affordance_hint": "the metal body of the pot",
+      "affordance_hint_original": "the pot",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 2,
+      "action": "grasp",
+      "target": "pot",
+      "affordance": [
+        0.25,
+        0.355
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "pot"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "holding",
+            "args": [
+              "pot"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              0,
+              0,
+              -1
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "holding(pot)",
+      "affordance_3d": [
+        -0.4696,
+        -0.2715,
+        1.6342
+      ],
+      "affordance_hint": "the handle of the metal pot",
+      "affordance_hint_original": "the handle of the pot",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 3,
+      "action": "transport",
+      "target": "pot",
+      "destination": "towel",
+      "affordance": [
+        0.651,
+        0.437
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "pot"
+            ],
+            "role": "safety"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "above",
+            "args": [
+              "pot",
+              "towel",
+              0.05
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "pot",
+              "towel"
+            ]
+          },
+          {
+            "pred": "no_drop",
+            "args": [
+              "pot"
+            ]
+          }
+        ]
+      },
+      "done_when": "above(pot, towel, 0.05) AND aligned_xy(pot, towel, 0.03)",
+      "affordance_3d": [
+        0.3513,
+        -0.1441,
+        2.006
+      ],
+      "affordance_hint": "the empty area on the blue towel",
+      "affordance_hint_original": "an empty area on the towel",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 4,
+      "action": "place",
+      "target": "pot",
+      "destination": "towel",
+      "affordance": [
+        0.651,
+        0.437
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "surface_contact",
+            "args": [
+              "pot",
+              "towel"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "released",
+            "args": [
+              "pot"
+            ],
+            "role": "completion"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "stable",
+            "args": [
+              "pot"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "support_stable",
+            "args": [
+              "pot"
+            ]
+          }
+        ]
+      },
+      "done_when": "surface_contact(pot, towel) AND released(pot) AND stable(pot)",
+      "affordance_3d": [
+        0.3513,
+        -0.1441,
+        2.006
+      ],
+      "affordance_hint": "the empty area on the blue towel",
+      "affordance_hint_original": "an empty area on the towel",
+      "affordance_hint_confidence": "ok"
+    }
+  ]
+}

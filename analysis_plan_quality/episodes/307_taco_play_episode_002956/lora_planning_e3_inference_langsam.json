@@ -1,0 +1,226 @@
+{
+  "task": "put the yellow block on the table",
+  "scene_objects": [
+    "yellow_block",
+    "table"
+  ],
+  "steps": [
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "yellow_block",
+              "<",
+              "0.03"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "approach_axis",
+            "args": [
+              "0",
+              "0",
+              "-1"
+            ],
+            "role": "progress"
+          }
+        ]
+      },
+      "step": 1,
+      "action": "reach",
+      "target": "yellow_block",
+      "affordance_region": "the yellow block",
+      "done_when": "distance(gripper, yellow_block) < 0.03",
+      "affordance_hint": "the yellow block",
+      "refine_prompt": "the yellow block",
+      "refine_cache_hit": false,
+      "affordance_refined": [
+        0.1914,
+        0.1484
+      ],
+      "affordance_3d_refined": [
+        -0.0035,
+        -0.004,
+        0.01
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.3791
+    },
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "yellow_block"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              "0",
+              "0",
+              "-1"
+            ],
+            "role": "progress"
+          }
+        ]
+      },
+      "step": 2,
+      "action": "grasp",
+      "target": "yellow_block",
+      "affordance_region": "the yellow block",
+      "done_when": "holding(yellow_block)",
+      "affordance_hint": "the yellow block",
+      "refine_prompt": "the yellow block",
+      "refine_cache_hit": true,
+      "affordance_refined": [
+        0.1914,
+        0.1484
+      ],
+      "affordance_3d_refined": [
+        -0.0035,
+        -0.004,
+        0.01
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.3791
+    },
+    {
+      "constraints": {
+        "spatial": [
+          {
+            "pred": "above",
+            "args": [
+              "yellow_block",
+              "table",
+              "0.05"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_drop",
+            "args": [
+              "yellow_block"
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "step": 3,
+      "action": "transport",
+      "target": "yellow_block",
+      "destination": "table",
+      "affordance_region": "an empty area on the table",
+      "done_when": "above(yellow_block, table, 0.05)",
+      "affordance_hint": "an empty area on the table",
+      "refine_prompt": "an empty area on the table",
+      "refine_cache_hit": false,
+      "refine_prompt_fallback": "yellow block",
+      "affordance_refined": [
+        0.1914,
+        0.1484
+      ],
+      "affordance_3d_refined": [
+        -0.0035,
+        -0.004,
+        0.01
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.3947
+    },
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "surface_contact",
+            "args": [
+              "yellow_block",
+              "table"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "released",
+            "args": [
+              "yellow_block"
+            ],
+            "role": "completion"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "stable",
+            "args": [
+              "yellow_block"
+            ],
+            "role": "completion"
+          }
+        ]
+      },
+      "step": 4,
+      "action": "place",
+      "target": "yellow_block",
+      "destination": "table",
+      "affordance_region": "an empty area on the table",
+      "done_when": "surface_contact(yellow_block, table) AND released(yellow_block)",
+      "affordance_hint": "an empty area on the table",
+      "refine_prompt": "an empty area on the table",
+      "refine_cache_hit": true,
+      "affordance_refined": [
+        0.1914,
+        0.1484
+      ],
+      "affordance_3d_refined": [
+        -0.0035,
+        -0.004,
+        0.01
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.3947
+    }
+  ]
+}

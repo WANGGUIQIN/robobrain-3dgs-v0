@@ -1,0 +1,232 @@
+{
+  "task": "Put the orange can in the open cabinet.",
+  "scene_objects": [
+    "orange_can",
+    "cabinet",
+    "table",
+    "sink",
+    "soap_dispenser"
+  ],
+  "num_steps": 4,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "orange_can",
+      "affordance": [
+        0.425,
+        0.7
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "orange_can",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "table"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, orange_can) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        -0.4167,
+        0.4821,
+        1.6342
+      ],
+      "affordance_hint": "the orange can"
+    },
+    {
+      "step": 2,
+      "action": "grasp",
+      "target": "orange_can",
+      "affordance": [
+        0.425,
+        0.709
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "orange_can"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "holding",
+            "args": [
+              "orange_can"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              0,
+              0,
+              -1
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "holding(orange_can)",
+      "affordance_3d": [
+        -0.4167,
+        0.5066,
+        1.6342
+      ],
+      "affordance_hint": "orange can"
+    },
+    {
+      "step": 3,
+      "action": "transport",
+      "target": "orange_can",
+      "destination": "cabinet",
+      "affordance": [
+        0.352,
+        0.825
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "orange_can"
+            ],
+            "role": "safety"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "inside",
+            "args": [
+              "orange_can",
+              "cabinet"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "orange_can",
+              "cabinet"
+            ]
+          },
+          {
+            "pred": "no_drop",
+            "args": [
+              "orange_can"
+            ]
+          }
+        ]
+      },
+      "done_when": "inside(orange_can, cabinet)",
+      "affordance_3d": [
+        -0.7021,
+        0.9127,
+        2.006
+      ],
+      "affordance_hint": "an empty area on the cabinet"
+    },
+    {
+      "step": 4,
+      "action": "place",
+      "target": "orange_can",
+      "destination": "cabinet",
+      "affordance": [
+        0.352,
+        0.825
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "surface_contact",
+            "args": [
+              "orange_can",
+              "cabinet"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "released",
+            "args": [
+              "orange_can"
+            ],
+            "role": "completion"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "stable",
+            "args": [
+              "orange_can"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "support_stable",
+            "args": [
+              "orange_can"
+            ]
+          }
+        ]
+      },
+      "done_when": "surface_contact(orange_can, cabinet) AND released(orange_can) AND stable(orange_can)",
+      "affordance_3d": [
+        -0.7021,
+        0.9127,
+        2.006
+      ],
+      "affordance_hint": "an empty area on the cabinet"
+    }
+  ]
+}

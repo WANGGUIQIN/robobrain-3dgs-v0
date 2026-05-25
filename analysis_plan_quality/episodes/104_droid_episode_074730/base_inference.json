@@ -1,0 +1,167 @@
+{
+  "task": "Move the pineapple plushie to the right",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_3epoch/best",
+  "raw": "**SCENE ANALYSIS -** A white table holds a black tray, a blue cup, a yellow pineapple plushie, and a small orange object. The pineapple is on the table, the cup is on the right, and the tray is on the left. The task is to move the pineapple to the right, so it must be placed on the table to the right of the blue cup. The cup is a rigid object with a side handle, and the table is a flat surface. **STRATEGY -** First, reach for the pineapple's body to grasp it. Then, transport it to the right side of the blue cup. Finally, place it gently on the table. Failure modes include dropping the pineapple during transport or placing it in an invalid location. **AFFORDANCE REASONING -** Step 1: Reach for the pineapple's body to establish contact. Step 2: Grasp the pineapple's body for a secure hold. Step 3: Transport the pineapple to the right side of the blue cup. Step 4: Place the pineapple on the table to the right of the blue cup.\n\nGoal: on(pineapple, table); right_of(pineapple, blue_cup)\nScene: pineapple, blue_cup, table, black_tray, orange_object\nStep 1: reach(pineapple)\n  affordance_region: the body of the pineapple\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, pineapple, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, pineapple) < 0.03\nStep 2: grasp(pineapple)\n  affordance_region: the body of the pineapple\n  contact: holding(pineapple) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(pineapple)\nStep 3: transport(pineapple -> right_of(blue_cup))\n  affordance_region: an empty area on the table to the right of the blue cup\n  spatial: above(pineapple, right_of(blue_cup), 0.05) [completion]\n  safety: no_drop(pineapple)\n  done_when: above(pineapple, right_of(blue_cup), 0.05)\nStep 4: place(pineapple -> right_of(blue_cup))\n  affordance_region: an empty area on the table to the right of the blue cup\n  contact: surface_contact(pineapple, table) [completion]; released(pineapple) [completion]\n  pose: stable(pineapple) [completion]\n  done_when: surface_contact(pineapple, table) AND released(pineapple)\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [
+      {
+        "pred": "on",
+        "args": [
+          "pineapple",
+          "table"
+        ]
+      },
+      {
+        "pred": "right_of",
+        "args": [
+          "pineapple",
+          "blue_cup"
+        ]
+      }
+    ],
+    "scene_objects": [
+      "pineapple",
+      "blue_cup",
+      "table",
+      "black_tray",
+      "orange_object"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "pineapple",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "pineapple",
+        "affordance_region": "the body of the pineapple",
+        "done_when": "distance(gripper, pineapple) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "pineapple"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "pineapple",
+        "affordance_region": "the body of the pineapple",
+        "done_when": "holding(pineapple)"
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "pineapple",
+                "right_of(blue_cup"
+              ]
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "pineapple"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "pineapple",
+        "destination": "right_of(blue_cup",
+        "affordance_region": "an empty area on the table to the right of the blue cup",
+        "done_when": "above(pineapple, right_of(blue_cup), 0.05)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "surface_contact",
+              "args": [
+                "pineapple",
+                "table"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "pineapple"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "pineapple"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "place",
+        "target": "pineapple",
+        "destination": "right_of(blue_cup",
+        "affordance_region": "an empty area on the table to the right of the blue cup",
+        "done_when": "surface_contact(pineapple, table) AND released(pineapple)"
+      }
+    ]
+  }
+}

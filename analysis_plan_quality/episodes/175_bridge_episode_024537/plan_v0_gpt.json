@@ -1,0 +1,233 @@
+{
+  "task": "Move the yellow cloth behind the pot with the corn",
+  "scene_objects": [
+    "yellow_cloth",
+    "pot",
+    "corn",
+    "spatula",
+    "table"
+  ],
+  "num_steps": 4,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "yellow_cloth",
+      "affordance": [
+        0.218,
+        0.486
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "yellow_cloth",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "pot"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, yellow_cloth) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        -0.4588,
+        -0.0255,
+        1.4189
+      ],
+      "affordance_hint": "the yellow cloth"
+    },
+    {
+      "step": 2,
+      "action": "grasp",
+      "target": "yellow_cloth",
+      "affordance": [
+        0.227,
+        0.486
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "yellow_cloth"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "holding",
+            "args": [
+              "yellow_cloth"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              0,
+              0,
+              -1
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "holding(yellow_cloth)",
+      "affordance_3d": [
+        -0.446,
+        -0.0255,
+        1.4189
+      ],
+      "affordance_hint": "yellow cloth"
+    },
+    {
+      "step": 3,
+      "action": "transport",
+      "target": "yellow_cloth",
+      "destination": "behind_pot_with_corn",
+      "affordance": [
+        0.553,
+        0.401
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "yellow_cloth"
+            ],
+            "role": "safety"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "above",
+            "args": [
+              "yellow_cloth",
+              "behind_pot_with_corn",
+              0.05
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "yellow_cloth",
+              "pot"
+            ]
+          },
+          {
+            "pred": "no_drop",
+            "args": [
+              "yellow_cloth"
+            ]
+          }
+        ]
+      },
+      "done_when": "above(yellow_cloth, behind_pot_with_corn, 0.05) AND aligned_xy(yellow_cloth, behind_pot_with_corn, 0.03)",
+      "affordance_3d": [
+        0.072,
+        -0.1285,
+        1.145
+      ],
+      "affordance_hint": "an empty area on the behind pot with corn"
+    },
+    {
+      "step": 4,
+      "action": "place",
+      "target": "yellow_cloth",
+      "destination": "behind_pot_with_corn",
+      "affordance": [
+        0.553,
+        0.401
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "surface_contact",
+            "args": [
+              "yellow_cloth",
+              "behind_pot_with_corn"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "released",
+            "args": [
+              "yellow_cloth"
+            ],
+            "role": "completion"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "stable",
+            "args": [
+              "yellow_cloth"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "support_stable",
+            "args": [
+              "yellow_cloth"
+            ]
+          }
+        ]
+      },
+      "done_when": "surface_contact(yellow_cloth, behind_pot_with_corn) AND released(yellow_cloth) AND stable(yellow_cloth)",
+      "affordance_3d": [
+        0.072,
+        -0.1285,
+        1.145
+      ],
+      "affordance_hint": "an empty area on the behind pot with corn"
+    }
+  ]
+}

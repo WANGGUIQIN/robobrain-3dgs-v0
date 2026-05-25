@@ -1,0 +1,85 @@
+{
+  "task": "Pick up a bag of things",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_planning_3epoch/checkpoint-39957",
+  "raw": "Scene: bag, table\nStep 1: reach(bag)\n  affordance_region: the body of the transparent plastic bag\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, bag, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, bag) < 0.03\nStep 2: grasp(bag)\n  affordance_region: the top opening of the transparent plastic bag\n  contact: holding(bag) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(bag)\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [],
+    "scene_objects": [
+      "bag",
+      "table"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "bag",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "bag",
+        "affordance_region": "the body of the transparent plastic bag",
+        "done_when": "distance(gripper, bag) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "bag"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "bag",
+        "affordance_region": "the top opening of the transparent plastic bag",
+        "done_when": "holding(bag)"
+      }
+    ]
+  }
+}

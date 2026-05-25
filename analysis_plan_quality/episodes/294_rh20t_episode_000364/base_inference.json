@@ -1,0 +1,164 @@
+{
+  "task": "Pick up the small block on the left and move it to the right",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_3epoch/best",
+  "raw": "SCENE ANALYSIS - A small block is on a green surface. A white cup is on the right side of the green surface. The block is a small cube with a matte finish; the cup is a cylindrical container with a handle. STRATEGY - First, reach and grasp the block. Then, transport it to the right side of the green surface. Finally, place it on the green surface. Failure modes include dropping the block during transport or placing it in an invalid location. AFFORDANCE REASONING - Step 1 reach the block at its body for stable grasp. Step 2 grasp the block at its body for secure hold. Step 3 transport the block to the right side of the green surface. Step 4 place the block on the green surface at the right side.\nGoal: on(block, green_surface); position(block, right_of(green_surface))\nScene: block, green_surface, white_cup\nStep 1: reach(block)\n  affordance_region: the body of the small block\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, block, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, block) < 0.03\nStep 2: grasp(block)\n  affordance_region: the body of the small block\n  contact: holding(block) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(block)\nStep 3: transport(block -> right_of(green_surface))\n  affordance_region: an empty area on the green surface to the right of the block\n  spatial: above(block, right_of(green_surface), 0.05) [completion]\n  safety: no_drop(block)\n  done_when: above(block, right_of(green_surface), 0.05)\nStep 4: place(block -> right_of(green_surface))\n  affordance_region: an empty area on the green surface to the right of the block\n  contact: surface_contact(block, right_of(green_surface)) [completion]; released(block) [completion]\n  pose: stable(block) [completion]\n  done_when: surface_contact(block, right_of(green_surface)) AND released(block)\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [
+      {
+        "pred": "on",
+        "args": [
+          "block",
+          "green_surface"
+        ]
+      },
+      {
+        "pred": "position",
+        "args": [
+          "block",
+          "right_of(green_surface"
+        ]
+      }
+    ],
+    "scene_objects": [
+      "block",
+      "green_surface",
+      "white_cup"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "block",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "block",
+        "affordance_region": "the body of the small block",
+        "done_when": "distance(gripper, block) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "block"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "block",
+        "affordance_region": "the body of the small block",
+        "done_when": "holding(block)"
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "block",
+                "right_of(green_surface"
+              ]
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "block"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "block",
+        "destination": "right_of(green_surface",
+        "affordance_region": "an empty area on the green surface to the right of the block",
+        "done_when": "above(block, right_of(green_surface), 0.05)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "surface_contact",
+              "args": [
+                "block",
+                "right_of(green_surface"
+              ]
+            },
+            {
+              "pred": "released",
+              "args": [
+                "block"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "block"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "place",
+        "target": "block",
+        "destination": "right_of(green_surface",
+        "affordance_region": "an empty area on the green surface to the right of the block",
+        "done_when": "surface_contact(block, right_of(green_surface)) AND released(block)"
+      }
+    ]
+  }
+}

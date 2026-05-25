@@ -1,0 +1,246 @@
+{
+  "task": "push the maroon button, then push the green button, then push the teal button",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_3epoch/best",
+  "raw": "**SCENE ANALYSIS** - A robotic arm is positioned over a wooden surface with four square buttons: a red one, a green one, a teal one, and a maroon one. The buttons are rigid and have flat surfaces suitable for pushing. The task requires sequential interaction with these buttons. **STRATEGY** - Execute three push actions in the specified order. Each push must be a distinct interaction with the button's surface. Failure modes include misaligning the gripper with the button or applying insufficient force. **AFFORDANCE REASONING** - Step 1: Reach the maroon button. Step 2: Push the maroon button. Step 3: Reach the green button. Step 4: Push the green button. Step 5: Reach the teal button. Step 6: Push the teal button.\n\nGoal: pushed(maroon_button); pushed(green_button); pushed(teal_button)\nScene: maroon_button, green_button, teal_button, wooden_surface\nStep 1: reach(maroon_button)\n  affordance_region: the flat surface of the maroon button\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, maroon_button, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, maroon_button) < 0.03\nStep 2: push(maroon_button)\n  affordance_region: the flat surface of the maroon button\n  contact: gripper_contact(maroon_button) [completion]\n  direction: push_axis(0, 0, -1) [progress]\n  done_when: gripper_contact(maroon_button)\nStep 3: reach(green_button)\n  affordance_region: the flat surface of the green button\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, green_button, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, green_button) < 0.03\nStep 4: push(green_button)\n  affordance_region: the flat surface of the green button\n  contact: gripper_contact(green_button) [completion]\n  direction: push_axis(0, 0, -1) [progress]\n  done_when: gripper_contact(green_button)\nStep 5: reach(teal_button)\n  affordance_region: the flat surface of the teal button\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, teal_button, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, teal_button) < 0.03\nStep 6: push(teal_button)\n  affordance_region: the flat surface of the teal button\n  contact: gripper_contact(teal_button) [completion]\n  direction: push_axis(0, 0, -1) [progress]\n  done_when: gripper_contact(teal_button)\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [
+      {
+        "pred": "pushed",
+        "args": [
+          "maroon_button"
+        ]
+      },
+      {
+        "pred": "pushed",
+        "args": [
+          "green_button"
+        ]
+      },
+      {
+        "pred": "pushed",
+        "args": [
+          "teal_button"
+        ]
+      }
+    ],
+    "scene_objects": [
+      "maroon_button",
+      "green_button",
+      "teal_button",
+      "wooden_surface"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "maroon_button",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "maroon_button",
+        "affordance_region": "the flat surface of the maroon button",
+        "done_when": "distance(gripper, maroon_button) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_contact",
+              "args": [
+                "maroon_button"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "push_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "push",
+        "target": "maroon_button",
+        "affordance_region": "the flat surface of the maroon button",
+        "done_when": "gripper_contact(maroon_button)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "green_button",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "reach",
+        "target": "green_button",
+        "affordance_region": "the flat surface of the green button",
+        "done_when": "distance(gripper, green_button) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_contact",
+              "args": [
+                "green_button"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "push_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "push",
+        "target": "green_button",
+        "affordance_region": "the flat surface of the green button",
+        "done_when": "gripper_contact(green_button)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "teal_button",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 5,
+        "action": "reach",
+        "target": "teal_button",
+        "affordance_region": "the flat surface of the teal button",
+        "done_when": "distance(gripper, teal_button) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_contact",
+              "args": [
+                "teal_button"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "push_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 6,
+        "action": "push",
+        "target": "teal_button",
+        "affordance_region": "the flat surface of the teal button",
+        "done_when": "gripper_contact(teal_button)"
+      }
+    ]
+  }
+}

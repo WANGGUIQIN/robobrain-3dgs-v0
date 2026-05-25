@@ -1,0 +1,231 @@
+{
+  "task": "put the chocolate jello in the cupboard",
+  "scene_objects": [
+    "chocolate_jello",
+    "cupboard",
+    "table"
+  ],
+  "num_steps": 4,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "chocolate_jello",
+      "affordance": [
+        0.445,
+        0.937
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "chocolate_jello",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "table"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, chocolate_jello) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        -0.1465,
+        1.1721,
+        1.3395
+      ],
+      "affordance_hint": "the chocolate jello"
+    },
+    {
+      "step": 2,
+      "action": "grasp",
+      "target": "chocolate_jello",
+      "affordance": [
+        0.453,
+        0.937
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "chocolate_jello"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "holding",
+            "args": [
+              "chocolate_jello"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              0,
+              0,
+              -1
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "holding(chocolate_jello)",
+      "affordance_3d": [
+        -0.4105,
+        3.8314,
+        4.3787
+      ],
+      "affordance_hint": "the handle of the chocolate jello"
+    },
+    {
+      "step": 3,
+      "action": "transport",
+      "target": "chocolate_jello",
+      "destination": "cupboard",
+      "affordance": [
+        0.351,
+        0.5
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "chocolate_jello"
+            ],
+            "role": "safety"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "above",
+            "args": [
+              "chocolate_jello",
+              "cupboard",
+              0.05
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "chocolate_jello",
+              "cupboard"
+            ]
+          },
+          {
+            "pred": "no_drop",
+            "args": [
+              "chocolate_jello"
+            ]
+          }
+        ]
+      },
+      "done_when": "above(chocolate_jello, cupboard, 0.05) AND aligned_xy(chocolate_jello, cupboard, 0.03)",
+      "affordance_3d": [
+        -0.827,
+        0.0,
+        2.7858
+      ],
+      "affordance_hint": "an empty area on the cupboard"
+    },
+    {
+      "step": 4,
+      "action": "place",
+      "target": "chocolate_jello",
+      "destination": "cupboard",
+      "affordance": [
+        0.351,
+        0.5
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "surface_contact",
+            "args": [
+              "chocolate_jello",
+              "cupboard"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "released",
+            "args": [
+              "chocolate_jello"
+            ],
+            "role": "completion"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "stable",
+            "args": [
+              "chocolate_jello"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "support_stable",
+            "args": [
+              "chocolate_jello"
+            ]
+          }
+        ]
+      },
+      "done_when": "surface_contact(chocolate_jello, cupboard) AND released(chocolate_jello) AND stable(chocolate_jello)",
+      "affordance_3d": [
+        -0.827,
+        0.0,
+        2.7858
+      ],
+      "affordance_hint": "an empty area on the cupboard"
+    }
+  ]
+}

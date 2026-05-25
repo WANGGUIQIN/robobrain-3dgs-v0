@@ -1,0 +1,255 @@
+{
+  "task": "place 3 cups on the cup holder",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_3epoch/best",
+  "raw": "**SCENE ANALYSIS -** A cup holder with a green base and a vertical rod is on a wooden table. Three small, light-colored cups are scattered on the table. The cups are cylindrical with open tops. The cup holder has a central rod for insertion. STRATEGY - First, pick up the first cup, insert it into the cup holder. Then pick up the second cup, insert it into the cup holder. Finally, pick up the third cup, insert it into the cup holder. Failure modes include misaligning the cup with the rod, dropping the cup during insertion, or not grasping the cup properly. AFFORDANCE REASONING - Step 1: Reach for the first cup, grasp its body, transport it to the cup holder, and insert it into the rod. Step 2: Repeat the process for the second cup. Step 3: Repeat for the third cup.\n\nGoal: stacked(cup1, cup2, cup3); all_inside(cup1, cup_holder); all_inside(cup2, cup_holder); all_inside(cup3, cup_holder)\nScene: cup_holder, cup1, cup2, cup3, table\nStep 1: grasp(cup1)\n  affordance_region: the body of the first cup\n  contact: holding(cup1) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: holding(cup1)\nStep 2: insert(cup1 -> cup_holder)\n  affordance_region: the central rod of the cup holder\n  contact: inserted(cup1) [completion]\n  spatial: on(cup1, cup_holder) [completion]\n  direction: insert_axis(0, 0, -1) [progress]\n  done_when: inserted(cup1)\nStep 3: grasp(cup2)\n  affordance_region: the body of the second cup\n  contact: holding(cup2) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: holding(cup2)\nStep 4: insert(cup2 -> cup_holder)\n  affordance_region: the central rod of the cup holder\n  contact: inserted(cup2) [completion]\n  spatial: on(cup2, cup_holder) [completion]\n  direction: insert_axis(0, 0, -1) [progress]\n  done_when: inserted(cup2)\nStep 5: grasp(cup3)\n  affordance_region: the body of the third cup\n  contact: holding(cup3) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: holding(cup3)\nStep 6: insert(cup3 -> cup_holder)\n  affordance_region: the central rod of the cup holder\n  contact: inserted(cup3) [completion]\n  spatial: on(cup3, cup_holder) [completion]\n  direction: insert_axis(0, 0, -1) [progress]\n  done_when: inserted(cup3)\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [
+      {
+        "pred": "stacked",
+        "args": [
+          "cup1",
+          "cup2",
+          "cup3"
+        ]
+      },
+      {
+        "pred": "all_inside",
+        "args": [
+          "cup1",
+          "cup_holder"
+        ]
+      },
+      {
+        "pred": "all_inside",
+        "args": [
+          "cup2",
+          "cup_holder"
+        ]
+      },
+      {
+        "pred": "all_inside",
+        "args": [
+          "cup3",
+          "cup_holder"
+        ]
+      }
+    ],
+    "scene_objects": [
+      "cup_holder",
+      "cup1",
+      "cup2",
+      "cup3",
+      "table"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "cup1"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "grasp",
+        "target": "cup1",
+        "affordance_region": "the body of the first cup",
+        "done_when": "holding(cup1)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "inserted",
+              "args": [
+                "cup1"
+              ],
+              "role": "completion"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "on",
+              "args": [
+                "cup1",
+                "cup_holder"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "insert_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "insert",
+        "target": "cup1",
+        "destination": "cup_holder",
+        "affordance_region": "the central rod of the cup holder",
+        "done_when": "inserted(cup1)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "cup2"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "grasp",
+        "target": "cup2",
+        "affordance_region": "the body of the second cup",
+        "done_when": "holding(cup2)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "inserted",
+              "args": [
+                "cup2"
+              ],
+              "role": "completion"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "on",
+              "args": [
+                "cup2",
+                "cup_holder"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "insert_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "insert",
+        "target": "cup2",
+        "destination": "cup_holder",
+        "affordance_region": "the central rod of the cup holder",
+        "done_when": "inserted(cup2)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "cup3"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 5,
+        "action": "grasp",
+        "target": "cup3",
+        "affordance_region": "the body of the third cup",
+        "done_when": "holding(cup3)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "inserted",
+              "args": [
+                "cup3"
+              ],
+              "role": "completion"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "on",
+              "args": [
+                "cup3",
+                "cup_holder"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "insert_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 6,
+        "action": "insert",
+        "target": "cup3",
+        "destination": "cup_holder",
+        "affordance_region": "the central rod of the cup holder",
+        "done_when": "inserted(cup3)"
+      }
+    ]
+  }
+}

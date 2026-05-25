@@ -1,0 +1,231 @@
+{
+  "task": "Pick up the scoop and put it in the object",
+  "scene_objects": [
+    "scoop",
+    "object",
+    "table"
+  ],
+  "num_steps": 4,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "scoop",
+      "affordance": [
+        0.593,
+        0.4
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "scoop",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "object"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, scoop) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        -0.0708,
+        -0.1594,
+        1.7712
+      ],
+      "affordance_hint": "the scoop"
+    },
+    {
+      "step": 2,
+      "action": "grasp",
+      "target": "scoop",
+      "affordance": [
+        0.6,
+        0.4
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "scoop"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "holding",
+            "args": [
+              "scoop"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              0,
+              0,
+              -1
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "holding(scoop)",
+      "affordance_3d": [
+        -0.0531,
+        -0.1594,
+        1.7712
+      ],
+      "affordance_hint": "the handle of the scoop"
+    },
+    {
+      "step": 3,
+      "action": "transport",
+      "target": "scoop",
+      "destination": "object",
+      "affordance": [
+        0.675,
+        0.6
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "scoop"
+            ],
+            "role": "safety"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "above",
+            "args": [
+              "scoop",
+              "object",
+              0.05
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "scoop",
+              "object"
+            ]
+          },
+          {
+            "pred": "no_drop",
+            "args": [
+              "scoop"
+            ]
+          }
+        ]
+      },
+      "done_when": "above(scoop, object, 0.05) AND aligned_xy(scoop, object, 0.03)",
+      "affordance_3d": [
+        0.1278,
+        0.3344,
+        1.9669
+      ],
+      "affordance_hint": "an empty area on the object"
+    },
+    {
+      "step": 4,
+      "action": "place",
+      "target": "scoop",
+      "destination": "object",
+      "affordance": [
+        0.675,
+        0.6
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "surface_contact",
+            "args": [
+              "scoop",
+              "object"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "released",
+            "args": [
+              "scoop"
+            ],
+            "role": "completion"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "stable",
+            "args": [
+              "scoop"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "support_stable",
+            "args": [
+              "scoop"
+            ]
+          }
+        ]
+      },
+      "done_when": "surface_contact(scoop, object) AND released(scoop) AND stable(scoop)",
+      "affordance_3d": [
+        0.1278,
+        0.3344,
+        1.9669
+      ],
+      "affordance_hint": "an empty area on the object"
+    }
+  ]
+}

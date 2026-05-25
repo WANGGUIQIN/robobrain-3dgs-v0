@@ -1,0 +1,170 @@
+{
+  "task": "take the purple block and rotate it right",
+  "scene_objects": [
+    "purple_block",
+    "table"
+  ],
+  "num_steps": 3,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "purple_block",
+      "affordance": [
+        0.267,
+        0.936
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "purple_block",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "table"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, purple_block) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        -0.4437,
+        0.8283,
+        1.647
+      ],
+      "affordance_hint": "the purple block",
+      "affordance_hint_original": "the purple block",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 2,
+      "action": "grasp",
+      "target": "purple_block",
+      "affordance": [
+        0.25,
+        0.1
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "purple_block"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "holding",
+            "args": [
+              "purple_block"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              0,
+              0,
+              -1
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "holding(purple_block)",
+      "affordance_3d": [
+        -0.6857,
+        -1.0928,
+        2.386
+      ],
+      "affordance_hint": "the purple block",
+      "affordance_hint_original": "purple block",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 3,
+      "action": "rotate",
+      "target": "purple_block",
+      "affordance": [
+        0.267,
+        0.1
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "purple_block"
+            ],
+            "role": "safety"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "orientation_match",
+            "args": [
+              "purple_block",
+              "rotated_right"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "purple_block",
+              "table"
+            ]
+          }
+        ]
+      },
+      "done_when": "orientation_match(purple_block, rotated_right)",
+      "affordance_3d": [
+        -0.6436,
+        -1.0942,
+        2.389
+      ],
+      "affordance_hint": "the body of the purple block",
+      "affordance_hint_original": "the body of the purple block",
+      "affordance_hint_confidence": "ok"
+    }
+  ]
+}

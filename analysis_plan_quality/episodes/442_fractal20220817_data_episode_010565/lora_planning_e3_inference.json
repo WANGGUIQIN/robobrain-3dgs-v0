@@ -1,0 +1,86 @@
+{
+  "task": "pick blue plastic bottle",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_planning_3epoch/checkpoint-39957",
+  "raw": "Scene: blue_can, white_bag, table\nStep 1: reach(blue_can)\n  affordance_region: the body of the blue can\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, blue_can, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, blue_can) < 0.03\nStep 2: grasp(blue_can)\n  affordance_region: the top of the blue can\n  contact: holding(blue_can) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(blue_can)\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [],
+    "scene_objects": [
+      "blue_can",
+      "white_bag",
+      "table"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "blue_can",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "blue_can",
+        "affordance_region": "the body of the blue can",
+        "done_when": "distance(gripper, blue_can) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "blue_can"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "blue_can",
+        "affordance_region": "the top of the blue can",
+        "done_when": "holding(blue_can)"
+      }
+    ]
+  }
+}

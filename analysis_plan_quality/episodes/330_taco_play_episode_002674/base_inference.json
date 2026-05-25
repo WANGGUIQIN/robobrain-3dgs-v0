@@ -1,0 +1,135 @@
+{
+  "task": "move the blue light switch to turn off the blue light",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_3epoch/best",
+  "raw": "**SCENE ANALYSIS -** A robotic arm is positioned in a room with a white cabinet, a cardboard box, and a white tray on the floor. The task is to move a blue light switch to turn off the blue light. The scene contains no visible blue light switch or blue light, but the task implies the presence of such objects. The strategy involves locating the switch, grasping it, and flipping it to the off position. Failure modes include mislocating the switch or failing to flip it correctly. Affordance reasoning involves identifying the switch's location and the appropriate part to interact with (e.g., the switch's lever or button).\n\n**Goal:** flip(blue_light_switch, off); blue_light_off\n**Scene:** blue_light_switch, blue_light\n**Step 1:** reach(blue_light_switch)\n  affordance_region: the lever of the blue light switch\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, blue_light_switch, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, blue_light_switch) < 0.03\n**Step 2:** grasp(blue_light_switch)\n  affordance_region: the lever of the blue light switch\n  contact: holding(blue_light_switch) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(blue_light_switch)\n**Step 3:** flip(blue_light_switch)\n  affordance_region: the lever of the blue light switch\n  contact: flipped(blue_light_switch) [completion]\n  direction: flip_axis(0, 0, -1) [progress]\n  done_when: flipped(blue_light_switch)\n**Step 4:** release(blue_light_switch)\n  affordance_region: the lever of the blue light switch\n  contact: released(blue_light_switch) [completion]\n  done_when: released(blue_light_switch)\n**END_OF_PLAN**",
+  "parsed": {
+    "reasoning": "",
+    "goal": [],
+    "scene_objects": [],
+    "steps": [
+      {
+        "constraints": {},
+        "step": 1,
+        "action": "flip",
+        "target": "blue_light_switch, off"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "blue_light_switch",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "reach",
+        "target": "blue_light_switch",
+        "affordance_region": "the lever of the blue light switch",
+        "done_when": "distance(gripper, blue_light_switch) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "blue_light_switch"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "grasp",
+        "target": "blue_light_switch",
+        "affordance_region": "the lever of the blue light switch",
+        "done_when": "holding(blue_light_switch)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "flipped",
+              "args": [
+                "blue_light_switch"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "flip_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "flip",
+        "target": "blue_light_switch",
+        "affordance_region": "the lever of the blue light switch",
+        "done_when": "flipped(blue_light_switch)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "released",
+              "args": [
+                "blue_light_switch"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 5,
+        "action": "release",
+        "target": "blue_light_switch",
+        "affordance_region": "the lever of the blue light switch",
+        "done_when": "released(blue_light_switch)"
+      }
+    ]
+  }
+}

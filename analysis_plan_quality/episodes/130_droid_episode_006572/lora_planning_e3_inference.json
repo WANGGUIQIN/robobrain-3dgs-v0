@@ -1,0 +1,124 @@
+{
+  "task": "Open the first drawer under the fruit plushies",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_planning_3epoch/checkpoint-39957",
+  "raw": "Scene: drawer, fruit_plushies, table\nStep 1: reach(drawer)\n  affordance_region: the front edge of the drawer\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, drawer, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, drawer) < 0.03\nStep 2: grasp(drawer)\n  affordance_region: the handle of the drawer\n  contact: holding(drawer) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(drawer)\nStep 3: pull(drawer)\n  affordance_region: the front edge of the drawer\n  contact: holding(drawer) [safety]\n  spatial: aligned_xy(drawer, open_position, 0.05) [completion]\n  safety: no_collision(drawer)\n  done_when: aligned_xy(drawer, open_position, 0.05)\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [],
+    "scene_objects": [
+      "drawer",
+      "fruit_plushies",
+      "table"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "drawer",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "drawer",
+        "affordance_region": "the front edge of the drawer",
+        "done_when": "distance(gripper, drawer) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "drawer"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "drawer",
+        "affordance_region": "the handle of the drawer",
+        "done_when": "holding(drawer)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "drawer"
+              ],
+              "role": "safety"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "aligned_xy",
+              "args": [
+                "drawer",
+                "open_position",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_collision",
+              "args": [
+                "drawer"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "pull",
+        "target": "drawer",
+        "affordance_region": "the front edge of the drawer",
+        "done_when": "aligned_xy(drawer, open_position, 0.05)"
+      }
+    ]
+  }
+}

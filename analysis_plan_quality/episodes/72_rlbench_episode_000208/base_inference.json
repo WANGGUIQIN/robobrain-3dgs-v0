@@ -1,0 +1,154 @@
+{
+  "task": "screw in the navy light bulb",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_3epoch/best",
+  "raw": "SCENE ANALYSIS - A robotic arm is positioned over a table with a blue base. On the table, there are two small objects: a navy blue object (likely the light bulb) and a pink object (likely a socket). The goal is to screw in the navy light bulb, which requires picking up the bulb, moving it to the socket, and then inserting it. The socket is a fixed object, and the bulb is a small, movable object. STRATEGY - First, reach for and grasp the navy bulb. Then, transport it to the pink socket. Finally, insert the bulb into the socket. Failure modes include dropping the bulb during transport or misaligning it during insertion. AFFORDANCE REASONING - Step 1: Reach for the navy bulb to grasp it. Step 2: Grasp the navy bulb securely. Step 3: Transport the bulb to the pink socket. Step 4: Insert the bulb into the socket.\nGoal: inserted(navy_bulb, pink_socket)\nScene: robotic_arm, navy_bulb, pink_socket, table\nStep 1: reach(navy_bulb)\n  affordance_region: the body of the navy bulb\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, navy_bulb, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, navy_bulb) < 0.03\nStep 2: grasp(navy_bulb)\n  affordance_region: the body of the navy bulb\n  contact: holding(navy_bulb) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(navy_bulb)\nStep 3: transport(navy_bulb -> pink_socket)\n  affordance_region: an empty area on the pink socket\n  spatial: above(navy_bulb, pink_socket, 0.05) [completion]\n  safety: no_drop(navy_bulb)\n  done_when: above(navy_bulb, pink_socket, 0.05)\nStep 4: insert(navy_bulb -> pink_socket)\n  affordance_region: the top opening of the pink socket\n  contact: inserted(navy_bulb, pink_socket) [completion]\n  pose: stable(navy_bulb) [completion]\n  done_when: inserted(navy_bulb, pink_socket)\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [
+      {
+        "pred": "inserted",
+        "args": [
+          "navy_bulb",
+          "pink_socket"
+        ]
+      }
+    ],
+    "scene_objects": [
+      "robotic_arm",
+      "navy_bulb",
+      "pink_socket",
+      "table"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "navy_bulb",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "navy_bulb",
+        "affordance_region": "the body of the navy bulb",
+        "done_when": "distance(gripper, navy_bulb) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "navy_bulb"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "navy_bulb",
+        "affordance_region": "the body of the navy bulb",
+        "done_when": "holding(navy_bulb)"
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "navy_bulb",
+                "pink_socket",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "navy_bulb"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "navy_bulb",
+        "destination": "pink_socket",
+        "affordance_region": "an empty area on the pink socket",
+        "done_when": "above(navy_bulb, pink_socket, 0.05)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "inserted",
+              "args": [
+                "navy_bulb",
+                "pink_socket"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "navy_bulb"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "insert",
+        "target": "navy_bulb",
+        "destination": "pink_socket",
+        "affordance_region": "the top opening of the pink socket",
+        "done_when": "inserted(navy_bulb, pink_socket)"
+      }
+    ]
+  }
+}

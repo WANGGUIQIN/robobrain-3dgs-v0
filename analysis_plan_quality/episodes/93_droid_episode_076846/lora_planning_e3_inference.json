@@ -1,0 +1,152 @@
+{
+  "task": "Put the multi USB charging cable in the gray box",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_planning_3epoch/checkpoint-39957",
+  "raw": "Scene: multi_USB_charging_cable, gray_box, shelf\nStep 1: reach(multi_USB_charging_cable)\n  affordance_region: the multi USB charging cable\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, multi_USB_charging_cable, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, multi_USB_charging_cable) < 0.03\nStep 2: grasp(multi_USB_charging_cable)\n  affordance_region: the body of the multi USB charging cable\n  contact: holding(multi_USB_charging_cable) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(multi_USB_charging_cable)\nStep 3: transport(multi_USB_charging_cable -> gray_box)\n  affordance_region: an empty area on the gray box\n  spatial: above(multi_USB_charging_cable, gray_box, 0.05) [completion]\n  safety: no_drop(multi_USB_charging_cable)\n  done_when: above(multi_USB_charging_cable, gray_box, 0.05)\nStep 4: place(multi_USB_charging_cable -> gray_box)\n  affordance_region: an empty area on the gray box\n  contact: surface_contact(multi_USB_charging_cable, gray_box) [completion]; released(multi_USB_charging_cable) [completion]\n  pose: stable(multi_USB_charging_cable) [completion]\n  done_when: surface_contact(multi_USB_charging_cable, gray_box) AND released(multi_USB_charging_cable) AND stable(multi_USB_charging_cable)\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [],
+    "scene_objects": [
+      "multi_USB_charging_cable",
+      "gray_box",
+      "shelf"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "multi_USB_charging_cable",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "multi_USB_charging_cable",
+        "affordance_region": "the multi USB charging cable",
+        "done_when": "distance(gripper, multi_USB_charging_cable) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "multi_USB_charging_cable"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "multi_USB_charging_cable",
+        "affordance_region": "the body of the multi USB charging cable",
+        "done_when": "holding(multi_USB_charging_cable)"
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "multi_USB_charging_cable",
+                "gray_box",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "multi_USB_charging_cable"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "multi_USB_charging_cable",
+        "destination": "gray_box",
+        "affordance_region": "an empty area on the gray box",
+        "done_when": "above(multi_USB_charging_cable, gray_box, 0.05)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "surface_contact",
+              "args": [
+                "multi_USB_charging_cable",
+                "gray_box"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "multi_USB_charging_cable"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "multi_USB_charging_cable"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "place",
+        "target": "multi_USB_charging_cable",
+        "destination": "gray_box",
+        "affordance_region": "an empty area on the gray box",
+        "done_when": "surface_contact(multi_USB_charging_cable, gray_box) AND released(multi_USB_charging_cable) AND stable(multi_USB_charging_cable)"
+      }
+    ]
+  }
+}

@@ -1,0 +1,225 @@
+{
+  "task": "Chop the onions",
+  "scene_objects": [
+    "onion",
+    "knife",
+    "cutting_board",
+    "table"
+  ],
+  "num_steps": 4,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "knife",
+      "affordance": [
+        0.3,
+        0.4
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "knife",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "onion"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, knife) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        -0.9586,
+        -0.3077,
+        1.2624
+      ],
+      "affordance_hint": "the knife"
+    },
+    {
+      "step": 2,
+      "action": "grasp",
+      "target": "knife",
+      "affordance": [
+        0.3,
+        0.4
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "knife"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "holding",
+            "args": [
+              "knife"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              0,
+              0,
+              -1
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "holding(knife)",
+      "affordance_3d": [
+        -0.9586,
+        -0.3077,
+        1.2624
+      ],
+      "affordance_hint": "the handle of the knife"
+    },
+    {
+      "step": 3,
+      "action": "transport",
+      "target": "knife",
+      "destination": "onion",
+      "affordance": [
+        0.25,
+        0.45
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "knife"
+            ],
+            "role": "safety"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "above",
+            "args": [
+              "knife",
+              "onion",
+              0.05
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "knife",
+              "onion"
+            ]
+          },
+          {
+            "pred": "no_drop",
+            "args": [
+              "knife"
+            ]
+          }
+        ]
+      },
+      "done_when": "above(knife, onion, 0.05) AND aligned_xy(knife, onion, 0.03)",
+      "affordance_3d": [
+        -1.1195,
+        -0.2842,
+        1.3994
+      ],
+      "affordance_hint": "an empty area on the onion"
+    },
+    {
+      "step": 4,
+      "action": "chop",
+      "target": "onion",
+      "affordance": [
+        0.23,
+        0.325
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "surface_contact",
+            "args": [
+              "knife",
+              "onion"
+            ],
+            "role": "completion"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "stable",
+            "args": [
+              "onion"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "force_limit",
+            "args": [
+              "knife",
+              "onion"
+            ]
+          }
+        ]
+      },
+      "done_when": "surface_contact(knife, onion) AND onion(chopped)",
+      "affordance_3d": [
+        -1.1892,
+        -0.442,
+        1.4581
+      ],
+      "affordance_hint": "onion"
+    }
+  ]
+}

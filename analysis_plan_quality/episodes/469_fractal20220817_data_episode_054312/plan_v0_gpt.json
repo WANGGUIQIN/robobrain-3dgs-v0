@@ -1,0 +1,223 @@
+{
+  "task": "move green rice chip bag near rxbar chocolate",
+  "scene_objects": [
+    "green_rice_chip_bag",
+    "rxbar_chocolate",
+    "table",
+    "blue_chip_bag"
+  ],
+  "num_steps": 4,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "green_rice_chip_bag",
+      "affordance": [
+        0.403,
+        0.406
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "green_rice_chip_bag",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "rxbar_chocolate"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, green_rice_chip_bag) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        -0.3416,
+        -0.328,
+        3.0431
+      ],
+      "affordance_hint": "the green rice chip bag"
+    },
+    {
+      "step": 2,
+      "action": "grasp",
+      "target": "green_rice_chip_bag",
+      "affordance": [
+        0.4,
+        0.408
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "green_rice_chip_bag"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "holding",
+            "args": [
+              "green_rice_chip_bag"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              0,
+              0,
+              -1
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "holding(green_rice_chip_bag)",
+      "affordance_3d": [
+        -0.3553,
+        -0.328,
+        3.0431
+      ],
+      "affordance_hint": "the handle of the green rice chip bag"
+    },
+    {
+      "step": 3,
+      "action": "transport",
+      "target": "green_rice_chip_bag",
+      "destination": "rxbar_chocolate",
+      "affordance": [
+        0.468,
+        0.75
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "green_rice_chip_bag"
+            ],
+            "role": "safety"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "near",
+            "args": [
+              "green_rice_chip_bag",
+              "rxbar_chocolate",
+              0.05
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "green_rice_chip_bag",
+              "rxbar_chocolate"
+            ]
+          },
+          {
+            "pred": "no_drop",
+            "args": [
+              "green_rice_chip_bag"
+            ]
+          }
+        ]
+      },
+      "done_when": "near(green_rice_chip_bag, rxbar_chocolate, 0.05)",
+      "affordance_3d": [
+        -0.1417,
+        1.1332,
+        3.9433
+      ],
+      "affordance_hint": "an empty area on the rxbar chocolate"
+    },
+    {
+      "step": 4,
+      "action": "release",
+      "target": "green_rice_chip_bag",
+      "affordance": [
+        0.403,
+        0.406
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "released",
+            "args": [
+              "green_rice_chip_bag"
+            ],
+            "role": "completion"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "stable",
+            "args": [
+              "green_rice_chip_bag"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "support_stable",
+            "args": [
+              "green_rice_chip_bag"
+            ]
+          }
+        ]
+      },
+      "done_when": "released(green_rice_chip_bag) AND stable(green_rice_chip_bag)",
+      "affordance_3d": [
+        -0.3416,
+        -0.328,
+        3.0431
+      ],
+      "affordance_hint": "the green rice chip bag"
+    }
+  ]
+}

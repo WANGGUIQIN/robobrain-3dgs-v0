@@ -1,0 +1,226 @@
+{
+  "task": "put the ring on the azure spoke",
+  "scene_objects": [
+    "red_ring",
+    "azure_spoke",
+    "table"
+  ],
+  "steps": [
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "red_ring",
+              "<",
+              "0.03"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "approach_axis",
+            "args": [
+              "0",
+              "0",
+              "-1"
+            ],
+            "role": "progress"
+          }
+        ]
+      },
+      "step": 1,
+      "action": "reach",
+      "target": "red_ring",
+      "affordance_region": "the red ring on the table",
+      "done_when": "distance(gripper, red_ring) < 0.03",
+      "affordance_hint": "the red ring on the table",
+      "refine_prompt": "the red ring on the table",
+      "refine_cache_hit": false,
+      "affordance_refined": [
+        0.8672,
+        0.9961
+      ],
+      "affordance_3d_refined": [
+        1.5334,
+        2.0717,
+        2.088
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.5561
+    },
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "red_ring"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              "0",
+              "0",
+              "-1"
+            ],
+            "role": "progress"
+          }
+        ]
+      },
+      "step": 2,
+      "action": "grasp",
+      "target": "red_ring",
+      "affordance_region": "the red ring on the table",
+      "done_when": "holding(red_ring)",
+      "affordance_hint": "the red ring on the table",
+      "refine_prompt": "the red ring on the table",
+      "refine_cache_hit": true,
+      "affordance_refined": [
+        0.8672,
+        0.9961
+      ],
+      "affordance_3d_refined": [
+        1.5334,
+        2.0717,
+        2.088
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.5561
+    },
+    {
+      "constraints": {
+        "spatial": [
+          {
+            "pred": "above",
+            "args": [
+              "red_ring",
+              "azure_spoke",
+              "0.05"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_drop",
+            "args": [
+              "red_ring"
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "step": 3,
+      "action": "transport",
+      "target": "red_ring",
+      "destination": "azure_spoke",
+      "affordance_region": "an empty area on the azure spoke",
+      "done_when": "above(red_ring, azure_spoke, 0.05)",
+      "affordance_hint": "an empty area on the azure spoke",
+      "refine_prompt": "an empty area on the azure spoke",
+      "refine_cache_hit": false,
+      "affordance_refined": [
+        0.8672,
+        0.9961
+      ],
+      "affordance_3d_refined": [
+        1.5334,
+        2.0717,
+        2.088
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.3216
+    },
+    {
+      "constraints": {
+        "contact": [
+          {
+            "pred": "surface_contact",
+            "args": [
+              "red_ring",
+              "azure_spoke"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "released",
+            "args": [
+              "red_ring"
+            ],
+            "role": "completion"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "stable",
+            "args": [
+              "red_ring"
+            ],
+            "role": "completion"
+          }
+        ]
+      },
+      "step": 4,
+      "action": "place",
+      "target": "red_ring",
+      "destination": "azure_spoke",
+      "affordance_region": "an empty area on the azure spoke",
+      "done_when": "surface_contact(red_ring, azure_spoke) AND released(red_ring)",
+      "affordance_hint": "an empty area on the azure spoke",
+      "refine_prompt": "an empty area on the azure spoke",
+      "refine_cache_hit": true,
+      "affordance_refined": [
+        0.8672,
+        0.9961
+      ],
+      "affordance_3d_refined": [
+        1.5334,
+        2.0717,
+        2.088
+      ],
+      "approach_refined": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "refine_status": "ok",
+      "refine_strategy": "inscribed",
+      "refine_confidence": 0.3216
+    }
+  ]
+}

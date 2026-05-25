@@ -1,0 +1,241 @@
+{
+  "task": "Reposition the top remote on the bottom one",
+  "scene_objects": [
+    "top_remote",
+    "bottom_remote",
+    "orange_pillow",
+    "yellow_pillow",
+    "sofa"
+  ],
+  "num_steps": 4,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "top_remote",
+      "affordance": [
+        0.558,
+        0.5
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "top_remote",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "orange_pillow"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, top_remote) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        -0.1273,
+        0.0599,
+        1.4972
+      ],
+      "affordance_hint": "the top remote on the orange pillow",
+      "affordance_hint_original": "the top remote",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 2,
+      "action": "grasp",
+      "target": "top_remote",
+      "affordance": [
+        0.566,
+        0.5
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "top_remote"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "holding",
+            "args": [
+              "top_remote"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              0,
+              0,
+              -1
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "holding(top_remote)",
+      "affordance_3d": [
+        -0.1123,
+        0.0599,
+        1.4972
+      ],
+      "affordance_hint": "the top surface of the top remote",
+      "affordance_hint_original": "the handle of the top remote",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 3,
+      "action": "transport",
+      "target": "top_remote",
+      "destination": "bottom_remote",
+      "affordance": [
+        0.566,
+        0.544
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "top_remote"
+            ],
+            "role": "safety"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "above",
+            "args": [
+              "top_remote",
+              "bottom_remote",
+              0.05
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "top_remote",
+              "bottom_remote"
+            ]
+          },
+          {
+            "pred": "no_drop",
+            "args": [
+              "top_remote"
+            ]
+          }
+        ]
+      },
+      "done_when": "above(top_remote, bottom_remote, 0.05) AND aligned_xy(top_remote, bottom_remote, 0.03)",
+      "affordance_3d": [
+        -0.1226,
+        0.1552,
+        1.6342
+      ],
+      "affordance_hint": "the empty area on the bottom remote",
+      "affordance_hint_original": "an empty area on the bottom remote",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 4,
+      "action": "place",
+      "target": "top_remote",
+      "destination": "bottom_remote",
+      "affordance": [
+        0.566,
+        0.544
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "surface_contact",
+            "args": [
+              "top_remote",
+              "bottom_remote"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "released",
+            "args": [
+              "top_remote"
+            ],
+            "role": "completion"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "stable",
+            "args": [
+              "top_remote"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "support_stable",
+            "args": [
+              "top_remote"
+            ]
+          }
+        ]
+      },
+      "done_when": "surface_contact(top_remote, bottom_remote) AND released(top_remote) AND stable(top_remote)",
+      "affordance_3d": [
+        -0.1226,
+        0.1552,
+        1.6342
+      ],
+      "affordance_hint": "the empty area on the bottom remote",
+      "affordance_hint_original": "an empty area on the bottom remote",
+      "affordance_hint_confidence": "ok"
+    }
+  ]
+}

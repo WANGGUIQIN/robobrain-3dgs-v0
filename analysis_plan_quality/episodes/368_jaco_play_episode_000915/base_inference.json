@@ -1,0 +1,329 @@
+{
+  "task": "pick up the burger meat",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_3epoch/best",
+  "raw": "**SCENE ANALYSIS -** A blue plastic tray with a grid pattern is on a wooden table. Inside the tray, there is a yellow container and a black bowl. On the table, there are two round, brown objects (one near the tray, one further left) and a yellow bottle. The objects are rigid. STRATEGY - First, reach for the black bowl in the tray. Grasp it by its rim for stability. Transport it to the table surface. Place it on the table. Then, reach for the yellow container in the tray. Grasp it by its rim. Transport it to the table surface. Place it on the table. Finally, reach for the yellow bottle on the table. Grasp it by its body. Transport it to the table surface. Place it on the table. Failure modes include dropping an object during transport or misplacing it. AFFORDANCE REASONING - Step 1: Reach the black bowl in the tray. Step 2: Grasp the black bowl by its rim. Step 3: Transport the black bowl to the table. Step 4: Place the black bowl on the table. Step 5: Reach the yellow container in the tray. Step 6: Grasp the yellow container by its rim. Step 7: Transport the yellow container to the table. Step 8: Place the yellow container on the table. Step 9: Reach the yellow bottle on the table. Step 10: Grasp the yellow bottle by its body. Step 11: Transport the yellow bottle to the table. Step 12: Place the yellow bottle on the table.\nGoal: all_on(table, {black_bowl, yellow_container, yellow_bottle})\nScene: black_bowl, yellow_container, yellow_bottle, blue_tray, table\nStep 1: reach(black_bowl)\n  affordance_region: the rim of the black bowl\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, black_bowl, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, black_bowl) < 0.03\nStep 2: grasp(black_bowl)\n  affordance_region: the rim of the black bowl\n  contact: holding(black_bowl) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(black_bowl)\nStep 3: transport(black_bowl -> table)\n  affordance_region: an empty area on the table\n  spatial: above(black_bowl, table, 0.05) [completion]\n  safety: no_drop(black_bowl)\n  done_when: above(black_bowl, table, 0.05)\nStep 4: place(black_bowl -> table)\n  affordance_region: an empty area on the table\n  contact: surface_contact(black_bowl, table) [completion]; released(black_bowl) [completion]\n  pose: stable(black_bowl) [completion]\n  done_when: surface_contact(black_bowl, table) AND released(black_bowl)\nStep 5: reach(yellow_container)\n  affordance_region: the rim of the yellow container\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, yellow_container, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, yellow_container) < 0.03\nStep 6: grasp(yellow_container)\n  affordance_region: the rim of the yellow container\n  contact: holding(yellow_container) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(yellow_container)\nStep 7: transport(yellow_container -> table)\n  affordance_region: an empty area on the table\n  spatial: above(yellow_container, table, 0.05) [completion]\n  safety: no_drop(yellow_container)\n  done_when: above(yellow_container, table, 0.05)\nStep 8: place(yellow_container -> table)\n  affordance_region: an empty area on the table\n  contact: surface_contact(yellow_container, table) [completion]; released(yellow_container) [completion]\n  pose: stable(yellow_container) [completion]\n  done_when: surface_contact(yellow_container, table) AND released(yellow_container)\nStep 9: reach(yellow_bottle)\n  affordance_region: the body of the yellow bottle\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, yellow_bottle, <, 0.03) [completion]\n  direction: approach_axis(",
+  "parsed": {
+    "reasoning": "",
+    "goal": [
+      {
+        "pred": "all_on",
+        "args": [
+          "table",
+          "{black_bowl",
+          "yellow_container",
+          "yellow_bottle}"
+        ]
+      }
+    ],
+    "scene_objects": [
+      "black_bowl",
+      "yellow_container",
+      "yellow_bottle",
+      "blue_tray",
+      "table"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "black_bowl",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "black_bowl",
+        "affordance_region": "the rim of the black bowl",
+        "done_when": "distance(gripper, black_bowl) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "black_bowl"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "black_bowl",
+        "affordance_region": "the rim of the black bowl",
+        "done_when": "holding(black_bowl)"
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "black_bowl",
+                "table",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "black_bowl"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "black_bowl",
+        "destination": "table",
+        "affordance_region": "an empty area on the table",
+        "done_when": "above(black_bowl, table, 0.05)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "surface_contact",
+              "args": [
+                "black_bowl",
+                "table"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "black_bowl"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "black_bowl"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "place",
+        "target": "black_bowl",
+        "destination": "table",
+        "affordance_region": "an empty area on the table",
+        "done_when": "surface_contact(black_bowl, table) AND released(black_bowl)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "yellow_container",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 5,
+        "action": "reach",
+        "target": "yellow_container",
+        "affordance_region": "the rim of the yellow container",
+        "done_when": "distance(gripper, yellow_container) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "yellow_container"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 6,
+        "action": "grasp",
+        "target": "yellow_container",
+        "affordance_region": "the rim of the yellow container",
+        "done_when": "holding(yellow_container)"
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "yellow_container",
+                "table",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "yellow_container"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 7,
+        "action": "transport",
+        "target": "yellow_container",
+        "destination": "table",
+        "affordance_region": "an empty area on the table",
+        "done_when": "above(yellow_container, table, 0.05)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "surface_contact",
+              "args": [
+                "yellow_container",
+                "table"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "yellow_container"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "yellow_container"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 8,
+        "action": "place",
+        "target": "yellow_container",
+        "destination": "table",
+        "affordance_region": "an empty area on the table",
+        "done_when": "surface_contact(yellow_container, table) AND released(yellow_container)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "yellow_bottle",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 9,
+        "action": "reach",
+        "target": "yellow_bottle",
+        "affordance_region": "the body of the yellow bottle"
+      }
+    ]
+  }
+}

@@ -1,0 +1,148 @@
+{
+  "task": "place the gray bowl in the oven",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_3epoch/best",
+  "raw": "**SCENE ANALYSIS -** A gray bowl sits on a blue tray on a wooden table. A red ball and a brown circular object are also on the table. The bowl is a rigid container with a rim; the tray is a flat surface. The oven is a metallic structure with an open door on the left. STRATEGY - First, grasp the bowl by its rim for a secure hold. Then, transport it to the oven. Next, insert the bowl into the oven cavity. Finally, release the bowl inside the oven. Failure modes include dropping the bowl during transport or misaligning it with the oven opening. AFFORDANCE REASONING - Step 1: Reach the bowl to grasp it. Step 2: Grasp the rim for stability. Step 3: Transport the bowl to the oven. Step 4: Insert the bowl into the oven opening. Step 5: Release the bowl inside the oven.\n\n**Goal:** inside(gray_bowl, oven); stable(gray_bowl)\n**Scene:** gray_bowl, blue_tray, red_ball, brown_circular_object, table, oven\n**Step 1:** reach(gray_bowl)\n  affordance_region: the rim of the gray bowl\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, gray_bowl, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, gray_bowl) < 0.03\n**Step 2:** grasp(gray_bowl)\n  affordance_region: the rim of the gray bowl\n  contact: holding(gray_bowl) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(gray_bowl)\n**Step 3:** transport(gray_bowl -> oven)\n  affordance_region: the open cavity of the oven\n  spatial: above(gray_bowl, oven, 0.05) [completion]\n  safety: no_drop(gray_bowl)\n  done_when: above(gray_bowl, oven, 0.05)\n**Step 4:** insert(gray_bowl -> oven)\n  affordance_region: the open cavity of the oven\n  contact: inside(gray_bowl, oven) [completion]; released(gray_bowl) [completion]\n  pose: stable(gray_bowl) [completion]\n  done_when: inside(gray_bowl, oven) AND released(gray_bowl)\n**END_OF_PLAN**",
+  "parsed": {
+    "reasoning": "",
+    "goal": [],
+    "scene_objects": [],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "gray_bowl",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "gray_bowl",
+        "affordance_region": "the rim of the gray bowl",
+        "done_when": "distance(gripper, gray_bowl) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "gray_bowl"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "gray_bowl",
+        "affordance_region": "the rim of the gray bowl",
+        "done_when": "holding(gray_bowl)"
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "gray_bowl",
+                "oven",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "gray_bowl"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "gray_bowl",
+        "destination": "oven",
+        "affordance_region": "the open cavity of the oven",
+        "done_when": "above(gray_bowl, oven, 0.05)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "inside",
+              "args": [
+                "gray_bowl",
+                "oven"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "gray_bowl"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "gray_bowl"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "insert",
+        "target": "gray_bowl",
+        "destination": "oven",
+        "affordance_region": "the open cavity of the oven",
+        "done_when": "inside(gray_bowl, oven) AND released(gray_bowl)"
+      }
+    ]
+  }
+}

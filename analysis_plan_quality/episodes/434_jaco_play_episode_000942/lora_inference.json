@@ -1,0 +1,244 @@
+{
+  "task": "place the black bowl in the dish rack",
+  "parsed": {
+    "scene_objects": [
+      "black_bowl",
+      "dish_rack",
+      "table"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "black_bowl",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "black_bowl",
+        "affordance_region": "the body of the black bowl",
+        "done_when": "distance(gripper, black_bowl) < 0.03",
+        "affordance_hint": "the body of the black bowl",
+        "refine_prompt": "the body of the black bowl",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.0859,
+          0.2227
+        ],
+        "affordance_3d_refined": [
+          -1.4298,
+          -0.9577,
+          3.004
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.3089,
+        "affordance": [
+          0.0859,
+          0.2227
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "black_bowl"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "black_bowl",
+        "affordance_region": "the rim of the black bowl",
+        "done_when": "holding(black_bowl)",
+        "affordance_hint": "the rim of the black bowl",
+        "refine_prompt": "the rim of the black bowl",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.6914,
+          0.5508
+        ],
+        "affordance_3d_refined": [
+          0.816,
+          0.2165,
+          3.7085
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.5314,
+        "affordance": [
+          0.6914,
+          0.5508
+        ]
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "black_bowl",
+                "dish_rack",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "black_bowl"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "black_bowl",
+        "destination": "dish_rack",
+        "affordance_region": "an empty area on the dish rack",
+        "done_when": "above(black_bowl, dish_rack, 0.05)",
+        "affordance_hint": "an empty area on the dish rack",
+        "refine_prompt": "an empty area on the dish rack",
+        "refine_cache_hit": false,
+        "affordance_refined": [
+          0.8555,
+          0.4414
+        ],
+        "affordance_3d_refined": [
+          1.1395,
+          -0.1878,
+          2.7887
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.3113,
+        "affordance": [
+          0.8555,
+          0.4414
+        ]
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "surface_contact",
+              "args": [
+                "black_bowl",
+                "dish_rack"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "black_bowl"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "black_bowl"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "place",
+        "target": "black_bowl",
+        "destination": "dish_rack",
+        "affordance_region": "an empty area on the dish rack",
+        "done_when": "surface_contact(black_bowl, dish_rack) AND released(black_bowl) AND stable(black_bowl)",
+        "affordance_hint": "an empty area on the dish rack",
+        "refine_prompt": "an empty area on the dish rack",
+        "refine_cache_hit": true,
+        "affordance_refined": [
+          0.8555,
+          0.4414
+        ],
+        "affordance_3d_refined": [
+          1.1395,
+          -0.1878,
+          2.7887
+        ],
+        "approach_refined": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "refine_status": "ok",
+        "refine_strategy": "inscribed",
+        "refine_confidence": 0.3113,
+        "affordance": [
+          0.8555,
+          0.4414
+        ]
+      }
+    ]
+  }
+}

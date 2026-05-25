@@ -1,0 +1,180 @@
+{
+  "task": "turn off the green light",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_3epoch/best",
+  "raw": "**SCENE ANALYSIS -** A white cabinet with a black handle is on a wooden surface. A green light is visible on the cabinet's front panel. The cabinet is rigid with a flat front. **STRATEGY -** Reach the cabinet front, push the handle to open the door, then reach for the green light to turn it off. **AFFORDANCE REASONING -** Step 1 reach cabinet body; Step 2 grasp handle for secure hold; Step 3 push handle to open; Step 4 reach light; Step 5 press light to turn off.\n\nGoal: off(green_light)\nScene: white_cabinet, green_light\nStep 1: reach(white_cabinet)\n  affordance_region: the body of the white cabinet\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, white_cabinet, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, white_cabinet) < 0.03\nStep 2: grasp(white_cabinet)\n  affordance_region: the black handle of the white cabinet\n  contact: holding(white_cabinet) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(white_cabinet)\nStep 3: push(white_cabinet)\n  affordance_region: the black handle of the white cabinet\n  contact: pushing(handle) [completion]\n  direction: push_axis(0, 0, -1) [progress]\n  done_when: open(white_cabinet)\nStep 4: reach(green_light)\n  affordance_region: the green light on the white cabinet\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, green_light, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, green_light) < 0.03\nStep 5: press(green_light)\n  affordance_region: the green light on the white cabinet\n  contact: pressing(green_light) [completion]\n  done_when: off(green_light)\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [
+      {
+        "pred": "off",
+        "args": [
+          "green_light"
+        ]
+      }
+    ],
+    "scene_objects": [
+      "white_cabinet",
+      "green_light"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "white_cabinet",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "white_cabinet",
+        "affordance_region": "the body of the white cabinet",
+        "done_when": "distance(gripper, white_cabinet) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "white_cabinet"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "white_cabinet",
+        "affordance_region": "the black handle of the white cabinet",
+        "done_when": "holding(white_cabinet)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "pushing",
+              "args": [
+                "handle"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "push_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "push",
+        "target": "white_cabinet",
+        "affordance_region": "the black handle of the white cabinet",
+        "done_when": "open(white_cabinet)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "green_light",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "reach",
+        "target": "green_light",
+        "affordance_region": "the green light on the white cabinet",
+        "done_when": "distance(gripper, green_light) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "pressing",
+              "args": [
+                "green_light"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 5,
+        "action": "press",
+        "target": "green_light",
+        "affordance_region": "the green light on the white cabinet",
+        "done_when": "off(green_light)"
+      }
+    ]
+  }
+}

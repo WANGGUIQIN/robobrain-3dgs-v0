@@ -1,0 +1,152 @@
+{
+  "task": "Pick up the pot from the stove and put it on the counter",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_planning_3epoch/checkpoint-39957",
+  "raw": "Scene: pot, stove, counter\nStep 1: reach(pot)\n  affordance_region: the body of the pot\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, pot, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, pot) < 0.03\nStep 2: grasp(pot)\n  affordance_region: the handle of the pot\n  contact: holding(pot) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(pot)\nStep 3: transport(pot -> counter)\n  affordance_region: an empty area on the counter\n  spatial: above(pot, counter, 0.05) [completion]\n  safety: no_drop(pot)\n  done_when: above(pot, counter, 0.05)\nStep 4: place(pot -> counter)\n  affordance_region: an empty area on the counter\n  contact: surface_contact(pot, counter) [completion]; released(pot) [completion]\n  pose: stable(pot) [completion]\n  done_when: surface_contact(pot, counter) AND released(pot) AND stable(pot)\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [],
+    "scene_objects": [
+      "pot",
+      "stove",
+      "counter"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "pot",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "pot",
+        "affordance_region": "the body of the pot",
+        "done_when": "distance(gripper, pot) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "pot"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "pot",
+        "affordance_region": "the handle of the pot",
+        "done_when": "holding(pot)"
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "above",
+              "args": [
+                "pot",
+                "counter",
+                "0.05"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "pot"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "transport",
+        "target": "pot",
+        "destination": "counter",
+        "affordance_region": "an empty area on the counter",
+        "done_when": "above(pot, counter, 0.05)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "surface_contact",
+              "args": [
+                "pot",
+                "counter"
+              ],
+              "role": "completion"
+            },
+            {
+              "pred": "released",
+              "args": [
+                "pot"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "pot"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "place",
+        "target": "pot",
+        "destination": "counter",
+        "affordance_region": "an empty area on the counter",
+        "done_when": "surface_contact(pot, counter) AND released(pot) AND stable(pot)"
+      }
+    ]
+  }
+}

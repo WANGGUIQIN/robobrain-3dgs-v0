@@ -1,0 +1,239 @@
+{
+  "task": "Build with small Lego blocks for the nth time with n blocks",
+  "scene_objects": [
+    "lego_blocks",
+    "gray_plate",
+    "table"
+  ],
+  "num_steps": 4,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "pink_lego_block",
+      "affordance": [
+        0.275,
+        0.387
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "pink_lego_block",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "gray_plate"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, pink_lego_block) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        -1.1697,
+        -0.379,
+        1.4972
+      ],
+      "affordance_hint": "the pink plastic lego block on the table",
+      "affordance_hint_original": "the pink lego block",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 2,
+      "action": "grasp",
+      "target": "pink_lego_block",
+      "affordance": [
+        0.325,
+        0.375
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "pink_lego_block"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "holding",
+            "args": [
+              "pink_lego_block"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              0,
+              0,
+              -1
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "holding(pink_lego_block)",
+      "affordance_3d": [
+        -1.0799,
+        -0.3827,
+        1.4581
+      ],
+      "affordance_hint": "the pink plastic lego block on the table",
+      "affordance_hint_original": "pink lego block",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 3,
+      "action": "transport",
+      "target": "pink_lego_block",
+      "destination": "gray_plate",
+      "affordance": [
+        0.45,
+        0.541
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "pink_lego_block"
+            ],
+            "role": "safety"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "above",
+            "args": [
+              "pink_lego_block",
+              "gray_plate",
+              0.05
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "pink_lego_block",
+              "gray_plate"
+            ]
+          },
+          {
+            "pred": "no_drop",
+            "args": [
+              "pink_lego_block"
+            ]
+          }
+        ]
+      },
+      "done_when": "above(pink_lego_block, gray_plate, 0.05) AND aligned_xy(pink_lego_block, gray_plate, 0.03)",
+      "affordance_3d": [
+        -1.0344,
+        -0.2119,
+        1.6146
+      ],
+      "affordance_hint": "the empty area on the gray plate",
+      "affordance_hint_original": "an empty area on the gray plate",
+      "affordance_hint_confidence": "ok"
+    },
+    {
+      "step": 4,
+      "action": "place",
+      "target": "pink_lego_block",
+      "destination": "gray_plate",
+      "affordance": [
+        0.45,
+        0.541
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "surface_contact",
+            "args": [
+              "pink_lego_block",
+              "gray_plate"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "released",
+            "args": [
+              "pink_lego_block"
+            ],
+            "role": "completion"
+          }
+        ],
+        "pose": [
+          {
+            "pred": "stable",
+            "args": [
+              "pink_lego_block"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "support_stable",
+            "args": [
+              "pink_lego_block"
+            ]
+          }
+        ]
+      },
+      "done_when": "surface_contact(pink_lego_block, gray_plate) AND released(pink_lego_block) AND stable(pink_lego_block)",
+      "affordance_3d": [
+        -1.0344,
+        -0.2119,
+        1.6146
+      ],
+      "affordance_hint": "the empty area on the gray plate",
+      "affordance_hint_original": "an empty area on the gray plate",
+      "affordance_hint_confidence": "ok"
+    }
+  ]
+}

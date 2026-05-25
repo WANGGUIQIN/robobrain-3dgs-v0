@@ -1,0 +1,156 @@
+{
+  "task": "Turn the object on the arm of the sofa towards the left",
+  "ckpt": "/home/edge/RoboBrain/outputs/lora_3epoch/best",
+  "raw": "**SCENE ANALYSIS - A white cloth is draped over the arm of a brown sofa. The cloth is soft and flexible, with no distinct handles or rigid parts. STRATEGY - The cloth must be grasped from a point on its body, pulled towards the left, and then released. Failure modes include dropping the cloth or pulling it too far, causing it to slip off the sofa. AFFORDANCE REASONING - Step 1 reach the cloth body; Step 2 grasp a section of the cloth for secure hold; Step 3 pull towards the left; Step 4 release.**\nGoal: on(white_cloth, sofa); stable(white_cloth)\nScene: white_cloth, sofa\nStep 1: reach(white_cloth)\n  affordance_region: the body of the white cloth\n  contact: gripper_state(open) [progress]\n  spatial: distance(gripper, white_cloth, <, 0.03) [completion]\n  direction: approach_axis(0, 0, -1) [progress]\n  done_when: distance(gripper, white_cloth) < 0.03\nStep 2: grasp(white_cloth)\n  affordance_region: a section of the white cloth\n  contact: holding(white_cloth) [completion]\n  direction: grasp_axis(0, 0, -1) [progress]\n  done_when: holding(white_cloth)\nStep 3: pull(white_cloth -> left)\n  affordance_region: an empty area on the left side of the sofa arm\n  spatial: left(white_cloth, sofa, 0.1) [completion]\n  safety: no_drop(white_cloth)\n  done_when: left(white_cloth, sofa, 0.1)\nStep 4: release(white_cloth)\n  affordance_region: the body of the white cloth\n  contact: released(white_cloth) [completion]\n  pose: stable(white_cloth) [completion]\n  done_when: released(white_cloth) AND stable(white_cloth)\n<END_OF_PLAN>",
+  "parsed": {
+    "reasoning": "",
+    "goal": [
+      {
+        "pred": "on",
+        "args": [
+          "white_cloth",
+          "sofa"
+        ]
+      },
+      {
+        "pred": "stable",
+        "args": [
+          "white_cloth"
+        ]
+      }
+    ],
+    "scene_objects": [
+      "white_cloth",
+      "sofa"
+    ],
+    "steps": [
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "gripper_state",
+              "args": [
+                "open"
+              ],
+              "role": "progress"
+            }
+          ],
+          "spatial": [
+            {
+              "pred": "distance",
+              "args": [
+                "gripper",
+                "white_cloth",
+                "<",
+                "0.03"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "approach_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 1,
+        "action": "reach",
+        "target": "white_cloth",
+        "affordance_region": "the body of the white cloth",
+        "done_when": "distance(gripper, white_cloth) < 0.03"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "holding",
+              "args": [
+                "white_cloth"
+              ],
+              "role": "completion"
+            }
+          ],
+          "direction": [
+            {
+              "pred": "grasp_axis",
+              "args": [
+                "0",
+                "0",
+                "-1"
+              ],
+              "role": "progress"
+            }
+          ]
+        },
+        "step": 2,
+        "action": "grasp",
+        "target": "white_cloth",
+        "affordance_region": "a section of the white cloth",
+        "done_when": "holding(white_cloth)"
+      },
+      {
+        "constraints": {
+          "spatial": [
+            {
+              "pred": "left",
+              "args": [
+                "white_cloth",
+                "sofa",
+                "0.1"
+              ],
+              "role": "completion"
+            }
+          ],
+          "safety": [
+            {
+              "pred": "no_drop",
+              "args": [
+                "white_cloth"
+              ],
+              "role": "safety"
+            }
+          ]
+        },
+        "step": 3,
+        "action": "pull",
+        "target": "white_cloth",
+        "destination": "left",
+        "affordance_region": "an empty area on the left side of the sofa arm",
+        "done_when": "left(white_cloth, sofa, 0.1)"
+      },
+      {
+        "constraints": {
+          "contact": [
+            {
+              "pred": "released",
+              "args": [
+                "white_cloth"
+              ],
+              "role": "completion"
+            }
+          ],
+          "pose": [
+            {
+              "pred": "stable",
+              "args": [
+                "white_cloth"
+              ],
+              "role": "completion"
+            }
+          ]
+        },
+        "step": 4,
+        "action": "release",
+        "target": "white_cloth",
+        "affordance_region": "the body of the white cloth",
+        "done_when": "released(white_cloth) AND stable(white_cloth)"
+      }
+    ]
+  }
+}

@@ -1,0 +1,171 @@
+{
+  "task": "pick blue plastic bottle",
+  "scene_objects": [
+    "blue_plastic_bottle",
+    "can",
+    "packet",
+    "table"
+  ],
+  "num_steps": 3,
+  "steps": [
+    {
+      "step": 1,
+      "action": "reach",
+      "target": "blue_plastic_bottle",
+      "affordance": [
+        0.593,
+        0.402
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_state",
+            "args": [
+              "open"
+            ],
+            "role": "progress"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "distance",
+            "args": [
+              "gripper",
+              "blue_plastic_bottle",
+              "<",
+              0.03
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "gripper",
+              "table"
+            ]
+          }
+        ]
+      },
+      "done_when": "distance(gripper, blue_plastic_bottle) < 0.03 AND gripper_state(open)",
+      "affordance_3d": [
+        0.4882,
+        -0.5086,
+        4.5304
+      ],
+      "affordance_hint": "the blue plastic bottle"
+    },
+    {
+      "step": 2,
+      "action": "grasp",
+      "target": "blue_plastic_bottle",
+      "affordance": [
+        0.593,
+        0.394
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "gripper_contact",
+            "args": [
+              "blue_plastic_bottle"
+            ],
+            "role": "completion"
+          },
+          {
+            "pred": "holding",
+            "args": [
+              "blue_plastic_bottle"
+            ],
+            "role": "completion"
+          }
+        ],
+        "direction": [
+          {
+            "pred": "grasp_axis",
+            "args": [
+              0,
+              0,
+              -1
+            ],
+            "role": "safety"
+          }
+        ]
+      },
+      "done_when": "holding(blue_plastic_bottle)",
+      "affordance_3d": [
+        0.4924,
+        -0.554,
+        4.5695
+      ],
+      "affordance_hint": "the handle of the blue plastic bottle"
+    },
+    {
+      "step": 3,
+      "action": "transport",
+      "target": "blue_plastic_bottle",
+      "affordance": [
+        0.475,
+        0.45
+      ],
+      "approach": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "constraints": {
+        "contact": [
+          {
+            "pred": "holding",
+            "args": [
+              "blue_plastic_bottle"
+            ],
+            "role": "safety"
+          }
+        ],
+        "spatial": [
+          {
+            "pred": "clear_path",
+            "args": [
+              "blue_plastic_bottle"
+            ],
+            "role": "completion"
+          }
+        ],
+        "safety": [
+          {
+            "pred": "no_collision",
+            "args": [
+              "blue_plastic_bottle",
+              "table"
+            ]
+          },
+          {
+            "pred": "no_drop",
+            "args": [
+              "blue_plastic_bottle"
+            ]
+          }
+        ]
+      },
+      "done_when": "clear_path(blue_plastic_bottle)",
+      "affordance_3d": [
+        -0.0925,
+        -0.2005,
+        3.4345
+      ],
+      "affordance_hint": "an empty area on the blue plastic bottle"
+    }
+  ]
+}
