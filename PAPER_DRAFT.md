@@ -1,7 +1,11 @@
 # GaussianBrain — ICLR Submission Draft (Abstract + Introduction)
 
-> Draft v0.1.  Numbers are placeholders pending the W2 experiment sweep.
-> Companion document to `PAPER_PLAN.md`.
+> Draft v0.2 (2026-05-29).  Plan-quality numbers in §1.4 are real (500-episode
+> A/B/C probe).  The cross-embodiment closed-loop study is the evaluation
+> protocol now in progress (LIBERO + RoboTwin); those cells are marked
+> "forthcoming" and contain no invented numbers.  Companion documents:
+> `PAPER_PLAN.md` and
+> `docs/superpowers/specs/2026-05-29-cross-embodiment-rekep-validation-design.md`.
 
 ---
 
@@ -42,15 +46,23 @@ plan strings into machine-checkable predicates that a downstream executor or
 runtime monitor can verify against the same 3D Gaussian field that produced
 them.
 
-We curate a 27 K-episode benchmark unifying twelve robotics datasets (RLBench,
-DROID, Bridge V2, taco_play, ALOHA, rh20t, and seven Open X-Embodiment
-subsets) and evaluate under a three-level generalization protocol that
-isolates spatial, semantic, and *cross-camera* transfer.  Across the cross-
-camera level — where conventional 2D-only fine-tuning degrades sharply — we
-observe that the 3D branch closes a substantial fraction of the gap to the
-seen-camera setting, while affordance L2 on the seen split improves over a
-LoRA-only baseline and over a point-cloud variant without rendering
-supervision.  We release the data pipeline, training code, and checkpoints.
+Whereas a parallel line of work closes the embodiment-and-viewpoint gap with
+*data* — e.g. PhysBrain translates large-scale human egocentric video into
+structured supervision for an 8B embodied brain — GaussianBrain closes it with
+a *representation*: an explicit, render-supervised 3D geometry that is
+camera-invariant by construction.  We curate a 27 K-episode benchmark unifying
+twelve robotics datasets (RLBench, DROID, Bridge V2, taco_play, ALOHA, rh20t,
+and seven Open X-Embodiment subsets) and evaluate on two complementary axes.
+*Offline*, a three-level protocol (seen / unseen / cross-camera) probes the 3D
+branch's view-invariance, and a 500-episode A/B/C probe shows that our trained
+planner produces markedly better-structured, better-grounded plans than the
+un-tuned 8B backbone — most strikingly a +35-point gain in scene-object
+grounding (Jaccard 0.66 vs 0.31) and +22 points in action-sequence exact match
+(0.71 vs 0.49).  *Closed-loop*, we feed the typed plans to a training-free
+relational-keypoint-constraint optimizer and execute them in two simulators of
+different embodiment — single-arm LIBERO and dual-arm RoboTwin — isolating the
+perception-transfer cost with a privileged-keypoint upper bound.  We release
+the data pipeline, training code, and checkpoints.
 
 ---
 
@@ -100,6 +112,18 @@ VLM:
    When the model is wrong, there is no way to detect it short of running
    the action.
 
+A second, orthogonal response to the same view-and-embodiment gap scales
+*data* rather than representation: PhysBrain [arXiv:2512.16793] translates
+large-scale human egocentric video into three million structured
+vision-question-answer instances and reports closed-loop manipulation success
+competitive with RoboBrain 2.5 (67.4 % vs 67.6 %) without collecting new robot
+data.  This is complementary to our aim — better data and a better geometric
+representation can compose — but it leaves the *representational* bottleneck
+untouched: the visual stack stays 2D and plan outputs stay free-form rather
+than verifiable.  GaussianBrain instead asks what a geometry-explicit token
+stream and a typed, checkable plan can buy, and tests that question in closed
+loop *across embodiments*, not only on offline VQA.
+
 ### 1.3 Our approach
 
 GaussianBrain attacks all three limitations by making the 3D branch
@@ -136,21 +160,46 @@ either 3D distances or pose primitives, downstream verifiers — including a
 LangSAM-based test-time refinement we report as an ablation — can be wired
 directly to the same Gaussian field the model emitted.
 
-### 1.4 Empirical results (preview)
+### 1.4 Empirical results
 
-We train two configurations: a parameter-efficient LoRA variant
-(36.8 M trainable, 0.42 % of the backbone) and a partial full fine-tune that
-unfreezes the last eight LLM layers.  Across the three-level evaluation
-protocol — same-task / unseen-task / cross-camera — the 3D branch yields its
-largest gains on the **cross-camera** split, the level that most directly
-tests view invariance and on which a 2D-only LoRA fine-tune is brittle.
-Ablations show that (a) removing the rendering loss collapses cross-camera
-performance to the 2D-only baseline, (b) replacing learned Gaussians with a
-raw point cloud loses a substantial fraction of the gain at matched token
-budget, and (c) the uncertainty-weighted FPS contributes a measurable margin
-that grows with scene complexity.  A test-time LangSAM refinement, conditioned
-on the model's emitted part-aware hint rather than the bare object name,
-improves grasp accuracy on multi-instance scenes without retraining.
+We train a parameter-efficient LoRA planner (rank-16 on q/k/v/o); on this
+planning objective LoRA matches or exceeds a partial full fine-tune at a
+fraction of the trainable parameters, so we adopt it throughout.
+
+**Offline plan quality (done, n = 500).**  An A/B/C probe scores three plan
+sources against a refined ground-truth label, per episode, across seven
+dataset families: (A) the un-tuned 8B backbone, (B) the raw upstream label,
+and (C) our LoRA planner.  Our planner improves plan *structure* decisively
+over the backbone — action-sequence exact match 0.71 vs 0.49 (+22 pts),
+action-set Jaccard 0.89 vs 0.77, per-step target grounding 0.78 vs 0.55
+(+23 pts), and, the largest gap, scene-object grounding 0.66 vs 0.31
+(+35 pts).  Affordance UV error is statistically tied (0.165 vs 0.162): the
+keypoint location is bottlenecked by the LangSAM grounder, not the planner,
+which is precisely why the closed-loop study below uses a direct-UV keypoint
+path.  The mode-collapse failure of the pre-fix model — all affordances at the
+image center — is fully eliminated (center rate 0.000), and grounding succeeds
+on 99.1 % of steps.
+
+**Representation ablations (three-level protocol, in progress).**  On the
+seen / unseen / cross-camera protocol we isolate the 3D branch: removing the
+rendering loss is expected to collapse cross-camera affordance accuracy toward
+the 2D-only baseline, a raw point cloud at matched token budget to forfeit a
+large fraction of the gain, and uncertainty-weighted FPS to add a margin that
+grows with scene complexity.  These cross-camera sweeps are running.
+
+**Closed-loop cross-embodiment (protocol; results forthcoming).**  To test the
+typed plans in *execution* — the regime in which data-centric embodied brains
+such as PhysBrain are measured — we feed each plan's keypoints and typed
+constraints to a training-free relational-keypoint-constraint (ReKep-style)
+optimizer that solves for SE(3) sub-goals, and execute them in two simulators
+of different embodiment: single-arm LIBERO (robosuite/MuJoCo) and dual-arm
+RoboTwin (SAPIEN).  We report task success under each benchmark's native
+checker for two keypoint sources that share the entire downstream stack — a
+*privileged* upper bound from ground-truth object poses, and the *frozen-VLM*
+keypoints — so their gap measures exactly the planner's perception-transfer
+cost to an unseen embodiment.  A test-time LangSAM refinement, conditioned on
+the model's part-aware hint rather than the bare object name, is reported as an
+ablation.
 
 ### 1.5 Contributions
 
@@ -170,6 +219,13 @@ improves grasp accuracy on multi-instance scenes without retraining.
   three-level generalization evaluation protocol (seen / unseen / cross-
   camera) that isolates the contribution of the 3D branch.
 
+* **A cross-embodiment closed-loop evaluation** that executes the typed plans
+  through a training-free relational-keypoint-constraint optimizer in two
+  simulators of different embodiment — single-arm LIBERO and dual-arm
+  RoboTwin — and isolates the frozen planner's perception-transfer cost with a
+  privileged-keypoint upper bound, testing view-and-embodiment transfer in
+  *execution* rather than only in offline metrics.
+
 * **Open release** of the data pipeline, training and inference code, and
   trained checkpoints, including the LangSAM-based test-time refinement
   used in our ablations.
@@ -177,7 +233,8 @@ improves grasp accuracy on multi-instance scenes without retraining.
 The remainder of the paper is organized as follows.  §2 reviews 3D-enhanced
 VLMs and embodied planning literatures.  §3 details the GaussianBrain
 architecture and the joint training objective.  §4 describes the data
-pipeline and plan supervision schema.  §5 reports the three-level
-benchmark, ablations, and qualitative analyses.  §6 discusses limitations
+pipeline and plan supervision schema.  §5 reports the offline plan-quality
+probe, the three-level benchmark and its ablations, the closed-loop
+cross-embodiment study, and qualitative analyses.  §6 discusses limitations
 (single-frame inputs, dependence on depth quality) and outlines future work
 on temporal Gaussian fields and learned constraint verification.
