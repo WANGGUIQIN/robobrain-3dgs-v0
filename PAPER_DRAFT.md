@@ -174,11 +174,12 @@ over the backbone — action-sequence exact match 0.71 vs 0.49 (+22 pts),
 action-set Jaccard 0.89 vs 0.77, per-step target grounding 0.78 vs 0.55
 (+23 pts), and, the largest gap, scene-object grounding 0.66 vs 0.31
 (+35 pts).  Affordance UV error is statistically tied (0.165 vs 0.162): the
-keypoint location is bottlenecked by the LangSAM grounder, not the planner,
-which is precisely why the closed-loop study below uses a direct-UV keypoint
-path.  The mode-collapse failure of the pre-fix model — all affordances at the
-image center — is fully eliminated (center rate 0.000), and grounding succeeds
-on 99.1 % of steps.
+keypoint location is bottlenecked by the LangSAM grounder, not the planner —
+the planner emits a part-aware affordance *region*, which LangSAM grounds to a
+pixel, so the closed-loop study below treats that grounding as part of the
+perception cost it measures.  The mode-collapse failure of the pre-fix model —
+all affordances at the image center — is fully eliminated (center rate 0.000),
+and grounding succeeds on 99.1 % of steps.
 
 **Representation ablations (three-level protocol, in progress).**  On the
 seen / unseen / cross-camera protocol we isolate the 3D branch: removing the
@@ -196,10 +197,12 @@ of different embodiment: single-arm LIBERO (robosuite/MuJoCo) and dual-arm
 RoboTwin (SAPIEN).  We report task success under each benchmark's native
 checker for two keypoint sources that share the entire downstream stack — a
 *privileged* upper bound from ground-truth object poses, and the *frozen-VLM*
-keypoints — so their gap measures exactly the planner's perception-transfer
-cost to an unseen embodiment.  A test-time LangSAM refinement, conditioned on
-the model's part-aware hint rather than the bare object name, is reported as an
-ablation.
+keypoints, obtained by grounding the planner's emitted affordance regions with
+LangSAM (GroundingDINO + SAM) and back-projecting through depth.  Their gap
+measures exactly the perception cost — VLM semantics plus grounding — of
+transferring the frozen planner to an unseen embodiment.  (Because the planner
+emits a part-aware affordance *region* rather than a raw pixel, LangSAM
+grounding is intrinsic to this keypoint path, not an add-on ablation.)
 
 ### 1.5 Contributions
 
